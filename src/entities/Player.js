@@ -40,29 +40,7 @@
 
     draw(ctx) {
       if (this.invulnerableFor > 0 && Math.floor(this.invulnerableFor * 12) % 2 === 0) return;
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.shadowColor = ns.config.colors.cyan;
-      ctx.shadowBlur = 14;
-      ctx.fillStyle = '#c9f7ff';
-      ctx.beginPath();
-      ctx.moveTo(0, -this.height / 2);
-      ctx.lineTo(9, 4);
-      ctx.lineTo(this.width / 2, 17);
-      ctx.lineTo(12, 20);
-      ctx.lineTo(7, this.height / 2);
-      ctx.lineTo(-7, this.height / 2);
-      ctx.lineTo(-12, 20);
-      ctx.lineTo(-this.width / 2, 17);
-      ctx.lineTo(-9, 4);
-      ctx.closePath();
-      ctx.fill();
-      ctx.fillStyle = '#1489b2';
-      ctx.fillRect(-4, -10, 8, 25);
-      ctx.fillStyle = '#ffb64f';
-      ctx.fillRect(-9, 24, 5, 10);
-      ctx.fillRect(4, 24, 5, 10);
-      ctx.restore();
+      ns.skins.draw('player', ctx, this);
     }
   }
   ns.entities.Player = Player;

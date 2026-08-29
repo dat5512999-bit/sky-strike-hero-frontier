@@ -12,6 +12,11 @@
 | `Spawner` | `update`、`currentInterval`、`reset` | 敵機生成與難度漸進 |
 | `GameState` | `start`、`pause`、`resume`、`end` | 流程、分數與時間 |
 | `Effects` | `burst`、`update`、`draw` | 輕量擊破視覺效果 |
+| `SkinRegistry` | `register`、`all`、`select`、`restore`、`current`、`draw` | 外觀包註冊、選擇、保存與繪圖委派 |
 | `Game` | `start`、`togglePause`、`update`、`draw` | 組合各模組與遊戲迴圈 |
 
 `Boss` 與 `PowerUp` 目前僅是獨立擴充點，不會在 Phase 1 生成或影響玩法。
+
+## Skin Pack 介面
+
+每個 pack 必須包含 `id`、`name`、`icon`、`accent`、`secondary`、`background`、`star`、`effect`，以及 `renderers.player`、`renderers.bullet`、`renderers.enemy`。呼叫 `SkyStrike.skins.register(pack)` 後即可被選擇；詳細範例見外觀包製作指南。

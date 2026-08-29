@@ -1,6 +1,8 @@
 :root {
   color-scheme: dark;
   --cyan: #52e7ff;
+  --accent: #52e7ff;
+  --accent-secondary: #ffca58;
   --navy: #061423;
   --panel: rgba(5, 18, 34, 0.92);
 }
@@ -43,9 +45,9 @@ body {
 
 .hud > :last-child { text-align: right; }
 .hud-label { display: block; color: #79a9ba; font-size: 10px; }
-.hud strong { color: var(--cyan); font-size: 17px; }
+.hud strong { color: var(--accent); font-size: 17px; }
 .title { text-align: center; font-weight: 800; white-space: nowrap; }
-.title small { display: block; color: #ffca58; font-size: 8px; letter-spacing: 0.22em; }
+.title small { display: block; color: var(--accent-secondary); font-size: 8px; letter-spacing: 0.22em; }
 
 .stage-wrap { position: relative; aspect-ratio: 2 / 3; }
 
@@ -84,12 +86,55 @@ canvas {
 h1 { margin: 8px 0 12px; font-size: clamp(30px, 8vw, 44px); letter-spacing: 0.1em; }
 .panel p { line-height: 1.7; color: #b9d7e2; }
 
+.skin-picker {
+  margin: 14px 0 4px;
+  padding: 0;
+  border: 0;
+}
+
+.skin-picker[hidden] { display: none; }
+
+.skin-picker legend {
+  width: 100%;
+  margin-bottom: 8px;
+  color: #86aebb;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+}
+
+.skin-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+
+.skin-option {
+  min-width: 0;
+  margin: 0;
+  padding: 8px 4px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.045);
+  color: #c7dbe2;
+  font-size: 11px;
+  font-weight: 650;
+  clip-path: none;
+}
+
+.skin-option .skin-icon { display: block; margin-bottom: 2px; font-size: 20px; }
+.skin-option:hover, .skin-option:focus-visible { background: rgba(255,255,255,.1); color: #fff; }
+.skin-option[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: #fff;
+  box-shadow: inset 0 0 16px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
 button {
   min-width: 168px;
   margin-top: 10px;
   padding: 13px 24px;
   border: 0;
-  background: var(--cyan);
+  background: var(--accent);
   color: #03121d;
   font: 800 16px/1 "Segoe UI", "Microsoft JhengHei", sans-serif;
   cursor: pointer;
@@ -104,4 +149,8 @@ footer { padding: 8px; text-align: center; color: #7194a4; font-size: 11px; }
   .game-shell { width: min(420px, calc(100vw - 24px), calc((100vh - 96px) * 2 / 3)); }
   .hud { height: 46px; }
   footer { padding: 5px; }
+  .panel { padding: 20px; }
+  .panel > p { margin-block: 6px; }
+  .skin-option { padding: 5px 3px; }
+  .skin-option .skin-icon { font-size: 16px; }
 }

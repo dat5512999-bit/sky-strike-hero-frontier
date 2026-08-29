@@ -10,6 +10,7 @@
       this.height = opts.height || cfg.height;
       this.speed = opts.speed || cfg.speed;
       this.damage = opts.damage || cfg.damage;
+      this.variant = Number.isInteger(opts.variant) ? opts.variant : 0;
       this.active = true;
     }
 
@@ -19,14 +20,7 @@
     }
 
     draw(ctx) {
-      ctx.save();
-      ctx.shadowColor = ns.config.colors.cyan;
-      ctx.shadowBlur = 12;
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-      ctx.fillStyle = ns.config.colors.cyan;
-      ctx.fillRect(this.x - 1, this.y + this.height / 2, 2, 8);
-      ctx.restore();
+      ns.skins.draw('bullet', ctx, this);
     }
   }
   ns.entities.Bullet = Bullet;

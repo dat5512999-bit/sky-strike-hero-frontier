@@ -9,6 +9,7 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const files = [
   'src/namespace.js', 'src/config.js', 'src/utils/math.js',
+  'src/skins/SkinRegistry.js', 'src/skins/SkinPacks.js',
   'src/entities/Bullet.js', 'src/entities/Player.js', 'src/entities/Enemy.js',
   'src/entities/Boss.js', 'src/entities/PowerUp.js',
   'src/systems/Weapon.js', 'src/systems/Collision.js',
@@ -16,7 +17,11 @@ const files = [
 ];
 
 function loadGameCore() {
-  const context = vm.createContext({ console });
+  const storage = new Map();
+  const context = vm.createContext({ console, localStorage: {
+    getItem: (key) => storage.has(key) ? storage.get(key) : null,
+    setItem: (key, value) => storage.set(key, value)
+  } });
   context.globalThis = context;
   files.forEach((file) => vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file }));
   return context.SkyStrike;
@@ -49,6 +54,26 @@ test('武器依射速自動生成單發子彈', () => {
   assert.equal(bullets[0].x, player.x);
   weapon.update(0.05, player, bullets);
   assert.equal(bullets.length, 1);
+});
+
+test('自動射擊會交替使用皮膚包的兩種子彈外觀', () => {
+  const ns = loadGameCore();
+  const player = new ns.entities.Player(240, 560);
+  const weapon = new ns.systems.Weapon();
+  const bullets = [];
+  weapon.update(0.2, player, bullets);
+  weapon.update(0.2, player, bullets);
+  assert.deepEqual(Array.from(bullets, (bullet) => bullet.variant), [0, 1]);
+  assert.equal(bullets[0].damage, bullets[1].damage);
+});
+
+test('內建 6 套皮膚可選擇且無效 ID 不會覆蓋目前選擇', () => {
+  const ns = loadGameCore();
+  assert.equal(ns.skins.all().length, 6);
+  assert.equal(ns.skins.select('fast-food'), true);
+  assert.equal(ns.skins.current().name, '歡樂速食');
+  assert.equal(ns.skins.select('not-a-skin'), false);
+  assert.equal(ns.skins.current().id, 'fast-food');
 });
 
 test('兩發子彈可擊破普通敵機且只計分一次', () => {

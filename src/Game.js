@@ -9,6 +9,7 @@
       this.weapon = new ns.systems.Weapon();
       this.spawner = new ns.systems.Spawner();
       this.effects = new ns.systems.Effects();
+      ns.skins.restore();
       this.player = null;
       this.bullets = [];
       this.enemies = [];
@@ -16,6 +17,8 @@
       this.lastTime = 0;
       this.boundLoop = this.loop.bind(this);
       this.attachInput();
+      this.buildSkinPicker();
+      this.applySkin();
       this.resetWorld();
       requestAnimationFrame(this.boundLoop);
     }
@@ -47,6 +50,34 @@
         if (event.key === 'Escape') self.togglePause();
       });
       globalThis.addEventListener('blur', function () { if (self.state.status === 'playing') self.togglePause(); });
+    }
+
+    buildSkinPicker() {
+      const self = this;
+      this.ui.skinOptions.textContent = '';
+      ns.skins.all().forEach(function (pack) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'skin-option';
+        button.dataset.skin = pack.id;
+        button.setAttribute('aria-pressed', String(pack.id === ns.skins.selectedId));
+        button.setAttribute('aria-label', '選擇' + pack.name + '外觀包');
+        button.innerHTML = '<span class="skin-icon" aria-hidden="true">' + pack.icon + '</span>' + pack.name;
+        button.onclick = function () {
+          ns.skins.select(pack.id);
+          self.applySkin();
+        };
+        self.ui.skinOptions.appendChild(button);
+      });
+    }
+
+    applySkin() {
+      const pack = ns.skins.current();
+      document.documentElement.style.setProperty('--accent', pack.accent);
+      document.documentElement.style.setProperty('--accent-secondary', pack.secondary);
+      Array.from(this.ui.skinOptions.children).forEach(function (button) {
+        button.setAttribute('aria-pressed', String(button.dataset.skin === pack.id));
+      });
     }
 
     resetWorld() {
@@ -82,6 +113,7 @@
       this.ui.title.textContent = title;
       this.ui.message.innerHTML = message;
       this.ui.button.textContent = buttonText;
+      this.ui.skinPicker.hidden = Boolean(resume);
       this.ui.overlay.classList.remove('hidden');
       this.ui.button.onclick = resume ? function () { self.togglePause(); } : function () { self.start(); };
     }
@@ -98,10 +130,10 @@
       const self = this;
       ns.systems.Collision.resolvePlayerBullets(this.bullets, this.enemies, function (enemy) {
         self.state.addScore(enemy.scoreValue);
-        self.effects.burst(enemy.x, enemy.y, ns.config.colors.red);
+        self.effects.burst(enemy.x, enemy.y, ns.skins.current().effect);
       });
       ns.systems.Collision.resolvePlayerEnemies(this.player, this.enemies, function (enemy) {
-        self.effects.burst(enemy.x, enemy.y, ns.config.colors.yellow);
+        self.effects.burst(enemy.x, enemy.y, ns.skins.current().secondary);
         self.updateHud();
       });
 
@@ -123,12 +155,13 @@
 
     drawBackground() {
       const ctx = this.ctx;
+      const skin = ns.skins.current();
       const gradient = ctx.createLinearGradient(0, 0, 0, ns.config.height);
-      gradient.addColorStop(0, '#071a2b');
-      gradient.addColorStop(1, '#020a12');
+      gradient.addColorStop(0, skin.background[0]);
+      gradient.addColorStop(1, skin.background[1]);
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, ns.config.width, ns.config.height);
-      ctx.fillStyle = '#8ed9ef';
+      ctx.fillStyle = skin.star;
       this.stars.forEach(function (star) { ctx.globalAlpha = 0.2 + star.size / 3; ctx.fillRect(star.x, star.y, star.size, star.size * 2.3); });
       ctx.globalAlpha = 1;
     }

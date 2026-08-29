@@ -1,6 +1,6 @@
 # 蒼穹突擊（Sky Strike）
 
-一款可直接在 Windows 的 Chrome / Edge 遊玩的 2D 縱向飛機射擊遊戲。此版本為 **Phase 1 最小可玩版（v0.1.0）**。
+一款可直接在 Windows 的 Chrome / Edge 遊玩的 2D 縱向飛機射擊遊戲。此版本為 **Phase 1 最小可玩版＋外觀包系統（v0.2.0）**。
 
 ## 目前功能
 
@@ -9,6 +9,8 @@
 - 普通敵機由畫面上方生成並向下移動。
 - 子彈／敵機與玩家／敵機碰撞、HP、短暫無敵與擊破效果。
 - 分數、死亡、暫停與重新開始。
+- 6 套可即時切換的外觀包；玩家、雙彈體、敵人、特效、背景與 HUD 會成套更換。
+- 外觀選擇保存在本機，包含會交替射出漢堡與薯條的「歡樂速食」。
 - 完全本機執行，不需登入、伺服器或第三方套件。
 
 ## 立即開始
@@ -36,6 +38,7 @@ npm run check
 
 - [系統架構](docs/ARCHITECTURE.md)
 - [API 文件](docs/API.md)
+- [外觀包製作指南](docs/SKIN_PACK_GUIDE.md)
 - [管理者手冊](docs/ADMIN_GUIDE.md)
 - [設定手冊](docs/CONFIGURATION.md)
 - [版本更新手冊](docs/UPDATE_GUIDE.md)

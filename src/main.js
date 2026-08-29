@@ -7,7 +7,9 @@
     overlay: document.getElementById('overlay'),
     title: document.getElementById('overlay-title'),
     message: document.getElementById('overlay-message'),
-    button: document.getElementById('start-button')
+    button: document.getElementById('start-button'),
+    skinPicker: document.getElementById('skin-picker'),
+    skinOptions: document.getElementById('skin-options')
   };
   globalThis.skyStrikeGame = new ns.Game(canvas, ui);
 })(globalThis.SkyStrike);

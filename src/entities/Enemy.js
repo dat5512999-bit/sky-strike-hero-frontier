@@ -33,24 +33,7 @@
     }
 
     draw(ctx) {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.shadowColor = ns.config.colors.red;
-      ctx.shadowBlur = 9;
-      ctx.fillStyle = '#ff5272';
-      ctx.beginPath();
-      ctx.moveTo(0, this.height / 2);
-      ctx.lineTo(8, -4);
-      ctx.lineTo(this.width / 2, -14);
-      ctx.lineTo(12, -this.height / 2);
-      ctx.lineTo(-12, -this.height / 2);
-      ctx.lineTo(-this.width / 2, -14);
-      ctx.lineTo(-8, -4);
-      ctx.closePath();
-      ctx.fill();
-      ctx.fillStyle = '#5c1630';
-      ctx.fillRect(-4, -14, 8, 21);
-      ctx.restore();
+      ns.skins.draw('enemy', ctx, this);
     }
   }
   ns.entities.Enemy = Enemy;
