@@ -1,0 +1,107 @@
+:root {
+  color-scheme: dark;
+  --cyan: #52e7ff;
+  --navy: #061423;
+  --panel: rgba(5, 18, 34, 0.92);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 20%, #173854 0, #071321 42%, #02070d 100%);
+  color: #eefcff;
+  font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
+}
+
+.game-shell {
+  width: min(480px, calc(100vw - 24px));
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
+}
+
+.hud {
+  height: 56px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid rgba(82, 231, 255, 0.3);
+  border-bottom: 0;
+  background: rgba(3, 15, 27, 0.94);
+  letter-spacing: 0.08em;
+}
+
+.hud > :last-child { text-align: right; }
+.hud-label { display: block; color: #79a9ba; font-size: 10px; }
+.hud strong { color: var(--cyan); font-size: 17px; }
+.title { text-align: center; font-weight: 800; white-space: nowrap; }
+.title small { display: block; color: #ffca58; font-size: 8px; letter-spacing: 0.22em; }
+
+.stage-wrap { position: relative; aspect-ratio: 2 / 3; }
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  border: 1px solid rgba(82, 231, 255, 0.3);
+  background: var(--navy);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  background: linear-gradient(rgba(1, 8, 15, 0.2), rgba(1, 8, 15, 0.82));
+  transition: opacity 180ms ease;
+}
+
+.overlay.hidden { opacity: 0; pointer-events: none; }
+
+.panel {
+  width: 100%;
+  padding: 32px 24px;
+  text-align: center;
+  border: 1px solid rgba(82, 231, 255, 0.45);
+  background: var(--panel);
+  box-shadow: inset 0 0 45px rgba(34, 162, 210, 0.08);
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+}
+
+.eyebrow { margin: 0; color: #ffca58; font-size: 11px; letter-spacing: 0.32em; }
+h1 { margin: 8px 0 12px; font-size: clamp(30px, 8vw, 44px); letter-spacing: 0.1em; }
+.panel p { line-height: 1.7; color: #b9d7e2; }
+
+button {
+  min-width: 168px;
+  margin-top: 10px;
+  padding: 13px 24px;
+  border: 0;
+  background: var(--cyan);
+  color: #03121d;
+  font: 800 16px/1 "Segoe UI", "Microsoft JhengHei", sans-serif;
+  cursor: pointer;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+button:hover, button:focus-visible { background: #fff; outline: 2px solid #ffca58; outline-offset: 3px; }
+.hint { margin-bottom: 0; font-size: 11px; }
+footer { padding: 8px; text-align: center; color: #7194a4; font-size: 11px; }
+
+@media (max-height: 820px) {
+  .game-shell { width: min(420px, calc(100vw - 24px), calc((100vh - 96px) * 2 / 3)); }
+  .hud { height: 46px; }
+  footer { padding: 5px; }
+}
