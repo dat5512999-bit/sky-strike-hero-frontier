@@ -5,6 +5,8 @@
   function atEntity(ctx, entity, draw) {
     ctx.save();
     ctx.translate(entity.x, entity.y);
+    if (entity.type === 'elite') ctx.scale(1.55, 1.45);
+    if (entity.rotation) ctx.rotate(entity.rotation);
     draw(ctx, entity);
     ctx.restore();
   }

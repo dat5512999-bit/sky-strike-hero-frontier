@@ -6,6 +6,7 @@
 - 各實體只管理自身狀態；碰撞、生成、武器與流程由 systems 負責。
 - `Game` 負責協調，不承載特定武器或敵人規則。
 - 實體只保留碰撞與狀態；繪圖委派給目前的 Skin Pack，皮膚不影響傷害與平衡。
+- `Spawner` 只決定威脅與敵人組合，`SkillSystem` 只管理果實及技能，不把規則塞入 Game loop。
 - Phase 1 不需要資料庫；遊戲重開即重設狀態。
 
 ## 資料夾
@@ -16,7 +17,7 @@ styles.css
 src/
   entities/    Player, Enemy, Bullet, Boss, PowerUp
   skins/       SkinRegistry 與內建外觀包
-  systems/     Weapon, Collision, Spawner, GameState, Effects
+  systems/     Weapon, Collision, Spawner, SkillSystem, GameState, Effects
                 InputController（滑鼠絕對定位／觸控相對拖曳）
   utils/       數學工具
   Game.js      遊戲協調與迴圈
@@ -33,7 +34,9 @@ manifest.webmanifest / sw.js   PWA 與離線快取
 main → Game → GameState
              ├─ Player ← Weapon → Bullet
              ├─ Spawner → Enemy
-             ├─ Collision(Player, Bullet, Enemy)
+             │             └─ EnemyBullet
+             ├─ SkillSystem → PowerUp → Weapon/Player/Enemy
+             ├─ Collision(Player, Bullet, Enemy, EnemyBullet, PowerUp)
              ├─ SkinRegistry → Player/Bullet/Enemy renderers
              └─ Effects
 ```

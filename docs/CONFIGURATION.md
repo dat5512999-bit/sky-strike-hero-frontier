@@ -13,9 +13,12 @@ Phase 1 無需設定：不需帳號、網路、音效裝置、資料庫或瀏覽
 - `enemy`：尺寸、速度、HP、分數。
 - `weapon.fireInterval`：自動射擊間隔，越小射速越快。
 - `spawner`：初始／最低生成間隔與難度提升時間。
+- `skills`：保證果實間隔、擊破掉落率與限時技能秒數。
 
 修改後依序執行 `npm run check`、`npm test`，再按 `docs/TEST_CHECKLIST.md` 手動驗證；同時更新版本號與 `CHANGELOG.md`。
 
 外觀包不在 `config.js` 調整，請依 `docs/SKIN_PACK_GUIDE.md` 註冊，以免把視覺設定耦合到戰鬥平衡。
 
 行動裝置設計基準為 Canvas 480×720，由 CSS 等比例縮放。請勿直接更改 Canvas 內部尺寸；若變更，須同步測試 `InputController` 的座標換算、各皮膚繪圖與所有碰撞箱。
+
+難度由 `spawner.threatStepSeconds` 控制，目前每 12 秒一級。各敵人速度、HP、分數與出現權重位於 `Spawner.js`；調整時要同時驗證前 60 秒可讀性、手機閃避空間與果實取得率。

@@ -6,13 +6,16 @@
       this.ctx = canvas.getContext('2d');
       this.ui = ui;
       this.state = new ns.systems.GameState();
+      this.skills = new ns.systems.SkillSystem();
       this.weapon = new ns.systems.Weapon();
       this.spawner = new ns.systems.Spawner();
       this.effects = new ns.systems.Effects();
       ns.skins.restore();
       this.player = null;
       this.bullets = [];
+      this.enemyBullets = [];
       this.enemies = [];
+      this.powerUps = [];
       this.stars = this.createStars();
       this.lastTime = 0;
       this.boundLoop = this.loop.bind(this);
@@ -76,9 +79,12 @@
     resetWorld() {
       this.player = new ns.entities.Player(ns.config.width / 2, ns.config.height * 0.78);
       this.bullets.length = 0;
+      this.enemyBullets.length = 0;
       this.enemies.length = 0;
+      this.powerUps.length = 0;
       this.weapon.reset();
       this.spawner.reset();
+      this.skills.reset();
       this.effects.clear();
       this.updateHud();
     }
@@ -115,29 +121,50 @@
     update(dt) {
       this.state.update(dt);
       this.player.update(dt);
-      this.weapon.update(dt, this.player, this.bullets);
+      this.skills.update(dt, this.powerUps);
+      this.weapon.update(dt, this.player, this.bullets, this.skills);
       this.spawner.update(dt, this.enemies);
       this.bullets.forEach(function (bullet) { bullet.update(dt); });
-      this.enemies.forEach(function (enemy) { enemy.update(dt); });
+      const combatContext = { player:this.player, enemyBullets:this.enemyBullets, threat:this.spawner.threatLevel() };
+      this.enemies.forEach(function (enemy) { enemy.update(dt, combatContext); });
+      this.enemyBullets.forEach(function (bullet) { bullet.update(dt); });
+      this.powerUps.forEach(function (powerUp) { powerUp.update(dt); });
       this.effects.update(dt);
 
       const self = this;
       ns.systems.Collision.resolvePlayerBullets(this.bullets, this.enemies, function (enemy) {
-        self.state.addScore(enemy.scoreValue);
-        self.effects.burst(enemy.x, enemy.y, ns.skins.current().effect);
+        self.onEnemyDestroyed(enemy, true);
       });
       ns.systems.Collision.resolvePlayerEnemies(this.player, this.enemies, function (enemy) {
         self.effects.burst(enemy.x, enemy.y, ns.skins.current().secondary);
         self.updateHud();
       });
+      ns.systems.Collision.resolveEnemyBullets(this.player, this.enemyBullets, function (bullet) {
+        self.effects.burst(bullet.x, bullet.y, '#ff395f'); self.updateHud();
+      });
+      ns.systems.Collision.resolvePlayerPowerUps(this.player, this.powerUps, function (powerUp) {
+        self.skills.collect(powerUp, {
+          player:self.player, enemies:self.enemies, enemyBullets:self.enemyBullets,
+          onDestroyed:function(enemy, drop){ self.onEnemyDestroyed(enemy, drop); }
+        });
+        self.effects.burst(powerUp.x,powerUp.y,'#ffffff'); self.updateHud();
+      });
 
       this.bullets = this.bullets.filter(function (bullet) { return bullet.active; });
+      this.enemyBullets = this.enemyBullets.filter(function (bullet) { return bullet.active; });
       this.enemies = this.enemies.filter(function (enemy) { return enemy.active; });
+      this.powerUps = this.powerUps.filter(function (powerUp) { return powerUp.active; });
       this.updateHud();
       if (!this.player.active) {
         this.state.end();
         this.showOverlay('任務失敗', '最終分數：' + String(this.state.score).padStart(6, '0') + '<br>重新整備後再次出擊', '重新開始', false);
       }
+    }
+
+    onEnemyDestroyed(enemy, allowDrop) {
+      this.state.addScore(enemy.scoreValue);
+      this.effects.burst(enemy.x, enemy.y, ns.skins.current().effect);
+      if (allowDrop) this.skills.maybeDrop(enemy, this.powerUps);
     }
 
     updateStars(dt) {
@@ -162,8 +189,10 @@
 
     draw() {
       this.drawBackground();
+      this.powerUps.forEach(function (powerUp) { powerUp.draw(this.ctx); }, this);
       this.bullets.forEach(function (bullet) { bullet.draw(this.ctx); }, this);
       this.enemies.forEach(function (enemy) { enemy.draw(this.ctx); }, this);
+      this.enemyBullets.forEach(function (bullet) { bullet.draw(this.ctx); }, this);
       if (this.player.active) this.player.draw(this.ctx);
       this.effects.draw(this.ctx);
     }
@@ -171,6 +200,8 @@
     updateHud() {
       this.ui.score.textContent = String(this.state.score).padStart(6, '0');
       this.ui.health.textContent = Array.from({ length: this.player ? this.player.maxHealth : 3 }, function (_, i) { return i < (this.player ? this.player.health : 3) ? '●' : '○'; }, this).join(' ');
+      this.ui.threat.textContent = '威脅 ' + this.spawner.threatLevel();
+      this.ui.skillStatus.textContent = this.skills.status(this.player);
     }
 
     loop(timestamp) {

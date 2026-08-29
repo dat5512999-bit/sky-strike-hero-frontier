@@ -7,6 +7,8 @@
 | `Player` | `setTarget`、`update`、`takeDamage`、`draw` | 玩家移動、HP、受傷狀態 |
 | `Enemy` | `update`、`takeDamage`、`draw` | 普通敵機行為與 HP |
 | `Bullet` | `update`、`draw` | Phase 1 玩家子彈 |
+| `EnemyBullet` | `update`、`draw` | 敵方瞄準彈與彈幕投射物 |
+| `PowerUp` | `update`、`draw` | 技能果實移動與外觀 |
 | `Weapon` | `update`、`reset` | 自動射擊節奏與子彈建立 |
 | `Collision` | `resolvePlayerBullets`、`resolvePlayerEnemies` | 碰撞配對與結果通知 |
 | `Spawner` | `update`、`currentInterval`、`reset` | 敵機生成與難度漸進 |
@@ -14,6 +16,7 @@
 | `Effects` | `burst`、`update`、`draw` | 輕量擊破視覺效果 |
 | `SkinRegistry` | `register`、`all`、`select`、`restore`、`current`、`draw` | 外觀包註冊、選擇、保存與繪圖委派 |
 | `InputController` | `canvasPoint`、`touchTarget`、Pointer handlers | 桌面絕對定位與手機相對拖曳 |
+| `SkillSystem` | `update`、`spawn`、`maybeDrop`、`collect`、`status` | 果實生成、限時技能、護盾與清場 |
 | `Game` | `start`、`togglePause`、`update`、`draw` | 組合各模組與遊戲迴圈 |
 
 `Boss` 與 `PowerUp` 目前僅是獨立擴充點，不會在 Phase 1 生成或影響玩法。

@@ -1,12 +1,12 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.3.0';
+const CACHE_NAME = 'sky-strike-v0.4.0-r2';
 const ASSETS = [
   './', './index.html', './styles.css', './manifest.webmanifest', './assets/icons/game-icon.svg',
   './src/namespace.js', './src/config.js', './src/utils/math.js',
   './src/skins/SkinRegistry.js', './src/skins/SkinPacks.js',
-  './src/entities/Bullet.js', './src/entities/Player.js', './src/entities/Enemy.js', './src/entities/Boss.js', './src/entities/PowerUp.js',
-  './src/systems/Weapon.js', './src/systems/Collision.js', './src/systems/Spawner.js', './src/systems/GameState.js', './src/systems/Effects.js', './src/systems/InputController.js',
+  './src/entities/Bullet.js', './src/entities/EnemyBullet.js', './src/entities/Player.js', './src/entities/Enemy.js', './src/entities/Boss.js', './src/entities/PowerUp.js',
+  './src/systems/Weapon.js', './src/systems/Collision.js', './src/systems/Spawner.js', './src/systems/GameState.js', './src/systems/Effects.js', './src/systems/SkillSystem.js', './src/systems/InputController.js',
   './src/Game.js', './src/main.js'
 ];
 
@@ -22,12 +22,10 @@ self.addEventListener('activate', function (event) {
 
 self.addEventListener('fetch', function (event) {
   if (event.request.method !== 'GET') return;
-  event.respondWith(caches.match(event.request).then(function (cached) {
-    return cached || fetch(event.request).then(function (response) {
+  event.respondWith(fetch(event.request).then(function (response) {
       if (!response || response.status !== 200 || response.type === 'opaque') return response;
       const copy = response.clone();
       caches.open(CACHE_NAME).then(function (cache) { cache.put(event.request, copy); });
       return response;
-    });
-  }));
+    }).catch(function () { return caches.match(event.request); }));
 });

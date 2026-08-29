@@ -13,6 +13,7 @@
       this.maxHealth = cfg.maxHealth;
       this.health = cfg.maxHealth;
       this.invulnerableFor = 0;
+      this.shieldHits = 0;
       this.active = true;
     }
 
@@ -32,6 +33,11 @@
 
     takeDamage(amount) {
       if (!this.active || this.invulnerableFor > 0) return false;
+      if (this.shieldHits > 0) {
+        this.shieldHits -= 1;
+        this.invulnerableFor = 0.35;
+        return true;
+      }
       this.health = Math.max(0, this.health - amount);
       this.invulnerableFor = ns.config.player.invulnerableSeconds;
       if (this.health === 0) this.active = false;
@@ -41,6 +47,10 @@
     draw(ctx) {
       if (this.invulnerableFor > 0 && Math.floor(this.invulnerableFor * 12) % 2 === 0) return;
       ns.skins.draw('player', ctx, this);
+      if (this.shieldHits > 0) {
+        ctx.save(); ctx.translate(this.x, this.y); ctx.strokeStyle = '#b07cff'; ctx.lineWidth = 3; ctx.shadowColor = '#b07cff'; ctx.shadowBlur = 12;
+        ctx.beginPath(); ctx.arc(0,0,34,0,Math.PI*2); ctx.stroke(); ctx.restore();
+      }
     }
   }
   ns.entities.Player = Player;

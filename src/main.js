@@ -9,7 +9,9 @@
     message: document.getElementById('overlay-message'),
     button: document.getElementById('start-button'),
     skinPicker: document.getElementById('skin-picker'),
-    skinOptions: document.getElementById('skin-options')
+    skinOptions: document.getElementById('skin-options'),
+    threat: document.getElementById('threat'),
+    skillStatus: document.getElementById('skill-status')
   };
   globalThis.skyStrikeGame = new ns.Game(canvas, ui);
 

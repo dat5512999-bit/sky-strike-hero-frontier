@@ -43,6 +43,25 @@
         }
       });
     }
+
+    static resolveEnemyBullets(player, bullets, onHit) {
+      if (!player.active) return;
+      bullets.forEach(function (bullet) {
+        if (bullet.active && overlaps(player, bullet, 9, 0)) {
+          bullet.active = false;
+          if (player.takeDamage(bullet.damage)) onHit(bullet);
+        }
+      });
+    }
+
+    static resolvePlayerPowerUps(player, powerUps, onCollect) {
+      powerUps.forEach(function (powerUp) {
+        if (powerUp.active && overlaps(player, powerUp, 5, 2)) {
+          powerUp.active = false;
+          onCollect(powerUp);
+        }
+      });
+    }
   }
 
   ns.systems.Collision = Collision;

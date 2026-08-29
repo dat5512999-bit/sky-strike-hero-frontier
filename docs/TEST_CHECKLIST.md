@@ -3,7 +3,7 @@
 ## 自動化
 
 - [x] `npm run check`：主要 JavaScript 語法正確。
-- [x] `npm test`：13 項移動、觸控換算、皮膚、碰撞、PWA 資產與離線檔案測試通過。
+- [x] `npm test`：20 項移動、技能、敵方攻擊、觸控、皮膚、PWA 與離線檔案測試通過。
 
 ## Chrome / Edge 手動煙霧測試
 
@@ -27,6 +27,11 @@
 - [x] 矮橫向手機顯示轉直向提示。
 - [x] Manifest、圖示與 Service Worker 離線資產全部存在。
 - [x] GitHub Pages 工作流程先驗證再部署，權限限於 contents read、pages write、id-token write。
+- [x] 威脅於 12 秒升到第 2 級並出現高速敵人。
+- [x] 射擊敵人能瞄準玩家，敵方子彈命中會失效並扣 HP。
+- [x] 草莓散射、香蕉連射、葡萄護盾、鳳梨清場通過自動測試。
+- [x] 第一顆保證果實在約 5 秒生成，之後持續生成且可由擊破掉落。
+- [x] PWA 更新採 network-first，連線時不再長期顯示舊版，離線時回退快取。
 
 ## 例外與安全
 

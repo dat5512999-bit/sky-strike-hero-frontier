@@ -10,10 +10,10 @@ const root = path.resolve(__dirname, '..');
 const files = [
   'src/namespace.js', 'src/config.js', 'src/utils/math.js',
   'src/skins/SkinRegistry.js', 'src/skins/SkinPacks.js',
-  'src/entities/Bullet.js', 'src/entities/Player.js', 'src/entities/Enemy.js',
+  'src/entities/Bullet.js', 'src/entities/EnemyBullet.js', 'src/entities/Player.js', 'src/entities/Enemy.js',
   'src/entities/Boss.js', 'src/entities/PowerUp.js',
   'src/systems/Weapon.js', 'src/systems/Collision.js',
-  'src/systems/Spawner.js', 'src/systems/GameState.js', 'src/systems/Effects.js',
+  'src/systems/Spawner.js', 'src/systems/GameState.js', 'src/systems/Effects.js', 'src/systems/SkillSystem.js',
   'src/systems/InputController.js'
 ];
 
@@ -113,6 +113,80 @@ test('生成器會隨遊戲時間逐步縮短生成間隔', () => {
   spawner.update(0.016, enemies);
   assert.equal(enemies.length, 1);
   assert.equal(enemies[0].x, ns.config.width / 2);
+});
+
+test('威脅等級每 12 秒提升並封頂為 5', () => {
+  const ns = loadGameCore();
+  const spawner = new ns.systems.Spawner(() => 0.1);
+  assert.equal(spawner.threatLevel(), 1);
+  spawner.elapsed = 25;
+  assert.equal(spawner.threatLevel(), 3);
+  spawner.elapsed = 999;
+  assert.equal(spawner.threatLevel(), 5);
+});
+
+test('射擊敵機會瞄準玩家產生敵方子彈', () => {
+  const ns = loadGameCore();
+  const enemy = new ns.entities.Enemy(240, 145, { type:'gunner', health:4 });
+  enemy.fireCooldown = 0;
+  const bullets = [];
+  enemy.update(0.016, { player:new ns.entities.Player(240,560), enemyBullets:bullets });
+  assert.equal(bullets.length, 1);
+  assert.ok(bullets[0].vy > 0);
+});
+
+test('草莓與香蕉果實分別啟用散射和高速連射', () => {
+  const ns = loadGameCore();
+  const skills = new ns.systems.SkillSystem(() => 0);
+  const context = { player:new ns.entities.Player(240,560), enemies:[], enemyBullets:[], onDestroyed(){} };
+  skills.collect(new ns.entities.PowerUp(0,0,'strawberry'), context);
+  skills.collect(new ns.entities.PowerUp(0,0,'banana'), context);
+  assert.equal(skills.has('spread'), true);
+  assert.equal(skills.has('rapid'), true);
+  const weapon = new ns.systems.Weapon();
+  const bullets = [];
+  weapon.update(0.2, context.player, bullets, skills);
+  assert.equal(bullets.length, 3);
+  assert.ok(bullets[0].vx < 0 && bullets[2].vx > 0);
+});
+
+test('葡萄護盾可抵擋一次傷害且不扣 HP', () => {
+  const ns = loadGameCore();
+  const player = new ns.entities.Player(240,560);
+  player.shieldHits = 1;
+  assert.equal(player.takeDamage(1), true);
+  assert.equal(player.health, 3);
+  assert.equal(player.shieldHits, 0);
+});
+
+test('鳳梨果實清除敵方子彈並對畫面敵人造成傷害', () => {
+  const ns = loadGameCore();
+  const skills = new ns.systems.SkillSystem(() => 0);
+  const enemy = new ns.entities.Enemy(100,100,{health:4});
+  const enemyBullet = new ns.entities.EnemyBullet(100,100,0,100);
+  skills.collect(new ns.entities.PowerUp(0,0,'pineapple'), { player:new ns.entities.Player(240,560), enemies:[enemy], enemyBullets:[enemyBullet], onDestroyed(){} });
+  assert.equal(enemyBullet.active, false);
+  assert.equal(enemy.health, 1);
+});
+
+test('技能系統會在前五秒保證生成第一顆果實', () => {
+  const ns = loadGameCore();
+  const skills = new ns.systems.SkillSystem(() => 0);
+  const powerUps = [];
+  skills.update(5.1, powerUps);
+  assert.equal(powerUps.length, 1);
+  assert.equal(powerUps[0].type, 'strawberry');
+});
+
+test('敵方子彈命中玩家後失效並扣除生命', () => {
+  const ns = loadGameCore();
+  const player = new ns.entities.Player(240,560);
+  const bullet = new ns.entities.EnemyBullet(240,560,0,100);
+  let hits = 0;
+  ns.systems.Collision.resolveEnemyBullets(player,[bullet],() => { hits += 1; });
+  assert.equal(hits,1);
+  assert.equal(player.health,2);
+  assert.equal(bullet.active,false);
 });
 
 test('手機拖曳使用相對位移，不會讓手指遮住或瞬移戰機', () => {

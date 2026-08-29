@@ -21,6 +21,10 @@
     </header>
     <section class="stage-wrap">
       <canvas id="game" width="480" height="720" tabindex="0" aria-label="遊戲畫面"></canvas>
+      <div class="battle-status" aria-live="polite">
+        <span id="threat">威脅 1</span>
+        <span id="skill-status">技能：無</span>
+      </div>
       <div id="overlay" class="overlay">
         <div class="panel">
           <p class="eyebrow">VERTICAL STRIKE</p>
@@ -48,6 +52,7 @@
   <script src="src/skins/SkinRegistry.js"></script>
   <script src="src/skins/SkinPacks.js"></script>
   <script src="src/entities/Bullet.js"></script>
+  <script src="src/entities/EnemyBullet.js"></script>
   <script src="src/entities/Player.js"></script>
   <script src="src/entities/Enemy.js"></script>
   <script src="src/entities/Boss.js"></script>
@@ -57,6 +62,7 @@
   <script src="src/systems/Spawner.js"></script>
   <script src="src/systems/GameState.js"></script>
   <script src="src/systems/Effects.js"></script>
+  <script src="src/systems/SkillSystem.js"></script>
   <script src="src/systems/InputController.js"></script>
   <script src="src/Game.js"></script>
   <script src="src/main.js"></script>
