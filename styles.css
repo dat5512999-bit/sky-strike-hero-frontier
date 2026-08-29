@@ -11,13 +11,19 @@
 
 html, body {
   min-height: 100%;
+  min-height: 100dvh;
   margin: 0;
+  overscroll-behavior: none;
 }
 
 body {
   display: grid;
   place-items: center;
-  padding: 16px;
+  padding:
+    max(12px, env(safe-area-inset-top))
+    max(12px, env(safe-area-inset-right))
+    max(12px, env(safe-area-inset-bottom))
+    max(12px, env(safe-area-inset-left));
   overflow: hidden;
   background:
     radial-gradient(circle at 50% 20%, #173854 0, #071321 42%, #02070d 100%);
@@ -58,7 +64,13 @@ canvas {
   cursor: crosshair;
   border: 1px solid rgba(82, 231, 255, 0.3);
   background: var(--navy);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
+
+canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
 
 .overlay {
   position: absolute;
@@ -144,6 +156,23 @@ button {
 button:hover, button:focus-visible { background: #fff; outline: 2px solid #ffca58; outline-offset: 3px; }
 .hint { margin-bottom: 0; font-size: 11px; }
 footer { padding: 8px; text-align: center; color: #7194a4; font-size: 11px; }
+.touch-help { display: none; }
+
+.orientation-tip {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  place-content: center;
+  gap: 8px;
+  text-align: center;
+  background: #030b13;
+  color: #eefcff;
+  font-size: 42px;
+}
+
+.orientation-tip strong { font-size: 21px; }
+.orientation-tip span { color: #86aebb; font-size: 13px; }
 
 @media (max-height: 820px) {
   .game-shell { width: min(420px, calc(100vw - 24px), calc((100vh - 96px) * 2 / 3)); }
@@ -153,4 +182,25 @@ footer { padding: 8px; text-align: center; color: #7194a4; font-size: 11px; }
   .panel > p { margin-block: 6px; }
   .skin-option { padding: 5px 3px; }
   .skin-option .skin-icon { font-size: 16px; }
+}
+
+@media (pointer: coarse) {
+  body { padding-top: max(8px, env(safe-area-inset-top)); padding-bottom: max(8px, env(safe-area-inset-bottom)); }
+  .desktop-help { display: none; }
+  .touch-help { display: inline; }
+  button { min-height: 44px; }
+  .skin-option { min-height: 48px; }
+  canvas { cursor: default; }
+}
+
+@media (max-width: 390px) {
+  .hud { padding-inline: 9px; gap: 5px; }
+  .hud strong { font-size: 15px; }
+  .title { font-size: 14px; }
+  .overlay { padding: 14px; }
+  .panel { padding-inline: 14px; }
+}
+
+@media (orientation: landscape) and (max-height: 520px) and (pointer: coarse) {
+  .orientation-tip { display: grid; }
 }

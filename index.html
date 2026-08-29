@@ -2,7 +2,13 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#061423">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/game-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/game-icon.svg">
   <title>蒼穹突擊 — Phase 1</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,7 +20,7 @@
       <div><span class="hud-label">HP</span><strong id="health">● ● ●</strong></div>
     </header>
     <section class="stage-wrap">
-      <canvas id="game" width="480" height="720" aria-label="遊戲畫面"></canvas>
+      <canvas id="game" width="480" height="720" tabindex="0" aria-label="遊戲畫面"></canvas>
       <div id="overlay" class="overlay">
         <div class="panel">
           <p class="eyebrow">VERTICAL STRIKE</p>
@@ -29,8 +35,12 @@
         </div>
       </div>
     </section>
-    <footer>滑鼠移動：操控戰機　｜　自動射擊　｜　Esc：暫停</footer>
+    <footer>
+      <span class="desktop-help">滑鼠移動：操控戰機　｜　自動射擊　｜　Esc：暫停</span>
+      <span class="touch-help">手指拖曳：操控戰機　｜　自動射擊</span>
+    </footer>
   </main>
+  <aside class="orientation-tip" role="status">↻<strong>請將手機轉為直向</strong><span>直向模式會有最佳操作空間</span></aside>
 
   <script src="src/namespace.js"></script>
   <script src="src/config.js"></script>
@@ -47,6 +57,7 @@
   <script src="src/systems/Spawner.js"></script>
   <script src="src/systems/GameState.js"></script>
   <script src="src/systems/Effects.js"></script>
+  <script src="src/systems/InputController.js"></script>
   <script src="src/Game.js"></script>
   <script src="src/main.js"></script>
 </body>

@@ -12,4 +12,10 @@
     skinOptions: document.getElementById('skin-options')
   };
   globalThis.skyStrikeGame = new ns.Game(canvas, ui);
+
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+    globalThis.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js').catch(function () { /* Offline mode is optional. */ });
+    });
+  }
 })(globalThis.SkyStrike);

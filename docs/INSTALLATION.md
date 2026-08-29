@@ -10,3 +10,7 @@
 ## 開發環境（選用）
 
 安裝 Node.js 18 或更新版本後，在專案根目錄執行 `npm test`。本專案不需 `npm install`。
+
+## 手機
+
+手機不需安裝檔。部署至 GitHub Pages 後，以 Safari／Chrome 開啟公開網址；需要類似 App 的體驗時選擇「加入主畫面」。iOS 與 Android 的選單名稱可能略有不同。

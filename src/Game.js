@@ -33,16 +33,9 @@
 
     attachInput() {
       const self = this;
-      this.canvas.addEventListener('pointermove', function (event) {
-        if (self.state.status !== 'playing') return;
-        const rect = self.canvas.getBoundingClientRect();
-        self.player.setTarget(
-          (event.clientX - rect.left) * self.canvas.width / rect.width,
-          (event.clientY - rect.top) * self.canvas.height / rect.height
-        );
-      });
-      this.canvas.addEventListener('pointerdown', function (event) {
-        if (self.state.status === 'playing' && self.canvas.setPointerCapture) self.canvas.setPointerCapture(event.pointerId);
+      this.input = new ns.systems.InputController(this.canvas, {
+        canControl: function () { return self.state.status === 'playing'; },
+        getPlayer: function () { return self.player; }
       });
       this.ui.button.onclick = function () { self.start(); };
       globalThis.addEventListener('keydown', function (event) {
@@ -101,7 +94,8 @@
     togglePause() {
       if (this.state.status === 'playing') {
         this.state.pause();
-        this.showOverlay('任務暫停', '移動滑鼠後按 Esc 繼續', '繼續任務', true);
+        const touch = globalThis.matchMedia && globalThis.matchMedia('(pointer: coarse)').matches;
+        this.showOverlay('任務暫停', touch ? '按下方按鈕繼續任務' : '移動滑鼠後按 Esc 繼續', '繼續任務', true);
       } else if (this.state.status === 'paused') {
         this.state.resume();
         this.ui.overlay.classList.add('hidden');

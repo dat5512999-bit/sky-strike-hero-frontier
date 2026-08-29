@@ -1,0 +1,15 @@
+{
+  "name": "蒼穹突擊 Sky Strike",
+  "short_name": "蒼穹突擊",
+  "description": "可更換外觀包的 2D 縱向飛機射擊遊戲",
+  "lang": "zh-Hant",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#02070d",
+  "theme_color": "#061423",
+  "icons": [
+    { "src": "assets/icons/game-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

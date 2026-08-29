@@ -13,7 +13,8 @@ const files = [
   'src/entities/Bullet.js', 'src/entities/Player.js', 'src/entities/Enemy.js',
   'src/entities/Boss.js', 'src/entities/PowerUp.js',
   'src/systems/Weapon.js', 'src/systems/Collision.js',
-  'src/systems/Spawner.js', 'src/systems/GameState.js', 'src/systems/Effects.js'
+  'src/systems/Spawner.js', 'src/systems/GameState.js', 'src/systems/Effects.js',
+  'src/systems/InputController.js'
 ];
 
 function loadGameCore() {
@@ -112,4 +113,17 @@ test('生成器會隨遊戲時間逐步縮短生成間隔', () => {
   spawner.update(0.016, enemies);
   assert.equal(enemies.length, 1);
   assert.equal(enemies[0].x, ns.config.width / 2);
+});
+
+test('手機拖曳使用相對位移，不會讓手指遮住或瞬移戰機', () => {
+  const ns = loadGameCore();
+  const anchor = { clientX: 100, clientY: 200, playerX: 240, playerY: 560 };
+  const target = ns.systems.InputController.touchTarget(anchor, { clientX: 125, clientY: 175 }, { left: 0, top: 0, width: 240, height: 360 }, { width: 480, height: 720 });
+  assert.deepEqual({ x: target.x, y: target.y }, { x: 290, y: 510 });
+});
+
+test('桌面指標位置可正確換算成 Canvas 座標', () => {
+  const ns = loadGameCore();
+  const point = ns.systems.InputController.canvasPoint({ clientX: 130, clientY: 210 }, { left: 10, top: 30, width: 240, height: 360 }, { width: 480, height: 720 });
+  assert.deepEqual({ x: point.x, y: point.y }, { x: 240, y: 360 });
 });

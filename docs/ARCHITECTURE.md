@@ -17,11 +17,14 @@ src/
   entities/    Player, Enemy, Bullet, Boss, PowerUp
   skins/       SkinRegistry 與內建外觀包
   systems/     Weapon, Collision, Spawner, GameState, Effects
+                InputController（滑鼠絕對定位／觸控相對拖曳）
   utils/       數學工具
   Game.js      遊戲協調與迴圈
   main.js      UI 啟動入口
 tests/         Node 內建測試
 docs/          操作、維運、API 與 QA 文件
+manifest.webmanifest / sw.js   PWA 與離線快取
+.github/workflows/pages.yml    Pages 驗證與部署
 ```
 
 ## 模組關係
