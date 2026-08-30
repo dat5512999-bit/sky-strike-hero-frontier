@@ -5,9 +5,11 @@
       this.random = random || Math.random;
       this.timer = 0.8;
       this.elapsed = 0;
+      this.modifiers = {};
     }
 
-    reset() { this.timer = 0.8; this.elapsed = 0; }
+    reset() { this.timer = 0.8; this.elapsed = 0; this.modifiers = {}; }
+    setModifiers(modifiers) { this.modifiers = modifiers || {}; }
 
     currentInterval() {
       const cfg = ns.config.spawner;
@@ -37,7 +39,11 @@
         gunner: { type:'gunner', speed:82, health:4, score:320 },
         elite: { type:'elite', speed:65, health:10, score:900, width:68, height:62 }
       };
-      return new ns.entities.Enemy(x, -ns.config.enemy.height, presets[type]);
+      const enemy = new ns.entities.Enemy(x, -ns.config.enemy.height, presets[type]);
+      enemy.health = Math.max(1, Math.round(enemy.health * (this.modifiers.health || 1)));
+      enemy.maxHealth = enemy.health;
+      enemy.scoreValue = Math.round(enemy.scoreValue * (this.modifiers.score || 1));
+      return enemy;
     }
 
     update(dt, enemies) {
@@ -46,7 +52,12 @@
       if (this.timer <= 0) {
         const margin = ns.config.enemy.width;
         const x = margin + this.random() * (ns.config.width - margin * 2);
-        enemies.push(this.createEnemy(this.chooseType(), x));
+        const type = this.chooseType();
+        enemies.push(this.createEnemy(type, x));
+        if ((this.modifiers.twinChance || 0) > this.random()) {
+          const twinX = ns.utils.clamp(x + (x < ns.config.width / 2 ? 58 : -58), margin, ns.config.width - margin);
+          enemies.push(this.createEnemy(type, twinX));
+        }
         this.timer += this.currentInterval();
       }
     }

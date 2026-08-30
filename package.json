@@ -1,6 +1,6 @@
 {
   "name": "sky-strike",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "private": true,
   "description": "支援手機、外觀包、戰場事件與分層視覺效果的 HTML5 Canvas 縱向射擊遊戲",
   "scripts": {

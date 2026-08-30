@@ -130,6 +130,7 @@
       const mode = this.difficulty.current();
       this.effects.announce(mode.icon + ' ' + mode.name + '模式 · 維持 Combo', ns.skins.current().accent);
       this.ui.supportStatus.hidden=false;
+      this.ui.defenseStatus.hidden=false;
       this.ui.overlay.classList.add('hidden');
       this.canvas.focus();
     }
@@ -142,6 +143,7 @@
       } else if (this.state.status === 'paused') {
         this.state.resume();
         this.ui.supportStatus.hidden=false;
+        this.ui.defenseStatus.hidden=false;
         this.ui.overlay.classList.add('hidden');
       }
     }
@@ -154,17 +156,21 @@
       this.ui.skinPicker.hidden = Boolean(resume);
       this.ui.difficultyPicker.hidden = Boolean(resume);
       this.ui.supportStatus.hidden=true;
+      this.ui.defenseStatus.hidden=true;
       this.ui.overlay.classList.remove('hidden');
       this.ui.button.onclick = resume ? function () { self.togglePause(); } : function () { self.start(); };
     }
 
     update(dt) {
+      const self = this;
       this.state.update(dt);
       this.player.update(dt);
       this.skills.update(dt, this.powerUps);
       this.weapon.update(dt, this.player, this.bullets, this.skills);
       const stageContext={player:this.player,enemies:this.enemies,powerUps:this.powerUps,enemyBullets:this.enemyBullets,effects:this.effects};
       this.stage.update(dt,stageContext);
+      const stageModifiers=this.stage.modifiers();
+      this.spawner.setModifiers(stageModifiers);
       if(this.stage.shouldSpawn())this.spawner.update(dt, this.enemies);
       this.support.update(dt,this.player,this.enemies,this.bullets);
       const challengeContext = { player:this.player, powerUps:this.powerUps, effects:this.effects };
@@ -175,13 +181,16 @@
         this.effects.announce('⚠ 威脅升級 · ' + currentThreat, currentThreat >= 4 ? '#ff496d' : '#ffd34f');
       }
       this.bullets.forEach(function (bullet) { bullet.update(dt); });
-      const combatContext = { player:this.player, enemyBullets:this.enemyBullets, threat:this.spawner.threatLevel(), enemySpeed:this.difficulty.current().enemySpeed };
+      const combatContext = { player:this.player, enemyBullets:this.enemyBullets, threat:this.spawner.threatLevel(), enemySpeed:this.difficulty.current().enemySpeed*stageModifiers.speed, enemyFireRate:stageModifiers.fireRate };
       this.enemies.forEach(function (enemy) { enemy.update(dt, combatContext); });
+      this.enemies.forEach(function(enemy){
+        if(enemy.phaseChanged){self.effects.announce('⚠ 霸主進入第 '+enemy.phase+' 階段','#ff5f88');enemy.phaseChanged=false;}
+        if(enemy.escaped&&!enemy.escapeHandled){enemy.escapeHandled=true;self.stage.onEnemyEscaped(enemy,{effects:self.effects});self.state.breakCombo();}
+      });
       this.enemyBullets.forEach(function (bullet) { bullet.update(dt); });
       this.powerUps.forEach(function (powerUp) { powerUp.update(dt); });
       this.effects.update(dt);
 
-      const self = this;
       ns.systems.Collision.resolvePlayerBullets(this.bullets, this.enemies, function (enemy) {
         self.onEnemyDestroyed(enemy, true);
       }, function(enemy, bullet) {
@@ -216,6 +225,11 @@
         this.showOverlay('遠征完成', '你已突破全部 100 波！<br>最終分數：'+String(this.state.score).padStart(6,'0')+'　最佳 Combo：'+this.state.bestCombo, '再次遠征', false);
         return;
       }
+      if (this.stage.failed && this.state.status === 'playing') {
+        this.state.end();this.challenge.reset();this.updateHud();
+        this.showOverlay('防線崩潰', '敵軍突破了空域防線。<br>本局：'+String(this.state.score).padStart(6,'0')+'　抵達第 '+this.stage.wave+' 波', '重新整備', false);
+        return;
+      }
       if (!this.player.active) {
         this.state.end();
         this.challenge.reset();
@@ -233,7 +247,7 @@
     }
 
     drawBackground() {
-      this.battlefield.draw(this.ctx, ns.skins.current(), this.spawner.threatLevel());
+      this.battlefield.draw(this.ctx, ns.skins.current(), this.spawner.threatLevel(), this.stage.affix());
     }
 
     draw() {
@@ -261,6 +275,8 @@
       this.ui.combo.textContent = 'COMBO ' + this.state.combo + ' · ×' + this.state.multiplier;
       this.ui.bestScore.textContent = 'BEST ' + String(Math.max(this.state.highScore, this.state.score)).padStart(6, '0');
       this.ui.supportStatus.textContent = this.support.status();
+      this.ui.defenseStatus.textContent = this.stage.defenseStatus();
+      this.ui.defenseStatus.classList.toggle('critical',this.stage.integrity<=2);
     }
 
     loop(timestamp) {

@@ -4,19 +4,20 @@
     constructor(wave,mode){
       const major=wave%10===0;const health=Math.round((major?92:62)+wave*3.6);
       super(ns.config.width/2,-80,{type:'boss',width:major?126:108,height:major?96:82,health:health,score:(major?5000:2600)+wave*80,speed:72});
-      this.wave=wave;this.major=major;this.fireCooldown=1.2;this.phase=1;this.entered=false;
+      this.wave=wave;this.major=major;this.fireCooldown=1.2;this.phase=1;this.previousPhase=1;this.phaseChanged=false;this.entered=false;
     }
     update(dt,context){
       const speedScale=context&&context.enemySpeed?context.enemySpeed:1;this.time+=dt;this.hitFlash=Math.max(0,this.hitFlash-dt);
       if(this.y<112){this.y+=this.speed*dt;return;}
-      this.entered=true;this.phase=this.health<=this.maxHealth*.32?3:(this.health<=this.maxHealth*.66?2:1);
+      this.entered=true;this.previousPhase=this.phase;this.phase=this.health<=this.maxHealth*.32?3:(this.health<=this.maxHealth*.66?2:1);this.phaseChanged=this.phase!==this.previousPhase;
       this.x=ns.config.width/2+Math.sin(this.time*(this.major?.7:.95))*135;
-      this.fireCooldown-=dt*speedScale;
-      if(this.fireCooldown<=0&&context&&context.enemyBullets){this.shootPattern(context.enemyBullets);this.fireCooldown=[0,1.15,.78,.48][this.phase];}
+      this.fireCooldown-=dt*speedScale*(context&&context.enemyFireRate?context.enemyFireRate:1);
+      if(this.fireCooldown<=0&&context&&context.enemyBullets){this.shootPattern(context.enemyBullets,context.player);this.fireCooldown=[0,1.15,.78,.48][this.phase];}
     }
-    shootPattern(bullets){
-      const speed=145+this.wave*1.5;const count=this.phase===1?5:(this.phase===2?7:12);const spread=this.phase===3?Math.PI*1.65:1.25;
-      for(let i=0;i<count;i+=1){const ratio=count===1?.5:i/(count-1);const angle=Math.PI/2-spread/2+ratio*spread+(this.phase===3?this.time*.22:0);bullets.push(new ns.entities.EnemyBullet(this.x,this.y+28,Math.cos(angle)*speed,Math.sin(angle)*speed));}
+    shootPattern(bullets,player){
+      const speed=145+this.wave*1.5;const count=(this.phase===1?6:(this.phase===2?9:14))+(this.major?2:0);const spread=this.phase===3?Math.PI*1.72:(this.phase===2?1.55:1.05);
+      const aimed=player?Math.atan2(player.y-this.y,player.x-this.x):Math.PI/2;
+      for(let i=0;i<count;i+=1){const ratio=count===1?.5:i/(count-1);const center=this.phase===3?Math.PI/2+this.time*.28:aimed;const angle=center-spread/2+ratio*spread;bullets.push(new ns.entities.EnemyBullet(this.x,this.y+28,Math.cos(angle)*speed,Math.sin(angle)*speed));}
     }
     draw(ctx){
       const color=this.major?'#ffb23e':'#ff416d';ctx.save();ctx.translate(this.x,this.y);ctx.shadowColor=color;ctx.shadowBlur=20;

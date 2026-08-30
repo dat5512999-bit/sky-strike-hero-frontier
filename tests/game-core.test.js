@@ -367,7 +367,64 @@ test('第五波會生成具有三階段攻擊的 Boss', () => {
   boss.fireCooldown = 0;
   boss.update(0.016, { player:context.player, enemyBullets:context.enemyBullets, enemySpeed:1 });
   assert.equal(boss.phase, 3);
-  assert.equal(context.enemyBullets.length, 12);
+  assert.equal(context.enemyBullets.length, 14);
+});
+
+test('敵機突破底線會標記逃脫並扣除防線耐久', () => {
+  const ns = loadGameCore();
+  const enemy = new ns.entities.Enemy(240, ns.config.height + 80);
+  enemy.update(0.016, { enemySpeed:1 });
+  assert.equal(enemy.escaped, true);
+  const stage = new ns.systems.StageDirector();
+  const before = stage.integrity;
+  assert.equal(stage.onEnemyEscaped(enemy, { effects:{ announce(){} } }), 1);
+  assert.equal(stage.integrity, before - 1);
+});
+
+test('大型敵機突破扣兩點且防線歸零會使遠征失敗', () => {
+  const ns = loadGameCore();
+  ns.difficulty.select('hard');
+  const stage = new ns.systems.StageDirector();
+  stage.integrity = 2;
+  const elite = new ns.entities.Enemy(240, 800, { type:'elite', health:10 });
+  stage.onEnemyEscaped(elite, { effects:{ announce(){} } });
+  assert.equal(stage.integrity, 0);
+  assert.equal(stage.failed, true);
+  assert.equal(stage.phase, 'failed');
+});
+
+test('波次依序套用狂戰、鐵壁、疾射與雙生符文', () => {
+  const ns = loadGameCore();
+  const stage = new ns.systems.StageDirector();
+  const expected = ['frenzy','fortified','rapid'];
+  [2,3,4].forEach((wave,index) => { stage.wave=wave; assert.equal(stage.affix().id, expected[index]); });
+  stage.wave=6;
+  assert.equal(stage.affix().id, 'twin');
+  stage.wave=5;
+  assert.equal(stage.affix().id, 'boss');
+});
+
+test('鐵壁詞綴提高敵機生命，雙生詞綴可生成編隊', () => {
+  const ns = loadGameCore();
+  const spawner = new ns.systems.Spawner(() => 0);
+  spawner.setModifiers({ health:1.55, score:1.2, twinChance:1 });
+  const enemies=[];
+  spawner.timer=0;
+  spawner.update(0.016,enemies);
+  assert.equal(enemies.length,2);
+  assert.equal(enemies[0].health,3);
+  assert.notEqual(enemies[0].x,enemies[1].x);
+});
+
+test('Boss 第一階段彈幕會以玩家方向為中心瞄準', () => {
+  const ns = loadGameCore();
+  const boss = new ns.entities.Boss(5, ns.difficulty.current());
+  boss.x=120;boss.y=112;boss.fireCooldown=0;
+  const player=new ns.entities.Player(360,560);const bullets=[];
+  boss.update(0.016,{player,enemyBullets:bullets,enemySpeed:1,enemyFireRate:1});
+  assert.equal(bullets.length,6);
+  assert.ok(bullets.reduce((sum,bullet) => sum+bullet.vx,0) > 0);
+  assert.ok(bullets.every((bullet) => bullet.vy > 0));
 });
 
 test('鏡像僚機與星靈戰寵可同時自動射擊', () => {

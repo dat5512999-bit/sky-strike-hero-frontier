@@ -35,7 +35,7 @@
       }, this);
     }
 
-    draw(ctx, skin, threat) {
+    draw(ctx, skin, threat, affix) {
       const top = skin.background[0];
       const bottom = skin.background[1];
       const gradient = ctx.createLinearGradient(0,0,0,ns.config.height);
@@ -71,6 +71,13 @@
       ctx.fillStyle=vignette; ctx.fillRect(0,0,ns.config.width,ns.config.height);
       const danger=Math.max(0,(threat||1)-3)*.025;
       if(danger){ctx.fillStyle='rgba(255,25,70,'+danger+')';ctx.fillRect(0,0,ns.config.width,ns.config.height);}
+      if(affix&&affix.id!=='none'){
+        ctx.save();ctx.translate(ns.config.width/2,ns.config.height*.31);ctx.rotate(this.time*.055);ctx.globalAlpha=.055;
+        ctx.strokeStyle=affix.color;ctx.lineWidth=2;ctx.shadowColor=affix.color;ctx.shadowBlur=12;
+        ctx.beginPath();ctx.arc(0,0,92,0,Math.PI*2);ctx.stroke();
+        for(let i=0;i<8;i+=1){const angle=i*Math.PI/4;ctx.beginPath();ctx.moveTo(Math.cos(angle)*72,Math.sin(angle)*72);ctx.lineTo(Math.cos(angle)*92,Math.sin(angle)*92);ctx.lineTo(Math.cos(angle+.25)*82,Math.sin(angle+.25)*82);ctx.stroke();}
+        ctx.restore();
+      }
     }
   }
   ns.systems.BattlefieldRenderer=BattlefieldRenderer;

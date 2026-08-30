@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.8.0';
+const CACHE_NAME = 'sky-strike-v0.9.0';
 const ASSETS = [
   './', './index.html', './styles.css', './manifest.webmanifest', './assets/icons/game-icon.svg',
   './src/namespace.js', './src/config.js', './src/utils/math.js',

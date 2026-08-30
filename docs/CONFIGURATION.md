@@ -37,4 +37,6 @@
 
 `StageDirector.js` 的 `totalWaves` 為 100，`isBossWave` 控制每 5 波 Boss，`chapter` 每 10 波換章，`waveDuration` 控制一般波出兵時間。修改規則時須測試第 1、3、5、10、100 波與遠征完成狀態。
 
-Boss 基礎 HP、波次成長、射擊冷卻與彈數位於 `Boss.js`。`SupportSystem.js` 控制分身數量、分身／戰寵傷害和射速。支援子彈仍使用玩家子彈碰撞流程，調高數量前須測試無雙模式效能。
+防線上限由 `DifficultySystem.js` 的 `defenseIntegrity` 控制。四種符文位於 `StageDirector.js` 的 `AFFIXES`，可調整 `speed`、`health`、`fireRate`、`twinChance` 與分數補償；新增詞綴時必須同時確認 HUD 短名、色彩、可反制性與自動測試。避免同時大幅提高速度、HP 與數量。
+
+Boss 基礎 HP、波次成長、射擊冷卻、瞄準散角與各階段彈數位於 `Boss.js`。`SupportSystem.js` 控制分身數量、分身／戰寵傷害和射速。支援子彈仍使用玩家子彈碰撞流程，調高數量前須測試無雙模式效能。

@@ -117,6 +117,15 @@ body {
   pointer-events:none;text-shadow:0 1px 4px #000;clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px);
 }
 .support-status[hidden] { display:none; }
+.defense-status {
+  position:absolute;z-index:2;right:10px;bottom:10px;padding:5px 9px;
+  border:1px solid rgba(255,95,102,.62);background:rgba(25,4,10,.76);color:#ffd8dc;
+  font-size:9px;font-weight:800;letter-spacing:.07em;pointer-events:none;text-shadow:0 1px 4px #000;
+  clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px);
+}
+.defense-status[hidden] { display:none; }
+.defense-status.critical { color:#fff;border-color:#ff3658;box-shadow:0 0 14px rgba(255,35,76,.45);animation:defense-pulse .8s ease-in-out infinite alternate; }
+@keyframes defense-pulse { to { background:rgba(74,4,20,.9); } }
 
 canvas {
   display: block;
@@ -297,6 +306,7 @@ footer { padding: 8px; text-align: center; color: #7194a4; font-size: 11px; }
   .battle-status { gap: 3px; left: 5px; right: 5px; font-size: 8px; }
   .battle-status span { padding: 4px; }
   .support-status { left:5px;bottom:5px;font-size:8px; }
+  .defense-status { right:5px;bottom:5px;font-size:8px; }
   .overlay { padding: 14px; }
   .panel { padding-inline: 14px; }
 }

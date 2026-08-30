@@ -17,6 +17,8 @@
       this.maxHealth = this.health;
       this.active = true;
       this.destroyed = false;
+      this.escaped = false;
+      this.escapeHandled = false;
       this.hitFlash = 0;
     }
 
@@ -35,7 +37,7 @@
       } else if (this.type === 'gunner' || this.type === 'elite') {
         if (this.y < (this.type === 'elite' ? 115 : 145)) this.y += this.speed * movementDt;
         else this.x += Math.sin(this.time * (this.type === 'elite' ? 1.8 : 2.5)) * (this.type === 'elite' ? 48 : 34) * movementDt;
-        this.fireCooldown -= movementDt;
+        this.fireCooldown -= movementDt * (context && context.enemyFireRate ? context.enemyFireRate : 1);
         if (this.fireCooldown <= 0 && player && context.enemyBullets) {
           this.shootAt(player, context.enemyBullets, speedScale);
           this.fireCooldown = this.type === 'elite' ? 1.05 : 1.7;
@@ -44,7 +46,7 @@
         this.y += this.speed * movementDt;
       }
       this.x = ns.utils.clamp(this.x, this.width / 2, ns.config.width - this.width / 2);
-      if (this.y - this.height / 2 > ns.config.height + 20) this.active = false;
+      if (this.y - this.height / 2 > ns.config.height + 20) { this.escaped = true; this.active = false; }
     }
 
     shootAt(player, bullets, speedScale) {
