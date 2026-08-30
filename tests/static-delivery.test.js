@@ -23,6 +23,16 @@ test('瀏覽器入口使用傳統腳本，以支援 file:// 直接開啟', () =>
   assert.equal(/\bfetch\s*\(/.test(html), false);
 });
 
+test('英雄塔防入口引用的本機資產完整且不依賴網路', () => {
+  const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');
+  const references = Array.from(html.matchAll(/(?:src|href)="([^"]+)"/g), (match) => match[1]);
+  references.forEach((reference) => {
+    assert.ok(!/^https?:/i.test(reference), `不得依賴網路資源：${reference}`);
+    assert.ok(fs.existsSync(path.join(root, reference)), `TD 缺少檔案：${reference}`);
+  });
+  assert.equal(/<script[^>]+type=["']module["']/i.test(html), false);
+});
+
 test('PWA manifest 與離線快取引用的遊戲檔案都存在', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.webmanifest'), 'utf8'));
   assert.equal(manifest.display, 'standalone');

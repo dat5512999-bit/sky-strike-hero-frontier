@@ -1,13 +1,14 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.9.0';
+const CACHE_NAME = 'sky-strike-v0.10.0';
 const ASSETS = [
-  './', './index.html', './styles.css', './manifest.webmanifest', './assets/icons/game-icon.svg',
+  './', './index.html', './styles.css', './td.html', './td.css', './manifest.webmanifest', './assets/icons/game-icon.svg',
   './src/namespace.js', './src/config.js', './src/utils/math.js',
   './src/skins/SkinRegistry.js', './src/skins/SkinPacks.js',
   './src/entities/Bullet.js', './src/entities/EnemyBullet.js', './src/entities/Player.js', './src/entities/Enemy.js', './src/entities/Boss.js', './src/entities/PowerUp.js',
   './src/systems/Weapon.js', './src/systems/Collision.js', './src/systems/Spawner.js', './src/systems/GameState.js', './src/systems/Effects.js', './src/systems/BattlefieldRenderer.js', './src/systems/DifficultySystem.js', './src/systems/SkillSystem.js', './src/systems/ChallengeSystem.js', './src/systems/StageDirector.js', './src/systems/SupportSystem.js', './src/systems/InputController.js',
-  './src/Game.js', './src/main.js'
+  './src/Game.js', './src/main.js',
+  './src/td/namespace.js', './src/td/config.js', './src/td/systems/PathSystem.js', './src/td/entities/Monster.js', './src/td/entities/Projectile.js', './src/td/entities/Tower.js', './src/td/entities/Hero.js', './src/td/systems/WaveSystem.js', './src/td/systems/BuildSystem.js', './src/td/TDGame.js', './src/td/main.js'
 ];
 
 self.addEventListener('install', function (event) {

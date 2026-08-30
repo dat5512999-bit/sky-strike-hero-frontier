@@ -15,11 +15,13 @@
 - `StageDirector` 管理波次、倒數、防線耐久、詞綴、Boss 進出與固定獎勵，不直接生成一般敵機。
 - `SupportSystem` 管理分身／戰寵等級、位置、射擊及繪製，使用既有 `Bullet` 與碰撞流程。
 - 不需要資料庫；局內狀態於重開時重設，偏好與紀錄只存於瀏覽器。
+- `TowerFrontier` 是獨立命名空間；塔防不讀寫 `SkyStrike` 的玩家、波次或碰撞狀態，避免雙模式互相污染。
 
 ## 資料夾
 
 ```text
 index.html
+td.html / td.css   英雄塔防獨立入口與響應式 UI
 styles.css
 src/
   entities/    Player, Enemy, Bullet, Boss, PowerUp
@@ -31,6 +33,10 @@ src/
   utils/       數學工具
   Game.js      遊戲協調與迴圈
   main.js      UI 啟動入口
+  td/
+    entities/  Monster, Projectile, Tower, Hero
+    systems/   PathSystem, WaveSystem, BuildSystem
+    TDGame.js  塔防協調、經濟、結算與 Canvas 繪製
 tests/         Node 內建測試
 docs/          操作、維運、API 與 QA 文件
 manifest.webmanifest / sw.js   PWA 與離線快取
@@ -62,3 +68,15 @@ main → Game → GameState
 100 波不是 100 份硬編碼腳本。`StageDirector` 依波次計算章節、戰區、一般波時長、詞綴、Boss 類型與支援獎勵；`modifiers()` 將生命、速度、射速與雙生機率交給生成／敵人流程，`onEnemyEscaped()` 集中處理防線損傷。後續可加入章節設定物件，覆蓋特定波次的背景、敵人權重、事件或 Boss 行為。
 
 Skin Registry 讓每個品牌／主題包保持獨立。外觀 renderer 只能讀取實體位置、旋轉、動畫時間與外觀變體，不修改 HP、碰撞箱、速度或傷害。背景與粒子共用系統讀取目前皮膚色票，因此新皮膚不必重寫完整特效管線。
+
+## 塔防資料流
+
+```text
+td/main → TDGame → WaveSystem → Monster → Path
+                 ├─ BuildSystem → Tower → Projectile
+                 ├─ Hero → Projectile / Nova / Intercept
+                 ├─ Economy → Build / Upgrade / Sell / Kill Reward
+                 └─ Base Health → Leak → Victory / Game Over
+```
+
+`WaveSystem.composition()` 只描述波次組成；`Monster` 自行沿節點移動；`Tower` 與 `Hero` 只產生投射物；擊殺金幣與漏怪扣血由 `TDGame` 統一結算。後續自由造路應新增格網與尋路模組，不修改現有固定路徑實體。

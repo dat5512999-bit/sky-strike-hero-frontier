@@ -27,6 +27,19 @@
 
 `Enemy.escaped` 只標記事實，防線扣損由 `StageDirector.onEnemyEscaped()` 統一執行。`Boss` 仍是後續擴充點；`PowerUp` 已由技能與事件系統生成。事件完成時建立 `dragonfruit`，一般隨機生成不包含此類型。
 
+## TowerFrontier 塔防介面
+
+| 模組 | 主要介面 | 責任 |
+|---|---|---|
+| `Monster` | `update`、`takeDamage`、`applySlow`、`progress` | 路徑移動、HP、護甲、緩速與漏怪 |
+| `Tower` | `config`、`update`、`upgrade`、`sellValue` | 索敵、發射、等級與回收價值 |
+| `Projectile` | `update`、`hit` | 單體／範圍傷害與緩速效果 |
+| `Hero` | `setTarget`、`update`、`castNova` | 玩家移動、自動攻擊、攔截與主動技能 |
+| `PathSystem` | `draw` | 固定道路節點與道路繪製 |
+| `WaveSystem` | `composition`、`start`、`update`、`label` | 20 波組成、生成佇列與清場狀態 |
+| `BuildSystem` | `selectAt`、`build`、`upgrade`、`sell`、`towers` | 合法塔座與建造經濟 |
+| `TDGame` | `startWave`、`buildTower`、`castNova`、`onKill`、`update` | 協調波次、英雄、塔、經濟、城門與結算 |
+
 ## Skin Pack 介面
 
 每個 pack 必須包含 `id`、`name`、`icon`、`accent`、`secondary`、`background`、`star`、`effect`，以及 `renderers.player`、`renderers.bullet`、`renderers.enemy`。呼叫 `SkyStrike.skins.register(pack)` 後即可被選擇；詳細範例見外觀包製作指南。

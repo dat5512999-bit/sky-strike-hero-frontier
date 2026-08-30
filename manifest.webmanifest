@@ -1,7 +1,7 @@
 {
   "name": "蒼穹突擊 Sky Strike",
   "short_name": "蒼穹突擊",
-  "description": "具備外觀包、技能果實、威脅成長與連擊的 2D 縱向射擊遊戲",
+  "description": "包含 2D 縱向射擊與原創英雄塔防模式的本機遊戲",
   "lang": "zh-Hant",
   "start_url": "./",
   "scope": "./",
