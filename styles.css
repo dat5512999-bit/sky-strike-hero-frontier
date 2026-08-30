@@ -110,6 +110,14 @@ body {
 
 .challenge-status[hidden] { display: none; }
 
+.support-status {
+  position:absolute;z-index:2;left:10px;bottom:10px;padding:5px 9px;
+  border:1px solid color-mix(in srgb,var(--accent-secondary) 48%,transparent);
+  background:rgba(1,9,16,.7);color:#eafaff;font-size:9px;font-weight:750;letter-spacing:.06em;
+  pointer-events:none;text-shadow:0 1px 4px #000;clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px);
+}
+.support-status[hidden] { display:none; }
+
 canvas {
   display: block;
   width: 100%;
@@ -288,6 +296,7 @@ footer { padding: 8px; text-align: center; color: #7194a4; font-size: 11px; }
   .title { font-size: 14px; }
   .battle-status { gap: 3px; left: 5px; right: 5px; font-size: 8px; }
   .battle-status span { padding: 4px; }
+  .support-status { left:5px;bottom:5px;font-size:8px; }
   .overlay { padding: 14px; }
   .panel { padding-inline: 14px; }
 }

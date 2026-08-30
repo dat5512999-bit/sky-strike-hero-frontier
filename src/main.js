@@ -16,6 +16,7 @@
     threat: document.getElementById('threat'),
     skillStatus: document.getElementById('skill-status'),
     challengeStatus: document.getElementById('challenge-status'),
+    supportStatus: document.getElementById('support-status'),
     combo: document.getElementById('combo'),
     bestScore: document.getElementById('best-score')
   };

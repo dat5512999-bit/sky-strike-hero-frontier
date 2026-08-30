@@ -13,7 +13,7 @@ const files = [
   'src/entities/Bullet.js', 'src/entities/EnemyBullet.js', 'src/entities/Player.js', 'src/entities/Enemy.js',
   'src/entities/Boss.js', 'src/entities/PowerUp.js',
   'src/systems/Weapon.js', 'src/systems/Collision.js',
-  'src/systems/DifficultySystem.js', 'src/systems/Spawner.js', 'src/systems/GameState.js', 'src/systems/Effects.js', 'src/systems/BattlefieldRenderer.js', 'src/systems/SkillSystem.js', 'src/systems/ChallengeSystem.js',
+  'src/systems/DifficultySystem.js', 'src/systems/Spawner.js', 'src/systems/GameState.js', 'src/systems/Effects.js', 'src/systems/BattlefieldRenderer.js', 'src/systems/SkillSystem.js', 'src/systems/ChallengeSystem.js', 'src/systems/StageDirector.js', 'src/systems/SupportSystem.js',
   'src/systems/InputController.js'
 ];
 
@@ -331,4 +331,57 @@ test('擊破效果建立粒子、衝擊波與有限震動回饋', () => {
   effects.update(2);
   assert.equal(effects.flashes.length, 0);
   assert.equal(effects.particles.length, 0);
+});
+
+test('遠征包含 100 波且每五波固定為 Boss 戰', () => {
+  const ns = loadGameCore();
+  const stage = new ns.systems.StageDirector();
+  assert.equal(stage.totalWaves, 100);
+  [5,10,55,100].forEach((wave) => assert.equal(stage.isBossWave(wave), true));
+  [1,4,6,99].forEach((wave) => assert.equal(stage.isBossWave(wave), false));
+});
+
+test('第一波清場後進入第二波並保證掉落鏡像核心', () => {
+  const ns = loadGameCore();
+  const stage = new ns.systems.StageDirector();
+  const context = { player:new ns.entities.Player(240,560), enemies:[], powerUps:[], enemyBullets:[], effects:{announce(){}} };
+  stage.timer = 0;
+  stage.phase = 'clear';
+  stage.update(0.01, context);
+  assert.equal(stage.wave, 2);
+  assert.equal(context.powerUps.length, 1);
+  assert.equal(context.powerUps[0].type, 'mirror');
+});
+
+test('第五波會生成具有三階段攻擊的 Boss', () => {
+  const ns = loadGameCore();
+  const stage = new ns.systems.StageDirector();
+  stage.wave = 5;
+  const context = { player:new ns.entities.Player(240,560), enemies:[], powerUps:[], enemyBullets:[], effects:{announce(){}} };
+  stage.update(0.01, context);
+  assert.equal(context.enemies.length, 1);
+  const boss = context.enemies[0];
+  assert.equal(boss.type, 'boss');
+  boss.y = 112;
+  boss.health = boss.maxHealth * 0.3;
+  boss.fireCooldown = 0;
+  boss.update(0.016, { player:context.player, enemyBullets:context.enemyBullets, enemySpeed:1 });
+  assert.equal(boss.phase, 3);
+  assert.equal(context.enemyBullets.length, 12);
+});
+
+test('鏡像僚機與星靈戰寵可同時自動射擊', () => {
+  const ns = loadGameCore();
+  const support = new ns.systems.SupportSystem();
+  support.collect('mirror');
+  support.collect('familiar');
+  const player = new ns.entities.Player(240,560);
+  const enemy = new ns.entities.Enemy(240,120);
+  const bullets = [];
+  support.update(0.1, player, [enemy], bullets);
+  assert.equal(support.cloneLevel, 1);
+  assert.equal(support.familiarLevel, 1);
+  assert.equal(bullets.length, 2);
+  assert.ok(bullets.some((bullet) => bullet.vy < 0));
+  assert.match(support.status(), /分身 L1.*戰寵 L1/);
 });

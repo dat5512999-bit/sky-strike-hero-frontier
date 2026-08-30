@@ -32,3 +32,9 @@
 分層背景的星星數、光塵數、速度與透明度位於 `BattlefieldRenderer.js`；爆炸粒子數、生命週期與震動衰減位於 `Effects.js`。這些數值只影響視覺，但調高粒子數前必須在中階手機測試無雙模式。
 
 玩家傾斜量位於 `Player.js`，敵機類型標記位於 `Enemy.js`，果實光環位於 `PowerUp.js`。主題色仍由 `SkinPacks.js` 提供，請勿將特定皮膚色寫入共用背景系統。
+
+## 關卡與支援設定
+
+`StageDirector.js` 的 `totalWaves` 為 100，`isBossWave` 控制每 5 波 Boss，`chapter` 每 10 波換章，`waveDuration` 控制一般波出兵時間。修改規則時須測試第 1、3、5、10、100 波與遠征完成狀態。
+
+Boss 基礎 HP、波次成長、射擊冷卻與彈數位於 `Boss.js`。`SupportSystem.js` 控制分身數量、分身／戰寵傷害和射速。支援子彈仍使用玩家子彈碰撞流程，調高數量前須測試無雙模式效能。

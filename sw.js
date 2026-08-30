@@ -1,12 +1,12 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.7.0';
+const CACHE_NAME = 'sky-strike-v0.8.0';
 const ASSETS = [
   './', './index.html', './styles.css', './manifest.webmanifest', './assets/icons/game-icon.svg',
   './src/namespace.js', './src/config.js', './src/utils/math.js',
   './src/skins/SkinRegistry.js', './src/skins/SkinPacks.js',
   './src/entities/Bullet.js', './src/entities/EnemyBullet.js', './src/entities/Player.js', './src/entities/Enemy.js', './src/entities/Boss.js', './src/entities/PowerUp.js',
-  './src/systems/Weapon.js', './src/systems/Collision.js', './src/systems/Spawner.js', './src/systems/GameState.js', './src/systems/Effects.js', './src/systems/BattlefieldRenderer.js', './src/systems/DifficultySystem.js', './src/systems/SkillSystem.js', './src/systems/ChallengeSystem.js', './src/systems/InputController.js',
+  './src/systems/Weapon.js', './src/systems/Collision.js', './src/systems/Spawner.js', './src/systems/GameState.js', './src/systems/Effects.js', './src/systems/BattlefieldRenderer.js', './src/systems/DifficultySystem.js', './src/systems/SkillSystem.js', './src/systems/ChallengeSystem.js', './src/systems/StageDirector.js', './src/systems/SupportSystem.js', './src/systems/InputController.js',
   './src/Game.js', './src/main.js'
 ];
 
