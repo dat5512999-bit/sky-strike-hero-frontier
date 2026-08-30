@@ -17,7 +17,7 @@
   };
 
   class Collision {
-    static resolvePlayerBullets(bullets, enemies, onDestroyed) {
+    static resolvePlayerBullets(bullets, enemies, onDestroyed, onHit) {
       bullets.forEach(function (bullet) {
         if (!bullet.active) return;
         for (let i = 0; i < enemies.length; i += 1) {
@@ -26,6 +26,7 @@
             bullet.active = false;
             const destroyed = enemy.takeDamage(bullet.damage);
             if (destroyed) onDestroyed(enemy);
+            else if (onHit) onHit(enemy, bullet);
             break;
           }
         }

@@ -24,4 +24,4 @@ GitHub Pages 部署依據：[GitHub 官方自訂工作流程文件](https://docs
 
 ## PWA 與離線
 
-`manifest.webmanifest` 提供主畫面名稱、圖示、直向與獨立視窗設定；`sw.js` 快取遊戲必要資產。直接雙擊 `index.html` 時不註冊 Service Worker，只有 HTTP／HTTPS 部署才啟用離線支援。連線時採 network-first 取得新版，失敗才使用快取；發布新版本仍需同步更新 `sw.js` 的快取名稱與資產清單，本版名稱為 `sky-strike-v0.6.0`。
+`manifest.webmanifest` 提供主畫面名稱、圖示、直向與獨立視窗設定；`sw.js` 快取遊戲必要資產。直接雙擊 `index.html` 時不註冊 Service Worker，只有 HTTP／HTTPS 部署才啟用離線支援。連線時採 network-first 取得新版，失敗才使用快取；發布新版本仍需同步更新 `sw.js` 的快取名稱與資產清單，本版名稱為 `sky-strike-v0.7.0`，並包含 `BattlefieldRenderer.js`。

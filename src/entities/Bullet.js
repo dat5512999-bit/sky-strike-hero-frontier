@@ -24,6 +24,8 @@
     }
 
     draw(ctx) {
+      ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.rotation);ctx.globalCompositeOperation='lighter';
+      const trail=ctx.createLinearGradient(0,-4,0,24);trail.addColorStop(0,'rgba(255,255,255,.78)');trail.addColorStop(1,'rgba(82,231,255,0)');ctx.fillStyle=trail;ctx.fillRect(-2,-3,4,28);ctx.restore();
       ns.skins.draw('bullet', ctx, this);
     }
   }

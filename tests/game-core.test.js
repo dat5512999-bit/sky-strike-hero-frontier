@@ -13,7 +13,7 @@ const files = [
   'src/entities/Bullet.js', 'src/entities/EnemyBullet.js', 'src/entities/Player.js', 'src/entities/Enemy.js',
   'src/entities/Boss.js', 'src/entities/PowerUp.js',
   'src/systems/Weapon.js', 'src/systems/Collision.js',
-  'src/systems/DifficultySystem.js', 'src/systems/Spawner.js', 'src/systems/GameState.js', 'src/systems/Effects.js', 'src/systems/SkillSystem.js', 'src/systems/ChallengeSystem.js',
+  'src/systems/DifficultySystem.js', 'src/systems/Spawner.js', 'src/systems/GameState.js', 'src/systems/Effects.js', 'src/systems/BattlefieldRenderer.js', 'src/systems/SkillSystem.js', 'src/systems/ChallengeSystem.js',
   'src/systems/InputController.js'
 ];
 
@@ -309,4 +309,26 @@ test('桌面指標位置可正確換算成 Canvas 座標', () => {
   const ns = loadGameCore();
   const point = ns.systems.InputController.canvasPoint({ clientX: 130, clientY: 210 }, { left: 10, top: 30, width: 240, height: 360 }, { width: 480, height: 720 });
   assert.deepEqual({ x: point.x, y: point.y }, { x: 240, y: 360 });
+});
+
+test('戰場背景建立遠近分層星流與環境光塵', () => {
+  const ns = loadGameCore();
+  const battlefield = new ns.systems.BattlefieldRenderer(() => 0.5);
+  assert.equal(battlefield.stars.length, 82);
+  assert.equal(battlefield.motes.length, 13);
+  const firstY = battlefield.stars[0].y;
+  battlefield.update(0.1);
+  assert.ok(battlefield.stars[0].y > firstY);
+});
+
+test('擊破效果建立粒子、衝擊波與有限震動回饋', () => {
+  const ns = loadGameCore();
+  const effects = new ns.systems.Effects(() => 0.5);
+  effects.burst(100, 120, '#ffffff', 1);
+  assert.equal(effects.flashes.length, 1);
+  assert.ok(effects.particles.length >= 20);
+  assert.ok(effects.trauma > 0);
+  effects.update(2);
+  assert.equal(effects.flashes.length, 0);
+  assert.equal(effects.particles.length, 0);
 });

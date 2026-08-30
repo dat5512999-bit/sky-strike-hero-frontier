@@ -17,12 +17,14 @@
       this.maxHealth = this.health;
       this.active = true;
       this.destroyed = false;
+      this.hitFlash = 0;
     }
 
     update(dt, context) {
       const speedScale = context && context.enemySpeed ? context.enemySpeed : 1;
       const movementDt = dt * speedScale;
       this.time += movementDt;
+      this.hitFlash=Math.max(0,this.hitFlash-dt);
       const player = context && context.player;
       if (this.type === 'swift') {
         this.y += this.speed * movementDt;
@@ -57,6 +59,7 @@
     takeDamage(amount) {
       if (!this.active) return false;
       this.health -= amount;
+      this.hitFlash=.1;
       if (this.health <= 0) {
         this.health = 0;
         this.active = false;
@@ -68,11 +71,15 @@
 
     draw(ctx) {
       ns.skins.draw('enemy', ctx, this);
-      if (this.type !== 'normal') {
-        const colors = { swift:'#ffd34f', tracker:'#65efb2', gunner:'#ff8b42', elite:'#b67cff' };
-        ctx.save(); ctx.translate(this.x,this.y); ctx.strokeStyle=colors[this.type]; ctx.lineWidth=this.type==='elite'?4:2; ctx.shadowColor=colors[this.type]; ctx.shadowBlur=8;
-        ctx.beginPath(); ctx.arc(0,0,Math.max(this.width,this.height)/2+4,0,Math.PI*2); ctx.stroke(); ctx.restore();
-      }
+      const colors={swift:'#ffd34f',tracker:'#65efb2',gunner:'#ff8b42',elite:'#b67cff'}; const color=colors[this.type];
+      ctx.save();ctx.translate(this.x,this.y);
+      if(this.type==='swift'){ctx.strokeStyle=color;ctx.lineWidth=2;ctx.globalAlpha=.7;[-9,0,9].forEach(function(x,i){ctx.beginPath();ctx.moveTo(x,19);ctx.lineTo(x+(i-1)*4,38);ctx.stroke();});}
+      if(this.type==='tracker'){ctx.strokeStyle=color;ctx.lineWidth=2;ctx.shadowColor=color;ctx.shadowBlur=8;[0,Math.PI/2,Math.PI,Math.PI*1.5].forEach(function(a){const x=Math.cos(a)*27,y=Math.sin(a)*27;ctx.beginPath();ctx.moveTo(x-Math.cos(a)*7,y-Math.sin(a)*7);ctx.lineTo(x,y);ctx.lineTo(x-Math.cos(a-.7)*7,y-Math.sin(a-.7)*7);ctx.stroke();});}
+      if(this.type==='gunner'){ctx.fillStyle=color;ctx.shadowColor=color;ctx.shadowBlur=9;ctx.fillRect(-7,16,14,6);ctx.fillStyle='#fff';ctx.fillRect(-2,20,4,6);}
+      if(this.type==='elite'){ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.shadowColor=color;ctx.shadowBlur=12;ctx.beginPath();ctx.arc(0,0,34,-2.65,-.5);ctx.stroke();ctx.beginPath();ctx.arc(0,0,34,.5,2.65);ctx.stroke();}
+      if(this.hitFlash>0){ctx.globalCompositeOperation='screen';ctx.globalAlpha=this.hitFlash*6;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(0,0,Math.max(this.width,this.height)*.55,0,Math.PI*2);ctx.fill();}
+      if(this.maxHealth>=4){const width=this.type==='elite'?52:38;ctx.globalAlpha=.9;ctx.fillStyle='rgba(0,0,0,.7)';ctx.fillRect(-width/2,-this.height*.75,width,4);ctx.fillStyle=color||'#ff526e';ctx.fillRect(-width/2,-this.height*.75,width*(this.health/this.maxHealth),4);}
+      ctx.restore();
     }
   }
   ns.entities.Enemy = Enemy;

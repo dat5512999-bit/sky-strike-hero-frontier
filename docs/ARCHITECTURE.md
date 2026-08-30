@@ -10,6 +10,8 @@
 - `GameState` 統一處理 Combo、分數倍率與最高紀錄，避免 Enemy 或 UI 自行計分。
 - `DifficultySystem` 提供資料驅動的模式設定，`Spawner`、`Enemy`、`SkillSystem` 與 `ChallengeSystem` 只讀取目前模式。
 - `ChallengeSystem` 只處理事件狀態機與獎勵生成，不直接改寫敵人或玩家規則。
+- `BattlefieldRenderer` 只負責背景層次與環境氣氛；不建立敵人、修改速度或參與碰撞。
+- `Effects` 使用有上限生命週期的粒子、衝擊波與震動強度，所有物件會在到期後移除。
 - 不需要資料庫；局內狀態於重開時重設，偏好與紀錄只存於瀏覽器。
 
 ## 資料夾
@@ -21,7 +23,7 @@ src/
   entities/    Player, Enemy, Bullet, Boss, PowerUp
   skins/       SkinRegistry 與內建外觀包
   systems/     Weapon, Collision, Spawner, DifficultySystem, SkillSystem,
-               ChallengeSystem, GameState, Effects
+               ChallengeSystem, BattlefieldRenderer, GameState, Effects
                 InputController（滑鼠絕對定位／觸控相對拖曳）
   utils/       數學工具
   Game.js      遊戲協調與迴圈
@@ -42,6 +44,7 @@ main → Game → GameState
              │             └─ EnemyBullet
              ├─ SkillSystem → PowerUp → Weapon/Player/Enemy
              ├─ ChallengeSystem → PowerUp(Dragonfruit)
+             ├─ BattlefieldRenderer → Skin Pack colors
              ├─ GameState → Combo/Multiplier/High Score
              ├─ Collision(Player, Bullet, Enemy, EnemyBullet, PowerUp)
              ├─ SkinRegistry → Player/Bullet/Enemy renderers
@@ -50,4 +53,4 @@ main → Game → GameState
 
 後續武器以策略物件擴充 `Weapon`，敵機以行為類別或策略擴充 `Enemy`；Boss 與 PowerUp 已保留獨立實體邊界，無需改寫玩家或碰撞核心。
 
-Skin Registry 讓每個品牌／主題包保持獨立。外觀 renderer 只能讀取實體位置與外觀變體，不修改 HP、碰撞箱、速度或傷害。
+Skin Registry 讓每個品牌／主題包保持獨立。外觀 renderer 只能讀取實體位置、旋轉、動畫時間與外觀變體，不修改 HP、碰撞箱、速度或傷害。背景與粒子共用系統讀取目前皮膚色票，因此新皮膚不必重寫完整特效管線。

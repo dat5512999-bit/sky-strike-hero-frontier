@@ -15,6 +15,8 @@
       this.invulnerableFor = 0;
       this.shieldHits = 0;
       this.lastDamageBlocked = false;
+      this.rotation = 0;
+      this.engineTime = 0;
       this.active = true;
     }
 
@@ -27,8 +29,12 @@
 
     update(dt) {
       const step = this.speed * dt;
+      const previousX=this.x;
       this.x = ns.utils.moveToward(this.x, this.targetX, step);
       this.y = ns.utils.moveToward(this.y, this.targetY, step);
+      const bank=step>0?(this.x-previousX)/step:0;
+      this.rotation += (ns.utils.clamp(bank,-1,1)*.16-this.rotation)*Math.min(1,dt*10);
+      this.engineTime+=dt;
       this.invulnerableFor = Math.max(0, this.invulnerableFor - dt);
     }
 
@@ -51,8 +57,7 @@
       if (this.invulnerableFor > 0 && Math.floor(this.invulnerableFor * 12) % 2 === 0) return;
       ns.skins.draw('player', ctx, this);
       if (this.shieldHits > 0) {
-        ctx.save(); ctx.translate(this.x, this.y); ctx.strokeStyle = '#b07cff'; ctx.lineWidth = 3; ctx.shadowColor = '#b07cff'; ctx.shadowBlur = 12;
-        ctx.beginPath(); ctx.arc(0,0,34,0,Math.PI*2); ctx.stroke(); ctx.restore();
+        ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.engineTime*.7);ctx.strokeStyle='#c597ff';ctx.lineWidth=2.5;ctx.shadowColor='#b07cff';ctx.shadowBlur=15;ctx.setLineDash([18,8]);ctx.beginPath();ctx.arc(0,0,34+Math.sin(this.engineTime*4)*1.5,0,Math.PI*2);ctx.stroke();ctx.rotate(-this.engineTime*1.5);ctx.globalAlpha=.55;ctx.beginPath();ctx.arc(0,0,29,0,Math.PI*2);ctx.stroke();ctx.restore();
       }
     }
   }

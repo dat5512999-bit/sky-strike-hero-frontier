@@ -12,6 +12,7 @@
       this.weapon = new ns.systems.Weapon();
       this.spawner = new ns.systems.Spawner();
       this.effects = new ns.systems.Effects();
+      this.battlefield = new ns.systems.BattlefieldRenderer();
       this.challenge = new ns.systems.ChallengeSystem();
       ns.skins.restore();
       this.player = null;
@@ -20,7 +21,6 @@
       this.enemies = [];
       this.powerUps = [];
       this.previousThreat = 1;
-      this.stars = this.createStars();
       this.lastTime = 0;
       this.boundLoop = this.loop.bind(this);
       this.attachInput();
@@ -30,14 +30,6 @@
       this.applySkin();
       this.resetWorld();
       requestAnimationFrame(this.boundLoop);
-    }
-
-    createStars() {
-      const stars = [];
-      for (let i = 0; i < 70; i += 1) {
-        stars.push({ x: Math.random() * ns.config.width, y: Math.random() * ns.config.height, size: 0.5 + Math.random() * 1.7, speed: 18 + Math.random() * 55 });
-      }
-      return stars;
     }
 
     attachInput() {
@@ -122,6 +114,7 @@
       this.skills.reset();
       this.challenge.reset();
       this.effects.clear();
+      this.battlefield.reset();
       this.previousThreat = 1;
       this.updateHud();
     }
@@ -181,14 +174,16 @@
       const self = this;
       ns.systems.Collision.resolvePlayerBullets(this.bullets, this.enemies, function (enemy) {
         self.onEnemyDestroyed(enemy, true);
+      }, function(enemy, bullet) {
+        self.effects.hit(bullet.x, bullet.y, ns.skins.current().accent);
       });
       ns.systems.Collision.resolvePlayerEnemies(this.player, this.enemies, function (enemy) {
-        self.effects.burst(enemy.x, enemy.y, ns.skins.current().secondary);
+        self.effects.burst(enemy.x, enemy.y, ns.skins.current().secondary, 1.35);
         if (!self.player.lastDamageBlocked) { self.state.breakCombo(); self.challenge.onPlayerDamaged(challengeContext); }
         self.updateHud();
       });
       ns.systems.Collision.resolveEnemyBullets(this.player, this.enemyBullets, function (bullet) {
-        self.effects.burst(bullet.x, bullet.y, '#ff395f');
+        self.effects.burst(bullet.x, bullet.y, self.player.lastDamageBlocked?'#b67cff':'#ff395f', .8);
         if (!self.player.lastDamageBlocked) { self.state.breakCombo(); self.challenge.onPlayerDamaged(challengeContext); }
         self.updateHud();
       });
@@ -217,38 +212,25 @@
     onEnemyDestroyed(enemy, allowDrop) {
       this.state.registerKill(enemy.scoreValue);
       this.challenge.onKill({ player:this.player, powerUps:this.powerUps, effects:this.effects });
-      this.effects.burst(enemy.x, enemy.y, ns.skins.current().effect);
+      this.effects.burst(enemy.x, enemy.y, ns.skins.current().effect, enemy.type==='elite'?1.7:1);
       if (allowDrop) this.skills.maybeDrop(enemy, this.powerUps);
     }
 
-    updateStars(dt) {
-      this.stars.forEach(function (star) {
-        star.y += star.speed * dt;
-        if (star.y > ns.config.height) { star.y = -4; star.x = Math.random() * ns.config.width; }
-      });
-    }
-
     drawBackground() {
-      const ctx = this.ctx;
-      const skin = ns.skins.current();
-      const gradient = ctx.createLinearGradient(0, 0, 0, ns.config.height);
-      gradient.addColorStop(0, skin.background[0]);
-      gradient.addColorStop(1, skin.background[1]);
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, ns.config.width, ns.config.height);
-      ctx.fillStyle = skin.star;
-      this.stars.forEach(function (star) { ctx.globalAlpha = 0.2 + star.size / 3; ctx.fillRect(star.x, star.y, star.size, star.size * 2.3); });
-      ctx.globalAlpha = 1;
+      this.battlefield.draw(this.ctx, ns.skins.current(), this.spawner.threatLevel());
     }
 
     draw() {
       this.drawBackground();
+      const offset=this.state.status==='playing'?this.effects.offset():{x:0,y:0};
+      this.ctx.save();this.ctx.translate(offset.x,offset.y);
       this.powerUps.forEach(function (powerUp) { powerUp.draw(this.ctx); }, this);
       this.bullets.forEach(function (bullet) { bullet.draw(this.ctx); }, this);
       this.enemies.forEach(function (enemy) { enemy.draw(this.ctx); }, this);
       this.enemyBullets.forEach(function (bullet) { bullet.draw(this.ctx); }, this);
       if (this.player.active) this.player.draw(this.ctx);
       this.effects.draw(this.ctx);
+      this.ctx.restore();
     }
 
     updateHud() {
@@ -267,7 +249,7 @@
       const dt = Math.min((timestamp - this.lastTime) / 1000 || 0, 0.033);
       this.lastTime = timestamp;
       if (this.state.status === 'playing') {
-        this.updateStars(dt);
+        this.battlefield.update(dt);
         this.update(dt);
       }
       this.draw();

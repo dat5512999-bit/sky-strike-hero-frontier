@@ -26,14 +26,15 @@ body {
     max(12px, env(safe-area-inset-left));
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 20%, #173854 0, #071321 42%, #02070d 100%);
+    linear-gradient(115deg, rgba(82,231,255,.035) 1px, transparent 1px) 0 0 / 42px 42px,
+    radial-gradient(circle at 50% 18%, #173854 0, #071321 42%, #02070d 100%);
   color: #eefcff;
   font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
 }
 
 .game-shell {
   width: min(480px, calc(100vw - 24px));
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(0 24px 55px rgba(0,0,0,.68)) drop-shadow(0 0 24px color-mix(in srgb,var(--accent) 9%,transparent));
 }
 
 .hud {
@@ -43,11 +44,14 @@ body {
   align-items: center;
   gap: 10px;
   padding: 0 14px;
-  border: 1px solid rgba(82, 231, 255, 0.3);
+  position: relative;
+  border: 1px solid color-mix(in srgb,var(--accent) 42%,transparent);
   border-bottom: 0;
-  background: rgba(3, 15, 27, 0.94);
+  background: linear-gradient(180deg,rgba(9,29,45,.98),rgba(2,12,22,.96));
   letter-spacing: 0.08em;
 }
+
+.hud::after { content:""; position:absolute; left:18%; right:18%; bottom:-1px; height:2px; background:linear-gradient(90deg,transparent,var(--accent),transparent); box-shadow:0 0 10px var(--accent); }
 
 .hud > :last-child { text-align: right; }
 .hud-label { display: block; color: #79a9ba; font-size: 10px; }
@@ -56,7 +60,8 @@ body {
 .title { text-align: center; font-weight: 800; white-space: nowrap; }
 .title small { display: block; color: var(--accent-secondary); font-size: 8px; letter-spacing: 0.22em; }
 
-.stage-wrap { position: relative; aspect-ratio: 2 / 3; }
+.stage-wrap { position: relative; aspect-ratio: 2 / 3; isolation:isolate; }
+.stage-wrap::before { content:""; position:absolute; z-index:3; inset:0; pointer-events:none; border:1px solid color-mix(in srgb,var(--accent) 38%,transparent); box-shadow:inset 0 0 28px rgba(0,0,0,.55),inset 0 0 2px var(--accent); clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%); }
 
 .battle-status {
   position: absolute;
@@ -78,7 +83,9 @@ body {
 .battle-status span {
   padding: 5px 8px;
   border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-  background: rgba(1,9,16,.62);
+  background: linear-gradient(180deg,rgba(10,30,43,.8),rgba(1,9,16,.72));
+  box-shadow:inset 0 0 10px color-mix(in srgb,var(--accent) 7%,transparent),0 3px 10px rgba(0,0,0,.22);
+  clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px);
 }
 
 .challenge-status {
@@ -97,7 +104,8 @@ body {
   font-weight: 800;
   letter-spacing: .06em;
   pointer-events: none;
-  box-shadow: 0 0 14px rgba(255,196,58,.18);
+  box-shadow: 0 0 18px rgba(255,196,58,.28),inset 0 0 14px rgba(255,196,58,.08);
+  clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,8px 100%,0 50%);
 }
 
 .challenge-status[hidden] { display: none; }
@@ -107,7 +115,7 @@ canvas {
   width: 100%;
   height: 100%;
   cursor: crosshair;
-  border: 1px solid rgba(82, 231, 255, 0.3);
+  border: 0;
   background: var(--navy);
   touch-action: none;
   user-select: none;
@@ -123,7 +131,8 @@ canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
   display: grid;
   place-items: center;
   padding: 28px;
-  background: linear-gradient(rgba(1, 8, 15, 0.2), rgba(1, 8, 15, 0.82));
+  background:radial-gradient(circle at 50% 35%,transparent 0,rgba(1,8,15,.28) 38%,rgba(1,8,15,.9) 100%);
+  backdrop-filter:blur(2px);
   transition: opacity 180ms ease;
 }
 
@@ -133,9 +142,9 @@ canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
   width: 100%;
   padding: 32px 24px;
   text-align: center;
-  border: 1px solid rgba(82, 231, 255, 0.45);
-  background: var(--panel);
-  box-shadow: inset 0 0 45px rgba(34, 162, 210, 0.08);
+  border: 1px solid color-mix(in srgb,var(--accent) 55%,transparent);
+  background:linear-gradient(145deg,rgba(8,28,43,.96),var(--panel));
+  box-shadow:inset 0 0 55px color-mix(in srgb,var(--accent) 8%,transparent),0 18px 45px rgba(0,0,0,.4),0 0 20px color-mix(in srgb,var(--accent) 9%,transparent);
   clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
 }
 
@@ -189,6 +198,7 @@ h1 { margin: 8px 0 12px; font-size: clamp(30px, 8vw, 44px); letter-spacing: 0.1e
 }
 
 .difficulty-option[aria-pressed="true"] { border-color: var(--accent-secondary); color: #fff; background: rgba(255,202,88,.13); }
+.difficulty-option[aria-pressed="true"],.skin-option[aria-pressed="true"] { transform:translateY(-1px); }
 
 .skin-options {
   display: grid;
@@ -222,12 +232,14 @@ button {
   margin-top: 10px;
   padding: 13px 24px;
   border: 0;
-  background: var(--accent);
+  background:linear-gradient(135deg,#fff 0,var(--accent) 24%,color-mix(in srgb,var(--accent) 68%,#126080) 100%);
   color: #03121d;
   font: 800 16px/1 "Segoe UI", "Microsoft JhengHei", sans-serif;
   cursor: pointer;
   clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
 }
+
+#start-button { box-shadow:0 8px 22px color-mix(in srgb,var(--accent) 20%,transparent),inset 0 1px rgba(255,255,255,.7);letter-spacing:.08em; }
 
 button:hover, button:focus-visible { background: #fff; outline: 2px solid #ffca58; outline-offset: 3px; }
 .hint { margin-bottom: 0; font-size: 11px; }

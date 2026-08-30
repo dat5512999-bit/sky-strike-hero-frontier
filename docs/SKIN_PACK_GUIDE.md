@@ -33,6 +33,9 @@ SkyStrike.skins.register({
 - renderer 必須成對使用 `ctx.save()`／`ctx.restore()`，不可污染其他物件的 Canvas 狀態。
 - 優先使用 Canvas 向量；若載入圖片，須有載入失敗替代造型並維持離線可用。
 - 亮度與敵我辨識必須清楚，不能讓皮膚造成玩法優勢。
+- 玩家 renderer 可讀取 `entity.rotation` 與 `entity.engineTime` 製作傾斜及尾焰動畫；只能讀取，不能回寫移動狀態。
+- `BattlefieldRenderer` 會自動使用 pack 的 `accent`、`secondary`、`background` 與 `star`，新增皮膚時必須同時檢查背景對比。
+- 敵方子彈固定維持紅色系，不應跟隨主題改成與玩家子彈相近的顏色。
 
 ## 品牌與授權
 
