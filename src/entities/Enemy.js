@@ -20,32 +20,34 @@
     }
 
     update(dt, context) {
-      this.time += dt;
+      const speedScale = context && context.enemySpeed ? context.enemySpeed : 1;
+      const movementDt = dt * speedScale;
+      this.time += movementDt;
       const player = context && context.player;
       if (this.type === 'swift') {
-        this.y += this.speed * dt;
-        this.x += Math.sin(this.time * 9) * 85 * dt;
+        this.y += this.speed * movementDt;
+        this.x += Math.sin(this.time * 9) * 85 * movementDt;
       } else if (this.type === 'tracker') {
-        this.y += this.speed * dt;
-        if (player) this.x = ns.utils.moveToward(this.x, player.x, 72 * dt);
+        this.y += this.speed * movementDt;
+        if (player) this.x = ns.utils.moveToward(this.x, player.x, 72 * movementDt);
       } else if (this.type === 'gunner' || this.type === 'elite') {
-        if (this.y < (this.type === 'elite' ? 115 : 145)) this.y += this.speed * dt;
-        else this.x += Math.sin(this.time * (this.type === 'elite' ? 1.8 : 2.5)) * (this.type === 'elite' ? 48 : 34) * dt;
-        this.fireCooldown -= dt;
+        if (this.y < (this.type === 'elite' ? 115 : 145)) this.y += this.speed * movementDt;
+        else this.x += Math.sin(this.time * (this.type === 'elite' ? 1.8 : 2.5)) * (this.type === 'elite' ? 48 : 34) * movementDt;
+        this.fireCooldown -= movementDt;
         if (this.fireCooldown <= 0 && player && context.enemyBullets) {
-          this.shootAt(player, context.enemyBullets);
+          this.shootAt(player, context.enemyBullets, speedScale);
           this.fireCooldown = this.type === 'elite' ? 1.05 : 1.7;
         }
       } else {
-        this.y += this.speed * dt;
+        this.y += this.speed * movementDt;
       }
       this.x = ns.utils.clamp(this.x, this.width / 2, ns.config.width - this.width / 2);
       if (this.y - this.height / 2 > ns.config.height + 20) this.active = false;
     }
 
-    shootAt(player, bullets) {
+    shootAt(player, bullets, speedScale) {
       const angle = Math.atan2(player.y - this.y, player.x - this.x);
-      const speed = this.type === 'elite' ? 205 : 180;
+      const speed = (this.type === 'elite' ? 205 : 180) * (speedScale || 1);
       const offsets = this.type === 'elite' ? [-0.2, 0, 0.2] : [0];
       offsets.forEach(function (offset) {
         bullets.push(new ns.entities.EnemyBullet(this.x, this.y + this.height / 2, Math.cos(angle + offset) * speed, Math.sin(angle + offset) * speed));

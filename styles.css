@@ -81,6 +81,27 @@ body {
   background: rgba(1,9,16,.62);
 }
 
+.challenge-status {
+  position: absolute;
+  z-index: 2;
+  top: 43px;
+  left: 50%;
+  min-width: 180px;
+  padding: 6px 12px;
+  transform: translateX(-50%);
+  border: 1px solid #ffd34f;
+  background: rgba(28,16,3,.82);
+  color: #ffe9a5;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  pointer-events: none;
+  box-shadow: 0 0 14px rgba(255,196,58,.18);
+}
+
+.challenge-status[hidden] { display: none; }
+
 canvas {
   display: block;
   width: 100%;
@@ -122,21 +143,52 @@ canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
 h1 { margin: 8px 0 12px; font-size: clamp(30px, 8vw, 44px); letter-spacing: 0.1em; }
 .panel p { line-height: 1.7; color: #b9d7e2; }
 
-.skin-picker {
+.skin-picker, .difficulty-picker {
   margin: 14px 0 4px;
   padding: 0;
   border: 0;
 }
 
-.skin-picker[hidden] { display: none; }
+.skin-picker[hidden], .difficulty-picker[hidden] { display: none; }
 
-.skin-picker legend {
+.skin-picker legend, .difficulty-picker legend {
   width: 100%;
   margin-bottom: 8px;
   color: #86aebb;
   font-size: 10px;
   letter-spacing: 0.18em;
 }
+
+.difficulty-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.difficulty-option {
+  min-width: 0;
+  min-height: 36px;
+  margin: 0;
+  padding: 7px 3px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.045);
+  color: #c7dbe2;
+  font-size: 10px;
+  font-weight: 750;
+  clip-path: none;
+}
+
+.difficulty-option span { display: block; margin-bottom: 2px; font-size: 16px; }
+.difficulty-option strong { display: block; font-size: 11px; }
+
+.difficulty-description {
+  min-height: 18px;
+  margin: 5px 0 0;
+  color: #d7edf5 !important;
+  font-size: 10px;
+}
+
+.difficulty-option[aria-pressed="true"] { border-color: var(--accent-secondary); color: #fff; background: rgba(255,202,88,.13); }
 
 .skin-options {
   display: grid;
@@ -206,6 +258,7 @@ footer { padding: 8px; text-align: center; color: #7194a4; font-size: 11px; }
   .panel > p { margin-block: 6px; }
   .skin-option { padding: 5px 3px; }
   .skin-option .skin-icon { font-size: 16px; }
+  .difficulty-picker { margin-top: 7px; }
 }
 
 @media (pointer: coarse) {

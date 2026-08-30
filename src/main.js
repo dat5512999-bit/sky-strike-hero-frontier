@@ -8,10 +8,14 @@
     title: document.getElementById('overlay-title'),
     message: document.getElementById('overlay-message'),
     button: document.getElementById('start-button'),
+    difficultyPicker: document.getElementById('difficulty-picker'),
+    difficultyOptions: document.getElementById('difficulty-options'),
+    difficultyDescription: document.getElementById('difficulty-description'),
     skinPicker: document.getElementById('skin-picker'),
     skinOptions: document.getElementById('skin-options'),
     threat: document.getElementById('threat'),
     skillStatus: document.getElementById('skill-status'),
+    challengeStatus: document.getElementById('challenge-status'),
     combo: document.getElementById('combo'),
     bestScore: document.getElementById('best-score')
   };

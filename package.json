@@ -1,11 +1,11 @@
 {
   "name": "sky-strike",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "description": "支援手機、外觀包、技能成長與連擊的 HTML5 Canvas 縱向射擊遊戲",
   "scripts": {
     "test": "node --test tests/*.test.js",
-    "check": "node --check src/skins/SkinRegistry.js && node --check src/skins/SkinPacks.js && node --check src/systems/InputController.js && node --check src/systems/SkillSystem.js && node --check src/entities/EnemyBullet.js && node --check sw.js && node --check src/Game.js && node --check src/main.js",
+    "check": "node --check src/skins/SkinRegistry.js && node --check src/skins/SkinPacks.js && node --check src/systems/InputController.js && node --check src/systems/DifficultySystem.js && node --check src/systems/SkillSystem.js && node --check src/systems/ChallengeSystem.js && node --check src/entities/EnemyBullet.js && node --check sw.js && node --check src/Game.js && node --check src/main.js",
     "serve:test": "node scripts/serve-test.js"
   },
   "engines": { "node": ">=18" }

@@ -13,7 +13,7 @@ const files = [
   'src/entities/Bullet.js', 'src/entities/EnemyBullet.js', 'src/entities/Player.js', 'src/entities/Enemy.js',
   'src/entities/Boss.js', 'src/entities/PowerUp.js',
   'src/systems/Weapon.js', 'src/systems/Collision.js',
-  'src/systems/Spawner.js', 'src/systems/GameState.js', 'src/systems/Effects.js', 'src/systems/SkillSystem.js',
+  'src/systems/DifficultySystem.js', 'src/systems/Spawner.js', 'src/systems/GameState.js', 'src/systems/Effects.js', 'src/systems/SkillSystem.js', 'src/systems/ChallengeSystem.js',
   'src/systems/InputController.js'
 ];
 
@@ -231,6 +231,78 @@ test('手機拖曳使用相對位移，不會讓手指遮住或瞬移戰機', ()
   const anchor = { clientX: 100, clientY: 200, playerX: 240, playerY: 560 };
   const target = ns.systems.InputController.touchTarget(anchor, { clientX: 125, clientY: 175 }, { left: 0, top: 0, width: 240, height: 360 }, { width: 480, height: 720 });
   assert.deepEqual({ x: target.x, y: target.y }, { x: 290, y: 510 });
+});
+
+test('四種難度可選擇，無效選項不會改變目前模式', () => {
+  const ns = loadGameCore();
+  assert.equal(ns.difficulty.all().length, 4);
+  assert.equal(ns.difficulty.select('hard'), true);
+  assert.equal(ns.difficulty.current().name, '困難');
+  assert.equal(ns.difficulty.select('impossible'), false);
+  assert.equal(ns.difficulty.current().id, 'hard');
+});
+
+test('無雙模式的散射與連射技能不會倒數消失', () => {
+  const ns = loadGameCore();
+  ns.difficulty.select('musou');
+  const skills = new ns.systems.SkillSystem(() => 0);
+  const context = { player:new ns.entities.Player(240,560), enemies:[], enemyBullets:[], onDestroyed(){} };
+  skills.collect(new ns.entities.PowerUp(0,0,'strawberry'), context);
+  skills.collect(new ns.entities.PowerUp(0,0,'banana'), context);
+  skills.update(999, []);
+  assert.equal(skills.timers.spread, Infinity);
+  assert.equal(skills.timers.rapid, Infinity);
+  assert.match(skills.status(context.player), /∞/);
+});
+
+test('鳳梨依難度維持稀有權重，龍果不進一般掉落池', () => {
+  const ns = loadGameCore();
+  assert.equal(ns.difficulty.all().find((mode) => mode.id === 'casual').weights.pineapple, 0.10);
+  assert.equal(ns.difficulty.all().find((mode) => mode.id === 'normal').weights.pineapple, 0.06);
+  assert.equal(ns.difficulty.all().find((mode) => mode.id === 'hard').weights.pineapple, 0.04);
+  assert.equal(ns.difficulty.all().find((mode) => mode.id === 'musou').weights.pineapple, 0.02);
+  ns.difficulty.select('normal');
+  const skills = new ns.systems.SkillSystem(() => 0.99);
+  const powerUps = [];
+  skills.spawn(powerUps, 100, 100);
+  assert.equal(powerUps[0].type, 'pineapple');
+  assert.notEqual(powerUps[0].type, 'dragonfruit');
+});
+
+test('高難度讓威脅更快升級且敵潮間隔更短', () => {
+  const ns = loadGameCore();
+  const normal = new ns.systems.Spawner(() => 0.5);
+  const normalInterval = normal.currentInterval();
+  ns.difficulty.select('musou');
+  const musou = new ns.systems.Spawner(() => 0.5);
+  assert.ok(musou.currentInterval() < normalInterval);
+  musou.elapsed = 13;
+  assert.equal(musou.threatLevel(), 3);
+});
+
+test('完成限時獵殺事件會掉落限定龍果', () => {
+  const ns = loadGameCore();
+  const challenge = new ns.systems.ChallengeSystem();
+  const context = { player:new ns.entities.Player(240,560), powerUps:[], effects:{ announce(){} } };
+  challenge.update(13.1, context);
+  assert.equal(challenge.active.type, 'hunt');
+  const target = challenge.active.target;
+  for (let i=0; i<target; i+=1) challenge.onKill(context);
+  assert.equal(context.powerUps.length, 1);
+  assert.equal(context.powerUps[0].type, 'dragonfruit');
+});
+
+test('無傷事件受傷會失敗且不會發放龍果', () => {
+  const ns = loadGameCore();
+  const challenge = new ns.systems.ChallengeSystem();
+  const context = { player:new ns.entities.Player(240,560), powerUps:[], effects:{ announce(){} } };
+  challenge.sequence = 1;
+  challenge.cooldown = 0;
+  challenge.update(0.01, context);
+  assert.equal(challenge.active.type, 'survive');
+  challenge.onPlayerDamaged(context);
+  assert.equal(challenge.active, null);
+  assert.equal(context.powerUps.length, 0);
 });
 
 test('桌面指標位置可正確換算成 Canvas 座標', () => {

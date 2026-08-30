@@ -12,11 +12,11 @@
     currentInterval() {
       const cfg = ns.config.spawner;
       const progress = ns.utils.clamp(this.elapsed / cfg.rampSeconds, 0, 1);
-      return cfg.initialInterval + (cfg.minimumInterval - cfg.initialInterval) * progress;
+      return (cfg.initialInterval + (cfg.minimumInterval - cfg.initialInterval) * progress) * ns.difficulty.current().spawnMultiplier;
     }
 
     threatLevel() {
-      return Math.min(ns.config.spawner.maxThreat, 1 + Math.floor(this.elapsed / ns.config.spawner.threatStepSeconds));
+      return Math.min(ns.config.spawner.maxThreat, 1 + Math.floor(this.elapsed / ns.difficulty.current().threatStep));
     }
 
     chooseType() {

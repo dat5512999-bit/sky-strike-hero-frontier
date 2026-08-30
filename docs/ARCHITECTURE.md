@@ -8,7 +8,9 @@
 - 實體只保留碰撞與狀態；繪圖委派給目前的 Skin Pack，皮膚不影響傷害與平衡。
 - `Spawner` 只決定威脅與敵人組合，`SkillSystem` 只管理果實及技能，不把規則塞入 Game loop。
 - `GameState` 統一處理 Combo、分數倍率與最高紀錄，避免 Enemy 或 UI 自行計分。
-- Phase 1 不需要資料庫；遊戲重開即重設狀態。
+- `DifficultySystem` 提供資料驅動的模式設定，`Spawner`、`Enemy`、`SkillSystem` 與 `ChallengeSystem` 只讀取目前模式。
+- `ChallengeSystem` 只處理事件狀態機與獎勵生成，不直接改寫敵人或玩家規則。
+- 不需要資料庫；局內狀態於重開時重設，偏好與紀錄只存於瀏覽器。
 
 ## 資料夾
 
@@ -18,7 +20,8 @@ styles.css
 src/
   entities/    Player, Enemy, Bullet, Boss, PowerUp
   skins/       SkinRegistry 與內建外觀包
-  systems/     Weapon, Collision, Spawner, SkillSystem, GameState, Effects
+  systems/     Weapon, Collision, Spawner, DifficultySystem, SkillSystem,
+               ChallengeSystem, GameState, Effects
                 InputController（滑鼠絕對定位／觸控相對拖曳）
   utils/       數學工具
   Game.js      遊戲協調與迴圈
@@ -33,10 +36,12 @@ manifest.webmanifest / sw.js   PWA 與離線快取
 
 ```text
 main → Game → GameState
+             ├─ DifficultySystem → Spawner/Enemy/SkillSystem/ChallengeSystem
              ├─ Player ← Weapon → Bullet
              ├─ Spawner → Enemy
              │             └─ EnemyBullet
              ├─ SkillSystem → PowerUp → Weapon/Player/Enemy
+             ├─ ChallengeSystem → PowerUp(Dragonfruit)
              ├─ GameState → Combo/Multiplier/High Score
              ├─ Collision(Player, Bullet, Enemy, EnemyBullet, PowerUp)
              ├─ SkinRegistry → Player/Bullet/Enemy renderers

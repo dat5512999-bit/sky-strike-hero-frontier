@@ -5,11 +5,14 @@
       this.canvas = canvas;
       this.ctx = canvas.getContext('2d');
       this.ui = ui;
+      ns.difficulty.restore();
+      this.difficulty = ns.difficulty;
       this.state = new ns.systems.GameState();
       this.skills = new ns.systems.SkillSystem();
       this.weapon = new ns.systems.Weapon();
       this.spawner = new ns.systems.Spawner();
       this.effects = new ns.systems.Effects();
+      this.challenge = new ns.systems.ChallengeSystem();
       ns.skins.restore();
       this.player = null;
       this.bullets = [];
@@ -21,7 +24,9 @@
       this.lastTime = 0;
       this.boundLoop = this.loop.bind(this);
       this.attachInput();
+      this.buildDifficultyPicker();
       this.buildSkinPicker();
+      this.applyDifficulty();
       this.applySkin();
       this.resetWorld();
       requestAnimationFrame(this.boundLoop);
@@ -68,6 +73,35 @@
       });
     }
 
+    buildDifficultyPicker() {
+      const self = this;
+      this.ui.difficultyOptions.textContent = '';
+      this.difficulty.all().forEach(function (mode) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'difficulty-option';
+        button.dataset.difficulty = mode.id;
+        button.title = mode.description;
+        button.setAttribute('aria-pressed', String(mode.id === self.difficulty.selectedId));
+        button.setAttribute('aria-label', mode.name + '模式：' + mode.description);
+        button.innerHTML = '<span aria-hidden="true">' + mode.icon + '</span><strong>' + mode.name + '</strong>';
+        button.onclick = function () {
+          self.difficulty.select(mode.id);
+          self.applyDifficulty();
+        };
+        self.ui.difficultyOptions.appendChild(button);
+      });
+    }
+
+    applyDifficulty() {
+      const mode = this.difficulty.current();
+      document.documentElement.dataset.difficulty = mode.id;
+      this.ui.difficultyDescription.textContent = mode.description;
+      Array.from(this.ui.difficultyOptions.children).forEach(function (button) {
+        button.setAttribute('aria-pressed', String(button.dataset.difficulty === mode.id));
+      });
+    }
+
     applySkin() {
       const pack = ns.skins.current();
       document.documentElement.style.setProperty('--accent', pack.accent);
@@ -86,6 +120,7 @@
       this.weapon.reset();
       this.spawner.reset();
       this.skills.reset();
+      this.challenge.reset();
       this.effects.clear();
       this.previousThreat = 1;
       this.updateHud();
@@ -95,7 +130,8 @@
       this.state.reset();
       this.resetWorld();
       this.state.start();
-      this.effects.announce('任務開始 · 維持 Combo', ns.skins.current().accent);
+      const mode = this.difficulty.current();
+      this.effects.announce(mode.icon + ' ' + mode.name + '模式 · 維持 Combo', ns.skins.current().accent);
       this.ui.overlay.classList.add('hidden');
       this.canvas.focus();
     }
@@ -117,6 +153,7 @@
       this.ui.message.innerHTML = message;
       this.ui.button.textContent = buttonText;
       this.ui.skinPicker.hidden = Boolean(resume);
+      this.ui.difficultyPicker.hidden = Boolean(resume);
       this.ui.overlay.classList.remove('hidden');
       this.ui.button.onclick = resume ? function () { self.togglePause(); } : function () { self.start(); };
     }
@@ -127,13 +164,15 @@
       this.skills.update(dt, this.powerUps);
       this.weapon.update(dt, this.player, this.bullets, this.skills);
       this.spawner.update(dt, this.enemies);
+      const challengeContext = { player:this.player, powerUps:this.powerUps, effects:this.effects };
+      this.challenge.update(dt, challengeContext);
       const currentThreat = this.spawner.threatLevel();
       if (currentThreat !== this.previousThreat) {
         this.previousThreat = currentThreat;
         this.effects.announce('⚠ 威脅升級 · ' + currentThreat, currentThreat >= 4 ? '#ff496d' : '#ffd34f');
       }
       this.bullets.forEach(function (bullet) { bullet.update(dt); });
-      const combatContext = { player:this.player, enemyBullets:this.enemyBullets, threat:this.spawner.threatLevel() };
+      const combatContext = { player:this.player, enemyBullets:this.enemyBullets, threat:this.spawner.threatLevel(), enemySpeed:this.difficulty.current().enemySpeed };
       this.enemies.forEach(function (enemy) { enemy.update(dt, combatContext); });
       this.enemyBullets.forEach(function (bullet) { bullet.update(dt); });
       this.powerUps.forEach(function (powerUp) { powerUp.update(dt); });
@@ -145,12 +184,12 @@
       });
       ns.systems.Collision.resolvePlayerEnemies(this.player, this.enemies, function (enemy) {
         self.effects.burst(enemy.x, enemy.y, ns.skins.current().secondary);
-        if (!self.player.lastDamageBlocked) self.state.breakCombo();
+        if (!self.player.lastDamageBlocked) { self.state.breakCombo(); self.challenge.onPlayerDamaged(challengeContext); }
         self.updateHud();
       });
       ns.systems.Collision.resolveEnemyBullets(this.player, this.enemyBullets, function (bullet) {
         self.effects.burst(bullet.x, bullet.y, '#ff395f');
-        if (!self.player.lastDamageBlocked) self.state.breakCombo();
+        if (!self.player.lastDamageBlocked) { self.state.breakCombo(); self.challenge.onPlayerDamaged(challengeContext); }
         self.updateHud();
       });
       ns.systems.Collision.resolvePlayerPowerUps(this.player, this.powerUps, function (powerUp) {
@@ -169,6 +208,7 @@
       this.updateHud();
       if (!this.player.active) {
         this.state.end();
+        this.challenge.reset();
         this.updateHud();
         this.showOverlay('任務失敗', '本局：' + String(this.state.score).padStart(6, '0') + '　最高：' + String(this.state.highScore).padStart(6, '0') + '<br>最佳 Combo：' + this.state.bestCombo + '　歷史：' + this.state.highCombo, '重新開始', false);
       }
@@ -176,6 +216,7 @@
 
     onEnemyDestroyed(enemy, allowDrop) {
       this.state.registerKill(enemy.scoreValue);
+      this.challenge.onKill({ player:this.player, powerUps:this.powerUps, effects:this.effects });
       this.effects.burst(enemy.x, enemy.y, ns.skins.current().effect);
       if (allowDrop) this.skills.maybeDrop(enemy, this.powerUps);
     }
@@ -215,6 +256,9 @@
       this.ui.health.textContent = Array.from({ length: this.player ? this.player.maxHealth : 3 }, function (_, i) { return i < (this.player ? this.player.health : 3) ? '●' : '○'; }, this).join(' ');
       this.ui.threat.textContent = '威脅 ' + this.spawner.threatLevel();
       this.ui.skillStatus.textContent = this.skills.status(this.player);
+      const challengeStatus = this.challenge.status();
+      this.ui.challengeStatus.textContent = challengeStatus;
+      this.ui.challengeStatus.hidden = !challengeStatus;
       this.ui.combo.textContent = 'COMBO ' + this.state.combo + ' · ×' + this.state.multiplier;
       this.ui.bestScore.textContent = 'BEST ' + String(Math.max(this.state.highScore, this.state.score)).padStart(6, '0');
     }
