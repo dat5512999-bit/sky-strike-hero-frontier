@@ -7,6 +7,7 @@
 - `Game` 負責協調，不承載特定武器或敵人規則。
 - 實體只保留碰撞與狀態；繪圖委派給目前的 Skin Pack，皮膚不影響傷害與平衡。
 - `Spawner` 只決定威脅與敵人組合，`SkillSystem` 只管理果實及技能，不把規則塞入 Game loop。
+- `GameState` 統一處理 Combo、分數倍率與最高紀錄，避免 Enemy 或 UI 自行計分。
 - Phase 1 不需要資料庫；遊戲重開即重設狀態。
 
 ## 資料夾
@@ -36,6 +37,7 @@ main → Game → GameState
              ├─ Spawner → Enemy
              │             └─ EnemyBullet
              ├─ SkillSystem → PowerUp → Weapon/Player/Enemy
+             ├─ GameState → Combo/Multiplier/High Score
              ├─ Collision(Player, Bullet, Enemy, EnemyBullet, PowerUp)
              ├─ SkinRegistry → Player/Bullet/Enemy renderers
              └─ Effects

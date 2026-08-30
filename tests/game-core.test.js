@@ -189,6 +189,43 @@ test('敵方子彈命中玩家後失效並扣除生命', () => {
   assert.equal(bullet.active,false);
 });
 
+test('重複取得草莓會升至五向並在 Lv.3 強化傷害', () => {
+  const ns = loadGameCore();
+  const skills = new ns.systems.SkillSystem(() => 0);
+  const player = new ns.entities.Player(240,560);
+  const context = { player, enemies:[], enemyBullets:[], onDestroyed(){} };
+  skills.collect(new ns.entities.PowerUp(0,0,'strawberry'),context);
+  skills.collect(new ns.entities.PowerUp(0,0,'strawberry'),context);
+  skills.collect(new ns.entities.PowerUp(0,0,'strawberry'),context);
+  const bullets=[];
+  new ns.systems.Weapon().update(0.2,player,bullets,skills);
+  assert.equal(skills.level('spread'),3);
+  assert.equal(bullets.length,5);
+  assert.equal(bullets[2].damage,1.5);
+});
+
+test('Combo 每五次擊破提升倍率，受傷規則可中斷', () => {
+  const ns = loadGameCore();
+  const state = new ns.systems.GameState();
+  for (let i=0;i<5;i+=1) state.registerKill(100);
+  assert.equal(state.combo,5);
+  assert.equal(state.multiplier,2);
+  assert.equal(state.score,600);
+  state.breakCombo();
+  assert.equal(state.combo,0);
+  assert.equal(state.multiplier,1);
+});
+
+test('結束遊戲會保存最高分與歷史最高 Combo', () => {
+  const ns = loadGameCore();
+  const state = new ns.systems.GameState();
+  for (let i=0;i<7;i+=1) state.registerKill(100);
+  state.end();
+  const next = new ns.systems.GameState();
+  assert.equal(next.highScore,state.score);
+  assert.equal(next.highCombo,7);
+});
+
 test('手機拖曳使用相對位移，不會讓手指遮住或瞬移戰機', () => {
   const ns = loadGameCore();
   const anchor = { clientX: 100, clientY: 200, playerX: 240, playerY: 560 };

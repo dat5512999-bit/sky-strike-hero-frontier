@@ -11,7 +11,9 @@
     skinPicker: document.getElementById('skin-picker'),
     skinOptions: document.getElementById('skin-options'),
     threat: document.getElementById('threat'),
-    skillStatus: document.getElementById('skill-status')
+    skillStatus: document.getElementById('skill-status'),
+    combo: document.getElementById('combo'),
+    bestScore: document.getElementById('best-score')
   };
   globalThis.skyStrikeGame = new ns.Game(canvas, ui);
 

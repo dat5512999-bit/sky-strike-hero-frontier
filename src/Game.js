@@ -16,6 +16,7 @@
       this.enemyBullets = [];
       this.enemies = [];
       this.powerUps = [];
+      this.previousThreat = 1;
       this.stars = this.createStars();
       this.lastTime = 0;
       this.boundLoop = this.loop.bind(this);
@@ -86,6 +87,7 @@
       this.spawner.reset();
       this.skills.reset();
       this.effects.clear();
+      this.previousThreat = 1;
       this.updateHud();
     }
 
@@ -93,6 +95,7 @@
       this.state.reset();
       this.resetWorld();
       this.state.start();
+      this.effects.announce('任務開始 · 維持 Combo', ns.skins.current().accent);
       this.ui.overlay.classList.add('hidden');
       this.canvas.focus();
     }
@@ -124,6 +127,11 @@
       this.skills.update(dt, this.powerUps);
       this.weapon.update(dt, this.player, this.bullets, this.skills);
       this.spawner.update(dt, this.enemies);
+      const currentThreat = this.spawner.threatLevel();
+      if (currentThreat !== this.previousThreat) {
+        this.previousThreat = currentThreat;
+        this.effects.announce('⚠ 威脅升級 · ' + currentThreat, currentThreat >= 4 ? '#ff496d' : '#ffd34f');
+      }
       this.bullets.forEach(function (bullet) { bullet.update(dt); });
       const combatContext = { player:this.player, enemyBullets:this.enemyBullets, threat:this.spawner.threatLevel() };
       this.enemies.forEach(function (enemy) { enemy.update(dt, combatContext); });
@@ -137,16 +145,20 @@
       });
       ns.systems.Collision.resolvePlayerEnemies(this.player, this.enemies, function (enemy) {
         self.effects.burst(enemy.x, enemy.y, ns.skins.current().secondary);
+        if (!self.player.lastDamageBlocked) self.state.breakCombo();
         self.updateHud();
       });
       ns.systems.Collision.resolveEnemyBullets(this.player, this.enemyBullets, function (bullet) {
-        self.effects.burst(bullet.x, bullet.y, '#ff395f'); self.updateHud();
+        self.effects.burst(bullet.x, bullet.y, '#ff395f');
+        if (!self.player.lastDamageBlocked) self.state.breakCombo();
+        self.updateHud();
       });
       ns.systems.Collision.resolvePlayerPowerUps(this.player, this.powerUps, function (powerUp) {
-        self.skills.collect(powerUp, {
+        const pickup = self.skills.collect(powerUp, {
           player:self.player, enemies:self.enemies, enemyBullets:self.enemyBullets,
           onDestroyed:function(enemy, drop){ self.onEnemyDestroyed(enemy, drop); }
         });
+        self.effects.announce(pickup.label, pickup.color);
         self.effects.burst(powerUp.x,powerUp.y,'#ffffff'); self.updateHud();
       });
 
@@ -157,12 +169,13 @@
       this.updateHud();
       if (!this.player.active) {
         this.state.end();
-        this.showOverlay('任務失敗', '最終分數：' + String(this.state.score).padStart(6, '0') + '<br>重新整備後再次出擊', '重新開始', false);
+        this.updateHud();
+        this.showOverlay('任務失敗', '本局：' + String(this.state.score).padStart(6, '0') + '　最高：' + String(this.state.highScore).padStart(6, '0') + '<br>最佳 Combo：' + this.state.bestCombo + '　歷史：' + this.state.highCombo, '重新開始', false);
       }
     }
 
     onEnemyDestroyed(enemy, allowDrop) {
-      this.state.addScore(enemy.scoreValue);
+      this.state.registerKill(enemy.scoreValue);
       this.effects.burst(enemy.x, enemy.y, ns.skins.current().effect);
       if (allowDrop) this.skills.maybeDrop(enemy, this.powerUps);
     }
@@ -202,6 +215,8 @@
       this.ui.health.textContent = Array.from({ length: this.player ? this.player.maxHealth : 3 }, function (_, i) { return i < (this.player ? this.player.health : 3) ? '●' : '○'; }, this).join(' ');
       this.ui.threat.textContent = '威脅 ' + this.spawner.threatLevel();
       this.ui.skillStatus.textContent = this.skills.status(this.player);
+      this.ui.combo.textContent = 'COMBO ' + this.state.combo + ' · ×' + this.state.multiplier;
+      this.ui.bestScore.textContent = 'BEST ' + String(Math.max(this.state.highScore, this.state.score)).padStart(6, '0');
     }
 
     loop(timestamp) {

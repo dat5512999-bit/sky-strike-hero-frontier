@@ -14,6 +14,7 @@
       this.health = cfg.maxHealth;
       this.invulnerableFor = 0;
       this.shieldHits = 0;
+      this.lastDamageBlocked = false;
       this.active = true;
     }
 
@@ -33,8 +34,10 @@
 
     takeDamage(amount) {
       if (!this.active || this.invulnerableFor > 0) return false;
+      this.lastDamageBlocked = false;
       if (this.shieldHits > 0) {
         this.shieldHits -= 1;
+        this.lastDamageBlocked = true;
         this.invulnerableFor = 0.35;
         return true;
       }
