@@ -13,9 +13,9 @@
       Object.assign(this,preset);this.type=type;this.wave=wave;this.path=path||ns.config.path;this.x=this.path[0].x;this.y=this.path[0].y;this.index=1;
       this.health=Math.round(this.health*scale);this.maxHealth=this.health;this.reward=Math.round(this.reward*(1+(wave-1)*.025));this.active=true;this.leaked=false;this.slowFactor=1;this.slowTimer=0;this.hitFlash=0;
     }
-    update(dt,hero){
+    update(dt,hero,defenders){
       if(!this.active)return;this.hitFlash=Math.max(0,this.hitFlash-dt);this.slowTimer=Math.max(0,this.slowTimer-dt);if(this.slowTimer<=0)this.slowFactor=1;
-      const intercepted=hero&&hero.active&&ns.utils.distance(this,hero)<46?.78:1;let remaining=this.speed*this.slowFactor*intercepted*dt;
+      const heroFactor=hero&&hero.active&&ns.utils.distance(this,hero)<46?.78:1;const unitFactor=(defenders||[]).some(function(unit){return ns.utils.distance(this,unit)<34;},this)?.62:1;let remaining=this.speed*this.slowFactor*Math.min(heroFactor,unitFactor)*dt;
       while(remaining>0&&this.active){const target=this.path[this.index];if(!target){this.active=false;this.leaked=true;break;}const distance=Math.hypot(target.x-this.x,target.y-this.y);if(distance<=remaining){this.x=target.x;this.y=target.y;this.index+=1;remaining-=distance;}else{this.x+=(target.x-this.x)/distance*remaining;this.y+=(target.y-this.y)/distance*remaining;remaining=0;}}
     }
     takeDamage(amount){if(!this.active)return false;this.health-=Math.max(1,amount-(this.armor||0));this.hitFlash=.1;if(this.health<=0){this.health=0;this.active=false;return true;}return false;}

@@ -32,15 +32,16 @@
 | 模組 | 主要介面 | 責任 |
 |---|---|---|
 | `Monster` | `update`、`takeDamage`、`applySlow`、`progress` | 路徑移動、HP、護甲、緩速與漏怪 |
-| `Tower` | `config`、`update`、`upgrade`、`sellValue` | 索敵、發射、等級與回收價值 |
+| `CombatUnit` | `setTarget`、`setState`、`animate`、`update`、`upgrade` | 可移動職業守軍、四態動畫、索敵與升級 |
+| `Building` | `config`、`update`、`upgrade`、`sellValue` | 固定弩塔／寒霜塔／火砲塔的索敵與攻擊 |
 | `Projectile` | `update`、`hit` | 單體／範圍傷害與緩速效果 |
 | `Hero` | `setTarget`、`update`、`castNova` | 玩家移動、自動攻擊、攔截與主動技能 |
 | `PathSystem` | `draw` | 固定道路節點與道路繪製 |
-| `ArtSystem` | `load`、`drawBackground`、`drawTower`、`drawUnit`、`drawKeep` | 本機美術資產載入、atlas 裁切與城堡合成 |
+| `ArtSystem` | `load`、`drawBackground`、`drawCombatUnit`、`drawBuilding`、`drawUnit` | 本機美術載入、4×4 動作圖集與建築圖集裁切 |
 | `ProfessionSystem` | `choose`、`current`、`reset` | 三職業選擇與單局職業鎖定 |
 | `WaveSystem` | `composition`、`start`、`update`、`label` | 15 波組成、生成佇列與清場狀態 |
-| `BuildSystem` | `queue`、`canPlaceAt`、`placeQueued`、`selectAt`、`upgrade`、`sell`、`towers` | 自由部署、道路禁建與三資源經濟 |
-| `TDGame` | `startWave`、`buildTower`、`castNova`、`onKill`、`update` | 協調波次、英雄、塔、經濟、城門與結算 |
+| `BuildSystem` | `queue`、`canPlaceAt`、`placeQueued`、`selectAt`、`combatUnits`、`buildings` | 單位／建築分流、選取、部署與三資源經濟 |
+| `TDGame` | `startWave`、`queueDeploy`、`commandSelected`、`castNova`、`update` | 協調移動命令、波次、英雄、建築、經濟與結算 |
 
 ## Skin Pack 介面
 

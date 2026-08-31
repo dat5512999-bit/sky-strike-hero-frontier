@@ -12,6 +12,6 @@
 
 關卡營運參數位於 `StageDirector.js`，Boss 戰鬥參數位於 `Boss.js`，支援單位位於 `SupportSystem.js`。調整後至少驗證第 1～6 波，確認四詞綴、逃脫扣損、鏡像／星靈核心、Boss 進場與轉階段、擊破晉級及兩種失敗結算。100 波目前不保存伺服器進度，沒有後台跳關功能。
 
-塔防營運參數位於 `src/td/config.js`、`Monster.js` 與 `WaveSystem.js`。發布前必須分別驗證職業鎖定、道路禁建、金幣／木材／功勳不足、Lv.5、出售、漏怪、城門歸零、15 波勝利及重新守城。塔防不保存單局進度，也沒有後台、帳號或付費經濟。
+塔防營運參數位於 `src/td/config.js`、`Monster.js` 與 `WaveSystem.js`。發布前必須驗證 `config.units`／`config.buildings` 分流、人物移動與動作切換、建築道路禁建、三種塔形、資源不足、Lv.5、回收、漏怪及 15 波結算。塔防不保存單局進度，也沒有後台、帳號或付費經濟。
 
-塔防美術由 `ArtSystem.js` 與 `assets/td` 管理。更換 PNG 前需檢查尺寸、透明 Alpha、atlas 格數、著作權來源與行動裝置載入量；部署後在網路限速環境確認 Canvas 降級畫面不會空白，載入完成後會自動切換正式資產。
+塔防美術由 `ArtSystem.js` 與 `assets/td` 管理。角色圖集必須為 4×4 並維持腳底註冊點；更換 PNG 前需檢查尺寸、透明 Alpha、著作權來源與手機載入量，新增檔名也要加入 `sw.js`。

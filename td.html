@@ -37,18 +37,19 @@
       <div class="td-minimap" aria-label="戰場縮圖"><i></i><b></b><span></span></div>
       <div class="selection-card"><div id="td-portrait" class="selection-portrait">?</div><div><small id="td-selection-type">目前指令</small><strong id="td-selection">先選擇守備職業</strong><span id="td-selection-stats">經典 RTS 職業科技</span></div></div>
       <div class="command-grid">
-        <button type="button" data-tower="hunter" hidden><b>➶</b><span>部署獵手</span></button>
-        <button type="button" data-tower="arcanist" hidden><b>✦</b><span>部署術士</span></button>
-        <button type="button" data-tower="rogue" hidden><b>◆</b><span>部署盜賊</span></button>
+        <button type="button" data-build-kind="unit" data-build-type="hunter" hidden><b>➶</b><span>部署獵手</span></button>
+        <button type="button" data-build-kind="unit" data-build-type="arcanist" hidden><b>✦</b><span>部署術士</span></button>
+        <button type="button" data-build-kind="unit" data-build-type="rogue" hidden><b>◆</b><span>部署盜賊</span></button>
+        <button type="button" data-build-kind="building" data-build-type="arrow"><b>♜</b><span>林地弩塔</span></button>
+        <button type="button" data-build-kind="building" data-build-type="frost"><b>❄</b><span>寒霜塔</span></button>
+        <button type="button" data-build-kind="building" data-build-type="cannon"><b>●</b><span>火砲塔</span></button>
         <button id="td-upgrade" type="button" disabled><b>⬆</b><span>升級</span></button>
         <button id="td-sell" type="button" disabled><b>↩</b><span>遣散</span></button>
         <button id="td-skill-button" class="skill-button" type="button"><b>❄</b><span>霜環震擊</span></button>
         <button id="td-cancel-build" type="button"><b>✕</b><span>取消部署</span></button>
-        <button type="button" disabled><b>?</b><span>裝備（後續）</span></button>
-        <button type="button" disabled><b>♜</b><span>科技（後續）</span></button>
       </div>
     </section>
-    <footer>先選單位再點草地部署　｜　道路與單位旁不可建造　｜　點擊戰場移動英雄</footer>
+    <footer>點角色選取，再點地面移動　｜　右鍵可快速下令　｜　建築只能蓋在道路外</footer>
   </main>
   <script src="src/td/namespace.js"></script>
   <script src="src/td/config.js"></script>
@@ -57,7 +58,8 @@
   <script src="src/td/systems/PathSystem.js"></script>
   <script src="src/td/entities/Monster.js"></script>
   <script src="src/td/entities/Projectile.js"></script>
-  <script src="src/td/entities/Tower.js"></script>
+  <script src="src/td/entities/CombatUnit.js"></script>
+  <script src="src/td/entities/Building.js"></script>
   <script src="src/td/entities/Hero.js"></script>
   <script src="src/td/systems/WaveSystem.js"></script>
   <script src="src/td/systems/BuildSystem.js"></script>

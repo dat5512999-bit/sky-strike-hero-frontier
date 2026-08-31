@@ -13,7 +13,9 @@ v0.11 與 v0.12 的 PNG 使用內建圖片生成工具製作，再複製進專�
 | `units-atlas-v1.png` | 1536×1024 RGBA | 3×2：英雄、步兵、獵犬／巨獸、術士、首領 |
 | `frontier-keep-v1.png` | 1304×1206 RGBA | 道路終點守護城堡 |
 | `human-td-battlefield-v2.png` | 1254×1254 PNG | 經典 RTS 人族邊境、循環泥路與自由建造草地 |
-| `human-defenders-atlas-v2.png` | 1536×1024 RGBA | 橫向三格：獵手、奧術師、盜賊 |
+| `ranger-actions-v1.png` | 1254×1254 RGBA | 獵手 4×4 動作圖集 |
+| `arcanist-actions-v1.png` | 1244×1264 RGBA | 奧術師 4×4 動作圖集，繪製時保持 cell 原始比例 |
+| `rogue-actions-v1.png` | 1254×1254 RGBA | 盜賊 4×4 動作圖集 |
 
 ## 最終提示詞摘要
 
@@ -43,4 +45,4 @@ v0.11 與 v0.12 的 PNG 使用內建圖片生成工具製作，再複製進專�
 
 ## 替換規則
 
-替換背景時必須重校 `src/td/config.js` 的道路與自由部署禁區。替換 atlas 時必須維持格數與順序，或同步修改 `ArtSystem.js`。所有正式資產都必須保存於專案並加入 `sw.js`；不可把圖片生成服務或遠端 URL 當作遊戲執行期依賴。
+替換背景時必須重校 `src/td/config.js` 的道路與建築禁區。角色 atlas 必須維持 4×4，列順序固定為 idle／walk／attack／hit-death，並確保每格角色比例、大小與腳底註冊點一致。所有資產都必須保存於專案並加入 `sw.js`；遊戲執行期不依賴遠端生成服務。

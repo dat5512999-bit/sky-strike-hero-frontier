@@ -47,4 +47,6 @@ Boss 基礎 HP、波次成長、射擊冷卻、瞄準散角與各階段彈數位
 
 調整經濟時至少驗證：開局可部署兩名基礎單位、波次木材補給正確、Lv.4～5 會消耗功勳、出售返還總投入 70%、Boss 漏怪扣 5 點。修改道路節點時必須維持首尾在畫面外，並重測 `BuildSystem.canPlaceAt()` 的 55px 禁建距離。
 
-v0.12 主要塔防美術為 `human-td-battlefield-v2.png` 與 `human-defenders-atlas-v2.png`；舊 v1 圖集仍作英雄、敵軍與相容備援。職業圖集順序固定為獵手／奧術／盜賊。替換資產時須保留透明 Alpha、三欄排列與一致鏡頭角度；新增檔名需同步更新 `sw.js`。
+v0.13 主要角色素材為 `ranger-actions-v1.png`、`arcanist-actions-v1.png`、`rogue-actions-v1.png`。每張固定 4×4：待機、行走、攻擊、受擊／死亡各一列。建築使用 `towers-atlas-v1.png` 的弩塔／寒霜塔／火砲塔三欄。替換時須保留透明 Alpha、正方形 cell、角色註冊點與一致鏡頭，並同步更新 `sw.js`。
+
+`config.units` 管理可移動單位的速度、傷害、射程與成本；`config.buildings` 管理固定建築。新增類型時不可混用兩份設定，否則道路禁建與移動指令會套用錯誤。

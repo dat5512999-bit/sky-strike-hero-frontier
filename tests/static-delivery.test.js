@@ -63,7 +63,9 @@ test('塔防正式 PNG 資產尺寸與透明圖集格式正確', () => {
 test('人族 TD 戰場與職業單位圖集可離線載入', () => {
   const assets = [
     ['assets/td/human-td-battlefield-v2.png', 1254, 1254],
-    ['assets/td/human-defenders-atlas-v2.png', 1536, 1024]
+    ['assets/td/ranger-actions-v1.png', 1254, 1254],
+    ['assets/td/arcanist-actions-v1.png', 1244, 1264],
+    ['assets/td/rogue-actions-v1.png', 1254, 1254]
   ];
   assets.forEach(([file, width, height]) => {
     const data = fs.readFileSync(path.join(root, file));
