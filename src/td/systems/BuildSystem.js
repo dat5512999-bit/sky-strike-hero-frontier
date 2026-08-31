@@ -1,14 +1,19 @@
 (function(ns){
   'use strict';
+  function pointSegmentDistance(px,py,a,b){const dx=b.x-a.x,dy=b.y-a.y;const length=dx*dx+dy*dy;if(!length)return Math.hypot(px-a.x,py-a.y);const t=Math.max(0,Math.min(1,((px-a.x)*dx+(py-a.y)*dy)/length));return Math.hypot(px-(a.x+t*dx),py-(a.y+t*dy));}
   class BuildSystem{
     constructor(){this.reset();}
-    reset(){this.pads=ns.config.pads.map(function(p,index){return{x:p.x,y:p.y,index:index,tower:null};});this.selected=null;}
-    selectAt(x,y){this.selected=this.pads.find(function(pad){return Math.hypot(pad.x-x,pad.y-y)<=34;})||null;return this.selected;}
-    build(type,economy){const pad=this.selected,cfg=ns.config.towers[type];if(!pad||pad.tower||!cfg||economy.gold<cfg.cost)return false;economy.gold-=cfg.cost;pad.tower=new ns.entities.Tower(type,pad.x,pad.y);return true;}
-    upgrade(economy){if(!this.selected||!this.selected.tower)return false;const cost=this.selected.tower.upgradeCost();if(!cost||economy.gold<cost)return false;economy.gold-=this.selected.tower.upgrade();return true;}
-    sell(economy){if(!this.selected||!this.selected.tower)return false;economy.gold+=this.selected.tower.sellValue();this.selected.tower=null;return true;}
-    towers(){return this.pads.filter(function(p){return p.tower;}).map(function(p){return p.tower;});}
-    draw(ctx,art){this.pads.forEach(function(pad){if(pad.tower){pad.tower.draw(ctx,pad===this.selected,art);return;}ctx.save();ctx.translate(pad.x,pad.y);ctx.shadowColor='rgba(0,0,0,.55)';ctx.shadowBlur=10;const stone=ctx.createRadialGradient(-7,-9,3,0,0,30);stone.addColorStop(0,pad===this.selected?'#ffe39a':'#9aa88b');stone.addColorStop(.55,pad===this.selected?'#a9803e':'#54695a');stone.addColorStop(1,'#26382f');ctx.fillStyle=stone;ctx.strokeStyle=pad===this.selected?'#ffd36a':'#c3d2b4';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,28,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.shadowBlur=0;ctx.globalAlpha=.85;ctx.beginPath();ctx.arc(0,0,19,0,Math.PI*2);ctx.stroke();ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-8,0);ctx.lineTo(8,0);ctx.moveTo(0,-8);ctx.lineTo(0,8);ctx.stroke();ctx.restore();},this);}
+    reset(){this.units=[];this.selected=null;this.pendingType=null;this.pointer={x:360,y:360,valid:false};}
+    queue(type){if(!ns.config.towers[type])return false;this.pendingType=type;this.selected=null;return true;}
+    cancel(){this.pendingType=null;}
+    canPlaceAt(x,y){if(x<42||x>678||y<62||y>674)return false;if(ns.config.path.some(function(point,index,path){return index&&pointSegmentDistance(x,y,path[index-1],point)<55;}))return false;return !this.units.some(function(tower){return ns.utils.distance(tower,{x:x,y:y})<58;});}
+    updatePointer(x,y){this.pointer={x:x,y:y,valid:this.canPlaceAt(x,y)};}
+    selectAt(x,y){this.selected=this.units.find(function(tower){return ns.utils.distance(tower,{x:x,y:y})<=30;})||null;return this.selected;}
+    placeQueued(x,y,economy){const type=this.pendingType,cfg=ns.config.towers[type];if(!cfg||!this.canPlaceAt(x,y)||economy.gold<cfg.cost||economy.lumber<(cfg.wood||0))return false;economy.gold-=cfg.cost;economy.lumber-=cfg.wood||0;const tower=new ns.entities.Tower(type,x,y);this.units.push(tower);this.selected=tower;this.pendingType=null;return true;}
+    upgrade(economy){if(!this.selected)return false;const cost=this.selected.upgradeCost();if(!cost||economy.gold<cost.gold||economy.merit<cost.merit)return false;economy.gold-=cost.gold;economy.merit-=cost.merit;this.selected.upgrade();return true;}
+    sell(economy){if(!this.selected)return false;economy.gold+=this.selected.sellValue();this.units=this.units.filter(function(tower){return tower!==this.selected;},this);this.selected=null;return true;}
+    towers(){return this.units.slice();}
+    draw(ctx,art){this.units.forEach(function(tower){tower.draw(ctx,tower===this.selected,art);},this);if(this.pendingType){const cfg=ns.config.towers[this.pendingType];ctx.save();ctx.globalAlpha=this.pointer.valid ? .72 : .4;ctx.fillStyle=this.pointer.valid?'#65efb2':'#ff5c5c';ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=2;ctx.beginPath();ctx.arc(this.pointer.x,this.pointer.y,26,0,Math.PI*2);ctx.fill();ctx.globalAlpha=.28;ctx.beginPath();ctx.arc(this.pointer.x,this.pointer.y,cfg.range,0,Math.PI*2);ctx.stroke();ctx.restore();}}
   }
   ns.systems.BuildSystem=BuildSystem;
 })(globalThis.TowerFrontier);

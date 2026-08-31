@@ -14,31 +14,46 @@
     <header class="td-header">
       <a href="index.html" aria-label="返回飛機射擊模式">← 飛機模式</a>
       <div><small>GOLD</small><strong id="td-gold">190</strong></div>
+      <div><small>木材</small><strong id="td-lumber">5</strong></div>
       <h1>英雄塔防<small>HERO FRONTIER</small></h1>
+      <div><small>功勳</small><strong id="td-merit">0</strong></div>
       <div><small>城門</small><strong id="td-health">20 / 20</strong></div>
     </header>
     <section class="td-stage">
       <canvas id="td-game" width="720" height="720" aria-label="英雄塔防戰場"></canvas>
       <div class="td-wave-info"><span id="td-wave-status">等待第一波</span><button id="td-wave-button" type="button">開始第一波</button></div>
+      <div id="td-profession-screen" class="td-profession-screen">
+        <div class="profession-dialog"><p>SELECT YOUR GUILD</p><h2>選擇守備職業</h2><span>每局只能發展一條職業科技，站位與升級順序將決定防線。</span><div class="profession-list">
+          <button type="button" data-profession="hunter"><b>➶ 王國獵手</b><small>遠射 · 多重狙擊</small></button>
+          <button type="button" data-profession="arcanist"><b>✦ 奧術學院</b><small>魔法 · 範圍爆破</small></button>
+          <button type="button" data-profession="rogue"><b>◆ 暗影行會</b><small>快攻 · 額外賞金</small></button>
+        </div></div>
+      </div>
       <div id="td-overlay" class="td-overlay" hidden>
         <div><p>FRONTIER REPORT</p><h2 id="td-overlay-title">王城失守</h2><span id="td-overlay-message"></span><button id="td-restart" type="button">重新守城</button></div>
       </div>
     </section>
     <section class="td-command" aria-label="建造與英雄指令">
-      <div class="selection-card"><small>目前指令</small><strong id="td-selection">選擇地圖上的塔座或移動英雄</strong></div>
-      <div id="td-build-panel" class="build-panel" hidden>
-        <button type="button" data-tower="arrow"><b>➶ 遊俠塔</b><span>60G · 快速單體</span></button>
-        <button type="button" data-tower="frost"><b>❄ 霜語塔</b><span>90G · 緩速控制</span></button>
-        <button type="button" data-tower="cannon"><b>✦ 星火塔</b><span>125G · 範圍傷害</span></button>
+      <div class="td-minimap" aria-label="戰場縮圖"><i></i><b></b><span></span></div>
+      <div class="selection-card"><div id="td-portrait" class="selection-portrait">?</div><div><small id="td-selection-type">目前指令</small><strong id="td-selection">先選擇守備職業</strong><span id="td-selection-stats">經典 RTS 職業科技</span></div></div>
+      <div class="command-grid">
+        <button type="button" data-tower="hunter" hidden><b>➶</b><span>部署獵手</span></button>
+        <button type="button" data-tower="arcanist" hidden><b>✦</b><span>部署術士</span></button>
+        <button type="button" data-tower="rogue" hidden><b>◆</b><span>部署盜賊</span></button>
+        <button id="td-upgrade" type="button" disabled><b>⬆</b><span>升級</span></button>
+        <button id="td-sell" type="button" disabled><b>↩</b><span>遣散</span></button>
+        <button id="td-skill-button" class="skill-button" type="button"><b>❄</b><span>霜環震擊</span></button>
+        <button id="td-cancel-build" type="button"><b>✕</b><span>取消部署</span></button>
+        <button type="button" disabled><b>?</b><span>裝備（後續）</span></button>
+        <button type="button" disabled><b>♜</b><span>科技（後續）</span></button>
       </div>
-      <div id="td-tower-panel" class="tower-panel" hidden><button id="td-upgrade" type="button">升級</button><button id="td-sell" type="button">出售</button></div>
-      <button id="td-skill-button" class="skill-button" type="button">❄ 霜環震擊</button>
     </section>
-    <footer>點擊塔座建造　｜　點擊或拖曳戰場移動英雄　｜　英雄靠近怪物可攔截減速</footer>
+    <footer>先選單位再點草地部署　｜　道路與單位旁不可建造　｜　點擊戰場移動英雄</footer>
   </main>
   <script src="src/td/namespace.js"></script>
   <script src="src/td/config.js"></script>
   <script src="src/td/systems/ArtSystem.js"></script>
+  <script src="src/td/systems/ProfessionSystem.js"></script>
   <script src="src/td/systems/PathSystem.js"></script>
   <script src="src/td/entities/Monster.js"></script>
   <script src="src/td/entities/Projectile.js"></script>

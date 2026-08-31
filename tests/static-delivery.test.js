@@ -59,3 +59,15 @@ test('塔防正式 PNG 資產尺寸與透明圖集格式正確', () => {
     assert.equal(data[25], colorType, `${file} 的 PNG 色彩格式不符`);
   });
 });
+
+test('人族 TD 戰場與職業單位圖集可離線載入', () => {
+  const assets = [
+    ['assets/td/human-td-battlefield-v2.png', 1254, 1254],
+    ['assets/td/human-defenders-atlas-v2.png', 1536, 1024]
+  ];
+  assets.forEach(([file, width, height]) => {
+    const data = fs.readFileSync(path.join(root, file));
+    assert.equal(data.readUInt32BE(16), width);
+    assert.equal(data.readUInt32BE(20), height);
+  });
+});

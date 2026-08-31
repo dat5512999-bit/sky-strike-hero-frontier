@@ -1,11 +1,11 @@
 (function(ns){
   'use strict';
   const TYPES={
-    grunt:{name:'荒原步兵',color:'#db604f',speed:52,health:70,reward:12,radius:16,baseDamage:1},
-    runner:{name:'疾風獵犬',color:'#e6bb45',speed:92,health:52,reward:13,radius:13,baseDamage:1},
-    brute:{name:'岩甲巨獸',color:'#8c78b8',speed:38,health:190,reward:24,radius:22,baseDamage:2,armor:2},
-    shaman:{name:'虛空術士',color:'#59c992',speed:48,health:112,reward:19,radius:17,baseDamage:1},
-    boss:{name:'深淵戰將',color:'#ff416d',speed:31,health:720,reward:130,radius:30,baseDamage:5,armor:4}
+    grunt:{name:'邊境步兵',color:'#db604f',speed:55,health:74,reward:12,radius:16,baseDamage:1,armorType:'light'},
+    runner:{name:'疾風獵犬',color:'#e6bb45',speed:98,health:56,reward:13,radius:13,baseDamage:1,armorType:'light'},
+    brute:{name:'岩甲巨獸',color:'#8c78b8',speed:40,health:205,reward:24,radius:22,baseDamage:2,armor:2,armorType:'heavy'},
+    shaman:{name:'虛空術士',color:'#59c992',speed:51,health:124,reward:19,radius:17,baseDamage:1,armorType:'arcane'},
+    boss:{name:'軍團戰將',color:'#ff416d',speed:33,health:790,reward:130,radius:30,baseDamage:5,armor:4,armorType:'heavy'}
   };
   class Monster{
     constructor(type,wave,path){

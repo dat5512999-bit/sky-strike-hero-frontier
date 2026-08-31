@@ -1,13 +1,13 @@
 (function(ns){
   'use strict';
   ns.config=Object.freeze({
-    width:720,height:720,startGold:190,baseHealth:20,totalWaves:20,
-    path:[{x:-35,y:5},{x:120,y:58},{x:300,y:112},{x:410,y:145},{x:430,y:220},{x:350,y:286},{x:235,y:326},{x:255,y:390},{x:405,y:414},{x:525,y:466},{x:535,y:590},{x:750,y:690}],
-    pads:[{x:170,y:194},{x:322,y:210},{x:535,y:180},{x:145,y:423},{x:352,y:520},{x:612,y:395},{x:335,y:620},{x:185,y:555}],
+    width:720,height:720,startGold:240,startLumber:5,baseHealth:20,totalWaves:15,
+    path:[{x:-30,y:42},{x:155,y:94},{x:385,y:112},{x:540,y:164},{x:585,y:265},{x:558,y:350},{x:420,y:365},{x:235,y:350},{x:120,y:390},{x:104,y:486},{x:190,y:548},{x:390,y:574},{x:600,y:620},{x:750,y:690}],
+    damageMultipliers:{pierce:{light:1.35,heavy:.75,arcane:1},magic:{light:.8,heavy:1.25,arcane:.7},chaos:{light:1,heavy:.9,arcane:1.35}},
     towers:{
-      arrow:{name:'遊俠塔',icon:'➶',cost:60,damage:14,range:140,interval:.62,color:'#ffd36a'},
-      frost:{name:'霜語塔',icon:'❄',cost:90,damage:8,range:132,interval:.92,color:'#63ddff',slow:.55,slowTime:1.6},
-      cannon:{name:'星火塔',icon:'✦',cost:125,damage:28,range:118,interval:1.3,color:'#ff765c',splash:48}
+      hunter:{name:'王國獵手',icon:'➶',cost:70,wood:1,damage:17,range:150,interval:.68,color:'#e6c56c',attackType:'pierce'},
+      arcanist:{name:'奧術學徒',icon:'✦',cost:85,wood:1,damage:13,range:132,interval:.9,color:'#ff8a52',attackType:'magic',splash:42},
+      rogue:{name:'暗影盜賊',icon:'◆',cost:65,wood:1,damage:11,range:118,interval:.45,color:'#c884df',attackType:'chaos',bountyBonus:.35}
     },
     hero:{maxHealth:100,speed:215,range:152,damage:18,interval:.58,novaDamage:30,novaRange:118,novaCooldown:9}
   });
