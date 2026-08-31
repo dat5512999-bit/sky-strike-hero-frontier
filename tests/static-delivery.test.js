@@ -43,3 +43,19 @@ test('PWA manifest 與離線快取引用的遊戲檔案都存在', () => {
   const assets = Array.from(worker.matchAll(/'\.\/([^']*)'/g), (match) => match[1] || 'index.html');
   assets.forEach((asset) => assert.ok(fs.existsSync(path.join(root, asset)), `離線快取缺少檔案：${asset}`));
 });
+
+test('塔防正式 PNG 資產尺寸與透明圖集格式正確', () => {
+  const assets = [
+    ['assets/td/forest-valley-v1.png', 1254, 1254, 2],
+    ['assets/td/towers-atlas-v1.png', 1774, 887, 6],
+    ['assets/td/units-atlas-v1.png', 1536, 1024, 6],
+    ['assets/td/frontier-keep-v1.png', 1304, 1206, 6]
+  ];
+  assets.forEach(([file, width, height, colorType]) => {
+    const data = fs.readFileSync(path.join(root, file));
+    assert.deepEqual(Array.from(data.subarray(0, 8)), [137,80,78,71,13,10,26,10]);
+    assert.equal(data.readUInt32BE(16), width);
+    assert.equal(data.readUInt32BE(20), height);
+    assert.equal(data[25], colorType, `${file} 的 PNG 色彩格式不符`);
+  });
+});

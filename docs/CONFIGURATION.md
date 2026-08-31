@@ -46,3 +46,5 @@ Boss 基礎 HP、波次成長、射擊冷卻、瞄準散角與各階段彈數位
 `src/td/config.js` 集中管理 720×720 戰場、道路節點、八個塔座、起始 190G、20 點城門生命、20 波上限、三塔價格／傷害／射程與英雄能力。怪物原始數值位於 `Monster.js` 的 `TYPES`，每波 HP 目前成長 10.5%。波次內容位於 `WaveSystem.composition()`。
 
 調整經濟時至少驗證：第一波可蓋兩座基礎塔、霜語加遊俠後仍可完成第一波、升級不會使金幣為負、出售返還總投入 70%、Boss 漏怪扣 5 點。自由新增道路節點時必須維持首尾在畫面外，並重測全部塔座不與道路重疊。
+
+塔防正式美術位於 `assets/td`：`forest-valley-v1.png`、`towers-atlas-v1.png`、`units-atlas-v1.png`、`frontier-keep-v1.png`。圖集順序已硬編碼於 `ArtSystem.js`，不可任意交換格子。替換資產時須保留透明 Alpha、相同列數與一致鏡頭角度；新增檔名則同步更新 `sw.js`。

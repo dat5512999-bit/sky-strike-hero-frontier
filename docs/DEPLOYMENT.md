@@ -24,4 +24,4 @@ GitHub Pages 部署依據：[GitHub 官方自訂工作流程文件](https://docs
 
 ## PWA 與離線
 
-`manifest.webmanifest` 提供主畫面名稱、圖示、直向與獨立視窗設定；`sw.js` 快取兩種遊戲的必要資產。直接雙擊檔案時不註冊 Service Worker，只有 HTTP／HTTPS 部署才啟用離線支援。連線時採 network-first 取得新版，失敗才使用快取；本版名稱為 `sky-strike-v0.10.0`，包含 `td.html`、`td.css` 與全部 `src/td` 模組。部署後須同時開啟 Pages 根網址與 `/td.html` 驗證。
+`manifest.webmanifest` 提供主畫面名稱、圖示、直向與獨立視窗設定；`sw.js` 快取兩種遊戲及塔防 PNG。直接雙擊檔案時不註冊 Service Worker，只有 HTTP／HTTPS 部署才啟用離線支援。連線時採 network-first 取得新版，失敗才使用快取；本版名稱為 `sky-strike-v0.11.0`，包含 `td.html`、`td.css`、全部 `src/td` 模組與四張 `assets/td` 正式資產。部署後須同時開啟 Pages 根網址與 `/td.html` 驗證。

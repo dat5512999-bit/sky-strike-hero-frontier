@@ -7,9 +7,8 @@
     upgradeCost(){return this.level>=3?0:55+this.level*35;}
     upgrade(){const cost=this.upgradeCost();if(!cost)return 0;this.level+=1;this.totalSpent+=cost;return cost;}
     sellValue(){return Math.floor(this.totalSpent*.7);}
-    draw(ctx,selected){const cfg=this.config();ctx.save();ctx.translate(this.x,this.y);if(selected){ctx.strokeStyle=cfg.color;ctx.globalAlpha=.18;ctx.fillStyle=cfg.color;ctx.beginPath();ctx.arc(0,0,cfg.range,0,Math.PI*2);ctx.fill();ctx.globalAlpha=.8;ctx.lineWidth=2;ctx.stroke();ctx.globalAlpha=1;}
-      ctx.fillStyle='#453629';ctx.beginPath();ctx.arc(0,8,26,0,Math.PI*2);ctx.fill();ctx.fillStyle='#a38558';ctx.fillRect(-17,-11,34,27);ctx.fillStyle='#d2bc83';ctx.fillRect(-13,-16,8,8);ctx.fillRect(5,-16,8,8);
-      ctx.rotate(this.aim);ctx.fillStyle=cfg.color;ctx.shadowColor=cfg.color;ctx.shadowBlur=9;ctx.fillRect(0,-5,31,10);ctx.beginPath();ctx.arc(0,0,12,0,Math.PI*2);ctx.fill();ctx.restore();
+    draw(ctx,selected,art){const cfg=this.config();if(selected){ctx.save();ctx.strokeStyle=cfg.color;ctx.globalAlpha=.14;ctx.fillStyle=cfg.color;ctx.beginPath();ctx.arc(this.x,this.y,cfg.range,0,Math.PI*2);ctx.fill();ctx.globalAlpha=.85;ctx.lineWidth=2;ctx.stroke();ctx.restore();}
+      if(!(art&&art.drawTower(ctx,this.type,this.x,this.y))){ctx.save();ctx.translate(this.x,this.y);ctx.fillStyle='#453629';ctx.beginPath();ctx.arc(0,8,26,0,Math.PI*2);ctx.fill();ctx.fillStyle='#a38558';ctx.fillRect(-17,-11,34,27);ctx.rotate(this.aim);ctx.fillStyle=cfg.color;ctx.fillRect(0,-5,31,10);ctx.beginPath();ctx.arc(0,0,12,0,Math.PI*2);ctx.fill();ctx.restore();}
       ctx.save();ctx.fillStyle='#fff4bd';ctx.font='700 11px Segoe UI';ctx.textAlign='center';ctx.fillText('L'+this.level,this.x,this.y+40);ctx.restore();}
   }
   ns.entities.Tower=Tower;

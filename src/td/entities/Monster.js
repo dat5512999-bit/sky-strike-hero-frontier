@@ -21,14 +21,11 @@
     takeDamage(amount){if(!this.active)return false;this.health-=Math.max(1,amount-(this.armor||0));this.hitFlash=.1;if(this.health<=0){this.health=0;this.active=false;return true;}return false;}
     applySlow(factor,time){this.slowFactor=Math.min(this.slowFactor,factor);this.slowTimer=Math.max(this.slowTimer,time);}
     progress(){return this.index+this.x/10000;}
-    draw(ctx){
-      ctx.save();ctx.translate(this.x,this.y);ctx.shadowColor=this.color;ctx.shadowBlur=this.type==='boss'?16:7;
-      ctx.fillStyle='#201a1b';ctx.beginPath();ctx.ellipse(0,10,this.radius*1.05,this.radius*.55,0,0,Math.PI*2);ctx.fill();
-      ctx.fillStyle=this.hitFlash>0?'#fff':this.color;ctx.beginPath();ctx.arc(0,0,this.radius,0,Math.PI*2);ctx.fill();
-      ctx.fillStyle='#2b2030';ctx.beginPath();ctx.moveTo(-this.radius*.7,-this.radius*.25);ctx.lineTo(0,-this.radius*1.3);ctx.lineTo(this.radius*.7,-this.radius*.25);ctx.closePath();ctx.fill();
-      ctx.fillStyle='#fff3bc';ctx.beginPath();ctx.arc(-this.radius*.35,-2,2.5,0,Math.PI*2);ctx.arc(this.radius*.35,-2,2.5,0,Math.PI*2);ctx.fill();
-      if(this.slowTimer>0){ctx.strokeStyle='#70e7ff';ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,this.radius+6,0,Math.PI*2);ctx.stroke();}
-      ctx.shadowBlur=0;ctx.fillStyle='rgba(8,7,12,.8)';ctx.fillRect(-this.radius,-this.radius-13,this.radius*2,5);ctx.fillStyle=this.color;ctx.fillRect(-this.radius,-this.radius-13,this.radius*2*(this.health/this.maxHealth),5);ctx.restore();
+    draw(ctx,art){
+      const sizes={grunt:58,runner:58,brute:78,shaman:64,boss:108};const size=sizes[this.type]||58;
+      if(!(art&&art.drawUnit(ctx,this.type,this.x,this.y,size))){ctx.save();ctx.translate(this.x,this.y);ctx.fillStyle=this.color;ctx.beginPath();ctx.arc(0,0,this.radius,0,Math.PI*2);ctx.fill();ctx.restore();}
+      ctx.save();if(this.hitFlash>0){ctx.globalAlpha=this.hitFlash*5;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(this.x,this.y,this.radius+4,0,Math.PI*2);ctx.fill();}if(this.slowTimer>0){ctx.strokeStyle='#70e7ff';ctx.shadowColor='#70e7ff';ctx.shadowBlur=8;ctx.lineWidth=3;ctx.beginPath();ctx.arc(this.x,this.y+4,this.radius+7,0,Math.PI*2);ctx.stroke();}
+      ctx.shadowBlur=0;ctx.fillStyle='rgba(8,7,12,.82)';ctx.fillRect(this.x-this.radius,this.y-this.radius-18,this.radius*2,5);ctx.fillStyle=this.color;ctx.fillRect(this.x-this.radius,this.y-this.radius-18,this.radius*2*(this.health/this.maxHealth),5);ctx.restore();
     }
   }
   Monster.TYPES=TYPES;ns.entities.Monster=Monster;

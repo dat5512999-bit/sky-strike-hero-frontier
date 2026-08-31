@@ -16,6 +16,7 @@
 - `SupportSystem` 管理分身／戰寵等級、位置、射擊及繪製，使用既有 `Bullet` 與碰撞流程。
 - 不需要資料庫；局內狀態於重開時重設，偏好與紀錄只存於瀏覽器。
 - `TowerFrontier` 是獨立命名空間；塔防不讀寫 `SkyStrike` 的玩家、波次或碰撞狀態，避免雙模式互相污染。
+- `ArtSystem` 非同步載入塔防背景、塔／單位圖集與守護城堡，封裝來源裁切；實體不知道實際檔名，載入失敗時回退 Canvas 圖形。
 
 ## 資料夾
 
@@ -35,7 +36,7 @@ src/
   main.js      UI 啟動入口
   td/
     entities/  Monster, Projectile, Tower, Hero
-    systems/   PathSystem, WaveSystem, BuildSystem
+    systems/   ArtSystem, PathSystem, WaveSystem, BuildSystem
     TDGame.js  塔防協調、經濟、結算與 Canvas 繪製
 tests/         Node 內建測試
 docs/          操作、維運、API 與 QA 文件
@@ -75,8 +76,11 @@ Skin Registry 讓每個品牌／主題包保持獨立。外觀 renderer 只能�
 td/main → TDGame → WaveSystem → Monster → Path
                  ├─ BuildSystem → Tower → Projectile
                  ├─ Hero → Projectile / Nova / Intercept
+                 ├─ ArtSystem → Background / Atlases / Keep
                  ├─ Economy → Build / Upgrade / Sell / Kill Reward
                  └─ Base Health → Leak → Victory / Game Over
 ```
 
 `WaveSystem.composition()` 只描述波次組成；`Monster` 自行沿節點移動；`Tower` 與 `Hero` 只產生投射物；擊殺金幣與漏怪扣血由 `TDGame` 統一結算。後續自由造路應新增格網與尋路模組，不修改現有固定路徑實體。
+
+塔與單位使用固定 atlas cell 對照，不以執行期影像辨識裁切。背景採 720×720 繪製座標，道路節點和塔座均依背景校準；更換背景時必須一併更新 `config.js` 並做實機對齊測試。

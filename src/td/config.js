@@ -2,8 +2,8 @@
   'use strict';
   ns.config=Object.freeze({
     width:720,height:720,startGold:190,baseHealth:20,totalWaves:20,
-    path:[{x:-30,y:108},{x:154,y:108},{x:154,y:258},{x:355,y:258},{x:355,y:445},{x:570,y:445},{x:570,y:615},{x:750,y:615}],
-    pads:[{x:82,y:202},{x:244,y:172},{x:265,y:350},{x:448,y:342},{x:477,y:535},{x:650,y:522},{x:110,y:510},{x:627,y:225}],
+    path:[{x:-35,y:5},{x:120,y:58},{x:300,y:112},{x:410,y:145},{x:430,y:220},{x:350,y:286},{x:235,y:326},{x:255,y:390},{x:405,y:414},{x:525,y:466},{x:535,y:590},{x:750,y:690}],
+    pads:[{x:170,y:194},{x:322,y:210},{x:535,y:180},{x:145,y:423},{x:352,y:520},{x:612,y:395},{x:335,y:620},{x:185,y:555}],
     towers:{
       arrow:{name:'遊俠塔',icon:'➶',cost:60,damage:14,range:140,interval:.62,color:'#ffd36a'},
       frost:{name:'霜語塔',icon:'❄',cost:90,damage:8,range:132,interval:.92,color:'#63ddff',slow:.55,slowTime:1.6},

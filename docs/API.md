@@ -36,6 +36,7 @@
 | `Projectile` | `update`、`hit` | 單體／範圍傷害與緩速效果 |
 | `Hero` | `setTarget`、`update`、`castNova` | 玩家移動、自動攻擊、攔截與主動技能 |
 | `PathSystem` | `draw` | 固定道路節點與道路繪製 |
+| `ArtSystem` | `load`、`drawBackground`、`drawTower`、`drawUnit`、`drawKeep` | 本機美術資產載入、atlas 裁切與城堡合成 |
 | `WaveSystem` | `composition`、`start`、`update`、`label` | 20 波組成、生成佇列與清場狀態 |
 | `BuildSystem` | `selectAt`、`build`、`upgrade`、`sell`、`towers` | 合法塔座與建造經濟 |
 | `TDGame` | `startWave`、`buildTower`、`castNova`、`onKill`、`update` | 協調波次、英雄、塔、經濟、城門與結算 |
