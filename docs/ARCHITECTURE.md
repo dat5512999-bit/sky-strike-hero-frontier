@@ -19,6 +19,7 @@
 - `ArtSystem` 非同步載入塔防背景、建築圖集、4×4 單位動作圖集與守護城堡；`CombatUnit` 只提供動畫狀態與影格，不知道實際檔名。
 - `ProfessionSystem` 管理單局職業鎖定與職業說明，不直接修改怪物或經濟；職業戰鬥差異由資料驅動的塔設定處理。
 - `NavigationSystem` 只建立導航格、建築障礙與 A* 路徑；`CommandSystem` 將 UI 指令轉成單位訂單，兩者不負責傷害或經濟。
+- `LayoutSystem` 管理塔防介面偏好、700px 自動判斷與 `data-layout` 狀態；CSS 只依狀態排版，不接觸遊戲物件。
 
 ## 資料夾
 
@@ -38,8 +39,8 @@ src/
   main.js      UI 啟動入口
   td/
     entities/  Monster, Projectile, CombatUnit, Building, Hero
-    systems/   ArtSystem, ProfessionSystem, PathSystem, NavigationSystem,
-               CommandSystem, WaveSystem, BuildSystem
+    systems/   ArtSystem, ProfessionSystem, PathSystem, LayoutSystem,
+               NavigationSystem, CommandSystem, WaveSystem, BuildSystem
     TDGame.js  塔防協調、經濟、結算與 Canvas 繪製
 tests/         Node 內建測試
 docs/          操作、維運、API 與 QA 文件
@@ -80,6 +81,7 @@ td/main → TDGame → WaveSystem → Monster → Path
                  ├─ ProfessionSystem → 單局職業鎖定
                  ├─ BuildSystem → CombatUnit（可移動）/ Building（固定）→ Projectile
                  ├─ CommandSystem → NavigationSystem(A*) → CombatUnit Order
+                 ├─ LayoutSystem → body[data-layout] → Desktop/Mobile CSS
                  ├─ Hero → Projectile / Nova / Intercept
                  ├─ ArtSystem → Background / Atlases / Keep
                  ├─ Economy(Gold/Lumber/Merit) → Build / Upgrade / Sell / Kill Reward

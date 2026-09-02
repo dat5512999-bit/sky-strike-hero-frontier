@@ -37,6 +37,7 @@
 | `Projectile` | `update`、`hit` | 單體／範圍傷害與緩速效果 |
 | `Hero` | `setTarget`、`update`、`castNova` | 玩家移動、自動攻擊、攔截與主動技能 |
 | `PathSystem` | `draw` | 固定道路節點與道路繪製 |
+| `LayoutSystem` | `select`、`restore`、`resolved`、`apply`、`onResize` | 自動／電腦／手機模式、偏好保存與版面狀態 |
 | `NavigationSystem` | `findPath`、`segmentClear`、`nearestOpen` | 30px 導航格、建築障礙、八方向 A* 與路徑簡化 |
 | `CommandSystem` | `arm`、`issue`、`hold`、`stop`、`reset` | 管理目前指令模式並把目的地與路徑交給單位 |
 | `ArtSystem` | `load`、`drawBackground`、`drawCombatUnit`、`drawBuilding`、`drawUnit` | 本機美術載入、4×4 動作圖集與建築圖集裁切 |

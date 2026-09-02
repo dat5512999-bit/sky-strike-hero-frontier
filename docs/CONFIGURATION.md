@@ -52,3 +52,5 @@ v0.13 主要角色素材為 `ranger-actions-v1.png`、`arcanist-actions-v1.png`�
 `config.units` 管理可移動單位的速度、傷害、射程與成本；`config.buildings` 管理固定建築。新增類型時不可混用兩份設定，否則道路禁建與移動指令會套用錯誤。
 
 `NavigationSystem` 預設使用 30px 導航格、46px 建築避障半徑與八方向 A*。若修改角色／建築圖像尺寸，須同步檢查 `cellSize`、`obstacleRadius`、斜向防切角、不可達目的地提示與手機點按精度；數值不應小於建築可見底座半徑。
+
+塔防介面模式由 `LayoutSystem.js` 管理，偏好鍵為 `towerFrontierLayout`，可用值是 `auto`、`desktop`、`mobile`。自動模式的 700px 判斷應與 `td.css` 響應式斷點同步修改；不要只改其中一處。手動電腦模式在小螢幕允許水平捲動，避免壓縮 Canvas 座標與操作命中區。
