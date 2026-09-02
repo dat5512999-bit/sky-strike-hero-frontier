@@ -43,19 +43,25 @@
         <button type="button" data-build-kind="building" data-build-type="arrow"><b>♜</b><span>林地弩塔</span></button>
         <button type="button" data-build-kind="building" data-build-type="frost"><b>❄</b><span>寒霜塔</span></button>
         <button type="button" data-build-kind="building" data-build-type="cannon"><b>●</b><span>火砲塔</span></button>
+        <button id="td-move" type="button" disabled title="移動（M）"><b>➤</b><span>移動 M</span></button>
+        <button id="td-attack-move" type="button" disabled title="攻擊移動（A）"><b>⚔</b><span>攻擊移動 A</span></button>
+        <button id="td-hold" type="button" disabled title="固守（H）"><b>⌾</b><span>固守 H</span></button>
+        <button id="td-stop" type="button" disabled title="停止（S）"><b>■</b><span>停止 S</span></button>
         <button id="td-upgrade" type="button" disabled><b>⬆</b><span>升級</span></button>
         <button id="td-sell" type="button" disabled><b>↩</b><span>遣散</span></button>
         <button id="td-skill-button" class="skill-button" type="button"><b>❄</b><span>霜環震擊</span></button>
         <button id="td-cancel-build" type="button"><b>✕</b><span>取消部署</span></button>
       </div>
     </section>
-    <footer>點角色選取，再點地面移動　｜　右鍵可快速下令　｜　建築只能蓋在道路外</footer>
+    <footer>點選單位後可移動／攻擊移動　｜　固守不追擊　｜　建築會成為尋路障礙</footer>
   </main>
   <script src="src/td/namespace.js"></script>
   <script src="src/td/config.js"></script>
   <script src="src/td/systems/ArtSystem.js"></script>
   <script src="src/td/systems/ProfessionSystem.js"></script>
   <script src="src/td/systems/PathSystem.js"></script>
+  <script src="src/td/systems/NavigationSystem.js"></script>
+  <script src="src/td/systems/CommandSystem.js"></script>
   <script src="src/td/entities/Monster.js"></script>
   <script src="src/td/entities/Projectile.js"></script>
   <script src="src/td/entities/CombatUnit.js"></script>

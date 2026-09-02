@@ -32,16 +32,18 @@
 | 模組 | 主要介面 | 責任 |
 |---|---|---|
 | `Monster` | `update`、`takeDamage`、`applySlow`、`progress` | 路徑移動、HP、護甲、緩速與漏怪 |
-| `CombatUnit` | `setTarget`、`setState`、`animate`、`update`、`upgrade` | 可移動職業守軍、四態動畫、索敵與升級 |
+| `CombatUnit` | `issueCommand`、`stop`、`holdPosition`、`update`、`upgrade` | 執行移動／攻擊移動／固守訂單、四態動畫、索敵與升級 |
 | `Building` | `config`、`update`、`upgrade`、`sellValue` | 固定弩塔／寒霜塔／火砲塔的索敵與攻擊 |
 | `Projectile` | `update`、`hit` | 單體／範圍傷害與緩速效果 |
 | `Hero` | `setTarget`、`update`、`castNova` | 玩家移動、自動攻擊、攔截與主動技能 |
 | `PathSystem` | `draw` | 固定道路節點與道路繪製 |
+| `NavigationSystem` | `findPath`、`segmentClear`、`nearestOpen` | 30px 導航格、建築障礙、八方向 A* 與路徑簡化 |
+| `CommandSystem` | `arm`、`issue`、`hold`、`stop`、`reset` | 管理目前指令模式並把目的地與路徑交給單位 |
 | `ArtSystem` | `load`、`drawBackground`、`drawCombatUnit`、`drawBuilding`、`drawUnit` | 本機美術載入、4×4 動作圖集與建築圖集裁切 |
 | `ProfessionSystem` | `choose`、`current`、`reset` | 三職業選擇與單局職業鎖定 |
 | `WaveSystem` | `composition`、`start`、`update`、`label` | 15 波組成、生成佇列與清場狀態 |
 | `BuildSystem` | `queue`、`canPlaceAt`、`placeQueued`、`selectAt`、`combatUnits`、`buildings` | 單位／建築分流、選取、部署與三資源經濟 |
-| `TDGame` | `startWave`、`queueDeploy`、`commandSelected`、`castNova`、`update` | 協調移動命令、波次、英雄、建築、經濟與結算 |
+| `TDGame` | `startWave`、`queueDeploy`、`armCommand`、`commandSelected`、`castNova`、`update` | 協調戰術指令、波次、英雄、建築、經濟與結算 |
 
 ## Skin Pack 介面
 

@@ -18,6 +18,7 @@
 - `TowerFrontier` 是獨立命名空間；塔防不讀寫 `SkyStrike` 的玩家、波次或碰撞狀態，避免雙模式互相污染。
 - `ArtSystem` 非同步載入塔防背景、建築圖集、4×4 單位動作圖集與守護城堡；`CombatUnit` 只提供動畫狀態與影格，不知道實際檔名。
 - `ProfessionSystem` 管理單局職業鎖定與職業說明，不直接修改怪物或經濟；職業戰鬥差異由資料驅動的塔設定處理。
+- `NavigationSystem` 只建立導航格、建築障礙與 A* 路徑；`CommandSystem` 將 UI 指令轉成單位訂單，兩者不負責傷害或經濟。
 
 ## 資料夾
 
@@ -37,7 +38,8 @@ src/
   main.js      UI 啟動入口
   td/
     entities/  Monster, Projectile, CombatUnit, Building, Hero
-    systems/   ArtSystem, ProfessionSystem, PathSystem, WaveSystem, BuildSystem
+    systems/   ArtSystem, ProfessionSystem, PathSystem, NavigationSystem,
+               CommandSystem, WaveSystem, BuildSystem
     TDGame.js  塔防協調、經濟、結算與 Canvas 繪製
 tests/         Node 內建測試
 docs/          操作、維運、API 與 QA 文件
@@ -77,12 +79,13 @@ Skin Registry 讓每個品牌／主題包保持獨立。外觀 renderer 只能�
 td/main → TDGame → WaveSystem → Monster → Path
                  ├─ ProfessionSystem → 單局職業鎖定
                  ├─ BuildSystem → CombatUnit（可移動）/ Building（固定）→ Projectile
+                 ├─ CommandSystem → NavigationSystem(A*) → CombatUnit Order
                  ├─ Hero → Projectile / Nova / Intercept
                  ├─ ArtSystem → Background / Atlases / Keep
                  ├─ Economy(Gold/Lumber/Merit) → Build / Upgrade / Sell / Kill Reward
                  └─ Base Health → Leak → Victory / Game Over
 ```
 
-`WaveSystem.composition()` 只描述波次組成；`Monster` 自行沿節點移動；`CombatUnit` 接收移動命令並切換待機／行走／攻擊狀態，`Building` 固定索敵；擊殺與漏怪仍由 `TDGame` 結算。建築不可堵路，作戰單位則允許進入道路，以近距離攔截降低怪物推進速度。
+`WaveSystem.composition()` 只描述波次組成；`Monster` 自行沿節點移動；`CommandSystem` 透過 `NavigationSystem` 將目的地轉為避障路徑，`CombatUnit` 執行移動／攻擊移動／固守／停止訂單，`Building` 固定索敵；擊殺與漏怪仍由 `TDGame` 結算。
 
 角色圖集固定為 4 欄×4 列，列順序是待機、行走、攻擊、受擊／死亡；建築圖集固定為弩塔、寒霜塔、火砲塔三欄。背景採 720×720 座標，更換素材時需同步驗證裁切、Alpha、道路與禁建距離。

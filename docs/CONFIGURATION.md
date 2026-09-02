@@ -50,3 +50,5 @@ Boss 基礎 HP、波次成長、射擊冷卻、瞄準散角與各階段彈數位
 v0.13 主要角色素材為 `ranger-actions-v1.png`、`arcanist-actions-v1.png`、`rogue-actions-v1.png`。每張固定 4×4：待機、行走、攻擊、受擊／死亡各一列。建築使用 `towers-atlas-v1.png` 的弩塔／寒霜塔／火砲塔三欄。替換時須保留透明 Alpha、正方形 cell、角色註冊點與一致鏡頭，並同步更新 `sw.js`。
 
 `config.units` 管理可移動單位的速度、傷害、射程與成本；`config.buildings` 管理固定建築。新增類型時不可混用兩份設定，否則道路禁建與移動指令會套用錯誤。
+
+`NavigationSystem` 預設使用 30px 導航格、46px 建築避障半徑與八方向 A*。若修改角色／建築圖像尺寸，須同步檢查 `cellSize`、`obstacleRadius`、斜向防切角、不可達目的地提示與手機點按精度；數值不應小於建築可見底座半徑。

@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');const vm=require('node:vm');
-const root=path.resolve(__dirname,'..');const files=['src/td/namespace.js','src/td/config.js','src/td/systems/ProfessionSystem.js','src/td/systems/PathSystem.js','src/td/entities/Monster.js','src/td/entities/Projectile.js','src/td/entities/CombatUnit.js','src/td/entities/Building.js','src/td/entities/Hero.js','src/td/systems/WaveSystem.js','src/td/systems/BuildSystem.js'];
+const root=path.resolve(__dirname,'..');const files=['src/td/namespace.js','src/td/config.js','src/td/systems/ProfessionSystem.js','src/td/systems/PathSystem.js','src/td/systems/NavigationSystem.js','src/td/systems/CommandSystem.js','src/td/entities/Monster.js','src/td/entities/Projectile.js','src/td/entities/CombatUnit.js','src/td/entities/Building.js','src/td/entities/Hero.js','src/td/systems/WaveSystem.js','src/td/systems/BuildSystem.js'];
 function load(){const context=vm.createContext({console});context.globalThis=context;files.forEach((file)=>vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file}));return context.TowerFrontier;}
 
 test('怪物依道路節點移動並在終點標記漏怪',()=>{const ns=load();const monster=new ns.entities.Monster('runner',1,[{x:0,y:0},{x:10,y:0}]);monster.update(1);assert.equal(monster.active,false);assert.equal(monster.leaked,true);});
@@ -12,6 +12,12 @@ test('建築不可堵路，但作戰單位可以部署到道路攔截',()=>{cons
 test('作戰單位與防禦建築使用不同實體及經濟',()=>{const ns=load();const build=new ns.systems.BuildSystem();const economy={gold:500,lumber:10,merit:0};assert.equal(build.queue('hunter','unit'),true);assert.equal(build.placeQueued(330,250,economy),true);assert.equal(build.selected.kind,'unit');assert.equal(build.queue('arrow','building'),true);assert.equal(build.placeQueued(480,250,economy),true);assert.equal(build.selected.kind,'building');assert.equal(build.combatUnits().length,1);assert.equal(build.buildings().length,1);});
 
 test('作戰單位接受移動命令並切換行走與待機動畫',()=>{const ns=load();const unit=new ns.entities.CombatUnit('hunter',100,100);unit.setTarget(200,100);unit.update(.25,[],[]);assert.ok(unit.x>100);assert.equal(unit.state,'walk');assert.equal(unit.facing,0);unit.update(2,[],[]);assert.equal(unit.state,'idle');});
+
+test('導航系統讓單位繞過防禦建築',()=>{const ns=load();const navigation=new ns.systems.NavigationSystem(),building={kind:'building',x:210,y:210};const path=navigation.findPath({x:100,y:210},{x:330,y:210},[building]);assert.ok(path.length>=2);assert.ok(path.some((point)=>Math.abs(point.y-210)>20));assert.equal(navigation.segmentClear({x:100,y:210},{x:330,y:210},[building]),false);});
+
+test('指令系統可下達攻擊移動、固守與停止',()=>{const ns=load();const navigation=new ns.systems.NavigationSystem(),commands=new ns.systems.CommandSystem(),unit=new ns.entities.CombatUnit('hunter',100,100);commands.arm('attackMove');assert.equal(commands.issue(unit,250,100,navigation,[]),true);assert.equal(unit.order,'attackMove');assert.equal(commands.mode,'move');assert.equal(commands.hold(unit),true);assert.equal(unit.order,'hold');assert.equal(commands.stop(unit),true);assert.equal(unit.order,'idle');});
+
+test('攻擊移動會停火接戰，一般移動則持續前進',()=>{const ns=load();const enemy=new ns.entities.Monster('grunt',1);enemy.x=120;enemy.y=100;const attackUnit=new ns.entities.CombatUnit('hunter',100,100),moveUnit=new ns.entities.CombatUnit('hunter',100,100),shots=[];attackUnit.cooldown=0;attackUnit.issueCommand('attackMove',{x:300,y:100},[{x:300,y:100}]);attackUnit.update(.1,[enemy],shots);assert.equal(shots.length,1);assert.equal(attackUnit.x,100);moveUnit.issueCommand('move',{x:300,y:100},[{x:300,y:100}]);moveUnit.update(.1,[enemy],[]);assert.ok(moveUnit.x>100);});
 
 test('點擊空地不會在下達移動命令前遺失目前選取',()=>{const ns=load();const build=new ns.systems.BuildSystem(),economy={gold:300,lumber:5,merit:0};build.queue('hunter','unit');build.placeQueued(330,250,economy);const selected=build.selected;assert.equal(build.selectAt(600,600),null);assert.equal(build.selected,selected);});
 
