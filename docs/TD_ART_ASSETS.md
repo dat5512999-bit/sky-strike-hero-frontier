@@ -46,3 +46,7 @@ v0.11 與 v0.12 的 PNG 使用內建圖片生成工具製作，再複製進專�
 ## 替換規則
 
 替換背景時必須重校 `src/td/config.js` 的道路與建築禁區。角色 atlas 必須維持 4×4，列順序固定為 idle／walk／attack／hit-death，並確保每格角色比例、大小與腳底註冊點一致。所有資產都必須保存於專案並加入 `sw.js`；遊戲執行期不依賴遠端生成服務。
+
+## v0.17 英雄動作素材
+
+新增 `assets/td/hero-actions-v1.png`（1254×1254、RGBA），內建 imagegen 生成的原創女英雄四態圖集。完整提示及限制見 [HERO_ART_PROMPT.md](HERO_ART_PROMPT.md)。圖集與頭像均離線使用；升級肩甲、戰旗與符文由 Canvas 繪製。

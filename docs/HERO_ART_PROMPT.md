@@ -1,0 +1,7 @@
+# 女英雄動作素材
+
+使用內建 imagegen 生成，正式資產：`assets/td/hero-actions-v1.png`。1254 × 1254 RGBA，4 × 4，列順序為待機、行走、刺擊、施法。左右朝向採鏡像；非八方向 3D 模型。保留原比例，腳底與戰場選取圈對齊。圖集是生成素材，後續可由逐格人工精修提升動作連續性。
+
+生成提示：
+
+Use case: stylized-concept. Asset type: production 2D tower defense hero sprite atlas, square transparent PNG. Create exactly 4 columns by 4 rows of equally spaced animation cells, 16 full-body sprites of the SAME original adult female human champion, emerald cloak, silver and antique gold plate armor, dark tied-back hair, long glowing mint spear. Painterly pre-rendered classic fantasy RTS aesthetic, top-down three-quarter camera, all face screen right, consistent proportions and lighting. Each sprite entirely within its own square cell, feet centered at x50%, y80% of cell; character occupies 70% cell height; spear stays inside cell. Row 1 four subtle idle breathing poses. Row 2 four clearly different walking cycle poses with alternating legs and cloak movement. Row 3 four spear attack poses: pull back, prepare thrust, full forward spear thrust, recover. Row 4 four spell casting poses: lift spear, channel, release, recover. Real transparent alpha background, no background color, no checkerboard baked in, no ground, no shadows outside character, no cell borders, no text, no labels. Consistent anatomy, two arms two legs, high detail silhouette legibility at 100px render size. Original character not a copy of an existing franchise.

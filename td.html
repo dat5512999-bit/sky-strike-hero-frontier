@@ -20,9 +20,10 @@
       <div><small>功勳</small><strong id="td-merit">0</strong></div>
       <div><small>城門</small><strong id="td-health">20 / 20</strong></div>
     </header>
+      <div class="td-wave-info"><div class="td-wave-copy"><span id="td-wave-status">等待第一波</span><small id="td-wave-preview">選擇職業後顯示下一波情報</small></div><button id="td-wave-button" type="button">開始第一波</button></div>
     <section class="td-stage">
       <canvas id="td-game" width="720" height="720" aria-label="英雄塔防戰場"></canvas>
-      <div class="td-wave-info"><div class="td-wave-copy"><span id="td-wave-status">等待第一波</span><small id="td-wave-preview">選擇職業後顯示下一波情報</small></div><button id="td-wave-button" type="button">開始第一波</button></div>
+
       <div id="td-profession-screen" class="td-profession-screen">
         <div class="profession-dialog"><p>SELECT YOUR GUILD</p><h2>選擇守備職業</h2><span>每局只能發展一條職業科技，站位與升級順序將決定防線。</span><div class="profession-list">
           <button type="button" data-profession="hunter"><b>➶ 王國獵手</b><small>遠射 · 多重狙擊</small></button>
@@ -34,27 +35,29 @@
         <div><p>FRONTIER REPORT</p><h2 id="td-overlay-title">王城失守</h2><span id="td-overlay-message"></span><button id="td-restart" type="button">重新守城</button></div>
       </div>
     </section>
+    <div class="td-hero-dock"><button id="td-hero-select" class="td-hero-select" type="button" aria-pressed="false" disabled title="選取英雄（F1），再點地面移動"><span class="hero-face" aria-hidden="true"></span><span><strong>銀葉守護者</strong><small>點我控制英雄 · F1</small></span><span class="hero-select-state">選取英雄</span></button>        <button id="td-skill-button" class="skill-button" type="button"><b>❄</b><span>霜環震擊</span></button></div>
     <section class="td-command" aria-label="建造與英雄指令">
-      <div class="td-minimap" aria-label="戰場縮圖"><i></i><b></b><span></span></div>
+      <div class="panel-heading"><span>防線指揮所</span><button id="td-pause" type="button">暫停</button></div>
       <div class="selection-card"><div id="td-portrait" class="selection-portrait">?</div><div><small id="td-selection-type">目前指令</small><strong id="td-selection">先選擇守備職業</strong><span id="td-selection-stats">經典 RTS 職業科技</span></div></div>
-      <div class="command-grid">
+      <div class="command-tabs" aria-label="指令分類"><button type="button" data-command-tab="build" aria-pressed="true">招募／建造</button><button type="button" data-command-tab="orders" aria-pressed="false">選取與命令</button></div>
+      <div class="command-grid" data-panel="build">
         <button type="button" data-build-kind="unit" data-build-type="hunter" hidden><b>➶</b><span>部署獵手</span></button>
         <button type="button" data-build-kind="unit" data-build-type="arcanist" hidden><b>✦</b><span>部署術士</span></button>
         <button type="button" data-build-kind="unit" data-build-type="rogue" hidden><b>◆</b><span>部署盜賊</span></button>
         <button type="button" data-build-kind="building" data-build-type="arrow"><b>♜</b><span>林地弩塔</span></button>
         <button type="button" data-build-kind="building" data-build-type="frost"><b>❄</b><span>寒霜塔</span></button>
         <button type="button" data-build-kind="building" data-build-type="cannon"><b>●</b><span>火砲塔</span></button>
-        <button id="td-move" type="button" disabled title="移動（M）"><b>➤</b><span>移動 M</span></button>
-        <button id="td-attack-move" type="button" disabled title="攻擊移動（A）"><b>⚔</b><span>攻擊移動 A</span></button>
-        <button id="td-hold" type="button" disabled title="固守（H）"><b>⌾</b><span>固守 H</span></button>
-        <button id="td-stop" type="button" disabled title="停止（S）"><b>■</b><span>停止 S</span></button>
-        <button id="td-upgrade" type="button" disabled><b>⬆</b><span>升級</span></button>
-        <button id="td-sell" type="button" disabled><b>↩</b><span>遣散</span></button>
-        <button id="td-skill-button" class="skill-button" type="button"><b>❄</b><span>霜環震擊</span></button>
-        <button id="td-cancel-build" type="button"><b>✕</b><span>取消部署</span></button>
+        <button id="td-move" class="order-action" type="button" disabled title="移動（M）"><b>➤</b><span>移動 M</span></button>
+        <button id="td-attack-move" class="order-action" type="button" disabled title="攻擊移動（A）"><b>⚔</b><span>攻擊移動 A</span></button>
+        <button id="td-hold" class="order-action" type="button" disabled title="固守（H）"><b>⌾</b><span>固守 H</span></button>
+        <button id="td-stop" class="order-action" type="button" disabled title="停止（S）"><b>■</b><span>停止 S</span></button>
+        <button id="td-upgrade" class="order-action" type="button" disabled><b>⬆</b><span>升級</span></button>
+        <button id="td-sell" class="order-action" type="button" disabled><b>↩</b><span>遣散</span></button>
+
+        <button id="td-cancel-build" class="order-action" type="button"><b>✕</b><span>取消部署</span></button>
       </div>
     </section>
-    <footer>點選單位後可移動／攻擊移動　｜　固守不追擊　｜　建築會成為尋路障礙</footer>
+    <footer id="td-help">① 選擇職業　② 招募守軍並點地面部署　③ 守住城門</footer>
   </main>
   <script src="src/td/namespace.js"></script>
   <script src="src/td/config.js"></script>

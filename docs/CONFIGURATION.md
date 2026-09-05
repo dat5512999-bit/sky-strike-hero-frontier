@@ -54,3 +54,7 @@ v0.13 主要角色素材為 `ranger-actions-v1.png`、`arcanist-actions-v1.png`�
 `NavigationSystem` 預設使用 30px 導航格、46px 建築避障半徑與八方向 A*。若修改角色／建築圖像尺寸，須同步檢查 `cellSize`、`obstacleRadius`、斜向防切角、不可達目的地提示與手機點按精度；數值不應小於建築可見底座半徑。
 
 塔防介面模式由 `LayoutSystem.js` 管理，偏好鍵為 `towerFrontierLayout`，可用值是 `auto`、`desktop`、`mobile`。自動模式的 700px 判斷應與 `td.css` 響應式斷點同步修改；不要只改其中一處。手動電腦模式在小螢幕允許水平捲動，避免壓縮 Canvas 座標與操作命中區。
+
+## v0.17.0 英雄與指揮介面
+
+英雄動作素材固定 4 欄 × 4 列，idle／walk／attack／cast，保留 Alpha 與比例。Hero 的刺擊長 0.36 秒、前 0.18 秒蓄力，施法動作長 0.56 秒；既有傷害和技能冷卻不變。ArtSystem.drawRank 管理肩甲、旗幟、符文與徽記。CSS 手機斷點仍配合 LayoutSystem 的 700px。

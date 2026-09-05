@@ -91,3 +91,7 @@
 ## 模組預留
 
 後續建議新增 `HeroSystem`、`TalentSystem`、`ArtifactSystem` 與 `EncounterDirector`。它們透過事件或明確 context 與 `Game` 溝通，不直接互相修改內部狀態；Boss 則延伸現有 `Boss` 實體與 `Collision` 介面。
+
+## v0.17.0 英雄與指揮介面
+
+已加入英雄固定選取入口、四態動畫、升級裝飾、電腦側邊指揮區與手機命令分類。這是操作／視覺改善；塔分支、英雄升級、多方向完整動畫與新怪能力仍屬後續開發。

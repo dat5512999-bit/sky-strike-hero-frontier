@@ -51,3 +51,7 @@
 ## Skin Pack 介面
 
 每個 pack 必須包含 `id`、`name`、`icon`、`accent`、`secondary`、`background`、`star`、`effect`，以及 `renderers.player`、`renderers.bullet`、`renderers.enemy`。呼叫 `SkyStrike.skins.register(pack)` 後即可被選擇；詳細範例見外觀包製作指南。
+
+## v0.17.0 英雄與指揮介面
+
+Hero.setState 管理 idle／walk／attack／cast；pendingTarget 在攻擊蓄力 0.18 秒後建立 Projectile。ArtSystem.drawHero 依四列圖集與左右鏡像繪製；drawRank 只繪製 Lv.2～5 裝飾。TDGame.selectHero 清除 build.selected／pending、切換命令分類；showCommands 改 UI 分類。paused 只暫停模擬，保留整備操作。

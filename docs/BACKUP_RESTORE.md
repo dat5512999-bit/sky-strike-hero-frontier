@@ -13,3 +13,7 @@
 備份 v0.16 時必須包含完整 `assets/td`、三張動作圖集，以及 `WaveCatalog.js`／`EconomySystem.js`／`WaveSystem.js`／`LayoutSystem.js`／`NavigationSystem.js`／`CommandSystem.js`；所有 PNG 與程式碼一同由 Git 管理，不依賴圖片生成服務在線上執行。
 
 塔防的波次、金幣、塔與城門均為單局記憶體狀態，重新整理或關閉頁面後歸零，不需另外備份。未來加入存檔時必須同步擴充此文件與資料遷移流程。
+
+## v0.17.0 英雄與指揮介面
+
+v0.17.0 新增英雄圖集、互動與指揮面板；備份須包含 assets/td/hero-actions-v1.png。上一個基線為 v0.16.0，回復時在另一工作目錄檢出該標籤，避免覆蓋未提交內容。仍不保存塔防局內進度。
