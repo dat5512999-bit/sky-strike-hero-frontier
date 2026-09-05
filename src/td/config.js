@@ -1,7 +1,7 @@
 (function(ns){
   'use strict';
   ns.config=Object.freeze({
-    width:720,height:720,startGold:240,startLumber:5,baseHealth:20,totalWaves:15,
+    width:720,height:720,startGold:240,startLumber:5,baseHealth:20,totalWaves:15,wave:{firstPreparation:18,preparation:12},
     path:[{x:-30,y:42},{x:155,y:94},{x:385,y:112},{x:540,y:164},{x:585,y:265},{x:558,y:350},{x:420,y:365},{x:235,y:350},{x:120,y:390},{x:104,y:486},{x:190,y:548},{x:390,y:574},{x:600,y:620},{x:750,y:690}],
     damageMultipliers:{pierce:{light:1.35,heavy:.75,arcane:1},magic:{light:.8,heavy:1.25,arcane:.7},chaos:{light:1,heavy:.9,arcane:1.35}},
     units:{

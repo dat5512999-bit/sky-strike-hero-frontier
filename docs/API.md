@@ -42,8 +42,10 @@
 | `CommandSystem` | `arm`、`issue`、`hold`、`stop`、`reset` | 管理目前指令模式並把目的地與路徑交給單位 |
 | `ArtSystem` | `load`、`drawBackground`、`drawCombatUnit`、`drawBuilding`、`drawUnit` | 本機美術載入、4×4 動作圖集與建築圖集裁切 |
 | `ProfessionSystem` | `choose`、`current`、`reset` | 三職業選擇與單局職業鎖定 |
-| `WaveSystem` | `composition`、`start`、`update`、`label` | 15 波組成、生成佇列與清場狀態 |
-| `BuildSystem` | `queue`、`canPlaceAt`、`placeQueued`、`selectAt`、`combatUnits`、`buildings` | 單位／建築分流、選取、部署與三資源經濟 |
+| `WaveCatalog` | `total`、`get` | 15 波名稱、敵軍編成、威脅、提示與清場獎勵資料 |
+| `WaveSystem` | `beginPreparation`、`preview`、`canStart`、`start`、`update`、`acknowledgeReward`、`label` | 準備／出兵／清場／結算狀態機與生成佇列 |
+| `EconomySystem` | `canAfford`、`spend`、`addKill`、`completeWave`、`refundGold` | 金幣、木材、功勳的集中收支與單次結算 |
+| `BuildSystem` | `queue`、`canPlaceAt`、`placeQueued`、`selectAt`、`combatUnits`、`buildings` | 單位／建築分流、選取、部署，透過經濟介面扣款與回收 |
 | `TDGame` | `startWave`、`queueDeploy`、`armCommand`、`commandSelected`、`castNova`、`update` | 協調戰術指令、波次、英雄、建築、經濟與結算 |
 
 ## Skin Pack 介面

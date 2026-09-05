@@ -1,11 +1,21 @@
 'use strict';
 const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');const vm=require('node:vm');
-const root=path.resolve(__dirname,'..');const files=['src/td/namespace.js','src/td/config.js','src/td/systems/ProfessionSystem.js','src/td/systems/PathSystem.js','src/td/systems/LayoutSystem.js','src/td/systems/NavigationSystem.js','src/td/systems/CommandSystem.js','src/td/entities/Monster.js','src/td/entities/Projectile.js','src/td/entities/CombatUnit.js','src/td/entities/Building.js','src/td/entities/Hero.js','src/td/systems/WaveSystem.js','src/td/systems/BuildSystem.js'];
+const root=path.resolve(__dirname,'..');const files=['src/td/namespace.js','src/td/config.js','src/td/systems/ProfessionSystem.js','src/td/systems/PathSystem.js','src/td/systems/LayoutSystem.js','src/td/systems/NavigationSystem.js','src/td/systems/CommandSystem.js','src/td/systems/WaveCatalog.js','src/td/systems/EconomySystem.js','src/td/entities/Monster.js','src/td/entities/Projectile.js','src/td/entities/CombatUnit.js','src/td/entities/Building.js','src/td/entities/Hero.js','src/td/systems/WaveSystem.js','src/td/systems/BuildSystem.js'];
 function load(){const context=vm.createContext({console});context.globalThis=context;files.forEach((file)=>vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file}));return context.TowerFrontier;}
 
 test('怪物依道路節點移動並在終點標記漏怪',()=>{const ns=load();const monster=new ns.entities.Monster('runner',1,[{x:0,y:0},{x:10,y:0}]);monster.update(1);assert.equal(monster.active,false);assert.equal(monster.leaked,true);});
 
 test('每波輪換敵人且每五波出現首領',()=>{const ns=load();const waves=new ns.systems.WaveSystem();assert.equal(waves.composition(1)[0].type,'grunt');assert.equal(waves.composition(2)[0].type,'runner');assert.equal(waves.composition(5)[0].type,'boss');assert.equal(waves.composition(5)[0].count,1);});
+
+test('十五波資料表提供預告、獎勵與每五波首領',()=>{const ns=load(),catalog=new ns.systems.WaveCatalog();assert.equal(catalog.total(),15);for(let wave=1;wave<=15;wave+=1){const definition=catalog.get(wave),hasBoss=definition.groups.some((group)=>group.type==='boss');assert.equal(definition.threat,wave);assert.ok(definition.reward.gold>0);assert.equal(hasBoss,wave%5===0);}assert.equal(catalog.get(16),null);});
+
+test('選職後有準備倒數，倒數結束或按鈕皆能開波',()=>{const ns=load(),waves=new ns.systems.WaveSystem(),monsters=[];assert.equal(waves.beginPreparation(),true);assert.equal(waves.phase,'preparing');assert.equal(waves.countdown,18);waves.update(17.5,monsters);assert.equal(waves.wave,0);waves.update(.6,monsters);assert.equal(waves.wave,1);assert.equal(waves.active,true);const manual=new ns.systems.WaveSystem();manual.beginPreparation();assert.equal(manual.start(),true);assert.equal(manual.wave,1);assert.equal(manual.phase,'spawning');});
+
+test('清場獎勵只發出一次並自動進入下一波準備',()=>{const ns=load(),waves=new ns.systems.WaveSystem();waves.beginPreparation();waves.start();waves.queue=[];waves.phase='clearing';const event=waves.update(.1,[]);assert.equal(event.wave,1);assert.equal(waves.update(.1,[]),null);assert.equal(waves.acknowledgeReward(),true);assert.equal(waves.phase,'preparing');assert.equal(waves.countdown,12);});
+
+test('經濟系統集中處理消費、擊殺、波次結算與回收',()=>{const ns=load(),economy=new ns.systems.EconomySystem();assert.equal(economy.spend({gold:70,wood:1}),true);assert.equal(economy.gold,170);assert.equal(economy.lumber,4);assert.equal(economy.spend({gold:999}),false);const kill=economy.addKill({reward:13,type:'grunt'},.35);assert.equal(kill.gold,18);const boss=economy.addKill({reward:130,type:'boss'},0);assert.equal(boss.merit,1);const payout=economy.completeWave({gold:24,lumber:1});assert.deepEqual({gold:payout.gold,lumber:payout.lumber},{gold:24,lumber:1});economy.refundGold(49);assert.equal(economy.gold,391);});
+
+test('Boss 波總耐久高於前一波，避免難度反向下降',()=>{const ns=load(),catalog=new ns.systems.WaveCatalog(),types=ns.entities.Monster.TYPES;const health=(wave)=>{const definition=catalog.get(wave),scale=1+(wave-1)*.105;return definition.groups.reduce((sum,group)=>sum+Math.round(types[group.type].health*scale)*group.count,0);};[5,10,15].forEach((wave)=>assert.ok(health(wave)>health(wave-1),'wave '+wave+' should exceed '+(wave-1)));});
 
 test('建築不可堵路，但作戰單位可以部署到道路攔截',()=>{const ns=load();const build=new ns.systems.BuildSystem(),point=ns.config.path[4];assert.equal(build.canPlaceAt(point.x,point.y,'building'),false);assert.equal(build.canPlaceAt(point.x,point.y,'unit'),true);});
 

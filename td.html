@@ -22,7 +22,7 @@
     </header>
     <section class="td-stage">
       <canvas id="td-game" width="720" height="720" aria-label="英雄塔防戰場"></canvas>
-      <div class="td-wave-info"><span id="td-wave-status">等待第一波</span><button id="td-wave-button" type="button">開始第一波</button></div>
+      <div class="td-wave-info"><div class="td-wave-copy"><span id="td-wave-status">等待第一波</span><small id="td-wave-preview">選擇職業後顯示下一波情報</small></div><button id="td-wave-button" type="button">開始第一波</button></div>
       <div id="td-profession-screen" class="td-profession-screen">
         <div class="profession-dialog"><p>SELECT YOUR GUILD</p><h2>選擇守備職業</h2><span>每局只能發展一條職業科技，站位與升級順序將決定防線。</span><div class="profession-list">
           <button type="button" data-profession="hunter"><b>➶ 王國獵手</b><small>遠射 · 多重狙擊</small></button>
@@ -64,6 +64,8 @@
   <script src="src/td/systems/LayoutSystem.js"></script>
   <script src="src/td/systems/NavigationSystem.js"></script>
   <script src="src/td/systems/CommandSystem.js"></script>
+  <script src="src/td/systems/WaveCatalog.js"></script>
+  <script src="src/td/systems/EconomySystem.js"></script>
   <script src="src/td/entities/Monster.js"></script>
   <script src="src/td/entities/Projectile.js"></script>
   <script src="src/td/entities/CombatUnit.js"></script>

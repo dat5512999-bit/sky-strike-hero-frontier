@@ -20,6 +20,7 @@
 - `ProfessionSystem` 管理單局職業鎖定與職業說明，不直接修改怪物或經濟；職業戰鬥差異由資料驅動的塔設定處理。
 - `NavigationSystem` 只建立導航格、建築障礙與 A* 路徑；`CommandSystem` 將 UI 指令轉成單位訂單，兩者不負責傷害或經濟。
 - `LayoutSystem` 管理塔防介面偏好、700px 自動判斷與 `data-layout` 狀態；CSS 只依狀態排版，不接觸遊戲物件。
+- `WaveCatalog` 只保存關卡資料；`WaveSystem` 只管理波次生命週期；`EconomySystem` 是塔防金幣、木材與功勳的唯一收支入口。
 
 ## 資料夾
 
@@ -40,8 +41,9 @@ src/
   td/
     entities/  Monster, Projectile, CombatUnit, Building, Hero
     systems/   ArtSystem, ProfessionSystem, PathSystem, LayoutSystem,
-               NavigationSystem, CommandSystem, WaveSystem, BuildSystem
-    TDGame.js  塔防協調、經濟、結算與 Canvas 繪製
+               NavigationSystem, CommandSystem, WaveCatalog, WaveSystem,
+               EconomySystem, BuildSystem
+    TDGame.js  塔防流程協調、UI 與 Canvas 繪製
 tests/         Node 內建測試
 docs/          操作、維運、API 與 QA 文件
 manifest.webmanifest / sw.js   PWA 與離線快取
@@ -77,17 +79,18 @@ Skin Registry 讓每個品牌／主題包保持獨立。外觀 renderer 只能�
 ## 塔防資料流
 
 ```text
-td/main → TDGame → WaveSystem → Monster → Path
+td/main → TDGame → WaveSystem → WaveCatalog
+                 │          └→ Monster → Path
                  ├─ ProfessionSystem → 單局職業鎖定
                  ├─ BuildSystem → CombatUnit（可移動）/ Building（固定）→ Projectile
                  ├─ CommandSystem → NavigationSystem(A*) → CombatUnit Order
                  ├─ LayoutSystem → body[data-layout] → Desktop/Mobile CSS
                  ├─ Hero → Projectile / Nova / Intercept
                  ├─ ArtSystem → Background / Atlases / Keep
-                 ├─ Economy(Gold/Lumber/Merit) → Build / Upgrade / Sell / Kill Reward
+                 ├─ EconomySystem → Build / Upgrade / Sell / Kill / Wave Reward
                  └─ Base Health → Leak → Victory / Game Over
 ```
 
-`WaveSystem.composition()` 只描述波次組成；`Monster` 自行沿節點移動；`CommandSystem` 透過 `NavigationSystem` 將目的地轉為避障路徑，`CombatUnit` 執行移動／攻擊移動／固守／停止訂單，`Building` 固定索敵；擊殺與漏怪仍由 `TDGame` 結算。
+`WaveCatalog` 提供不可變的 15 波設計資料；`WaveSystem` 依序執行 `preparing → spawning → clearing → reward`，結算事件只發出一次，再自動進入下一次準備。`Monster` 自行沿節點移動；`CommandSystem` 透過 `NavigationSystem` 將目的地轉為避障路徑，`CombatUnit` 執行訂單，`Building` 固定索敵；`TDGame` 只協調事件與 UI，收支交由 `EconomySystem`。
 
 角色圖集固定為 4 欄×4 列，列順序是待機、行走、攻擊、受擊／死亡；建築圖集固定為弩塔、寒霜塔、火砲塔三欄。背景採 720×720 座標，更換素材時需同步驗證裁切、Alpha、道路與禁建距離。

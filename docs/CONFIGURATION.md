@@ -43,9 +43,9 @@ Boss 基礎 HP、波次成長、射擊冷卻、瞄準散角與各階段彈數位
 
 ## 英雄塔防參數
 
-`src/td/config.js` 集中管理 720×720 戰場、道路節點、起始 240G／5 木材、20 點城門生命、15 波上限、三職業價格／傷害／射程、護甲相剋與英雄能力。怪物原始數值位於 `Monster.js` 的 `TYPES`，每波 HP 目前成長 10.5%。波次內容位於 `WaveSystem.composition()`。
+`src/td/config.js` 集中管理 720×720 戰場、道路節點、起始 240G／5 木材、20 點城門生命、三職業價格／傷害／射程、護甲相剋與英雄能力；`wave.firstPreparation` 與 `wave.preparation` 分別是 18 秒首波準備及 12 秒後續整備。怪物原始數值位於 `Monster.js` 的 `TYPES`，每波 HP 目前成長 10.5%。15 波名稱、編成、提示、威脅與清場獎勵位於 `WaveCatalog.js`，不要在 `TDGame` 或 `WaveSystem` 硬編波表。
 
-調整經濟時至少驗證：開局可部署兩名基礎單位、波次木材補給正確、Lv.4～5 會消耗功勳、出售返還總投入 70%、Boss 漏怪扣 5 點。修改道路節點時必須維持首尾在畫面外，並重測 `BuildSystem.canPlaceAt()` 的 55px 禁建距離。
+調整經濟時透過 `EconomySystem`，並至少驗證：開局可部署兩名基礎單位、開波不提前發資源、清場只結算一次、波次木材補給正確、Lv.4～5 會消耗功勳、出售返還總投入 70%、Boss 漏怪扣 5 點。調整波表後須確認第 5／10／15 波含 Boss 且估算總耐久高於前一波。修改道路節點時必須維持首尾在畫面外，並重測 `BuildSystem.canPlaceAt()` 的 55px 禁建距離。
 
 v0.13 主要角色素材為 `ranger-actions-v1.png`、`arcanist-actions-v1.png`、`rogue-actions-v1.png`。每張固定 4×4：待機、行走、攻擊、受擊／死亡各一列。建築使用 `towers-atlas-v1.png` 的弩塔／寒霜塔／火砲塔三欄。替換時須保留透明 Alpha、正方形 cell、角色註冊點與一致鏡頭，並同步更新 `sw.js`。
 
