@@ -136,3 +136,14 @@ ArtSystem.drawMonster → 三種透明動作圖集
 ```
 
 純本機視覺與狀態擴充，沿用原有經濟、波次、碰撞與資料保存方式。
+
+## v0.21.0 RTS 指揮介面
+
+```text
+td.html HUD 控制 → src/td/main.js DOM 綁定 → TDGame
+TDGame.updateUi → Wave／Hero／Economy 狀態 → HUD 與 Cooldown CSS
+速度按鈕 → TDGame.setGameSpeed → loop 的 dt 倍率 → 原有 update
+LayoutSystem → body[data-layout] → td.css 桌面雙欄／手機直向
+```
+
+本階段不新增遊戲領域模組、不改資料庫（仍無資料庫），也不讓 CSS 反向依賴戰鬥邏輯。

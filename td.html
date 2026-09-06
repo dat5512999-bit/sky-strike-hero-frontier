@@ -12,15 +12,19 @@
 <body>
   <main class="td-shell">
     <header class="td-header">
+      <div class="td-brand"><h1>英雄塔防<small>HERO FRONTIER</small></h1></div>
       <a href="index.html" aria-label="返回飛機射擊模式">← 飛機模式</a>
       <label class="td-layout-picker"><span>介面</span><select id="td-layout-mode" aria-label="介面模式"><option value="auto">自動</option><option value="desktop">電腦</option><option value="mobile">手機</option></select></label>
-      <div><small>GOLD</small><strong id="td-gold">240</strong></div>
-      <div><small>木材</small><strong id="td-lumber">5</strong></div>
-      <h1>英雄塔防<small>HERO FRONTIER</small></h1>
-      <div><small>功勳</small><strong id="td-merit">0</strong></div>
-      <div><small>城門</small><strong id="td-health">20 / 20</strong></div>
+      <div class="resource"><small>GOLD</small><strong id="td-gold">240</strong></div>
+      <div class="resource"><small>木材</small><strong id="td-lumber">5</strong></div>
+      <div class="resource"><small>功勳</small><strong id="td-merit">0</strong></div>
+      <div class="resource"><small>城門</small><strong id="td-health">20 / 20</strong></div>
     </header>
-      <div class="td-wave-info"><div class="td-wave-copy"><span id="td-wave-status">等待第一波</span><small id="td-wave-preview">選擇職業後顯示下一波情報</small></div><button id="td-wave-button" type="button">開始第一波</button></div>
+    <section class="td-wave-info" aria-label="波次資訊">
+      <div class="wave-index"><small>WAVE</small><strong id="td-wave-number">00</strong></div>
+      <div class="td-wave-copy"><span id="td-wave-status">等待第一波</span><small id="td-wave-preview">選擇職業後顯示下一波情報</small></div>
+      <div class="hud-controls"><button id="td-pause" type="button" title="暫停／繼續">Ⅱ</button><div class="speed-picker" aria-label="遊戲速度"><button type="button" data-game-speed="1" aria-pressed="true">×1</button><button type="button" data-game-speed="2" aria-pressed="false">×2</button><button type="button" data-game-speed="3" aria-pressed="false">×3</button></div><button id="td-wave-button" type="button">開始第一波</button></div>
+    </section>
     <section class="td-stage">
       <canvas id="td-game" width="720" height="720" aria-label="英雄塔防戰場"></canvas>
 
@@ -35,11 +39,20 @@
         <div><p>FRONTIER REPORT</p><h2 id="td-overlay-title">王城失守</h2><span id="td-overlay-message"></span><button id="td-restart" type="button">重新守城</button></div>
       </div>
     </section>
-    <div class="td-hero-dock"><button id="td-hero-select" class="td-hero-select" type="button" aria-pressed="false" disabled title="選取英雄（F1），再點地面移動"><span class="hero-face" aria-hidden="true"></span><span><strong>銀葉守護者</strong><small>點我控制英雄 · F1</small></span><span class="hero-select-state">選取英雄</span></button>        <button id="td-skill-button" class="skill-button" type="button"><b>❄</b><span>霜環震擊</span></button><button id="td-thunder" class="skill-button" type="button" title="攻擊附近最多四個敵人，冷卻12秒"><b>ϟ</b><span>連鎖雷擊</span></button><button id="td-summon" class="skill-button" type="button" title="召喚兩名守衛協助攻擊，冷卻22秒"><b>✧</b><span>祖靈守衛</span></button><button id="td-shop-open" class="skill-button shop-button" type="button"><b>♜</b><span>商店城</span></button></div>
     <section class="td-command" aria-label="建造與英雄指令">
-      <div class="panel-heading"><span>防線指揮所</span><button id="td-pause" type="button">暫停</button></div>
+      <div class="panel-heading"><span>英雄指揮所</span><small>HERO COMMAND</small></div>
+      <div class="hero-profile">
+        <button id="td-hero-select" class="td-hero-select" type="button" aria-pressed="false" disabled title="選取英雄（F1），再點地面移動"><span class="hero-face" aria-hidden="true"></span><span><strong>銀葉守護者</strong><small>點我控制英雄 · F1</small></span><span class="hero-select-state">選取</span></button>
+        <div class="hero-rank"><span>LV.</span><strong id="td-hero-level">1</strong></div>
+        <div class="hero-vitals"><label>HP <span id="td-hero-hp-text">100 / 100</span><i><b id="td-hero-hp-fill"></b></i></label><label>MP <span id="td-hero-mp-text">冷卻能量</span><i class="mana"><b id="td-hero-mp-fill"></b></i></label></div>
+        <div class="hero-stats" aria-label="英雄能力"><span>⚔ 攻擊 <b id="td-stat-attack">18</b></span><span>◎ 射程 <b id="td-stat-range">152</b></span><span>✥ 攻速 <b id="td-stat-speed">0.58s</b></span><span>➤ 移速 <b id="td-stat-move">215</b></span></div>
+      </div>
+      <div class="panel-section-label"><span>技能</span><small>SKILLS · Q W E R</small></div>
+      <div class="td-hero-dock"><button id="td-skill-button" class="skill-button" type="button"><kbd>Q</kbd><b>❄</b><span>霜環震擊</span></button><button id="td-thunder" class="skill-button" type="button" title="攻擊附近最多四個敵人，冷卻12秒"><kbd>W</kbd><b>ϟ</b><span>連鎖雷擊</span></button><button id="td-summon" class="skill-button" type="button" title="召喚兩名守衛協助攻擊，冷卻22秒"><kbd>E</kbd><b>✧</b><span>祖靈守衛</span></button><button id="td-shop-open" class="skill-button shop-button" type="button"><kbd>R</kbd><b>♜</b><span>商店城</span></button></div>
+      <div class="panel-section-label"><span>選取資訊</span><small>SELECTION</small></div>
       <div class="selection-card"><div id="td-portrait" class="selection-portrait">?</div><div><small id="td-selection-type">目前指令</small><strong id="td-selection">先選擇守備職業</strong><span id="td-selection-stats">經典 RTS 職業科技</span></div></div>
       <p id="td-tower-skill" class="tower-skill-info" hidden></p>
+      <div class="panel-section-label"><span>命令與建造</span><small>COMMAND / BUILD</small></div>
       <div class="command-tabs" aria-label="指令分類"><button type="button" data-command-tab="build" aria-pressed="true">招募／建造</button><button type="button" data-command-tab="orders" aria-pressed="false">選取與命令</button></div>
       <div class="command-grid" data-panel="build">
         <button type="button" data-build-kind="unit" data-build-type="hunter" hidden><b>➶</b><span>部署獵手</span></button>

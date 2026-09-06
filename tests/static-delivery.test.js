@@ -33,6 +33,15 @@ test('英雄塔防入口引用的本機資產完整且不依賴網路', () => {
   assert.equal(/<script[^>]+type=["']module["']/i.test(html), false);
 });
 
+test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
+  const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');
+  ['td-wave-number','td-pause','td-hero-hp-fill','td-hero-mp-fill','td-stat-attack','td-stat-range','td-stat-speed','td-stat-move'].forEach((id) => {
+    assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1, `${id} 應唯一存在`);
+  });
+  [1, 2, 3].forEach((speed) => assert.match(html, new RegExp(`data-game-speed=["']${speed}["']`)));
+  ['Q','W','E','R'].forEach((key) => assert.match(html, new RegExp(`<kbd>${key}</kbd>`)));
+});
+
 test('PWA manifest 與離線快取引用的遊戲檔案都存在', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.webmanifest'), 'utf8'));
   assert.equal(manifest.display, 'standalone');

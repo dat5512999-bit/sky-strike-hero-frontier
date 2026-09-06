@@ -33,3 +33,7 @@ v0.19.0 新增 HeroRoster.js。流派仍沿用 hunter／arcanist／rogue ID；�
 ## v0.20.0 敵軍動作第一階段
 
 新增三個enemy-*-actions-v1.png；Monster生命週期仍以active控制戰鬥，TDGame.corpses只用於一秒視覺殘留、上限60。不可讓屍體重新參與碰撞、漏怪或金錢結算。無新服務或權限。
+
+## v0.21.0 RTS 指揮介面
+
+HUD DOM ID 是 `TDGame` 與畫面的相容契約，不可重複或任意改名。`gameSpeed` 只允許 1、2、3；模擬仍由同一 update 流程推進。藍色列是三招技能的「冷卻能量」摘要，不是可消耗 MP。發布前需分別驗證桌面、手機、暫停、三段速度、Q／W／E／R 與 Console。
