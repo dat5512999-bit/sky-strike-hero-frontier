@@ -25,3 +25,7 @@
 ## v0.18.0 英雄技能與種族塔
 
 新增 TowerSkillSystem、ShopSystem、Summon 與 faction-towers-v1.png，無資料庫、帳號、外部 API 或付費服務。平衡調整需同時檢查擊殺歸屬、召喚上限、出售後召喚消失、裝備購買與重新開始清除局內狀態。
+
+## v0.19.0 英雄流派與傭兵館
+
+v0.19.0 新增 HeroRoster.js。流派仍沿用 hunter／arcanist／rogue ID；不要改 ID 破壞圖片映射。傭兵重用 CombatUnit 與導航，pending.mercenary 標記特殊價格；totalSpent 必須記錄實付額以正確回收。無新服務、帳號、權限或資料庫。

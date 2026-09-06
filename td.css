@@ -35,3 +35,11 @@ body[data-layout="mobile"] .command-tabs button{min-height:36px}
 .command-grid [data-build-type="storm"]{border-top:3px solid #7ee9e5}.command-grid [data-build-type="totem"]{border-top:3px solid #ffbe66}.command-grid [data-build-type="crypt"]{border-top:3px solid #bc9aff}
 body[data-layout="mobile"] .td-hero-dock{width:100%;grid-template-columns:repeat(4,minmax(0,1fr))}body[data-layout="mobile"] .td-hero-dock .skill-button{min-height:46px}
 body[data-layout="desktop"] .td-command{max-height:72vh;overflow-y:auto}
+/* Hero faction silhouettes reuse the corresponding original animation rigs. */
+.td-hero-select[data-hero-class="hunter"] .hero-face,.selection-portrait[data-subject="hero"][data-hero-class="hunter"]{background-image:url('assets/td/ranger-actions-v1.png');background-size:400% 400%;background-position:0 0}
+.td-hero-select[data-hero-class="rogue"] .hero-face,.selection-portrait[data-subject="hero"][data-hero-class="rogue"]{background-image:url('assets/td/rogue-actions-v1.png');background-size:400% 400%;background-position:0 0}
+.profession-list button[data-profession]::before{content:'';display:block;width:52px;height:58px;background-size:400% 400%;background-position:0 0;margin:auto}
+.profession-list [data-profession="hunter"]::before{background-image:url('assets/td/ranger-actions-v1.png')}
+.profession-list [data-profession="arcanist"]::before{background-image:url('assets/td/hero-actions-v1.png')}
+.profession-list [data-profession="rogue"]::before{background-image:url('assets/td/rogue-actions-v1.png')}
+.mercenary-items button{border-color:#739486}

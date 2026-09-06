@@ -62,3 +62,7 @@ v0.13 主要角色素材為 `ranger-actions-v1.png`、`arcanist-actions-v1.png`�
 ## v0.18.0 英雄技能與種族塔
 
 config.buildings 新增 storm／totem／crypt。技能倍率與擊殺門檻位於 TowerSkillSystem；商店物品與價格位於 ShopSystem；英雄技能冷卻在 Hero；召喚物壽命與追擊範圍由呼叫端提供。改值後執行 npm test 與 npm run check。
+
+## v0.19.0 英雄流派與傭兵館
+
+英雄流派普攻、名稱、顏色、技能說明位於HeroRoster.CLASSES；獵手與盜賊技能行為位於HeroRoster.cast。商店傭兵金幣為config.units.cost×1.5向上取整，木材0，定義於BuildSystem.pendingCost；UI價格須一致。召喚物form決定戰狼／元素／分身繪圖。

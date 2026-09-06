@@ -8,11 +8,13 @@
     constructor(){this.reset();}
     reset(){this.items=[];this.selected=null;this.pending=null;this.pointer={x:360,y:360,valid:false};}
     queue(type,kind){kind=kind||'unit';const catalog=kind==='building'?ns.config.buildings:ns.config.units;if(!catalog[type])return false;this.pending={type:type,kind:kind};this.selected=null;return true;}
+    queueMercenary(type){if(!this.queue(type,'unit'))return false;this.pending.mercenary=true;return true;}
+    pendingCost(){if(!this.pending)return null;const p=this.pending,cfg=(p.kind==='building'?ns.config.buildings:ns.config.units)[p.type];return{gold:p.mercenary?Math.ceil(cfg.cost*1.5):cfg.cost,wood:p.mercenary?0:cfg.wood};}
     cancel(){this.pending=null;}
     canPlaceAt(x,y,kind){kind=kind||'building';if(x<42||x>678||y<62||y>674)return false;if(kind==='building'&&ns.config.path.some(function(point,index,path){return index&&pointSegmentDistance(x,y,path[index-1],point)<55;}))return false;return !this.items.some(function(item){return ns.utils.distance(item,{x:x,y:y})<(kind==='building'||item.kind==='building'?58:34);});}
     updatePointer(x,y){this.pointer={x:x,y:y,valid:this.pending?this.canPlaceAt(x,y,this.pending.kind):false};}
     selectAt(x,y){const hit=this.items.slice().reverse().find(function(item){return ns.utils.distance(item,{x:x,y:y})<=(item.kind==='building'?34:27);})||null;if(hit)this.selected=hit;return hit;}
-    placeQueued(x,y,economy){const pending=this.pending;if(!pending)return false;const catalog=pending.kind==='building'?ns.config.buildings:ns.config.units;const cfg=catalog[pending.type];const cost={gold:cfg&&cfg.cost,wood:cfg&&cfg.wood};if(!cfg||!this.canPlaceAt(x,y,pending.kind)||!canAfford(economy,cost)||!spend(economy,cost))return false;const item=pending.kind==='building'?new ns.entities.Building(pending.type,x,y):new ns.entities.CombatUnit(pending.type,x,y);this.items.push(item);this.selected=item;this.pending=null;return true;}
+    placeQueued(x,y,economy){const pending=this.pending;if(!pending)return false;const catalog=pending.kind==='building'?ns.config.buildings:ns.config.units;const cfg=catalog[pending.type];const cost=this.pendingCost();if(!cfg||!this.canPlaceAt(x,y,pending.kind)||!canAfford(economy,cost)||!spend(economy,cost))return false;const item=pending.kind==='building'?new ns.entities.Building(pending.type,x,y):new ns.entities.CombatUnit(pending.type,x,y);item.mercenary=Boolean(pending.mercenary);item.totalSpent=cost.gold;this.items.push(item);this.selected=item;this.pending=null;return true;}
     upgrade(economy){if(!this.selected)return false;const cost=this.selected.upgradeCost();if(!cost||!spend(economy,cost))return false;this.selected.upgrade();return true;}
     sell(economy){if(!this.selected)return false;this.selected.retired=true;refund(economy,this.selected.sellValue());this.items=this.items.filter(function(item){return item!==this.selected;},this);this.selected=null;return true;}
     towers(){return this.items.slice();}

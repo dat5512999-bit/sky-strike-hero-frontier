@@ -110,3 +110,17 @@ UI → TDGame → Hero → Projectile
 Projectile → TDGame.onKill → EconomySystem + owner.registerKill
 ArtSystem → 既有圖集 / faction-towers-v1.png 三階塔圖
 ```
+
+## v0.19.0 英雄流派與傭兵館
+
+沿用原本遊戲循環，新增流派資料與地面技能，不重建戰鬥架構。
+
+```text
+開場流派 → ProfessionSystem + Hero.chooseClass → HeroRoster
+商店傭兵 → BuildSystem.queueMercenary → placeQueued → CombatUnit
+CombatUnit → NavigationSystem / CommandSystem / 既有升級回收
+HeroRoster → Projectile / fields / Summon → 既有擊殺結算
+ArtSystem → 原有英雄／獵手／盜賊動作圖集 + 階級裝甲
+```
+
+沒有新增資料庫；局內狀態不存檔。

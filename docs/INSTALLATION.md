@@ -26,3 +26,7 @@
 ## v0.18.0 英雄技能與種族塔
 
 安裝方式不變：完整下載專案後開啟 td.html，或 npm run serve:test 後開啟 http://127.0.0.1:4173/td.html。必須保留新增三個 JS 模組與 assets/td/faction-towers-v1.png。無新增套件或帳號要求。
+
+## v0.19.0 英雄流派與傭兵館
+
+安裝方式不變，開啟td.html或執行npm run serve:test。完整下載時須包含 src/td/systems/HeroRoster.js；無新增套件。首次進入直接選英雄、招募守軍或傭兵、部署後開始第一波。

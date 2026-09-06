@@ -59,3 +59,7 @@ Hero.setState 管理 idle／walk／attack／cast；pendingTarget 在攻擊蓄力
 ## v0.18.0 英雄技能與種族塔
 
 TowerSkillSystem.rank(kills)、progress(tower)、describe(tower)、fire(tower,targets,projectiles,summons) 管理六類塔技能。ShopSystem.offer(id) 回傳價格／等級，buy(id,economy) 驗證並扣除金幣。Hero.castThunder(monsters,onKill,projectiles)、castSummon(summons) 回傳是否成功。Projectile.owner 保存擊殺來源；TDGame.onKill 使用 rewardHandled 防止重複獎勵。Summon.update(dt,monsters,projectiles) 處理追擊、壽命及來源失效。均為本機 JS API，不新增 HTTP API。
+
+## v0.19.0 英雄流派與傭兵館
+
+Hero.chooseClass(type) 驗證流派；HeroRoster.get(type) 提供普攻與技能資料。HeroRoster.cast(hero,slot,monsters,onKill) 處理非精靈技能；updateFields 處理陷阱與毒霧，drawFields 繪製範圍與軌跡。BuildSystem.queueMercenary(type) 只排隊、不扣款；pendingCost() 提供實際費用；placeQueued() 成功才付費，CombatUnit.mercenary 區分來源。沒有新增網路 API。
