@@ -71,3 +71,7 @@ Monster新增walkDistance、state、frame、facing、hitTime、deathTime；updat
 ## v0.21.0 RTS 指揮介面
 
 `TDGame.setGameSpeed(speed)` 僅接受 `1 | 2 | 3` 並回傳是否成功；主迴圈將原始 `dt` 乘上倍率。`updateUi()` 同步 `td-wave-number`、英雄 HP、冷卻能量、四項能力與技能 Cooldown CSS 變數。這些都是本機介面，不新增 HTTP API。
+
+## v0.22.0 戰鬥回饋
+
+`Projectile.update(dt, monsters, onKill, onHit)` 與 `hit(...)` 的 `onHit(monster, actualDamage, critical, projectile)` 為可選回呼。`CombatFeedbackSystem.hit`、`gold`、`death`、`update`、`draw` 管理純視覺物件；`Monster.displayHealth` 僅供平滑血條，不參與存活判定。無網路 API。

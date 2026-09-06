@@ -38,3 +38,7 @@
 ## v0.21.0 RTS 指揮介面
 
 安裝方式與需求不變，無新增套件。開啟 `td.html` 後應看到黑鐵金框 HUD、頂部速度鍵與右側英雄指揮面板；若仍見舊介面，HTTP／GitHub Pages 使用者請重新載入以更新 Service Worker 快取。
+
+## v0.22.0 戰鬥回饋
+
+無新增套件。完整下載須包含 `src/td/systems/CombatFeedbackSystem.js`；進入戰鬥後應看到傷害與 Gold 跳字。若頁面空白，確認此檔案與 `td.html` 的載入順序完整。

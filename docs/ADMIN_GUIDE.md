@@ -37,3 +37,7 @@ v0.19.0 新增 HeroRoster.js。流派仍沿用 hunter／arcanist／rogue ID；�
 ## v0.21.0 RTS 指揮介面
 
 HUD DOM ID 是 `TDGame` 與畫面的相容契約，不可重複或任意改名。`gameSpeed` 只允許 1、2、3；模擬仍由同一 update 流程推進。藍色列是三招技能的「冷卻能量」摘要，不是可消耗 MP。發布前需分別驗證桌面、手機、暫停、三段速度、Q／W／E／R 與 Console。
+
+## v0.22.0 戰鬥回饋
+
+`CombatFeedbackSystem` 的 `items` 上限為 120；效能不足時先降低碎屑數量或生命週期，不得省略實際傷害計算。暴擊只表示既有護甲剋制倍率至少 1.25。新增攻擊路徑時必須傳遞 `onHit`，並驗證一次命中只產生一次傷害回饋與一次擊殺獎勵。

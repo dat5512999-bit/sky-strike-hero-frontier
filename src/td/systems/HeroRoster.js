@@ -7,7 +7,7 @@
   };
   class HeroRoster{
     static get(type){return CLASSES[type]||CLASSES.arcanist;}
-    static cast(hero,slot,monsters,onKill){
+    static cast(hero,slot,monsters,onKill,onHit){
       const cfg=this.get(hero.classType),cooldown=slot===0?'novaCooldown':null;
       if((cooldown?hero[cooldown]:hero.skillCooldowns.thunder)>0)return false;
       const targets=monsters.filter(m=>m.active&&ns.utils.distance(hero,m)<=cfg.range+35).sort((a,b)=>b.progress()-a.progress());
@@ -15,8 +15,8 @@
       if(slot===0){
         if(!targets.length)return false;
         hero.skillTrails=targets.slice(0,hero.classType==='hunter'?3:1).map(target=>({x:hero.x,y:hero.y,tx:target.x,ty:target.y,time:.3}));
-        if(hero.classType==='hunter')targets.slice(0,3).forEach(target=>new ns.entities.Projectile(hero,target,{damage:48*power,attackType:'pierce'}).hit(monsters,onKill));
-        else{const target=targets[0];hero.x=ns.utils.clamp(target.x-28,25,695);hero.y=ns.utils.clamp(target.y+22,55,695);hero.setTarget(hero.x,hero.y);new ns.entities.Projectile(hero,target,{damage:95*power,attackType:'chaos'}).hit(monsters,onKill);}
+        if(hero.classType==='hunter')targets.slice(0,3).forEach(target=>new ns.entities.Projectile(hero,target,{damage:48*power,color:cfg.color,attackType:'pierce'}).hit(monsters,onKill,onHit));
+        else{const target=targets[0];hero.x=ns.utils.clamp(target.x-28,25,695);hero.y=ns.utils.clamp(target.y+22,55,695);hero.setTarget(hero.x,hero.y);new ns.entities.Projectile(hero,target,{damage:95*power,color:cfg.color,attackType:'chaos'}).hit(monsters,onKill,onHit);}
         hero.novaCooldown=9*(1-hero.equipment.rune*.1);
       }else{
         hero.fields.push({x:hero.x,y:hero.y,time:hero.classType==='hunter'?8:6,tick:0,type:hero.classType,power:power});
@@ -24,9 +24,9 @@
       }
       hero.beginCast();return true;
     }
-    static updateFields(hero,dt,monsters,onKill){
+    static updateFields(hero,dt,monsters,onKill,onHit){
       hero.skillTrails=(hero.skillTrails||[]).filter(trail=>{trail.time-=dt;return trail.time>0;});
-      hero.fields.forEach(field=>{const elapsed=Math.min(dt,field.time);field.time-=elapsed;field.tick+=elapsed;while(field.tick>=.5){field.tick-=.5;monsters.forEach(monster=>{if(!monster.active||ns.utils.distance(field,monster)>72)return;if(field.type==='hunter')monster.applySlow(.35,.7);else new ns.entities.Projectile(hero,monster,{damage:9*field.power,attackType:'chaos'}).hit(monsters,onKill);});}});
+      hero.fields.forEach(field=>{const elapsed=Math.min(dt,field.time);field.time-=elapsed;field.tick+=elapsed;while(field.tick>=.5){field.tick-=.5;monsters.forEach(monster=>{if(!monster.active||ns.utils.distance(field,monster)>72)return;if(field.type==='hunter')monster.applySlow(.35,.7);else new ns.entities.Projectile(hero,monster,{damage:9*field.power,color:'#c884df',attackType:'chaos'}).hit(monsters,onKill,onHit);});}});
       hero.fields=hero.fields.filter(field=>field.time>0);
     }
     static drawFields(ctx,hero){(hero.skillTrails||[]).forEach(trail=>{ctx.save();ctx.globalAlpha=trail.time/.3;ctx.strokeStyle=this.get(hero.classType).color;ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(trail.x,trail.y);ctx.lineTo(trail.tx,trail.ty);ctx.stroke();ctx.restore();});hero.fields.forEach(field=>{ctx.save();ctx.fillStyle=field.type==='hunter'?'#d6b66b':'#b37ddb';ctx.strokeStyle=ctx.fillStyle;ctx.globalAlpha=.18;ctx.beginPath();ctx.arc(field.x,field.y,72,0,Math.PI*2);ctx.fill();ctx.globalAlpha=.7;ctx.lineWidth=2;ctx.stroke();ctx.font='bold 14px Segoe UI';ctx.textAlign='center';ctx.fillText(field.type==='hunter'?'獵獸陷阱':'淬毒煙幕',field.x,field.y);ctx.restore();});}

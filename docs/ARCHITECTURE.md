@@ -147,3 +147,14 @@ LayoutSystem → body[data-layout] → td.css 桌面雙欄／手機直向
 ```
 
 本階段不新增遊戲領域模組、不改資料庫（仍無資料庫），也不讓 CSS 反向依賴戰鬥邏輯。
+
+## v0.22.0 戰鬥回饋
+
+```text
+Projectile／Hero 技能 → Monster.takeDamage → onHit(實際傷害、剋制)
+onHit → CombatFeedbackSystem → 傷害字／命中星芒
+TDGame.onKill → EconomySystem + Gold／死亡回饋
+Monster.health → displayHealth（視覺插值）→ 雙層血條
+```
+
+回饋模組不持有經濟或傷害規則，移除它不會改變戰鬥結果。
