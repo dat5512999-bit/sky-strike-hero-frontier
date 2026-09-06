@@ -50,3 +50,11 @@ v0.11 與 v0.12 的 PNG 使用內建圖片生成工具製作，再複製進專�
 ## v0.17 英雄動作素材
 
 新增 `assets/td/hero-actions-v1.png`（1254×1254、RGBA），內建 imagegen 生成的原創女英雄四態圖集。完整提示及限制見 [HERO_ART_PROMPT.md](HERO_ART_PROMPT.md)。圖集與頭像均離線使用；升級肩甲、戰旗與符文由 Canvas 繪製。
+
+## v0.18.0 種族塔三階圖集
+
+輸出：`assets/td/faction-towers-v1.png`。使用 imagegen 建立原創透明點陣素材。三欄依序為精靈雷塔、獸族祖靈柱、亡靈召喚殿；三列為初階／進階／終階，裁切列界線比例為0、0.311、0.624、1。保留長寬比，不拉伸角色。
+
+生成提示：
+
+Use case: stylized-concept. Production transparent PNG game sprite atlas for original classic fantasy RTS tower defense. Exactly 3 columns by 3 rows of 9 independent tower models in equal square cells, square whole image. TRUE transparent alpha background, no ground/background or text/grid/labels. Fixed three-quarter TOP-DOWN isometric camera looking down ~40 degrees. Each tower centered within its cell, 18 percent clear padding on ALL sides, complete base and spires inside own cell, consistent scale, feet at y80 percent. Column1 elegant elven storm spire, white carved stone with leafy copper gold curved arches and floating cyan lightning crystals. Column2 orcish ancestral totem, massive reddish timber, tusks, leather, tribal masks, amber spirit fire, no people. Column3 undead summoning crypt, dark purple stone mausoleum with skull gate, ribbed bone arches and spectral violet lanterns, no people. Row1 simple base towers. Row2 visibly upgraded towers same identities with extra structures/tusks/crystal satellites, more ornate. Row3 ultimate versions with imposing reinforced bases, additional wings/arches/horns and brighter energy crowns, still fit own cell. Painterly pre-rendered low-poly game texture aesthetic, readable at 100px, original designs, muted stone/wood materials contrasting small colored magic accents. No overlap between cells, all cells equal spacing, NO cast shadows outside models, no floor tiles or checkerboard.

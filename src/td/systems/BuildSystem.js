@@ -14,7 +14,7 @@
     selectAt(x,y){const hit=this.items.slice().reverse().find(function(item){return ns.utils.distance(item,{x:x,y:y})<=(item.kind==='building'?34:27);})||null;if(hit)this.selected=hit;return hit;}
     placeQueued(x,y,economy){const pending=this.pending;if(!pending)return false;const catalog=pending.kind==='building'?ns.config.buildings:ns.config.units;const cfg=catalog[pending.type];const cost={gold:cfg&&cfg.cost,wood:cfg&&cfg.wood};if(!cfg||!this.canPlaceAt(x,y,pending.kind)||!canAfford(economy,cost)||!spend(economy,cost))return false;const item=pending.kind==='building'?new ns.entities.Building(pending.type,x,y):new ns.entities.CombatUnit(pending.type,x,y);this.items.push(item);this.selected=item;this.pending=null;return true;}
     upgrade(economy){if(!this.selected)return false;const cost=this.selected.upgradeCost();if(!cost||!spend(economy,cost))return false;this.selected.upgrade();return true;}
-    sell(economy){if(!this.selected)return false;refund(economy,this.selected.sellValue());this.items=this.items.filter(function(item){return item!==this.selected;},this);this.selected=null;return true;}
+    sell(economy){if(!this.selected)return false;this.selected.retired=true;refund(economy,this.selected.sellValue());this.items=this.items.filter(function(item){return item!==this.selected;},this);this.selected=null;return true;}
     towers(){return this.items.slice();}
     combatUnits(){return this.items.filter(function(item){return item.kind==='unit';});}
     buildings(){return this.items.filter(function(item){return item.kind==='building';});}

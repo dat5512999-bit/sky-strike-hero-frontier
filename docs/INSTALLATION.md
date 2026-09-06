@@ -22,3 +22,7 @@
 ## v0.17.0 英雄與指揮介面
 
 完整複製新版檔案，確認 assets/td/hero-actions-v1.png 存在。開啟 td.html，選職後應看到女英雄與固定頭像、霜環、招募／建造分類。點頭像再點地面可控制英雄；按暫停能安心練習部署。
+
+## v0.18.0 英雄技能與種族塔
+
+安裝方式不變：完整下載專案後開啟 td.html，或 npm run serve:test 後開啟 http://127.0.0.1:4173/td.html。必須保留新增三個 JS 模組與 assets/td/faction-towers-v1.png。無新增套件或帳號要求。

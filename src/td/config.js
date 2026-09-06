@@ -10,9 +10,12 @@
       rogue:{name:'暗影盜賊',icon:'◆',cost:65,wood:1,damage:11,range:118,interval:.45,speed:148,color:'#c884df',attackType:'chaos',bountyBonus:.35}
     },
     buildings:{
-      arrow:{name:'林地弩塔',icon:'♜',cost:95,wood:2,damage:25,range:172,interval:.82,color:'#d5bd63',attackType:'pierce'},
-      frost:{name:'寒霜水晶塔',icon:'❄',cost:120,wood:2,damage:18,range:150,interval:1.05,color:'#66ddff',attackType:'magic',slow:.58,slowTime:1.4},
-      cannon:{name:'赤焰火砲塔',icon:'●',cost:145,wood:3,damage:42,range:142,interval:1.55,color:'#ff7045',attackType:'chaos',splash:54}
+      arrow:{name:'林地弩塔',faction:'人族',icon:'♜',cost:95,wood:2,damage:25,range:172,interval:.82,color:'#d5bd63',attackType:'pierce'},
+      frost:{name:'寒霜水晶塔',faction:'秘法',icon:'❄',cost:120,wood:2,damage:18,range:150,interval:1.05,color:'#66ddff',attackType:'magic',slow:.58,slowTime:1.4},
+      cannon:{name:'赤焰火砲塔',faction:'矮人',icon:'●',cost:145,wood:3,damage:42,range:142,interval:1.55,color:'#ff7045',attackType:'chaos',splash:54},
+      storm:{name:'星葉雷霆塔',faction:'精靈',icon:'ϟ',cost:165,wood:2,damage:19,range:165,interval:1.15,color:'#7ee9e5',attackType:'magic'},
+      totem:{name:'赤牙祖靈柱',faction:'獸族',icon:'✹',cost:150,wood:2,damage:28,range:125,interval:1.25,color:'#ffbe66',attackType:'chaos',splash:25},
+      crypt:{name:'幽骨召喚殿',faction:'亡靈',icon:'☽',cost:180,wood:3,damage:12,range:155,interval:1.3,color:'#bc9aff',attackType:'magic'}
     },
     hero:{maxHealth:100,speed:215,range:152,damage:18,interval:.58,novaDamage:30,novaRange:118,novaCooldown:9}
   });

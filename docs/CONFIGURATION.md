@@ -58,3 +58,7 @@ v0.13 主要角色素材為 `ranger-actions-v1.png`、`arcanist-actions-v1.png`�
 ## v0.17.0 英雄與指揮介面
 
 英雄動作素材固定 4 欄 × 4 列，idle／walk／attack／cast，保留 Alpha 與比例。Hero 的刺擊長 0.36 秒、前 0.18 秒蓄力，施法動作長 0.56 秒；既有傷害和技能冷卻不變。ArtSystem.drawRank 管理肩甲、旗幟、符文與徽記。CSS 手機斷點仍配合 LayoutSystem 的 700px。
+
+## v0.18.0 英雄技能與種族塔
+
+config.buildings 新增 storm／totem／crypt。技能倍率與擊殺門檻位於 TowerSkillSystem；商店物品與價格位於 ShopSystem；英雄技能冷卻在 Hero；召喚物壽命與追擊範圍由呼叫端提供。改值後執行 npm test 與 npm run check。

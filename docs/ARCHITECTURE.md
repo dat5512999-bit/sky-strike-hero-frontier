@@ -98,3 +98,15 @@ td/main → TDGame → WaveSystem → WaveCatalog
 ## v0.17.0 英雄與指揮介面
 
 英雄資料流：頭像／F1 → TDGame.selectHero → Hero.selected／setTarget → Hero 動作狀態 → ArtSystem.drawHero；蓄力完成 → 原 Projectile 傷害流程。升級 → 原等級與經濟 → ArtSystem.drawRank。HTML 顯示招募／命令分類，CSS 依 data-panel／data-selection 顯示相關操作；桌面戰場左側、指令右側，手機直向排列。
+
+## v0.18.0 英雄技能與種族塔
+
+既有職業、波次、導航及經濟保留，新增低耦合技能／商店／召喚模組，無新資料庫。
+
+```text
+UI → TDGame → Hero → Projectile
+             ├→ ShopSystem → EconomySystem + Hero.equipment
+             └→ Building → TowerSkillSystem → Projectile / Summon
+Projectile → TDGame.onKill → EconomySystem + owner.registerKill
+ArtSystem → 既有圖集 / faction-towers-v1.png 三階塔圖
+```

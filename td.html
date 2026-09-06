@@ -35,10 +35,11 @@
         <div><p>FRONTIER REPORT</p><h2 id="td-overlay-title">王城失守</h2><span id="td-overlay-message"></span><button id="td-restart" type="button">重新守城</button></div>
       </div>
     </section>
-    <div class="td-hero-dock"><button id="td-hero-select" class="td-hero-select" type="button" aria-pressed="false" disabled title="選取英雄（F1），再點地面移動"><span class="hero-face" aria-hidden="true"></span><span><strong>銀葉守護者</strong><small>點我控制英雄 · F1</small></span><span class="hero-select-state">選取英雄</span></button>        <button id="td-skill-button" class="skill-button" type="button"><b>❄</b><span>霜環震擊</span></button></div>
+    <div class="td-hero-dock"><button id="td-hero-select" class="td-hero-select" type="button" aria-pressed="false" disabled title="選取英雄（F1），再點地面移動"><span class="hero-face" aria-hidden="true"></span><span><strong>銀葉守護者</strong><small>點我控制英雄 · F1</small></span><span class="hero-select-state">選取英雄</span></button>        <button id="td-skill-button" class="skill-button" type="button"><b>❄</b><span>霜環震擊</span></button><button id="td-thunder" class="skill-button" type="button" title="攻擊附近最多四個敵人，冷卻12秒"><b>ϟ</b><span>連鎖雷擊</span></button><button id="td-summon" class="skill-button" type="button" title="召喚兩名守衛協助攻擊，冷卻22秒"><b>✧</b><span>祖靈守衛</span></button><button id="td-shop-open" class="skill-button shop-button" type="button"><b>♜</b><span>商店城</span></button></div>
     <section class="td-command" aria-label="建造與英雄指令">
       <div class="panel-heading"><span>防線指揮所</span><button id="td-pause" type="button">暫停</button></div>
       <div class="selection-card"><div id="td-portrait" class="selection-portrait">?</div><div><small id="td-selection-type">目前指令</small><strong id="td-selection">先選擇守備職業</strong><span id="td-selection-stats">經典 RTS 職業科技</span></div></div>
+      <p id="td-tower-skill" class="tower-skill-info" hidden></p>
       <div class="command-tabs" aria-label="指令分類"><button type="button" data-command-tab="build" aria-pressed="true">招募／建造</button><button type="button" data-command-tab="orders" aria-pressed="false">選取與命令</button></div>
       <div class="command-grid" data-panel="build">
         <button type="button" data-build-kind="unit" data-build-type="hunter" hidden><b>➶</b><span>部署獵手</span></button>
@@ -47,6 +48,9 @@
         <button type="button" data-build-kind="building" data-build-type="arrow"><b>♜</b><span>林地弩塔</span></button>
         <button type="button" data-build-kind="building" data-build-type="frost"><b>❄</b><span>寒霜塔</span></button>
         <button type="button" data-build-kind="building" data-build-type="cannon"><b>●</b><span>火砲塔</span></button>
+        <button type="button" data-build-kind="building" data-build-type="storm"><b>星葉雷霆塔</b><span>精靈 · 連鎖</span></button>
+        <button type="button" data-build-kind="building" data-build-type="totem"><b>赤牙祖靈柱</b><span>獸族 · 震地</span></button>
+        <button type="button" data-build-kind="building" data-build-type="crypt"><b>幽骨召喚殿</b><span>亡靈 · 召喚</span></button>
         <button id="td-move" class="order-action" type="button" disabled title="移動（M）"><b>➤</b><span>移動 M</span></button>
         <button id="td-attack-move" class="order-action" type="button" disabled title="攻擊移動（A）"><b>⚔</b><span>攻擊移動 A</span></button>
         <button id="td-hold" class="order-action" type="button" disabled title="固守（H）"><b>⌾</b><span>固守 H</span></button>
@@ -59,6 +63,15 @@
     </section>
     <footer id="td-help">① 選擇職業　② 招募守軍並點地面部署　③ 守住城門</footer>
   </main>
+  <section id="td-shop-screen" class="shop-overlay" role="dialog" aria-modal="true" aria-labelledby="td-shop-title" hidden>
+    <div class="shop-dialog"><div class="shop-heading"><div><small>FRONTIER MERCHANT</small><h2 id="td-shop-title">銀葉商店城</h2></div><button id="td-shop-close" type="button">返回戰場</button></div>
+    <p>持有 <strong id="td-shop-gold">240G</strong> · 購物時戰鬥暫停 · 裝備本局有效</p>
+    <div class="shop-items">
+      <button type="button" data-shop-item="spear"><b>⚔ 銀葉戰刃</b><small>每級普攻／霜環／雷擊傷害 +20%</small><span>100G</span></button>
+      <button type="button" data-shop-item="rune"><b>◈ 迅捷符文</b><small>每級新施放技能冷卻 -10%</small><span>120G</span></button>
+      <button type="button" data-shop-item="charm"><b>✧ 祖靈契約</b><small>每級守衛壽命 +3秒、傷害 +20%；Lv.3 多一名守衛</small><span>140G</span></button>
+    </div><p id="td-shop-message" role="status"></p></div>
+  </section>
   <script src="src/td/namespace.js"></script>
   <script src="src/td/config.js"></script>
   <script src="src/td/systems/ArtSystem.js"></script>
@@ -69,6 +82,9 @@
   <script src="src/td/systems/CommandSystem.js"></script>
   <script src="src/td/systems/WaveCatalog.js"></script>
   <script src="src/td/systems/EconomySystem.js"></script>
+  <script src="src/td/systems/TowerSkillSystem.js"></script>
+  <script src="src/td/systems/ShopSystem.js"></script>
+  <script src="src/td/entities/Summon.js"></script>
   <script src="src/td/entities/Monster.js"></script>
   <script src="src/td/entities/Projectile.js"></script>
   <script src="src/td/entities/CombatUnit.js"></script>
