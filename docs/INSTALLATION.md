@@ -30,3 +30,7 @@
 ## v0.19.0 英雄流派與傭兵館
 
 安裝方式不變，開啟td.html或執行npm run serve:test。完整下載時須包含 src/td/systems/HeroRoster.js；無新增套件。首次進入直接選英雄、招募守軍或傭兵、部署後開始第一波。
+
+## v0.20.0 敵軍動作第一階段
+
+安裝方式不變。完整下載專案須包含assets/td/enemy-grunt-actions-v1.png、enemy-runner-actions-v1.png、enemy-brute-actions-v1.png。開啟td.html可玩，無新增套件。

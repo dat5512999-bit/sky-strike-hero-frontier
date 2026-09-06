@@ -11,21 +11,28 @@
     constructor(type,wave,path){
       const preset=TYPES[type]||TYPES.grunt;const scale=1+(wave-1)*.105;
       Object.assign(this,preset);this.type=type;this.wave=wave;this.path=path||ns.config.path;this.x=this.path[0].x;this.y=this.path[0].y;this.index=1;
-      this.health=Math.round(this.health*scale);this.maxHealth=this.health;this.reward=Math.round(this.reward*(1+(wave-1)*.025));this.active=true;this.leaked=false;this.slowFactor=1;this.slowTimer=0;this.hitFlash=0;
+      this.health=Math.round(this.health*scale);this.maxHealth=this.health;this.reward=Math.round(this.reward*(1+(wave-1)*.025));this.active=true;this.leaked=false;this.slowFactor=1;this.slowTimer=0;this.hitFlash=0;this.walkDistance=0;this.frame=0;this.state='walk';this.facing=0;this.hitTime=0;this.deathTime=0;
     }
     update(dt,hero,defenders){
-      if(!this.active)return;this.hitFlash=Math.max(0,this.hitFlash-dt);this.slowTimer=Math.max(0,this.slowTimer-dt);if(this.slowTimer<=0)this.slowFactor=1;
+      if(!this.active)return;this.hitTime=Math.max(0,this.hitTime-dt);this.hitFlash=Math.max(0,this.hitFlash-dt);this.slowTimer=Math.max(0,this.slowTimer-dt);if(this.slowTimer<=0)this.slowFactor=1;
       const heroFactor=hero&&hero.active&&ns.utils.distance(this,hero)<46?.78:1;const unitFactor=(defenders||[]).some(function(unit){return ns.utils.distance(this,unit)<34;},this)?.62:1;let remaining=this.speed*this.slowFactor*Math.min(heroFactor,unitFactor)*dt;
-      while(remaining>0&&this.active){const target=this.path[this.index];if(!target){this.active=false;this.leaked=true;break;}const distance=Math.hypot(target.x-this.x,target.y-this.y);if(distance<=remaining){this.x=target.x;this.y=target.y;this.index+=1;remaining-=distance;}else{this.x+=(target.x-this.x)/distance*remaining;this.y+=(target.y-this.y)/distance*remaining;remaining=0;}}
+      const stride=this.type==='runner'?74:this.type==='brute'?80:64;let travelled=0;
+      while(remaining>0&&this.active){const target=this.path[this.index];if(!target){this.active=false;this.leaked=true;break;}const distance=Math.hypot(target.x-this.x,target.y-this.y);if(distance>0){const dx=target.x-this.x;if(Math.abs(dx)>.1)this.facing=dx<0?Math.PI:0;}
+      if(distance<=remaining){travelled+=distance;this.x=target.x;this.y=target.y;this.index+=1;remaining-=distance;}else{travelled+=remaining;this.x+=(target.x-this.x)/distance*remaining;this.y+=(target.y-this.y)/distance*remaining;remaining=0;}}
+      this.walkDistance+=travelled;this.state=this.hitTime>0?'hit':'walk';this.frame=this.state==='hit'?Math.min(3,Math.floor((.24-this.hitTime)/.06)):Math.floor(this.walkDistance/stride*8)%8;
     }
-    takeDamage(amount){if(!this.active)return false;this.health-=Math.max(1,amount-(this.armor||0));this.hitFlash=.1;if(this.health<=0){this.health=0;this.active=false;return true;}return false;}
+    updateDeath(dt){if(this.state!=='death')return;this.deathTime+=dt;this.frame=Math.min(3,Math.floor(this.deathTime/.16));}
+
+    takeDamage(amount){if(!this.active)return false;this.health-=Math.max(1,amount-(this.armor||0));this.hitFlash=.1;if(this.hitTime<=0){this.hitTime=.24;this.state='hit';this.frame=0;}if(this.health<=0){this.health=0;this.active=false;this.state='death';this.deathTime=0;this.frame=0;return true;}return false;}
     applySlow(factor,time){this.slowFactor=Math.min(this.slowFactor,factor);this.slowTimer=Math.max(this.slowTimer,time);}
     progress(){return this.index+this.x/10000;}
     draw(ctx,art){
       const sizes={grunt:58,runner:58,brute:78,shaman:64,boss:108};const size=sizes[this.type]||58;
-      if(!(art&&art.drawUnit(ctx,this.type,this.x,this.y,size))){ctx.save();ctx.translate(this.x,this.y);ctx.fillStyle=this.color;ctx.beginPath();ctx.arc(0,0,this.radius,0,Math.PI*2);ctx.fill();ctx.restore();}
+      ctx.save();if(this.state==='death')ctx.globalAlpha=Math.max(0,Math.min(1,(1-this.deathTime)/.35));
+      if(!(art&&art.drawMonster&&art.drawMonster(ctx,this))&&!(art&&art.drawUnit(ctx,this.type,this.x,this.y,size))){ctx.save();ctx.translate(this.x,this.y);ctx.fillStyle=this.color;ctx.beginPath();ctx.arc(0,0,this.radius,0,Math.PI*2);ctx.fill();ctx.restore();}
+      ctx.restore();if(this.state==='death')return;
       ctx.save();if(this.hitFlash>0){ctx.globalAlpha=this.hitFlash*5;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(this.x,this.y,this.radius+4,0,Math.PI*2);ctx.fill();}if(this.slowTimer>0){ctx.strokeStyle='#70e7ff';ctx.shadowColor='#70e7ff';ctx.shadowBlur=8;ctx.lineWidth=3;ctx.beginPath();ctx.arc(this.x,this.y+4,this.radius+7,0,Math.PI*2);ctx.stroke();}
-      ctx.shadowBlur=0;ctx.fillStyle='rgba(8,7,12,.82)';ctx.fillRect(this.x-this.radius,this.y-this.radius-18,this.radius*2,5);ctx.fillStyle=this.color;ctx.fillRect(this.x-this.radius,this.y-this.radius-18,this.radius*2*(this.health/this.maxHealth),5);ctx.restore();
+      const barY=this.y-({grunt:82,runner:76,brute:102}[this.type]||this.radius+18);ctx.shadowBlur=0;ctx.fillStyle='rgba(8,7,12,.82)';ctx.fillRect(this.x-this.radius,barY,this.radius*2,5);ctx.fillStyle=this.color;ctx.fillRect(this.x-this.radius,barY,this.radius*2*(this.health/this.maxHealth),5);ctx.restore();
     }
   }
   Monster.TYPES=TYPES;ns.entities.Monster=Monster;

@@ -63,3 +63,7 @@ TowerSkillSystem.rank(kills)、progress(tower)、describe(tower)、fire(tower,ta
 ## v0.19.0 英雄流派與傭兵館
 
 Hero.chooseClass(type) 驗證流派；HeroRoster.get(type) 提供普攻與技能資料。HeroRoster.cast(hero,slot,monsters,onKill) 處理非精靈技能；updateFields 處理陷阱與毒霧，drawFields 繪製範圍與軌跡。BuildSystem.queueMercenary(type) 只排隊、不扣款；pendingCost() 提供實際費用；placeQueued() 成功才付費，CombatUnit.mercenary 區分來源。沒有新增網路 API。
+
+## v0.20.0 敵軍動作第一階段
+
+Monster新增walkDistance、state、frame、facing、hitTime、deathTime；updateDeath(dt)只推進死亡圖幀。ArtSystem.drawMonster(ctx,monster)回傳是否已使用新動畫圖集；未載入或不支援類型回退舊drawUnit。TDGame.corpses獨立於monsters，重開局清除。

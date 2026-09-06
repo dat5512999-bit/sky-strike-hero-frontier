@@ -29,3 +29,7 @@
 ## v0.19.0 英雄流派與傭兵館
 
 v0.19.0 新增 HeroRoster.js。流派仍沿用 hunter／arcanist／rogue ID；不要改 ID 破壞圖片映射。傭兵重用 CombatUnit 與導航，pending.mercenary 標記特殊價格；totalSpent 必須記錄實付額以正確回收。無新服務、帳號、權限或資料庫。
+
+## v0.20.0 敵軍動作第一階段
+
+新增三個enemy-*-actions-v1.png；Monster生命週期仍以active控制戰鬥，TDGame.corpses只用於一秒視覺殘留、上限60。不可讓屍體重新參與碰撞、漏怪或金錢結算。無新服務或權限。

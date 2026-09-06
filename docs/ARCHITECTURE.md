@@ -124,3 +124,15 @@ ArtSystem → 原有英雄／獵手／盜賊動作圖集 + 階級裝甲
 ```
 
 沒有新增資料庫；局內狀態不存檔。
+
+## v0.20.0 敵軍動作第一階段
+
+```text
+Monster.update → 實際路程 → 八幀走路 + 左右朝向
+Monster.takeDamage → 四幀受擊 / active=false
+TDGame.onKill → 一次獎勵 + corpses（上限60）
+corpses → updateDeath → 倒地淡出 → 一秒移除
+ArtSystem.drawMonster → 三種透明動作圖集
+```
+
+純本機視覺與狀態擴充，沿用原有經濟、波次、碰撞與資料保存方式。

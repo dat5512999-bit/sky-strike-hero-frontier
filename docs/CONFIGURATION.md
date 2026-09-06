@@ -66,3 +66,7 @@ config.buildings 新增 storm／totem／crypt。技能倍率與擊殺門檻位�
 ## v0.19.0 英雄流派與傭兵館
 
 英雄流派普攻、名稱、顏色、技能說明位於HeroRoster.CLASSES；獵手與盜賊技能行為位於HeroRoster.cast。商店傭兵金幣為config.units.cost×1.5向上取整，木材0，定義於BuildSystem.pendingCost；UI價格須一致。召喚物form決定戰狼／元素／分身繪圖。
+
+## v0.20.0 敵軍動作第一階段
+
+Monster.update中的stride控制完整步態需要的路程：步兵64、疾行獸74、重裝80。受擊0.24秒，死亡視覺1秒。ArtSystem.drawMonster四乘四圖集前兩列走路、第三列受擊、第四列倒地。保持來源格長寬比。

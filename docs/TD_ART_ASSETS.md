@@ -58,3 +58,31 @@ v0.11 與 v0.12 的 PNG 使用內建圖片生成工具製作，再複製進專�
 生成提示：
 
 Use case: stylized-concept. Production transparent PNG game sprite atlas for original classic fantasy RTS tower defense. Exactly 3 columns by 3 rows of 9 independent tower models in equal square cells, square whole image. TRUE transparent alpha background, no ground/background or text/grid/labels. Fixed three-quarter TOP-DOWN isometric camera looking down ~40 degrees. Each tower centered within its cell, 18 percent clear padding on ALL sides, complete base and spires inside own cell, consistent scale, feet at y80 percent. Column1 elegant elven storm spire, white carved stone with leafy copper gold curved arches and floating cyan lightning crystals. Column2 orcish ancestral totem, massive reddish timber, tusks, leather, tribal masks, amber spirit fire, no people. Column3 undead summoning crypt, dark purple stone mausoleum with skull gate, ribbed bone arches and spectral violet lanterns, no people. Row1 simple base towers. Row2 visibly upgraded towers same identities with extra structures/tusks/crystal satellites, more ornate. Row3 ultimate versions with imposing reinforced bases, additional wings/arches/horns and brighter energy crowns, still fit own cell. Painterly pre-rendered low-poly game texture aesthetic, readable at 100px, original designs, muted stone/wood materials contrasting small colored magic accents. No overlap between cells, all cells equal spacing, NO cast shadows outside models, no floor tiles or checkerboard.
+
+## v0.20.0 敵军動作圖集
+
+使用內建 imagegen 工具生成並保留透明 alpha，未覆寫舊圖。
+
+### grunt
+
+保存路徑：`assets/td/enemy-grunt-actions-v1.png`
+
+最終提示：
+
+Use case: stylized-concept. Asset type: production 2D RTS sprite animation sheet, original fantasy game enemy, transparent PNG with real alpha, no background, no grid lines or words. EXACT layout: 4 columns by 4 rows, 16 equal square cells. Each cell contains the SAME character at identical camera, consistent size and materials, feet anchored 80% down in cell, full body with safe margins. Rows 1 and 2 = eight consecutive locomotion keyframes, alternating limbs and clear step cycles (not identical poses), facing right, slight 3/4 overhead game camera. Row 3 = four hit reaction keyframes, flinch then recover. Row 4 = four non-gory death keyframes, stagger kneel fall then motionless on ground, maintain original scale and foot ground anchor. Classic hand-painted low-poly fantasy RTS miniature aesthetic, muted earthy colors, clearly readable silhouette, upper-left lighting, no glow, no baked shadow, not a concept illustration. No Warcraft characters or logos. Armored enemy foot soldier, battered dark steel helmet, rusty red tabard, round wooden shield and short sword. Distinct marching legs and swinging shield arm.
+
+### runner
+
+保存路徑：`assets/td/enemy-runner-actions-v1.png`
+
+最終提示：
+
+Use case: stylized-concept. Asset type: production 2D RTS sprite animation sheet, original fantasy game enemy, transparent PNG with real alpha, no background, no grid lines or words. EXACT layout: 4 columns by 4 rows, 16 equal square cells. Each cell contains the SAME character at identical camera, consistent size and materials, feet anchored 80% down in cell, full body with safe margins. Rows 1 and 2 = eight consecutive locomotion keyframes, alternating limbs and clear step cycles (not identical poses), facing right, slight 3/4 overhead game camera. Row 3 = four hit reaction keyframes, flinch then recover. Row 4 = four non-gory death keyframes, stagger kneel fall then motionless on ground, maintain original scale and foot ground anchor. Classic hand-painted low-poly fantasy RTS miniature aesthetic, muted earthy colors, clearly readable silhouette, upper-left lighting, no glow, no baked shadow, not a concept illustration. No Warcraft characters or logos. Lean four-legged armored wolf beast, charcoal grey fur with tawny mane, brown leather harness. Eight running frames include tucked legs and extended gallop, paws clearly articulate. Anatomically coherent four legs.
+
+### brute
+
+保存路徑：`assets/td/enemy-brute-actions-v1.png`
+
+最終提示：
+
+Use case: stylized-concept. Asset type: production 2D RTS sprite animation sheet, original fantasy game enemy, transparent PNG with real alpha, no background, no grid lines or words. EXACT layout: 4 columns by 4 rows, 16 equal square cells. Each cell contains the SAME character at identical camera, consistent size and materials, feet anchored 80% down in cell, full body with safe margins. Rows 1 and 2 = eight consecutive locomotion keyframes, alternating limbs and clear step cycles (not identical poses), facing right, slight 3/4 overhead game camera. Row 3 = four hit reaction keyframes, flinch then recover. Row 4 = four non-gory death keyframes, stagger kneel fall then motionless on ground, maintain original scale and foot ground anchor. Classic hand-painted low-poly fantasy RTS miniature aesthetic, muted earthy colors, clearly readable silhouette, upper-left lighting, no glow, no baked shadow, not a concept illustration. No Warcraft characters or logos. Massive hunched two-legged stone-armored ogre beast, slate violet-grey rock plates, thick muscular limbs, heavy fists, brown belt. Eight slow weighty walking frames with alternate heavy footfalls, consistent anatomy.
