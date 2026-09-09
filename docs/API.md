@@ -80,3 +80,9 @@ Monster新增walkDistance、state、frame、facing、hitTime、deathTime；updat
 ## v0.23.0 戰鬥生命週期
 
 `Hero.takeDamage(amount)` 回傳實際傷害，倒下後由 `updateDowned(dt)` 計時復活。`CombatUnit.takeDamage(amount)` 套用護甲並在歸零時退出戰鬥；`BuildSystem.removeDefeated()` 清除完成死亡動畫的單位。`EnemyCombatSystem.update(dt, monsters, hero, defenders, hooks)` 集中處理敵軍攻擊、Boss 階段、增援與踐踏前搖；hooks 只通知 UI 與回饋，不修改經濟。
+
+## v0.24.0 黃金 15 波
+
+`TDDifficultySystem.choose(id)` 只接受 `story | standard | veteran | calamity`；`current()` 回傳顯示資料，`modifiers()` 回傳本局倍率副本。`TDGame.chooseDifficulty(id)` 僅在選角前生效，並由 `applyDifficulty()` 同步 Wave、Economy 與城門。
+
+`EnemyTraitSystem.update(dt, monsters, hooks)` 每幀重算旗手光環並推進祭司治療；`hooks.onHeal(healer, target, amount)` 僅提供視覺回饋。`Monster.effectiveHealth()` 包含剩餘屏障，所有直接傷害回饋以攻擊前後有效生命差計算。未新增 HTTP API。

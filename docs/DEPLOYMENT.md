@@ -53,3 +53,7 @@ v0.17.0 快取為 sky-strike-v0.17.0，必須包含 hero-actions-v1.png。同步
 ## v0.23.0 戰鬥生命週期
 
 最新快取為 `sky-strike-v0.23.0`。發布時必須包含 `EnemyCombatSystem.js`、Hero、CombatUnit、Monster、BuildSystem、CombatFeedbackSystem、TDGame、td.html 與 sw.js。發布後重新整理確認新版 Service Worker 接管，再以三倍速驗證守軍 HP、Boss 紅圈與英雄復活倒數。
+
+## v0.24.0 黃金 15 波
+
+最新快取為 `sky-strike-v0.24.0`。發布時同步上傳兩個新系統、WaveCatalog、WaveSystem、EconomySystem、Monster、Projectile、Hero、ArtSystem、TDGame、HTML、CSS、測試與文件。發布後重新整理兩次並確認四難度、城門生命與難度名稱一致；本次未自動部署到網路。

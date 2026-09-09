@@ -16,11 +16,12 @@
     allyHit(target,value){this.push({type:'allyDamage',x:target.x+(Math.random()-.5)*10,y:target.y-34,time:.72,max:.72,value:Math.round(value)});this.push({type:'impact',x:target.x,y:target.y-8,time:.2,max:.2,color:'#ff765c'});}
     warning(source,label,radius){this.push({type:'warning',x:source.x,y:source.y,time:1.05,max:1.05,label:label,radius:radius||24});}
     revive(hero){this.push({type:'revive',x:hero.x,y:hero.y,time:.8,max:.8,color:'#95ffe0'});}
+    heal(target,value){this.push({type:'heal',x:target.x,y:target.y-target.radius-10,time:.75,max:.75,value:Math.round(value)});}
     update(dt){this.items.forEach(function(item){item.time-=dt;if(item.type==='mote'){item.x+=item.vx*dt;item.y+=item.vy*dt;item.vy+=55*dt;}});this.items=this.items.filter(function(item){return item.time>0;});}
     draw(ctx){
       this.items.forEach(function(item){const ratio=Math.max(0,item.time/item.max),age=1-ratio;ctx.save();ctx.globalAlpha=Math.min(1,ratio*2);
-        if(item.type==='damage'||item.type==='gold'||item.type==='allyDamage'){
-          ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='rgba(3,5,5,.9)';ctx.fillStyle=item.type==='gold'?'#f5c85b':item.type==='allyDamage'?'#ff7b69':item.critical?'#ff823d':'#fff1d2';ctx.font=(item.critical?'900 19px ':'800 14px ')+'Segoe UI';const label=item.type==='gold'?('+'+item.value+' Gold'):(item.critical?'暴擊 '+item.value:'-'+item.value);const y=item.y-age*(item.type==='gold'?30:22);ctx.strokeText(label,item.x,y);ctx.fillText(label,item.x,y);
+        if(item.type==='damage'||item.type==='gold'||item.type==='allyDamage'||item.type==='heal'){
+          ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='rgba(3,5,5,.9)';ctx.fillStyle=item.type==='gold'?'#f5c85b':item.type==='heal'?'#7df09b':item.type==='allyDamage'?'#ff7b69':item.critical?'#ff823d':'#fff1d2';ctx.font=(item.critical?'900 19px ':'800 14px ')+'Segoe UI';const label=item.type==='gold'?('+'+item.value+' Gold'):item.type==='heal'?('治療 +'+item.value):(item.critical?'暴擊 '+item.value:'-'+item.value);const y=item.y-age*(item.type==='gold'?30:22);ctx.strokeText(label,item.x,y);ctx.fillText(label,item.x,y);
         }else if(item.type==='impact'){
           ctx.translate(item.x,item.y);ctx.rotate(age*Math.PI);ctx.strokeStyle=item.color;ctx.shadowColor=item.color;ctx.shadowBlur=8;ctx.lineWidth=2;for(let i=0;i<4;i++){ctx.rotate(Math.PI/2);ctx.beginPath();ctx.moveTo(5,0);ctx.lineTo(8+age*13,0);ctx.stroke();}
         }else if(item.type==='death'){

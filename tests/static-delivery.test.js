@@ -40,6 +40,7 @@ test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
   });
   [1, 2, 3].forEach((speed) => assert.match(html, new RegExp(`data-game-speed=["']${speed}["']`)));
   ['Q','W','E','R'].forEach((key) => assert.match(html, new RegExp(`<kbd>${key}</kbd>`)));
+  ['story','standard','veteran','calamity'].forEach((mode) => assert.match(html, new RegExp(`data-td-difficulty=["']${mode}["']`)));
 });
 
 test('PWA manifest 與離線快取引用的遊戲檔案都存在', () => {

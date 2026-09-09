@@ -1,7 +1,7 @@
 (function(ns){
   'use strict';
   class EnemyCombatSystem{
-    damageFor(monster,multiplier){return Math.max(1,Math.round((monster.attackDamage||0)*(1+(monster.wave-1)*.035)*(multiplier||1)));}
+    damageFor(monster,multiplier){return Math.max(1,Math.round((monster.attackDamage||0)*(1+(monster.wave-1)*.035)*(monster.damageMultiplier||1)*(multiplier||1)));}
     validTargets(monster,hero,defenders){
       if(monster.combatRole==='siege')return(defenders||[]).filter(unit=>unit.active&&ns.utils.distance(monster,unit)<=monster.attackRange);
       if(monster.combatRole==='hunter')return hero&&hero.active&&ns.utils.distance(monster,hero)<=monster.attackRange?[hero]:[];
@@ -20,7 +20,7 @@
       if(next<=monster.bossPhase)return;monster.bossPhase=next;
       if(next===2&&!monster.phaseTriggered[2]){
         monster.phaseTriggered[2]=true;const reinforcements=[];
-        for(let i=-1;i<=1;i+=2){const runner=new ns.entities.Monster('runner',monster.wave,monster.path);runner.x=monster.x+i*28;runner.y=monster.y+12;runner.index=monster.index;runner.reward=Math.max(1,Math.round(runner.reward*.5));reinforcements.push(runner);}
+        for(let i=-1;i<=1;i+=2){const runner=new ns.entities.Monster('runner',monster.wave,monster.path,monster.modifiers);runner.x=monster.x+i*28;runner.y=monster.y+12;runner.index=monster.index;runner.reward=Math.max(1,Math.round(runner.reward*.5));reinforcements.push(runner);}
         reinforcements.forEach(unit=>monsters.push(unit));if(hooks&&hooks.onBossPhase)hooks.onBossPhase(monster,2,reinforcements);
       }
       if(next===3&&!monster.phaseTriggered[3]){monster.phaseTriggered[3]=true;monster.enraged=true;monster.speed*=1.2;if(hooks&&hooks.onBossPhase)hooks.onBossPhase(monster,3,[]);}

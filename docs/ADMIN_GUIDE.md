@@ -45,3 +45,7 @@ HUD DOM ID 是 `TDGame` 與畫面的相容契約，不可重複或任意改名�
 ## v0.23.0 戰鬥生命週期
 
 敵方攻擊集中於 `EnemyCombatSystem.js`；英雄復活參數在 `config.hero`，守軍生命／護甲在 `config.units`。調整 Boss 傷害或冷卻時應同時驗證三個 Boss 波，並保留 1.1 秒可讀前搖。不要讓一般怪取得 `combatRole`，除非波次設計明確需要其反擊。
+
+## v0.24.0 黃金 15 波
+
+難度倍率統一由 `TDDifficultySystem.js` 管理，波次只由 `WaveCatalog.js` 管理，敵人鄰近能力只由 `EnemyTraitSystem.js` 管理。調整祭司治療或旗手光環後，至少測試多名同類同場不會無限疊加；調整盾衛時應以 `effectiveHealth()` 驗證傷害回饋。正式發布前保留標準模式為預設，並人工完成至少一次第 5、10、15 波。

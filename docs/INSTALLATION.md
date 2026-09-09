@@ -46,3 +46,7 @@
 ## v0.23.0 戰鬥生命週期
 
 不需新增套件或資料庫。確認 `src/td/systems/EnemyCombatSystem.js` 存在，並由 `td.html` 在 `TDGame.js` 前載入；若更新後仍見舊行為，重新整理一次讓 v0.23.0 Service Worker 接管。
+
+## v0.24.0 黃金 15 波
+
+安裝條件不變。完整專案必須包含 `TDDifficultySystem.js` 與 `EnemyTraitSystem.js`，兩者均需在 `TDGame.js` 前由 `td.html` 載入。HTTP 或 GitHub Pages 更新後重新整理，看到四個難度選項即代表 v0.24.0 已載入。

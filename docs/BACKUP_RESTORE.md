@@ -41,3 +41,7 @@ v0.19.0回復基線為v0.18.0。完整備份包含新增 HeroRoster.js；需要�
 ## v0.23.0 戰鬥生命週期
 
 完整備份須包含 `EnemyCombatSystem.js`、實體、TDGame、HTML、Service Worker、測試與文件。回復舊版時必須同步回復 `td.html` 與 `sw.js` 的腳本／快取清單；使用 Git 標籤 `v0.23.0` 可回到完整一致版本。
+
+## v0.24.0 黃金 15 波
+
+完整備份新增 `TDDifficultySystem.js`、`EnemyTraitSystem.js` 與新版波表。回復時不可只還原 `td.html`，必須同步還原 Service Worker 快取名稱與全部相依程式。完成封存後可使用 Git 標籤 `v0.24.0` 回到此版本；局內波次仍不保存。

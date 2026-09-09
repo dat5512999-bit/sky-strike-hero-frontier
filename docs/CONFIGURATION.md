@@ -74,3 +74,9 @@ Monster.update中的stride控制完整步態需要的路程：步兵64、疾行�
 ## v0.23.0 戰鬥生命週期
 
 英雄復活時間、生命比例及守護時間位於 `config.hero.respawnTime`、`respawnHealth`、`invulnerability`。守軍基礎 `health`、`armor` 位於 `config.units`。敵人 `combatRole`、`attackRange`、`attackDamage`、`attackInterval` 位於 `Monster.TYPES`；Boss 階段門檻、踐踏倍率與冷卻集中於 `EnemyCombatSystem`。調整後必須驗證第 5／10／15 波。
+
+## v0.24.0 黃金 15 波
+
+四種難度的 `enemyHealth`、`enemySpeed`、`enemyDamage`、`reward`、`baseHealth`、`preparation` 與 `spawnRate` 集中在 `TDDifficultySystem.js`。不得只改 UI 文案；各倍率必須維持正數，且更高難度的城門生命與整備時間不應高於較低難度。
+
+盾衛、祭司、旗手的基礎數值位於 `Monster.TYPES`；光環範圍／倍率與治療週期／比例位於 `EnemyTraitSystem.js`。15 波實際組合只改 `WaveCatalog.js`。平衡時先調波表和倍率，避免把例外硬編進 `TDGame`。

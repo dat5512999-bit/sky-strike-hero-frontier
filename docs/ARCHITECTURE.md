@@ -170,3 +170,19 @@ EnemyCombatSystem hooks → TDGame → CombatFeedbackSystem / UI
 ```
 
 一般怪仍只前進；攻擊職責按 `combatRole` 分為攻城、英雄獵殺與 Boss。`EnemyCombatSystem` 只處理敵方目標與攻擊時序，不負責獎勵或建造。英雄自行管理復活，守軍死亡由 `BuildSystem` 安全移除。
+
+## v0.24.0 黃金 15 波
+
+```text
+開場難度按鈕 → TDDifficultySystem → TDGame.applyDifficulty
+                                    ├→ WaveSystem：整備／生成間隔／Monster 數值
+                                    ├→ EconomySystem：擊殺與清波獎勵
+                                    └→ TDGame：城門上限與 UI
+
+WaveCatalog → Monster(type) → EnemyTraitSystem
+                              ├→ warder：屏障先吸收傷害
+                              ├→ healer：定期治療鄰近傷兵
+                              └→ commander：鄰近敵軍移速／護甲光環
+```
+
+`TDDifficultySystem` 只提供成套倍率，不知道波次內容；`EnemyTraitSystem` 只計算鄰近能力，不處理移動、獎勵或死亡。既有 `WaveSystem`、`EconomySystem` 與 `Monster` 保持資料流單向。專案仍無資料庫與遠端 API，難度是單局狀態。
