@@ -49,3 +49,7 @@ v0.17.0 快取為 sky-strike-v0.17.0，必須包含 hero-actions-v1.png。同步
 ## v0.22.0 戰鬥回饋
 
 最新快取為 `sky-strike-v0.22.0`。同步發布新增的 `CombatFeedbackSystem.js` 及 Projectile、Monster、Hero、HeroRoster、TDGame、HTML、Service Worker；缺任一檔可能讓頁面無法啟動。發布後以 ×3 驗證大量回饋仍流暢。
+
+## v0.23.0 戰鬥生命週期
+
+最新快取為 `sky-strike-v0.23.0`。發布時必須包含 `EnemyCombatSystem.js`、Hero、CombatUnit、Monster、BuildSystem、CombatFeedbackSystem、TDGame、td.html 與 sw.js。發布後重新整理確認新版 Service Worker 接管，再以三倍速驗證守軍 HP、Boss 紅圈與英雄復活倒數。

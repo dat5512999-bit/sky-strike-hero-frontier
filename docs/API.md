@@ -46,6 +46,7 @@
 | `WaveSystem` | `beginPreparation`、`preview`、`canStart`、`start`、`update`、`acknowledgeReward`、`label` | 準備／出兵／清場／結算狀態機與生成佇列 |
 | `EconomySystem` | `canAfford`、`spend`、`addKill`、`completeWave`、`refundGold` | 金幣、木材、功勳的集中收支與單次結算 |
 | `BuildSystem` | `queue`、`canPlaceAt`、`placeQueued`、`selectAt`、`combatUnits`、`buildings` | 單位／建築分流、選取、部署，透過經濟介面扣款與回收 |
+| `EnemyCombatSystem` | `update`、`validTargets`、`strike`、`phase` | 敵軍目標政策、攻擊前搖、Boss 增援／狂暴／範圍技能 |
 | `TDGame` | `startWave`、`queueDeploy`、`armCommand`、`commandSelected`、`castNova`、`update` | 協調戰術指令、波次、英雄、建築、經濟與結算 |
 
 ## Skin Pack 介面
@@ -75,3 +76,7 @@ Monster新增walkDistance、state、frame、facing、hitTime、deathTime；updat
 ## v0.22.0 戰鬥回饋
 
 `Projectile.update(dt, monsters, onKill, onHit)` 與 `hit(...)` 的 `onHit(monster, actualDamage, critical, projectile)` 為可選回呼。`CombatFeedbackSystem.hit`、`gold`、`death`、`update`、`draw` 管理純視覺物件；`Monster.displayHealth` 僅供平滑血條，不參與存活判定。無網路 API。
+
+## v0.23.0 戰鬥生命週期
+
+`Hero.takeDamage(amount)` 回傳實際傷害，倒下後由 `updateDowned(dt)` 計時復活。`CombatUnit.takeDamage(amount)` 套用護甲並在歸零時退出戰鬥；`BuildSystem.removeDefeated()` 清除完成死亡動畫的單位。`EnemyCombatSystem.update(dt, monsters, hero, defenders, hooks)` 集中處理敵軍攻擊、Boss 階段、增援與踐踏前搖；hooks 只通知 UI 與回饋，不修改經濟。

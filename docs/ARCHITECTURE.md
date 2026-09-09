@@ -42,7 +42,7 @@ src/
     entities/  Monster, Projectile, CombatUnit, Building, Hero
     systems/   ArtSystem, ProfessionSystem, PathSystem, LayoutSystem,
                NavigationSystem, CommandSystem, WaveCatalog, WaveSystem,
-               EconomySystem, BuildSystem
+               EconomySystem, BuildSystem, EnemyCombatSystem
     TDGame.js  塔防流程協調、UI 與 Canvas 繪製
 tests/         Node 內建測試
 docs/          操作、維運、API 與 QA 文件
@@ -85,7 +85,8 @@ td/main → TDGame → WaveSystem → WaveCatalog
                  ├─ BuildSystem → CombatUnit（可移動）/ Building（固定）→ Projectile
                  ├─ CommandSystem → NavigationSystem(A*) → CombatUnit Order
                  ├─ LayoutSystem → body[data-layout] → Desktop/Mobile CSS
-                 ├─ Hero → Projectile / Nova / Intercept
+                 ├─ Hero → Projectile / Nova / Intercept / Respawn
+                 ├─ EnemyCombatSystem → Hero / CombatUnit damage / Boss phase
                  ├─ ArtSystem → Background / Atlases / Keep
                  ├─ EconomySystem → Build / Upgrade / Sell / Kill / Wave Reward
                  └─ Base Health → Leak → Victory / Game Over
@@ -158,3 +159,14 @@ Monster.health → displayHealth（視覺插值）→ 雙層血條
 ```
 
 回饋模組不持有經濟或傷害規則，移除它不會改變戰鬥結果。
+
+## v0.23.0 戰鬥生命週期
+
+```text
+Monster movement → EnemyCombatSystem → target policy / Boss phase
+                                      ├→ Hero.takeDamage → downed → timed respawn
+                                      └→ CombatUnit.takeDamage → death → BuildSystem.removeDefeated
+EnemyCombatSystem hooks → TDGame → CombatFeedbackSystem / UI
+```
+
+一般怪仍只前進；攻擊職責按 `combatRole` 分為攻城、英雄獵殺與 Boss。`EnemyCombatSystem` 只處理敵方目標與攻擊時序，不負責獎勵或建造。英雄自行管理復活，守軍死亡由 `BuildSystem` 安全移除。

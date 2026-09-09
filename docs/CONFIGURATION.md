@@ -70,3 +70,7 @@ config.buildings 新增 storm／totem／crypt。技能倍率與擊殺門檻位�
 ## v0.20.0 敵軍動作第一階段
 
 Monster.update中的stride控制完整步態需要的路程：步兵64、疾行獸74、重裝80。受擊0.24秒，死亡視覺1秒。ArtSystem.drawMonster四乘四圖集前兩列走路、第三列受擊、第四列倒地。保持來源格長寬比。
+
+## v0.23.0 戰鬥生命週期
+
+英雄復活時間、生命比例及守護時間位於 `config.hero.respawnTime`、`respawnHealth`、`invulnerability`。守軍基礎 `health`、`armor` 位於 `config.units`。敵人 `combatRole`、`attackRange`、`attackDamage`、`attackInterval` 位於 `Monster.TYPES`；Boss 階段門檻、踐踏倍率與冷卻集中於 `EnemyCombatSystem`。調整後必須驗證第 5／10／15 波。
