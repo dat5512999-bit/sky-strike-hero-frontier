@@ -19,8 +19,8 @@
       const ratio=monster.health/monster.maxHealth,next=ratio<=.33?3:ratio<=.66?2:1;
       if(next<=monster.bossPhase)return;monster.bossPhase=next;
       if(next===2&&!monster.phaseTriggered[2]){
-        monster.phaseTriggered[2]=true;const reinforcements=[];
-        for(let i=-1;i<=1;i+=2){const runner=new ns.entities.Monster('runner',monster.wave,monster.path,monster.modifiers);runner.x=monster.x+i*28;runner.y=monster.y+12;runner.index=monster.index;runner.reward=Math.max(1,Math.round(runner.reward*.5));reinforcements.push(runner);}
+        monster.phaseTriggered[2]=true;const reinforcements=[],types=monster.wave>=30?['runner','commander','healer','runner']:monster.wave>=25?['runner','brute','commander']:monster.wave>=20?['runner','commander','runner']:['runner','runner'];
+        types.forEach(function(type,index){const unit=new ns.entities.Monster(type,monster.wave,monster.path,monster.modifiers);unit.x=monster.x+(index-(types.length-1)/2)*28;unit.y=monster.y+12;unit.index=monster.index;unit.reward=Math.max(1,Math.round(unit.reward*.5));reinforcements.push(unit);});
         reinforcements.forEach(unit=>monsters.push(unit));if(hooks&&hooks.onBossPhase)hooks.onBossPhase(monster,2,reinforcements);
       }
       if(next===3&&!monster.phaseTriggered[3]){monster.phaseTriggered[3]=true;monster.enraged=true;monster.speed*=1.2;if(hooks&&hooks.onBossPhase)hooks.onBossPhase(monster,3,[]);}

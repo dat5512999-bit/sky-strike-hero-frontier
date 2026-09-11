@@ -3,7 +3,7 @@
   class Hero{
     constructor(x,y){const cfg=ns.config.hero;Object.assign(this,{x:x,y:y,spawnX:x,spawnY:y,targetX:x,targetY:y,health:cfg.maxHealth,maxHealth:cfg.maxHealth,displayHealth:cfg.maxHealth,level:1,xp:0,gear:{},cooldown:0,novaCooldown:0,facing:0,active:true,state:'idle',frame:0,animationTime:0,attackTimer:0,castTimer:0,pendingTarget:null,selected:false,classType:'arcanist',fields:[],equipment:{spear:0,rune:0,charm:0},skillCooldowns:{thunder:0,summon:0},hitFlash:0,invulnerable:0,respawnTimer:0,deathTime:0,justDowned:false,justRevived:false});}
     chooseClass(type){if(!ns.systems.HeroRoster.CLASSES[type])return false;this.classType=type;return true;}
-    xpForNext(){return this.level>=10?null:40+this.level*this.level*12;}
+    xpForNext(){return this.level>=15?null:40+this.level*this.level*12;}
     xpProgress(){const next=this.xpForNext();return{level:this.level,xp:this.xp,next:next,ratio:next?Math.min(1,this.xp/next):1};}
     gainExperience(amount){let gained=Math.max(0,Math.round(amount||0)),levels=0;this.xp+=gained;let next=this.xpForNext();while(next!==null&&this.xp>=next){this.xp-=next;this.level+=1;levels+=1;const before=this.maxHealth;this.maxHealth=ns.config.hero.maxHealth+(this.level-1)*10;this.health=Math.min(this.maxHealth,this.health+(this.maxHealth-before)+8);this.displayHealth=this.health;next=this.xpForNext();}return{gained:gained,levels:levels,level:this.level};}
     skillPower(){return(1+this.equipment.spear*.2)*(1+(this.level-1)*.08);}

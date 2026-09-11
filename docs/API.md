@@ -1,5 +1,13 @@
 # API 文件（內部模組介面）
 
+## v0.34.0 三十波介面
+
+- `WaveCatalog.total()` 現回傳 `30`；`get(1..30)` 提供名稱、提示、威脅、敵軍群組與獎勵。
+- `WaveSystem.spawnInterval()` 依目前波次與 Difficulty `spawnRate` 回傳出兵間隔；後半 Boss 仍保留至少 0.52 秒基準可讀空檔。
+- `Hero.xpForNext()` 在 Lv.15 回傳 `null`。
+- `Monster` 使用分段線性生命倍率；第 1～15 波保持既有斜率，第 16～30 波降低斜率。
+- `TDGame.end()` 與 `wavePreviewLabel()` 從 `catalog.total()` 取得總波數，不再硬編 15。
+
 ## v0.33.0 守軍負傷介面
 
 - `TDDifficultySystem.current().unitRecovery`：回傳該難度的 `enabled`、`time`、`health`、`guard`。
@@ -50,7 +58,7 @@
 | `CommandSystem` | `arm`、`issue`、`hold`、`stop`、`reset` | 管理目前指令模式並把目的地與路徑交給單位 |
 | `ArtSystem` | `load`、`drawBackground`、`drawCombatUnit`、`drawBuilding`、`drawUnit` | 本機美術載入、4×4 動作圖集與建築圖集裁切 |
 | `ProfessionSystem` | `choose`、`current`、`reset` | 三職業選擇與單局職業鎖定 |
-| `WaveCatalog` | `total`、`get` | 15 波名稱、敵軍編成、威脅、提示與清場獎勵資料 |
+| `WaveCatalog` | `total`、`get` | 30 波名稱、敵軍編成、威脅、提示與清場獎勵資料 |
 | `WaveSystem` | `beginPreparation`、`preview`、`canStart`、`start`、`update`、`acknowledgeReward`、`label` | 準備／出兵／清場／結算狀態機與生成佇列 |
 | `EconomySystem` | `canAfford`、`spend`、`addKill`、`completeWave`、`refundGold` | 金幣、木材、功勳的集中收支與單次結算 |
 | `BuildSystem` | `queue`、`canPlaceAt`、`placeQueued`、`selectAt`、`combatUnits`、`buildings` | 單位／建築分流、選取、部署，透過經濟介面扣款與回收 |

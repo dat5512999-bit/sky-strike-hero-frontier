@@ -1,5 +1,9 @@
 # 設定手冊
 
+## v0.34.0 三十波設定
+
+塔防總波數以 `WaveCatalog.WAVES.length` 為執行權威，`config.totalWaves` 同步為 30。第 1～15 波生命每波 +10.5%，第 16～30 波每波改為 +7%；擊殺收益仍沿用原本每波 +2.5%，木材與功勳繼續限制建築數量與高階升級。後半 Boss 基準出兵間隔由 0.72 秒逐步縮至第 30 波 0.57 秒，但不低於 0.52 秒。
+
 ## v0.33.0 塔防守軍恢復
 
 `src/td/systems/TDDifficultySystem.js` 的 `unitRecovery` 控制守軍 HP 歸零規則：`enabled` 決定恢復或永久陣亡，`time` 是離場秒數，`health` 是歸隊生命比例，`guard` 是歸隊無敵秒數。建議同時調整時間與生命，不要只縮短倒數，否則前線作戰單位會變成無成本消耗品。
@@ -49,7 +53,7 @@ Boss 基礎 HP、波次成長、射擊冷卻、瞄準散角與各階段彈數位
 
 ## 英雄塔防參數
 
-`src/td/config.js` 集中管理 720×720 戰場、道路節點、起始 240G／5 木材、20 點城門生命、三職業價格／傷害／射程、護甲相剋與英雄能力；`wave.firstPreparation` 與 `wave.preparation` 分別是 18 秒首波準備及 12 秒後續整備。怪物原始數值位於 `Monster.js` 的 `TYPES`，每波 HP 目前成長 10.5%。15 波名稱、編成、提示、威脅與清場獎勵位於 `WaveCatalog.js`，不要在 `TDGame` 或 `WaveSystem` 硬編波表。
+`src/td/config.js` 集中管理 720×720 戰場、道路節點、起始 240G／5 木材、20 點城門生命、三職業價格／傷害／射程、護甲相剋與英雄能力；`wave.firstPreparation` 與 `wave.preparation` 分別是 18 秒首波準備及 12 秒後續整備。怪物原始數值位於 `Monster.js` 的 `TYPES`，生命採前 15 波 10.5%、後 15 波 7% 的分段線性成長。30 波名稱、編成、提示、威脅與清場獎勵位於 `WaveCatalog.js`，不要在 `TDGame` 或 `WaveSystem` 硬編波表。
 
 調整經濟時透過 `EconomySystem`，並至少驗證：開局可部署兩名基礎單位、開波不提前發資源、清場只結算一次、波次木材補給正確、Lv.4～5 會消耗功勳、出售返還總投入 70%、Boss 漏怪扣 5 點。調整波表後須確認第 5／10／15 波含 Boss 且估算總耐久高於前一波。修改道路節點時必須維持首尾在畫面外，並重測 `BuildSystem.canPlaceAt()` 的 55px 禁建距離。
 

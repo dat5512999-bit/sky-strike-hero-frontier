@@ -4,6 +4,7 @@
     constructor(catalog){this.catalog=catalog||new ns.systems.WaveCatalog();this.reset();}
     reset(){this.wave=0;this.queue=[];this.spawnTimer=0;this.phase='waiting';this.active=false;this.complete=false;this.countdown=0;this.pendingClear=null;this.modifiers={};}
     setModifiers(modifiers){this.modifiers=Object.assign({},modifiers||{});return this.modifiers;}
+    spawnInterval(){const base=this.wave%5===0?Math.max(.52,.72-Math.max(0,this.wave-15)*.01):Math.max(.24,.5-this.wave*.012);return base*(this.modifiers.spawnRate||1);}
     composition(wave){const definition=this.catalog.get(wave);return definition?definition.groups:[];}
     preview(){return this.complete?null:this.catalog.get(this.wave+1);}
     beginPreparation(){
@@ -18,7 +19,7 @@
     }
     update(dt,monsters){
       if(this.phase==='preparing'){this.countdown=Math.max(0,this.countdown-dt);if(this.countdown<=0)this.start();}
-      if(this.phase==='spawning'){this.spawnTimer-=dt;if(this.queue.length&&this.spawnTimer<=0){monsters.push(new ns.entities.Monster(this.queue.shift(),this.wave,ns.config.path,this.modifiers));this.spawnTimer=(this.wave%5===0?.72:Math.max(.26,.5-this.wave*.012))*(this.modifiers.spawnRate||1);}if(!this.queue.length)this.phase='clearing';}
+      if(this.phase==='spawning'){this.spawnTimer-=dt;if(this.queue.length&&this.spawnTimer<=0){monsters.push(new ns.entities.Monster(this.queue.shift(),this.wave,ns.config.path,this.modifiers));this.spawnTimer=this.spawnInterval();}if(!this.queue.length)this.phase='clearing';}
       if(this.phase==='clearing'&&!monsters.some(function(monster){return monster.active;})){this.active=false;this.phase='reward';this.pendingClear=this.catalog.get(this.wave);}
       if(this.phase==='reward'&&this.pendingClear){const event=this.pendingClear;this.pendingClear=null;return event;}
       return null;

@@ -1,5 +1,9 @@
 # 部署手冊
 
+## v0.34.0 發布檢查
+
+部署方式不變。確認 `sw.js` 的快取名稱為 `sky-strike-v0.34.0`，並上傳完整 `WaveCatalog.js`、`WaveSystem.js`、`Monster.js`、`EnemyCombatSystem.js`、`Hero.js`、`TDGame.js` 與測試／文件。發布煙霧測試至少覆蓋首波開始、模擬第 30 波完成、Lv.15 封頂與後期 Boss 增援。
+
 ## v0.33.0 發布檢查
 
 靜態部署方式不變。上線前執行 `npm run check` 與 `npm test`，並確認 `sw.js` 使用 `sky-strike-v0.33.0`。在 HTTP／GitHub Pages 環境至少以標準難度部署一名守軍，再驗證負傷後裝備仍由原單位持有；另以災厄驗證永久陣亡會釋放軍械。

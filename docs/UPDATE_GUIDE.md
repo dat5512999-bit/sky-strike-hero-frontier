@@ -1,5 +1,9 @@
 # 版本更新手冊
 
+## 更新到 v0.34.0
+
+請完整替換塔防波表、怪物、英雄、Boss 戰鬥、主流程、設定與 Service Worker 檔案，不可只把 `totalWaves` 改成 30。執行 `npm run check` 與 `npm test` 應有 140 項通過。此版無存檔遷移；更新會重開目前戰役。
+
 ## 更新到 v0.33.0
 
 完整替換 `CombatUnit.js`、`BuildSystem.js`、`TDDifficultySystem.js`、`BattleReportSystem.js`、`TDGame.js`、`td.html` 與 `sw.js`，再執行 `npm run check`、`npm test`。本版沒有存檔遷移；進行中的戰役會重開。更新後確認標準難度顯示「守軍 10 秒歸隊」。

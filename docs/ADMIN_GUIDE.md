@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## v0.34.0 三十波營運
+
+`WaveCatalog.js` 是 30 波編成與清場獎勵的唯一來源，`WaveSystem.js` 仍只管理 `preparing → spawning → clearing → reward → complete`。後期生命成長採 `1 + 前14波×10.5% + 後15波×7%`；不要在 `TDGame` 硬編波數。調整後至少驗證第 15／16 波曲線銜接、六個 Boss 波總耐久、每三波 Loot、Lv.15、第三十波勝利與四難度的守軍恢復規則。
+
 ## v0.33.0 守軍恢復營運參數
 
 四難度的 `unitRecovery` 位於 `src/td/systems/TDDifficultySystem.js`，包含 `enabled`、`time`、`health`、`guard`。`BuildSystem` 只把該策略配置到新舊作戰單位；`CombatUnit` 擁有倒地、倒數與歸隊狀態。永久離場才可觸發 `BuildSystem.onRemove` 回收唯一軍械，負傷期間不得呼叫 `releaseTarget()`。調整後至少驗證裝備單位負傷、倒數、原位置歸隊、戰報統計與災厄永久陣亡。
