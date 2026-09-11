@@ -242,4 +242,6 @@
 
 - [x] 工作流程含 `enablement: true`，新公開倉庫可自動建立 Pages Site。
 - [x] 語法檢查與 135 項自動回歸測試仍全部通過。
-- [ ] 遠端 Actions deploy job 與 Pages URL 等待實際發布驗收。
+- [x] 遠端 Actions deploy job 成功，正式塔防頁、manifest 與 512px PNG 均回傳 200。
+- [x] 公開 Chromium 載入塔防選角畫面、720×720 Canvas、專用 manifest 與 Apple Touch Icon，Console Error 為 0。
+- [ ] Android Chrome 與 iOS Safari 的實體安裝仍待玩家裝置驗收。

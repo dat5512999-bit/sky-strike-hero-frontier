@@ -2,6 +2,11 @@
 
 一款可在電腦與手機瀏覽器遊玩的雙模式 2D 遊戲。此版本為 **GitHub Pages 手機發布版（v0.32.2）**，同時保留完整的唯一軍械、英雄塔防與符文防線射擊模式。
 
+線上遊玩：
+
+- [英雄塔防（手機安裝入口）](https://dat5512999-bit.github.io/sky-strike-hero-frontier/td.html)
+- [蒼穹突擊飛機模式](https://dat5512999-bit.github.io/sky-strike-hero-frontier/)
+
 ## 目前功能
 
 - 滑鼠平滑控制玩家戰機，並限制於畫面邊界。
@@ -120,6 +125,7 @@ npm run check
 
 - 公開倉庫推送後由 GitHub Actions 自動執行語法與回歸測試，通過才發布遊戲。
 - 新倉庫第一次執行會由工作流程自動啟用 Pages，不需先手動建立 Pages Site。
+- 正式站已發布於 `https://dat5512999-bit.github.io/sky-strike-hero-frontier/`，塔防安裝入口為 `/td.html`。
 
 ## 文件索引
 

@@ -237,4 +237,6 @@
 
 先用手機瀏覽器開啟 `td.html` 的 GitHub Pages 網址。Android Chrome 選「安裝應用程式」或「加到主畫面」；iPhone Safari 點分享按鈕後選「加入主畫面」。安裝名稱為「英雄塔防」，顯示金翼盾徽圖示，從圖示啟動會直接進入塔防頁。
 
+正式塔防網址：`https://dat5512999-bit.github.io/sky-strike-hero-frontier/td.html`
+
 v0.32.2 起，首次推送至新的公開 GitHub 倉庫也會自動啟用 Pages；玩家操作方式不變。
