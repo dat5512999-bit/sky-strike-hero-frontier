@@ -1,5 +1,7 @@
 # 安裝手冊
 
+> v0.30.0 新增的種族單位、三族大型建築與戰狼圖集均已保存於 `assets/td/`，不需另外下載素材或安裝套件。更新後若仍看到舊版，請關閉分頁後重新開啟，或清除該站台的 Service Worker 快取。
+
 ## 遊玩安裝
 
 1. 將整個專案資料夾複製到 Windows 電腦。
@@ -50,3 +52,11 @@
 ## v0.24.0 黃金 15 波
 
 安裝條件不變。完整專案必須包含 `TDDifficultySystem.js` 與 `EnemyTraitSystem.js`，兩者均需在 `TDGame.js` 前由 `td.html` 載入。HTTP 或 GitHub Pages 更新後重新整理，看到四個難度選項即代表 v0.24.0 已載入。
+
+## v0.31.0 戰地軍械
+
+無新增套件、伺服器或資料庫。完整下載需含 `src/td/systems/ArmorySystem.js` 與 `assets/td/items/equipment-atlas-v1.png`；兩者已列入 `td.html` 及離線快取。選角後看到選取卡下方「軍械庫」即代表新版已載入。
+
+## v0.32.0 唯一軍械
+
+安裝需求不變。更新後軍械庫上方應看到武器／護甲／戰器三個欄位；若未出現，重新整理以更新 `sky-strike-v0.32.0` 離線快取。

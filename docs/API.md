@@ -48,6 +48,7 @@
 | `BuildSystem` | `queue`、`canPlaceAt`、`placeQueued`、`selectAt`、`combatUnits`、`buildings` | 單位／建築分流、選取、部署，透過經濟介面扣款與回收 |
 | `EnemyCombatSystem` | `update`、`validTargets`、`strike`、`phase` | 敵軍目標政策、攻擊前搖、Boss 增援／狂暴／範圍技能 |
 | `TDGame` | `startWave`、`queueDeploy`、`armCommand`、`commandSelected`、`castNova`、`update` | 協調戰術指令、波次、英雄、建築、經濟與結算 |
+| `ArmorySystem` | `obtain`、`canEquip`、`equip`、`equipped`、`apply`、`title`、`visual` | 管理本局戰利裝備、角色相容性、能力修正、稱號與外觀掛件 |
 
 ## Skin Pack 介面
 
@@ -86,3 +87,38 @@ Monster新增walkDistance、state、frame、facing、hitTime、deathTime；updat
 `TDDifficultySystem.choose(id)` 只接受 `story | standard | veteran | calamity`；`current()` 回傳顯示資料，`modifiers()` 回傳本局倍率副本。`TDGame.chooseDifficulty(id)` 僅在選角前生效，並由 `applyDifficulty()` 同步 Wave、Economy 與城門。
 
 `EnemyTraitSystem.update(dt, monsters, hooks)` 每幀重算旗手光環並推進祭司治療；`hooks.onHeal(healer, target, amount)` 僅提供視覺回饋。`Monster.effectiveHealth()` 包含剩餘屏障，所有直接傷害回饋以攻擊前後有效生命差計算。未新增 HTTP API。
+
+## v0.27.0 職業武器
+
+`EquipmentSystem.weapon(hero, level?)` 回傳目前或指定階級的武器副本；`nextWeapon(hero)` 在滿級時回傳 `null`；`effectColor(hero, fallback)` 提供戰鬥回饋色；`drawSignature(ctx, hero)` 只繪製裝備特效，不修改英雄狀態。`ShopSystem.offer('spear')` 現在附帶 `visual` 與 `active`，`buy` 成功時附帶實際裝備的 `item`。既有 `Hero.equipment.spear`、三級價格及傷害公式保持相容。
+
+## v0.28.0 暗影英雄掛點
+
+`ArtSystem.drawRogueWeapons(ctx, hero)` 依 `hero.state`、`hero.frame` 與裝備階級繪製兩把武器並回傳是否成功。`drawHero` 只在暗影英雄已購買武器且兩個新素材 ready 時改用無武器底圖。此為內部繪圖 API，沒有修改 `Hero` 或 `Projectile` 的公開戰鬥介面。
+
+## v0.30 新增介面
+
+- `FactionSystem.choose(id)`：選擇 `hunter`、`arcanist` 或 `rogue` 軍團。
+- `FactionSystem.available(kind)`／`allows(kind, id)`：取得或檢查目前可建造內容。
+- `FactionSystem.unlock(kind, id)`：由戰利品解鎖單位或建築；拒絕未知 ID。
+- `LootSystem.createOffers(wave, profession)`：建立 Boss 後三選一；第 5 波保證半獸人戰契。
+- `LootSystem.claim(id, context)`：套用解鎖、裝備或資源並防止重複領取同一待選項。
+- `TowerEvolutionSystem.branches(type)`／`choose(tower, id)`：列出並選擇 Lv.3 塔分支。
+- `Hero.gainExperience(amount)`／`xpProgress()`：增加英雄 XP 並回傳升級數與 UI 進度。
+- `CombatUnit.registerKill()`／`mastery()`：累積擊殺並取得 Lv.1～5 熟練等級。
+
+## v0.31 新增介面
+
+- `ArmorySystem.obtain(id)`：把合法裝備收入本局軍械庫，同件不重複。
+- `ArmorySystem.canEquip(id, target)`／`equip(id, target)`：驗證英雄職業或守軍類型，配置到 `weapon | armor | relic` 欄位。
+- `ArmorySystem.apply(target, config)`：回傳套用乘算與加算修正後的能力副本，不修改基礎表。
+- `ArmorySystem.title(target, fallback)`／`visual(target)`：提供進階稱號與主要外觀資料給 UI／`ArtSystem`。
+- `LootSystem.createOffers()` 在 3 的倍數波次保證一件軍械；`claim()` 的 context 可傳入 `armory` 以收入裝備。
+
+## v0.32 新增介面
+
+- `ArmorySystem.wearer(id)`：回傳唯一軍械目前持有人，未配置時為 `null`。
+- `ArmorySystem.unequip(slot, target)`：卸下指定欄位並重新同步守軍最大生命。
+- `ArmorySystem.releaseTarget(target)`：角色離場時一次回收全部裝備。
+- `ArmorySystem.equip()` 現在會自動處理原持有人與被替換欄位，結果包含 `movedFrom`、`replaced`。
+- `BuildSystem.onRemove(target)`：可選移除事件；出售或死亡清除時呼叫，BuildSystem 本身不依賴軍械系統。

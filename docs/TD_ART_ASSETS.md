@@ -47,6 +47,27 @@ v0.11 與 v0.12 的 PNG 使用內建圖片生成工具製作，再複製進專�
 
 替換背景時必須重校 `src/td/config.js` 的道路與建築禁區。角色 atlas 必須維持 4×4，列順序固定為 idle／walk／attack／hit-death，並確保每格角色比例、大小與腳底註冊點一致。所有資產都必須保存於專案並加入 `sw.js`；遊戲執行期不依賴遠端生成服務。
 
+## v0.26.0 分享素材歸檔與垂直切片
+
+- 原始候選圖保存於本機 `assets/td/reference/share-2026-09-10/`，由該資料夾的 `README.md` 記錄內容及加工狀態；遊戲不直接載入候選圖，Git 倉庫也會忽略此本機參考封存。
+- `assets/td/enemy-orc-grunt-actions-v2.png`：1254×1254 RGBA，4×4；前兩列八格行走、第三列受擊、第四列死亡，取代普通邊境步兵的顯示素材。
+- `assets/td/items/weapons-atlas-v5.png`：1536×1024 RGBA，4×2；八把武器依普通、稀有、史詩與傳說方向準備，目前尚未接入戰鬥數值。
+- `scripts/chroma-key.ps1`：將生成階段的純綠背景轉為真正透明 Alpha，並清除綠幕邊緣污染。輸入必須是專為去背產生的純綠素材，不應對一般圖片直接套用。
+
+## v0.27.0 三職業武器九宮格
+
+- 輸出：`assets/td/items/class-weapons-atlas-v1.png`，1536×1024 RGBA，3 欄 × 3 列。
+- 欄位依序為精良、史詩、傳說；列依序為獵手長弓、奧術法杖、盜賊雙刃。
+- 生成模式：imagegen 全新生成，以 `weapons-atlas-v5.png` 作為風格參考；要求固定九宮格、純綠背景、無字、無框與完整安全邊距，再用 `scripts/chroma-key.ps1` 轉為真正 Alpha。
+- 最終提示摘要：original fantasy RTS inventory weapon atlas；row 1 steel/frostwood/dragonfire bows，row 2 crystal/storm/holy-star staffs，row 3 steel/shadow/demonfang paired blades；classic hand-painted low-poly RTS miniature、upper-left light、equal cells、no characters/UI/text/logo。
+
+## v0.28.0 暗影英雄無武器底圖
+
+- 輸出：`assets/td/rogue-actions-unarmed-v2.png`，1254×1254 RGBA，4 欄 × 4 列。
+- 生成方式：內建 imagegen 的 precise-object-edit，以 `rogue-actions-v1.png` 為編輯目標；只移除每格匕首與烘焙斬擊，保留角色、衣著、姿勢、格位與鏡頭。生成器第一次輸出棋盤格背景，第二次只改為純 `#00FF00`，再以 `scripts/chroma-key.ps1` 轉成真正透明 Alpha。
+- 正式提示摘要：remove only every dagger/blade/weapon and baked slash arc from all 16 cells；reconstruct natural empty gloved hands；preserve identity, poses, foot positions, scale and spacing；flat chroma background cleanup；no weapon/effect/text/logo。
+- 四角 Alpha 驗證皆為 0。原 `rogue-actions-v1.png` 不刪除，作為制式裝備與載入失敗回退。
+
 ## v0.17 英雄動作素材
 
 新增 `assets/td/hero-actions-v1.png`（1254×1254、RGBA），內建 imagegen 生成的原創女英雄四態圖集。完整提示及限制見 [HERO_ART_PROMPT.md](HERO_ART_PROMPT.md)。圖集與頭像均離線使用；升級肩甲、戰旗與符文由 Canvas 繪製。
@@ -86,3 +107,23 @@ Use case: stylized-concept. Asset type: production 2D RTS sprite animation sheet
 最終提示：
 
 Use case: stylized-concept. Asset type: production 2D RTS sprite animation sheet, original fantasy game enemy, transparent PNG with real alpha, no background, no grid lines or words. EXACT layout: 4 columns by 4 rows, 16 equal square cells. Each cell contains the SAME character at identical camera, consistent size and materials, feet anchored 80% down in cell, full body with safe margins. Rows 1 and 2 = eight consecutive locomotion keyframes, alternating limbs and clear step cycles (not identical poses), facing right, slight 3/4 overhead game camera. Row 3 = four hit reaction keyframes, flinch then recover. Row 4 = four non-gory death keyframes, stagger kneel fall then motionless on ground, maintain original scale and foot ground anchor. Classic hand-painted low-poly fantasy RTS miniature aesthetic, muted earthy colors, clearly readable silhouette, upper-left lighting, no glow, no baked shadow, not a concept illustration. No Warcraft characters or logos. Massive hunched two-legged stone-armored ogre beast, slate violet-grey rock plates, thick muscular limbs, heavy fists, brown belt. Eight slow weighty walking frames with alternate heavy footfalls, consistent anatomy.
+
+## v0.30.0 玩家軍團與戰狼
+
+- `faction-shield-v1.png`、`faction-skeleton-v1.png`、`faction-dragon-v1.png`：王國盾衛、幽骨劍士、翡翠幼龍 4×4 動作圖集。
+- `enemy-orc-grunt-actions-v2.png`：本版保留給玩家解鎖的赤牙勇士；普通敵軍恢復使用 `enemy-grunt-actions-v1.png`，避免敵我外觀相同。
+- `faction-structures-v1.png`：1224×1224 RGBA 九宮格；三欄為王國戰鼓堡、翠靈古樹、冥燈墓園，三列為基礎、進階、終階。
+- `war-wolf-actions-v1.png`：1448×1088 RGBA，4×4；列順序為待機、奔跑、撲咬、受擊／倒地。生成時先輸出純綠背景，再由 `scripts/chroma-key.ps1` 轉成真正透明 Alpha；`war-wolf-actions-source-v1.png` 保留作為可重製來源。
+
+戰狼最終提示摘要：original armored forest war wolf companion，classic hand-painted low-poly fantasy RTS miniature，three-quarter top-down camera，exact 4 columns × 4 rows；row 1 idle breathing，row 2 running cycle，row 3 bite/lunge，row 4 hit/fall；same anatomy, scale, lighting and ground anchor in every cell；solid chroma green background，no text/grid/UI/logo。由內建 imagegen 全新生成，未複製既有遊戲角色或素材。
+
+## v0.31.0 戰地軍械圖集
+
+- `assets/td/items/equipment-atlas-v1.png`：1254×1254 透明 RGBA 九宮格。由左至右、由上至下為獅心王弓、不落獅盾、先鋒戰鼓、翡翠龍心、月銀古杖、常青冠冕、赤牙狼騎戰鞍、幽骨王冠、噬魂冥燈。
+- 用於戰利品、軍械庫與角色掛件；CSS 與 Canvas 共用相同 3×3 座標，不含文字、Logo 或既有遊戲素材。
+
+最終提示摘要：original dark-fantasy RTS equipment icon atlas，transparent background，exact 3×3 equal cells，nine unique centered isolated items in fixed order，hand-painted low-poly miniature readability，consistent upper-left warm lighting，no text/UI/grid/logo，original fantasy designs and not copied Warcraft assets。由內建 imagegen 生成並保存為正式本機資產。
+
+## v0.32.0 唯一軍械介面
+
+本版沒有生成或替換美術資產，沿用 `equipment-atlas-v1.png`。新增的三欄裝備盤、持有人標記、已裝備／轉裝／不相容狀態皆以 HTML／CSS 呈現，確保桌面與手機共用同一套圖集並避免重複素材。

@@ -1,0 +1,6 @@
+node_modules/
+.npm-cache/
+*.log
+
+# Local concept/reference archive; the playable game does not load these files.
+assets/td/reference/

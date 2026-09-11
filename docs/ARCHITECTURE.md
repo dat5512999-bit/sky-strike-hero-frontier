@@ -186,3 +186,46 @@ WaveCatalog → Monster(type) → EnemyTraitSystem
 ```
 
 `TDDifficultySystem` 只提供成套倍率，不知道波次內容；`EnemyTraitSystem` 只計算鄰近能力，不處理移動、獎勵或死亡。既有 `WaveSystem`、`EconomySystem` 與 `Monster` 保持資料流單向。專案仍無資料庫與遠端 API，難度是單局狀態。
+
+## v0.27.0 職業武器資料流
+
+```text
+Hero.classType + Hero.equipment.spear → EquipmentSystem.weapon / nextWeapon
+                                      ├→ ShopSystem：下一階名稱、價格與購買結果
+                                      ├→ TDGame.updateUi：英雄卡、商店圖示與稀有度
+                                      └→ Hero / HeroRoster：彈道色與純視覺簽名特效
+```
+
+`EquipmentSystem` 是只讀配置與繪圖層；裝備等級仍由既有 `Hero.equipment` 保存，金錢仍只由 `EconomySystem` 扣除。沒有加入背包、資料庫或遠端 API，因此可逐步替換成真正的手持武器動畫而不改商店介面。
+
+## v0.28.0 暗影英雄逐幀掛點
+
+```text
+Hero.equipment.spear > 0
+  → ArtSystem 選擇 rogue-actions-unarmed-v2
+  → state + frame 查詢左右手掛點
+  → class-weapons-atlas-v1 裁切左右武器
+  → 同一角色鏡像座標系繪製
+```
+
+只有在無武器底圖與武器圖集都載入完成時才啟用真正換裝；任一素材未完成會繼續使用舊 `rogue-actions-v1.png`，避免短暫空手或畫面缺失。掛點只屬於 `ArtSystem`，不進入戰鬥判定。
+
+## v0.30 玩家軍團資料流
+
+`ProfessionSystem` 決定英雄職業，`FactionSystem` 以同一 ID 提供本族可用的單位與建築；`LootSystem` 只透過 `FactionSystem.unlock()` 增加可用項目，不修改建造器。`BuildSystem` 繼續負責排隊、合法位置、扣款、升級與回收，因此新種族不需要複製經濟或放置邏輯。
+
+`CombatUnit` 統一 7 種可移動守軍的命令、生命週期、Lv.1～5 與熟練度。`Building` 負責固定塔；`TowerSkillSystem` 處理塔種差異，`TowerEvolutionSystem` 於 Lv.3 套用二選一設定修正。`ArtSystem` 依單位狀態、等級、塔階與分支選擇圖格，素材未 ready 時仍回退 Canvas 圖形。
+
+英雄 XP 保存在 `Hero` 實體，不新增全域存檔。`TDGame.onKill()` 只在第一次合法擊殺時同時分派金錢、來源單位熟練與英雄 XP，避免範圍／連鎖攻擊重複結算。
+
+## v0.31 軍械資料流
+
+`LootSystem` 只產生戰利品選項，選取軍械時呼叫 `ArmorySystem.obtain()`；`TDGame` 負責暫停、目標選取與軍械庫 DOM。`Hero`／`CombatUnit` 各自保存三個裝備欄，查詢戰鬥設定時才由 `ArmorySystem.apply()` 建立修正副本，因此不改寫 `config.js` 基礎數值，也不影響其他實體。
+
+`ArtSystem.drawGearPieces()` 從 `equipment-atlas-v1.png` 裁切掛件；狼騎由半獸人及既有戰狼兩套 4×4 動作圖集共用狀態與影格合成。素材未 ready 時仍繪製原單位，裝備數值不依賴美術載入。軍械目前為單局記憶體狀態，沒有資料庫、API 或存檔遷移。
+
+## v0.32 唯一裝備生命週期
+
+`ArmorySystem.assignments` 以裝備 ID 指向單一角色；轉裝先移除舊角色欄位，再配置新目標。角色只保存自己的 `gear` 欄位，戰鬥查詢仍走 `apply()`。`BuildSystem` 僅提供通用 `onRemove` hook，`TDGame.attachArmoryUi()` 才把它連到 `releaseTarget()`，避免建造模組反向依賴軍械庫。
+
+出售與死亡清除共用離場 hook；英雄倒下不觸發，因英雄仍會復活。生命型裝備的穿戴／卸下會重新查詢 config、補上新增上限或把超額生命夾回新上限，避免轉裝後留下幽靈數值。

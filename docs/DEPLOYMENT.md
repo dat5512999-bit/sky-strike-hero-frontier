@@ -1,5 +1,7 @@
 # 部署手冊
 
+> v0.30.0 部署時必須包含 `FactionSystem.js`、`LootSystem.js`、`TowerEvolutionSystem.js`、`faction-structures-v1.png`、三種新守軍圖集與 `war-wolf-actions-v1.png`。`sw.js` 快取版本已升至 `sky-strike-v0.30.0`。
+
 ## 本機／隨身碟
 
 發行時保留 `index.html`、`styles.css`、`src` 與版本文件。以 ZIP 封裝整個資料夾，解壓後可直接開啟。
@@ -57,3 +59,11 @@ v0.17.0 快取為 sky-strike-v0.17.0，必須包含 hero-actions-v1.png。同步
 ## v0.24.0 黃金 15 波
 
 最新快取為 `sky-strike-v0.24.0`。發布時同步上傳兩個新系統、WaveCatalog、WaveSystem、EconomySystem、Monster、Projectile、Hero、ArtSystem、TDGame、HTML、CSS、測試與文件。發布後重新整理兩次並確認四難度、城門生命與難度名稱一致；本次未自動部署到網路。
+
+## v0.31.0 戰地軍械
+
+最新快取為 `sky-strike-v0.31.0`。發布必須包含 `ArmorySystem.js`、`equipment-atlas-v1.png`、Hero、CombatUnit、ArtSystem、LootSystem、TDGame、HTML、CSS、Service Worker、測試及文件。部署後重新整理至新 Service Worker，確認第 3 波掉寶、軍械庫配置與手機介面無水平溢出。本次只修改本機專案，未自動發布。
+
+## v0.32.0 唯一軍械
+
+最新快取為 `sky-strike-v0.32.0`。同步發布 ArmorySystem、BuildSystem、TDGame、HTML、CSS、Service Worker 與文件；沒有新資產或外部依賴。部署後驗證三欄配置、轉裝、卸裝及守軍離場回收。本次未自動發布到網路。

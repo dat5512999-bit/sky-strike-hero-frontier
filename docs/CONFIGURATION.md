@@ -1,5 +1,7 @@
 # 設定手冊
 
+> v0.30.0：基礎單位／建築數值位於 `src/td/config.js`；三族開局清單位於 `FactionSystem.FACTIONS`；Boss 戰利品位於 `LootSystem.ITEMS`；塔分支位於 `TowerEvolutionSystem.BRANCHES`。新增項目時需同步資料、UI、離線快取與測試。
+
 ## 一般玩家
 
 不需帳號、網路、音效裝置、資料庫或瀏覽器權限。外觀與難度選擇會嘗試寫入瀏覽器本機儲存空間；禁止儲存也不影響遊玩。建議以 1280×720 或更高解析度、100% 瀏覽器縮放遊玩。
@@ -80,3 +82,11 @@ Monster.update中的stride控制完整步態需要的路程：步兵64、疾行�
 四種難度的 `enemyHealth`、`enemySpeed`、`enemyDamage`、`reward`、`baseHealth`、`preparation` 與 `spawnRate` 集中在 `TDDifficultySystem.js`。不得只改 UI 文案；各倍率必須維持正數，且更高難度的城門生命與整備時間不應高於較低難度。
 
 盾衛、祭司、旗手的基礎數值位於 `Monster.TYPES`；光環範圍／倍率與治療週期／比例位於 `EnemyTraitSystem.js`。15 波實際組合只改 `WaveCatalog.js`。平衡時先調波表和倍率，避免把例外硬編進 `TDGame`。
+
+## v0.31.0 軍械設定
+
+九件裝備的 `slot`、`types`／`heroes`、`mods`、稱號與圖集 `column`／`row` 位於 `ArmorySystem.ITEMS`。乘算欄位為 damage、range、interval、speed、health；加算欄位為 armor、shots、splash、chain、bountyBonus。第 3 波保證裝備及每 3 波軍械規則位於 `LootSystem.createOffers()`。
+
+## v0.32.0 分配規則
+
+每個裝備 ID 僅能有一名持有人；轉裝及卸裝免費，鼓勵整備期調度而不增加額外貨幣。若要加入轉裝成本或戰鬥中鎖定，應在 `TDGame` 操作層實作，不要破壞 `ArmorySystem` 的資料一致性。

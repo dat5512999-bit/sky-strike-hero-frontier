@@ -14,7 +14,7 @@
     start(){
       if(!this.canStart())return false;
       const definition=this.catalog.get(this.wave+1);if(!definition)return false;
-      this.wave=definition.wave;this.queue=[];definition.groups.forEach(function(group){for(let i=0;i<group.count;i+=1)this.queue.push(group.type);},this);this.spawnTimer=.15;this.countdown=0;this.phase='spawning';this.active=true;return true;
+      this.wave=definition.wave;this.queue=[];definition.groups.forEach(function(group){for(let i=0;i<group.count;i+=1)this.queue.push(group.type);},this);this.spawnTimer=.15;this.countdown=0;this.phase='spawning';this.active=true;if(typeof this.onStart==='function')this.onStart(this.wave,definition);return true;
     }
     update(dt,monsters){
       if(this.phase==='preparing'){this.countdown=Math.max(0,this.countdown-dt);if(this.countdown<=0)this.start();}

@@ -41,6 +41,8 @@ test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
   [1, 2, 3].forEach((speed) => assert.match(html, new RegExp(`data-game-speed=["']${speed}["']`)));
   ['Q','W','E','R'].forEach((key) => assert.match(html, new RegExp(`<kbd>${key}</kbd>`)));
   ['story','standard','veteran','calamity'].forEach((mode) => assert.match(html, new RegExp(`data-td-difficulty=["']${mode}["']`)));
+  ['td-report-open','td-report-screen','td-report-rows','td-final-report'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
+  ['td-armory-open','td-armory-screen','td-armory-loadout','td-armory-items','td-armory-target'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
 });
 
 test('PWA manifest 與離線快取引用的遊戲檔案都存在', () => {
@@ -82,4 +84,25 @@ test('人族 TD 戰場與職業單位圖集可離線載入', () => {
     assert.equal(data.readUInt32BE(16), width);
     assert.equal(data.readUInt32BE(20), height);
   });
+});
+
+test('職業武器九宮格為本機透明資產', () => {
+  const data = fs.readFileSync(path.join(root, 'assets/td/items/class-weapons-atlas-v1.png'));
+  assert.equal(data.readUInt32BE(16), 1536);
+  assert.equal(data.readUInt32BE(20), 1024);
+  assert.equal(data[25], 6);
+});
+
+test('暗影英雄無武器底圖可供逐幀換裝', () => {
+  const data = fs.readFileSync(path.join(root, 'assets/td/rogue-actions-unarmed-v2.png'));
+  assert.equal(data.readUInt32BE(16), 1254);
+  assert.equal(data.readUInt32BE(20), 1254);
+  assert.equal(data[25], 6);
+});
+
+test('戰地軍械九宮格為本機透明資產', () => {
+  const data = fs.readFileSync(path.join(root, 'assets/td/items/equipment-atlas-v1.png'));
+  assert.equal(data.readUInt32BE(16), 1254);
+  assert.equal(data.readUInt32BE(20), 1254);
+  assert.equal(data[25], 6);
 });

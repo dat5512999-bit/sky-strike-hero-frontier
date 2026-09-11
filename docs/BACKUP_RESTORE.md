@@ -1,5 +1,7 @@
 # 備份與還原手冊
 
+> v0.30.0 沒有新增持久化存檔格式，還原舊版不需要資料轉換。單局英雄 XP、戰利品與軍團解鎖不寫入 `localStorage`；頁面重新載入即安全重置。
+
 ## 備份
 
 - 版本備份：保留 Git 儲存庫並建立版本標籤。
@@ -45,3 +47,11 @@ v0.19.0回復基線為v0.18.0。完整備份包含新增 HeroRoster.js；需要�
 ## v0.24.0 黃金 15 波
 
 完整備份新增 `TDDifficultySystem.js`、`EnemyTraitSystem.js` 與新版波表。回復時不可只還原 `td.html`，必須同步還原 Service Worker 快取名稱與全部相依程式。完成封存後可使用 Git 標籤 `v0.24.0` 回到此版本；局內波次仍不保存。
+
+## v0.31.0 戰地軍械
+
+備份需同步包含 `ArmorySystem.js`、軍械圖集、LootSystem、Hero、CombatUnit、ArtSystem、TDGame、HTML、CSS 及 `sw.js`。回復 v0.30 時必須整組回復，避免 HTML 載入不存在模組或舊快取遺漏圖片。軍械只存在記憶體，沒有需要備份的玩家資料。
+
+## v0.32.0 唯一軍械與守軍編成
+
+備份需包含 ArmorySystem、BuildSystem、TDGame、HTML、CSS、測試與文件；軍械圖集沿用 v0.31，沒有新增二進位資產。建議以 v0.31.0 作回退基線並在另一目錄檢出。回退會恢復同件軍械可重複配置的舊規則，局內裝備狀態不會保留。

@@ -7,7 +7,11 @@
     units:{
       hunter:{name:'王國獵手',icon:'➶',cost:70,wood:1,health:92,armor:1,damage:17,range:150,interval:.68,speed:122,color:'#e6c56c',attackType:'pierce'},
       arcanist:{name:'奧術學徒',icon:'✦',cost:85,wood:1,health:72,armor:0,damage:13,range:132,interval:.9,speed:104,color:'#ff8a52',attackType:'magic',splash:42},
-      rogue:{name:'暗影盜賊',icon:'◆',cost:65,wood:1,health:80,armor:0,damage:11,range:118,interval:.45,speed:148,color:'#c884df',attackType:'chaos',bountyBonus:.35}
+      rogue:{name:'暗影盜賊',faction:'暗影',icon:'◆',cost:65,wood:1,health:80,armor:0,damage:11,range:118,interval:.45,speed:148,color:'#c884df',attackType:'chaos',bountyBonus:.35},
+      shield:{name:'王國盾衛',faction:'王國',icon:'盾',cost:105,wood:2,health:185,armor:5,damage:18,range:42,interval:.92,speed:92,color:'#6da4e8',attackType:'chaos',role:'重裝攔截'},
+      skeleton:{name:'幽骨劍士',faction:'暗影',icon:'骷',cost:78,wood:1,health:102,armor:2,damage:21,range:48,interval:.72,speed:118,color:'#bc9aff',attackType:'chaos',role:'快速近戰'},
+      dragon:{name:'翡翠幼龍',faction:'精靈',icon:'龍',cost:165,wood:3,health:126,armor:2,damage:27,range:145,interval:1.05,speed:136,color:'#70d89c',attackType:'magic',splash:34,role:'飛行範圍'},
+      orc:{name:'赤牙勇士',faction:'半獸人',icon:'斧',cost:125,wood:2,health:205,armor:4,damage:31,range:50,interval:.82,speed:106,color:'#e46c4d',attackType:'chaos',splash:24,role:'重擊戰吼'}
     },
     buildings:{
       arrow:{name:'林地弩塔',faction:'人族',icon:'♜',cost:95,wood:2,damage:25,range:172,interval:.82,color:'#d5bd63',attackType:'pierce'},
@@ -15,7 +19,11 @@
       cannon:{name:'赤焰火砲塔',faction:'矮人',icon:'●',cost:145,wood:3,damage:42,range:142,interval:1.55,color:'#ff7045',attackType:'chaos',splash:54},
       storm:{name:'星葉雷霆塔',faction:'精靈',icon:'ϟ',cost:165,wood:2,damage:19,range:165,interval:1.15,color:'#7ee9e5',attackType:'magic'},
       totem:{name:'赤牙祖靈柱',faction:'獸族',icon:'✹',cost:150,wood:2,damage:28,range:125,interval:1.25,color:'#ffbe66',attackType:'chaos',splash:25},
-      crypt:{name:'幽骨召喚殿',faction:'亡靈',icon:'☽',cost:180,wood:3,damage:12,range:155,interval:1.3,color:'#bc9aff',attackType:'magic'}
+      crypt:{name:'幽骨召喚殿',faction:'亡靈',icon:'☽',cost:180,wood:3,damage:12,range:155,interval:1.3,color:'#bc9aff',attackType:'magic'},
+      soul:{name:'靈魂收割塔',faction:'暗影',icon:'魂',cost:155,wood:2,damage:24,range:158,interval:1.08,color:'#d283ff',attackType:'magic',chain:2,slow:.88,slowTime:.8},
+      barracks:{name:'王國戰鼓堡',faction:'王國',icon:'旗',cost:135,wood:2,damage:20,range:146,interval:.72,color:'#e7c76d',attackType:'pierce',shots:2},
+      grove:{name:'翠靈古樹',faction:'精靈',icon:'樹',cost:150,wood:3,damage:22,range:154,interval:1.02,color:'#72dc87',attackType:'magic',splash:34,slow:.76,slowTime:1.1},
+      graveyard:{name:'冥燈墓園',faction:'暗影',icon:'墓',cost:165,wood:3,damage:14,range:148,interval:1.16,color:'#a985ed',attackType:'magic'}
     },
     hero:{maxHealth:100,speed:215,range:152,damage:18,interval:.58,novaDamage:30,novaRange:118,novaCooldown:9,respawnTime:8,respawnHealth:.65,invulnerability:2}
   });
