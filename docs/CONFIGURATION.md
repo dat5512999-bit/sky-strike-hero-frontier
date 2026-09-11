@@ -90,3 +90,7 @@ Monster.update中的stride控制完整步態需要的路程：步兵64、疾行�
 ## v0.32.0 分配規則
 
 每個裝備 ID 僅能有一名持有人；轉裝及卸裝免費，鼓勵整備期調度而不增加額外貨幣。若要加入轉裝成本或戰鬥中鎖定，應在 `TDGame` 操作層實作，不要破壞 `ArmorySystem` 的資料一致性。
+
+## v0.32.1 安裝設定
+
+應用名稱、啟動頁、色彩與 Android 圖示在兩份 manifest 設定；iOS 名稱與 Touch Icon 在各 HTML `<head>` 設定。重新產生尺寸時執行 `scripts/build-app-icons.ps1 -SourcePath assets/icons/app-icon-source-v1.png`，不可只放大低解析度圖示。

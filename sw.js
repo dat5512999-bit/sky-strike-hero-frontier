@@ -1,9 +1,9 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.32.0';
+const CACHE_NAME = 'sky-strike-v0.32.1';
 const ASSETS = [
   './src/td/systems/TDDifficultySystem.js', './src/td/systems/EnemyTraitSystem.js', './src/td/systems/BattleReportSystem.js',
-  './', './index.html', './styles.css', './td.html', './td.css', './manifest.webmanifest', './assets/icons/game-icon.svg',
+  './', './index.html', './styles.css', './td.html', './td.css', './manifest.webmanifest', './td.webmanifest', './assets/icons/game-icon.svg', './assets/icons/app-icon-192.png', './assets/icons/app-icon-512.png', './assets/icons/apple-touch-icon-180.png',
   './src/namespace.js', './src/config.js', './src/utils/math.js',
   './src/skins/SkinRegistry.js', './src/skins/SkinPacks.js',
   './src/entities/Bullet.js', './src/entities/EnemyBullet.js', './src/entities/Player.js', './src/entities/Enemy.js', './src/entities/Boss.js', './src/entities/PowerUp.js',

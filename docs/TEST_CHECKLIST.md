@@ -228,3 +228,12 @@
 - [x] 守軍遣散或死亡清除會透過 `BuildSystem.onRemove` 回收全部裝備；英雄倒下不回收。
 - [x] JavaScript 語法檢查與 134 項自動回歸測試通過。
 - [ ] 實體手機長局仍需驗證「選取守軍 → 轉裝 → 遣散 → 重新配置」完整觸控流程。
+
+## v0.32.1 手機安裝圖示
+
+- [x] 1024／512／192／180 PNG 簽名與實際尺寸正確。
+- [x] 射擊與塔防兩種 HTML 都引用 PNG favicon 與 Apple Touch Icon。
+- [x] `td.webmanifest` 使用 `./td.html` 作唯一 ID 與啟動頁，Android 一般／maskable 圖示齊全。
+- [x] Service Worker v0.32.1 快取兩份 manifest 與安裝圖示。
+- [x] JavaScript 語法檢查與 135 項自動回歸測試通過。
+- [ ] GitHub Pages 上線後，以 Android Chrome 與 iOS Safari 各安裝一次實機驗收。

@@ -229,3 +229,7 @@ Hero.equipment.spear > 0
 `ArmorySystem.assignments` 以裝備 ID 指向單一角色；轉裝先移除舊角色欄位，再配置新目標。角色只保存自己的 `gear` 欄位，戰鬥查詢仍走 `apply()`。`BuildSystem` 僅提供通用 `onRemove` hook，`TDGame.attachArmoryUi()` 才把它連到 `releaseTarget()`，避免建造模組反向依賴軍械庫。
 
 出售與死亡清除共用離場 hook；英雄倒下不觸發，因英雄仍會復活。生命型裝備的穿戴／卸下會重新查詢 config、補上新增上限或把超額生命夾回新上限，避免轉裝後留下幽靈數值。
+
+## v0.32.1 雙入口 PWA
+
+`index.html` 與 `td.html` 保持同一個靜態站台與 Service Worker scope，但各自連到獨立 manifest。這讓兩種模式共用離線資產與更新週期，同時保有不同安裝名稱及啟動頁；圖示輸出由 `scripts/build-app-icons.ps1` 從版本化原圖機械式產生。

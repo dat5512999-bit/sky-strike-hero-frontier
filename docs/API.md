@@ -122,3 +122,9 @@ Monster新增walkDistance、state、frame、facing、hitTime、deathTime；updat
 - `ArmorySystem.releaseTarget(target)`：角色離場時一次回收全部裝備。
 - `ArmorySystem.equip()` 現在會自動處理原持有人與被替換欄位，結果包含 `movedFrom`、`replaced`。
 - `BuildSystem.onRemove(target)`：可選移除事件；出售或死亡清除時呼叫，BuildSystem 本身不依賴軍械系統。
+
+## v0.32.1 PWA 介面契約
+
+- `manifest.webmanifest`：射擊模式安裝資訊，起始頁為專案根目錄並提供塔防捷徑。
+- `td.webmanifest`：塔防獨立安裝資訊，`id` 與 `start_url` 均為 `./td.html`。
+- 圖示來源固定為 192／512 PNG；iOS HTML 入口另使用 180 PNG Apple Touch Icon。

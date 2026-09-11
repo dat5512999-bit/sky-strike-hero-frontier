@@ -67,3 +67,7 @@ v0.17.0 快取為 sky-strike-v0.17.0，必須包含 hero-actions-v1.png。同步
 ## v0.32.0 唯一軍械
 
 最新快取為 `sky-strike-v0.32.0`。同步發布 ArmorySystem、BuildSystem、TDGame、HTML、CSS、Service Worker 與文件；沒有新資產或外部依賴。部署後驗證三欄配置、轉裝、卸裝及守軍離場回收。本次未自動發布到網路。
+
+## v0.32.1 手機 PWA
+
+最新快取為 `sky-strike-v0.32.1`。部署必須包含 `manifest.webmanifest`、`td.webmanifest`、192／512／180 PNG 與 Service Worker。GitHub Pages 工作流程在 `main` 推送後執行檢查與測試，再發布整個靜態專案。發布後以手機從 `/td.html` 加入主畫面並驗證名稱、圖示與啟動頁。

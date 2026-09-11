@@ -53,3 +53,7 @@
 ## v0.32.0 唯一軍械與守軍編成
 
 完整更新 `ArmorySystem.js`、`BuildSystem.js`、`TDGame.js`、`td.html`、`td.css` 與 `sw.js` 後執行 `npm run check`、`npm test`。重新載入後，軍械庫上方應出現武器／護甲／戰器三欄。此版把同一件軍械改為單一持有人；更新會重開目前戰局，但沒有永久資料遷移。
+
+## v0.32.1 手機安裝圖示
+
+同步更新兩份 manifest、兩個 HTML、Service Worker 及 `assets/icons/app-icon-*.png`。若手機仍顯示舊圖示，先從主畫面移除舊捷徑，重新開啟 HTTPS 的 `td.html` 再加入；瀏覽器與作業系統可能暫存既有圖示。

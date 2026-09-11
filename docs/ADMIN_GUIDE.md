@@ -59,3 +59,7 @@ HUD DOM ID 是 `TDGame` 與畫面的相容契約，不可重複或任意改名�
 ## v0.32.0 唯一軍械
 
 `assignments` 是唯一持有關係的權威資料；不得只改角色 `gear` 而繞過 `equip()`／`unequip()`。新增角色永久離場流程時必須觸發 `BuildSystem.onRemove` 或明確呼叫 `releaseTarget()`。英雄倒下屬可復活狀態，不應回收裝備。
+
+## v0.32.1 PWA 管理
+
+射擊模式與塔防模式分別使用 `manifest.webmanifest`、`td.webmanifest`，但共用同一組 PNG 圖示。修改 manifest、啟動網址或圖示後必須同步提升 Service Worker 快取版本，避免已安裝裝置長期停留舊資產。

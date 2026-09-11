@@ -127,3 +127,9 @@ Use case: stylized-concept. Asset type: production 2D RTS sprite animation sheet
 ## v0.32.0 唯一軍械介面
 
 本版沒有生成或替換美術資產，沿用 `equipment-atlas-v1.png`。新增的三欄裝備盤、持有人標記、已裝備／轉裝／不相容狀態皆以 HTML／CSS 呈現，確保桌面與手機共用同一套圖集並避免重複素材。
+
+## v0.32.1 手機 App Icon
+
+- `assets/icons/app-icon-source-v1.png`：內建 imagegen 生成的原始方形圖，金翼盾徽中央為飛行器，下方為王城，代表雙模式玩法。
+- `app-icon-1024.png`、`app-icon-512.png`、`app-icon-192.png`、`apple-touch-icon-180.png`：由 `scripts/build-app-icons.ps1` 高品質縮放，構圖核心保留於中央安全區。
+- 最終提示摘要：original premium dark-fantasy mobile game icon，gold winged shield、sky fighter、stone fortress、cyan energy trail、deep navy／forest background，centered maskable safe zone，no text/logo/watermark/copyrighted character。

@@ -46,14 +46,38 @@ test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
 });
 
 test('PWA manifest 與離線快取引用的遊戲檔案都存在', () => {
-  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.webmanifest'), 'utf8'));
-  assert.equal(manifest.display, 'standalone');
-  assert.equal(manifest.orientation, 'portrait');
-  manifest.icons.forEach((icon) => assert.ok(fs.existsSync(path.join(root, icon.src)), `缺少圖示：${icon.src}`));
+  ['manifest.webmanifest', 'td.webmanifest'].forEach((filename) => {
+    const manifest = JSON.parse(fs.readFileSync(path.join(root, filename), 'utf8'));
+    assert.equal(manifest.display, 'standalone');
+    assert.equal(manifest.orientation, 'portrait');
+    manifest.icons.forEach((icon) => assert.ok(fs.existsSync(path.join(root, icon.src)), `缺少圖示：${icon.src}`));
+  });
+  const tdManifest = JSON.parse(fs.readFileSync(path.join(root, 'td.webmanifest'), 'utf8'));
+  assert.equal(tdManifest.start_url, './td.html');
 
   const worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
   const assets = Array.from(worker.matchAll(/'\.\/([^']*)'/g), (match) => match[1] || 'index.html');
   assets.forEach((asset) => assert.ok(fs.existsSync(path.join(root, asset)), `離線快取缺少檔案：${asset}`));
+});
+
+test('手機主畫面圖示具備標準 PNG 尺寸並由兩種模式引用', () => {
+  const assets = [
+    ['assets/icons/app-icon-1024.png', 1024],
+    ['assets/icons/app-icon-512.png', 512],
+    ['assets/icons/app-icon-192.png', 192],
+    ['assets/icons/apple-touch-icon-180.png', 180]
+  ];
+  assets.forEach(([file, size]) => {
+    const data = fs.readFileSync(path.join(root, file));
+    assert.deepEqual(Array.from(data.subarray(0, 8)), [137,80,78,71,13,10,26,10]);
+    assert.equal(data.readUInt32BE(16), size);
+    assert.equal(data.readUInt32BE(20), size);
+  });
+  const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const td = fs.readFileSync(path.join(root, 'td.html'), 'utf8');
+  assert.match(index, /apple-touch-icon-180\.png/);
+  assert.match(td, /apple-touch-icon-180\.png/);
+  assert.match(td, /td\.webmanifest/);
 });
 
 test('塔防正式 PNG 資產尺寸與透明圖集格式正確', () => {
