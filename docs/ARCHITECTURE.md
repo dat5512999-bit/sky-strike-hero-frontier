@@ -1,5 +1,9 @@
 # 系統架構
 
+## v0.36.0 兵種擴充資料流
+
+新守軍不新增 System：`FactionSystem → BuildSystem.queue/placeQueued → CombatUnit → ArtSystem.combatUnits`。數值、陣營清單、實體生命週期與圖像註冊互相分離，因此 knight／treant／golem 自動沿用移動導航、選取、升級、負傷恢復、軍械與出售。敵軍仍走 `WaveCatalog → Monster → EnemyTrait/EnemyCombat → ArtSystem.enemyActions`；本版只替既有職責補獨立視覺，未改寫波次狀態機。
+
 ## v0.35.0 英雄與十三塔資料流
 
 `Hero.classType → ArtSystem` 現在使用專屬英雄圖集，`CombatUnit.type → ArtSystem.combatUnits` 則維持普通守軍圖集，從素材層根治英雄與招募單位同外觀。新塔仍走 `FactionSystem → BuildSystem → Building → TowerSkillSystem／TowerEvolutionSystem → ArtSystem`，沒有新增第二套建造或經濟系統。`faction-towers-v2.png` 僅提供三欄塔族、三列 Lv.1／3／5 模型。

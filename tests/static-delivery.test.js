@@ -126,6 +126,18 @@ test('暗影英雄無武器底圖可供逐幀換裝', () => {
   assert.equal(data[25], 6);
 });
 
+test('新增三族守軍與戰術敵軍都接入建造介面及離線快取', () => {
+  const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'td.css'), 'utf8');
+  const worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
+  ['knight','treant','golem'].forEach((type) => {
+    assert.match(html, new RegExp(`data-build-type=["']${type}["']`));
+    assert.match(css, new RegExp(`faction-${type}-v1\\.png`));
+    assert.match(worker, new RegExp(`faction-${type}-v1\\.png`));
+  });
+  ['shaman','healer','boss'].forEach((type) => assert.match(worker, new RegExp(`enemy-${type}-actions-v1\\.png`)));
+});
+
 test('戰地軍械九宮格為本機透明資產', () => {
   const data = fs.readFileSync(path.join(root, 'assets/td/items/equipment-atlas-v1.png'));
   assert.equal(data.readUInt32BE(16), 1254);

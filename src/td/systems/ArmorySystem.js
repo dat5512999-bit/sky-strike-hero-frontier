@@ -2,13 +2,13 @@
   'use strict';
   const ITEMS={
     'lion-bow':{name:'獅心王弓',rarity:'史詩',slot:'weapon',column:0,row:0,types:['hunter'],heroes:['hunter'],description:'攻擊 +28%、射程 +12%，獵手額外增加一個目標。',mods:{damage:1.28,range:1.12,shots:1},title:'獅心神射手'},
-    'lion-shield':{name:'不落獅盾',rarity:'傳說',slot:'armor',column:1,row:0,types:['shield'],description:'生命 +40%、護甲 +4，成為重裝聖盾。',mods:{health:1.4,armor:4},title:'獅心聖盾'},
-    'war-drum':{name:'先鋒戰鼓',rarity:'史詩',slot:'relic',column:2,row:0,types:['orc','shield'],description:'傷害與攻速提高，第四擊的戰技範圍擴大。',mods:{damage:1.18,interval:.84,splash:18},title:'戰鼓統領'},
+    'lion-shield':{name:'不落獅盾',rarity:'傳說',slot:'armor',column:1,row:0,types:['shield','knight'],description:'生命 +40%、護甲 +4，成為重裝聖盾。',mods:{health:1.4,armor:4},title:'獅心聖盾'},
+    'war-drum':{name:'先鋒戰鼓',rarity:'史詩',slot:'relic',column:2,row:0,types:['orc','shield','golem'],description:'傷害與攻速提高，第四擊的戰技範圍擴大。',mods:{damage:1.18,interval:.84,splash:18},title:'戰鼓統領'},
     'dragon-heart':{name:'翡翠龍心',rarity:'傳說',slot:'relic',column:0,row:1,types:['dragon'],description:'魔法傷害 +35%、爆炸範圍 +22。',mods:{damage:1.35,splash:22},title:'翡翠龍王'},
     'moon-staff':{name:'月銀古杖',rarity:'史詩',slot:'weapon',column:1,row:1,types:['arcanist'],heroes:['arcanist'],description:'魔法傷害 +30%，攻擊附帶一次連鎖。',mods:{damage:1.3,chain:2},title:'月銀大法師'},
-    'vine-crown':{name:'常青冠冕',rarity:'精良',slot:'armor',column:2,row:1,types:['dragon','arcanist'],description:'生命 +25%、攻速 +12%。',mods:{health:1.25,interval:.88},title:'常青守護者'},
+    'vine-crown':{name:'常青冠冕',rarity:'精良',slot:'armor',column:2,row:1,types:['dragon','arcanist','treant'],description:'生命 +25%、攻速 +12%。',mods:{health:1.25,interval:.88},title:'常青守護者'},
     'wolf-saddle':{name:'赤牙狼騎戰鞍',rarity:'傳說',slot:'relic',column:0,row:2,types:['orc'],description:'半獸人騎乘戰狼，移速 +35%、傷害 +22%、重擊範圍擴大。',mods:{speed:1.35,damage:1.22,splash:20},title:'赤牙狼騎督軍',mount:'wolf'},
-    'bone-crown':{name:'幽骨王冠',rarity:'傳說',slot:'armor',column:1,row:2,types:['skeleton'],description:'傷害 +32%，額外攻擊一個目標。',mods:{damage:1.32,shots:1},title:'幽骨死亡騎士'},
+    'bone-crown':{name:'幽骨王冠',rarity:'傳說',slot:'armor',column:1,row:2,types:['skeleton','golem'],description:'傷害 +32%，額外攻擊一個目標。',mods:{damage:1.32,shots:1},title:'幽骨死亡騎士'},
     'soul-lantern':{name:'噬魂冥燈',rarity:'史詩',slot:'relic',column:2,row:2,types:['rogue','skeleton'],heroes:['rogue'],description:'攻擊附帶靈魂連鎖，擊殺賞金再提高。',mods:{chain:2,bountyBonus:.2},title:'噬魂行者'}
   };
   class ArmorySystem{

@@ -1,5 +1,9 @@
 # 版本更新手冊
 
+## 更新到 v0.36.0
+
+完整替換六張新增動作圖及守軍設定、陣營、美術、實體、HTML、CSS、Service Worker、測試與文件。不可只複製圖片，否則新兵不會進入陣營清單；不可只增加按鈕，否則 `BuildSystem` 會拒絕未知類型。更新後執行 `npm run check` 與 `npm test`，應有 145 項通過。本版沒有資料遷移。
+
 ## 更新到 v0.35.0
 
 完整替換 `assets/td` 的四張 v2 新素材及塔防的設定、美術、流派、技能、分支、HTML、CSS、Service Worker、測試與文件。不可只複製 PNG，否則新塔不會進入建造清單；也不可只改 `FactionSystem`，否則建造時會找不到設定。更新後 `npm run check` 與 `npm test` 應有 142 項通過。

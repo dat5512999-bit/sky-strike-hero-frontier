@@ -1,5 +1,9 @@
 # 部署手冊
 
+## v0.36.0 發布檢查
+
+部署方式不變；必須一併發布 `faction-knight-v1.png`、`faction-treant-v1.png`、`faction-golem-v1.png`、`enemy-shaman-actions-v1.png`、`enemy-healer-actions-v1.png`、`enemy-boss-actions-v1.png` 與相關程式／樣式。確認 `sw.js` 快取名稱為 `sky-strike-v0.36.0`。發布後各選一次三族、確認 3 名守軍卡，並煙霧測試第 3 波術士與第 5 波祭司／Boss。除非使用者明確要求，本地版本完成不會自動推送 GitHub。
+
 ## v0.35.0 發布檢查
 
 部署方式不變，但必須連同四張新 PNG、`ArtSystem.js`、`FactionSystem.js`、`TowerSkillSystem.js`、`TowerEvolutionSystem.js`、`config.js`、`td.html`、`td.css` 與 `sw.js` 一起發布。確認快取名稱為 `sky-strike-v0.35.0`；發布後逐一選擇三位英雄並確認英雄肖像、戰場人物與普通守軍不同，再各建造一座新增塔。

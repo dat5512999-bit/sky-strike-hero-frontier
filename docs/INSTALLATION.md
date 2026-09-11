@@ -1,5 +1,9 @@
 # 安裝手冊
 
+## v0.36.0 驗證
+
+無新增套件。更新時必須包含六張新 PNG、`config.js`、`FactionSystem.js`、`CombatUnit.js`、`Monster.js`、`ArtSystem.js`、`td.html`、`td.css` 與 `sw.js`。執行 `npm run check`、`npm test` 後開啟 `td.html?v=0.36.0`；三流派應各顯示 3 名守軍，術士、祭司與 Boss 應為獨立外觀。若仍是舊建造清單，完整關閉頁面再重開以更新 v0.36.0 離線快取。
+
 ## v0.35.0 驗證
 
 不需安裝新套件。更新時必須保留 `hero-hunter-actions-v2.png`、`hero-rogue-actions-v2.png`、`hero-rogue-actions-unarmed-v2.png` 與 `faction-towers-v2.png`。執行測試後開啟 `td.html`，三流派應各顯示 2 名守軍、4 座建築；若仍顯示舊圖，完整關閉頁面再重開以更新 v0.35.0 離線快取。

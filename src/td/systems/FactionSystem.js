@@ -1,9 +1,9 @@
 (function(ns){
   'use strict';
   const FACTIONS={
-    hunter:{id:'hunter',name:'王國遠征軍',theme:'王國',color:'#e6c56c',units:['hunter','shield'],buildings:['arrow','cannon','barracks','ballista']},
-    arcanist:{id:'arcanist',name:'銀葉秘法庭',theme:'精靈',color:'#70e7ff',units:['arcanist','dragon'],buildings:['frost','storm','grove','moonwell']},
-    rogue:{id:'rogue',name:'暮影盟約',theme:'暗影',color:'#c884df',units:['rogue','skeleton'],buildings:['crypt','soul','graveyard','plague']}
+    hunter:{id:'hunter',name:'王國遠征軍',theme:'王國',color:'#e6c56c',units:['hunter','shield','knight'],buildings:['arrow','cannon','barracks','ballista']},
+    arcanist:{id:'arcanist',name:'銀葉秘法庭',theme:'精靈',color:'#70e7ff',units:['arcanist','dragon','treant'],buildings:['frost','storm','grove','moonwell']},
+    rogue:{id:'rogue',name:'暮影盟約',theme:'暗影',color:'#c884df',units:['rogue','skeleton','golem'],buildings:['crypt','soul','graveyard','plague']}
   };
   class FactionSystem{
     constructor(){this.reset();}

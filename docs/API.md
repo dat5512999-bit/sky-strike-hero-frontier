@@ -1,5 +1,12 @@
 # API 文件（內部模組介面）
 
+## v0.36.0 軍團擴充介面
+
+- `config.units` 新增 `knight`、`treant`、`golem`；它們與既有單位使用相同 `CombatUnit` 介面。
+- `FactionSystem.available('unit')` 對選定本族回傳 3 名開局守軍；戰利品解鎖仍以集合合併。
+- `CombatUnit.attack()` 讀取 `slow/slowTime/splash`，並依類型在第四擊觸發騎士暈緩或魔像強化震地。
+- `ArtSystem.enemyActions` 可直接以 `Monster.type` 取得術士、祭司、Boss 圖集；`visualBase` 只保留給盾衛與旗手的既有衍生外觀。
+
 ## v0.35.0 英雄與建築介面
 
 - `ArtSystem.drawHero()` 依 `Hero.classType` 選擇三套獨立英雄圖集；暗影武器鍛造改用新版專屬無武器底圖。

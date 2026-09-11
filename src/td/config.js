@@ -9,8 +9,11 @@
       arcanist:{name:'奧術學徒',icon:'✦',cost:85,wood:1,health:72,armor:0,damage:13,range:132,interval:.9,speed:104,color:'#ff8a52',attackType:'magic',splash:42},
       rogue:{name:'暗影盜賊',faction:'暗影',icon:'◆',cost:65,wood:1,health:80,armor:0,damage:11,range:118,interval:.45,speed:148,color:'#c884df',attackType:'chaos',bountyBonus:.35},
       shield:{name:'王國盾衛',faction:'王國',icon:'盾',cost:105,wood:2,health:185,armor:5,damage:18,range:42,interval:.92,speed:92,color:'#6da4e8',attackType:'chaos',role:'重裝攔截'},
+      knight:{name:'日耀騎士',faction:'王國',icon:'槌',cost:128,wood:2,health:168,armor:4,damage:26,range:48,interval:.9,speed:100,color:'#e4bd58',attackType:'chaos',role:'破陣暈擊'},
       skeleton:{name:'幽骨劍士',faction:'暗影',icon:'骷',cost:78,wood:1,health:102,armor:2,damage:21,range:48,interval:.72,speed:118,color:'#bc9aff',attackType:'chaos',role:'快速近戰'},
       dragon:{name:'翡翠幼龍',faction:'精靈',icon:'龍',cost:165,wood:3,health:126,armor:2,damage:27,range:145,interval:1.05,speed:136,color:'#70d89c',attackType:'magic',splash:34,role:'飛行範圍'},
+      treant:{name:'銀葉樹靈',faction:'精靈',icon:'樹',cost:138,wood:3,health:142,armor:2,damage:20,range:138,interval:1.04,speed:86,color:'#8bd9b4',attackType:'magic',splash:32,slow:.82,slowTime:1.1,role:'範圍緩速'},
+      golem:{name:'魂鋼魔像',faction:'暗影',icon:'像',cost:148,wood:3,health:218,armor:5,damage:32,range:46,interval:1.12,speed:76,color:'#9f72df',attackType:'chaos',splash:30,role:'重型震地'},
       orc:{name:'赤牙勇士',faction:'半獸人',icon:'斧',cost:125,wood:2,health:205,armor:4,damage:31,range:50,interval:.82,speed:106,color:'#e46c4d',attackType:'chaos',splash:24,role:'重擊戰吼'}
     },
     buildings:{

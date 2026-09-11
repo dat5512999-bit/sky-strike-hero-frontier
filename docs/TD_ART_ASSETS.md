@@ -1,5 +1,16 @@
 # 塔防正式美術資產與生成提示
 
+## v0.36.0 守軍與敵軍動作圖集
+
+- `faction-knight-v1.png`：王國日耀騎士，盾槌重裝近戰。
+- `faction-treant-v1.png`：銀葉樹靈，根足行走與種子法術。
+- `faction-golem-v1.png`：魂鋼魔像，重步與震地拳擊。
+- `enemy-shaman-actions-v1.png`：虛空術士，骨面具與綠紫法術。
+- `enemy-healer-actions-v1.png`：血契祭司，燈杖治療施法。
+- `enemy-boss-actions-v1.png`：軍團戰將，巨斧、衝鋒、踐踏與倒地。
+
+六張圖片由內建 imagegen 生成後保存於 `assets/td/`，均為透明 RGBA、4×4 動作格表。視覺提示以本專案斜俯視比例與深色奇幻完成度為準，要求原創角色、無既有遊戲標誌、無文字及無浮水印。
+
 ## v0.35.0 英雄與增援塔圖集
 
 - `hero-hunter-actions-v2.png`：1254×1254 RGBA，藍金獅衛巡林隊長 4×4 待機／行走／攻擊／受擊倒地；生成器首次輸出棋盤格，第二次轉純綠後以 `chroma-key.ps1` 製成透明圖。
