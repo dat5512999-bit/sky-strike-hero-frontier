@@ -237,3 +237,9 @@
 - [x] Service Worker v0.32.1 快取兩份 manifest 與安裝圖示。
 - [x] JavaScript 語法檢查與 135 項自動回歸測試通過。
 - [ ] GitHub Pages 上線後，以 Android Chrome 與 iOS Safari 各安裝一次實機驗收。
+
+## v0.32.2 GitHub Pages 首次發布
+
+- [x] 工作流程含 `enablement: true`，新公開倉庫可自動建立 Pages Site。
+- [x] 語法檢查與 135 項自動回歸測試仍全部通過。
+- [ ] 遠端 Actions deploy job 與 Pages URL 等待實際發布驗收。

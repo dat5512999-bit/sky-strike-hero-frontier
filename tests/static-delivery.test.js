@@ -78,6 +78,8 @@ test('手機主畫面圖示具備標準 PNG 尺寸並由兩種模式引用', () 
   assert.match(index, /apple-touch-icon-180\.png/);
   assert.match(td, /apple-touch-icon-180\.png/);
   assert.match(td, /td\.webmanifest/);
+  const pages = fs.readFileSync(path.join(root, '.github/workflows/pages.yml'), 'utf8');
+  assert.match(pages, /enablement:\s*true/);
 });
 
 test('塔防正式 PNG 資產尺寸與透明圖集格式正確', () => {

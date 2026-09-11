@@ -59,3 +59,5 @@ v0.19.0回復基線為v0.18.0。完整備份包含新增 HeroRoster.js；需要�
 ## v0.32.1 手機圖示
 
 備份需包含圖示原圖、四種輸出尺寸、`build-app-icons.ps1`、兩份 manifest、HTML 與 Service Worker。回退至 v0.32.0 不影響玩法，但手機重新安裝時會恢復舊 SVG 圖示，從 TD 安裝也會開啟共用起始頁。
+
+v0.32.2 只增加 Pages 首次啟用設定；回退至 v0.32.1 仍可本機遊玩，但全新 GitHub 倉庫需手動啟用 Pages。

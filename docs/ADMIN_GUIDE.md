@@ -63,3 +63,5 @@ HUD DOM ID 是 `TDGame` 與畫面的相容契約，不可重複或任意改名�
 ## v0.32.1 PWA 管理
 
 射擊模式與塔防模式分別使用 `manifest.webmanifest`、`td.webmanifest`，但共用同一組 PNG 圖示。修改 manifest、啟動網址或圖示後必須同步提升 Service Worker 快取版本，避免已安裝裝置長期停留舊資產。
+
+v0.32.2 由 Pages 工作流程自動執行首次 enablement；維護者仍應在 Actions 確認部署成功，不可只以 push 成功視為上線。

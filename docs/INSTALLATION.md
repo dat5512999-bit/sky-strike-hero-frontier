@@ -64,3 +64,5 @@
 ## v0.32.1 手機安裝
 
 正式網址必須使用 HTTPS（GitHub Pages 符合）。從 `td.html` 加入主畫面時使用 `td.webmanifest` 並直接啟動塔防；Android Chrome 選「安裝應用程式」，iOS Safari 由分享選單選「加入主畫面」。首次開啟需連線，完成離線快取後可再次離線啟動。
+
+v0.32.2 的 Pages 工作流程可自動初始化全新公開倉庫；若組織政策禁止 Pages，仍需由倉庫管理者開啟權限。

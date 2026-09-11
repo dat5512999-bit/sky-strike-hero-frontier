@@ -133,3 +133,5 @@ Use case: stylized-concept. Asset type: production 2D RTS sprite animation sheet
 - `assets/icons/app-icon-source-v1.png`：內建 imagegen 生成的原始方形圖，金翼盾徽中央為飛行器，下方為王城，代表雙模式玩法。
 - `app-icon-1024.png`、`app-icon-512.png`、`app-icon-192.png`、`apple-touch-icon-180.png`：由 `scripts/build-app-icons.ps1` 高品質縮放，構圖核心保留於中央安全區。
 - 最終提示摘要：original premium dark-fantasy mobile game icon，gold winged shield、sky fighter、stone fortress、cyan energy trail、deep navy／forest background，centered maskable safe zone，no text/logo/watermark/copyrighted character。
+
+v0.32.2 沒有改動美術輸出，只修正 GitHub Pages 首次發布設定。

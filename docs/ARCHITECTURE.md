@@ -233,3 +233,5 @@ Hero.equipment.spear > 0
 ## v0.32.1 雙入口 PWA
 
 `index.html` 與 `td.html` 保持同一個靜態站台與 Service Worker scope，但各自連到獨立 manifest。這讓兩種模式共用離線資產與更新週期，同時保有不同安裝名稱及啟動頁；圖示輸出由 `scripts/build-app-icons.ps1` 從版本化原圖機械式產生。
+
+v0.32.2 的 CI/CD 仍維持單一 `main → test → Pages` 管線，僅在 Configure Pages 階段允許第一次建立站台，不增加執行期服務或資料庫。

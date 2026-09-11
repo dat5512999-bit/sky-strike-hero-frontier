@@ -57,3 +57,7 @@
 ## v0.32.1 手機安裝圖示
 
 同步更新兩份 manifest、兩個 HTML、Service Worker 及 `assets/icons/app-icon-*.png`。若手機仍顯示舊圖示，先從主畫面移除舊捷徑，重新開啟 HTTPS 的 `td.html` 再加入；瀏覽器與作業系統可能暫存既有圖示。
+
+## v0.32.2 GitHub Pages
+
+同步更新 `.github/workflows/pages.yml`、版本號與 Service Worker。此版只修正新倉庫首次啟用 Pages 的流程，不遷移或重設任何遊戲資料。

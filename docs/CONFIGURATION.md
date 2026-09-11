@@ -94,3 +94,5 @@ Monster.update中的stride控制完整步態需要的路程：步兵64、疾行�
 ## v0.32.1 安裝設定
 
 應用名稱、啟動頁、色彩與 Android 圖示在兩份 manifest 設定；iOS 名稱與 Touch Icon 在各 HTML `<head>` 設定。重新產生尺寸時執行 `scripts/build-app-icons.ps1 -SourcePath assets/icons/app-icon-source-v1.png`，不可只放大低解析度圖示。
+
+Pages 首次啟用由 `.github/workflows/pages.yml` 的 `enablement: true` 控制；已存在的 Pages Site 會沿用原設定。

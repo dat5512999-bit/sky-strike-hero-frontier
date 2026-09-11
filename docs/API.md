@@ -128,3 +128,5 @@ Monster新增walkDistance、state、frame、facing、hitTime、deathTime；updat
 - `manifest.webmanifest`：射擊模式安裝資訊，起始頁為專案根目錄並提供塔防捷徑。
 - `td.webmanifest`：塔防獨立安裝資訊，`id` 與 `start_url` 均為 `./td.html`。
 - 圖示來源固定為 192／512 PNG；iOS HTML 入口另使用 180 PNG Apple Touch Icon。
+
+v0.32.2 的 GitHub Pages 部署契約要求 `actions/configure-pages@v5` 傳入 `enablement: true`，讓全新倉庫可建立 Pages Site。
