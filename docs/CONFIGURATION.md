@@ -1,5 +1,9 @@
 # 設定手冊
 
+## v0.33.0 塔防守軍恢復
+
+`src/td/systems/TDDifficultySystem.js` 的 `unitRecovery` 控制守軍 HP 歸零規則：`enabled` 決定恢復或永久陣亡，`time` 是離場秒數，`health` 是歸隊生命比例，`guard` 是歸隊無敵秒數。建議同時調整時間與生命，不要只縮短倒數，否則前線作戰單位會變成無成本消耗品。
+
 > v0.30.0：基礎單位／建築數值位於 `src/td/config.js`；三族開局清單位於 `FactionSystem.FACTIONS`；Boss 戰利品位於 `LootSystem.ITEMS`；塔分支位於 `TowerEvolutionSystem.BRANCHES`。新增項目時需同步資料、UI、離線快取與測試。
 
 ## 一般玩家

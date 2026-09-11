@@ -1,5 +1,9 @@
 # 系統架構
 
+## v0.33.0 負傷恢復資料流
+
+`TDDifficultySystem.unitRecovery → TDGame.applyDifficulty() → BuildSystem.setUnitRecovery() → CombatUnit.takeDamage()/updateRecovery()`。一般難度的負傷實體仍留在 `BuildSystem.items`，但不出現在 `combatUnits()`，因此不會索敵、擋怪或被敵軍選為目標；倒數完成後保留同一實體歸隊。只有永久陣亡或玩家遣散才經 `onRemove → ArmorySystem.releaseTarget()`，避免誤清養成與唯一軍械。沒有新增資料庫、API 或大型 System。
+
 ## 設計原則
 
 - 純 HTML / CSS / JavaScript，無執行期依賴。

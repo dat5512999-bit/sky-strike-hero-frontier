@@ -1,5 +1,13 @@
 # API 文件（內部模組介面）
 
+## v0.33.0 守軍負傷介面
+
+- `TDDifficultySystem.current().unitRecovery`：回傳該難度的 `enabled`、`time`、`health`、`guard`。
+- `BuildSystem.setUnitRecovery(policy)`：把難度策略套用到現有與之後部署的作戰單位。
+- `BuildSystem.recoveringUnits()`：回傳暫離戰場、等待歸隊的守軍。
+- `CombatUnit.setRecoveryPolicy(policy)`／`updateRecovery(dt)`：管理倒地後恢復，不改寫等級、擊殺熟練、裝備或投入成本。
+- `BattleReportSystem.recordDefeat(target)`：依 `target.recovering` 分流至 `unitDowns` 或 `unitLosses`。
+
 所有模組掛載於全域 `SkyStrike` 命名空間，以支援直接由 `file://` 開啟。
 
 | 模組 | 主要介面 | 責任 |

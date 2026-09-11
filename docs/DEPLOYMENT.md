@@ -1,5 +1,9 @@
 # 部署手冊
 
+## v0.33.0 發布檢查
+
+靜態部署方式不變。上線前執行 `npm run check` 與 `npm test`，並確認 `sw.js` 使用 `sky-strike-v0.33.0`。在 HTTP／GitHub Pages 環境至少以標準難度部署一名守軍，再驗證負傷後裝備仍由原單位持有；另以災厄驗證永久陣亡會釋放軍械。
+
 > v0.30.0 部署時必須包含 `FactionSystem.js`、`LootSystem.js`、`TowerEvolutionSystem.js`、`faction-structures-v1.png`、三種新守軍圖集與 `war-wolf-actions-v1.png`。`sw.js` 快取版本已升至 `sky-strike-v0.30.0`。
 
 ## 本機／隨身碟

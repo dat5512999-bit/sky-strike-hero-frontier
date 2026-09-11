@@ -1,5 +1,9 @@
 # 版本更新手冊
 
+## 更新到 v0.33.0
+
+完整替換 `CombatUnit.js`、`BuildSystem.js`、`TDDifficultySystem.js`、`BattleReportSystem.js`、`TDGame.js`、`td.html` 與 `sw.js`，再執行 `npm run check`、`npm test`。本版沒有存檔遷移；進行中的戰役會重開。更新後確認標準難度顯示「守軍 10 秒歸隊」。
+
 > 更新至 v0.30.0 後請執行 `npm run check` 與 `npm test`，再用 Chrome／Edge 重新載入 `td.html`。若 Service Worker 仍提供舊介面，移除舊站台資料後再開啟；遊戲沒有資料庫 migration。
 
 ## 一般玩家更新

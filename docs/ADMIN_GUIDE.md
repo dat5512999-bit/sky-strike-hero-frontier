@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## v0.33.0 守軍恢復營運參數
+
+四難度的 `unitRecovery` 位於 `src/td/systems/TDDifficultySystem.js`，包含 `enabled`、`time`、`health`、`guard`。`BuildSystem` 只把該策略配置到新舊作戰單位；`CombatUnit` 擁有倒地、倒數與歸隊狀態。永久離場才可觸發 `BuildSystem.onRemove` 回收唯一軍械，負傷期間不得呼叫 `releaseTarget()`。調整後至少驗證裝備單位負傷、倒數、原位置歸隊、戰報統計與災厄永久陣亡。
+
 > v0.30.0 無新增帳號、後端或資料庫。英雄 XP、戰利品、跨族解鎖與單位熟練皆為單局狀態；重新開始會重置，原本的本機介面偏好與射擊模式紀錄不受影響。
 
 本遊戲無帳號、伺服器、資料庫或管理後台。只使用瀏覽器 `localStorage` 保存外觀包 ID、難度 ID、最高分與歷史最高 Combo，不包含身分資料，也不上傳。管理工作僅包含保存發行檔、確認瀏覽器相容性及依 `CHANGELOG.md` 辨識版本。
