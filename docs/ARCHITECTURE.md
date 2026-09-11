@@ -1,5 +1,9 @@
 # 系統架構
 
+## v0.35.0 英雄與十三塔資料流
+
+`Hero.classType → ArtSystem` 現在使用專屬英雄圖集，`CombatUnit.type → ArtSystem.combatUnits` 則維持普通守軍圖集，從素材層根治英雄與招募單位同外觀。新塔仍走 `FactionSystem → BuildSystem → Building → TowerSkillSystem／TowerEvolutionSystem → ArtSystem`，沒有新增第二套建造或經濟系統。`faction-towers-v2.png` 僅提供三欄塔族、三列 Lv.1／3／5 模型。
+
 ## v0.34.0 三十波資料流
 
 現有 `WaveCatalog → WaveSystem → TDGame` 關係不變。新增內容只擴充資料列；`WaveSystem` 依 `catalog.total()` 自動處理第 30 波完成，`TDGame` 只協調結算與 UI。`Monster` 使用分段生命曲線，`EnemyCombatSystem` 依 Boss 波次選擇既有敵種作為第二階段援軍。Loot、Economy、BattleReport、Difficulty、Armory 與建造模組都沒有複製或重寫。

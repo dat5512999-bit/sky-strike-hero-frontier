@@ -10,7 +10,10 @@
     soul:{harvest:{name:'噬魂尖塔',description:'高傷連鎖靈魂。',mods:{damage:1.45,chain:2,color:'#e487ff'}},curse:{name:'詛咒尖塔',description:'快速攻擊並使敵軍遲緩。',mods:{interval:.72,slow:.82,color:'#9d78ff'}}},
     barracks:{legion:{name:'獅心軍團堡',description:'齊射增加兩個目標。',mods:{shots:4,interval:.9,color:'#f2cf69'}},command:{name:'皇家指揮所',description:'提高射程與單發威力。',mods:{damage:1.4,range:1.18,color:'#ffe3a0'}}},
     grove:{ancient:{name:'遠古守望樹',description:'擴大自然爆發與緩速。',mods:{splash:1.55,slow:.62,color:'#7cff99'}},moonwell:{name:'月井古樹',description:'高速施放可連鎖的月光。',mods:{interval:.72,chain:2,color:'#a6efff'}}},
-    graveyard:{legion:{name:'不眠軍團墓園',description:'增加幽靈守衛召喚上限。',mods:{summonCap:2,color:'#b49aff'}},doom:{name:'末日鎮魂堂',description:'主體攻擊轉為高傷連鎖。',mods:{damage:1.5,chain:2,color:'#ee8cff'}}}
+    graveyard:{legion:{name:'不眠軍團墓園',description:'增加幽靈守衛召喚上限。',mods:{summonCap:2,color:'#b49aff'}},doom:{name:'末日鎮魂堂',description:'主體攻擊轉為高傷連鎖。',mods:{damage:1.5,chain:2,color:'#ee8cff'}}},
+    ballista:{battery:{name:'雄獅連弩堡',description:'增加弩箭目標並提高攻速。',mods:{shots:3,interval:.82,color:'#f4ce70'}},skybolt:{name:'破城天矛塔',description:'射程與單發威力大幅提高。',mods:{damage:1.55,range:1.18,interval:1.2,color:'#fff0ae'}}},
+    moonwell:{tides:{name:'月潮聖泉',description:'月光擴散並延長緩速。',mods:{splash:1.45,slow:.65,color:'#9eefff'}},prism:{name:'星穹稜鏡',description:'增加連鎖目標並提高攻速。',mods:{chain:4,interval:.78,color:'#d2b0ff'}}},
+    plague:{contagion:{name:'蔓延瘟疫柱',description:'擴大腐化範圍並強化遲緩。',mods:{splash:1.65,slow:.72,color:'#9ff064'}},venom:{name:'劇毒針塔',description:'集中腐蝕並提高攻擊速度。',mods:{damage:1.45,interval:.78,color:'#d0ff76'}}}
   };
   class TowerEvolutionSystem{
     static branches(type){return Object.keys(BRANCHES[type]||{}).map(id=>Object.assign({id:id},BRANCHES[type][id]));}

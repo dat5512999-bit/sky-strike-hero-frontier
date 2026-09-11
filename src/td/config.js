@@ -23,7 +23,10 @@
       soul:{name:'靈魂收割塔',faction:'暗影',icon:'魂',cost:155,wood:2,damage:24,range:158,interval:1.08,color:'#d283ff',attackType:'magic',chain:2,slow:.88,slowTime:.8},
       barracks:{name:'王國戰鼓堡',faction:'王國',icon:'旗',cost:135,wood:2,damage:20,range:146,interval:.72,color:'#e7c76d',attackType:'pierce',shots:2},
       grove:{name:'翠靈古樹',faction:'精靈',icon:'樹',cost:150,wood:3,damage:22,range:154,interval:1.02,color:'#72dc87',attackType:'magic',splash:34,slow:.76,slowTime:1.1},
-      graveyard:{name:'冥燈墓園',faction:'暗影',icon:'墓',cost:165,wood:3,damage:14,range:148,interval:1.16,color:'#a985ed',attackType:'magic'}
+      graveyard:{name:'冥燈墓園',faction:'暗影',icon:'墓',cost:165,wood:3,damage:14,range:148,interval:1.16,color:'#a985ed',attackType:'magic'},
+      ballista:{name:'獅翼弩砲台',faction:'王國',icon:'獅',cost:155,wood:3,damage:26,range:190,interval:1.18,color:'#f0c76a',attackType:'pierce',shots:2},
+      moonwell:{name:'月泉稜鏡塔',faction:'精靈',icon:'月',cost:160,wood:3,damage:18,range:168,interval:1.08,color:'#a9c8ff',attackType:'magic',chain:2,slow:.82,slowTime:1},
+      plague:{name:'瘟疫尖碑',faction:'暗影',icon:'疫',cost:150,wood:2,damage:21,range:150,interval:1.18,color:'#8fe45d',attackType:'chaos',splash:38,slow:.86,slowTime:1.2}
     },
     hero:{maxHealth:100,speed:215,range:152,damage:18,interval:.58,novaDamage:30,novaRange:118,novaCooldown:9,respawnTime:8,respawnHealth:.65,invulnerability:2}
   });

@@ -1,5 +1,9 @@
 # 安裝手冊
 
+## v0.35.0 驗證
+
+不需安裝新套件。更新時必須保留 `hero-hunter-actions-v2.png`、`hero-rogue-actions-v2.png`、`hero-rogue-actions-unarmed-v2.png` 與 `faction-towers-v2.png`。執行測試後開啟 `td.html`，三流派應各顯示 2 名守軍、4 座建築；若仍顯示舊圖，完整關閉頁面再重開以更新 v0.35.0 離線快取。
+
 ## v0.34.0 驗證
 
 無新增套件或伺服器需求。完整更新後執行 `npm run check`、`npm test`，再開啟 `td.html`；下一波情報可正常顯示且 `WaveCatalog.total()` 為 30 即代表程式已更新。若 GitHub Pages／手機主畫面仍載入舊版，完整關閉遊戲再重開，讓 v0.34.0 快取接管。

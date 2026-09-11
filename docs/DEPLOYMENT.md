@@ -1,5 +1,9 @@
 # 部署手冊
 
+## v0.35.0 發布檢查
+
+部署方式不變，但必須連同四張新 PNG、`ArtSystem.js`、`FactionSystem.js`、`TowerSkillSystem.js`、`TowerEvolutionSystem.js`、`config.js`、`td.html`、`td.css` 與 `sw.js` 一起發布。確認快取名稱為 `sky-strike-v0.35.0`；發布後逐一選擇三位英雄並確認英雄肖像、戰場人物與普通守軍不同，再各建造一座新增塔。
+
 ## v0.34.0 發布檢查
 
 部署方式不變。確認 `sw.js` 的快取名稱為 `sky-strike-v0.34.0`，並上傳完整 `WaveCatalog.js`、`WaveSystem.js`、`Monster.js`、`EnemyCombatSystem.js`、`Hero.js`、`TDGame.js` 與測試／文件。發布煙霧測試至少覆蓋首波開始、模擬第 30 波完成、Lv.15 封頂與後期 Boss 增援。

@@ -1,5 +1,12 @@
 # API 文件（內部模組介面）
 
+## v0.35.0 英雄與建築介面
+
+- `ArtSystem.drawHero()` 依 `Hero.classType` 選擇三套獨立英雄圖集；暗影武器鍛造改用新版專屬無武器底圖。
+- `config.buildings` 新增 `ballista`、`moonwell`、`plague`，仍由 `Building` 與 `BuildSystem` 共用同一生命週期。
+- `FactionSystem.available('building')` 每個初始流派回傳 4 種本族建築，戰利品解鎖仍以集合附加。
+- `TowerEvolutionSystem.branches()` 與 `TowerSkillSystem.describe()/fire()` 已涵蓋三座新塔。
+
 ## v0.34.0 三十波介面
 
 - `WaveCatalog.total()` 現回傳 `30`；`get(1..30)` 提供名稱、提示、威脅、敵軍群組與獎勵。

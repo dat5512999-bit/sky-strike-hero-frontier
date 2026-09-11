@@ -1,5 +1,9 @@
 # 版本更新手冊
 
+## 更新到 v0.35.0
+
+完整替換 `assets/td` 的四張 v2 新素材及塔防的設定、美術、流派、技能、分支、HTML、CSS、Service Worker、測試與文件。不可只複製 PNG，否則新塔不會進入建造清單；也不可只改 `FactionSystem`，否則建造時會找不到設定。更新後 `npm run check` 與 `npm test` 應有 142 項通過。
+
 ## 更新到 v0.34.0
 
 請完整替換塔防波表、怪物、英雄、Boss 戰鬥、主流程、設定與 Service Worker 檔案，不可只把 `totalWaves` 改成 30。執行 `npm run check` 與 `npm test` 應有 140 項通過。此版無存檔遷移；更新會重開目前戰役。

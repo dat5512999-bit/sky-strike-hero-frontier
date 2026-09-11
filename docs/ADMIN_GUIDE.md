@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## v0.35.0 美術與建造資料
+
+英雄專屬圖集由 `ArtSystem.heroHunter／hero／heroRogue` 選擇，普通守軍繼續使用 `combatUnits`，不可再讓英雄回退共用守軍圖集。三座新塔的數值位於 `config.buildings`，開局歸屬位於 `FactionSystem.FACTIONS`，分支與熟練行為分別由 `TowerEvolutionSystem`、`TowerSkillSystem` 管理。新增或移除塔時必須同步 `td.html`、`td.css`、`sw.js` 與測試。
+
 ## v0.34.0 三十波營運
 
 `WaveCatalog.js` 是 30 波編成與清場獎勵的唯一來源，`WaveSystem.js` 仍只管理 `preparing → spawning → clearing → reward → complete`。後期生命成長採 `1 + 前14波×10.5% + 後15波×7%`；不要在 `TDGame` 硬編波數。調整後至少驗證第 15／16 波曲線銜接、六個 Boss 波總耐久、每三波 Loot、Lv.15、第三十波勝利與四難度的守軍恢復規則。
