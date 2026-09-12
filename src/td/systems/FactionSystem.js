@@ -1,7 +1,7 @@
 (function(ns){
   'use strict';
   const FACTIONS={
-    hunter:{id:'hunter',name:'王國遠征軍',theme:'王國',color:'#e6c56c',units:['hunter','shield','knight','musketeer','halberdier'],buildings:['arrow','cannon','barracks','ballista']},
+    hunter:{id:'hunter',name:'王國遠征軍',theme:'王國',color:'#e6c56c',units:['hunter','shield','knight','musketeer','halberdier'],buildings:['arrow','iceward','cannon','barracks','ballista']},
     arcanist:{id:'arcanist',name:'銀葉秘法庭',theme:'精靈',color:'#70e7ff',units:['arcanist','dragon','treant','dryad','moonblade'],buildings:['frost','storm','grove','moonwell']},
     rogue:{id:'rogue',name:'暮影盟約',theme:'暗影',color:'#c884df',units:['rogue','skeleton','golem','banshee','boneRider'],buildings:['crypt','soul','graveyard','plague']}
   };

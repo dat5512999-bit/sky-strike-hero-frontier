@@ -1,5 +1,11 @@
 # API 文件（內部模組介面）
 
+## v0.42.0 塔與傷害資料契約
+
+- `Building.upgradeCost()` 回傳 `{gold,merit}` 或 Lv.5 的 `null`；`gold` 為塔原價乘 `[2.8,4.2,6.2,8.4]` 後取整至 10G，`merit` 僅 Lv.4→5 為 1。`BuildSystem.upgrade(economy)` 仍原子性扣款，失敗不升級。
+- `config.buildings[type].slow/slowTime/bonusVsSlowed/role` 為選填欄位；`TowerSkillSystem.fire()` 將增傷欄位傳至 `Projectile`。`Projectile.hit()` 以命中前 `slowTimer>0 && slowFactor<=.8` 判定強緩速，對應傷害類型及怪物護甲仍照原公式結算。
+- `FactionSystem.available('building')` 王國起始含 `iceward`；`TowerEvolutionSystem.branches('iceward')` 有兩條互斥三級進階。無新外部 API、資料庫或帳號權限。
+
 ## v0.41.0 英雄大絕與美術載入介面
 
 - `HeroUltimateSystem.get(classType)` 回傳名稱、圖示、說明、冷卻與範圍；`cast(hero, monsters, onKill, onHit)` 成功回傳範圍效果資料，無目標／死亡／冷卻中回傳 `null`。

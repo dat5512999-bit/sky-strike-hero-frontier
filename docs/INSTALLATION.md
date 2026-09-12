@@ -1,5 +1,9 @@
 # 安裝手冊
 
+## v0.42.0 安裝與初驗
+
+無新相依套件。完整取得專案後執行 `npm run check` 與 `npm test`，再用 Chrome／Edge 開啟 `td.html` 或執行 `npm run serve:test` 開 `http://127.0.0.1:4173/td.html`。選王國應見 125G 寒鋼哨塔、選老兵應見第 30 波血量 309%；建 100G 林地弩塔後，下一級應顯示 280G。手機需展開建造面板。若手機仍見舊價格，須先待 GitHub Pages 新版發布，並關閉舊遊戲分頁再開。
+
 ## v0.41.0 安裝與驗證
 
 無新套件。完整複製專案後執行 `npm run check`、`npm test`，以 Chrome／Edge 開啟 `td.html`，或 `npm run serve:test` 後開啟 `http://127.0.0.1:4173/td.html`。選角時應先看到圖片載入狀態；進場後 F 大絕按鈕可見，地圖與首波怪物不應是色塊／圓點。手機加入主畫面仍使用原圖示。

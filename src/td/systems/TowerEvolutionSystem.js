@@ -2,6 +2,7 @@
   'use strict';
   const BRANCHES={
     arrow:{volley:{name:'暴雨連弩',description:'每次攻擊增加一個目標。',mods:{shots:2,interval:.82,color:'#f2cf69'}},sniper:{name:'巨獸獵塔',description:'射程與單發傷害大幅提高。',mods:{damage:1.55,range:1.22,interval:1.28,color:'#ffdca0'}}},
+    iceward:{winter:{name:'永冬哨塔',description:'射程擴大，冰封持續更久。',mods:{range:1.18,slowTime:1.35,color:'#bcecff'}},rime:{name:'霜鐵棱堡',description:'攻擊更快，寒氣讓單體敵軍更難前進。',mods:{interval:.72,slow:.48,color:'#83d2ff'}}},
     frost:{blizzard:{name:'永凍高塔',description:'擴大冰爆並延長緩速。',mods:{splash:1.6,slow:.78,color:'#8beaff'}},conduit:{name:'秘法導塔',description:'攻速提升並連鎖兩名敵人。',mods:{interval:.72,chain:2,color:'#b78cff'}}},
     cannon:{cluster:{name:'爆裂火砲',description:'爆炸範圍大幅提高。',mods:{splash:1.65,color:'#ff8a51'}},siege:{name:'攻城重砲',description:'高傷害但攻擊較慢。',mods:{damage:1.7,interval:1.32,color:'#ffc15b'}}},
     storm:{tempest:{name:'風暴尖塔',description:'額外連鎖並提高攻速。',mods:{chain:2,interval:.8,color:'#70f5ff'}},surge:{name:'雷槍塔',description:'集中雷擊造成高傷害。',mods:{damage:1.5,chain:0,color:'#d7fbff'}}},
@@ -18,7 +19,7 @@
   class TowerEvolutionSystem{
     static branches(type){return Object.keys(BRANCHES[type]||{}).map(id=>Object.assign({id:id},BRANCHES[type][id]));}
     static choose(tower,id){if(!tower||tower.kind!=='building'||tower.level<3||!BRANCHES[tower.type]||!BRANCHES[tower.type][id])return false;tower.branch=id;tower.skillPulse=1;return true;}
-    static apply(tower,config){const branch=BRANCHES[tower.type]&&BRANCHES[tower.type][tower.branch];if(!branch)return config;const m=branch.mods,result=Object.assign({},config);['damage','range','interval','splash'].forEach(key=>{if(m[key]!==undefined)result[key]=(result[key]||0)*m[key];});['shots','chain','slow','summonCap','color'].forEach(key=>{if(m[key]!==undefined)result[key]=m[key];});result.branchName=branch.name;return result;}
+    static apply(tower,config){const branch=BRANCHES[tower.type]&&BRANCHES[tower.type][tower.branch];if(!branch)return config;const m=branch.mods,result=Object.assign({},config);['damage','range','interval','splash','slowTime'].forEach(key=>{if(m[key]!==undefined)result[key]=(result[key]||0)*m[key];});['shots','chain','slow','summonCap','color'].forEach(key=>{if(m[key]!==undefined)result[key]=m[key];});result.branchName=branch.name;return result;}
     static label(tower){const branch=BRANCHES[tower.type]&&BRANCHES[tower.type][tower.branch];return branch?branch.name:'尚未選擇進階分支';}
   }
   TowerEvolutionSystem.BRANCHES=BRANCHES;ns.systems.TowerEvolutionSystem=TowerEvolutionSystem;

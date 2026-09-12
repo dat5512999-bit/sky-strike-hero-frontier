@@ -1,5 +1,9 @@
 # 部署手冊
 
+## v0.42.0 發布檢查（尚未發布）
+
+使用者本次未要求更新 GitHub，請勿自行推送。若日後明確要求發布，須同時包含 `config.js`、`Building.js`、`TowerSkillSystem.js`、`TowerEvolutionSystem.js`、`Projectile.js`、`TDDifficultySystem.js`、`FactionSystem.js`、`ArtSystem.js`、`TDGame.js`、`td.html`、`td.css`、`sw.js` 和文件。Service Worker 快取名稱 `sky-strike-v0.42.0`；手機舊頁關閉重開後驗證老兵摘要、寒鋼哨塔、升級價格與三族控場。線上版目前仍可能是舊版，不應當作本地測試結果。
+
 ## v0.41.0 發布前後
 
 本機修復尚未發布。取得使用者明確指示後，連同 `HeroUltimateSystem.js`、`ArtSystem.js`、`td.html`、`td.css`、`TDGame.js`、`main.js` 與 `sw.js` 一起推送；不能只推 UI 或圖片。Pages 更新後於 4G／Wi‑Fi 各重開手機遊戲，確認選角載入提示、地圖／首波怪物／英雄圖片、F 大絕與既有 R 商店。離線快取名稱為 `sky-strike-v0.41.0`，切版後關閉舊分頁再開。

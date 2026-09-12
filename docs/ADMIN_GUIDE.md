@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## v0.42.0 平衡維護
+
+老兵壓力只在 `TDDifficultySystem.MODES.veteran` 調整；塔原價與控制／連攜屬性在 `config.buildings`，階梯倍數在 `Building.upgradeCost()`，擊殺門檻在 `TowerSkillSystem.THRESHOLDS`。調整任一值時請同時查第 1／13／20／30 波的可花金、漏怪、是否仍有兩種以上可行編成；不能只看血量倍率或單塔 DPS。新塔必須同步 `FactionSystem`、`td.html`、`ArtSystem`、`td.css`、離線快取與測試。此版沿用現有本機資料，不需要管理權限或資料遷移。
+
 ## v0.41.0 載入與平衡維護
 
 調整三英雄大絕請改 `HeroUltimateSystem.ULTIMATES` 與 `cast`，保持冷卻高於 Q／W／E、空場不扣冷卻、傷害走 `Projectile.hit`。新增關鍵首波圖時更新 `ArtSystem.coreStatus`；大圖維持按需載入，不要重新放進 Service Worker 的 `PRECACHE`。手機圖片失敗先確認 GitHub Pages 資產 URL／網路，再用選角頁重試，切勿只看 Canvas 的降級圖就判定美術檔不存在。

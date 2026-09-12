@@ -1,5 +1,9 @@
 # 系統架構
 
+## v0.42.0 資源與控場資料流
+
+`config.buildings → FactionSystem.available → BuildSystem.queue/place → Building.upgradeCost（依建造價）→ EconomySystem.spend → TDGame 選取價格`。攻擊走原有 `Building.update → TowerSkillSystem.fire → Projectile.hit → Monster.applySlow/takeDamage`；`Projectile` 先讀取敵人原有強緩速狀態，再套新緩速與 `bonusVsSlowed`，避免一顆子彈自我觸發連攜。`TDDifficultySystem.veteran → WaveSystem.spawnInterval / Monster.healthRate` 只改第三難，不更動其他難度。`ArtSystem` 沿用冰塔圖集並加王國冰徽；無資料庫、HTTP API 或存檔 schema 變更。
+
 ## v0.41.0 大絕與圖片生命週期
 
 `F／觸控按鈕 → TDGame.castUltimate → HeroUltimateSystem → Projectile.hit → 命中／擊殺／經濟與回饋`；大絕設定集中一個模組，原 Q／W／E、商店、怪物與塔不用重寫。`選角／畫面繪製 → ArtSystem 按需請求（4 並行、失敗重試）→ coreStatus 確認地圖＋首波怪物＋所選英雄 → 進戰場`；`Service Worker` 僅預存 HTML／CSS／JS／圖示，戰場圖片使用時快取。無資料庫與新伺服器。

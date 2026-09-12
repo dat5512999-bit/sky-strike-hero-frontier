@@ -142,3 +142,6 @@ body[data-layout="mobile"] .td-hero-dock .ultimate-button{min-height:48px}
 body[data-layout="mobile"] .td-wave-copy{min-width:0;overflow:hidden}
 body[data-layout="mobile"] .td-wave-copy>span{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 body[data-layout="mobile"] .td-wave-copy small{max-height:3em}
+.command-grid [data-build-type="iceward"]{border-top:3px solid #a4dcff}
+.command-grid [data-build-type="iceward"]::before{background-position:50% 0;filter:sepia(.35) saturate(1.3)}
+.selection-portrait[data-subject="iceward"]{background-image:url('assets/td/towers-atlas-v1.png');background-size:300% 100%;background-position:50% 0}

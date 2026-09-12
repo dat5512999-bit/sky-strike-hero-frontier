@@ -23,19 +23,20 @@
       orc:{name:'赤牙勇士',faction:'半獸人',icon:'斧',cost:125,wood:2,health:205,armor:4,damage:31,range:50,interval:.82,speed:106,color:'#e46c4d',attackType:'chaos',splash:24,role:'重擊戰吼'}
     },
     buildings:{
-      arrow:{name:'林地弩塔',faction:'人族',icon:'♜',cost:95,wood:2,damage:25,range:172,interval:.82,color:'#d5bd63',attackType:'pierce'},
+      arrow:{name:'林地弩塔',faction:'人族',icon:'♜',cost:100,wood:2,damage:25,range:172,interval:.82,color:'#d5bd63',attackType:'pierce'},
+      iceward:{name:'寒鋼哨塔',faction:'王國',icon:'❄',cost:125,wood:2,damage:10,range:162,interval:1.28,color:'#a4dcff',attackType:'magic',slow:.62,slowTime:1.6,role:'冰封控場'},
       frost:{name:'寒霜水晶塔',faction:'秘法',icon:'❄',cost:120,wood:2,damage:18,range:150,interval:1.05,color:'#66ddff',attackType:'magic',slow:.58,slowTime:1.4},
-      cannon:{name:'赤焰火砲塔',faction:'矮人',icon:'●',cost:145,wood:3,damage:42,range:142,interval:1.55,color:'#ff7045',attackType:'chaos',splash:54},
-      storm:{name:'星葉雷霆塔',faction:'精靈',icon:'ϟ',cost:165,wood:2,damage:19,range:165,interval:1.15,color:'#7ee9e5',attackType:'magic'},
+      cannon:{name:'赤焰火砲塔',faction:'矮人',icon:'●',cost:145,wood:3,damage:42,range:142,interval:1.55,color:'#ff7045',attackType:'chaos',splash:54,bonusVsSlowed:1.25,role:'緩速追擊 +25%'},
+      storm:{name:'星葉雷霆塔',faction:'精靈',icon:'ϟ',cost:165,wood:2,damage:19,range:165,interval:1.15,color:'#7ee9e5',attackType:'magic',bonusVsSlowed:1.2,role:'緩速追擊 +20%'},
       totem:{name:'赤牙祖靈柱',faction:'獸族',icon:'✹',cost:150,wood:2,damage:28,range:125,interval:1.25,color:'#ffbe66',attackType:'chaos',splash:25},
       crypt:{name:'幽骨召喚殿',faction:'亡靈',icon:'☽',cost:180,wood:3,damage:12,range:155,interval:1.3,color:'#bc9aff',attackType:'magic'},
-      soul:{name:'靈魂收割塔',faction:'暗影',icon:'魂',cost:155,wood:2,damage:24,range:158,interval:1.08,color:'#d283ff',attackType:'magic',chain:2,slow:.88,slowTime:.8},
+      soul:{name:'靈魂收割塔',faction:'暗影',icon:'魂',cost:155,wood:2,damage:24,range:158,interval:1.08,color:'#d283ff',attackType:'magic',chain:2,slow:.88,slowTime:.8,bonusVsSlowed:1.2,role:'緩速追擊 +20%'},
       barracks:{name:'王國戰鼓堡',faction:'王國',icon:'旗',cost:135,wood:2,damage:20,range:146,interval:.72,color:'#e7c76d',attackType:'pierce',shots:2},
-      grove:{name:'翠靈古樹',faction:'精靈',icon:'樹',cost:150,wood:3,damage:22,range:154,interval:1.02,color:'#72dc87',attackType:'magic',splash:34,slow:.76,slowTime:1.1},
+      grove:{name:'翠靈古樹',faction:'精靈',icon:'樹',cost:150,wood:3,damage:22,range:154,interval:1.02,color:'#72dc87',attackType:'magic',splash:34,slow:.76,slowTime:1.1,role:'荊棘纏根控場'},
       graveyard:{name:'冥燈墓園',faction:'暗影',icon:'墓',cost:165,wood:3,damage:14,range:148,interval:1.16,color:'#a985ed',attackType:'magic'},
       ballista:{name:'獅翼弩砲台',faction:'王國',icon:'獅',cost:155,wood:3,damage:26,range:190,interval:1.18,color:'#f0c76a',attackType:'pierce',shots:2},
       moonwell:{name:'月泉稜鏡塔',faction:'精靈',icon:'月',cost:160,wood:3,damage:18,range:168,interval:1.08,color:'#a9c8ff',attackType:'magic',chain:2,slow:.82,slowTime:1},
-      plague:{name:'瘟疫尖碑',faction:'暗影',icon:'疫',cost:150,wood:2,damage:21,range:150,interval:1.18,color:'#8fe45d',attackType:'chaos',splash:38,slow:.86,slowTime:1.2}
+      plague:{name:'瘟疫尖碑',faction:'暗影',icon:'疫',cost:150,wood:2,damage:18,range:150,interval:1.18,color:'#8fe45d',attackType:'chaos',splash:38,slow:.76,slowTime:1.5,role:'毒霧遲緩控場'}
     },
     hero:{maxHealth:100,speed:215,range:152,damage:18,interval:.58,novaDamage:30,novaRange:118,novaCooldown:9,respawnTime:8,respawnHealth:.65,invulnerability:2}
   });
