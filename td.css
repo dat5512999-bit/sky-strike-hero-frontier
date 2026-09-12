@@ -134,7 +134,7 @@ body[data-layout="mobile"]{padding:max(3px,env(safe-area-inset-top)) max(3px,env
 .td-hero-dock .ultimate-button:not(:disabled):not(.is-cooling){box-shadow:inset 0 0 18px #f3cb8344,0 0 10px #dfb96a44}
 .td-hero-dock .ultimate-button.is-cooling{border-color:#775f6c}
 body[data-layout="mobile"] .td-hero-dock .ultimate-button{min-height:48px}
-.art-loading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0;padding:9px 11px;border:1px solid #8f7950;background:#101b1c;color:#f0d999;font-size:12px;line-height:1.45}
+.art-loading{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:8px 0;padding:9px 11px;border:1px solid #8f7950;background:#101b1c;color:#f0d999;font-size:12px;line-height:1.45}
 .art-loading[data-state="ready"]{border-color:#5d9574;color:#9ee1bd}
 .art-loading[data-state="failed"]{border-color:#d47163;color:#ffd0bc}
 .art-loading button{min-height:40px;flex:none;padding:5px 11px}
@@ -142,6 +142,7 @@ body[data-layout="mobile"] .td-hero-dock .ultimate-button{min-height:48px}
 body[data-layout="mobile"] .td-wave-copy{min-width:0;overflow:hidden}
 body[data-layout="mobile"] .td-wave-copy>span{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 body[data-layout="mobile"] .td-wave-copy small{max-height:3em}
+.target-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 9px;border:1px solid #5c5337;background:#101918;color:#e1d5ac;font-size:11px}.target-controls select{min-height:38px;max-width:65%;padding:5px 8px;border:1px solid #8e7848;border-radius:3px;background:#202720;color:#f4e9c5}.target-controls select:focus-visible{outline:2px solid #9effd2}.target-controls[hidden]{display:none}body[data-layout="mobile"][data-mobile-panel="compact"] .target-controls{display:none}
 .command-grid [data-build-type="iceward"]{border-top:3px solid #a4dcff}
 .command-grid [data-build-type="iceward"]::before{background-position:50% 0;filter:sepia(.35) saturate(1.3)}
 .selection-portrait[data-subject="iceward"]{background-image:url('assets/td/towers-atlas-v1.png');background-size:300% 100%;background-position:50% 0}

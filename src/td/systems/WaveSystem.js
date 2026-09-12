@@ -2,11 +2,12 @@
   'use strict';
   class WaveSystem{
     constructor(catalog){this.catalog=catalog||new ns.systems.WaveCatalog();this.reset();}
-    reset(){this.wave=0;this.queue=[];this.spawnTimer=0;this.phase='waiting';this.active=false;this.complete=false;this.countdown=0;this.pendingClear=null;this.modifiers={};}
+    reset(){this.wave=0;this.queue=[];this.spawnTimer=0;this.phase='waiting';this.active=false;this.complete=false;this.countdown=0;this.pendingClear=null;this.bountyScale=1;this.modifiers={};}
     setModifiers(modifiers){this.modifiers=Object.assign({},modifiers||{});return this.modifiers;}
     spawnInterval(){const base=this.wave%5===0?Math.max(.52,.72-Math.max(0,this.wave-15)*.01):Math.max(.24,.5-this.wave*.012);return base*(this.modifiers.spawnRate||1);}
-    composition(wave){const definition=this.catalog.get(wave);return definition?definition.groups:[];}
-    preview(){return this.complete?null:this.catalog.get(this.wave+1);}
+    definition(wave){const source=this.catalog.get(wave);if(!source)return null;const factor=Math.max(1,Number(this.modifiers.enemyCount)||1),groups=source.groups.map(group=>({type:group.type,count:group.type==='boss'?group.count:Math.max(group.count,Math.round(group.count*factor))})),original=source.groups.reduce((sum,group)=>sum+(group.type==='boss'?0:group.count),0);let expanded=groups.reduce((sum,group)=>sum+(group.type==='boss'?0:group.count),0);if(expanded===original&&original){const largest=groups.filter(group=>group.type!=='boss').sort((a,b)=>b.count-a.count)[0];largest.count+=1;expanded+=1;}return Object.assign({},source,{groups:groups,bountyScale:original&&expanded?original/expanded:1});}
+    composition(wave){const definition=this.definition(wave);return definition?definition.groups:[];}
+    preview(){return this.complete?null:this.definition(this.wave+1);}
     beginPreparation(){
       if(this.complete||this.active||this.wave>=this.catalog.total())return false;
       this.phase='preparing';this.countdown=(this.wave===0?ns.config.wave.firstPreparation:ns.config.wave.preparation)*(this.modifiers.preparation||1);return true;
@@ -14,12 +15,12 @@
     canStart(){return !this.complete&&!this.active&&this.wave<this.catalog.total()&&(this.phase==='waiting'||this.phase==='preparing');}
     start(){
       if(!this.canStart())return false;
-      const definition=this.catalog.get(this.wave+1);if(!definition)return false;
-      this.wave=definition.wave;this.queue=[];definition.groups.forEach(function(group){for(let i=0;i<group.count;i+=1)this.queue.push(group.type);},this);this.spawnTimer=.15;this.countdown=0;this.phase='spawning';this.active=true;if(typeof this.onStart==='function')this.onStart(this.wave,definition);return true;
+      const definition=this.definition(this.wave+1);if(!definition)return false;
+      this.wave=definition.wave;this.bountyScale=definition.bountyScale;this.queue=[];definition.groups.forEach(function(group){for(let i=0;i<group.count;i+=1)this.queue.push(group.type);},this);this.spawnTimer=.15;this.countdown=0;this.phase='spawning';this.active=true;if(typeof this.onStart==='function')this.onStart(this.wave,definition);return true;
     }
     update(dt,monsters){
       if(this.phase==='preparing'){this.countdown=Math.max(0,this.countdown-dt);if(this.countdown<=0)this.start();}
-      if(this.phase==='spawning'){this.spawnTimer-=dt;if(this.queue.length&&this.spawnTimer<=0){monsters.push(new ns.entities.Monster(this.queue.shift(),this.wave,ns.config.path,this.modifiers));this.spawnTimer=this.spawnInterval();}if(!this.queue.length)this.phase='clearing';}
+      if(this.phase==='spawning'){this.spawnTimer-=dt;if(this.queue.length&&this.spawnTimer<=0){const type=this.queue.shift(),modifiers=Object.assign({},this.modifiers,{bountyScale:type==='boss'?1:this.bountyScale});monsters.push(new ns.entities.Monster(type,this.wave,ns.config.path,modifiers));this.spawnTimer=this.spawnInterval();}if(!this.queue.length)this.phase='clearing';}
       if(this.phase==='clearing'&&!monsters.some(function(monster){return monster.active;})){this.active=false;this.phase='reward';this.pendingClear=this.catalog.get(this.wave);}
       if(this.phase==='reward'&&this.pendingClear){const event=this.pendingClear;this.pendingClear=null;return event;}
       return null;

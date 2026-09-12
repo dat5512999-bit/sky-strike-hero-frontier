@@ -5,7 +5,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
-const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8' };
+const mime = {
+  '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8',
+  '.webmanifest': 'application/manifest+json', '.png': 'image/png',
+  '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp',
+  '.svg': 'image/svg+xml', '.ico': 'image/x-icon'
+};
+const port = Number(process.env.TD_TEST_PORT) || 4173;
 
 http.createServer((request, response) => {
   const requestPath = decodeURIComponent(new URL(request.url, 'http://127.0.0.1').pathname);
@@ -23,4 +30,4 @@ http.createServer((request, response) => {
     response.writeHead(200, { 'Content-Type': mime[path.extname(file)] || 'application/octet-stream' });
     response.end(data);
   });
-}).listen(4173, '127.0.0.1', () => console.log('Phase 1 test server: http://127.0.0.1:4173'));
+}).listen(port, '127.0.0.1', () => console.log('Test server: http://127.0.0.1:' + port));

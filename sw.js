@@ -1,7 +1,8 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.42.0';
+const CACHE_NAME = 'sky-strike-v0.43.0';
 const ASSETS = [
+  './src/td/systems/TargetSelector.js',
   './src/td/systems/TDDifficultySystem.js', './src/td/systems/EnemyTraitSystem.js', './src/td/systems/BattleReportSystem.js',
   './', './index.html', './styles.css', './td.html', './td.css', './manifest.webmanifest', './td.webmanifest', './assets/icons/game-icon.svg', './assets/icons/app-icon-192.png', './assets/icons/app-icon-512.png', './assets/icons/apple-touch-icon-180.png',
   './src/namespace.js', './src/config.js', './src/utils/math.js',
@@ -14,7 +15,7 @@ const ASSETS = [
   './src/td/namespace.js', './src/td/config.js', './src/td/systems/ArtSystem.js', './src/td/systems/EquipmentSystem.js', './src/td/systems/ArmorySystem.js', './src/td/systems/ProfessionSystem.js', './src/td/systems/FactionSystem.js', './src/td/systems/LootSystem.js', './src/td/systems/PathSystem.js', './src/td/systems/LayoutSystem.js', './src/td/systems/NavigationSystem.js', './src/td/systems/CommandSystem.js', './src/td/systems/WaveCatalog.js', './src/td/systems/EconomySystem.js', './src/td/systems/CombatFeedbackSystem.js', './src/td/systems/TowerEvolutionSystem.js', './src/td/systems/TowerSkillSystem.js', './src/td/systems/ShopSystem.js', './src/td/entities/Summon.js', './src/td/entities/Monster.js', './src/td/systems/EnemyCombatSystem.js', './src/td/entities/Projectile.js', './src/td/entities/CombatUnit.js', './src/td/entities/Building.js', './src/td/systems/HeroRoster.js', './src/td/systems/HeroUltimateSystem.js', './src/td/entities/Hero.js', './src/td/systems/WaveSystem.js', './src/td/systems/BuildSystem.js', './src/td/TDGame.js', './src/td/main.js'
 ];
 
-// 手機首次安裝只預存遊戲殼；大型美術改為實際使用時載入，避免 4G 一次下載約 90 MB。
+// 安裝時只預存遊戲殼；頁面直接載入完整美術，成功後由 fetch handler 快取，避免安裝流程同步等待約 90 MB。
 const PRECACHE = ASSETS.filter(function (asset) { return !asset.startsWith('./assets/td/'); });
 self.addEventListener('install', function (event) {
   event.waitUntil(caches.open(CACHE_NAME).then(function (cache) { return cache.addAll(PRECACHE); }).then(function () { return self.skipWaiting(); }));

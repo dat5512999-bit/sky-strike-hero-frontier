@@ -1,5 +1,9 @@
 # 安裝手冊
 
+## v0.43.0 安裝與初驗
+
+完整複製專案後用 Chrome／Edge 開 `td.html`；本機亦可執行 `npm run serve:test`，再開 `http://127.0.0.1:4173/td.html`。開發驗證執行 `npm run check`、`npm test`，無新套件。選角應見三英雄完整圖片，進場應見完整地圖；不提供低畫質進場。建一名士兵，點選後應看到五種索敵策略。GitHub Pages 使用者需等部署完成後關閉舊遊戲分頁並重新開啟。
+
 ## v0.42.0 安裝與初驗
 
 無新相依套件。完整取得專案後執行 `npm run check` 與 `npm test`，再用 Chrome／Edge 開啟 `td.html` 或執行 `npm run serve:test` 開 `http://127.0.0.1:4173/td.html`。選王國應見 125G 寒鋼哨塔、選老兵應見第 30 波血量 309%；建 100G 林地弩塔後，下一級應顯示 280G。手機需展開建造面板。若手機仍見舊價格，須先待 GitHub Pages 新版發布，並關閉舊遊戲分頁再開。

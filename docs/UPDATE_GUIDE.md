@@ -1,5 +1,9 @@
 # 版本更新手冊
 
+## 更新到 v0.43.0
+
+先備份專案和未提交修改；更新整份靜態檔案，不要漏掉恢復直接載圖的 `ArtSystem.js`、新 `TargetSelector.js`、`td.html` 引用或 `sw.js` 離線清單。執行 `npm run check` 與 `npm test`；關閉舊分頁再開，確認三英雄與地圖完整顯示、士兵可切換五種索敵。無存檔遷移；GitHub Pages 推送後需等待部署完成，再重開舊分頁。
+
 ## 更新到 v0.41.0
 
 從 v0.40.1 更新全部程式與文件，新增 `src/td/systems/HeroUltimateSystem.js`，不要漏掉 `td.html` 的腳本引用與 `sw.js` 清單。執行 `npm run check`、`npm test`；關閉舊遊戲分頁再開。選角時等待圖片就緒，進場以 F 測大絕與 R 商店。沒有存檔遷移，線上版需另外依部署手冊發布。

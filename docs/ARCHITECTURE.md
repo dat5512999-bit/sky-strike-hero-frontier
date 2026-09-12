@@ -1,5 +1,9 @@
 # 系統架構
 
+## v0.43.0 守軍指揮與選角容錯
+
+`CommandSystem → CombatUnit.issueCommand → 導航／駐守點`；無手動命令時 `CombatUnit → TargetSelector → 既有攻擊／Projectile`。有效目標保留鎖定，死亡、越界或路徑失敗才重選；追擊超界則走原 `NavigationSystem` 返回駐守點。英雄與建築仍保留各自現行索敵，沒有第二套戰鬥引擎。圖片改回 `ArtSystem.load → Image.src／onload → coreStatus → 選角進場`，不經 v0.41.0 的按需佇列作首次載入，也不繞過完整圖片門檻。靜態前端，無資料庫或伺服器 API。
+
 ## v0.42.0 資源與控場資料流
 
 `config.buildings → FactionSystem.available → BuildSystem.queue/place → Building.upgradeCost（依建造價）→ EconomySystem.spend → TDGame 選取價格`。攻擊走原有 `Building.update → TowerSkillSystem.fire → Projectile.hit → Monster.applySlow/takeDamage`；`Projectile` 先讀取敵人原有強緩速狀態，再套新緩速與 `bonusVsSlowed`，避免一顆子彈自我觸發連攜。`TDDifficultySystem.veteran → WaveSystem.spawnInterval / Monster.healthRate` 只改第三難，不更動其他難度。`ArtSystem` 沿用冰塔圖集並加王國冰徽；無資料庫、HTTP API 或存檔 schema 變更。

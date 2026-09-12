@@ -1,5 +1,9 @@
 # 部署手冊
 
+## v0.43.0 發布檢查
+
+此次依使用者明確要求推送。需一起發布 `TargetSelector.js`、`CombatUnit.js`、`TDGame.js`、`ArtSystem.js`、`main.js`、`td.html`、`td.css`、`sw.js`、版本與測試文件及先前未發布內容；勿只更新 HTML。Service Worker 快取名 `sky-strike-v0.43.0`，新腳本必須在離線預存清單。發布後用同一網址的 Chrome／Edge 驗證三英雄、地圖和敵軍完整圖片及開局，並測士兵索敵與離線重開。
+
 ## v0.42.0 發布檢查（尚未發布）
 
 使用者本次未要求更新 GitHub，請勿自行推送。若日後明確要求發布，須同時包含 `config.js`、`Building.js`、`TowerSkillSystem.js`、`TowerEvolutionSystem.js`、`Projectile.js`、`TDDifficultySystem.js`、`FactionSystem.js`、`ArtSystem.js`、`TDGame.js`、`td.html`、`td.css`、`sw.js` 和文件。Service Worker 快取名稱 `sky-strike-v0.42.0`；手機舊頁關閉重開後驗證老兵摘要、寒鋼哨塔、升級價格與三族控場。線上版目前仍可能是舊版，不應當作本地測試結果。

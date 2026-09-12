@@ -1,5 +1,11 @@
 # API 文件（內部模組介面）
 
+## v0.43.0 守軍索敵介面
+
+- `TargetSelector.supports(strategy)`、`valid(target)`、`rank(origin, targets, strategy, filter)`、`select(...)` 為可重用的純索敵介面；策略鍵為 `nearest/front/lowestHealth/highestHealth/fastest`。
+- `CombatUnit.setTargetStrategy(key)` 拒絕無效值；`setGuardPoint(x,y)` 與 `guardRadius/maxChaseDistance` 控制自動警戒及追擊。`update(dt,monsters,projectiles,{navigation,buildings})` 沿用既有投射物與傷害。
+- `ArtSystem.load(src)` 恢復直接設定圖片 `src` 並監聽載入；`coreStatus(type)` 仍回傳地圖、首波敵軍與所選英雄的就緒狀態。`TDGame.chooseProfession` 未就緒時不開局；無低畫質繞過選項。沒有 HTTP API。
+
 ## v0.42.0 塔與傷害資料契約
 
 - `Building.upgradeCost()` 回傳 `{gold,merit}` 或 Lv.5 的 `null`；`gold` 為塔原價乘 `[2.8,4.2,6.2,8.4]` 後取整至 10G，`merit` 僅 Lv.4→5 為 1。`BuildSystem.upgrade(economy)` 仍原子性扣款，失敗不升級。
