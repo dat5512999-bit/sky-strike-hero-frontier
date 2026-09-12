@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.43.0';
+const CACHE_NAME = 'sky-strike-v0.44.0';
 const ASSETS = [
   './src/td/systems/TargetSelector.js',
   './src/td/systems/TDDifficultySystem.js', './src/td/systems/EnemyTraitSystem.js', './src/td/systems/BattleReportSystem.js',

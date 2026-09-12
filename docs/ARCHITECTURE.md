@@ -1,5 +1,20 @@
 # 系統架構
 
+## v0.44.0 UI/UX 資料流
+
+```mermaid
+flowchart LR
+  Layout[LayoutSystem: PC / Mobile] --> Surface[main.js: 同一批建造按鈕搬移]
+  Opening[開局卡片] --> TDGame[TDGame 狀態與介面]
+  Surface --> TDGame
+  TDGame --> Build[既有 BuildSystem / EconomySystem]
+  TDGame --> Wave[既有 Wave / Hero / Combat]
+  Menu[⚙ 遊戲選單] --> TDGame
+  TDGame --> Reset[既有 reset + 上局設定重套]
+```
+
+開局為全視窗選擇層，戰鬥為 PC 寬戰場＋右指揮欄或既有 Mobile 底部面板；兩者共用 `TDGame`、建造資料和數值。Canvas 保持 720×720 邏輯座標，只改 CSS 顯示尺寸與周邊版型，不擴地圖、不拉伸座標。桌機 Drawer 只移動既有建造 DOM，不另建 BuildSystem。無資料庫／外部 API／新網路服務。
+
 ## v0.43.0 守軍指揮與選角容錯
 
 `CommandSystem → CombatUnit.issueCommand → 導航／駐守點`；無手動命令時 `CombatUnit → TargetSelector → 既有攻擊／Projectile`。有效目標保留鎖定，死亡、越界或路徑失敗才重選；追擊超界則走原 `NavigationSystem` 返回駐守點。英雄與建築仍保留各自現行索敵，沒有第二套戰鬥引擎。圖片改回 `ArtSystem.load → Image.src／onload → coreStatus → 選角進場`，不經 v0.41.0 的按需佇列作首次載入，也不繞過完整圖片門檻。靜態前端，無資料庫或伺服器 API。

@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## v0.44.0 UI 維護重點
+
+開局選擇與戰鬥狀態仍由 `TDGame` 管理；難度倍率在 `TDDifficultySystem`，勿在卡片寫第二套數值。`main.js` 依 `LayoutSystem.resolved()` 把**同一批** `[data-build-type]` 按鈕在桌機 Drawer 與手機原指揮網格之間搬移，不複製建造資料；分類只用 `data-build-category` 篩選，實際費用／放置仍走 `BuildSystem`。新增建築時同時檢查 Drawer 分類、手機原格、CSS 圖集與 PWA 清單。重開只呼叫 `TDGame.reset()`；再挑戰在重置後重新套用上一局難度／英雄。沒有資料庫、帳號、權限或遊戲存檔遷移。
+
 ## v0.43.0 維護重點
 
 `CombatUnit` 保有命令與自動攻擊，只新增守軍追擊／回防狀態；新增士兵須由既有 `BuildSystem` 建立，不另開 Auto Battle。索敵類型在 `TargetSelector.STRATEGIES`，新增選項時同步更新 `td.html` 與測試。此次回歸與 v0.41.0 的按需載圖佇列相關，已恢復直接載圖；不要為了進場而繞過完整圖片門檻。測試伺服器的圖片 MIME 也已補正。無帳號、資料庫、權限或存檔遷移。

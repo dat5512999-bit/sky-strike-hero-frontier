@@ -1,5 +1,9 @@
 # 部署手冊
 
+## v0.44.0 待發布檢查
+
+本次 UI 只在本機；使用者先前要求的 GitHub 更新已完成於 v0.43.0，**不要把 v0.44.0 自動推送**。日後明確要求發布時，需整批提交 `td.html`、`td.css`、`src/td/main.js`、`src/td/TDGame.js`、`sw.js`、版本、測試與文件。Service Worker 快取名為 `sky-strike-v0.44.0`；Pages 部署後關閉舊分頁重開，分別驗證 1920×1080 PC 建造 Drawer、筆電寬度、手機原面板和重開／結算。靜態部署不需資料庫或環境變數。
+
 ## v0.43.0 發布檢查
 
 此次依使用者明確要求推送。需一起發布 `TargetSelector.js`、`CombatUnit.js`、`TDGame.js`、`ArtSystem.js`、`main.js`、`td.html`、`td.css`、`sw.js`、版本與測試文件及先前未發布內容；勿只更新 HTML。Service Worker 快取名 `sky-strike-v0.43.0`，新腳本必須在離線預存清單。發布後用同一網址的 Chrome／Edge 驗證三英雄、地圖和敵軍完整圖片及開局，並測士兵索敵與離線重開。

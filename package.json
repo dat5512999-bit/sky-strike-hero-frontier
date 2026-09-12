@@ -1,6 +1,6 @@
 {
   "name": "sky-strike",
-  "version": "0.43.0",
+  "version": "0.44.0",
   "private": true,
   "description": "包含縱向射擊與英雄塔防模式的本機 HTML5 Canvas 遊戲",
   "scripts": {

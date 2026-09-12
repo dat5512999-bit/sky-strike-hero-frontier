@@ -1,5 +1,9 @@
 # 安裝手冊
 
+## v0.44.0 安裝與初驗
+
+無新套件或伺服器需求。下載完整專案後，用 Chrome／Edge 開 `td.html`，或先執行 `npm run serve:test` 再開 `http://127.0.0.1:4173/td.html`。先看開局三步驟與完整英雄圖，開始後點「招募／建造」測底部 Drawer、實際放一兵並確認扣金；按 ⚙ 試取消重開與設定。手機可用 Chrome／Edge 開相同檔案或網址，選「自動」介面並展開原建造面板。開發者另執行 `npm run check`、`npm test`。此版 UI 尚未推送 GitHub，公開 Pages 仍可能顯示舊介面。
+
 ## v0.43.0 安裝與初驗
 
 完整複製專案後用 Chrome／Edge 開 `td.html`；本機亦可執行 `npm run serve:test`，再開 `http://127.0.0.1:4173/td.html`。開發驗證執行 `npm run check`、`npm test`，無新套件。選角應見三英雄完整圖片，進場應見完整地圖；不提供低畫質進場。建一名士兵，點選後應看到五種索敵策略。GitHub Pages 使用者需等部署完成後關閉舊遊戲分頁並重新開啟。

@@ -1,5 +1,11 @@
 # API 文件（內部模組介面）
 
+## v0.44.0 UI 流程介面
+
+- `TDGame.selectOpeningProfession(type)` 只選開局英雄，不啟動波次；`chooseProfession(type)` 仍做原有圖片門檻、職業初始化與準備倒數。`updateOpeningRules()` 讀既有 `TDDifficultySystem.summary()`，不另存倍率。
+- `TDGame.showCommands(panel)` 控制桌機建造 Drawer／手機原指令分頁；`setBuildFilter(key)` 與 `updateBuildFilter()` 只控制卡片可見性，鍵為 `all/unit/tower/support/recent`。`BuildSystem.queue/placeQueued/upgrade/sell` 與資料契約未變。
+- `TDGame.openMenu/closeMenu/showMenuPane` 為單一 UI 暫停／恢復入口；`retrySameSetup()` 呼叫既有 `reset()` 後重套上一局難度與英雄。勝敗後 `end(victory)` 的戰報資料仍不變。無 HTTP API、資料庫或新儲存格式。
+
 ## v0.43.0 守軍索敵介面
 
 - `TargetSelector.supports(strategy)`、`valid(target)`、`rank(origin, targets, strategy, filter)`、`select(...)` 為可重用的純索敵介面；策略鍵為 `nearest/front/lowestHealth/highestHealth/fastest`。
