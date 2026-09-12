@@ -1,7 +1,7 @@
 (function(ns){
   'use strict';
   class Hero{
-    constructor(x,y){const cfg=ns.config.hero;Object.assign(this,{x:x,y:y,spawnX:x,spawnY:y,targetX:x,targetY:y,health:cfg.maxHealth,maxHealth:cfg.maxHealth,displayHealth:cfg.maxHealth,level:1,xp:0,gear:{},cooldown:0,novaCooldown:0,facing:0,active:true,state:'idle',frame:0,animationTime:0,attackTimer:0,castTimer:0,pendingTarget:null,selected:false,classType:'arcanist',fields:[],equipment:{spear:0,rune:0,charm:0},skillCooldowns:{thunder:0,summon:0},hitFlash:0,invulnerable:0,respawnTimer:0,deathTime:0,justDowned:false,justRevived:false});}
+    constructor(x,y){const cfg=ns.config.hero;Object.assign(this,{x:x,y:y,spawnX:x,spawnY:y,targetX:x,targetY:y,health:cfg.maxHealth,maxHealth:cfg.maxHealth,displayHealth:cfg.maxHealth,level:1,xp:0,gear:{},cooldown:0,novaCooldown:0,facing:0,active:true,state:'idle',frame:0,animationTime:0,attackTimer:0,castTimer:0,pendingTarget:null,selected:false,classType:'arcanist',fields:[],equipment:{spear:0,rune:0,charm:0},skillCooldowns:{thunder:0,summon:0,ultimate:0},hitFlash:0,invulnerable:0,respawnTimer:0,deathTime:0,justDowned:false,justRevived:false});}
     chooseClass(type){if(!ns.systems.HeroRoster.CLASSES[type])return false;this.classType=type;return true;}
     xpForNext(){return this.level>=15?null:40+this.level*this.level*12;}
     xpProgress(){const next=this.xpForNext();return{level:this.level,xp:this.xp,next:next,ratio:next?Math.min(1,this.xp/next):1};}

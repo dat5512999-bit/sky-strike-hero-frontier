@@ -1,5 +1,9 @@
 # 設定手冊
 
+## v0.41.0 可調參數
+
+大絕的 `cooldown`、`range`、`radius`、基礎傷害與緩速位於 `HeroUltimateSystem.js`。圖片載入同時上限 4 張、單張 20 秒逾時、最多 3 次嘗試位於 `ArtSystem.js`；`sw.js` 的 `PRECACHE` 排除 `assets/td` 大圖。沒有新增環境變數或伺服器設定。
+
 ## v0.40.1 圖集設定
 
 `ArtSystem.heroHunterUnarmed` 指向 v4 透明 4×4 圖集；`sw.js` 快取名稱為 `sky-strike-v0.40.1`。不需調整武器數值、資料庫或環境變數。

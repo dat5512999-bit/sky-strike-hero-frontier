@@ -39,7 +39,8 @@ test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
     assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1, `${id} 應唯一存在`);
   });
   [1, 2, 3].forEach((speed) => assert.match(html, new RegExp(`data-game-speed=["']${speed}["']`)));
-  ['Q','W','E','R'].forEach((key) => assert.match(html, new RegExp(`<kbd>${key}</kbd>`)));
+  ['Q','W','E','R','F'].forEach((key) => assert.match(html, new RegExp(`<kbd>${key}</kbd>`)));
+  assert.match(html, /id="td-ultimate"[^>]*aria-keyshortcuts="F"/);
   ['story','standard','veteran','calamity'].forEach((mode) => assert.match(html, new RegExp(`data-td-difficulty=["']${mode}["']`)));
   ['td-report-open','td-report-screen','td-report-rows','td-final-report'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
   ['td-armory-open','td-armory-screen','td-armory-loadout','td-armory-items','td-armory-target'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
@@ -70,6 +71,9 @@ test('PWA manifest 與離線快取引用的遊戲檔案都存在', () => {
   const worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
   const assets = Array.from(worker.matchAll(/'\.\/([^']*)'/g), (match) => match[1] || 'index.html');
   assets.forEach((asset) => assert.ok(fs.existsSync(path.join(root, asset)), `離線快取缺少檔案：${asset}`));
+  assert.match(worker, /const PRECACHE = ASSETS\.filter/);
+  assert.match(worker, /!asset\.startsWith\('\.\/assets\/td\/'\)/);
+  assert.match(worker, /caches\.match\(event\.request, \{ ignoreSearch: true \}\)/);
 });
 
 test('手機主畫面圖示具備標準 PNG 尺寸並由兩種模式引用', () => {

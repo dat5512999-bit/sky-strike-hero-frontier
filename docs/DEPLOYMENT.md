@@ -1,5 +1,9 @@
 # 部署手冊
 
+## v0.41.0 發布前後
+
+本機修復尚未發布。取得使用者明確指示後，連同 `HeroUltimateSystem.js`、`ArtSystem.js`、`td.html`、`td.css`、`TDGame.js`、`main.js` 與 `sw.js` 一起推送；不能只推 UI 或圖片。Pages 更新後於 4G／Wi‑Fi 各重開手機遊戲，確認選角載入提示、地圖／首波怪物／英雄圖片、F 大絕與既有 R 商店。離線快取名稱為 `sky-strike-v0.41.0`，切版後關閉舊分頁再開。
+
 ## v0.40.1 發布檢查
 
 發布時必須同時包含 `hero-hunter-actions-unarmed-v4.png`、`ArtSystem.js` 與 `sw.js`（快取 `sky-strike-v0.40.1`）。部署後關閉舊分頁，重開並實際購買王國弓確認無棋盤格；只上傳 PNG 而未改美術引用不會修復。Pages 狀態需在 GitHub 部署紀錄中確認。

@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## v0.41.0 載入與平衡維護
+
+調整三英雄大絕請改 `HeroUltimateSystem.ULTIMATES` 與 `cast`，保持冷卻高於 Q／W／E、空場不扣冷卻、傷害走 `Projectile.hit`。新增關鍵首波圖時更新 `ArtSystem.coreStatus`；大圖維持按需載入，不要重新放進 Service Worker 的 `PRECACHE`。手機圖片失敗先確認 GitHub Pages 資產 URL／網路，再用選角頁重試，切勿只看 Canvas 的降級圖就判定美術檔不存在。
+
 ## v0.40.1 透明圖維護
 
 王國英雄有武器底圖仍用 `hero-hunter-actions-v2.png`；購買武器後必須改用真正透明的 `hero-hunter-actions-unarmed-v4.png`，再由 `ArtSystem.drawClassWeapon` 疊上武器。禁止把影像編輯器的棋盤預覽當作 PNG 背景匯出；新增圖集需逐格檢查 Alpha，不只看 PNG 色彩型態。舊 v3 留作歷史資產但不再於執行時或離線快取引用。

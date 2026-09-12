@@ -1,5 +1,9 @@
 # 系統架構
 
+## v0.41.0 大絕與圖片生命週期
+
+`F／觸控按鈕 → TDGame.castUltimate → HeroUltimateSystem → Projectile.hit → 命中／擊殺／經濟與回饋`；大絕設定集中一個模組，原 Q／W／E、商店、怪物與塔不用重寫。`選角／畫面繪製 → ArtSystem 按需請求（4 並行、失敗重試）→ coreStatus 確認地圖＋首波怪物＋所選英雄 → 進戰場`；`Service Worker` 僅預存 HTML／CSS／JS／圖示，戰場圖片使用時快取。無資料庫與新伺服器。
+
 ## v0.40.1 透明換裝修復
 
 `ShopSystem 購買弓 → hero.equipment.spear → ArtSystem.drawHero(v4 真透明底圖) → drawClassWeapon(武器層)`。只替換美術來源與 Service Worker 快取，戰鬥傷害、裝備持有與存檔結構不變。

@@ -34,7 +34,7 @@
       <canvas id="td-game" width="720" height="720" aria-label="英雄塔防戰場"></canvas>
 
       <div id="td-profession-screen" class="td-profession-screen">
-        <div class="profession-dialog"><p>CHOOSE YOUR FACTION</p><h2>選擇英雄與流派</h2><span>所有難度皆為 30 關；城門耐久是可承受的傷害，不是關卡數。金幣倍率套用擊殺與過關收入，血量倍率相對同關標準敵軍。先選難度，再選英雄。</span><div class="difficulty-list" aria-label="塔防難度"><button type="button" data-td-difficulty="story"><b>遠征見習</b><small>30 關 · 城門耐久 25 點</small></button><button type="button" data-td-difficulty="standard" aria-pressed="true"><b>邊境守衛</b><small>30 關 · 城門耐久 20 點</small></button><button type="button" data-td-difficulty="veteran"><b>軍團老兵</b><small>30 關 · 城門耐久 18 點</small></button><button type="button" data-td-difficulty="calamity"><b>災厄遠征</b><small>30 關 · 城門耐久 15 點</small></button></div><div class="profession-list">
+        <div class="profession-dialog"><p>CHOOSE YOUR FACTION</p><h2>選擇英雄與流派</h2><span>所有難度皆為 30 關；城門耐久是可承受的傷害，不是關卡數。金幣倍率套用擊殺與過關收入，血量倍率相對同關標準敵軍。先選難度，再選英雄。</span><div id="td-art-loading" class="art-loading" role="status" aria-live="polite"><span id="td-art-status">正在載入戰場美術…</span><button id="td-art-retry" type="button" hidden>重新載入圖片</button></div><div class="difficulty-list" aria-label="塔防難度"><button type="button" data-td-difficulty="story"><b>遠征見習</b><small>30 關 · 城門耐久 25 點</small></button><button type="button" data-td-difficulty="standard" aria-pressed="true"><b>邊境守衛</b><small>30 關 · 城門耐久 20 點</small></button><button type="button" data-td-difficulty="veteran"><b>軍團老兵</b><small>30 關 · 城門耐久 18 點</small></button><button type="button" data-td-difficulty="calamity"><b>災厄遠征</b><small>30 關 · 城門耐久 15 點</small></button></div><div class="profession-list">
           <button type="button" data-profession="hunter"><b>➶ 人族 · 王國巡林者</b><small>多重箭／緩速陷阱／戰狼</small></button>
           <button type="button" data-profession="arcanist"><b>✦ 精靈 · 銀葉守護者</b><small>冰霜新星／連鎖雷擊／元素</small></button>
           <button type="button" data-profession="rogue"><b>◆ 暗影氏族 · 暮影刀鋒</b><small>閃擊／淬毒煙幕／分身</small></button>
@@ -53,8 +53,8 @@
         <div class="hero-stats" aria-label="英雄能力"><span>⚔ 攻擊 <b id="td-stat-attack">18</b></span><span>◎ 射程 <b id="td-stat-range">152</b></span><span>✥ 攻速 <b id="td-stat-speed">0.58s</b></span><span>➤ 移速 <b id="td-stat-move">215</b></span></div>
         <div id="td-hero-weapon" class="hero-equipment" data-rarity="base"><i aria-hidden="true"></i><span><small>目前武器</small><b>銀葉法杖</b></span><em>制式</em></div>
       </div>
-      <div class="panel-section-label"><span>技能</span><small>SKILLS · Q W E R</small></div>
-      <div class="td-hero-dock"><button id="td-skill-button" class="skill-button" type="button"><kbd>Q</kbd><b>❄</b><span>霜環震擊</span></button><button id="td-thunder" class="skill-button" type="button" title="攻擊附近最多四個敵人，冷卻12秒"><kbd>W</kbd><b>ϟ</b><span>連鎖雷擊</span></button><button id="td-summon" class="skill-button" type="button" title="召喚兩名守衛協助攻擊，冷卻22秒"><kbd>E</kbd><b>✧</b><span>祖靈守衛</span></button><button id="td-shop-open" class="skill-button shop-button" type="button"><kbd>R</kbd><b>♜</b><span>商店城</span></button></div>
+      <div class="panel-section-label"><span>技能</span><small>SKILLS · Q W E R F</small></div>
+      <div class="td-hero-dock"><button id="td-skill-button" class="skill-button" type="button"><kbd>Q</kbd><b>❄</b><span>霜環震擊</span></button><button id="td-thunder" class="skill-button" type="button" title="攻擊附近最多四個敵人，冷卻12秒"><kbd>W</kbd><b>ϟ</b><span>連鎖雷擊</span></button><button id="td-summon" class="skill-button" type="button" title="召喚兩名守衛協助攻擊，冷卻22秒"><kbd>E</kbd><b>✧</b><span>祖靈守衛</span></button><button id="td-shop-open" class="skill-button shop-button" type="button"><kbd>R</kbd><b>♜</b><span>商店城</span></button><button id="td-ultimate" class="skill-button ultimate-button" type="button" aria-keyshortcuts="F" title="大絕：選擇英雄後查看效果"><kbd>F</kbd><b>✦</b><span>大絕 · 星墜寒潮</span></button></div>
       <div class="panel-section-label"><span>選取資訊</span><small>SELECTION</small></div>
       <div class="selection-card"><div id="td-portrait" class="selection-portrait">?</div><div><small id="td-selection-type">目前指令</small><strong id="td-selection">先選擇守備職業</strong><span id="td-selection-stats">經典 RTS 職業科技</span></div></div>
       <button id="td-armory-open" class="armory-open" type="button" disabled><span>軍械庫</span><b id="td-armory-count">0 件</b><small>先選英雄或守軍，再配置戰利裝備</small></button>
@@ -103,7 +103,7 @@
         <button id="td-cancel-build" class="order-action" type="button"><b>✕</b><span>取消部署</span></button>
       </div>
     </section>
-    <footer id="td-help">① 選擇職業　② 招募守軍並點地面部署　③ 守住城門</footer>
+    <footer id="td-help">① 選擇職業　② 招募守軍並點地面部署　③ 守住城門 · F 施放英雄大絕</footer>
   </main>
   <section id="td-shop-screen" class="shop-overlay" role="dialog" aria-modal="true" aria-labelledby="td-shop-title" hidden>
     <div class="shop-dialog"><div class="shop-heading"><div><small>FRONTIER MERCHANT</small><h2 id="td-shop-title">銀葉商店城</h2></div><button id="td-shop-close" type="button">返回戰場</button></div>
@@ -167,6 +167,7 @@
   <script src="src/td/entities/CombatUnit.js"></script>
   <script src="src/td/entities/Building.js"></script>
   <script src="src/td/systems/HeroRoster.js"></script>
+  <script src="src/td/systems/HeroUltimateSystem.js"></script>
   <script src="src/td/entities/Hero.js"></script>
   <script src="src/td/systems/WaveSystem.js"></script>
   <script src="src/td/systems/BuildSystem.js"></script>

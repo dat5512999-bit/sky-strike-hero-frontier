@@ -1,5 +1,12 @@
 # API 文件（內部模組介面）
 
+## v0.41.0 英雄大絕與美術載入介面
+
+- `HeroUltimateSystem.get(classType)` 回傳名稱、圖示、說明、冷卻與範圍；`cast(hero, monsters, onKill, onHit)` 成功回傳範圍效果資料，無目標／死亡／冷卻中回傳 `null`。
+- `Hero.skillCooldowns.ultimate` 保存本局剩餘秒數；符文沿用既有每級 10% 縮減規則。
+- `ArtSystem.coreStatus(classType)` 回傳 `{loaded,total,failed,ready}`，並觸發必要圖片請求；`retryFailed()` 重新請求失敗圖片，`onProgress` 通知 UI。圖片最多 4 張並行，其他圖在首次繪製時請求。
+- 無新資料庫、外部 API、帳號或資料傳輸；上述均為瀏覽器內部介面。
+
 ## v0.40.1 美術引用
 
 - `ArtSystem.heroHunterUnarmed`：改載入 `hero-hunter-actions-unarmed-v4.png`。`drawHero` 仍只在已買武器、無武器底圖與武器圖集均載入完成後切換分層；無新 API 或資料格式。

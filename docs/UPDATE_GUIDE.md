@@ -1,5 +1,9 @@
 # 版本更新手冊
 
+## 更新到 v0.41.0
+
+從 v0.40.1 更新全部程式與文件，新增 `src/td/systems/HeroUltimateSystem.js`，不要漏掉 `td.html` 的腳本引用與 `sw.js` 清單。執行 `npm run check`、`npm test`；關閉舊遊戲分頁再開。選角時等待圖片就緒，進場以 F 測大絕與 R 商店。沒有存檔遷移，線上版需另外依部署手冊發布。
+
 ## 更新到 v0.40.1
 
 在 v0.40.0 基礎上加入 `hero-hunter-actions-unarmed-v4.png`，替換 `ArtSystem.js` 與 `sw.js`，並更新測試／文件；其他角色與數值不變。執行 `npm run check`、`npm test` 後關閉舊分頁重開；購買王國弓驗證透明背景。本版無存檔遷移，回退見 `BACKUP_RESTORE.md`。
