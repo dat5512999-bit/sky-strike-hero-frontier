@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## v0.40.1 透明圖維護
+
+王國英雄有武器底圖仍用 `hero-hunter-actions-v2.png`；購買武器後必須改用真正透明的 `hero-hunter-actions-unarmed-v4.png`，再由 `ArtSystem.drawClassWeapon` 疊上武器。禁止把影像編輯器的棋盤預覽當作 PNG 背景匯出；新增圖集需逐格檢查 Alpha，不只看 PNG 色彩型態。舊 v3 留作歷史資產但不再於執行時或離線快取引用。
+
 ## v0.40.0 維護重點
 
 六名新守軍仍由 `config.units` 定義，陣營名單在 `FactionSystem.FACTIONS`；新增圖集只接入 `ArtSystem.combatUnits`，不複製建造或傷害系統。三名新敵軍在 `Monster.js` 設定，30 波來源為 `WaveCatalog.js`。新增角色時須同時檢查建造與傭兵 HTML、CSS 圖像、Service Worker 清單及測試；本次無帳號、權限或伺服器資料遷移。

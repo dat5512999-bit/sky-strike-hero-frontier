@@ -1,5 +1,9 @@
 # 版本更新手冊
 
+## 更新到 v0.40.1
+
+在 v0.40.0 基礎上加入 `hero-hunter-actions-unarmed-v4.png`，替換 `ArtSystem.js` 與 `sw.js`，並更新測試／文件；其他角色與數值不變。執行 `npm run check`、`npm test` 後關閉舊分頁重開；購買王國弓驗證透明背景。本版無存檔遷移，回退見 `BACKUP_RESTORE.md`。
+
 ## 更新到 v0.40.0
 
 完整更新程式、HTML、CSS、`sw.js` 與八張新 PNG；不可只換圖片或只加入建造按鈕。此版不需資料轉換，既有本機偏好可沿用。先備份工作樹，執行 `npm run check`、`npm test`，再於三族各部署一名新兵並檢查新敵軍。若仍看到舊建造列，關閉分頁並重開以刷新 Service Worker；還原見 `BACKUP_RESTORE.md`。

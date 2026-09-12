@@ -1,8 +1,12 @@
 # 部署手冊
 
+## v0.40.1 發布檢查
+
+發布時必須同時包含 `hero-hunter-actions-unarmed-v4.png`、`ArtSystem.js` 與 `sw.js`（快取 `sky-strike-v0.40.1`）。部署後關閉舊分頁，重開並實際購買王國弓確認無棋盤格；只上傳 PNG 而未改美術引用不會修復。Pages 狀態需在 GitHub 部署紀錄中確認。
+
 ## v0.40.0 發布檢查
 
-本機版尚未發布到 GitHub。未來獲明確發布指示時，將八張新圖集連同 `config.js`、`FactionSystem.js`、`Monster.js`、`WaveCatalog.js`、`ArtSystem.js`、`td.html`、`td.css`、`sw.js` 一併部署；快取名稱應為 `sky-strike-v0.40.0`。手機與電腦分別驗證建造卡、召喚、商店、30 波預告，並關閉舊分頁後重開以避免舊快取。
+此批八張新圖集必須連同 `config.js`、`FactionSystem.js`、`Monster.js`、`WaveCatalog.js`、`ArtSystem.js`、`td.html`、`td.css`、`sw.js` 一併部署。手機與電腦分別驗證建造卡、召喚、商店、30 波預告，並關閉舊分頁後重開以避免舊快取；目前正式快取版本以 v0.40.1 章節為準。
 
 ## v0.39.0 發布檢查
 

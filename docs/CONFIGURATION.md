@@ -1,5 +1,9 @@
 # 設定手冊
 
+## v0.40.1 圖集設定
+
+`ArtSystem.heroHunterUnarmed` 指向 v4 透明 4×4 圖集；`sw.js` 快取名稱為 `sky-strike-v0.40.1`。不需調整武器數值、資料庫或環境變數。
+
 ## v0.40.0 守軍／敵軍調整
 
 新兵的費用、木材、HP、攻擊、射程、速度、特殊欄位皆在 `src/td/config.js` 的 `units`；成長名稱與長戟衛節奏在 `CombatUnit.js`。敵人速度、護甲、獎勵與 siege／hunter 職責位於 `Monster.js`，每波數量和預告在 `WaveCatalog.js`。調整後請檢查 30 波仍每五波有 Boss、跨族商店不出售本族、新兵能升級與出售。

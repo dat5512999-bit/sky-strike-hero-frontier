@@ -1,5 +1,9 @@
 # 塔防正式美術資產與生成提示
 
+## v0.40.1 真透明王國英雄圖集
+
+`hero-hunter-actions-unarmed-v4.png`：由 v3 的 16 格王國巡林者無武器圖，僅抽除烘入的灰白棋盤格；保留角色、姿勢與分層武器定位。尺寸 1252×1252、RGBA，每格 313×313；各格外側背景為 Alpha 0。v3 不再供遊戲載入。產圖提示：背景抽除、只移除棋盤、保持 4×4 角色與動作、不要新增武器、輸出真透明 PNG。
+
 ## v0.40.0 軍團／敵軍圖集
 
 六張新守軍：`faction-musketeer-actions-v1.png`、`faction-halberdier-actions-v1.png`、`faction-dryad-actions-v1.png`、`faction-moonblade-actions-v1.png`、`faction-banshee-actions-v1.png`、`faction-bone-rider-actions-v1.png`。兩張敵軍：`enemy-warder-actions-v1.png`、`enemy-commander-actions-v1.png`。均為 4×4 RGBA 動作格、透明背景，由 `ArtSystem` 切格；新狼群／赤牙／怨靈暫沿用現有狼、半獸人與亡靈圖集，以保持移動表現而不使用方塊代替。曾產生的鳳凰圖背景不透明，未收入正式素材。往後產生新圖時先驗證 Alpha、格數與角色不裁切，再登錄快取。

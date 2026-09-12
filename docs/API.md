@@ -1,5 +1,9 @@
 # API 文件（內部模組介面）
 
+## v0.40.1 美術引用
+
+- `ArtSystem.heroHunterUnarmed`：改載入 `hero-hunter-actions-unarmed-v4.png`。`drawHero` 仍只在已買武器、無武器底圖與武器圖集均載入完成後切換分層；無新 API 或資料格式。
+
 ## v0.40.0 資料契約
 
 - `config.units[musketeer|halberdier|dryad|moonblade|banshee|boneRider]`：沿用既有單位設定欄位與 `CombatUnit` 生命週期；`style`、`chainRange` 等選填欄位送入既有 `Projectile`。
