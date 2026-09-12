@@ -41,7 +41,7 @@
       if((tower.type==='crypt'||tower.type==='graveyard')&&summons&&tower.summonCooldown<=0){
         const cap=(rank>=3?3:2)+(cfg.summonCap||0);
         if(summons.filter(function(unit){return unit.active&&unit.owner===tower;}).length<cap){
-          summons.push(new ns.entities.Summon(tower,{duration:14,damage:9*(1+.2*(tower.level-1)+.15*(rank-1)),range:120,leash:cfg.range+35,color:cfg.color}));
+          summons.push(new ns.entities.Summon(tower,{duration:14,damage:9*(1+.2*(tower.level-1)+.15*(rank-1)),range:120,leash:cfg.range+35,color:cfg.color,form:tower.type}));
           tower.summonCooldown=Math.max(6,12-rank);tower.skillPulse=.6;
         }
       }

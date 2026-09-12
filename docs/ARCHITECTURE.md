@@ -1,5 +1,25 @@
 # 系統架構
 
+## v0.39.0 裝備、召喚與手機資料流
+
+`ShopSystem → hero.equipment → EquipmentSystem.weapon/projectileOptions → Hero Attack → Projectile → Monster`；特殊武器只組合既有連鎖與濺射，不另建傷害系統。視覺走 `EquipmentSystem.weapon → ArtSystem 無武器底圖 + class-weapons-atlas`。召喚走 `Hero/TowerSkillSystem → Summon(form) → ArtSystem.drawSummon → 4×4 atlas`。傭兵走 `FactionSystem.available/allows → canHire → TDGame.updateUi → BuildSystem.queueMercenary`。手機版則由 `LayoutSystem → body[data-layout]` 與 `main.js → body[data-mobile-panel]` 控制，與遊戲迴圈完全分離。
+
+## v0.38.0（2026-09-12）
+
+所有難度皆為 30 關，城門數字表示耐久。選角 Canvas 與戰場共用 ArtSystem.drawHero，圖片載入後持續重繪預覽。難度摘要由 TDDifficultySystem 與 WaveCatalog 即時產生。
+
+```mermaid
+flowchart LR
+  Difficulty[TDDifficultySystem] --> Menu[難度卡摘要]
+  Catalog[WaveCatalog 關卡總數] --> Menu
+  Difficulty --> WaveSystem --> Monster[Monster 血量與護盾]
+  Difficulty --> Economy[EconomySystem 擊殺及過關金幣]
+  Art[ArtSystem.drawHero] --> Preview[選角 Canvas]
+  Art --> Battlefield[戰場英雄]
+```
+
+沿用現有 src/td/systems、entities、tests、docs 結構；沒有新增資料庫或外部服務。
+
 ## v0.36.0 兵種擴充資料流
 
 新守軍不新增 System：`FactionSystem → BuildSystem.queue/placeQueued → CombatUnit → ArtSystem.combatUnits`。數值、陣營清單、實體生命週期與圖像註冊互相分離，因此 knight／treant／golem 自動沿用移動導航、選取、升級、負傷恢復、軍械與出售。敵軍仍走 `WaveCatalog → Monster → EnemyTrait/EnemyCombat → ArtSystem.enemyActions`；本版只替既有職責補獨立視覺，未改寫波次狀態機。

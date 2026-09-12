@@ -1,5 +1,13 @@
 # 管理者手冊
 
+## v0.39.0 維護重點
+
+所有 `new Summon` 入口都必須提供 `form`；英雄使用 hunter／arcanist／rogue，塔使用 crypt／graveyard。召喚圖路由只放在 `ArtSystem.drawSummon`。傭兵可見性由 `FactionSystem.canHire()` 決定，HTML 只列九種三族正式兵；戰利專屬半獸人不重複販售。玩法型武器透過 `EquipmentSystem.projectileOptions()` 組合現有 Projectile 欄位。手機面板狀態存於 `towerFrontierMobilePanel`，只影響 UI，不得進入戰鬥狀態。
+
+## v0.38.0（2026-09-12）
+
+平衡設定集中於 src/td/systems/TDDifficultySystem.js。變更後檢查三十關血量與金幣排序，勿另行手改選單數字；其內容由設定生成。保留本機修改前備份 artifacts/before-v0.38.0.zip。
+
 ## v0.36.0 守軍與敵軍素材
 
 新增單位資料仍集中於 `config.units`，陣營歸屬只由 `FactionSystem.FACTIONS` 決定；`CombatUnit` 沿用既有命令、負傷、Lv.1～5、熟練與軍械流程。`ArtSystem.combatUnits` 新增 knight／treant／golem，`enemyActions` 新增 shaman／healer／boss。新增角色時必須同步 HTML 建造按鈕、CSS 肖像、Service Worker、PNG 資產及回歸測試，不得另建平行建造系統。

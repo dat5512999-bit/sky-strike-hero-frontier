@@ -45,6 +45,18 @@ test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
   ['td-armory-open','td-armory-screen','td-armory-loadout','td-armory-items','td-armory-target'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
 });
 
+test('手機版提供可記憶的戰場優先指揮面板與安全區', () => {
+  const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'td.css'), 'utf8');
+  const main = fs.readFileSync(path.join(root, 'src/td/main.js'), 'utf8');
+  assert.match(html, /id="td-mobile-panel-toggle"/);
+  assert.match(css, /data-mobile-panel="compact"/);
+  assert.match(css, /safe-area-inset-bottom/);
+  assert.match(css, /min-height:48px/);
+  assert.match(main, /towerFrontierMobilePanel/);
+  assert.match(main, /dataset\.mobilePanel/);
+});
+
 test('PWA manifest 與離線快取引用的遊戲檔案都存在', () => {
   ['manifest.webmanifest', 'td.webmanifest'].forEach((filename) => {
     const manifest = JSON.parse(fs.readFileSync(path.join(root, filename), 'utf8'));
@@ -136,6 +148,20 @@ test('新增三族守軍與戰術敵軍都接入建造介面及離線快取', ()
     assert.match(worker, new RegExp(`faction-${type}-v1\\.png`));
   });
   ['shaman','healer','boss'].forEach((type) => assert.match(worker, new RegExp(`enemy-${type}-actions-v1\\.png`)));
+});
+
+test('跨族傭兵名冊與召喚／換裝圖集完整加入離線版本', () => {
+  const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');
+  const worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
+  const game = fs.readFileSync(path.join(root, 'src/td/TDGame.js'), 'utf8');
+  const mercenaries = Array.from(html.matchAll(/data-mercenary="([^"]+)"/g), (match) => match[1]);
+  assert.deepEqual(mercenaries, ['hunter','shield','knight','arcanist','dragon','treant','rogue','skeleton','golem']);
+  assert.equal(mercenaries.includes('orc'), false, '戰利解鎖的半獸人不應重複放入商店');
+  assert.match(game, /if\(!self\.factions\.canHire\(type\)\)return/, '隱藏按鈕之外仍需阻擋本族傭兵購買');
+  ['arcane-elemental-actions-v1.png','crypt-wraith-actions-v1.png','graveyard-revenant-actions-v1.png','hero-hunter-actions-unarmed-v3.png','hero-arcanist-actions-unarmed-v1.png'].forEach((file) => {
+    assert.ok(fs.existsSync(path.join(root, 'assets/td', file)));
+    assert.match(worker, new RegExp(file.replaceAll('.', '\\.')));
+  });
 });
 
 test('戰地軍械九宮格為本機透明資產', () => {

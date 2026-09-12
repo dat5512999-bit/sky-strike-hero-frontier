@@ -1,5 +1,13 @@
 # 安裝手冊
 
+## v0.39.0 驗證
+
+無新增套件或資料遷移。必須一併複製五張新增 PNG、相關 TD 程式、`td.html`、`td.css` 與 `sw.js`。執行 `npm run check`、`npm test`，應通過 153 項測試；再開啟 `td.html?v=0.39.0`，選精靈按 E 檢查元素，開商店確認本族三兵未出現，並切換手機介面測試「展開建造／收合面板」。
+
+## v0.38.0（2026-09-12）
+
+安裝方式不變：完整複製專案後開啟 td.html 即可遊玩；測試需 Node.js 18 以上，執行 npm run check 與 npm test。无需資料庫、帳號、環境變數或第三方依賴。
+
 ## v0.36.0 驗證
 
 無新增套件。更新時必須包含六張新 PNG、`config.js`、`FactionSystem.js`、`CombatUnit.js`、`Monster.js`、`ArtSystem.js`、`td.html`、`td.css` 與 `sw.js`。執行 `npm run check`、`npm test` 後開啟 `td.html?v=0.36.0`；三流派應各顯示 3 名守軍，術士、祭司與 Boss 應為獨立外觀。若仍是舊建造清單，完整關閉頁面再重開以更新 v0.36.0 離線快取。

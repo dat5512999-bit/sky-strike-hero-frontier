@@ -1,5 +1,13 @@
 # 部署手冊
 
+## v0.39.0 發布檢查
+
+確認 `sw.js` 使用 `sky-strike-v0.39.0` 並快取五張新增圖集。發布後重開分頁，煙霧測試跨族傭兵、元素／幽魂／亡靈、三英雄武器換裝、雷霜連鎖、魔焰濺射及 390px 手機精簡／展開面板。除非使用者明確要求，本地版本不自動推送 GitHub。
+
+## v0.38.0（2026-09-12）
+
+完整部署 v0.38.0 的 HTML、CSS、src、assets 與 sw.js；快取名稱已升至 sky-strike-v0.38.0。部署後關閉舊遊戲頁並重新開啟，確認難度卡顯示 30 關與金幣倍率。此回合只修改本機，尚未發布至遠端。
+
 ## v0.36.0 發布檢查
 
 部署方式不變；必須一併發布 `faction-knight-v1.png`、`faction-treant-v1.png`、`faction-golem-v1.png`、`enemy-shaman-actions-v1.png`、`enemy-healer-actions-v1.png`、`enemy-boss-actions-v1.png` 與相關程式／樣式。確認 `sw.js` 快取名稱為 `sky-strike-v0.36.0`。發布後各選一次三族、確認 3 名守軍卡，並煙霧測試第 3 波術士與第 5 波祭司／Boss。除非使用者明確要求，本地版本完成不會自動推送 GitHub。

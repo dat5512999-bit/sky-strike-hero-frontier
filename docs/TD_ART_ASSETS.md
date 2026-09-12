@@ -1,5 +1,17 @@
 # 塔防正式美術資產與生成提示
 
+## v0.39.0 召喚與英雄換裝圖集
+
+- `arcane-elemental-actions-v1.png`：銀葉英雄的冰水元素。
+- `crypt-wraith-actions-v1.png`：幽骨召喚殿的紫霧持戟幽魂。
+- `graveyard-revenant-actions-v1.png`：冥燈墓園的綠焰亡靈武士。
+- `hero-hunter-actions-unarmed-v3.png`、`hero-arcanist-actions-unarmed-v1.png`：保留各自英雄身份與四列動作，只移除手持武器；暗影沿用 `hero-rogue-actions-unarmed-v2.png`。
+- 三張召喚圖統一整理為 1400×1120 RGBA、4×4 格。
+
+## v0.38.0（2026-09-12）
+
+選角預覽不再使用 ranger-actions-v1 / rogue-actions-v1 守軍素材，改以獨立 Hero 預覽物件呼叫 ArtSystem.drawHero，直接沿用戰場對應英雄及武器分層規則；沒有生成或修改圖片。
+
 ## v0.36.0 守軍與敵軍動作圖集
 
 - `faction-knight-v1.png`：王國日耀騎士，盾槌重裝近戰。

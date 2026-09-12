@@ -1,5 +1,17 @@
 # API 文件（內部模組介面）
 
+## v0.39.0 新增介面
+
+- `FactionSystem.canHire(unitId)`：兵種存在、已選軍團且目前不可建造時回傳 `true`。
+- `EquipmentSystem.projectileOptions(hero, base, random?)`：以職業武器擴充投射物設定；測試可注入固定亂數。
+- `ArtSystem.drawSummonSprite(...)`：統一四乘四召喚動畫切格、朝向、陰影與階級。
+- `ArtSystem.drawClassWeapon(ctx, hero)`：把九宮格職業武器疊至三英雄無武器底圖。
+- `body[data-mobile-panel]`：`compact`／`expanded` 僅控制手機指揮面板呈現。
+
+## v0.38.0（2026-09-12）
+
+TDDifficultySystem.summary(totalWaves) 回傳關卡數、城門耐久、首末關血量倍率、金幣倍率和歸隊規則。modifiers() 新增 healthGrowth（每關線性成長係數，預設 0）。Monster 建構時套用 enemyHealth × (1 + healthGrowth × (wave - 1)) 到血量及護盾。沒有新增網路 API 或資料庫。
+
 ## v0.36.0 軍團擴充介面
 
 - `config.units` 新增 `knight`、`treant`、`golem`；它們與既有單位使用相同 `CombatUnit` 介面。
