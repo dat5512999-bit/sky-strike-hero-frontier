@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## v0.40.0 維護重點
+
+六名新守軍仍由 `config.units` 定義，陣營名單在 `FactionSystem.FACTIONS`；新增圖集只接入 `ArtSystem.combatUnits`，不複製建造或傷害系統。三名新敵軍在 `Monster.js` 設定，30 波來源為 `WaveCatalog.js`。新增角色時須同時檢查建造與傭兵 HTML、CSS 圖像、Service Worker 清單及測試；本次無帳號、權限或伺服器資料遷移。
+
 ## v0.39.0 維護重點
 
 所有 `new Summon` 入口都必須提供 `form`；英雄使用 hunter／arcanist／rogue，塔使用 crypt／graveyard。召喚圖路由只放在 `ArtSystem.drawSummon`。傭兵可見性由 `FactionSystem.canHire()` 決定，HTML 只列九種三族正式兵；戰利專屬半獸人不重複販售。玩法型武器透過 `EquipmentSystem.projectileOptions()` 組合現有 Projectile 欄位。手機面板狀態存於 `towerFrontierMobilePanel`，只影響 UI，不得進入戰鬥狀態。

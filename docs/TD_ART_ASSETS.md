@@ -1,5 +1,9 @@
 # 塔防正式美術資產與生成提示
 
+## v0.40.0 軍團／敵軍圖集
+
+六張新守軍：`faction-musketeer-actions-v1.png`、`faction-halberdier-actions-v1.png`、`faction-dryad-actions-v1.png`、`faction-moonblade-actions-v1.png`、`faction-banshee-actions-v1.png`、`faction-bone-rider-actions-v1.png`。兩張敵軍：`enemy-warder-actions-v1.png`、`enemy-commander-actions-v1.png`。均為 4×4 RGBA 動作格、透明背景，由 `ArtSystem` 切格；新狼群／赤牙／怨靈暫沿用現有狼、半獸人與亡靈圖集，以保持移動表現而不使用方塊代替。曾產生的鳳凰圖背景不透明，未收入正式素材。往後產生新圖時先驗證 Alpha、格數與角色不裁切，再登錄快取。
+
 ## v0.39.0 召喚與英雄換裝圖集
 
 - `arcane-elemental-actions-v1.png`：銀葉英雄的冰水元素。

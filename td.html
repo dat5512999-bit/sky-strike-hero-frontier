@@ -69,10 +69,16 @@
         <button type="button" data-build-kind="unit" data-build-type="rogue" hidden><b>◆</b><span>部署盜賊</span></button>
         <button type="button" data-build-kind="unit" data-build-type="shield" hidden><b>盾</b><span>部署盾衛</span></button>
         <button type="button" data-build-kind="unit" data-build-type="knight" hidden><b>槌</b><span>部署騎士</span></button>
+        <button type="button" data-build-kind="unit" data-build-type="musketeer" hidden><b>銃</b><span>部署火槍手</span></button>
+        <button type="button" data-build-kind="unit" data-build-type="halberdier" hidden><b>戟</b><span>部署長戟衛</span></button>
         <button type="button" data-build-kind="unit" data-build-type="skeleton" hidden><b>骷</b><span>部署骷髏</span></button>
         <button type="button" data-build-kind="unit" data-build-type="dragon" hidden><b>龍</b><span>部署幼龍</span></button>
         <button type="button" data-build-kind="unit" data-build-type="treant" hidden><b>樹</b><span>部署樹靈</span></button>
+        <button type="button" data-build-kind="unit" data-build-type="dryad" hidden><b>鹿</b><span>部署林裔獵手</span></button>
+        <button type="button" data-build-kind="unit" data-build-type="moonblade" hidden><b>刃</b><span>部署月刃哨兵</span></button>
         <button type="button" data-build-kind="unit" data-build-type="golem" hidden><b>像</b><span>部署魔像</span></button>
+        <button type="button" data-build-kind="unit" data-build-type="banshee" hidden><b>魅</b><span>部署暮影女妖</span></button>
+        <button type="button" data-build-kind="unit" data-build-type="boneRider" hidden><b>騎</b><span>部署幽騎骸將</span></button>
         <button type="button" data-build-kind="unit" data-build-type="orc" hidden><b>斧</b><span>部署半獸人</span></button>
         <button type="button" data-build-kind="building" data-build-type="arrow"><b>♜</b><span>林地弩塔</span></button>
         <button type="button" data-build-kind="building" data-build-type="frost"><b>❄</b><span>寒霜塔</span></button>
@@ -106,7 +112,23 @@
       <button type="button" data-shop-item="spear" class="shop-weapon-offer"><i class="shop-item-icon" aria-hidden="true"></i><b>職業武器鍛造</b><small>每級普攻與傷害技能 +20%</small><span>100G</span></button>
       <button type="button" data-shop-item="rune"><b>◈ 迅捷符文</b><small>每級新施放技能冷卻 -10%</small><span>120G</span></button>
       <button type="button" data-shop-item="charm"><b>✧ 祖靈契約</b><small>每級守衛壽命 +3秒、傷害 +20%；Lv.3 多一名守衛</small><span>140G</span></button>
-    </div><h3>傭兵館 · 跨族契約</h3><p>只販售目前軍團無法自行建造的兵種；成功放置才扣款，可移動、升至 Lv.5、遣散回收70%。</p><div class="shop-items mercenary-items"><button type="button" data-mercenary="hunter"><b>王國 · 遊俠傭兵</b><small>遠射，Lv.3／5 增加目標</small><span>105G</span></button><button type="button" data-mercenary="shield"><b>王國 · 重裝盾衛</b><small>高護甲攔截，每四擊附帶震懾</small><span>158G</span></button><button type="button" data-mercenary="knight"><b>王國 · 獅翼騎士</b><small>近戰破陣，第四擊造成暈眩</small><span>203G</span></button><button type="button" data-mercenary="arcanist"><b>精靈 · 秘法傭兵</b><small>魔法範圍爆破，剋制重甲</small><span>128G</span></button><button type="button" data-mercenary="dragon"><b>精靈 · 翡翠幼龍</b><small>飛行範圍魔法攻擊</small><span>248G</span></button><button type="button" data-mercenary="treant"><b>精靈 · 翠靈古衛</b><small>遠程緩速，牽制成群敵軍</small><span>218G</span></button><button type="button" data-mercenary="rogue"><b>暗影 · 刀鋒傭兵</b><small>快速攻擊，擊殺額外賞金</small><span>98G</span></button><button type="button" data-mercenary="skeleton"><b>暗影 · 幽骨劍士</b><small>高速近戰，熟練後提高輸出</small><span>117G</span></button><button type="button" data-mercenary="golem"><b>暗影 · 冥鐵魔像</b><small>高生命範圍重擊，擅長阻路</small><span>233G</span></button></div><p id="td-shop-message" role="status"></p></div>
+    </div><h3>傭兵館 · 跨族契約</h3><p>只販售目前軍團無法自行建造的兵種；成功放置才扣款，可移動、升至 Lv.5、遣散回收70%。</p><div class="shop-items mercenary-items">
+      <button type="button" data-mercenary="hunter"><b>王國 · 遊俠傭兵</b><small>遠射，Lv.3／5 增加目標</small><span>105G</span></button>
+      <button type="button" data-mercenary="shield"><b>王國 · 重裝盾衛</b><small>高護甲攔截，每四擊附帶震懾</small><span>158G</span></button>
+      <button type="button" data-mercenary="knight"><b>王國 · 獅翼騎士</b><small>近戰破陣，第四擊造成暈眩</small><span>192G</span></button>
+      <button type="button" data-mercenary="musketeer"><b>王國 · 火槍手</b><small>遠距點殺輕甲，出手較慢</small><span>177G</span></button>
+      <button type="button" data-mercenary="halberdier"><b>王國 · 長戟衛</b><small>長兵攔截，第四擊震懾</small><span>168G</span></button>
+      <button type="button" data-mercenary="arcanist"><b>精靈 · 秘法傭兵</b><small>魔法範圍爆破，剋制重甲</small><span>128G</span></button>
+      <button type="button" data-mercenary="dragon"><b>精靈 · 翡翠幼龍</b><small>飛行範圍魔法攻擊</small><span>248G</span></button>
+      <button type="button" data-mercenary="treant"><b>精靈 · 翠靈古衛</b><small>遠程緩速，牽制成群敵軍</small><span>207G</span></button>
+      <button type="button" data-mercenary="dryad"><b>精靈 · 林裔獵手</b><small>快速移動、自然飛矛緩速</small><span>189G</span></button>
+      <button type="button" data-mercenary="moonblade"><b>精靈 · 月刃哨兵</b><small>近戰旋刃、攻擊小範圍敵軍</small><span>174G</span></button>
+      <button type="button" data-mercenary="rogue"><b>暗影 · 刀鋒傭兵</b><small>快速攻擊，擊殺額外賞金</small><span>98G</span></button>
+      <button type="button" data-mercenary="skeleton"><b>暗影 · 幽骨劍士</b><small>高速近戰，熟練後提高輸出</small><span>117G</span></button>
+      <button type="button" data-mercenary="golem"><b>暗影 · 冥鐵魔像</b><small>高生命範圍重擊，擅長阻路</small><span>222G</span></button>
+      <button type="button" data-mercenary="banshee"><b>暗影 · 暮影女妖</b><small>遠程靈能連鎖，剋制群體</small><span>206G</span></button>
+      <button type="button" data-mercenary="boneRider"><b>暗影 · 幽騎骸將</b><small>高速衝陣與近戰濺射</small><span>237G</span></button>
+    </div><p id="td-shop-message" role="status"></p></div>
   </section>
   <section id="td-loot-screen" class="loot-overlay" role="dialog" aria-modal="true" aria-labelledby="td-loot-title" hidden>
     <div class="loot-dialog"><small id="td-loot-kicker">BATTLE TROPHY</small><h2 id="td-loot-title">選擇一件戰利品</h2><p id="td-loot-intro">獎勵會立即改變本局可建造軍團；未選擇前戰鬥保持暫停。</p><div id="td-loot-options" class="loot-options"></div><div class="loot-history"><span>本局收藏</span><strong id="td-loot-history">尚未取得戰利品</strong></div></div>

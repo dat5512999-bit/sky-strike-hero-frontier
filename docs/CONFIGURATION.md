@@ -1,5 +1,9 @@
 # 設定手冊
 
+## v0.40.0 守軍／敵軍調整
+
+新兵的費用、木材、HP、攻擊、射程、速度、特殊欄位皆在 `src/td/config.js` 的 `units`；成長名稱與長戟衛節奏在 `CombatUnit.js`。敵人速度、護甲、獎勵與 siege／hunter 職責位於 `Monster.js`，每波數量和預告在 `WaveCatalog.js`。調整後請檢查 30 波仍每五波有 Boss、跨族商店不出售本族、新兵能升級與出售。
+
 ## v0.39.0 武器、傭兵與手機設定
 
 玩法型武器位於 `EquipmentSystem.WEAPONS`：`chainChance/chain/chainRange` 組成雷擊，`splash/style` 組成魔焰斬。平衡時只改這些欄位，不要在 `Hero` 複製傷害公式。傭兵候選由 HTML 提供、`FactionSystem.canHire()` 依目前可建造名單篩選。手機／電腦模式仍由 `towerFrontierLayout` 保存，精簡／展開另由 `towerFrontierMobilePanel` 保存。

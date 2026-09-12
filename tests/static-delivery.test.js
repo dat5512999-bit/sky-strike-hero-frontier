@@ -155,13 +155,36 @@ test('跨族傭兵名冊與召喚／換裝圖集完整加入離線版本', () =>
   const worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
   const game = fs.readFileSync(path.join(root, 'src/td/TDGame.js'), 'utf8');
   const mercenaries = Array.from(html.matchAll(/data-mercenary="([^"]+)"/g), (match) => match[1]);
-  assert.deepEqual(mercenaries, ['hunter','shield','knight','arcanist','dragon','treant','rogue','skeleton','golem']);
+  assert.deepEqual(mercenaries, ['hunter','shield','knight','musketeer','halberdier','arcanist','dragon','treant','dryad','moonblade','rogue','skeleton','golem','banshee','boneRider']);
   assert.equal(mercenaries.includes('orc'), false, '戰利解鎖的半獸人不應重複放入商店');
   assert.match(game, /if\(!self\.factions\.canHire\(type\)\)return/, '隱藏按鈕之外仍需阻擋本族傭兵購買');
   ['arcane-elemental-actions-v1.png','crypt-wraith-actions-v1.png','graveyard-revenant-actions-v1.png','hero-hunter-actions-unarmed-v3.png','hero-arcanist-actions-unarmed-v1.png'].forEach((file) => {
     assert.ok(fs.existsSync(path.join(root, 'assets/td', file)));
     assert.match(worker, new RegExp(file.replaceAll('.', '\\.')));
   });
+});
+
+test('六名新守軍和獨立盾衛旗手都有透明四乘四圖集並接入手機建造介面', () => {
+  const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'td.css'), 'utf8');
+  const art = fs.readFileSync(path.join(root, 'src/td/systems/ArtSystem.js'), 'utf8');
+  const worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
+  const units = {musketeer:'faction-musketeer-actions-v1.png',halberdier:'faction-halberdier-actions-v1.png',dryad:'faction-dryad-actions-v1.png',moonblade:'faction-moonblade-actions-v1.png',banshee:'faction-banshee-actions-v1.png',boneRider:'faction-bone-rider-actions-v1.png'};
+  for (const [type,file] of Object.entries(units)) {
+    assert.match(html, new RegExp('data-build-type="'+type+'"'));
+    assert.match(html, new RegExp('data-mercenary="'+type+'"'));
+    assert.ok(css.includes(file), type+' build card / selection portrait');
+    assert.ok(art.includes(file), type+' combat atlas');
+    assert.ok(worker.includes(file), type+' offline cache');
+  }
+  for (const file of [...Object.values(units),'enemy-warder-actions-v1.png','enemy-commander-actions-v1.png']) {
+    const data = fs.readFileSync(path.join(root, 'assets/td', file));
+    assert.deepEqual(Array.from(data.subarray(0,8)),[137,80,78,71,13,10,26,10]);
+    assert.equal(data.readUInt32BE(16)%4,0,file+' width');
+    assert.equal(data.readUInt32BE(20)%4,0,file+' height');
+    assert.equal(data[25],6,file+' RGBA');
+    assert.ok(worker.includes(file),file+' offline cache');
+  }
 });
 
 test('戰地軍械九宮格為本機透明資產', () => {

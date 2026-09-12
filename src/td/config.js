@@ -10,10 +10,16 @@
       rogue:{name:'暗影盜賊',faction:'暗影',icon:'◆',cost:65,wood:1,health:80,armor:0,damage:11,range:118,interval:.45,speed:148,color:'#c884df',attackType:'chaos',bountyBonus:.35},
       shield:{name:'王國盾衛',faction:'王國',icon:'盾',cost:105,wood:2,health:185,armor:5,damage:18,range:42,interval:.92,speed:92,color:'#6da4e8',attackType:'chaos',role:'重裝攔截'},
       knight:{name:'日耀騎士',faction:'王國',icon:'槌',cost:128,wood:2,health:168,armor:4,damage:26,range:48,interval:.9,speed:100,color:'#e4bd58',attackType:'chaos',role:'破陣暈擊'},
+      musketeer:{name:'王國火槍手',faction:'王國',icon:'銃',cost:118,wood:2,health:86,armor:1,damage:35,range:185,interval:1.22,speed:99,color:'#e8c58e',attackType:'pierce',style:'bullet',role:'長距離點殺'},
+      halberdier:{name:'獅徽長戟衛',faction:'王國',icon:'戟',cost:112,wood:2,health:154,armor:3,damage:23,range:61,interval:.94,speed:94,color:'#dfd0a7',attackType:'chaos',role:'長兵攔截'},
       skeleton:{name:'幽骨劍士',faction:'暗影',icon:'骷',cost:78,wood:1,health:102,armor:2,damage:21,range:48,interval:.72,speed:118,color:'#bc9aff',attackType:'chaos',role:'快速近戰'},
       dragon:{name:'翡翠幼龍',faction:'精靈',icon:'龍',cost:165,wood:3,health:126,armor:2,damage:27,range:145,interval:1.05,speed:136,color:'#70d89c',attackType:'magic',splash:34,role:'飛行範圍'},
       treant:{name:'銀葉樹靈',faction:'精靈',icon:'樹',cost:138,wood:3,health:142,armor:2,damage:20,range:138,interval:1.04,speed:86,color:'#8bd9b4',attackType:'magic',splash:32,slow:.82,slowTime:1.1,role:'範圍緩速'},
+      dryad:{name:'林裔獵手',faction:'精靈',icon:'鹿',cost:126,wood:2,health:105,armor:1,damage:19,range:156,interval:.79,speed:143,color:'#83d9bd',attackType:'magic',slow:.72,slowTime:1.25,style:'nature',role:'機動緩速'},
+      moonblade:{name:'月刃哨兵',faction:'精靈',icon:'刃',cost:116,wood:2,health:125,armor:2,damage:21,range:51,interval:.64,speed:148,color:'#a8c5fa',attackType:'chaos',splash:24,style:'moon',role:'近戰旋刃'},
       golem:{name:'魂鋼魔像',faction:'暗影',icon:'像',cost:148,wood:3,health:218,armor:5,damage:32,range:46,interval:1.12,speed:76,color:'#9f72df',attackType:'chaos',splash:30,role:'重型震地'},
+      banshee:{name:'暮影女妖',faction:'暗影',icon:'魅',cost:137,wood:2,health:82,armor:0,damage:16,range:154,interval:.98,speed:121,color:'#be9eff',attackType:'magic',chain:2,chainRange:104,style:'spirit',role:'靈能連鎖'},
+      boneRider:{name:'幽騎骸將',faction:'暗影',icon:'騎',cost:158,wood:3,health:173,armor:3,damage:30,range:54,interval:.88,speed:153,color:'#b995ef',attackType:'chaos',splash:19,style:'spirit',role:'高速衝陣'},
       orc:{name:'赤牙勇士',faction:'半獸人',icon:'斧',cost:125,wood:2,health:205,armor:4,damage:31,range:50,interval:.82,speed:106,color:'#e46c4d',attackType:'chaos',splash:24,role:'重擊戰吼'}
     },
     buildings:{

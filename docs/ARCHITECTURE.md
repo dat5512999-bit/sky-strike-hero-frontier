@@ -1,5 +1,9 @@
 # 系統架構
 
+## v0.40.0 軍團與敵軍擴編
+
+`FactionSystem.FACTIONS → config.units → BuildSystem → CombatUnit → ArtSystem.combatUnits`。新六兵僅擴資料與圖像路由，移動、攻擊、升級、軍械、商店互斥沿用既有系統。敵軍路徑為 `WaveCatalog → WaveSystem → Monster.TYPES → EnemyCombatSystem/ArtSystem.enemyActions`，三個新職責透過既有怪物攻擊角色運作。`td.html/td.css` 提供建造與傭兵呈現；`sw.js` 快取八張新增 PNG。無資料庫、外部 API 或持久資料 schema 改動。
+
 ## v0.39.0 裝備、召喚與手機資料流
 
 `ShopSystem → hero.equipment → EquipmentSystem.weapon/projectileOptions → Hero Attack → Projectile → Monster`；特殊武器只組合既有連鎖與濺射，不另建傷害系統。視覺走 `EquipmentSystem.weapon → ArtSystem 無武器底圖 + class-weapons-atlas`。召喚走 `Hero/TowerSkillSystem → Summon(form) → ArtSystem.drawSummon → 4×4 atlas`。傭兵走 `FactionSystem.available/allows → canHire → TDGame.updateUi → BuildSystem.queueMercenary`。手機版則由 `LayoutSystem → body[data-layout]` 與 `main.js → body[data-mobile-panel]` 控制，與遊戲迴圈完全分離。

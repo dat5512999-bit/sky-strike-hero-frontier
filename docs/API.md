@@ -1,5 +1,12 @@
 # API 文件（內部模組介面）
 
+## v0.40.0 資料契約
+
+- `config.units[musketeer|halberdier|dryad|moonblade|banshee|boneRider]`：沿用既有單位設定欄位與 `CombatUnit` 生命週期；`style`、`chainRange` 等選填欄位送入既有 `Projectile`。
+- `FactionSystem.available('unit')`：每族回傳五名開局守軍，戰利解鎖兵種繼續合併；`canHire` 排除本族和已解鎖單位。
+- `Monster.TYPES[direwolf|raider|revenant]`：分別是高速、攻擊守軍的 siege、攻擊英雄的 hunter；`WaveCatalog` 仍提供 30 波與五波一 Boss。
+- 無外部 HTTP API、資料庫、網路權限或持久存檔格式變更。
+
 ## v0.39.0 新增介面
 
 - `FactionSystem.canHire(unitId)`：兵種存在、已選軍團且目前不可建造時回傳 `true`。
