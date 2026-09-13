@@ -1,5 +1,9 @@
 # 系統架構
 
+## v0.44.1 巡林者換裝圖層
+
+`Hero.gear.weapon`／`Hero.equipment.spear` → `ArtSystem.drawHero()` 選無武器底圖 → `drawHunterWeapon()` 優先軍械庫弓、否則職業弓 → `drawGearPieces(..., skipWeapon)` 補畫非武器裝備。此流程只改 Canvas 繪製，不反寫 `Hero` 或 `ArmorySystem`，也不改投射物與傷害資料流。
+
 ## v0.44.0 UI/UX 資料流
 
 ```mermaid

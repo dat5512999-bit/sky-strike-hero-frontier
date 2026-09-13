@@ -1,5 +1,10 @@
 # API 文件（內部模組介面）
 
+## v0.44.1 美術圖層介面
+
+- `ArtSystem.drawHunterWeapon(ctx, hero)` 優先繪製英雄身上相容的軍械庫武器，否則繪製已購買的職業弓；未取得任何換裝弓時回傳 `false`。不參與傷害與索敵。
+- `ArtSystem.drawGearPieces(ctx, target, mounted, skipWeapon=false)` 新增可選的純視覺參數；巡林者弓已獨立貼手繪製時用它避免重複，其他單位維持原行為。`Hero`、`ArmorySystem` 與 `EquipmentSystem` 的資料契約未變。
+
 ## v0.44.0 UI 流程介面
 
 - `TDGame.selectOpeningProfession(type)` 只選開局英雄，不啟動波次；`chooseProfession(type)` 仍做原有圖片門檻、職業初始化與準備倒數。`updateOpeningRules()` 讀既有 `TDDifficultySystem.summary()`，不另存倍率。

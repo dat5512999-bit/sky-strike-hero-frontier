@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## v0.44.1 巡林者武器圖層維護
+
+`ArtSystem.drawHunterWeapon()` 以武器圖集或軍械庫獅心弓繪製同一個手持圖層；調整姿勢請檢查 idle／walk／attack 四格、左右鏡像及原圖比例。`drawHero()` 在可繪製換裝武器時選無武器底圖，`drawGearPieces()` 對巡林者略過已繪製的軍械庫武器，其他護甲／戰器照舊。沒有資料庫、權限或數值改動；修改圖層後提升 Service Worker 快取並跑換弓回歸測試。
+
 ## v0.44.0 UI 維護重點
 
 開局選擇與戰鬥狀態仍由 `TDGame` 管理；難度倍率在 `TDDifficultySystem`，勿在卡片寫第二套數值。`main.js` 依 `LayoutSystem.resolved()` 把**同一批** `[data-build-type]` 按鈕在桌機 Drawer 與手機原指揮網格之間搬移，不複製建造資料；分類只用 `data-build-category` 篩選，實際費用／放置仍走 `BuildSystem`。新增建築時同時檢查 Drawer 分類、手機原格、CSS 圖集與 PWA 清單。重開只呼叫 `TDGame.reset()`；再挑戰在重置後重新套用上一局難度／英雄。沒有資料庫、帳號、權限或遊戲存檔遷移。
