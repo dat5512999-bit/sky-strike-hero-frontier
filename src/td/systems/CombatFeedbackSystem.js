@@ -4,14 +4,17 @@
     constructor(){this.items=[];}
     reset(){this.items=[];}
     push(item){this.items.push(item);if(this.items.length>120)this.items.splice(0,this.items.length-120);}
+    visualPosition(monster){return typeof monster.visualPosition==='function'?monster.visualPosition():{x:monster.x,y:monster.y};}
     hit(monster,damage,critical,color){
-      this.push({type:'impact',x:monster.x,y:monster.y,time:.22,max:.22,color:color||'#fff1b2'});
-      this.push({type:'damage',x:monster.x+(Math.random()-.5)*12,y:monster.y-monster.radius-12,time:.78,max:.78,value:Math.max(1,Math.round(damage)),critical:Boolean(critical)});
+      const position=this.visualPosition(monster);
+      this.push({type:'impact',x:position.x,y:position.y,time:.22,max:.22,color:color||'#fff1b2'});
+      this.push({type:'damage',x:position.x+(Math.random()-.5)*12,y:position.y-monster.radius-12,time:.78,max:.78,value:Math.max(1,Math.round(damage)),critical:Boolean(critical)});
     }
-    gold(monster,value){this.push({type:'gold',x:monster.x,y:monster.y-8,time:1.05,max:1.05,value:Math.round(value)});}
+    gold(monster,value){const position=this.visualPosition(monster);this.push({type:'gold',x:position.x,y:position.y-8,time:1.05,max:1.05,value:Math.round(value)});}
     death(monster){
-      this.push({type:'death',x:monster.x,y:monster.y,time:.48,max:.48,color:monster.color});
-      for(let i=0;i<5;i++){const angle=Math.PI*2*i/5;this.push({type:'mote',x:monster.x,y:monster.y,vx:Math.cos(angle)*(28+i*3),vy:Math.sin(angle)*(22+i*2)-18,time:.55,max:.55,color:monster.color});}
+      const position=this.visualPosition(monster);
+      this.push({type:'death',x:position.x,y:position.y,time:.48,max:.48,color:monster.color});
+      for(let i=0;i<5;i++){const angle=Math.PI*2*i/5;this.push({type:'mote',x:position.x,y:position.y,vx:Math.cos(angle)*(28+i*3),vy:Math.sin(angle)*(22+i*2)-18,time:.55,max:.55,color:monster.color});}
     }
     allyHit(target,value){this.push({type:'allyDamage',x:target.x+(Math.random()-.5)*10,y:target.y-34,time:.72,max:.72,value:Math.round(value)});this.push({type:'impact',x:target.x,y:target.y-8,time:.2,max:.2,color:'#ff765c'});}
     warning(source,label,radius){this.push({type:'warning',x:source.x,y:source.y,time:1.05,max:1.05,label:label,radius:radius||24});}

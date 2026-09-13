@@ -1,8 +1,12 @@
 # 部署手冊
 
+## v0.44.2 發布檢查
+
+本版依使用者要求推送 GitHub，包含 `Monster.js`、`TDGame.js`、`Projectile.js`、`CombatFeedbackSystem.js`、`sw.js`、v0.44.1 換弓修復、版本、測試與文件；Service Worker 快取名稱為 `sky-strike-v0.44.2`。Pages 更新後關閉舊分頁重開，再確認 12／20／30 怪群、Boss 血條、手機與 Console。截圖測試頁及 PNG 只作 QA，不是遊戲入口。
+
 ## v0.44.1 待發布檢查
 
-v0.44.0 已部署成功，v0.44.1 巡林者持弓修復目前只在本機；沒有使用者明確要求時不要推送。發布時需整批包含 `ArtSystem.js`、`sw.js`、`package.json`、測試與文件；確認 Pages 完成後分別測試職業弓 Lv.1～3、獅心王弓、不持有新弓及左右轉向。快取名稱為 `sky-strike-v0.44.1`，更新後需關閉舊分頁重開。
+v0.44.0 已部署成功；v0.44.1 巡林者持弓修復當時只在本機，後續併入 v0.44.2。需整批包含 `ArtSystem.js`、`sw.js`、`package.json`、測試與文件；確認 Pages 完成後分別測試職業弓 Lv.1～3、獅心王弓、不持有新弓及左右轉向。快取名稱原為 `sky-strike-v0.44.1`，更新後需關閉舊分頁重開。
 
 ## v0.44.0 已發布檢查
 

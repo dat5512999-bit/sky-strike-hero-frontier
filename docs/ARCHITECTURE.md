@@ -1,5 +1,9 @@
 # 系統架構
 
+## v0.44.2 敵軍視覺編隊
+
+`WaveSystem → Monster.update → Monster.x/y/index` 仍是唯一邏輯路徑；`TargetSelector / Projectile / AoE / Chain / Tower / Hero` 照舊讀 `x/y`。繪圖使用 `Monster.visualPosition()` 由道路切線求法線、固定三列錯位與小幅前後變化；`TDGame.draw()` 依視覺深度繪怪，再獨立繪製條件式 HP Bar。`Projectile.chainPoints`、`CombatFeedbackSystem` 只將顯示端點對齊視覺位置，不反寫傷害座標。沒有物理碰撞、第二條路徑、新資料庫或 API。
+
 ## v0.44.1 巡林者換裝圖層
 
 `Hero.gear.weapon`／`Hero.equipment.spear` → `ArtSystem.drawHero()` 選無武器底圖 → `drawHunterWeapon()` 優先軍械庫弓、否則職業弓 → `drawGearPieces(..., skipWeapon)` 補畫非武器裝備。此流程只改 Canvas 繪製，不反寫 `Hero` 或 `ArmorySystem`，也不改投射物與傷害資料流。

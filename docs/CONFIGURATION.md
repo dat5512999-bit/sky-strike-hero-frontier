@@ -1,5 +1,9 @@
 # 設定手冊
 
+## v0.44.2 怪群視覺參數
+
+`Monster.visualPosition()` 固定三列 `0／-1／+1`，一般怪側向 20 Canvas 單位、大型怪 23，前後錯位最多 5，轉角前後 42 單位平滑轉向。這些是繪製參數，不是怪物速度、碰撞、道路或波次設定；調整時必須保留 `x/y/index` 並重跑視覺及戰鬥回歸測試。無環境變數或資料庫設定。
+
 ## v0.42.0 塔與老兵平衡
 
 `Building.upgradeCost()` 依 `config.buildings[type].cost × [2.8,4.2,6.2,8.4]` 計價並四捨五入至 10G；只有最後一階需 1 功勳。林地弩塔原價 100G、升級 280／420／620／840G。塔熟練門檻在 `TowerSkillSystem.THRESHOLDS=[0,8,22,45,80]`。冰／荊棘／毒塔的 `slow`（移速倍率）與 `slowTime` 位於 `config.buildings`；強緩速判定為命中前 `slowFactor<=.8`，增傷率由輸出塔的 `bonusVsSlowed` 控制。老兵 `healthGrowth=.03`、`spawnRate=.78`，第 1→30 波血量 165%→309%；其他難度不變。可用上述資料逐項微調，不需修改資料庫或 API。

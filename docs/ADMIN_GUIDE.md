@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## v0.44.2 敵軍視覺維護
+
+怪物 `x/y/index` 是戰鬥座標，不可為了排隊效果改寫。若調整 `Monster.visualPosition()` 的列距／轉角插值，須重新檢查 `tests/td-enemy-readability.test.js` 與 `tests/td-readability-preview.html` 的 12／20／30、混合及 Boss 截圖。新增大型怪時檢查視覺遮擋與血條高度；不需修改 Wave 或碰撞。此版本沒有資料庫、帳號或權限變更。
+
 ## v0.44.1 巡林者武器圖層維護
 
 `ArtSystem.drawHunterWeapon()` 以武器圖集或軍械庫獅心弓繪製同一個手持圖層；調整姿勢請檢查 idle／walk／attack 四格、左右鏡像及原圖比例。`drawHero()` 在可繪製換裝武器時選無武器底圖，`drawGearPieces()` 對巡林者略過已繪製的軍械庫武器，其他護甲／戰器照舊。沒有資料庫、權限或數值改動；修改圖層後提升 Service Worker 快取並跑換弓回歸測試。

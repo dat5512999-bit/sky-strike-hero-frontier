@@ -1,5 +1,11 @@
 # API 文件（內部模組介面）
 
+## v0.44.2 敵軍繪製介面
+
+- `Monster.visualPosition()` 回傳 `{x,y}` 的純繪製座標；`x/y/index` 仍為戰鬥座標。`visualLane`、`visualStagger` 為建構時固定的視覺參數。
+- `Monster.showsHealthBar()`、`drawHealthBar(ctx)` 控制血條呈現；`Monster.compareForDraw(a,b)` 供繪製排序，Boss 保持最上層。不改 `takeDamage`、`progress` 或 `WaveSystem` 介面。
+- `CombatFeedbackSystem.visualPosition(monster)` 與 `Projectile.chainPoints` 僅供視覺回饋；選敵、濺射半徑、連鎖距離及傷害公式不變。無外部 HTTP API。
+
 ## v0.44.1 美術圖層介面
 
 - `ArtSystem.drawHunterWeapon(ctx, hero)` 優先繪製英雄身上相容的軍械庫武器，否則繪製已購買的職業弓；未取得任何換裝弓時回傳 `false`。不參與傷害與索敵。

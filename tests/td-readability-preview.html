@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<title>Enemy Readability V1 visual check</title>
+<style>
+  html,body{margin:0;background:#0b100e;color:#e9d8a6;font:15px system-ui}
+  main{width:720px;margin:12px auto;border:2px solid #8f7548;box-shadow:0 12px 32px #000}
+  header{height:44px;box-sizing:border-box;padding:10px 18px;background:#121a1a;display:flex;justify-content:space-between;align-items:center;letter-spacing:.08em}
+  canvas{display:block;width:720px;height:720px}
+</style>
+<main><header><strong>銀葉邊境 · Enemy Readability V1</strong><span id="scene-label">載入中</span></header><canvas id="scene" width="720" height="720"></canvas><a id="capture" href="#">下載場景 PNG</a></main>
+<script src="../src/td/namespace.js"></script>
+<script src="../src/td/config.js"></script>
+<script src="../src/td/entities/Monster.js"></script>
+<script src="../src/td/systems/ArtSystem.js"></script>
+<script>
+(async function(){
+  const ns=globalThis.TowerFrontier,params=new URLSearchParams(location.search),count=Number(params.get('count')||12),mixed=params.has('mixed'),boss=params.has('boss');
+  const types=mixed?['grunt','runner','warder','healer','commander','brute','shaman','raider','direwolf','revenant']:['grunt'];
+  const images=['human-td-battlefield-v2.png',...new Set(types.concat(boss?['boss']:[]).map(type=>({grunt:'enemy-grunt-actions-v1.png',runner:'enemy-runner-actions-v1.png',warder:'enemy-warder-actions-v1.png',healer:'enemy-healer-actions-v1.png',commander:'enemy-commander-actions-v1.png',brute:'enemy-brute-actions-v1.png',shaman:'enemy-shaman-actions-v1.png',raider:'enemy-orc-grunt-actions-v2.png',direwolf:'war-wolf-actions-v1.png',revenant:'graveyard-revenant-actions-v1.png',boss:'enemy-boss-actions-v1.png'})[type]))];
+  const loaded=await Promise.all(images.map(name=>new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>{image.ready=true;resolve([name,image]);};image.onerror=()=>reject(new Error(name));image.src='../assets/td/'+name;})));
+  const atlas=Object.fromEntries(loaded),actionNames={grunt:'enemy-grunt-actions-v1.png',runner:'enemy-runner-actions-v1.png',warder:'enemy-warder-actions-v1.png',healer:'enemy-healer-actions-v1.png',commander:'enemy-commander-actions-v1.png',brute:'enemy-brute-actions-v1.png',shaman:'enemy-shaman-actions-v1.png',raider:'enemy-orc-grunt-actions-v2.png',direwolf:'war-wolf-actions-v1.png',revenant:'graveyard-revenant-actions-v1.png',boss:'enemy-boss-actions-v1.png'};
+  const art={enemyActions:Object.fromEntries(Object.entries(actionNames).map(([type,name])=>[type,atlas[name]])),drawMonster(ctx,monster){return ns.systems.ArtSystem.prototype.drawMonster.call(this,ctx,monster);}};
+  const path=ns.config.path;
+  function pathPoint(distance){let remaining=distance;for(let index=1;index<path.length;index++){const start=path[index-1],end=path[index],length=Math.hypot(end.x-start.x,end.y-start.y);if(remaining<=length)return{x:start.x+(end.x-start.x)*remaining/length,y:start.y+(end.y-start.y)*remaining/length,index};remaining-=length;}const last=path.at(-1);return{x:last.x,y:last.y,index:path.length-1};}
+  ns.entities.Monster.nextFormationSlot=0;
+  const monsters=Array.from({length:count},(_,index)=>{const type=boss&&index===Math.floor(count*.55)?'boss':types[index%types.length],monster=new ns.entities.Monster(type,Math.max(5,count),path),point=pathPoint(135+(30-count)*9+index*27.5);monster.x=point.x;monster.y=point.y;monster.index=point.index;monster.frame=index%8;if(index%7===2){monster.health*=.64;monster.displayHealth=monster.health;}return monster;});
+  const ctx=document.getElementById('scene').getContext('2d');ctx.drawImage(atlas['human-td-battlefield-v2.png'],0,0,720,720);
+  const visible=monsters.slice().sort(ns.entities.Monster.compareForDraw);visible.forEach(monster=>monster.draw(ctx,art));visible.forEach(monster=>monster.drawHealthBar(ctx));
+  const capture=document.getElementById('capture');capture.href=ctx.canvas.toDataURL('image/png');capture.download='enemy-readability-v1-'+(boss?'boss':mixed?'mixed':count)+'.png';
+  document.getElementById('scene-label').textContent=boss?'Boss + 普通怪':mixed?'混合怪群 · '+count+' 隻':count+' 隻普通怪';document.body.dataset.ready='true';
+})().catch(error=>{document.getElementById('scene-label').textContent='載入失敗：'+error.message;document.body.dataset.ready='error';});
+</script>
+</html>
