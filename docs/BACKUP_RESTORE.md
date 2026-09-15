@@ -1,5 +1,9 @@
 # 備份與還原手冊
 
+## 0.59.0 備份與回復
+
+本版沒有存檔 Schema 變更。備份／回復必須讓 `assets/td/opening`、三個選角資料檔、`TDGame.js`、`td.css`、`package.json` 與 `sw.js` 保持同版；只回復圖片或只回復程式都可能造成離線快取缺圖。選角素材均為本機檔案，可在獨立備份中直接保存。
+
 ## 0.58.0 備份與回復
 
 本版無持久化資料格式變更。備份需保留完整 Git 工作樹，特別是 0.57.0 正式地圖提交與目前 0.58.0 尚未提交修改；不得用 reset／discard 只留下 UI。回復時應讓 `Monster.js`、`EnemyCombatSystem.js`、`TDGame.js`、`maps.js`、Art／Terrain、HTML／CSS、`package.json` 與 `sw.js` 回到同一版本。英雄裝備與戰利品仍為單局記憶體資料，不需資料遷移。

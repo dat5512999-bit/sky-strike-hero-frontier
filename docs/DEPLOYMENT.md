@@ -1,5 +1,9 @@
 # 部署手冊
 
+## 0.59.0 待部署狀態
+
+本版目前只在本機，尚未推送 GitHub／Pages。部署必須包含 `assets/td/opening` 內四類難度場景、三張英雄立繪、三張軍團橫幅，以及 HeroRoster、FactionSystem、TDDifficultySystem、TDGame、CSS、測試、文件、`package.json` 與 `sw.js`。快取名為 `sky-strike-v0.59.0`，無資料或 API 遷移。發布後請確認所有 PNG 回應成功且軍團卡沒有退回英雄圖。
+
 ## 0.58.0 待部署狀態
 
 目前修改保留在本機工作樹，尚未推送 GitHub／Pages。發布時必須整批包含 Monster、EnemyCombatSystem、TDGame、maps、ArtSystem、FrontierTerrain、HTML、兩份 CSS、package、Service Worker、測試與文件；不能只上傳樣式，否則英雄受傷規則與怪物隊列會不同步。快取名為 `sky-strike-v0.58.0`，無資料庫或 HTTP API 遷移。發布前須完成 `npm run check`、`npm test`、`git diff --check`，並複驗 1366×768、1920×1080 與 844×390。

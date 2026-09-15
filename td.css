@@ -413,3 +413,115 @@ body[data-layout="desktop"] .armory-item>i{width:56px;height:56px}
 
 body[data-layout="mobile"] .loot-overlay{place-items:end center;padding:0;background:#020708b8;backdrop-filter:blur(2px)}
 body[data-layout="mobile"] .loot-dialog{width:100%;max-height:84svh;border-radius:10px 10px 0 0;padding-bottom:max(12px,env(safe-area-inset-bottom))}
+
+/* v0.59 — expedition selection art supplied through data-backed asset slots. */
+body[data-game-screen="opening"] .td-profession-screen{
+  background:
+    linear-gradient(180deg,#02060780,#020809e8 72%),
+    var(--opening-scene,radial-gradient(circle at 50% 18%,#294033 0,#0b1414 45%,#030708 100%));
+}
+body[data-game-screen="opening"] .profession-dialog{
+  background:linear-gradient(145deg,#101b1bea,#071011f4 58%,#0c1514f8);
+}
+body[data-game-screen="opening"] .opening-titlebar{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:linear-gradient(90deg,#071010 0,#0c1714c7 42%,#0710109e 100%);
+}
+body[data-game-screen="opening"] .opening-titlebar::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:-75% -4% -90% 34%;
+  background-image:linear-gradient(90deg,#071010 0,transparent 36%,#07101026),url("assets/td/opening/difficulty-scenes-v1.png");
+  background-size:auto,200% auto;
+  background-position:center,100% 0%;
+  background-repeat:no-repeat;
+  opacity:.5;
+  filter:saturate(.85) brightness(.7);
+}
+body[data-game-screen="opening"] .difficulty-list button{
+  isolation:isolate;
+  overflow:hidden;
+  background-image:
+    linear-gradient(90deg,#07100fe8 0,#07100fb5 48%,#07100f4c 100%),
+    var(--selection-art);
+  background-size:auto,200% auto;
+  background-position:center,var(--selection-position,0% 0%);
+  background-repeat:no-repeat;
+  text-shadow:0 2px 6px #000;
+}
+body[data-game-screen="opening"] .difficulty-list button::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  background:linear-gradient(180deg,#00000008 0,#0208079c 100%);
+  pointer-events:none;
+}
+body[data-game-screen="opening"] .difficulty-list button[aria-pressed="true"]{
+  background-image:
+    linear-gradient(90deg,#2d2107cf 0,#10130db0 46%,#09100d42 100%),
+    var(--selection-art);
+  background-size:auto,200% auto;
+  background-position:center,var(--selection-position,0% 0%);
+}
+body[data-game-screen="opening"] .profession-list button{
+  isolation:isolate;
+  background-image:
+    linear-gradient(180deg,transparent 8%,#06100c12 42%,#07100ed9 74%,#07100ffd 100%),
+    var(--selection-art);
+  background-size:auto,cover;
+  background-position:center,var(--selection-focus,50% 22%);
+  background-repeat:no-repeat;
+  text-shadow:0 2px 7px #000;
+}
+body[data-game-screen="opening"] .profession-list button[data-profession="hunter"],
+body[data-game-screen="opening"] .profession-list button[data-profession="arcanist"],
+body[data-game-screen="opening"] .profession-list button[data-profession="rogue"]{
+  background-image:
+    linear-gradient(180deg,transparent 8%,#06100c12 42%,#07100ed9 74%,#07100ffd 100%),
+    var(--selection-art);
+  background-size:auto,cover;
+  background-position:center,var(--selection-focus,50% 22%);
+}
+body[data-game-screen="opening"] .profession-list button::before{
+  inset:auto 0 0;
+  height:48%;
+  z-index:-1;
+  background:linear-gradient(180deg,transparent,#07100efa 58%);
+}
+body[data-game-screen="opening"] .profession-list b{
+  color:#fff0c1;
+  font-size:18px;
+  text-shadow:0 2px 8px #000,0 0 14px #000;
+}
+body[data-game-screen="opening"] .profession-list strong{color:#8fe7d6}
+body[data-game-screen="opening"] .profession-list small{color:#d2d8d0}
+body[data-game-screen="opening"] .faction-list button{
+  background-image:
+    linear-gradient(90deg,#0b1514f7 0,#0b1514e3 53%,#0b15145c 100%),
+    var(--selection-art);
+  background-size:auto,cover;
+  background-position:center,var(--selection-focus,50% 30%);
+  background-repeat:no-repeat;
+  text-shadow:0 1px 5px #000;
+}
+body[data-game-screen="opening"] .faction-list button[aria-pressed="true"]{
+  background-image:
+    linear-gradient(90deg,#33270feb 0,#111a17d9 53%,#0b15144a 100%),
+    var(--selection-art);
+}
+@media (min-width:1000px) and (min-height:700px){
+  body[data-game-screen="opening"] .profession-list button{min-height:285px}
+}
+body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list button{
+  background-size:auto,200% auto;
+  background-position:center,var(--selection-position,0% 0%);
+}
+body[data-layout="mobile"][data-game-screen="opening"] .profession-list button{
+  background-size:auto,cover;
+  background-position:center,var(--selection-focus,50% 22%);
+}
+body[data-layout="mobile"][data-game-screen="opening"] .profession-list b{font-size:10px}

@@ -1,5 +1,18 @@
 # 系統架構
 
+## 0.59.0 遠征選角 Presentation
+
+```text
+HeroRoster.selectionArt ─────┐
+FactionSystem.selectionArt ─┼─ TDGame.attachDifficultyUi
+Difficulty.selectionArt ────┘          │
+                                       └─ CSS custom properties → 選角卡背景
+
+原 Hero／Faction／Difficulty ID → 原選擇流程 → 原 Build／Combat
+```
+
+美術 metadata 只屬 Presentation seam；英雄立繪、軍團橫幅與難度圖集互相獨立。沒有新增選角 Manager、網路圖片服務、資料庫或 PC／Mobile 分支邏輯。
+
 ## 0.58.0 戰場清晰度補強
 
 ```text

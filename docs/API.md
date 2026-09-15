@@ -1,5 +1,12 @@
 # API 文件（內部模組介面）
 
+## 0.59.0 選角美術資料介面
+
+- `HeroRoster.get(type).selectionArt`／`selectionFocus`：英雄選角立繪與 CSS `background-position` 焦點。
+- `FactionSystem.FACTIONS[id].selectionArt`／`selectionFocus`：獨立軍團橫幅與構圖焦點，不得指向英雄立繪。
+- `TDDifficultySystem.MODES[id].selectionArt`／`selectionPosition`：難度場景圖集及其象限位置。
+- `TDGame.attachDifficultyUi()` 將資料寫入 `--selection-art`、`--selection-focus`、`--selection-position`；選擇事件、Hero/Faction ID 與 Build 權限仍沿用原 API。
+
 ## 0.58.0 怪物隊列與地圖規則介面
 
 - `Monster.routeDistance`：怪物在共享折線路徑上的累積邏輯距離；不取代 `x/y`，索敵、Projectile、AoE 與 Chain 仍用世界座標。

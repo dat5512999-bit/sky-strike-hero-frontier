@@ -1,5 +1,9 @@
 # 版本更新手冊
 
+## 0.59.0 升級方式
+
+拉取完整版本後執行 `npm run check` 與 `npm test`，再重新載入 `td.html?v=0.59.0`。沒有存檔遷移；離線版確認快取更新為 `sky-strike-v0.59.0`。請勿只更新 CSS，七個新選角 PNG 與 Hero／Faction／Difficulty metadata 必須一起更新。
+
 ## 0.57.0 升級方式
 
 拉取完整 0.57.0 版本後執行 `npm run check` 與 `npm test`，再重新載入 `td.html?v=0.57.0`。本版沒有存檔遷移；舊戰局不保證熱更新，請開始新局。確認離線快取已改為 `sky-strike-v0.57.0`。升級後士兵永久固定，舊版準備期重新部署與 M／A／H／S 操作不再提供。

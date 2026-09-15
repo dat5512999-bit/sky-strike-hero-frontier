@@ -1,5 +1,9 @@
 # 設定手冊
 
+## 0.59.0 選角圖片設定
+
+圖片不使用環境變數或外部 URL。英雄、軍團與難度分別由 `HeroRoster.js`、`FactionSystem.js`、`TDDifficultySystem.js` 的 `selectionArt` 指定；`selectionFocus` 調整單張圖片裁切焦點，難度共用圖集則由 `selectionPosition` 選取象限。所有路徑需相對專案根目錄並加入 `sw.js`。
+
 ## 0.57.0 地圖與部署設定
 
 正式地圖定義位於 `src/td/maps.js` 的 `beginner`。`width/height` 必須保持 1536×1024 並與 `assets/td/beginner-valley-v1.png` 一致；`path`、`spawn`、`gate`、`heroSpawn`、`roadClearance`、`buildAreas`、`safeArea` 與 `camera` 都是資料設定。PC／Mobile 不得建立不同副本。士兵永久固定是核心規則，不提供玩家開關；`CommandSystem` 只保留相容接縫，不能改變士兵座標。

@@ -1,10 +1,10 @@
 (function(ns){
   'use strict';
   const MODES={
-    story:{name:'遠征見習',description:'較多容錯，適合熟悉英雄與建造。',enemyHealth:.82,enemySpeed:.96,enemyDamage:.72,enemyCount:1.08,reward:1.14,baseHealth:25,preparation:1.25,spawnRate:1.08},
-    standard:{name:'邊境守衛',description:'設計基準，推薦第一次正式挑戰。',enemyHealth:1,enemySpeed:1,enemyDamage:1,enemyCount:1.14,reward:1,baseHealth:20,preparation:1,spawnRate:1},
-    veteran:{name:'軍團老兵',description:'敵軍後段成長更快，需持續調整陣線。',enemyHealth:1.65,healthGrowth:.03,enemySpeed:1.08,enemyDamage:1.4,enemyCount:1.18,reward:.85,baseHealth:18,preparation:.85,spawnRate:.78},
-    calamity:{name:'災厄遠征',description:'高壓進軍與致命 Boss，為熟練玩家準備。',enemyHealth:2.4,healthGrowth:.04,enemySpeed:1.14,enemyDamage:1.9,enemyCount:1.18,reward:.7,baseHealth:15,preparation:.7,spawnRate:.68}
+    story:{name:'遠征見習',description:'較多容錯，適合熟悉英雄與建造。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'0% 0%',enemyHealth:.82,enemySpeed:.96,enemyDamage:.72,enemyCount:1.08,reward:1.14,baseHealth:25,preparation:1.25,spawnRate:1.08},
+    standard:{name:'邊境守衛',description:'設計基準，推薦第一次正式挑戰。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'100% 0%',enemyHealth:1,enemySpeed:1,enemyDamage:1,enemyCount:1.14,reward:1,baseHealth:20,preparation:1,spawnRate:1},
+    veteran:{name:'軍團老兵',description:'敵軍後段成長更快，需持續調整陣線。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'0% 100%',enemyHealth:1.65,healthGrowth:.03,enemySpeed:1.08,enemyDamage:1.4,enemyCount:1.18,reward:.85,baseHealth:18,preparation:.85,spawnRate:.78},
+    calamity:{name:'災厄遠征',description:'高壓進軍與致命 Boss，為熟練玩家準備。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'100% 100%',enemyHealth:2.4,healthGrowth:.04,enemySpeed:1.14,enemyDamage:1.9,enemyCount:1.18,reward:.7,baseHealth:15,preparation:.7,spawnRate:.68}
   };
   class TDDifficultySystem{
     constructor(){this.reset();}
