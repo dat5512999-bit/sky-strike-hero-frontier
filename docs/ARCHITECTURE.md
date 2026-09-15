@@ -1,5 +1,24 @@
 # 系統架構
 
+## 0.58.0 戰場清晰度補強
+
+```text
+WaveSystem → Monster.routeDistance → TDGame.updateMonsterConvoy
+                    │                         │
+                    └── x/y 世界座標不變 ←── maxAdvance（僅限制後車）
+                                               ├─ Target / Projectile / AoE / Chain
+                                               └─ Path / Gate / Leak
+
+Map.heroVulnerable ─┬─ false → EnemyCombat 不攻擊 Hero、HUD 隱藏 HP
+                    └─ true  → 沿用既有受傷／倒下／復活
+
+Build data → Faction permission → cost/wood display order
+                                ├─ Desktop full Grid
+                                └─ Mobile horizontal Drawer
+```
+
+本版沒有新增 CollisionSystem、ModalSystem、第二套 Mobile BuildSystem 或地圖座標。軍械／戰利品只更換 Presentation；正式 1536×1024 Map 仍是 World。
+
 ## 0.57.0 戰場與固定部署架構
 
 ```text

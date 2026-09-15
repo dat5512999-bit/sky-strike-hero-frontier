@@ -1,5 +1,9 @@
 # 部署手冊
 
+## 0.58.0 待部署狀態
+
+目前修改保留在本機工作樹，尚未推送 GitHub／Pages。發布時必須整批包含 Monster、EnemyCombatSystem、TDGame、maps、ArtSystem、FrontierTerrain、HTML、兩份 CSS、package、Service Worker、測試與文件；不能只上傳樣式，否則英雄受傷規則與怪物隊列會不同步。快取名為 `sky-strike-v0.58.0`，無資料庫或 HTTP API 遷移。發布前須完成 `npm run check`、`npm test`、`git diff --check`，並複驗 1366×768、1920×1080 與 844×390。
+
 ## 0.57.0 發布單位
 
 0.57.0 必須以完整版本發布：正式地圖 PNG、`maps.js`、Camera／Terrain／MiniMap、Monster／CombatUnit／Wave／Build、TDGame、HTML／CSS、測試與文件不可拆開部署。Service Worker 快取名為 `sky-strike-v0.57.0`，大型美術仍採成功載入後快取，避免安裝階段同步等待。沒有資料庫、API 或伺服器遷移。GitHub Pages 發布後以 `td.html?v=0.57.0` 避免舊網址快取誤判。

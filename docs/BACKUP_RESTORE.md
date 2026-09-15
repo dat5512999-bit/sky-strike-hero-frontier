@@ -1,5 +1,9 @@
 # 備份與還原手冊
 
+## 0.58.0 備份與回復
+
+本版無持久化資料格式變更。備份需保留完整 Git 工作樹，特別是 0.57.0 正式地圖提交與目前 0.58.0 尚未提交修改；不得用 reset／discard 只留下 UI。回復時應讓 `Monster.js`、`EnemyCombatSystem.js`、`TDGame.js`、`maps.js`、Art／Terrain、HTML／CSS、`package.json` 與 `sw.js` 回到同一版本。英雄裝備與戰利品仍為單局記憶體資料，不需資料遷移。
+
 ## 0.57.0 備份與回復
 
 本版沒有新增戰局存檔或資料庫。備份／還原必須以完整 Git 版本為單位，同步保留正式 PNG、`maps.js`、鏡頭／地景腳本、HTML／CSS、Service Worker 與文件；不能只替換地圖圖片，否則道路和建造多邊形會錯位。發布後可用 0.57.0 commit 回復；若回復舊版，也要同步回復 `CACHE_NAME`，再由瀏覽器更新 Service Worker。

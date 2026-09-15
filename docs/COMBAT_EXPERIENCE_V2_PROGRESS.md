@@ -1,5 +1,9 @@
 # Combat Experience V2 進度（截至 2026-09-15）
 
+## 2026-09-15：0.58.0 戰場清晰度與操作面板精簡
+
+依實際遊玩回報補上同路怪物隊列間距、新手地圖英雄無傷、緊湊軍械／戰利品、桌面完整且由便宜到昂貴的建造 Grid、單一建造收合入口、戰鼓堡 Lv3 疊圖修正與正式地圖近看品質保護。全部沿用既有 Monster、EnemyCombat、Build、Armory、Loot、Art 與 Camera seam，沒有建立物理、第二套 UI 或新 Gameplay Map。選擇遠征的資訊層級草稿保留；使用者概念圖只作視覺基準，獨立立繪 Asset 尚未落地。本輪不是 P5。
+
 ## 2026-09-15：Battlefield & Camera V1＋永久固定士兵
 
 0.57.0 將使用者提供的 1536×1024 圖片直接設為正式 World，校準單一路線、7 個草地建造區、安全區與鏡頭；PC／Mobile 共用幾何且不拉伸。敵軍取消 Visual Lane／Stagger，逐隻沿土路進場。士兵由「準備期可重新部署」更新為部署後永久固定；英雄移動保留；舊 M／A／H／S UI 移除，升級／回收移至單位旁。加入輕量火光與水面微光，但沒有建立地形引擎。完整紀錄見 `docs/BATTLEFIELD_CAMERA_V1.md`。這是已確認需求的延伸，不代表自行進入 Combat Experience V2 P5。

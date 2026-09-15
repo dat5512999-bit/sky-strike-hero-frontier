@@ -45,8 +45,10 @@
       <div id="td-profession-screen" class="td-profession-screen" role="dialog" aria-modal="true" aria-labelledby="td-opening-title">
         <div class="profession-dialog">
           <div class="opening-topline"><a href="index.html">← 返回模式選擇</a><span>HERO FRONTIER · CHOOSE YOUR CHALLENGE</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
-          <p>英雄塔防</p><h2 id="td-opening-title">選擇你的遠征</h2>
-          <label class="map-choice">正式戰場 <select id="td-map-choice" aria-label="選擇戰場"><option value="beginner">新手谷地 · U 型防線</option></select><small id="td-map-note">正式 1536 × 1024｜U 型單路線｜地圖不拉伸，森林、山壁、水域與道路禁建。</small></label>
+          <div class="opening-titlebar">
+            <div class="opening-title-copy"><p>英雄塔防</p><h2 id="td-opening-title">選擇你的遠征</h2><span>選定挑戰、英雄與軍團，即刻守衛邊境。</span></div>
+            <label class="map-choice"><span>目前戰場</span><select id="td-map-choice" aria-label="選擇戰場"><option value="beginner">新手谷地 · U 型防線</option></select><small id="td-map-note">U 型單路線｜草地部署｜道路與地形禁建</small></label>
+          </div>
           <section class="opening-step" aria-labelledby="td-difficulty-heading"><div class="opening-step-heading"><h3 id="td-difficulty-heading"><em>1</em> 選擇難度</h3><span>不同挑戰，不同節奏</span></div>
             <div class="difficulty-list" aria-label="塔防難度">
               <button type="button" data-td-difficulty="story"><b>遠征見習</b><strong>輕鬆入門</strong><small>城門 25 點<br>敵軍較脆<br>金幣較多</small></button>
@@ -56,20 +58,22 @@
             </div>
             <details class="difficulty-rules"><summary>詳細規則與完整倍率</summary><p id="td-difficulty-detail"></p></details>
           </section>
-          <section class="opening-step" aria-labelledby="td-profession-heading"><div class="opening-step-heading"><h3 id="td-profession-heading"><em>2</em> 選擇英雄</h3><span>不同英雄，不同戰術</span></div>
-            <div class="profession-list">
-              <button type="button" data-profession="hunter" aria-pressed="false"><b>王國巡林者</b><strong>遠程輸出 · 戰狼協戰</strong><small>多重箭 / 緩速陷阱 / 戰狼</small></button>
-              <button type="button" data-profession="arcanist" aria-pressed="false"><b>銀葉守護者</b><strong>控場法術 · 元素召喚</strong><small>冰霜新星 / 連鎖雷擊 / 元素</small></button>
-              <button type="button" data-profession="rogue" aria-pressed="false"><b>暮影刀鋒</b><strong>近戰爆發 · 分身突襲</strong><small>閃擊 / 淬毒煙幕 / 分身</small></button>
-            </div>
-          </section>
-          <section class="opening-step" aria-labelledby="td-faction-heading"><div class="opening-step-heading"><h3 id="td-faction-heading"><em>3</em> 選擇軍團</h3><span>決定本局可建造的守軍與防禦塔；不限制英雄</span></div>
-            <div class="faction-list" aria-label="開局軍團">
-              <button type="button" data-faction="hunter" aria-pressed="false"><b>王國遠征軍</b><strong>穿刺遠射 · 盾擊震懾 · 冰控火砲</strong><small>5 名守軍／5 座塔 · 擅長輕甲與穩固防線</small></button>
-              <button type="button" data-faction="arcanist" aria-pressed="false"><b>銀葉秘法庭</b><strong>魔法範圍 · 緩速 · 雷電連鎖</strong><small>5 名守軍／4 座塔 · 擅長重甲與區域控制</small></button>
-              <button type="button" data-faction="rogue" aria-pressed="false"><b>暮影盟約</b><strong>賞金尾刀 · 幽魂召喚 · 瘟疫</strong><small>5 名守軍／4 座塔 · 擅長突襲與靈魂戰術</small></button>
-            </div>
-          </section>
+          <div class="opening-choice-grid">
+            <section class="opening-step opening-hero-step" aria-labelledby="td-profession-heading"><div class="opening-step-heading"><h3 id="td-profession-heading"><em>2</em> 選擇英雄</h3><span>決定你的操作核心</span></div>
+              <div class="profession-list">
+                <button type="button" data-profession="hunter" aria-pressed="false"><b>王國巡林者</b><strong>遠程輸出 · 戰狼協戰</strong><small>多重箭 / 緩速陷阱 / 戰狼</small></button>
+                <button type="button" data-profession="arcanist" aria-pressed="false"><b>銀葉守護者</b><strong>控場法術 · 元素召喚</strong><small>冰霜新星 / 連鎖雷擊 / 元素</small></button>
+                <button type="button" data-profession="rogue" aria-pressed="false"><b>暮影刀鋒</b><strong>近戰爆發 · 分身突襲</strong><small>閃擊 / 淬毒煙幕 / 分身</small></button>
+              </div>
+            </section>
+            <section class="opening-step opening-faction-step" aria-labelledby="td-faction-heading"><div class="opening-step-heading"><h3 id="td-faction-heading"><em>3</em> 選擇軍團</h3><span>決定可建造部隊</span></div>
+              <div class="faction-list" aria-label="開局軍團">
+                <button type="button" data-faction="hunter" aria-pressed="false"><b>王國遠征軍</b><strong>穿刺遠射 · 盾擊 · 冰控火砲</strong><small>穩固防線｜5 兵・5 塔</small></button>
+                <button type="button" data-faction="arcanist" aria-pressed="false"><b>銀葉秘法庭</b><strong>魔法範圍 · 緩速 · 雷電連鎖</strong><small>區域控制｜5 兵・4 塔</small></button>
+                <button type="button" data-faction="rogue" aria-pressed="false"><b>暮影盟約</b><strong>賞金尾刀 · 幽魂召喚 · 瘟疫</strong><small>突襲戰術｜5 兵・4 塔</small></button>
+              </div>
+            </section>
+          </div>
           <div class="opening-actions"><div id="td-art-loading" class="art-loading" role="status" aria-live="polite"><span id="td-art-status">正在載入戰場美術…</span><button id="td-art-retry" type="button" hidden>重新載入圖片</button></div><button id="td-start-expedition" type="button" disabled>4　先選擇英雄與軍團</button></div>
         </div>
       </div>
@@ -82,7 +86,7 @@
       <div class="hero-profile">
         <button id="td-hero-select" class="td-hero-select" type="button" aria-pressed="false" disabled title="選取英雄（F1），再點地面移動"><span class="hero-face" aria-hidden="true"></span><span><strong>銀葉守護者</strong><small>點我控制英雄 · F1</small></span><span class="hero-select-state">選取</span></button>
         <div class="hero-rank"><span>LV.</span><strong id="td-hero-level">1</strong></div>
-        <div class="hero-vitals"><label>HP <span id="td-hero-hp-text">100 / 100</span><i><b id="td-hero-hp-fill"></b></i></label><label>MP <span id="td-hero-mp-text">冷卻能量</span><i class="mana"><b id="td-hero-mp-fill"></b></i></label></div>
+        <div class="hero-vitals"><label class="hero-health-vital">HP <span id="td-hero-hp-text">100 / 100</span><i><b id="td-hero-hp-fill"></b></i></label><label>MP <span id="td-hero-mp-text">冷卻能量</span><i class="mana"><b id="td-hero-mp-fill"></b></i></label></div>
         <details class="hero-more"><summary>詳細資訊</summary><div class="hero-extra"><div class="hero-xp"><label>XP <span id="td-hero-xp-text">0 / 52</span><i class="experience"><b id="td-hero-xp-fill"></b></i></label></div><div class="hero-stats" aria-label="英雄能力"><span>⚔ 攻擊 <b id="td-stat-attack">18</b></span><span>◎ 射程 <b id="td-stat-range">152</b></span><span>✥ 攻速 <b id="td-stat-speed">0.58s</b></span><span>➤ 移速 <b id="td-stat-move">215</b></span></div><div id="td-hero-weapon" class="hero-equipment" data-rarity="base"><i aria-hidden="true"></i><span><small>目前武器</small><b>銀葉法杖</b></span><em>制式</em></div></div></details>
       </div>
       <div class="panel-section-label"><span>技能</span><small>SKILLS · Q W E F</small></div>
@@ -96,7 +100,7 @@
       <div id="td-tower-branches" class="tower-branches" hidden><small>選擇進階建築</small><div><button type="button" data-tower-branch="0"></button><button type="button" data-tower-branch="1"></button></div></div>
       </details>
       <div class="panel-section-label"><span>命令與建造</span><small>COMMAND / BUILD</small></div>
-      <div class="command-tabs" aria-label="建造面板"><button type="button" data-command-tab="build" aria-pressed="true">招募／建造</button><button type="button" data-command-tab="orders" aria-pressed="false">收合建造</button></div>
+      <div class="command-tabs" aria-label="建造面板"><button type="button" data-command-tab="build" aria-pressed="true">招募／建造</button></div>
       <div id="td-army-summary" class="army-summary">選擇軍團後展開可建造清單</div>
       <div class="command-grid" data-panel="build">
         <button type="button" data-build-kind="unit" data-build-type="hunter" hidden><b>➶</b><span>部署獵手</span><small></small></button>

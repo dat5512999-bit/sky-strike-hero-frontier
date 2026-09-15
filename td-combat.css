@@ -415,7 +415,20 @@ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-gam
  body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-face{width:42px;height:52px;flex-basis:auto;}
  body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select strong{font-size:11px;}
  body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-rank strong{font-size:14px;}
- body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label>span{font-size:8px;}
- body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more summary{min-height:26px;font-size:10px;}
- body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-extra{max-height:min(185px,calc(100svh - 165px));}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label>span{font-size:8px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more summary{min-height:26px;font-size:10px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-extra{max-height:min(185px,calc(100svh - 165px));}
+}
+
+/* v0.58: desktop shows the whole affordable-to-premium roster without a carousel. */
+body.edge-combat[data-hero-damage="off"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-health-vital{display:none!important;}
+body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer{width:min(1320px,calc(100vw - var(--skills-width) - 30px));max-height:min(245px,48%);}
+body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:5px;overflow:visible;padding:0;}
+body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]{min-width:0;width:auto;flex:none;height:112px;min-height:112px;padding:4px;}
+body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]::before{width:50px;height:47px;}
+@media (max-width:1500px){
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid{grid-template-columns:repeat(5,minmax(0,1fr));}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]{height:72px;min-height:72px;grid-template-columns:44px 1fr;grid-template-rows:auto auto;place-items:center start;text-align:left;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]::before{grid-row:1/3;width:40px;height:38px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] span{display:none;}
 }

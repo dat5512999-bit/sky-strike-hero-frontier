@@ -8,7 +8,7 @@
    if(direct){
     if(!direct.ready)return false;
     // Map pixels and world coordinates are 1:1. Camera handles every screen ratio.
-    this.cache=direct;this.source=direct;this.ground=null;ctx.drawImage(direct,0,0);
+    this.cache=direct;this.source=direct;this.ground=null;ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.filter='contrast(1.035) saturate(1.045)';ctx.drawImage(direct,0,0);ctx.restore();
     this.drawAmbience(ctx);
     if(build&&build.pending)this.drawDeployment(ctx,build);
     return true;

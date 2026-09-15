@@ -1,5 +1,9 @@
 # 安裝手冊
 
+## 0.58.0 安裝與啟動
+
+沒有新增第三方依賴或資料庫。完整保留 `td.html`、`td.css`、`td-combat.css`、`src/td`、`assets/td`、`sw.js` 與文件，執行 `npm run check`、`npm test` 後以 `npm run serve:test` 啟動，開啟 `http://127.0.0.1:4173/td.html?v=0.58.0`。若仍看到滿版軍械庫、可穿模怪群或舊建造 Carousel，請重新整理並等待 Service Worker 切換至 `sky-strike-v0.58.0`。
+
 ## 0.57.0 安裝與啟動
 
 需求為 Node.js 18 以上，沒有新增套件。保留完整專案，尤其 `assets/td/beginner-valley-v1.png`、`src/td/maps.js`、`BattlefieldCamera.js`、`FrontierTerrain.js`、`MiniMapView.js`、`td-combat.css` 與 `sw.js`。執行 `npm run check`、`npm test`，再以 `npm run serve:test` 啟動並開啟 `http://127.0.0.1:4173/td.html?v=0.57.0`。安裝到手機主畫面後若仍見舊地圖，重新整理並等待 Service Worker 切換至 `sky-strike-v0.57.0`。

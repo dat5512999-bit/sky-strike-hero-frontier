@@ -25,6 +25,18 @@ test('開局、建造 Drawer 與統一選單保留同一套 UI 入口',()=>{
   assert.doesNotMatch(html,/id="td-move"|id="td-attack-move"|id="td-hold"|id="td-stop"/);
 });
 
+test('開局選擇在單一桌面視窗並排英雄與軍團，手機共用相同選項',()=>{
+  const html=fs.readFileSync(path.join(root,'td.html'),'utf8'),css=fs.readFileSync(path.join(root,'td.css'),'utf8');
+  assert.match(html,/class="opening-titlebar"/);
+  assert.match(html,/class="opening-choice-grid"/);
+  assert.match(html,/opening-choice-grid[\s\S]*opening-hero-step[\s\S]*opening-faction-step/);
+  assert.match(css,/data-game-screen="opening"[^}]*\.td-profession-screen\{overflow:hidden/);
+  assert.match(css,/\.opening-choice-grid\{display:grid;grid-template-columns:minmax\(0,2fr\)/);
+  assert.match(css,/data-layout="mobile"[^}]*data-game-screen="opening"[^}]*\.opening-choice-grid/);
+  assert.equal((html.match(/data-profession=/g)||[]).length,3);
+  assert.equal((html.match(/data-faction=/g)||[]).length,3);
+});
+
 test('重新挑戰沿用上一局設定，並確實呼叫既有 reset',()=>{
   const calls=[],game={lastRun:{difficulty:'veteran',profession:'rogue',faction:'hunter'},ui:{menuScreen:{hidden:false}},reset(){calls.push('reset');},chooseDifficulty(id){calls.push('difficulty:'+id);},selectOpeningProfession(id){calls.push('hero:'+id);},selectOpeningFaction(id){calls.push('faction:'+id);},chooseProfession(hero,faction){calls.push('start:'+hero+'×'+faction);}};
   assert.equal(prototype().retrySameSetup.call(game),true);
@@ -33,13 +45,24 @@ test('重新挑戰沿用上一局設定，並確實呼叫既有 reset',()=>{
 });
 
 test('建造分類共用既有按鈕並尊重軍團可建造清單',()=>{
-  const buttons=[{dataset:{buildKind:'unit',buildType:'hunter',buildCategory:'unit'}},{dataset:{buildKind:'building',buildType:'arrow',buildCategory:'tower'}},{dataset:{buildKind:'building',buildType:'iceward',buildCategory:'support'}},{dataset:{buildKind:'unit',buildType:'rogue',buildCategory:'unit'}}];
+  const buttons=[{dataset:{buildKind:'unit',buildType:'hunter',buildCategory:'unit'},style:{}},{dataset:{buildKind:'building',buildType:'arrow',buildCategory:'tower'},style:{}},{dataset:{buildKind:'building',buildType:'iceward',buildCategory:'support'},style:{}},{dataset:{buildKind:'unit',buildType:'rogue',buildCategory:'unit'},style:{}}];
   const filters=['all','unit','tower','support','recent'].map(button),game={ui:{buildFilters:filters,buildButtons:buttons,buildDrawerEmpty:{hidden:false}},buildFilter:'support',recentBuilds:['unit:hunter'],profession:{current:()=>({})},factions:{allows:(kind,type)=>type!=='rogue'}};
   prototype().updateBuildFilter.call(game);
   assert.deepEqual(buttons.map(item=>item.hidden),[true,true,false,true]);
   game.buildFilter='recent';prototype().updateBuildFilter.call(game);
   assert.deepEqual(buttons.map(item=>item.hidden),[false,true,true,true]);
   assert.equal(filters.find(item=>item.dataset.buildFilter==='recent').attributes['aria-pressed'],'true');
+  assert.ok(Number(buttons[0].style.order)<Number(buttons[1].style.order),'較便宜項目應排在前面');
+});
+
+test('桌面建造只有單一入口，全部卡片以十欄顯示；手機仍可橫向滑動',()=>{
+  const html=fs.readFileSync(path.join(root,'td.html'),'utf8'),css=fs.readFileSync(path.join(root,'td.css'),'utf8'),combatCss=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
+  assert.equal((html.match(/data-command-tab="build"/g)||[]).length,1);
+  assert.doesNotMatch(html,/data-command-tab="orders"[^>]*>收合建造/);
+  assert.match(css,/data-layout="desktop"[^}]*\.build-drawer-grid\{display:grid;grid-template-columns:repeat\(10/);
+  assert.match(combatCss,/data-layout="desktop"[^}]*\.build-drawer-grid\{display:grid;grid-template-columns:repeat\(10/);
+  assert.match(combatCss,/max-width:1500px[\s\S]*grid-template-columns:repeat\(5/);
+  assert.match(css,/data-combat-orientation="landscape"[^}]*\.build-drawer-grid \[data-build-type\][^}]*flex:0 0/);
 });
 
 test('遊戲選單取消會回到原暫停狀態',()=>{

@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.57.0';
+const CACHE_NAME = 'sky-strike-v0.58.0';
 const ASSETS = [
   './assets/td/beginner-valley-v1.png', './assets/td/frontier-ground-v2.png', './assets/td/frontier-ground-v1.png', './assets/td/hero-skill-icons-v1.png',
   './src/td/maps.js', './src/td/systems/FrontierTerrain.js',

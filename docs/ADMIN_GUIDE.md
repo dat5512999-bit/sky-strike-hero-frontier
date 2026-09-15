@@ -1,5 +1,11 @@
 # 管理者手冊
 
+## 0.58.0 維護重點
+
+怪物隊列由 `Monster.routeDistance`、`Monster.minimumHeadway()` 與 `TDGame.updateMonsterConvoy()` 控制。它只限制後方怪物當幀可前進距離，不得改成互推、側移或碰撞；調整間距後要同時測試快／慢混編與 ×1／×2／×3。地圖的 `heroVulnerable` 決定敵軍是否可攻擊英雄與 HUD 是否顯示 HP，新增地圖時必須明確設定。
+
+建造排序只改按鈕 CSS `order`，BuildSystem 名冊及價格資料仍是唯一來源；桌面使用完整 Grid，手機仍使用橫向 Scroll。軍械與戰利品是同一 DOM 與同一流程的 CSS 緊湊化，請勿另建 Mobile Modal。`barracks`、`grove`、`graveyard` 的九宮格已含升級旗幟，不能再呼叫通用 `drawRank()` 疊圖。正式地圖最大縮放為 1.65；要再提高必須先提供維持 1536×1024 座標比例的 2× 素材。
+
 ## 0.57.0 維護重點
 
 正式地圖資產是 `assets/td/beginner-valley-v1.png`，固定為 1536×1024；不得用 CSS 或 Canvas 將它非等比例拉伸。地圖幾何集中於 `src/td/maps.js`：路線、出生點、城門、草地多邊形與 Safe Area 必須隨圖片版本一起維護。`BattlefieldCamera` 只負責 Viewport，不得建立 PC／Mobile 各自的道路或建造規則。

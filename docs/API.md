@@ -1,5 +1,15 @@
 # API 文件（內部模組介面）
 
+## 0.58.0 怪物隊列與地圖規則介面
+
+- `Monster.routeDistance`：怪物在共享折線路徑上的累積邏輯距離；不取代 `x/y`，索敵、Projectile、AoE 與 Chain 仍用世界座標。
+- `Monster.update(dt, hero, defenders, maxAdvance)`：第四參數可限制當幀最大前進量；省略時維持原本獨立移動。
+- `Monster.setRouteDistance(distance)`：把增援放到既有道路的指定累積距離；不建立側向 Lane。
+- `Monster.minimumHeadway(front, back)`：依前後怪物半徑回傳隊列最小中心距離。
+- `TDGame.updateMonsterConvoy(dt)`：以前方怪物為基準限制後方快怪，並沿用原漏怪結算。
+- 地圖定義新增 `heroVulnerable`；`false` 時 `EnemyCombatSystem.update()` 仍處理 Boss 階段，但取消對英雄的蓄力、攻擊與踐踏傷害。
+- 建造顯示順序由 `TDGame.updateBuildFilter()` 依 `cost` 後 `wood` 寫入 CSS `order`；不改資料表與建造權限。
+
 ## 0.57.0 Battlefield API 契約
 
 - `TowerFrontier.maps.apply(id)` 將同一地圖資料套用到 `ns.config`；正式 `beginner` 提供 `width`、`height`、`asset`、`path`、`spawn`、`gate`、`heroSpawn`、`roadClearance`、`buildAreas`、`safeArea` 與 `camera`。
