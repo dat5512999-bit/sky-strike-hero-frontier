@@ -1,5 +1,66 @@
 # 安裝手冊
 
+## 0.57.0 安裝與啟動
+
+需求為 Node.js 18 以上，沒有新增套件。保留完整專案，尤其 `assets/td/beginner-valley-v1.png`、`src/td/maps.js`、`BattlefieldCamera.js`、`FrontierTerrain.js`、`MiniMapView.js`、`td-combat.css` 與 `sw.js`。執行 `npm run check`、`npm test`，再以 `npm run serve:test` 啟動並開啟 `http://127.0.0.1:4173/td.html?v=0.57.0`。安裝到手機主畫面後若仍見舊地圖，重新整理並等待 Service Worker 切換至 `sky-strike-v0.57.0`。
+
+## 0.55.0 安裝與啟動（2026-09-15，本機）
+
+無新增依賴。保留完整專案後執行 `npm test`、`npm run check`，再以 `npm run serve:test` 啟動並開啟 `http://127.0.0.1:4173/td.html`。若手機主畫面仍見舊士兵規則，重新載入頁面等待 Service Worker 切換至 `sky-strike-v0.55.0`。
+
+## 0.54.3 商城與技能分區（2026-09-14，本機）
+
+無新依賴；完整保留專案檔案，執行 `npm run serve:test` 後開啟 `http://127.0.0.1:4173/td.html`。離線版若仍顯示舊技能列，重新載入讓 Service Worker 更新 `sky-strike-v0.54.3` 快取。
+
+## 0.54.2 士兵升級圖塊（2026-09-14，本機）
+
+沒有新依賴；完整保留專案並開啟 `td.html` 即可。測試可執行 `npm run serve:test`，再開啟 `http://127.0.0.1:4173/td.html`。若離線版仍顯示舊箭頭，重新載入讓新版 Service Worker 更新快取。
+
+## 0.54.1 英雄小卡（2026-09-14，本機）
+
+沒有新依賴。保留完整專案並直接開啟 td.html；測試可執行 `npm run serve:test` 後到 `http://127.0.0.1:4173/td.html`。若畫面仍是舊卡，重新載入頁面並讓更新後的 sw.js 完成離線快取更新。
+
+## 0.54.0 小地圖與快捷面板（2026-09-14，本機）
+
+無新依賴。保留完整專案，直接開 td.html；開發測試可執行 npm run serve:test 並到 http://127.0.0.1:4173/td.html。缺少 src/td/systems/MiniMapView.js 將使小地圖無法載入。
+
+## 0.53.0 戰鬥 HUD（2026-09-14，本機）
+
+安裝方式不變：本機可開 td.html；開發測試可執行 npm run serve:test，瀏覽 http://127.0.0.1:4173/td.html。無新增依賴，需保留 td-combat.css。
+
+## 0.52.0 地圖構圖與部署體驗（2026-09-14，本機）
+
+安裝方式不變，可直接開 td.html；測試預覽用 npm run serve:test 後開 http://127.0.0.1:4173/td.html。必須保留 assets/td/frontier-ground-v2.png 及既有 assets 全目錄，無新增套件。
+
+## 0.51.0 HUD／地景呈現（2026-09-14，本機）
+
+安裝方式不變；兩張新PNG必須與程式一起保留於assets/td。沒有新執行時套件，npm test與npm run check仍為驗證入口。
+
+## 0.50.0 大地圖原型（2026-09-14，本機）
+
+安裝方式不變：Node18+、npm test、npm run check、npm run serve:test；開啟本機td.html，開局可選大地圖原型或原版。新增地景使用本機既有素材，不需另外下載素材套件。
+
+
+## 最新：0.49.0 鏡頭原型
+
+0.49.0不增加依賴，沿用npm run serve:test或原本靜態開啟方式；複製專案時須包含src/td/systems/BattlefieldCamera.js。
+
+## 0.48.0 安裝差異
+
+無新增安裝依賴或伺服器需求，沿用原本啟動方式。完整複製專案時不可漏掉 `td-combat.css`；不要只複製 td.html。
+
+## v0.47.0 初次開玩檢查
+
+不需伺服器或登入；下載完整專案後以 Chrome／Edge 開啟 `td.html`，或使用現有 GitHub Pages 入口。手機建議橫向握持；若自動識別不符，可在 ⚙ 遊戲選單選手機介面。選難度、英雄、軍團後開局；建造現在要在地圖選位置並再次確認。要離線安裝成主畫面捷徑，仍需從 HTTPS Pages 開啟且等 PWA 資產快取完成；本機 `file://` 不提供 Service Worker。
+
+## v0.46.0 安裝初驗
+
+沿用 v0.45.0 安裝方式，沒有新增套件。完整複製專案後開 `td.html`，以王國軍團建造戰鼓堡與一名附近守軍，塔卡應顯示「守軍攻速支援」；獅翼弩砲卡顯示支援怪優先。切換暮影軍團則可看到兩種召喚塔的不同定位。開發者執行 `npm run check`、`npm test`；本機 HTTP 可用 `npm run serve:test`。若舊 PWA 仍顯示舊說明，先關閉分頁再開以更新 `sky-strike-v0.46.0` 快取。此版尚未部署 Pages。
+
+## v0.45.0 安裝初驗
+
+無新依賴；完整複製專案後以 Chrome／Edge 開 `td.html`，或在專案目錄執行 `npm run serve:test` 並開 `http://127.0.0.1:4173/td.html`。選「王國巡林者 × 暮影盟約」並開始，應看到巡林者技能與暮影建造清單；再測另一個交叉組合。開發者驗證執行 `npm run check`、`npm test`。若仍顯示舊三步開局，關閉舊分頁重開，讓 `sky-strike-v0.45.0` 離線快取更新。未安裝任何資料庫或伺服器套件；手機 Pages 版待另外發布。
+
 ## v0.44.2 安裝初驗
 
 安裝方式與 v0.44.1 相同，無新套件。開 `td.html` 選英雄、開波，滿血普通怪不應連成血條長線；也可執行 `npm run serve:test`，開 `http://127.0.0.1:4173/tests/td-readability-preview.html?count=30` 檢查固定 30 隻場景。開發驗證執行 `npm run check`、`npm test`。
@@ -10,7 +71,7 @@
 
 ## v0.44.0 安裝與初驗
 
-無新套件或伺服器需求。下載完整專案後，用 Chrome／Edge 開 `td.html`，或先執行 `npm run serve:test` 再開 `http://127.0.0.1:4173/td.html`。先看開局三步驟與完整英雄圖，開始後點「招募／建造」測底部 Drawer、實際放一兵並確認扣金；按 ⚙ 試取消重開與設定。手機可用 Chrome／Edge 開相同檔案或網址，選「自動」介面並展開原建造面板。開發者另執行 `npm run check`、`npm test`。v0.44.0 UI 已部署到 GitHub Pages。
+無新套件或伺服器需求。下載完整專案後，用 Chrome／Edge 開 `td.html`，或先執行 `npm run serve:test` 再開 `http://127.0.0.1:4173/td.html`。先看開局三步驟與完整英雄圖，開始後點「招募／建造」測底部 Drawer；選卡後點戰場綠色位置會直接建造並扣款，紅色位置不建造。按 ⚙ 試取消重開與設定。手機可用 Chrome／Edge 開相同檔案或網址，選「自動」介面並展開建造面板；本機新版尚未做真機驗收。開發者另執行 `npm run check`、`npm test`。v0.44.0 UI 已部署到 GitHub Pages，但這次本機續作未發布。
 
 ## v0.43.0 安裝與初驗
 
@@ -67,7 +128,7 @@
 5. 塔防模式可從開始畫面的連結進入，也可直接雙擊 `td.html`；應顯示人族邊境戰場、職業選擇、240G、5 木材、0 功勳與 20/20 城門。
 6. 確認 `assets/td` 包含戰場、建築、敵軍及三張 `*-actions-v1.png`；缺少時遊戲仍會顯示簡化圖形，但不屬於完整 v0.16 美術交付。
 7. 使用頂端「介面」選單輪流切換自動、電腦、手機，確認戰局不會重開；重新整理後應維持最後選擇。
-8. 選職後確認顯示 18 秒準備與下一波情報，按「立即開始」可跳過倒數；部署一名職業守軍與一座防禦塔，再確認移動、攻擊移動、固守與停止。
+8. 選職後確認顯示 18 秒準備與下一波情報，按「立即開始」可跳過倒數；在合法草地部署一名士兵與一座防禦塔。兩者位置永久固定，英雄仍可移動與施法。
 
 ## 開發環境（選用）
 

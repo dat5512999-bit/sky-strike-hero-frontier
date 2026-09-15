@@ -1,5 +1,66 @@
 # 設定手冊
 
+## 0.57.0 地圖與部署設定
+
+正式地圖定義位於 `src/td/maps.js` 的 `beginner`。`width/height` 必須保持 1536×1024 並與 `assets/td/beginner-valley-v1.png` 一致；`path`、`spawn`、`gate`、`heroSpawn`、`roadClearance`、`buildAreas`、`safeArea` 與 `camera` 都是資料設定。PC／Mobile 不得建立不同副本。士兵永久固定是核心規則，不提供玩家開關；`CommandSystem` 只保留相容接縫，不能改變士兵座標。
+
+## 0.55.0 士兵規則設定（2026-09-15，本機）
+
+固定部署、射程內自動索敵、不承傷與一人一裝備是遊戲規則，無玩家設定開關。士兵攻擊、射程、攻速與價格沿用 `src/td/config.js`；軍械適用兵種與效果位於 `ArmorySystem.ITEMS`。`health`／`armor`／`speed` 舊欄位暫留資料相容，但士兵不會承傷或移動。沒有新增環境變數。
+
+## 0.54.3 商城與技能分區（2026-09-14，本機）
+
+無新設定；PC／手機版沿用原介面模式切換。R 仍開商店，F 仍施放大絕；技能、商品與數值配置不變。
+
+## 0.54.2 士兵升級圖塊（2026-09-14，本機）
+
+不需新設定；升級後角色使用原素材與裝備，等級顯示由程式自動處理。畫質、速度及操作模式設定不變。
+
+## 0.54.1 英雄小卡（2026-09-14，本機）
+
+無新增設定項。既有自動／電腦／手機模式與 F1 操作保持不變；「詳細資訊」是本局頁面上的臨時展開狀態，不需設定或存檔。
+
+## 0.54.0 小地圖與快捷面板（2026-09-14，本機）
+
+沒有新增玩家設定。既有「自動／電腦／手機」模式照常使用；小地圖與快捷圖塊在 PC／手機橫向的邊緣戰鬥介面顯示，手機直向維持既有面板。
+
+## 0.53.0 戰鬥 HUD（2026-09-14，本機）
+
+不新增設定項。既有「自動／電腦／手機」介面切換繼續有效；戰鬥 PC／橫向共用緊湊列，手機直向維持原資源顯示。
+
+## 0.52.0 地圖構圖與部署體驗（2026-09-14，本機）
+
+可調整 maps.js 的 frontier.openingFocus 和 zones 呈現資料；它們不修改世界、道路或合法建造區。道路仍 55 單位禁建，邊界與間距沿用，沒有新增障礙設定。ArtSystem.frontierGround 使用 v2 地表。
+
+## 0.51.0 HUD／地景呈現（2026-09-14，本機）
+
+UI樣式集中在td-combat.css最新V0.51區段。hero-skill-icons-v1.png為4×4：列0巡林者、列1守護者、列2刀鋒，欄0/1/2/3對應Q/W/E/F；列3欄0商店。未改職業／技能config。完整素材提示詞見ART_PRESENTATION_V051.md。
+
+## 0.50.0 大地圖原型（2026-09-14，本機）
+
+maps.js 定義 classic 720×720 與 frontier 1280×900；新圖 roadUnits=true、roadClearance=55，沿用42水平／62頂部／46底部部署邊距。兩圖路線長度約2017.831，怪物速度未改。新增地圖須同時提供 path、出生點、地景及通行測試，不能只拉伸背景。
+
+
+## 最新：0.49.0 鏡頭原型
+
+0.49.0 鏡頭不新增持久設定：放大上限2.2倍、backing DPR上限1.5；基本細節模式填滿視窗，全圖模式完整容納地圖。重新開始清除查看／跟隨／縮放狀態。直式手機自動停用鏡頭呈現。
+
+## 0.48.0 介面設定
+
+戰鬥中從右上齒輪 → 設定 → 介面模式，仍沿用 `towerFrontierLayout` 記憶。電腦與手機橫向採邊緣 HUD；手機直向採原版。沒有新增戰鬥數值或鏡頭設定。
+
+## v0.47.0 橫式與介面選擇
+
+設定選單的「自動」在寬度 ≤700 或「粗指標、橫向、高度 ≤700」時使用手機介面；玩家仍可手動選電腦／手機，選擇儲存在 `towerFrontierLayout`。手機橫式使用戰場側欄與同一建造 Drawer；直式保留舊指令面板並提示轉橫向。價格、攻速、射程、波次與其他平衡參數沒有改動。
+
+## v0.46.0 塔定位參數
+
+`src/td/config.js` 的 `buildings[*].role` 是建造卡短標籤。戰鼓堡 `allyHaste=.08`、`allyHasteRadius=165`，塔級提高少量增益，皇家指揮所分支為 `.15` 並擴大範圍；多塔取最大值而非相加。獅翼弩砲 `priorityTargets` 依序為祭司、旗手、術士、怨靈、Boss，目標不在射程內仍不會攻擊。召喚殿與墓園各自使用 `summonInterval/CapBase/Duration/Damage/Range/Speed/LeashBonus`；數值改動需同時觀察出怪速度、召喚存續與傷害。沒有新增環境變數、資料庫或部署設定。
+
+## v0.45.0 英雄與軍團組合
+
+可選英雄 ID 由 `HeroRoster.CLASSES` 定義，可選軍團 ID 由 `FactionSystem.FACTIONS` 定義；目前各 3 個，未使用資料庫或環境變數。建造權限依軍團 `units/buildings` 清單與戰利品解鎖，不再依英雄 ID。`LootSystem.createOffers(wave,heroId,factionId)` 的第三波入門軍械依英雄；已屬本族的龍卵或幽骨純解鎖不入抽選池，跨軍團仍可取得。塔進階的 `burstRadius` 是第 4 擊範圍倍率，常規投射物仍按既有 `splash`；`chainChance/chainStyle` 控制英雄武器觸發。調整後應重跑 `npm test`，不要在 UI 複製同套規則。
+
 ## v0.44.2 怪群視覺參數
 
 `Monster.visualPosition()` 固定三列 `0／-1／+1`，一般怪側向 20 Canvas 單位、大型怪 23，前後錯位最多 5，轉角前後 42 單位平滑轉向。這些是繪製參數，不是怪物速度、碰撞、道路或波次設定；調整時必須保留 `x/y/index` 並重跑視覺及戰鬥回歸測試。無環境變數或資料庫設定。
@@ -51,7 +112,7 @@
 
 ## v0.33.0 塔防守軍恢復
 
-`src/td/systems/TDDifficultySystem.js` 的 `unitRecovery` 控制守軍 HP 歸零規則：`enabled` 決定恢復或永久陣亡，`time` 是離場秒數，`health` 是歸隊生命比例，`guard` 是歸隊無敵秒數。建議同時調整時間與生命，不要只縮短倒數，否則前線作戰單位會變成無成本消耗品。
+此為 v0.33.0 歷史參數，0.55.0 已移除 `unitRecovery`。所有難度的士兵都不承傷，難度仍由敵軍倍率、資源與城門耐久區分。
 
 > v0.30.0：基礎單位／建築數值位於 `src/td/config.js`；三族開局清單位於 `FactionSystem.FACTIONS`；Boss 戰利品位於 `LootSystem.ITEMS`；塔分支位於 `TowerEvolutionSystem.BRANCHES`。新增項目時需同步資料、UI、離線快取與測試。
 
@@ -128,7 +189,7 @@ Monster.update中的stride控制完整步態需要的路程：步兵64、疾行�
 
 ## v0.23.0 戰鬥生命週期
 
-英雄復活時間、生命比例及守護時間位於 `config.hero.respawnTime`、`respawnHealth`、`invulnerability`。守軍基礎 `health`、`armor` 位於 `config.units`。敵人 `combatRole`、`attackRange`、`attackDamage`、`attackInterval` 位於 `Monster.TYPES`；Boss 階段門檻、踐踏倍率與冷卻集中於 `EnemyCombatSystem`。調整後必須驗證第 5／10／15 波。
+英雄復活時間、生命比例及守護時間位於 `config.hero.respawnTime`、`respawnHealth`、`invulnerability`。`config.units` 的士兵 `health`／`armor` 是舊版相容欄位，不控制現行承傷。敵人 `combatRole`、`attackRange`、`attackDamage`、`attackInterval` 位於 `Monster.TYPES`；Boss 階段門檻、踐踏倍率與冷卻集中於 `EnemyCombatSystem`。
 
 ## v0.24.0 黃金 15 波
 

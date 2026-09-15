@@ -6,7 +6,7 @@
       {id:'ranger-bow',name:'王國巡林弓',rarity:'base',color:'#e6c56c',description:'英雄原本的制式長弓。'},
       {id:'steel-longbow',name:'精鋼長弓',rarity:'common',color:'#dce8ef',column:0,row:0,description:'普攻與傷害技能提高 20%，箭矢留下銀白軌跡。'},
       {id:'frostwood-longbow',name:'雷霜水晶弓',rarity:'epic',color:'#62dfff',column:1,row:0,description:'累計提高 40% 傷害；普攻有 35% 機率觸發三段連鎖雷擊。',chainChance:.35,chain:3,chainRange:108},
-      {id:'dragonfire-longbow',name:'炎龍天弓',rarity:'legendary',color:'#ff6c32',column:2,row:0,description:'累計提高 60% 傷害，獲得龍焰光環與強烈命中色。'}
+      {id:'dragonfire-longbow',name:'炎龍天弓',rarity:'legendary',color:'#ff6c32',column:2,row:0,description:'累計提高 60% 傷害；保留 35% 三段連鎖，並改為龍焰軌跡。',chainChance:.35,chain:3,chainRange:108,chainStyle:'flame'}
     ],
     arcanist:[
       {id:'silverleaf-staff',name:'銀葉法杖',rarity:'base',color:'#70e7ff',description:'銀葉學院的制式法杖。'},
@@ -25,7 +25,7 @@
     static weapon(hero,level){const list=WEAPONS[hero&&hero.classType]||WEAPONS.arcanist,index=Math.max(0,Math.min(3,level===undefined?(hero.equipment.spear||0):level));return Object.assign({},list[index],{level:index,rarityInfo:RARITIES[list[index].rarity]});}
     static nextWeapon(hero){const level=hero.equipment.spear||0;return level>=3?null:this.weapon(hero,level+1);}
     static effectColor(hero,fallback){const weapon=this.weapon(hero);return weapon.level?weapon.color:fallback;}
-    static projectileOptions(hero,base,random){const options=Object.assign({},base),weapon=this.weapon(hero),roll=typeof random==='function'?random:Math.random;if(weapon.chainChance&&roll()<weapon.chainChance){options.chain=weapon.chain;options.chainRange=weapon.chainRange;options.style='lightning';options.weaponProc='chain';}if(weapon.splash){options.splash=Math.max(options.splash||0,weapon.splash);options.style=weapon.style||options.style;options.weaponProc='splash';}return options;}
+    static projectileOptions(hero,base,random){const options=Object.assign({},base),weapon=this.weapon(hero),roll=typeof random==='function'?random:Math.random;if(weapon.chainChance&&roll()<weapon.chainChance){options.chain=weapon.chain;options.chainRange=weapon.chainRange;options.style=weapon.chainStyle||'lightning';options.weaponProc='chain';}if(weapon.splash){options.splash=Math.max(options.splash||0,weapon.splash);options.style=weapon.style||options.style;options.weaponProc='splash';}return options;}
     static drawSignature(ctx,hero){const weapon=this.weapon(hero);if(!weapon.level||!hero.active)return;const pulse=.65+Math.sin(hero.animationTime*5)*.15,attack=hero.state==='attack';ctx.save();ctx.translate(hero.x,hero.y-17);ctx.rotate(hero.facing);ctx.globalCompositeOperation='screen';ctx.strokeStyle=weapon.color;ctx.fillStyle=weapon.color;ctx.shadowColor=weapon.color;ctx.shadowBlur=weapon.level>=3?15:8;ctx.globalAlpha=.35+.13*weapon.level;ctx.lineWidth=1.5+weapon.level*.65;
       if(hero.classType==='rogue'){if(!attack){ctx.restore();return;}ctx.globalAlpha=.1+.08*weapon.level;ctx.lineWidth=1+weapon.level*.45;const reach=12+weapon.level*2;for(let side=-1;side<=1;side+=2){ctx.beginPath();ctx.arc(13,side*4,reach,-.48,.48);ctx.stroke();}}
       else if(hero.classType==='hunter'){ctx.beginPath();ctx.arc(11,0,17+weapon.level*3,-1.05,1.05);ctx.stroke();ctx.beginPath();ctx.moveTo(19,-14);ctx.lineTo(19,14);ctx.stroke();}

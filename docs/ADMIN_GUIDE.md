@@ -1,5 +1,68 @@
 # 管理者手冊
 
+## 0.57.0 維護重點
+
+正式地圖資產是 `assets/td/beginner-valley-v1.png`，固定為 1536×1024；不得用 CSS 或 Canvas 將它非等比例拉伸。地圖幾何集中於 `src/td/maps.js`：路線、出生點、城門、草地多邊形與 Safe Area 必須隨圖片版本一起維護。`BattlefieldCamera` 只負責 Viewport，不得建立 PC／Mobile 各自的道路或建造規則。
+
+士兵的正式契約為部署後永久固定。UI、鍵盤或舊 `CommandSystem` 呼叫都不可改變 `CombatUnit.x/y`；英雄移動仍由 `Hero` 處理。發布前至少執行 `npm run check`、`npm test`、`git diff --check`，並在桌面與手機橫向檢查道路、合法部署、小地圖和單位旁升級／回收。
+
+## 0.55.0 士兵規則維護（2026-09-15，本機）
+
+士兵進攻由 `CombatUnit.update()` 的射程內自動索敵處理，敵人對玩家傷害則維持英雄與城門流程。不要為士兵恢復追擊、承傷、負傷歸隊或強制兵種數量上限。`BuildSystem` 每次合法放置建立獨立士兵；軍械以 `ArmorySystem.owned` 物品副本 ID 與 `assignments` 持有人對照，販售單位時由既有 `onRemove` 釋放裝備。修改裝備適用類型或效果時，應確認固定部署的士兵實際能受益。
+
+## 0.54.3 商城與技能分區（2026-09-14，本機）
+
+維護商店入口時保留唯一 `td-shop-open` ID；開啟、暫停、快捷鍵 R 及商店權限仍走 `TDGame` 原流程。只調整 DOM 位置與表現，不修改商品或交易數值。
+
+## 0.54.2 士兵升級圖塊（2026-09-14，本機）
+
+本版僅改 `ArtSystem.drawCombatUnit/drawRank` 的守軍呈現及測試。維護時檢查 Lv.2～5 守軍輪廓不被程式多邊形蓋住；不需修改資料、權限或伺服器。
+
+## 0.54.1 英雄小卡（2026-09-14，本機）
+
+此次僅調整 td.html、td.css、td-combat.css 的既有英雄 HUD。確認同一組 `td-hero-*`、`td-stat-*` ID 沒有複製，`src/td/main.js` 與 TDGame 更新流程未改。部署需同步三個 UI 檔與 sw.js；無權限、帳號或資料遷移。
+
+## 0.54.0 小地圖與快捷面板（2026-09-14，本機）
+
+新增 MiniMapView 純呈現模組，從既有地形快取／地圖定義／鏡頭讀值，不儲存新玩家資料。檢查 td.html、td-combat.css、MiniMapView.js 與 sw.js 同步部署。沒有資料庫、帳號、權限或設定遷移。
+
+## 0.53.0 戰鬥 HUD（2026-09-14，本機）
+
+這次只改 HTML 圖示與 CSS 排版，四個資源 ID、原暫停／選單按鈕及事件不變。沒有新設定、資料遷移、帳號或權限變更。
+
+## 0.52.0 地圖構圖與部署體驗（2026-09-14，本機）
+
+本版只變更地表、開局鏡頭構圖與部署提示；不需要新設定、帳號、API 或資料遷移。確認 assets/td/frontier-ground-v2.png 一併存在。中央折返覆蓋偏強的觀察及未驗事項記於 MAP_DEPLOYMENT_V052.md。
+
+## 0.51.0 HUD／地景呈現（2026-09-14，本機）
+
+新增兩張本機裝飾圖，不新增管理端或網路服務。若新圖未就緒，地景沿用原素材、技能沿用文字圖符；兩者不參與開局coreStatus必要美術判斷。現有retryFailed納入新圖。
+
+## 0.50.0 大地圖原型（2026-09-14，本機）
+
+新增 maps.js、FrontierTerrain.js，未增加服務、帳號或管理後台。地圖開局選擇，戰鬥中不得切換；保留 classic 作比對基線。新圖僅路線原型，30波平衡與真機效能仍待驗收。
+
+
+## 最新：0.49.0 鏡頭原型
+
+0.49.0新增src/td/systems/BattlefieldCamera.js，需和td.html、td-combat.css、TDGame.js、main.js同步更新。未新增後端、權限或数据库。此版只驗證鏡頭，不可把Canvas像素尺寸當作擴大的可部署世界。
+
+## 0.48.0 維護提醒
+
+本次是呈現層更新，無帳號、資料庫或後台變更。新增 `td-combat.css` 必須和 HTML、main.js、sw.js 一起部署；既有未提交玩法改動不屬於這次 HUD 修改。不要單獨回退整個工作目錄。
+
+## v0.47.0 戰鬥介面與建造流程維護（本機續作）
+
+先執行 `npm test`、`npm run check`。橫式判斷在 `LayoutSystem`，UI 入口在 `src/td/main.js`；建造真正扣款仍由 `BuildSystem.placeQueued()` 執行。若收到誤建回報，依序檢查選卡、Canvas 點位、`stagePlacement()`、`confirmPlacement()` 與原扣款入口；目前綠色合法位置單擊即提交，已無第二個確認按鈕。手機選單可手動切換電腦／手機介面。詳見 [續作進度](COMBAT_EXPERIENCE_V2_PROGRESS.md)與 [Camera／Canvas 盤點](BATTLEFIELD_CAMERA_CANVAS_AUDIT.md)。此版未更動權限、後端或存檔結構。
+
+## v0.46.0 塔定位維護
+
+新塔的 `config.buildings.role` 必須描述已實作能力，不可只用美術名稱暗示毒傷、暈眩或光環。戰鼓增益由 `BuildSystem.applyTowerSupport()` 每步重算、不疊加；調整 `allyHaste` 後應重新檢查跨軍團守軍、軍械攻速與售塔回復。召喚塔的各項召喚設定留在 `config.buildings`，共用 `TowerSkillSystem` 與 `Summon`；若改 `summonInterval`，需一起驗證有效存續與上限，不只驗證設定值。獅翼弩砲的 `priorityTargets` 應只列現有 Monster type。發版前跑 `npm run check`、`npm test`，並實玩前／中／後波；未經使用者要求不推送 GitHub。
+
+## v0.45.0 英雄／軍團資料維護
+
+英雄 ID 與技能在 `HeroRoster`／`Hero`，開局英雄狀態仍由 `ProfessionSystem` 保存；軍團名冊與可建權限在 `FactionSystem.FACTIONS`。新增軍團或英雄時分別更新開局卡、圖片預載與測試，不應靠相同 ID 自動綁定。`TDGame.lastRun` 現保存 `profession`（英雄 ID）與 `faction`（軍團 ID），沒有持久存檔、帳號、資料庫或權限。調整塔進階時需測實際 `TowerSkillSystem.fire()` 投射物，不能只驗說明文字。發版前執行 `npm run check`、`npm test` 並在 PC／手機介面實玩；只有使用者明確要求才推送 GitHub。
+
 ## v0.44.2 敵軍視覺維護
 
 怪物 `x/y/index` 是戰鬥座標，不可為了排隊效果改寫。若調整 `Monster.visualPosition()` 的列距／轉角插值，須重新檢查 `tests/td-enemy-readability.test.js` 與 `tests/td-readability-preview.html` 的 12／20／30、混合及 Boss 截圖。新增大型怪時檢查視覺遮擋與血條高度；不需修改 Wave 或碰撞。此版本沒有資料庫、帳號或權限變更。
@@ -10,11 +73,11 @@
 
 ## v0.44.0 UI 維護重點
 
-開局選擇與戰鬥狀態仍由 `TDGame` 管理；難度倍率在 `TDDifficultySystem`，勿在卡片寫第二套數值。`main.js` 依 `LayoutSystem.resolved()` 把**同一批** `[data-build-type]` 按鈕在桌機 Drawer 與手機原指揮網格之間搬移，不複製建造資料；分類只用 `data-build-category` 篩選，實際費用／放置仍走 `BuildSystem`。新增建築時同時檢查 Drawer 分類、手機原格、CSS 圖集與 PWA 清單。重開只呼叫 `TDGame.reset()`；再挑戰在重置後重新套用上一局難度／英雄。沒有資料庫、帳號、權限或遊戲存檔遷移。
+開局選擇與戰鬥狀態仍由 `TDGame` 管理；難度倍率在 `TDDifficultySystem`，勿在卡片寫第二套數值。`main.js` 依 `LayoutSystem.resolved()` 把**同一批** `[data-build-type]` 按鈕在桌機 Drawer 與手機原指揮網格之間搬移，不複製建造資料；分類只用 `data-build-category` 篩選，實際費用／放置仍走 `BuildSystem`。新增建築時同時檢查 Drawer 分類、手機原格、CSS 圖集與 PWA 清單。重開只呼叫 `TDGame.reset()`；再挑戰在重置後重新套用上一局難度／英雄／軍團。沒有資料庫、帳號、權限或遊戲存檔遷移。
 
 ## v0.43.0 維護重點
 
-`CombatUnit` 保有命令與自動攻擊，只新增守軍追擊／回防狀態；新增士兵須由既有 `BuildSystem` 建立，不另開 Auto Battle。索敵類型在 `TargetSelector.STRATEGIES`，新增選項時同步更新 `td.html` 與測試。此次回歸與 v0.41.0 的按需載圖佇列相關，已恢復直接載圖；不要為了進場而繞過完整圖片門檻。測試伺服器的圖片 MIME 也已補正。無帳號、資料庫、權限或存檔遷移。
+當時版本曾有守軍追擊／回防；0.55.0 已移除，請勿照舊恢復。新增士兵仍須由既有 `BuildSystem` 建立，不另開 Auto Battle。索敵類型在 `TargetSelector.STRATEGIES`，新增選項時同步更新 `td.html` 與測試。載圖回歸已修正；不要為了進場而繞過完整圖片門檻。
 
 ## v0.42.0 平衡維護
 
@@ -50,11 +113,11 @@
 
 ## v0.34.0 三十波營運
 
-`WaveCatalog.js` 是 30 波編成與清場獎勵的唯一來源，`WaveSystem.js` 仍只管理 `preparing → spawning → clearing → reward → complete`。後期生命成長採 `1 + 前14波×10.5% + 後15波×7%`；不要在 `TDGame` 硬編波數。調整後至少驗證第 15／16 波曲線銜接、六個 Boss 波總耐久、每三波 Loot、Lv.15、第三十波勝利與四難度的守軍恢復規則。
+`WaveCatalog.js` 是 30 波編成與清場獎勵的唯一來源，`WaveSystem.js` 仍只管理 `preparing → spawning → clearing → reward → complete`。後期生命成長採 `1 + 前14波×10.5% + 後15波×7%`；不要在 `TDGame` 硬編波數。調整後至少驗證第 15／16 波曲線銜接、六個 Boss 波總耐久、每三波 Loot、Lv.15、第三十波勝利與四難度士兵定點規則。
 
 ## v0.33.0 守軍恢復營運參數
 
-四難度的 `unitRecovery` 位於 `src/td/systems/TDDifficultySystem.js`，包含 `enabled`、`time`、`health`、`guard`。`BuildSystem` 只把該策略配置到新舊作戰單位；`CombatUnit` 擁有倒地、倒數與歸隊狀態。永久離場才可觸發 `BuildSystem.onRemove` 回收唯一軍械，負傷期間不得呼叫 `releaseTarget()`。調整後至少驗證裝備單位負傷、倒數、原位置歸隊、戰報統計與災厄永久陣亡。
+這是 v0.33.0 的歷史規則。0.55.0 已移除 `unitRecovery`、士兵倒地／歸隊與永久陣亡；現在 `BuildSystem.onRemove` 只在玩家販售等主動移除流程釋放裝備。勿再引用當時的恢復參數。
 
 > v0.30.0 無新增帳號、後端或資料庫。英雄 XP、戰利品、跨族解鎖與單位熟練皆為單局狀態；重新開始會重置，原本的本機介面偏好與射擊模式紀錄不受影響。
 
@@ -102,7 +165,7 @@ HUD DOM ID 是 `TDGame` 與畫面的相容契約，不可重複或任意改名�
 
 ## v0.23.0 戰鬥生命週期
 
-敵方攻擊集中於 `EnemyCombatSystem.js`；英雄復活參數在 `config.hero`，守軍生命／護甲在 `config.units`。調整 Boss 傷害或冷卻時應同時驗證三個 Boss 波，並保留 1.1 秒可讀前搖。不要讓一般怪取得 `combatRole`，除非波次設計明確需要其反擊。
+敵方攻擊集中於 `EnemyCombatSystem.js`；英雄復活參數在 `config.hero`。`config.units` 舊士兵生命／護甲欄位保留相容但不參與承傷。調整 Boss 傷害或冷卻時應驗證其仍只傷英雄，並保留 1.1 秒可讀前搖。不要讓一般怪取得 `combatRole`，除非波次設計明確需要其反擊。
 
 ## v0.24.0 黃金 15 波
 

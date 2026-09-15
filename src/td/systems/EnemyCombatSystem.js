@@ -3,9 +3,7 @@
   class EnemyCombatSystem{
     damageFor(monster,multiplier){return Math.max(1,Math.round((monster.attackDamage||0)*(1+(monster.wave-1)*.035)*(monster.damageMultiplier||1)*(multiplier||1)));}
     validTargets(monster,hero,defenders){
-      if(monster.combatRole==='siege')return(defenders||[]).filter(unit=>unit.active&&ns.utils.distance(monster,unit)<=monster.attackRange);
-      if(monster.combatRole==='hunter')return hero&&hero.active&&ns.utils.distance(monster,hero)<=monster.attackRange?[hero]:[];
-      if(monster.combatRole==='boss')return[hero].concat(defenders||[]).filter(target=>target&&target.active&&ns.utils.distance(monster,target)<=monster.attackRange);
+      if(monster.combatRole==='siege'||monster.combatRole==='hunter'||monster.combatRole==='boss')return hero&&hero.active&&ns.utils.distance(monster,hero)<=monster.attackRange?[hero]:[];
       return[];
     }
     strike(monster,target,multiplier,hooks,kind){
@@ -27,7 +25,7 @@
     }
     bossAbility(dt,monster,hero,defenders,hooks){
       if(monster.type!=='boss')return false;
-      if(monster.abilityWindup>0){const before=monster.abilityWindup;monster.abilityWindup=Math.max(0,monster.abilityWindup-dt);if(before>0&&monster.abilityWindup<=0){const targets=[hero].concat(defenders||[]).filter(target=>target&&target.active&&ns.utils.distance(monster,target)<=monster.abilityRadius);targets.forEach(target=>this.strike(monster,target,monster.bossPhase===3?1.55:1.25,hooks,'stomp'));monster.abilityCooldown=monster.bossPhase===3?4.5:7;if(hooks&&hooks.onAbility)hooks.onAbility(monster,targets);}return true;}
+      if(monster.abilityWindup>0){const before=monster.abilityWindup;monster.abilityWindup=Math.max(0,monster.abilityWindup-dt);if(before>0&&monster.abilityWindup<=0){const targets=hero&&hero.active&&ns.utils.distance(monster,hero)<=monster.abilityRadius?[hero]:[];targets.forEach(target=>this.strike(monster,target,monster.bossPhase===3?1.55:1.25,hooks,'stomp'));monster.abilityCooldown=monster.bossPhase===3?4.5:7;if(hooks&&hooks.onAbility)hooks.onAbility(monster,targets);}return true;}
       monster.abilityCooldown-=dt;if(monster.abilityCooldown<=0){monster.abilityWindup=1.1;monster.combatTarget=null;monster.attackWindup=0;if(hooks&&hooks.onWarning)hooks.onWarning(monster,'戰爭踐踏',monster.abilityRadius);return true;}return false;
     }
     attack(dt,monster,hero,defenders,hooks){

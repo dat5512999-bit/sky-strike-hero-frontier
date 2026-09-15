@@ -1,5 +1,58 @@
 # 版本更新手冊
 
+## 0.57.0 升級方式
+
+拉取完整 0.57.0 版本後執行 `npm run check` 與 `npm test`，再重新載入 `td.html?v=0.57.0`。本版沒有存檔遷移；舊戰局不保證熱更新，請開始新局。確認離線快取已改為 `sky-strike-v0.57.0`。升級後士兵永久固定，舊版準備期重新部署與 M／A／H／S 操作不再提供。
+
+## 0.55.0 升級方式（2026-09-15，本機）
+
+更新完整專案並執行 `npm test`、`npm run check`。沒有舊戰局存檔遷移；重新載入 `td.html` 後啟動新局，離線版確認快取已更新至 `sky-strike-v0.55.0`。不應只更新 UI 而保留舊 `CombatUnit`／`ArmorySystem`。本輪未推送 GitHub，除非使用者另行要求。
+
+## 0.54.3 商城與技能分區（2026-09-14，本機）
+
+更新後重新載入 `td.html`；無存檔轉換。離線版使用 `sky-strike-v0.54.3` 快取。部署時同步 `td.html`、`td.css`、`td-combat.css`、`TDGame.js`、`package.json`、`sw.js`；僅在使用者明確要求時推送 GitHub。
+
+## 0.54.2 士兵升級圖塊（2026-09-14，本機）
+
+更新後重新載入 `td.html`；無存檔轉換。離線版以 `sky-strike-v0.54.2` 取代舊快取，須同步 `ArtSystem.js`、`package.json`、`sw.js`；僅在使用者明確要求時推送 GitHub。
+
+## 0.54.1 英雄小卡（2026-09-14，本機）
+
+本機更新後重新載入 td.html；無存檔轉換。離線安裝版需讓 sw.js 的 `sky-strike-v0.54.1` 取代舊快取，並同步 td.html、td.css、td-combat.css；只在使用者明確要求時推送 GitHub。
+
+## 0.54.0 小地圖與快捷面板（2026-09-14，本機）
+
+本機重新載入 td.html 即可看到 PC／橫向右上縮圖；無存檔轉換。若日後發布，務必同步新腳本與 sw.js 快取版號，避免舊離線頁面引用不到新檔；只在使用者明確要求時推送 GitHub。
+
+## 0.53.0 戰鬥 HUD（2026-09-14，本機）
+
+本機版重新載入 td.html 即可見新版頂部資源列；沒有存檔轉換。若未來發布，請同步更新四個網頁／樣式檔與 sw.js 快取，僅於使用者明確要求時推送 GitHub。
+
+## 0.52.0 地圖構圖與部署體驗（2026-09-14，本機）
+
+v0.52.0 是本機更新：重新載入 td.html 查看；沒有資料遷移或玩家存檔重置。版本、sw 與新版 PNG 需一起發布，僅在使用者要求時推送 GitHub。驗證細節見 MAP_DEPLOYMENT_V052.md。
+
+## 0.51.0 HUD／地景呈現（2026-09-14，本機）
+
+更新後重載td.html可看到「⌖ 鏡頭」折疊入口和新版技能圖示。保留使用者未提交成果；這次不自動GitHub發布。只換CSS而不更新HTML／ArtSystem會造成錯配。
+
+## 0.50.0 大地圖原型（2026-09-14，本機）
+
+0.50.0是本機大地圖原型；尚未commit／推送。更新後重新載入td.html，開局戰場選單有兩張地圖。若保留舊頁籤，它仍是上一輪程式，請重載。不要將dirty tree整體reset，裡面有多輪未提交成果。
+
+
+## 最新：0.49.0 鏡頭原型
+
+0.49.0更新後執行npm test／npm run check。驗证先拖鏡頭、放大、再建塔及選取；全圖留白不下令；取消拖曳、回英雄、橫直切換後仍能操作。新Camera與main語法檢查已加入check。
+
+## 0.48.0 更新檢查
+
+更新 HTML、main.js、新增的 td-combat.css 與 sw.js 為同一版本。執行 `npm test`、`npm run check` 和 `node --check src/td/main.js`；首次重載檢查上緣 HUD、左下英雄、右下技能、Drawer 與直式回退。此版未推送 GitHub。
+
+## Combat Experience V2 本機續作注意（2026-09-14）
+
+目前工作目錄仍有多批未提交修改，不能對整個目錄 reset／discard。P2 UX Revision 改為合法位置單擊即建造；發布前需將 `td.html`、`td.css`、`src/td/TDGame.js`、`Hero.js`、`config.js`、`main.js`、測試及文件一同核對，並與既有 P0–P2 檔案一起處理，不能只更新單一 UI 檔。先跑 `npm test`（目前 210 項）、`npm run check`，再以 PC、真手機橫式與 Edge 驗證。此續作尚未發布 GitHub，P5 未開始；[進度紀錄](COMBAT_EXPERIENCE_V2_PROGRESS.md)為交接依據。
+
 ## 更新到 v0.44.1
 
 先備份整個專案與未提交修改，再一起更新 `ArtSystem.js`、`sw.js`、`package.json`、測試和文件。無新套件、無存檔遷移；執行 `npm run check`、`npm test`。本機開 `td.html`，選巡林者買弓、觀察待機／移動／攻擊和左右轉向，裝備獅心王弓時確認沒有雙弓。公開 GitHub Pages 仍為 v0.44.0；只有使用者明確要求時才發布 v0.44.1。

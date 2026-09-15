@@ -4,3 +4,8 @@ node_modules/
 
 # Local concept/reference archive; the playable game does not load these files.
 assets/td/reference/
+
+# Local browser profiles used by visual QA. Keep screenshots, never commit browser state/cache.
+artifacts/qa-v057/chrome-cdp/
+artifacts/qa-v057/edge-profile/
+artifacts/qa-v057/chrome-profile*/

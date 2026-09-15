@@ -1,5 +1,68 @@
 # 部署手冊
 
+## 0.57.0 發布單位
+
+0.57.0 必須以完整版本發布：正式地圖 PNG、`maps.js`、Camera／Terrain／MiniMap、Monster／CombatUnit／Wave／Build、TDGame、HTML／CSS、測試與文件不可拆開部署。Service Worker 快取名為 `sky-strike-v0.57.0`，大型美術仍採成功載入後快取，避免安裝階段同步等待。沒有資料庫、API 或伺服器遷移。GitHub Pages 發布後以 `td.html?v=0.57.0` 避免舊網址快取誤判。
+
+發布前驗收：250／250 自動測試、靜態檢查與差異格式檢查通過；2560×1440、1920×1080、1366×768、844×390、932×430 的正式地圖比例、Gameplay Safe Area、入口道路、建造限制與單位旁操作皆完成瀏覽器驗證。發布後仍需在真實手機驗證 PWA 冷啟動、觸控長局與完整 30 Wave。
+
+## 0.55.0 待部署狀態（2026-09-15，本機）
+
+這輪僅修改本機，未推送 GitHub／Pages。日後依使用者明確要求發布時，須連同 `CombatUnit.js`、`Monster.js`、`EnemyCombatSystem.js`、`BuildSystem.js`、`ArmorySystem.js`、`TDGame.js`、相關 UI／文字、測試與文件整批部署；`sw.js` 快取版號為 `sky-strike-v0.55.0`。沒有資料庫或伺服器端遷移。
+
+## 0.54.3 商城與技能分區（2026-09-14，本機）
+
+目前僅本機修改，尚未發布 GitHub／Pages。日後使用者要求部署時，同步 HTML、CSS、`TDGame.js`、`package.json`、`sw.js`；離線快取版號為 `sky-strike-v0.54.3`。無資料庫與伺服器 API 變更。
+
+## 0.54.2 士兵升級圖塊（2026-09-14，本機）
+
+尚未發布至 GitHub／Pages。日後經使用者要求部署時，同步 `ArtSystem.js`、`package.json`、`sw.js` 等既有遊戲檔；新離線快取為 `sky-strike-v0.54.2`。無伺服器 API 或資料庫變更。
+
+## 0.54.1 英雄小卡（2026-09-14，本機）
+
+尚未發布至 GitHub／Pages。日後經使用者要求部署時，同步上傳 td.html、td.css、td-combat.css、package.json、sw.js；新離線快取為 `sky-strike-v0.54.1`。無伺服器 API 或資料庫變更。
+
+## 0.54.0 小地圖與快捷面板（2026-09-14，本機）
+
+本機 0.54.0，尚未部署。未來經授權發布時，須連同新 MiniMapView.js、td.html、td-combat.css、src/td/main.js、src/td/TDGame.js 及 sw.js 上傳；離線快取名稱 sky-strike-v0.54.0。沒有遠端 API 或資料庫部署。
+
+## 0.53.0 戰鬥 HUD（2026-09-14，本機）
+
+本機版 0.53.0，未部署。若日後獲授權發布，需一起部署 td.html、td.css、td-combat.css 與 sw.js；離線快取名稱已更新為 sky-strike-v0.53.0。
+
+## 0.52.0 地圖構圖與部署體驗（2026-09-14，本機）
+
+本機版本 0.52.0，未部署。未來獲授權發布時一併包含新版地表和 sw.js；快取名稱 sky-strike-v0.52.0。仍按既有策略按需快取大型美術，不新增同步等待所有圖片的安裝步驟。
+
+## 0.51.0 HUD／地景呈現（2026-09-14，本機）
+
+本機0.51.0未commit／未push。sw cache版本0.51.0；兩張新assets/td圖遵守原延後圖片快取方式，不加入同步PRECACHE。發布時須整套HTML/CSS/JS/兩張PNG一致部署。
+
+## 0.50.0 大地圖原型（2026-09-14，本機）
+
+本機0.50.0未推送GitHub。sw.js cache版本0.50.0新增maps.js與FrontierTerrain.js；發布時需和HTML／JS／CSS一致部署。此次未增加外部依賴或資源來源。
+
+
+## 最新：0.49.0 鏡頭原型
+
+0.49.0的Camera腳本已加入Service Worker殼快取，CACHE_NAME為sky-strike-v0.49.0。僅本機測試，未推送GitHub／Pages。發布前需再次確認腳本與CSS均存在。
+
+## 0.48.0 部署差異
+
+靜態部署需包含 `td-combat.css`，已加入 Service Worker 的殼快取。快取名稱為 `sky-strike-v0.48.0`。此次只在本機驗收，沒有推送 GitHub／Pages；發布需另外取得使用者指示。
+
+## v0.47.0 本機待發布
+
+靜態檔照舊由 GitHub Pages／任意靜態伺服器提供，無資料庫或 API 部署。發布前跑 `npm test`、`npm run check`，確認 `td.html`、`td.css`、`src/td` 腳本與 `sw.js` 同版，再以真手機橫式測「選卡→合法點位單擊建造」、長按詳情及安全區；目前真機測試未完成。Service Worker 快取名稱仍為 `sky-strike-v0.47.0` 待發布基線，不能由版號推論 P2/P3/P4 已上線。這次沒有推送 GitHub；僅在使用者明確要求更新時才發布。
+
+## v0.46.0 待發布檢查
+
+目前只在本機，**未推送 GitHub**。收到使用者明確發布要求後，應將 v0.45.0 尚未發布的英雄 × 軍團改動與本版塔定位檔案一起提交，不能只上傳 `src/td/config.js`；至少包含 `TDGame.js`、`Building.js`、`CombatUnit.js`、`BuildSystem.js`、`TowerSkillSystem.js`、`TowerEvolutionSystem.js`、`tests/td-tower-identity.test.js`、文件、`package.json`、`sw.js`。先跑 `npm run check`、`npm test`，部署後在 PC／手機實測建造卡、戰鼓不疊加、弩砲索敵、兩種召喚塔，並確認 `sky-strike-v0.46.0` 快取已生效。無環境變數、資料庫或 API 遷移。
+
+## v0.45.0 待發布檢查
+
+目前只在本機，**未推送 GitHub**。未來經使用者明確要求發布時，應整批提交 `td.html`、`td.css`、`src/td/main.js`、本次更動的 TD 系統／測試／文件、`package.json` 與 `sw.js`；不可只上傳 HTML，否則會出現選角與建造資料版本不一致。先執行 `npm run check`、`npm test`，再驗三位英雄 × 三個軍團、重開、第三波軍械、PC／手機介面及 Console。Pages 生效後關閉舊分頁重開，確認 Service Worker 快取為 `sky-strike-v0.45.0`。不需環境變數或資料庫遷移。
+
 ## v0.44.2 發布檢查
 
 本版依使用者要求推送 GitHub，包含 `Monster.js`、`TDGame.js`、`Projectile.js`、`CombatFeedbackSystem.js`、`sw.js`、v0.44.1 換弓修復、版本、測試與文件；Service Worker 快取名稱為 `sky-strike-v0.44.2`。Pages 更新後關閉舊分頁重開，再確認 12／20／30 怪群、Boss 血條、手機與 Console。截圖測試頁及 PNG 只作 QA，不是遊戲入口。
@@ -54,7 +117,7 @@ v0.44.0 已在使用者明確要求後推送並完成 GitHub Pages 部署。該�
 
 ## v0.33.0 發布檢查
 
-靜態部署方式不變。上線前執行 `npm run check` 與 `npm test`，並確認 `sw.js` 使用 `sky-strike-v0.33.0`。在 HTTP／GitHub Pages 環境至少以標準難度部署一名守軍，再驗證負傷後裝備仍由原單位持有；另以災厄驗證永久陣亡會釋放軍械。
+此段為 v0.33.0 歷史發布檢查，不能用於 0.55.0。現行上線前應執行 `npm run check` 與 `npm test`、確認 `sw.js` 使用 `sky-strike-v0.55.0`，再驗證士兵定點、同兵種可重複部署、每名只裝一件，且換裝或販售會釋放軍械。
 
 > v0.30.0 部署時必須包含 `FactionSystem.js`、`LootSystem.js`、`TowerEvolutionSystem.js`、`faction-structures-v1.png`、三種新守軍圖集與 `war-wolf-actions-v1.png`。`sw.js` 快取版本已升至 `sky-strike-v0.30.0`。
 
@@ -110,7 +173,7 @@ v0.17.0 快取為 sky-strike-v0.17.0，必須包含 hero-actions-v1.png。同步
 
 ## v0.23.0 戰鬥生命週期
 
-最新快取為 `sky-strike-v0.23.0`。發布時必須包含 `EnemyCombatSystem.js`、Hero、CombatUnit、Monster、BuildSystem、CombatFeedbackSystem、TDGame、td.html 與 sw.js。發布後重新整理確認新版 Service Worker 接管，再以三倍速驗證守軍 HP、Boss 紅圈與英雄復活倒數。
+此為 v0.23.0 的歷史快取紀錄；0.55.0 的快取名稱請以本文件頁首與 `sw.js` 為準。發布時仍須包含 `EnemyCombatSystem.js`、Hero、CombatUnit、Monster、BuildSystem、CombatFeedbackSystem、TDGame、td.html 與 sw.js。發布後以三倍速驗證士兵定點、Boss 紅圈與英雄復活倒數。
 
 ## v0.24.0 黃金 15 波
 

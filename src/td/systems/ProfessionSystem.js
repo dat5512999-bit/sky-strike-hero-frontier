@@ -1,9 +1,9 @@
 (function(ns){
   'use strict';
   const DEFINITIONS={
-    hunter:{name:'王國獵手',title:'直線壓制',description:'射程最遠，升級後可同時狙擊多個目標。',color:'#e6c56c'},
-    arcanist:{name:'奧術學院',title:'範圍法術',description:'以火焰濺射重甲軍團，但對秘法生物較弱。',color:'#ff8a52'},
-    rogue:{name:'暗影行會',title:'偷竊經濟',description:'攻速快，擊殺可奪取額外金幣。',color:'#c884df'}
+    hunter:{name:'王國巡林者',title:'英雄 · 遠程壓制',description:'遠程穿刺、陷阱緩速與戰狼協戰。',color:'#e6c56c'},
+    arcanist:{name:'銀葉守護者',title:'英雄 · 法術控場',description:'冰霜新星、連鎖雷擊與元素召喚。',color:'#70e7ff'},
+    rogue:{name:'暮影刀鋒',title:'英雄 · 近戰突襲',description:'閃擊、持續傷害毒霧與分身。',color:'#c884df'}
   };
   class ProfessionSystem{
     constructor(){this.selected=null;}

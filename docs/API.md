@@ -1,5 +1,74 @@
 # API 文件（內部模組介面）
 
+## 0.57.0 Battlefield API 契約
+
+- `TowerFrontier.maps.apply(id)` 將同一地圖資料套用到 `ns.config`；正式 `beginner` 提供 `width`、`height`、`asset`、`path`、`spawn`、`gate`、`heroSpawn`、`roadClearance`、`buildAreas`、`safeArea` 與 `camera`。
+- `BattlefieldCamera` 只做等比例世界／螢幕座標轉換、縮放和平移；不修改世界尺寸、路線或戰鬥資料。
+- `BuildSystem.placementIssue(x,y,kind)` 依序回傳 `boundary`、`road`、`terrain`、`occupied` 或 `null`；士兵與塔使用同一道路禁建和草地區域。
+- `CombatUnit.issueCommand()`、`setTarget()`、`followPath()` 固定回傳 `false`；`update()` 只進行固定位置索敵與攻擊。`Hero.setTarget()` 保持可移動。
+- `Monster.visualPosition()` 直接回傳目前 `{x,y}`；0.57.0 不再套用 Visual Lane 或 Stagger，攻擊、AoE 與 Chain 仍共用該邏輯座標。
+
+## 0.55.0 士兵與軍械介面（2026-09-15，本機）
+
+`CombatUnit.update(dt, monsters, projectiles)` 只在部署位置射程內索敵與射擊；`takeDamage()` 對士兵回傳 0。這是 0.55.0 歷史介面，當時 `TDGame.commandSelected(x, y)` 尚允許準備期重新部署；0.57.0 起固定回傳 `false`。`BuildSystem.placeQueued()` 每次建立新 `CombatUnit`，不設兵種數量硬上限。`ArmorySystem.obtain(itemId)` 可收同名裝備副本（內部 ID 如 `war-drum#2`）；`equip(copyId, target)` 對士兵保證只保留一件、不可共享，同名不同副本可給不同個體；`unequip(slot, target)` 與 `releaseTarget(target)` 把持有關係解除，但副本仍在 `owned`。英雄原有多欄位裝備規則不變。無 HTTP API。
+
+## 0.54.3 商城與技能分區（2026-09-14，本機）
+
+`td-shop-open` ID 與 `TDGame` 原點擊／R 鍵處理不變。`td-ultimate` 新增 `.skill-cooldown` 顯示欄，由原 UI 更新流程寫入剩餘秒數；技能名稱文字只寫入可見名稱。無 HTTP API 變更。
+
+## 0.54.2 士兵升級圖塊（2026-09-14，本機）
+
+`ArtSystem.drawCombatUnit(ctx, unit)` 與 `drawRank(ctx, x, y, level, color, building, type)` 參數及回傳值不變；`building=false` 只繪腳邊標記，不再疊身體多邊形。無 HTTP API 變更。
+
+## 0.54.1 英雄小卡（2026-09-14，本機）
+
+沒有新增 HTTP 或內部模組 API。`TDGame.updateUi` 繼續更新原 `td-hero-hp-*`、`td-hero-mp-*`、`td-hero-xp-*`、`td-stat-*` 與 `td-hero-weapon` 節點；僅將次要節點移入原生 `<details>`，事件與資料契約不變。
+
+## 0.54.0 小地圖與快捷面板（2026-09-14，本機）
+
+無新 HTTP API。MiniMapView(button).attach(game) 綁定既有 BattlefieldCamera.focus；draw(game) 每約 100ms 從現有地表快取、ns.config.path、game.monsters、game.build.towers 與 game.hero 畫縮圖；static fit／point 僅做世界與縮圖座標換算，不更改任何遊戲資料。
+
+## 0.53.0 戰鬥 HUD（2026-09-14，本機）
+
+無新 HTTP 或 JavaScript API。td-gold／td-lumber／td-merit／td-health、td-pause、td-menu-open 仍是既有 DOM 介面，既有 updateUi 與事件監聽不變；resource-icon 僅呈現。
+
+## 0.52.0 地圖構圖與部署體驗（2026-09-14，本機）
+
+BuildSystem.placementIssue(x,y,kind) 回傳 null／boundary／road／occupied；canPlaceAt 共用它，原規則不變。placementMessage 提供人類可讀說明。FrontierTerrain.draw(ctx,art,build?) 僅在 build.pending 時畫部署提示。maps.definitions.frontier.openingFocus／zones 都是呈現資料，不是碰撞或增益；無新 HTTP API。
+
+## 0.51.0 HUD／地景呈現（2026-09-14，本機）
+
+僅呈現欄位：ArtSystem.frontierGround／skillIcons（原load與重試）；body.dataset.heroClass／skillArt提供CSS技能圖集定位。FrontierTerrain依ground是否ready決定升級快取；沒有新增HTTP API或Combat接口。
+
+## 0.50.0 大地圖原型（2026-09-14，本機）
+
+本機介面：TowerFrontier.maps.definitions / length(points) / apply(id)。正式UI入口 TDGame.chooseMap(id) 僅開局可呼叫，重建既有 PathSystem／NavigationSystem、更新 Hero 出生點與 Camera 尺寸；不要在戰鬥中直接 maps.apply。沒有新增網路 API。FrontierTerrain.draw(ctx,art) 延遲建立靜態地景快取。
+
+
+## 最新：0.49.0 鏡頭原型
+
+0.49.0：BattlefieldCamera 提供 resize、worldToScreen／screenToWorld、contains、pan、focus、changeZoom、showAll、reset，以及 begin／end 繪圖邊界。Camera.attach只接呈現輸入，不持有戰鬥資料。TDGame.canvasPoint 在鏡頭啟用時回傳世界座標；BuildSystem、TargetSelector與Damage介面未改。
+
+## 0.48.0 呈現介面
+
+`main.js` 的 `syncEdgePresentation()` 依既有 LayoutSystem 切換 `body.edge-combat`；`data-edge-orders` 僅控制原指令格可見性。沒有新增公開 API、網路端點或第二套 Build／Combat。`td-combat.css` 只對 battle/result 狀態生效，直式仍使用原布局。
+
+## v0.47.0 介面與放置預覽
+
+`LayoutSystem(root, storage, viewport)` 的 `viewport()` 可回傳舊式寬度數字，或 `{width, height, coarse}`；`resolved()` 仍回傳 `desktop`／`mobile`，`apply()` 額外寫入 `data-combat-orientation`。`BuildSystem.queue(type,kind)` 僅記待放物；`updatePointer(x,y)` 更新視覺預覽，`stagePlacement(x,y)` 暫存座標及合法性；UI 對合法 Canvas 點位立即呼叫 `TDGame.confirmPlacement()`。`canConfirm(economy)` 重查放置與資源；`BuildSystem.confirmPlacement(economy)` 成功時委派原 `placeQueued(x,y,economy)`，失敗不扣款；`cancel()` 清除待放與預覽。`placeQueued()` 保留供既有內部呼叫與測試，UI 不再直接呼叫。建造卡 `config.units/buildings.role` 為短定位，`TDGame.buildDetailDescription()` 提供長描述；`Hero.castNova()` 沒有有效敵人時回傳 `false` 且不耗 CD。這些都是本機模組介面，沒有 HTTP API。
+
+## v0.46.0 塔定位介面
+
+- `BuildSystem.applyTowerSupport()` 在單位更新前計算每名守軍受到的最高 `allyHaste`，離開半徑或出售塔後下次呼叫即歸零；不作用於英雄或召喚物。`CombatUnit.config().interval` 以 `原間隔 / (1 + supportHaste)` 計算，讓卡面百分比等於實際攻速增幅。
+- `config.buildings` 的 `role` 供既有建造卡顯示；`priorityTargets` 僅讓獅翼弩砲優先處理指定敵類。`summonInterval/CapBase/Duration/Damage/Range/Speed/LeashBonus` 由 `TowerSkillSystem.fire()` 傳給既有 `Summon`；未擴張 Projectile 或傷害 API。
+- `TowerEvolutionSystem.apply()` 支援分支上的 `allyHaste/allyHasteRadius/summonDuration`，其餘塔、經濟與儲存格式不變。這些都是本機 JS 內部介面，沒有 HTTP API。
+
+## v0.45.0 開局組合介面
+
+- `TDGame.selectOpeningProfession(heroId)` 選英雄；`selectOpeningFaction(factionId)` 選軍團；`chooseProfession(heroId, factionId)` 需兩者皆有效且英雄核心圖片就緒才進場。沿用舊方法名稱，語意中的 `profession` 現為英雄 ID。
+- `ProfessionSystem.selected`／`Hero.classType` 負責英雄；`FactionSystem.selected`／`available(kind)`／`allows(kind,id)` 負責建造權限；`TDGame.lastRun={difficulty,profession,faction}` 供同組合重開。`BattleReportSystem.run` 增加 `faction/factionName`。
+- `LootSystem.createOffers(wave, heroId, factionId)`：第三波保底軍械依英雄；軍團相關排除規則依軍團；省略第三參數時保留舊同 ID 行為。`TowerEvolutionSystem` 的 `burstRadius` 只放大特定第 4 擊爆發，沒有新 Effect Engine。無 HTTP API、資料庫或資料遷移。
+
 ## v0.44.2 敵軍繪製介面
 
 - `Monster.visualPosition()` 回傳 `{x,y}` 的純繪製座標；`x/y/index` 仍為戰鬥座標。`visualLane`、`visualStagger` 為建構時固定的視覺參數。
@@ -81,13 +150,9 @@ TDDifficultySystem.summary(totalWaves) 回傳關卡數、城門耐久、首末�
 - `Monster` 使用分段線性生命倍率；第 1～15 波保持既有斜率，第 16～30 波降低斜率。
 - `TDGame.end()` 與 `wavePreviewLabel()` 從 `catalog.total()` 取得總波數，不再硬編 15。
 
-## v0.33.0 守軍負傷介面
+## v0.33.0 守軍負傷介面（歷史，0.55.0 已移除）
 
-- `TDDifficultySystem.current().unitRecovery`：回傳該難度的 `enabled`、`time`、`health`、`guard`。
-- `BuildSystem.setUnitRecovery(policy)`：把難度策略套用到現有與之後部署的作戰單位。
-- `BuildSystem.recoveringUnits()`：回傳暫離戰場、等待歸隊的守軍。
-- `CombatUnit.setRecoveryPolicy(policy)`／`updateRecovery(dt)`：管理倒地後恢復，不改寫等級、擊殺熟練、裝備或投入成本。
-- `BattleReportSystem.recordDefeat(target)`：依 `target.recovering` 分流至 `unitDowns` 或 `unitLosses`。
+`unitRecovery`、`setUnitRecovery()`、`recoveringUnits()`、`setRecoveryPolicy()`、`updateRecovery()` 與士兵戰敗移除均不再提供。現行 `BattleReportSystem.recordDefeat(target)` 只統計英雄倒下；士兵使用頁首 0.55.0 的定點與單件裝備介面。
 
 所有模組掛載於全域 `SkyStrike` 命名空間，以支援直接由 `file://` 開啟。
 
@@ -121,7 +186,7 @@ TDDifficultySystem.summary(totalWaves) 回傳關卡數、城門耐久、首末�
 | 模組 | 主要介面 | 責任 |
 |---|---|---|
 | `Monster` | `update`、`takeDamage`、`applySlow`、`progress` | 路徑移動、HP、護甲、緩速與漏怪 |
-| `CombatUnit` | `issueCommand`、`stop`、`holdPosition`、`update`、`upgrade` | 執行移動／攻擊移動／固守訂單、四態動畫、索敵與升級 |
+| `CombatUnit` | `issueCommand`、`setTarget`、`update`、`upgrade` | 前兩個相容入口拒絕移動；`update` 只做固定位置索敵／攻擊，`upgrade` 保留個體成長 |
 | `Building` | `config`、`update`、`upgrade`、`sellValue` | 固定弩塔／寒霜塔／火砲塔的索敵與攻擊 |
 | `Projectile` | `update`、`hit` | 單體／範圍傷害與緩速效果 |
 | `Hero` | `setTarget`、`update`、`castNova` | 玩家移動、自動攻擊、攔截與主動技能 |
@@ -169,7 +234,7 @@ Monster新增walkDistance、state、frame、facing、hitTime、deathTime；updat
 
 ## v0.23.0 戰鬥生命週期
 
-`Hero.takeDamage(amount)` 回傳實際傷害，倒下後由 `updateDowned(dt)` 計時復活。`CombatUnit.takeDamage(amount)` 套用護甲並在歸零時退出戰鬥；`BuildSystem.removeDefeated()` 清除完成死亡動畫的單位。`EnemyCombatSystem.update(dt, monsters, hero, defenders, hooks)` 集中處理敵軍攻擊、Boss 階段、增援與踐踏前搖；hooks 只通知 UI 與回饋，不修改經濟。
+`Hero.takeDamage(amount)` 回傳實際傷害，倒下後由 `updateDowned(dt)` 計時復活。`CombatUnit.takeDamage()` 固定回傳 0，士兵不承傷、不死亡；敵軍攻擊目標只包含英雄。`EnemyCombatSystem.update(dt, monsters, hero, defenders, hooks)` 保留既有參數相容並集中處理敵軍攻擊、Boss 階段、增援與踐踏前搖；hooks 只通知 UI 與回饋，不修改經濟。
 
 ## v0.24.0 黃金 15 波
 

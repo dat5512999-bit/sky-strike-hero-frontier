@@ -1,0 +1,421 @@
+/* Edge HUD V1. Presentation only; world dimensions come from the chosen map.
+   Portrait keeps td.css. Every control remains the original DOM/game handler. */
+.hero-more { grid-column:1/-1; }
+.camera-controls { display:none; }
+.td-minimap,.td-quick-rail { display:none; }
+.selection-actions { position:absolute; z-index:19; display:flex; gap:4px; padding:4px; border:1px solid #b6934d; border-radius:5px; background:linear-gradient(145deg,#162421f4,#070e0ff7); box-shadow:0 8px 24px #000c,inset 0 0 0 1px #efd88a18; transform-origin:bottom left; animation:selection-actions-in .14s ease-out; }
+.selection-actions button { display:grid; grid-template-columns:17px auto; align-items:center; gap:3px; min-width:62px; min-height:34px; padding:3px 6px; border-color:#74633d; background:linear-gradient(#2b3529,#111917); }
+.selection-actions button b { color:#f0cf79; font-size:15px; line-height:1; }
+.selection-actions button span { color:#e8dfc5; font-size:10px; white-space:nowrap; }
+.selection-actions button:not(:disabled):hover { border-color:#f1d47d; background:linear-gradient(#4a5439,#18231d); }
+.selection-actions button:disabled { opacity:.48; }
+@keyframes selection-actions-in { from { opacity:0; transform:translateY(5px) scale(.96); } to { opacity:1; transform:none; } }
+body.edge-combat[data-combat-ui="edge"][data-camera="on"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-game { position:absolute; inset:0; width:100%; height:100%; max-height:100%; aspect-ratio:auto; object-fit:fill; box-shadow:none; }
+body.edge-combat[data-camera="on"] .camera-controls { display:block; position:absolute; z-index:14; top:112px; left:max(14px,env(safe-area-inset-left)); max-width:calc(100% - 28px); padding:7px; border:1px solid #827047; background:#081413ed; box-shadow:0 5px 20px #0008; }
+.camera-controls>div { display:flex; gap:4px; flex-wrap:wrap; }
+.camera-controls button { min-height:36px; padding:5px 9px; font-size:11px; }
+.camera-controls small { display:block; margin-top:5px; color:#c7cfb4; font-size:10px; }
+.camera-controls button[aria-pressed="true"] { border-color:#ffe399; background:#524526; }
+body.edge-combat[data-camera="on"] #td-game.camera-inspect { cursor:grab; }
+body.edge-combat[data-camera="on"] #td-game.camera-inspect:active { cursor:grabbing; }
+@media(max-height:600px) {
+  .selection-actions { gap:2px; padding:3px; }
+  .selection-actions button { min-width:54px; min-height:30px; padding:2px 4px; }
+  .selection-actions button span { font-size:9px; }
+  body.edge-combat[data-camera="on"] .camera-controls { top:96px; left:8px; width:auto; max-width:calc(100% - 180px); padding:4px; }
+  .camera-controls>div { gap:3px; }
+  .camera-controls button { min-height:30px; padding:3px 6px; font-size:10px; }
+  .camera-controls small { font-size:9px; }
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header .resource:nth-child(n) { grid-column:auto; grid-row:auto; }
+.hero-more summary { cursor:pointer; color:#c9ba8b; padding:5px; font-size:11px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more[open] .hero-stats { display:grid; grid-template-columns:1fr 1fr; padding:4px; font-size:10px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) { --edge:14px; --hero-width:260px; --skills-width:350px; padding:0; overflow:hidden; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-shell { position:relative; display:block; width:100%; max-width:none; height:100svh; min-height:0; margin:0; padding:0; border:0; overflow:hidden; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-stage { position:absolute; inset:0; display:grid; place-items:center; width:100%; height:100%; min-height:0; aspect-ratio:auto; padding:0; border:0; overflow:hidden; background:radial-gradient(ellipse at center,#17201a44,#030a0bea 88%),url('assets/td/human-td-battlefield-v2.png') center/cover; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-game { display:block; width:min(100vw,100svh); height:auto; max-width:100%; max-height:none; aspect-ratio:1; object-fit:contain; border:0; box-shadow:0 0 80px 35px #030909; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-wave-info { position:absolute; z-index:10; top:var(--edge); margin:0; border:1px solid #827047; background:linear-gradient(140deg,#172322f5,#070f11f2); box-shadow:0 5px 22px #0009,inset 0 0 0 3px #c4a35a0b; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header { right:var(--edge); left:auto; width:430px; height:52px; min-height:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)) 44px; padding:0; gap:0; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header .td-brand,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>a,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-layout-picker { display:none; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .resource { min-width:0; padding:5px 8px; border:0; border-right:1px solid #78623855; text-align:center; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .resource small { display:block; font-size:9px; letter-spacing:1px; color:#acb6a5; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .resource strong { font-size:19px; line-height:1.3; white-space:nowrap; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-menu-open { position:static; min-width:0; width:100%; height:100%; min-height:44px; border:0; font-size:23px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-wave-info { left:var(--edge); right:auto; width:390px; height:83px; display:grid; grid-template-columns:72px 1fr; padding:8px; gap:10px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .wave-index { padding:0 10px 0 0; display:flex; flex-direction:column; align-items:center; justify-content:center; border-right:1px solid #78623877; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .wave-index small { writing-mode:horizontal-tb; font-size:9px; letter-spacing:2px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .wave-index strong { font-size:30px; line-height:1.1; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-wave-copy { min-width:0; display:flex; flex-direction:column; justify-content:center; gap:5px; overflow:hidden; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-wave-status { font-size:14px; line-height:1.3; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-wave-preview { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; font-size:10px; line-height:1.5; color:#aeb9a8; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls { position:fixed; top:82px; right:var(--edge); display:grid; grid-template-columns:1fr 1fr; width:158px; gap:5px; padding:6px; background:#081211ef; border:1px solid #827047; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls button { min-height:40px; padding:4px; font-size:12px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .speed-picker { grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-wave-button { grid-column:1/-1; width:auto; min-width:0; white-space:normal; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-command { position:absolute; z-index:12; right:var(--edge); bottom:var(--edge); top:auto; left:auto; display:flex; flex-direction:column; gap:8px; width:var(--skills-width); height:auto; max-height:none; min-height:0; padding:0; overflow:visible; border:0; background:none; box-shadow:none; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-command>.panel-heading,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-command>.panel-section-label,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-army-summary,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-shell>footer { display:none; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-profile { position:fixed; left:var(--edge); bottom:86px; display:grid; grid-template-columns:1fr 38px; gap:6px; width:var(--hero-width); padding:10px; background:linear-gradient(140deg,#192623f5,#071012f5); border:1px solid #9e8550; box-shadow:0 8px 30px #000a; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select { display:flex; align-items:center; gap:8px; padding:0; min-height:60px; min-width:0; border:0; background:transparent; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-face { display:block; flex:0 0 52px; width:52px; height:60px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select strong { font-size:15px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select small { font-size:10px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-select-state { display:none; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-rank { padding:5px 0; min-height:0; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-rank strong { font-size:24px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals { display:grid; grid-column:1/-1; gap:4px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label { font-size:10px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals i { height:5px; margin-top:2px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-stats { display:none; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-equipment { display:flex; grid-column:1/-1; min-height:30px; padding:4px; gap:5px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-equipment i { width:25px; height:25px; flex:0 0 25px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-equipment small { display:none; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-equipment b,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-equipment em { font-size:10px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-tabs { position:fixed; left:var(--edge); bottom:var(--edge); width:var(--hero-width); display:grid!important; grid-template-columns:1fr 1fr; gap:6px; padding:0; background:none; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-tabs button { min-height:58px; padding:6px; font-size:14px; border-color:#a58b52; background:linear-gradient(145deg,#344032,#131d1b); }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-tabs [data-command-tab="build"]::before { content:'♜'; display:block; color:#f4d792; font-size:22px; line-height:1; margin-bottom:4px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-tabs [data-command-tab="orders"]::before { content:'⚑'; display:block; color:#c4d7c4; font-size:22px; line-height:1; margin-bottom:4px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock { order:3; display:grid!important; grid-template-columns:repeat(4,minmax(0,1fr)); gap:5px; padding:8px; border:1px solid #8e794b; background:linear-gradient(#152322ee,#071010f5); box-shadow:0 8px 24px #0008; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button { grid-column:auto; display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:82px; height:82px; min-width:0; padding:6px 2px 4px; border:1px solid #7d8c78; background:radial-gradient(ellipse at 50% 35%,#3b829488,#172d37 50%,#080f19); }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button b { font-size:29px; line-height:1.15; color:#b1e9f3; text-shadow:0 0 15px #56c5ff; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button span { font-size:10px; line-height:1.3; text-align:center; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .ultimate-button { border-color:#a886c6; background:radial-gradient(ellipse at 50% 35%,#8549b488,#291b3d 50%,#110b1d); }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .ultimate-button b { color:#e6c0ff; text-shadow:0 0 15px #c271ff; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details { order:0; display:block!important; padding:0; background:#091414f5; border:1px solid #7e6b43; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details summary { padding:10px; min-height:40px; color:#e9d298; font-size:12px; cursor:pointer; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details[open] { max-height:min(360px,55svh); overflow:auto; padding:0 8px 8px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details .selection-card { padding:6px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-command>.command-grid { order:1; display:none!important; grid-template-columns:repeat(4,minmax(0,1fr)); padding:8px; border:1px solid #827047; background:#091414f5; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"])[data-edge-orders="true"] .td-command>.command-grid { display:grid!important; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-grid .order-action { min-height:55px; padding:4px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-grid .order-action b { font-size:21px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-grid .order-action span { font-size:10px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer { z-index:16; left:var(--edge); right:auto; bottom:86px; transform:none; width:min(790px,calc(100vw - var(--skills-width) - 42px)); height:auto; max-height:none; padding:10px; background:linear-gradient(145deg,#162623f7,#071013fa); border:1px solid #b69a58; box-shadow:0 10px 35px #000b; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]):has(.build-drawer:not([hidden])) .hero-profile { visibility:hidden; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading { gap:8px; padding-bottom:4px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading strong { font-size:15px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading span { font-size:10px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading button { min-height:32px; width:32px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-filters { gap:5px; padding:4px 0 8px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-filters button { min-height:32px; padding:4px 13px; font-size:12px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid { display:flex; gap:7px; overflow-x:auto; overflow-y:hidden; padding:0 0 6px; scrollbar-color:#9b8250 #091412; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] { display:grid; flex:0 0 126px; grid-template-columns:1fr; place-items:center; place-content:center; gap:3px; height:137px; min-height:137px; padding:5px; text-align:center; background:radial-gradient(ellipse at 50% 30%,#43524566,#10201c 65%,#08110f); }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]::before { grid-row:auto; width:66px; height:65px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] b { font-size:12px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] span,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] small { font-size:10px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .placement-actions { left:var(--edge); right:auto; bottom:86px; width:var(--hero-width); }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]):has(.placement-actions:not([hidden])) .hero-profile { visibility:hidden; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) button:focus-visible,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) summary:focus-visible { outline:2px solid #ffe6a2; outline-offset:3px; }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) button:not(:disabled):hover { border-color:#efcf81; filter:brightness(1.18); }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) button:not(:disabled):active { filter:brightness(.85); }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) button:disabled { filter:saturate(.4); }
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) [hidden] { display:none!important; }
+@media (max-height:600px) {
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) { --edge:8px; --hero-width:190px; --skills-width:220px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header { width:250px; height:44px; grid-template-columns:repeat(4,minmax(0,1fr)) 36px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .resource { padding:3px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .resource strong { font-size:14px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .resource small { font-size:8px; letter-spacing:0; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-wave-info { width:200px; height:80px; grid-template-columns:38px 1fr; gap:5px; padding:6px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .wave-index { padding-right:5px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .wave-index strong { font-size:24px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-wave-status { font-size:11px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-wave-preview { font-size:9px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls { top:60px; width:150px; gap:3px; padding:4px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls button { min-height:30px; font-size:10px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-profile { bottom:66px; padding:6px; gap:3px; grid-template-columns:1fr 28px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select { min-height:42px; gap:4px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-face { width:36px; height:42px; flex-basis:36px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select strong { font-size:12px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select small { font-size:8px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-rank strong { font-size:18px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals { gap:2px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label { font-size:8px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-equipment { min-height:22px; padding:2px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-equipment i { width:18px; height:18px; flex-basis:18px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-tabs button { min-height:48px; font-size:11px; padding:3px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-tabs button::before { font-size:18px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock { padding:4px; gap:3px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button { min-height:58px; height:58px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button b { font-size:21px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button span { font-size:8px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details summary { min-height:32px; padding:7px; font-size:10px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details[open] { max-height:210px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-command { gap:4px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-grid .order-action { min-height:40px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-grid .order-action b { font-size:15px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer { bottom:66px; width:calc(100vw - 16px); padding:6px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading { padding:0; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading strong { font-size:12px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-filters { padding:3px 0; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-filters button { min-height:30px; font-size:10px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] { flex-basis:114px; height:103px; min-height:103px; gap:1px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]::before { width:44px; height:42px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] b { font-size:11px; }
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .placement-actions { bottom:66px; }
+}
+.map-choice{display:grid;gap:6px;max-width:540px;margin:12px auto;color:#dbc48b;text-align:left;font-size:13px;}
+.map-choice select{width:100%;padding:9px;background:#101b18;color:#f4dfac;border:1px solid #8f794b;border-radius:3px;}
+.map-choice small{font-size:11px;color:#aebcae;line-height:1.5;}
+/* V0.51: compact perimeter HUD; no changes to world/input coordinates. */
+.wave-intel{position:relative;}
+.wave-intel summary{cursor:pointer;font-size:11px;color:#c6b384;min-height:22px;line-height:22px;}
+.camera-controls summary{cursor:pointer;padding:8px 12px;min-height:36px;list-style:none;color:#ead59e;font-size:12px;}
+.camera-controls summary::-webkit-details-marker{display:none;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header{height:48px;width:350px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .resource{padding:4px 6px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .resource strong{font-size:17px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-wave-info{width:292px;height:54px;grid-template-columns:52px 1fr;gap:9px;padding:5px 8px;overflow:visible;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .wave-index strong{font-size:25px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-wave-copy{overflow:visible;gap:0;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-wave-status{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:212px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .wave-intel[open] #td-wave-preview{position:absolute;top:26px;left:-62px;width:292px;display:block;padding:12px;background:#091311f5;border:1px solid #897144;box-shadow:0 6px 20px #0008;font-size:12px;line-height:1.6;z-index:30;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls{top:var(--edge);left:calc(50% - 227px);right:auto;width:454px;height:48px;padding:4px;display:flex;align-items:stretch;gap:4px;border-color:#82704788;background:#0c1615ee;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls button{min-height:38px;flex:0 0 38px;padding:4px;font-size:11px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .speed-picker{display:flex;gap:2px;flex:0 0 auto;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-wave-button{flex:1;min-width:105px;white-space:nowrap;font-size:11px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls{left:auto;right:var(--edge);top:72px;width:auto;max-width:320px;padding:0;border-color:#82704788;background:#0b1514e8;box-shadow:0 4px 16px #0005;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls[open]{width:304px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls>div{padding:0 8px 6px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls small{padding:0 8px 8px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls:has(#td-camera-inspect[aria-pressed="true"]) summary{color:#9eefd3;border-bottom:1px solid #72c5a455;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) {--hero-width:244px;--skills-width:352px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-profile{bottom:74px;padding:8px;gap:4px;background:linear-gradient(150deg,#1c2824f5,#071010f5);border:1px solid #9b834c88;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select{min-height:48px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-face{width:44px;height:48px;flex-basis:44px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select strong{font-size:14px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals{grid-template-columns:1fr 1fr;gap:5px 10px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label:last-child{grid-column:1/-1;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-equipment{min-height:24px;padding:2px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more summary{padding:1px 2px;font-size:10px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-tabs button{min-height:48px;font-size:12px;display:flex;align-items:center;justify-content:center;gap:8px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-tabs button::before{display:inline;margin:0;font-size:21px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-command{gap:5px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details summary{min-height:30px;padding:6px 10px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock{padding:6px;gap:5px;border-color:#9b834c88;background:linear-gradient(150deg,#1c2824f5,#071010f5);}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button{height:76px;min-height:76px;border-color:#8a795366;border-radius:3px;background:radial-gradient(ellipse at 50% 30%,#356d6580,#132822 60%,#09120f);box-shadow:inset 0 0 0 2px #02070677;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button b{font-size:30px;color:#c1e3c5;text-shadow:0 0 14px #75c49d99;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .ultimate-button{background:radial-gradient(ellipse at 50% 30%,#7c51a077,#241c33 60%,#110e19);}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .ultimate-button b{color:#dac5f5;text-shadow:0 0 12px #bd81ff77;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer{bottom:74px;padding:8px;width:min(850px,calc(100vw - var(--skills-width) - 42px));}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]{flex-basis:112px;min-height:122px;height:122px;gap:2px;border-color:#8a795377;box-shadow:inset 0 0 0 2px #06100b77;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]::before{width:60px;height:56px;filter:drop-shadow(0 3px 4px #0009);}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] small{color:#ecd190;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-filters{padding:3px 0 5px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-filters button{min-height:28px;font-size:11px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .placement-actions{bottom:74px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type][aria-pressed="true"],body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) button[aria-pressed="true"]{border-color:#d9bd78;box-shadow:inset 0 0 14px #caa35525;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) button:not(:disabled),body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) summary{transition:border-color .15s,filter .15s,background-color .15s;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) :is(button,summary):focus-visible{outline:2px solid #f3d68d;outline-offset:2px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .skill-button.is-cooling{border-color:#48554d;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) button:disabled{opacity:.68;filter:saturate(.55);}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .skill-button.is-cooling{opacity:.9;}
+@media(max-width:1199px){
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-wave-info{width:280px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header{width:320px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls{top:74px;left:var(--edge);width:454px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls{top:74px;}
+}
+@media(max-height:600px){
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) {--hero-width:190px;--skills-width:270px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header{height:44px;width:275px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-wave-info{height:46px;width:258px;grid-template-columns:42px 1fr;padding:3px 6px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-wave-status{font-size:11px;max-width:194px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .wave-index strong{font-size:22px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .resource strong{font-size:14px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls{top:60px;left:var(--edge);height:38px;width:405px;padding:2px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls button{min-height:32px;font-size:10px;flex-basis:30px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-wave-button{flex:1;font-size:10px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls{top:60px;max-width:300px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls summary{min-height:38px;padding:10px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-profile{bottom:62px;padding:5px;gap:3px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals{gap:3px 7px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label{font-size:9px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select{min-height:36px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-face{width:34px;height:38px;flex-basis:34px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select strong{font-size:12px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-equipment{min-height:20px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-tabs button{min-height:44px;font-size:11px;gap:4px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock{padding:4px;gap:3px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button{height:61px;min-height:61px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button b{font-size:23px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button span{font-size:9px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details summary{min-height:30px;font-size:10px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer{bottom:62px;width:calc(100vw - 16px);padding:5px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading span{display:none;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]{height:103px;min-height:103px;flex-basis:106px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]::before{width:45px;height:42px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-filters button{min-height:32px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .placement-actions{bottom:62px;}
+}
+@media(prefers-reduced-motion:reduce){body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) button,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) summary{transition:none;}}
+/* Keep category tabs and close action on one row, leaving more battlefield visible. */
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer{display:grid;grid-template-columns:auto 1fr 32px;column-gap:10px;row-gap:5px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading{display:contents;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading strong{grid-column:1;grid-row:1;align-self:center;font-size:12px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading span{display:none;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading button{grid-column:3;grid-row:1;align-self:center;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-filters{grid-column:2;grid-row:1;padding:0;min-width:0;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid{grid-column:1/-1;grid-row:2;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-empty{grid-column:1/-1;}
+body[data-layout="mobile"] .wave-intel[open] #td-wave-preview{white-space:normal;line-height:1.5;height:auto;max-height:none;}
+/* Commerce is a separate utility action, never a fifth hero skill. */
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail #td-shop-open{border-color:#c6a65f;background:linear-gradient(#56442a,#18140f);}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail #td-shop-open b{color:#ffe5a0;}
+.td-quick-rail #td-shop-open kbd{position:absolute;top:1px;right:2px;min-width:12px;color:#f8dc9d;font:700 8px "Segoe UI",sans-serif;text-align:center;background:#090e0bbd;border:1px solid #8e764c;}
+body[data-layout="mobile"]:not(.edge-combat):is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail{position:absolute;z-index:14;top:8px;right:8px;display:grid;width:56px;}
+body[data-layout="mobile"]:not(.edge-combat):is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail #td-selection-shortcut,body[data-layout="mobile"]:not(.edge-combat):is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail #td-armory-shortcut{display:none;}
+body[data-layout="mobile"]:not(.edge-combat):is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail #td-shop-open{position:relative;display:grid;place-items:center;gap:0;width:56px;height:56px;min-height:56px;padding:3px;border-color:#c6a65f;background:linear-gradient(#56442a,#18140f);box-shadow:0 3px 12px #000a;}
+body[data-layout="mobile"]:not(.edge-combat):is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail #td-shop-open b{font-size:24px;line-height:1;color:#ffe5a0;}
+body[data-layout="mobile"]:not(.edge-combat):is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail #td-shop-open small{font-size:9px;color:#e9d59c;}
+@media(max-height:600px){
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-heading strong{display:none;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-filters{grid-column:1/3;}
+}
+/* Icons enhance existing skill labels only once the shared atlas is decoded. */
+body[data-skill-art="ready"] .td-hero-dock .skill-button b{display:block;width:40px;height:40px;flex:0 0 40px;background-image:url('assets/td/hero-skill-icons-v1.png');background-size:400% 400%;background-position:var(--skill-x,0%) var(--skill-y,0%);border:1px solid #b09c6655;border-radius:2px;font-size:0!important;color:transparent!important;text-shadow:none!important;box-shadow:0 2px 5px #0009;}
+body[data-hero-class="hunter"]{--skill-y:0%;}
+body[data-hero-class="arcanist"]{--skill-y:33.333333%;}
+body[data-hero-class="rogue"]{--skill-y:66.666667%;}
+#td-thunder{--skill-x:33.333333%;}
+#td-summon{--skill-x:66.666667%;}
+#td-ultimate{--skill-x:100%;}
+body[data-skill-art="ready"] .td-quick-rail #td-shop-open b{display:block;width:27px;height:27px;background:url('assets/td/hero-skill-icons-v1.png') 0% 100%/400% 400% no-repeat;font-size:0!important;color:transparent!important;filter:drop-shadow(0 1px 3px #000)}
+body[data-skill-art="ready"] .skill-button.is-cooling b{filter:saturate(.5) brightness(.65);}
+@media(max-height:600px){body[data-skill-art="ready"] .td-hero-dock .skill-button b{width:32px;height:32px;flex-basis:32px;}}
+/* V0.53: a single visual resource/action strip, using the existing pause button. */
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header{
+ width:336px;height:38px;min-height:38px;display:grid;
+ grid-template-columns:minmax(0,1.1fr) minmax(0,.65fr) minmax(0,.65fr) minmax(0,1.35fr) 38px 38px;
+ padding:0;gap:0;align-items:stretch;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header::after{
+ content:"";order:5;grid-column:6;border-left:1px solid #78623855;pointer-events:none;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource{
+ display:flex;align-items:center;justify-content:center;gap:4px;min-width:0;padding:0 3px;
+ border:0;border-right:1px solid #78623855;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource small{
+ position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource .resource-icon{
+ display:inline-block;flex:none;font:normal 16px/1 "Segoe UI Emoji","Apple Color Emoji",sans-serif;text-shadow:0 1px 3px #000;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource:nth-of-type(5) .resource-icon{color:#e69b91;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource strong{font-size:15px;line-height:1;white-space:nowrap;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-menu-open{grid-column:5;order:4;margin:0;width:38px;height:36px;min-height:36px;font-size:19px;border-right:1px solid #78623855;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls{left:calc(50% - 206px);width:412px;height:38px;padding:2px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls button{min-height:32px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-pause{
+ position:fixed;z-index:20;top:var(--edge);right:var(--edge);width:38px;min-width:38px;height:38px;min-height:38px;
+ flex:none;margin:0;padding:0;border:1px solid transparent;background:transparent;font-size:18px;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-pause:hover,
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-pause:focus-visible{background:#47391e;border-color:#d7b86a;}
+@media(max-width:1199px){
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls{left:var(--edge);width:412px;}
+}
+@media(max-height:600px){
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header{width:310px;height:34px;min-height:34px;grid-template-columns:minmax(0,1fr) minmax(0,.7fr) minmax(0,.7fr) minmax(0,1.45fr) 34px 34px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource{padding:0 2px;gap:2px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource .resource-icon{font-size:13px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource strong{font-size:12px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-menu-open{width:34px;height:32px;min-height:32px;font-size:17px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-pause{width:34px;min-width:34px;height:34px;min-height:34px;font-size:16px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls{left:var(--edge);width:373px;}
+}
+body.edge-combat[data-layout="mobile"][data-combat-orientation="landscape"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header{left:auto;right:var(--edge);width:310px;flex:none;}
+/* V0.54: map overview and right-edge quick actions, all presentation over the same world. */
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-minimap{
+ position:absolute;z-index:13;display:block;top:60px;right:var(--edge);width:200px;height:145px;
+ min-height:0;padding:3px;border:1px solid #a48a55;border-radius:2px;
+ background:#071310;box-shadow:0 5px 18px #000a,inset 0 0 0 2px #bb9c5733;
+ overflow:hidden;text-align:left;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-minimap canvas{display:block;width:100%;height:100%;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-minimap span{
+ position:absolute;left:4px;bottom:3px;padding:1px 4px;background:#06100dcc;color:#e5d6a6;
+ font-size:9px;line-height:1.3;pointer-events:none;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail{
+ position:absolute;z-index:14;display:grid;top:212px;right:var(--edge);width:46px;gap:5px;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail button{
+ position:relative;display:grid;place-content:center;justify-items:center;gap:1px;width:46px;height:47px;
+ min-height:47px;padding:1px;border:1px solid #9b8251;background:linear-gradient(#1d2a26,#07100f);
+ box-shadow:inset 0 0 0 2px #e4c27611,0 3px 10px #0008;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail button[aria-expanded="true"]{border-color:#e9cb82;background:#4a3a22;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail b{font-size:22px;line-height:1;color:#e7d397;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail small{font-size:9px;color:#d1c3a0;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail em{position:absolute;top:1px;right:2px;font:700 9px Georgia,serif;color:#ffe49a;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details{display:none!important;position:fixed;z-index:15;top:212px;right:calc(var(--edge) + 54px);bottom:auto;width:300px;max-height:min(300px,calc(100svh - 300px));margin:0;box-shadow:0 7px 22px #000b;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details[open]{display:block!important;overflow:auto;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details #td-armory-open{display:none;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls{top:370px;right:var(--edge);min-width:46px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls summary{min-height:42px;padding:8px 5px;text-align:center;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls[open]{width:304px;}
+@media(max-height:600px){
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-minimap{top:48px;width:140px;height:99px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-minimap span{font-size:8px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail{top:151px;width:38px;gap:3px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail button{width:38px;height:38px;min-height:38px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail b{font-size:17px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail small{font-size:8px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details{top:151px;right:calc(var(--edge) + 44px);width:min(270px,calc(100vw - 65px));max-height:min(220px,calc(100svh - 240px));}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls{top:275px;min-width:38px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls summary{min-height:36px;padding:6px 3px;font-size:10px;}
+}
+/* Compact hero HUD: portrait/name, HP/MP and one details action. The original IDs remain live. */
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-profile{
+ grid-template-columns:56px minmax(0,1fr) 35px;grid-template-rows:29px 50px 28px;
+ gap:2px 6px;padding:7px;min-height:0;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select{
+ grid-column:1/3;grid-row:1/3;display:grid;grid-template-columns:56px minmax(0,1fr);
+ align-items:start;gap:6px;min-height:0;padding:0;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-face{
+ grid-column:1;width:56px;height:66px;flex-basis:auto;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select>span:nth-child(2){grid-column:2;min-width:0;padding-top:2px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select strong{font-size:14px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select small{display:none;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-rank{
+ grid-column:3;grid-row:1;display:flex;align-items:center;justify-content:flex-end;gap:2px;
+ min-height:0;padding:0;border:0;background:transparent;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-rank span{font-size:9px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-rank strong{font-size:17px;line-height:1;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals{
+ grid-column:2/4;grid-row:2;grid-template-columns:1fr;gap:2px;align-self:start;
+ pointer-events:none;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label{grid-column:1;display:grid;grid-template-columns:24px minmax(0,1fr);gap:1px;font-size:9px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label>span{grid-column:2;grid-row:1;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:9px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals i{grid-column:1/-1;grid-row:2;height:5px;margin:0;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more{grid-column:2/4;grid-row:3;align-self:stretch;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more summary{
+ display:grid;place-items:center;min-height:28px;padding:2px 8px;list-style:none;
+ border:1px solid #9b834c;background:linear-gradient(#354437,#17231f);color:#f1dca6;font-size:11px;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more summary::-webkit-details-marker{display:none;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more summary:hover{border-color:#e4c67e;background:#475338;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-extra{
+ position:absolute;left:0;bottom:calc(100% + 6px);z-index:2;width:100%;max-height:min(220px,calc(100svh - 180px));
+ display:grid;gap:7px;overflow-y:auto;padding:9px;border:1px solid #9b834c;
+ background:linear-gradient(145deg,#1d2b26f7,#071010fa);box-shadow:0 8px 25px #000c;
+}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more[open] .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:4px 9px;padding-top:6px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more[open] .hero-equipment{display:grid;grid-template-columns:25px minmax(0,1fr) auto;min-height:30px;padding:3px;}
+body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more[open] .hero-equipment:has(>i[hidden]){grid-template-columns:minmax(0,1fr) auto;}
+@media(max-height:600px){
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-profile{grid-template-columns:42px minmax(0,1fr) 29px;grid-template-rows:25px 44px 26px;gap:2px 4px;padding:5px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select{grid-template-columns:42px minmax(0,1fr);gap:4px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-face{width:42px;height:52px;flex-basis:auto;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select strong{font-size:11px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-rank strong{font-size:14px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label,body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label>span{font-size:8px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more summary{min-height:26px;font-size:10px;}
+ body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-extra{max-height:min(185px,calc(100svh - 165px));}
+}

@@ -1,5 +1,94 @@
 # 系統架構
 
+## 0.57.0 戰場與固定部署架構
+
+```text
+beginner-valley-v1.png（1536×1024 正式 World）
+        + maps.js（Path / Build Areas / Safe Area）
+        ├─ BattlefieldCamera → PC / Laptop / Mobile Viewport
+        ├─ WaveSystem → Monster（單列、逐隻）→ PathSystem
+        ├─ BuildSystem → Building（固定）
+        │             └→ CombatUnit（固定、自動攻擊、一人一裝備）
+        └─ MiniMapView（同一 World 的縮圖）
+
+Hero（可移動） ─┐
+CombatUnit（固定）├→ Projectile / Damage / Feedback
+Building（固定） ┘
+```
+
+核心約束：Map 與 Viewport 分離；世界座標不隨裝置改變。正式地圖、迷你地圖、索敵、投射物、AoE、Chain 與建造判定讀取同一套座標，沒有 PC／Mobile Gameplay 分支。`FrontierTerrain` 的動態光影僅屬 Presentation。
+
+## 0.55.0 士兵定點架構（2026-09-15，本機）
+
+`BuildSystem` 在合法位置建立各自獨立的 `CombatUnit` → `CombatUnit` 使用既有 `TargetSelector` 鎖定射程內目標 → 沿用 `Projectile` 傷害與特效。怪物沿 `Monster` 路徑前進，不因士兵改速；`EnemyCombatSystem` 只把英雄視為可承傷角色。這是 0.55.0 歷史架構；0.57.0 已停用士兵的 `CommandSystem`／`NavigationSystem` 移動接縫。裝備由 `ArmorySystem.owned`（實體副本）→ `assignments`（唯一持有人）→ `CombatUnit.gear`（最多一格）串接；沒有新 Manager、資料庫或網路 API。英雄與塔沿用原架構。
+
+## 0.54.3 商城與技能分區（2026-09-14，本機）
+
+`td.html` 的唯一商店按鈕移至 `.td-quick-rail`；`TDGame` 保留原開店事件與 R 鍵路徑。`.td-hero-dock` 僅呈現 Q／W／E／F，`TDGame` 把大絕名稱與冷卻秒數分別寫入文字及 `.skill-cooldown`。遊戲邏輯和 UI 表現仍分離。
+
+## 0.54.2 士兵升級圖塊（2026-09-14，本機）
+
+`CombatUnit` 等級資料 → `ArtSystem.drawCombatUnit` 的素材輪廓光 → `drawRank` 腳邊標記；召喚物沿用同一非建築標記。建築仍走原 `drawBuilding/drawRank(building=true)`。繪圖與攻擊／升級計算保持分離。
+
+## 0.54.1 英雄小卡（2026-09-14，本機）
+
+原 `Hero / TDGame.updateUi` → 同一批 DOM ID；常駐層顯示頭像、等級、HP／MP，`<details class="hero-more">` 按需顯示 XP、能力、裝備。`td-combat.css` 僅控制 PC／橫向邊緣 HUD 外觀，`td.css` 提供手機直向內容；不涉及世界座標或戰鬥系統。
+
+## 0.54.0 小地圖與快捷面板（2026-09-14，本機）
+
+`maps + FrontierTerrain.cache + Monster/Building/Hero` → `MiniMapView.draw` → 右上 Canvas；小地圖點擊 → 原 `BattlefieldCamera.focus`。右側選取圖塊 → 原 `.selection-details`；軍械圖塊 → 原 `TDGame.openArmory`。手機直向不用右側圖塊；不新增地圖座標、索敵、建造或戰鬥系統。
+
+## 0.53.0 戰鬥 HUD（2026-09-14，本機）
+
+TDGame 資源／暫停狀態 → 原 DOM ID → td-combat.css 邊緣戰鬥呈現。暫停鍵仍在原 hud-controls 節點，CSS 視覺定位到右上資源列；手機直向走 td.css 原佈局。無第二套控制器。
+
+## 0.52.0 地圖構圖與部署體驗（2026-09-14，本機）
+
+共用關係：maps.path → Monster／BuildSystem／FrontierTerrain；BuildSystem.placementIssue → canPlaceAt＋錯誤說明；ArtSystem.frontierGround → 靜態地表快取；BuildSystem.pending → 地表提示；maps.openingFocus → 既有 Camera 首次取景。只抽取原判定結果，不新增導航、物理或 Manager。
+
+## 0.51.0 HUD／地景呈現（2026-09-14，本機）
+
+ArtSystem原載入器 → frontierGround → FrontierTerrain靜態離屏快取；ns.config.path仍同時驅動實際移動與道路畫面。ArtSystem.skillIcons.ready + Hero.classType → TDGame.updateUi的body資料屬性 → CSS圖集位置。折疊使用原生details，同一批按鈕保留原事件；未建立新Manager。
+
+## 0.50.0 大地圖原型（2026-09-14，本機）
+
+開局地圖選擇 → TDGame.chooseMap → maps.apply 更新唯讀 config（width/height/path/heroSpawn/mapId/roadClearance/roadUnits）；同一份 path → Monster 移動／BuildSystem 禁建／FrontierTerrain 繪圖；config尺寸 → NavigationSystem 與 BattlefieldCamera。戰鬥世界與鏡頭座標分離。未新增第二套遊戲、導航、建造或傷害系統。舊TDGame固定720地景分支僅保留給classic。
+
+
+## 最新：0.49.0 鏡頭原型
+
+0.49.0：Pointer → canvasPoint → Camera.screenToWorld → 原建造／指令；原世界圖像 → Camera.begin變換 → 原draw → Camera.end還原。Canvas backing尺寸是視窗解析度，不再代表世界大小；世界仍由ns.config.width/height定義。PC／橫向共用相同鏡頭與玩法，直式沿用720畫布。大地圖的導航／路線／美術尚未改動。
+
+## 0.48.0 UI 分層
+
+`LayoutSystem → main.js（呈現旗標）→ td-combat.css → 同一 DOM 控件 → 原 TDGame／BuildSystem`。
+
+英雄能力折疊保留原數值 ID；建造卡移動重用原 DOM，不複製事件。新增樣式不改渲染器、世界座標、索敵或傷害。下一階段候選為大地圖＋鏡頭，必須先驗證螢幕座標與世界座標雙向換算，不能只放大背景。
+
+## v0.47.0 戰鬥版面與建造流程
+
+```text
+LayoutSystem ── desktop / mobile + portrait / landscape ── td.css
+       │                                             │
+       └─ main.js 搬動同一批建造卡至 Drawer／舊指令格 ┘
+
+建造卡 → TDGame.queueDeploy → BuildSystem.queue
+Canvas 指標移動 → BuildSystem.updatePointer → 半透明預覽＋射程
+Canvas 點合法位置 → BuildSystem.stagePlacement → TDGame.confirmPlacement → BuildSystem.confirmPlacement
+                                      └→ 原 placeQueued → Economy.spend → Building／CombatUnit
+取消／無效位置 → 不進入 placeQueued、不扣資源
+```
+
+Hero、Wave、Projectile、塔攻擊與數值管線未改；桌面與手機共用同一 `TDGame`／`BuildSystem`。Canvas 邏輯地圖仍是 720×720 正方形，橫式版只重排 UI、不伸縮或裁切遊戲座標。P3 只補銀葉 Q 的有效目標檢查，P4 只整理建造卡的第一／第二層資訊；完整座標耦合與未來方案見 [Battlefield／Camera／Canvas Audit](BATTLEFIELD_CAMERA_CANVAS_AUDIT.md)。
+
+## v0.46.0 塔定位最小補強
+
+`config.buildings.role → TDGame 建造卡／Tooltip` 顯示塔的用途；`BuildSystem.applyTowerSupport()` 每個戰鬥步進從現有建築計算附近守軍的最高戰鼓攻速增益，`CombatUnit.config()` 換算為攻擊間隔，無疊加或永久狀態。獅翼弩砲只在 `Building.update()` 對既有目標清單增加支援怪優先序，其他塔仍按路徑進度。幽骨召喚殿與冥燈墓園將持續、距離、速度、傷害、上限等資料放在既有 `config.buildings`，`TowerSkillSystem.fire()` 繼續產生既有 `Summon`。沒有新 Manager、資料庫、HTTP API 或存檔格式。
+
+## v0.45.0 英雄 × 軍團最小解耦
+
+`開局 UI → TDGame.selectedProfession / selectedFaction → ProfessionSystem + HeroRoster / FactionSystem`。前者保留英雄身份、技能、武器與召喚；後者提供 `FactionSystem.available/allows` 給既有 `BuildSystem`、建造 UI 與傭兵館。`LootSystem` 接收兩個 ID，英雄決定入門軍械、軍團決定自身內容；`BattleReportSystem` 記錄兩者。沒有新資料夾、資料庫、HTTP API 或通用 Effect Engine。`TDGame.chooseProfession` 沿用名稱以減少改動，未來若新增 Hero Registry 可再考慮命名整理。塔進階僅在 `TowerEvolutionSystem.apply` 與 `TowerSkillSystem.fire` 修正個別分支的實際投射物設定，不觸及全域 `Projectile` 命中公式。
+
 ## v0.44.2 敵軍視覺編隊
 
 `WaveSystem → Monster.update → Monster.x/y/index` 仍是唯一邏輯路徑；`TargetSelector / Projectile / AoE / Chain / Tower / Hero` 照舊讀 `x/y`。繪圖使用 `Monster.visualPosition()` 由道路切線求法線、固定三列錯位與小幅前後變化；`TDGame.draw()` 依視覺深度繪怪，再獨立繪製條件式 HP Bar。`Projectile.chainPoints`、`CombatFeedbackSystem` 只將顯示端點對齊視覺位置，不反寫傷害座標。沒有物理碰撞、第二條路徑、新資料庫或 API。
@@ -65,7 +154,7 @@ flowchart LR
 
 ## v0.36.0 兵種擴充資料流
 
-新守軍不新增 System：`FactionSystem → BuildSystem.queue/placeQueued → CombatUnit → ArtSystem.combatUnits`。數值、陣營清單、實體生命週期與圖像註冊互相分離，因此 knight／treant／golem 自動沿用移動導航、選取、升級、負傷恢復、軍械與出售。敵軍仍走 `WaveCatalog → Monster → EnemyTrait/EnemyCombat → ArtSystem.enemyActions`；本版只替既有職責補獨立視覺，未改寫波次狀態機。
+新守軍不新增 System：`FactionSystem → BuildSystem.queue/placeQueued → CombatUnit → ArtSystem.combatUnits`。數值、陣營清單與圖像註冊仍分離；knight／treant／golem 沿用準備期導航、選取、升級、軍械與出售。當時版本的負傷恢復在 0.55.0 已移除。敵軍仍走 `WaveCatalog → Monster → EnemyTrait/EnemyCombat → ArtSystem.enemyActions`，未改寫波次狀態機。
 
 ## v0.35.0 英雄與十三塔資料流
 
@@ -161,11 +250,11 @@ Skin Registry 讓每個品牌／主題包保持獨立。外觀 renderer 只能�
 td/main → TDGame → WaveSystem → WaveCatalog
                  │          └→ Monster → Path
                  ├─ ProfessionSystem → 單局職業鎖定
-                 ├─ BuildSystem → CombatUnit（可移動）/ Building（固定）→ Projectile
-                 ├─ CommandSystem → NavigationSystem(A*) → CombatUnit Order
+                 ├─ BuildSystem → CombatUnit（固定）/ Building（固定）→ Projectile
+                 ├─ CommandSystem / NavigationSystem（舊相容接縫，不改士兵位置）
                  ├─ LayoutSystem → body[data-layout] → Desktop/Mobile CSS
                  ├─ Hero → Projectile / Nova / Intercept / Respawn
-                 ├─ EnemyCombatSystem → Hero / CombatUnit damage / Boss phase
+                 ├─ EnemyCombatSystem → Hero damage / Boss phase（士兵不承傷）
                  ├─ ArtSystem → Background / Atlases / Keep
                  ├─ EconomySystem → Build / Upgrade / Sell / Kill / Wave Reward
                  └─ Base Health → Leak → Victory / Game Over
@@ -244,11 +333,11 @@ Monster.health → displayHealth（視覺插值）→ 雙層血條
 ```text
 Monster movement → EnemyCombatSystem → target policy / Boss phase
                                       ├→ Hero.takeDamage → downed → timed respawn
-                                      └→ CombatUnit.takeDamage → death → BuildSystem.removeDefeated
+                                      └→ 士兵不承傷（0.55.0 起）
 EnemyCombatSystem hooks → TDGame → CombatFeedbackSystem / UI
 ```
 
-一般怪仍只前進；攻擊職責按 `combatRole` 分為攻城、英雄獵殺與 Boss。`EnemyCombatSystem` 只處理敵方目標與攻擊時序，不負責獎勵或建造。英雄自行管理復活，守軍死亡由 `BuildSystem` 安全移除。
+一般怪仍只前進；攻擊職責按 `combatRole` 分為攻城、英雄獵殺與 Boss。`EnemyCombatSystem` 只處理敵方目標與攻擊時序，不負責獎勵或建造。英雄自行管理復活；0.55.0 起士兵不會死亡或由 `BuildSystem` 戰敗移除。
 
 ## v0.24.0 黃金 15 波
 
@@ -293,7 +382,7 @@ Hero.equipment.spear > 0
 
 `ProfessionSystem` 決定英雄職業，`FactionSystem` 以同一 ID 提供本族可用的單位與建築；`LootSystem` 只透過 `FactionSystem.unlock()` 增加可用項目，不修改建造器。`BuildSystem` 繼續負責排隊、合法位置、扣款、升級與回收，因此新種族不需要複製經濟或放置邏輯。
 
-`CombatUnit` 統一 7 種可移動守軍的命令、生命週期、Lv.1～5 與熟練度。`Building` 負責固定塔；`TowerSkillSystem` 處理塔種差異，`TowerEvolutionSystem` 於 Lv.3 套用二選一設定修正。`ArtSystem` 依單位狀態、等級、塔階與分支選擇圖格，素材未 ready 時仍回退 Canvas 圖形。
+此段記錄 v0.30 當時的 7 種可移動守軍；0.57.0 起 `CombatUnit` 統一為固定守軍，仍保留 Lv.1～5、熟練度與攻擊動畫。`Building` 負責固定塔；`TowerSkillSystem` 處理塔種差異，`TowerEvolutionSystem` 於 Lv.3 套用二選一設定修正。`ArtSystem` 依單位狀態、等級、塔階與分支選擇圖格，素材未 ready 時仍回退 Canvas 圖形。
 
 英雄 XP 保存在 `Hero` 實體，不新增全域存檔。`TDGame.onKill()` 只在第一次合法擊殺時同時分派金錢、來源單位熟練與英雄 XP，避免範圍／連鎖攻擊重複結算。
 

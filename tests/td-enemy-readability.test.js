@@ -8,7 +8,7 @@ const vm=require('node:vm');
 function load(){
   const root=path.resolve(__dirname,'..'),context=vm.createContext({console});
   context.globalThis=context;
-  for(const file of ['src/td/namespace.js','src/td/config.js','src/td/systems/TargetSelector.js','src/td/systems/CombatFeedbackSystem.js','src/td/entities/Monster.js','src/td/entities/Projectile.js']){
+  for(const file of ['src/td/namespace.js','src/td/config.js','src/td/systems/TargetSelector.js','src/td/systems/CombatFeedbackSystem.js','src/td/systems/WaveCatalog.js','src/td/entities/Monster.js','src/td/entities/Projectile.js','src/td/systems/WaveSystem.js']){
     vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
   }
   return context.TowerFrontier;
@@ -23,25 +23,31 @@ function formation(ns,count,pathPoints){
   });
 }
 
-test('12／20／30 隻小怪呈三個穩定視覺錯位，邏輯路徑座標不變',()=>{
+test('12／20／30 隻敵軍維持單一路線，模型位置等於邏輯道路位置',()=>{
   for(const count of [12,20,30]){
     const ns=load(),monsters=formation(ns,count),before=monsters.map(m=>({x:m.x,y:m.y,index:m.index}));
-    assert.equal(new Set(monsters.map(m=>m.visualLane)).size,3);
+    assert.equal(new Set(monsters.map(m=>m.visualLane)).size,1);
     const visible=monsters.map(m=>m.visualPosition());
-    assert.ok(visible.some(point=>point.y<100));
-    assert.ok(visible.some(point=>point.y>100));
-    assert.ok(visible.every((point,index)=>Math.abs(point.y-monsters[index].y)<=24));
-    const logicalSpacing=27,averageVisualSpacing=visible.slice(1).reduce((sum,point,index)=>sum+Math.hypot(point.x-visible[index].x,point.y-visible[index].y),0)/(count-1);
-    assert.ok(averageVisualSpacing>logicalSpacing*1.15);
+    assert.deepEqual(visible.map(point=>[point.x,point.y]),monsters.map(monster=>[monster.x,monster.y]));
     assert.deepEqual(monsters.map(m=>({x:m.x,y:m.y,index:m.index})),before);
   }
 });
 
-test('彎道路的視覺法線平滑轉向，轉角前後不瞬移',()=>{
+test('Wave 逐隻生成敵人並在前後保留可辨識間隔',()=>{
+  const ns=load(),waves=new ns.systems.WaveSystem(),monsters=[];
+  assert.equal(waves.start(),true);assert.ok(waves.spawnInterval()>=.72);
+  waves.update(.151,monsters);assert.equal(monsters.length,1);
+  waves.update(waves.spawnInterval()*.5,monsters);assert.equal(monsters.length,1);
+  waves.update(waves.spawnInterval()*.51,monsters);assert.equal(monsters.length,2);
+  assert.equal(monsters[0].visualLane,0);assert.equal(monsters[1].visualLane,0);
+  for(const spawnRate of [1.08,1,.78,.68]){waves.wave=30;waves.setModifiers({spawnRate});assert.ok(waves.spawnInterval()>=.66);}
+});
+
+test('彎道路不加入視覺側移，轉角前後完全跟隨邏輯位置',()=>{
   const ns=load(),path=[{x:100,y:100},{x:300,y:100},{x:300,y:300}],monster=new ns.entities.Monster('grunt',1,path);
   monster.visualLane=1;monster.visualStagger=0;monster.x=299.9;monster.y=100;monster.index=1;
   const before=monster.visualPosition();monster.x=300;monster.y=100.1;monster.index=2;
-  const after=monster.visualPosition();assert.ok(Math.hypot(after.x-before.x,after.y-before.y)<2);
+  const after=monster.visualPosition();assert.equal(before.x,299.9);assert.equal(before.y,100);assert.equal(after.x,300);assert.equal(after.y,100.1);
 });
 
 test('×1／×2／×3 步進保持原本行進時間與邏輯路徑',()=>{
@@ -61,7 +67,7 @@ test('索敵、濺射與連鎖仍用邏輯座標，視覺錯位不改命中',()=
   const chainA=make(),chainB=make();chainB.forEach((m,index)=>{m.visualLane=index%2?-1:1;});
   for(const group of [chainA,chainB])new ns.entities.Projectile({x:80,y:100},group[0],{damage:12,chain:4,chainRange:40,attackType:'magic'}).hit(group);
   assert.deepEqual(chainA.map(m=>m.health),chainB.map(m=>m.health));
-  assert.ok(chainA[0].visualPosition().y!==chainA[0].y);
+  assert.equal(chainA[0].visualPosition().y,chainA[0].y);
 });
 
 test('連鎖線與傷害跳字落在模型視覺位置，不改傷害結果',()=>{

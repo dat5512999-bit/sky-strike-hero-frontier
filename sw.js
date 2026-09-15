@@ -1,7 +1,12 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.44.2';
+const CACHE_NAME = 'sky-strike-v0.57.0';
 const ASSETS = [
+  './assets/td/beginner-valley-v1.png', './assets/td/frontier-ground-v2.png', './assets/td/frontier-ground-v1.png', './assets/td/hero-skill-icons-v1.png',
+  './src/td/maps.js', './src/td/systems/FrontierTerrain.js',
+  './src/td/systems/BattlefieldCamera.js',
+  './src/td/systems/MiniMapView.js',
+  './td-combat.css',
   './src/td/systems/TargetSelector.js',
   './src/td/systems/TDDifficultySystem.js', './src/td/systems/EnemyTraitSystem.js', './src/td/systems/BattleReportSystem.js',
   './', './index.html', './styles.css', './td.html', './td.css', './manifest.webmanifest', './td.webmanifest', './assets/icons/game-icon.svg', './assets/icons/app-icon-192.png', './assets/icons/app-icon-512.png', './assets/icons/apple-touch-icon-180.png',

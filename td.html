@@ -13,53 +13,68 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon-180.png">
   <title>蒼穹突擊：英雄塔防</title>
   <link rel="stylesheet" href="td.css">
+  <link rel="stylesheet" href="td-combat.css">
 </head>
-<body>
+<body data-combat-ui="edge">
   <main class="td-shell">
     <header class="td-header">
       <div class="td-brand"><h1>英雄塔防<small>HERO FRONTIER</small></h1></div>
       <a href="index.html" aria-label="返回飛機射擊模式">← 飛機模式</a>
       <label class="td-layout-picker"><span>介面</span><select id="td-layout-mode" aria-label="介面模式"><option value="auto">自動</option><option value="desktop">電腦</option><option value="mobile">手機</option></select></label>
-      <div class="resource"><small>GOLD</small><strong id="td-gold">240</strong></div>
-      <div class="resource"><small>木材</small><strong id="td-lumber">5</strong></div>
-      <div class="resource"><small>功勳</small><strong id="td-merit">0</strong></div>
-      <div class="resource"><small>城門</small><strong id="td-health">20 / 20</strong></div>
+      <div class="resource" title="金幣"><span class="resource-icon" aria-hidden="true">🪙</span><small>GOLD</small><strong id="td-gold">240</strong></div>
+      <div class="resource" title="木材"><span class="resource-icon" aria-hidden="true">🪵</span><small>木材</small><strong id="td-lumber">5</strong></div>
+      <div class="resource" title="功勳"><span class="resource-icon" aria-hidden="true">💎</span><small>功勳</small><strong id="td-merit">0</strong></div>
+      <div class="resource" title="城門耐久"><span class="resource-icon" aria-hidden="true">❤️</span><small>城門</small><strong id="td-health">20 / 20</strong></div>
       <button id="td-menu-open" class="td-menu-open" type="button" aria-label="開啟遊戲選單" aria-haspopup="dialog">⚙</button>
     </header>
     <section class="td-wave-info" aria-label="波次資訊">
       <div class="wave-index"><small>WAVE</small><strong id="td-wave-number">00</strong></div>
-      <div class="td-wave-copy"><span id="td-wave-status">等待第一波</span><small id="td-wave-preview">選擇職業後顯示下一波情報</small></div>
+      <div class="td-wave-copy"><span id="td-wave-status">等待第一波</span><details class="wave-intel"><summary>下一波情報</summary><small id="td-wave-preview">選擇英雄與軍團後顯示下一波情報</small></details></div>
       <div class="hud-controls"><button id="td-pause" type="button" title="暫停／繼續">Ⅱ</button><button id="td-report-open" type="button" title="查看本局逐波戰報">戰況</button><div class="speed-picker" aria-label="遊戲速度"><button type="button" data-game-speed="1" aria-pressed="true">×1</button><button type="button" data-game-speed="2" aria-pressed="false">×2</button><button type="button" data-game-speed="3" aria-pressed="false">×3</button></div><button id="td-wave-button" type="button">開始第一波</button></div>
     </section>
     <section class="td-stage">
       <canvas id="td-game" width="720" height="720" aria-label="英雄塔防戰場"></canvas>
-      <section id="td-build-drawer" class="build-drawer" aria-label="招募與建造" hidden><div class="build-drawer-heading"><strong>招募／建造</strong><span>選擇後點戰場放置 · Esc 取消</span><button id="td-build-drawer-close" type="button" aria-label="收合建造欄">✕</button></div><div class="build-drawer-filters" aria-label="建造分類"><button type="button" data-build-filter="all" aria-pressed="true">全部</button><button type="button" data-build-filter="unit">士兵</button><button type="button" data-build-filter="tower">塔</button><button type="button" data-build-filter="support">輔助</button><button type="button" data-build-filter="recent">最近使用</button></div><div class="command-grid build-drawer-grid" data-panel="build"></div><p id="td-build-drawer-empty" class="build-drawer-empty" hidden>這個分類目前沒有可建造項目</p></section>
+      <details id="td-camera-controls" class="camera-controls" aria-label="戰場鏡頭"><summary>⌖ 鏡頭</summary><div><button id="td-camera-inspect" type="button" aria-pressed="false">✥ 拖曳查看</button><button id="td-camera-home" type="button">◎ 回英雄</button><button id="td-camera-follow" type="button" aria-pressed="false">跟隨</button><button id="td-camera-all" type="button">全圖</button><button id="td-camera-out" type="button" aria-label="縮小戰場">−</button><button id="td-camera-in" type="button" aria-label="放大戰場">＋</button></div><small id="td-camera-status">中鍵／空白＋拖曳查看</small></details>
+      <button id="td-minimap" class="td-minimap" type="button" aria-label="戰場小地圖，點擊移動視野" title="戰場全圖 · 點擊移動視野"><canvas id="td-minimap-canvas" width="200" height="142" aria-hidden="true"></canvas><span>戰場全圖 · 點擊定位</span></button>
+      <div class="td-quick-rail" role="group" aria-label="戰場快捷面板"><button id="td-selection-shortcut" type="button" aria-label="開啟選取資訊" aria-expanded="false" title="選取資訊"><b aria-hidden="true">▣</b><small>選取</small></button><button id="td-armory-shortcut" type="button" aria-label="開啟軍械庫" title="軍械庫" disabled><b aria-hidden="true">⚔</b><small>軍械</small><em id="td-armory-shortcut-count">0</em></button><button id="td-shop-open" class="shop-button" type="button" aria-label="開啟商店（R）" aria-keyshortcuts="R" title="商店城 · R"><b aria-hidden="true">♜</b><small>商店</small><kbd>R</kbd></button></div>
+      <p class="td-orientation-hint">橫向握持可在同一畫面查看戰場與指令</p>
+      <div id="td-placement-actions" class="placement-actions" role="group" aria-label="建造位置預覽" hidden><strong id="td-placement-title">點戰場選擇位置</strong><small id="td-placement-detail">點綠色位置直接部署</small><button id="td-placement-cancel" type="button">取消部署 · Esc</button></div>
+      <div id="td-selection-actions" class="selection-actions" role="group" aria-label="選取單位快捷操作" hidden><button id="td-upgrade" type="button"><b>⬆</b><span>升級</span></button><button id="td-sell" type="button"><b>↩</b><span>回收</span></button></div>
+      <section id="td-build-drawer" class="build-drawer" aria-label="招募與建造" hidden><div class="build-drawer-heading"><strong>招募／建造</strong><span>點卡片選擇 · 電腦懸停／手機長按看詳細</span><button id="td-build-drawer-close" type="button" aria-label="收合建造欄">✕</button></div><div class="build-drawer-filters" aria-label="建造分類"><button type="button" data-build-filter="all" aria-pressed="true">全部</button><button type="button" data-build-filter="unit">士兵</button><button type="button" data-build-filter="tower">塔</button><button type="button" data-build-filter="support">輔助</button><button type="button" data-build-filter="recent">最近使用</button></div><div class="command-grid build-drawer-grid" data-panel="build"></div><p id="td-build-drawer-empty" class="build-drawer-empty" hidden>這個分類目前沒有可建造項目</p><div id="td-build-detail" class="build-detail" role="status" hidden><div><strong id="td-build-detail-name"></strong><p id="td-build-detail-text"></p></div><button id="td-build-detail-close" type="button" aria-label="關閉建造詳細資訊">✕</button></div></section>
 
       <div id="td-profession-screen" class="td-profession-screen" role="dialog" aria-modal="true" aria-labelledby="td-opening-title">
         <div class="profession-dialog">
           <div class="opening-topline"><a href="index.html">← 返回模式選擇</a><span>HERO FRONTIER · CHOOSE YOUR CHALLENGE</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
           <p>英雄塔防</p><h2 id="td-opening-title">選擇你的遠征</h2>
+          <label class="map-choice">正式戰場 <select id="td-map-choice" aria-label="選擇戰場"><option value="beginner">新手谷地 · U 型防線</option></select><small id="td-map-note">正式 1536 × 1024｜U 型單路線｜地圖不拉伸，森林、山壁、水域與道路禁建。</small></label>
           <section class="opening-step" aria-labelledby="td-difficulty-heading"><div class="opening-step-heading"><h3 id="td-difficulty-heading"><em>1</em> 選擇難度</h3><span>不同挑戰，不同節奏</span></div>
             <div class="difficulty-list" aria-label="塔防難度">
-              <button type="button" data-td-difficulty="story"><b>遠征見習</b><strong>輕鬆入門</strong><small>城門 25 點<br>敵軍較脆<br>守軍較快歸隊</small></button>
+              <button type="button" data-td-difficulty="story"><b>遠征見習</b><strong>輕鬆入門</strong><small>城門 25 點<br>敵軍較脆<br>金幣較多</small></button>
               <button type="button" data-td-difficulty="standard" aria-pressed="true"><b>邊境守衛</b><strong>標準挑戰</strong><small>城門 20 點<br>標準敵軍<br>金幣標準收入</small></button>
               <button type="button" data-td-difficulty="veteran"><b>軍團老兵</b><strong>困難戰門</strong><small>城門 18 點<br>敵軍後期更強<br>金幣較少</small></button>
-              <button type="button" data-td-difficulty="calamity"><b>災厄遠征</b><strong>極限生存</strong><small>城門 15 點<br>高壓敵軍<br>守軍無法歸隊</small></button>
+              <button type="button" data-td-difficulty="calamity"><b>災厄遠征</b><strong>極限生存</strong><small>城門 15 點<br>高壓敵軍<br>金幣較少</small></button>
             </div>
             <details class="difficulty-rules"><summary>詳細規則與完整倍率</summary><p id="td-difficulty-detail"></p></details>
           </section>
           <section class="opening-step" aria-labelledby="td-profession-heading"><div class="opening-step-heading"><h3 id="td-profession-heading"><em>2</em> 選擇英雄</h3><span>不同英雄，不同戰術</span></div>
             <div class="profession-list">
-              <button type="button" data-profession="hunter" aria-pressed="false"><b>人族 · 王國巡林者</b><strong>遠程輸出 · 戰狼協戰</strong><small>多重箭 / 緩速陷阱 / 戰狼</small></button>
-              <button type="button" data-profession="arcanist" aria-pressed="false"><b>精靈 · 銀葉守護者</b><strong>控場法術 · 元素召喚</strong><small>冰霜新星 / 連鎖雷擊 / 元素</small></button>
-              <button type="button" data-profession="rogue" aria-pressed="false"><b>暗影氏族 · 暮影刀鋒</b><strong>近戰爆發 · 分身突襲</strong><small>閃擊 / 淬毒煙幕 / 分身</small></button>
+              <button type="button" data-profession="hunter" aria-pressed="false"><b>王國巡林者</b><strong>遠程輸出 · 戰狼協戰</strong><small>多重箭 / 緩速陷阱 / 戰狼</small></button>
+              <button type="button" data-profession="arcanist" aria-pressed="false"><b>銀葉守護者</b><strong>控場法術 · 元素召喚</strong><small>冰霜新星 / 連鎖雷擊 / 元素</small></button>
+              <button type="button" data-profession="rogue" aria-pressed="false"><b>暮影刀鋒</b><strong>近戰爆發 · 分身突襲</strong><small>閃擊 / 淬毒煙幕 / 分身</small></button>
             </div>
           </section>
-          <div class="opening-actions"><div id="td-art-loading" class="art-loading" role="status" aria-live="polite"><span id="td-art-status">正在載入戰場美術…</span><button id="td-art-retry" type="button" hidden>重新載入圖片</button></div><button id="td-start-expedition" type="button" disabled>3　開始遠征</button></div>
+          <section class="opening-step" aria-labelledby="td-faction-heading"><div class="opening-step-heading"><h3 id="td-faction-heading"><em>3</em> 選擇軍團</h3><span>決定本局可建造的守軍與防禦塔；不限制英雄</span></div>
+            <div class="faction-list" aria-label="開局軍團">
+              <button type="button" data-faction="hunter" aria-pressed="false"><b>王國遠征軍</b><strong>穿刺遠射 · 盾擊震懾 · 冰控火砲</strong><small>5 名守軍／5 座塔 · 擅長輕甲與穩固防線</small></button>
+              <button type="button" data-faction="arcanist" aria-pressed="false"><b>銀葉秘法庭</b><strong>魔法範圍 · 緩速 · 雷電連鎖</strong><small>5 名守軍／4 座塔 · 擅長重甲與區域控制</small></button>
+              <button type="button" data-faction="rogue" aria-pressed="false"><b>暮影盟約</b><strong>賞金尾刀 · 幽魂召喚 · 瘟疫</strong><small>5 名守軍／4 座塔 · 擅長突襲與靈魂戰術</small></button>
+            </div>
+          </section>
+          <div class="opening-actions"><div id="td-art-loading" class="art-loading" role="status" aria-live="polite"><span id="td-art-status">正在載入戰場美術…</span><button id="td-art-retry" type="button" hidden>重新載入圖片</button></div><button id="td-start-expedition" type="button" disabled>4　先選擇英雄與軍團</button></div>
         </div>
       </div>
       <div id="td-overlay" class="td-overlay" hidden>
-        <div><p>FRONTIER REPORT</p><h2 id="td-overlay-title">王城失守</h2><span id="td-overlay-message"></span><strong id="td-final-report" class="final-report"></strong><div class="result-actions"><button id="td-restart" type="button">再挑戰一次</button><button id="td-result-change" type="button">更換英雄與難度</button><a id="td-result-mode" href="index.html">返回模式選擇</a></div></div>
+        <div><p>FRONTIER REPORT</p><h2 id="td-overlay-title">王城失守</h2><span id="td-overlay-message"></span><strong id="td-final-report" class="final-report"></strong><div class="result-actions"><button id="td-restart" type="button">再挑戰一次</button><button id="td-result-change" type="button">更換英雄、軍團與難度</button><a id="td-result-mode" href="index.html">返回模式選擇</a></div></div>
       </div>
     </section>
     <section class="td-command" aria-label="建造與英雄指令">
@@ -67,13 +82,12 @@
       <div class="hero-profile">
         <button id="td-hero-select" class="td-hero-select" type="button" aria-pressed="false" disabled title="選取英雄（F1），再點地面移動"><span class="hero-face" aria-hidden="true"></span><span><strong>銀葉守護者</strong><small>點我控制英雄 · F1</small></span><span class="hero-select-state">選取</span></button>
         <div class="hero-rank"><span>LV.</span><strong id="td-hero-level">1</strong></div>
-        <div class="hero-vitals"><label>HP <span id="td-hero-hp-text">100 / 100</span><i><b id="td-hero-hp-fill"></b></i></label><label>MP <span id="td-hero-mp-text">冷卻能量</span><i class="mana"><b id="td-hero-mp-fill"></b></i></label><label>XP <span id="td-hero-xp-text">0 / 52</span><i class="experience"><b id="td-hero-xp-fill"></b></i></label></div>
-        <div class="hero-stats" aria-label="英雄能力"><span>⚔ 攻擊 <b id="td-stat-attack">18</b></span><span>◎ 射程 <b id="td-stat-range">152</b></span><span>✥ 攻速 <b id="td-stat-speed">0.58s</b></span><span>➤ 移速 <b id="td-stat-move">215</b></span></div>
-        <div id="td-hero-weapon" class="hero-equipment" data-rarity="base"><i aria-hidden="true"></i><span><small>目前武器</small><b>銀葉法杖</b></span><em>制式</em></div>
+        <div class="hero-vitals"><label>HP <span id="td-hero-hp-text">100 / 100</span><i><b id="td-hero-hp-fill"></b></i></label><label>MP <span id="td-hero-mp-text">冷卻能量</span><i class="mana"><b id="td-hero-mp-fill"></b></i></label></div>
+        <details class="hero-more"><summary>詳細資訊</summary><div class="hero-extra"><div class="hero-xp"><label>XP <span id="td-hero-xp-text">0 / 52</span><i class="experience"><b id="td-hero-xp-fill"></b></i></label></div><div class="hero-stats" aria-label="英雄能力"><span>⚔ 攻擊 <b id="td-stat-attack">18</b></span><span>◎ 射程 <b id="td-stat-range">152</b></span><span>✥ 攻速 <b id="td-stat-speed">0.58s</b></span><span>➤ 移速 <b id="td-stat-move">215</b></span></div><div id="td-hero-weapon" class="hero-equipment" data-rarity="base"><i aria-hidden="true"></i><span><small>目前武器</small><b>銀葉法杖</b></span><em>制式</em></div></div></details>
       </div>
-      <div class="panel-section-label"><span>技能</span><small>SKILLS · Q W E R F</small></div>
-      <div class="td-hero-dock"><button id="td-skill-button" class="skill-button" type="button"><kbd>Q</kbd><b>❄</b><span>霜環震擊</span></button><button id="td-thunder" class="skill-button" type="button" title="攻擊附近最多四個敵人，冷卻12秒"><kbd>W</kbd><b>ϟ</b><span>連鎖雷擊</span></button><button id="td-summon" class="skill-button" type="button" title="召喚兩名守衛協助攻擊，冷卻22秒"><kbd>E</kbd><b>✧</b><span>祖靈守衛</span></button><button id="td-shop-open" class="skill-button shop-button" type="button"><kbd>R</kbd><b>♜</b><span>商店城</span></button><button id="td-ultimate" class="skill-button ultimate-button" type="button" aria-keyshortcuts="F" title="大絕：選擇英雄後查看效果"><kbd>F</kbd><b>✦</b><span>大絕 · 星墜寒潮</span></button></div>
-      <details class="selection-details" open><summary>選取資訊／軍械庫</summary>
+      <div class="panel-section-label"><span>技能</span><small>SKILLS · Q W E F</small></div>
+      <div class="td-hero-dock"><button id="td-skill-button" class="skill-button" type="button"><kbd>Q</kbd><b>❄</b><span>霜環震擊</span></button><button id="td-thunder" class="skill-button" type="button" title="攻擊附近最多四個敵人，冷卻12秒"><kbd>W</kbd><b>ϟ</b><span>連鎖雷擊</span></button><button id="td-summon" class="skill-button" type="button" title="召喚兩名守衛協助攻擊，冷卻22秒"><kbd>E</kbd><b>✧</b><span>祖靈守衛</span></button><button id="td-ultimate" class="skill-button ultimate-button" type="button" aria-keyshortcuts="F" title="大絕：選擇英雄後查看效果"><kbd>F</kbd><b>✦</b><span>星墜寒潮</span><small class="skill-cooldown" aria-hidden="true"></small></button></div>
+      <details class="selection-details"><summary>選取資訊</summary>
       <div class="panel-section-label"><span>選取資訊</span><small>SELECTION</small></div>
       <div class="selection-card"><div id="td-portrait" class="selection-portrait">?</div><div><small id="td-selection-type">目前指令</small><strong id="td-selection">先選擇守備職業</strong><span id="td-selection-stats">經典 RTS 職業科技</span></div></div>
       <label id="td-target-controls" class="target-controls" hidden>士兵索敵 <select id="td-target-strategy" aria-label="選取士兵的索敵策略"><option value="front">最接近城門</option><option value="nearest">距離最近</option><option value="lowestHealth">血量最低</option><option value="highestHealth">血量最高</option><option value="fastest">速度最快</option></select></label>
@@ -82,52 +96,45 @@
       <div id="td-tower-branches" class="tower-branches" hidden><small>選擇進階建築</small><div><button type="button" data-tower-branch="0"></button><button type="button" data-tower-branch="1"></button></div></div>
       </details>
       <div class="panel-section-label"><span>命令與建造</span><small>COMMAND / BUILD</small></div>
-      <div class="command-tabs" aria-label="指令分類"><button type="button" data-command-tab="build" aria-pressed="true">招募／建造</button><button type="button" data-command-tab="orders" aria-pressed="false">選取與命令</button></div>
-      <div id="td-army-summary" class="army-summary">選擇英雄後展開本族軍團</div>
+      <div class="command-tabs" aria-label="建造面板"><button type="button" data-command-tab="build" aria-pressed="true">招募／建造</button><button type="button" data-command-tab="orders" aria-pressed="false">收合建造</button></div>
+      <div id="td-army-summary" class="army-summary">選擇軍團後展開可建造清單</div>
       <div class="command-grid" data-panel="build">
-        <button type="button" data-build-kind="unit" data-build-type="hunter" hidden><b>➶</b><span>部署獵手</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="arcanist" hidden><b>✦</b><span>部署術士</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="rogue" hidden><b>◆</b><span>部署盜賊</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="shield" hidden><b>盾</b><span>部署盾衛</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="knight" hidden><b>槌</b><span>部署騎士</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="musketeer" hidden><b>銃</b><span>部署火槍手</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="halberdier" hidden><b>戟</b><span>部署長戟衛</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="skeleton" hidden><b>骷</b><span>部署骷髏</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="dragon" hidden><b>龍</b><span>部署幼龍</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="treant" hidden><b>樹</b><span>部署樹靈</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="dryad" hidden><b>鹿</b><span>部署林裔獵手</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="moonblade" hidden><b>刃</b><span>部署月刃哨兵</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="golem" hidden><b>像</b><span>部署魔像</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="banshee" hidden><b>魅</b><span>部署暮影女妖</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="boneRider" hidden><b>騎</b><span>部署幽騎骸將</span></button>
-        <button type="button" data-build-kind="unit" data-build-type="orc" hidden><b>斧</b><span>部署半獸人</span></button>
-        <button type="button" data-build-kind="building" data-build-type="arrow"><b>♜</b><span>林地弩塔</span></button>
-        <button type="button" data-build-kind="building" data-build-type="iceward"><b>❄</b><span>寒鋼哨塔</span></button>
-        <button type="button" data-build-kind="building" data-build-type="frost"><b>❄</b><span>寒霜塔</span></button>
-        <button type="button" data-build-kind="building" data-build-type="cannon"><b>●</b><span>火砲塔</span></button>
-        <button type="button" data-build-kind="building" data-build-type="storm"><b>星葉雷霆塔</b><span>精靈 · 連鎖</span></button>
-        <button type="button" data-build-kind="building" data-build-type="totem"><b>赤牙祖靈柱</b><span>獸族 · 震地</span></button>
-        <button type="button" data-build-kind="building" data-build-type="crypt"><b>幽骨召喚殿</b><span>亡靈 · 召喚</span></button>
-        <button type="button" data-build-kind="building" data-build-type="soul"><b>靈魂收割塔</b><span>暗影 · 連鎖</span></button>
-        <button type="button" data-build-kind="building" data-build-type="barracks"><b>王國戰鼓堡</b><span>王國 · 齊射</span></button>
-        <button type="button" data-build-kind="building" data-build-type="grove"><b>翠靈古樹</b><span>精靈 · 禁錮</span></button>
-        <button type="button" data-build-kind="building" data-build-type="graveyard"><b>冥燈墓園</b><span>暗影 · 召喚</span></button>
-        <button type="button" data-build-kind="building" data-build-type="ballista"><b>獅翼弩砲台</b><span>王國 · 多重貫射</span></button>
-        <button type="button" data-build-kind="building" data-build-type="moonwell"><b>月泉稜鏡塔</b><span>精靈 · 折射緩速</span></button>
-        <button type="button" data-build-kind="building" data-build-type="plague"><b>瘟疫尖碑</b><span>暗影 · 腐化爆發</span></button>
-        <button id="td-move" class="order-action" type="button" disabled title="移動（M）"><b>➤</b><span>移動 M</span></button>
-        <button id="td-attack-move" class="order-action" type="button" disabled title="攻擊移動（A）"><b>⚔</b><span>攻擊移動 A</span></button>
-        <button id="td-hold" class="order-action" type="button" disabled title="固守（H）"><b>⌾</b><span>固守 H</span></button>
-        <button id="td-stop" class="order-action" type="button" disabled title="停止（S）"><b>■</b><span>停止 S</span></button>
-        <button id="td-upgrade" class="order-action" type="button" disabled><b>⬆</b><span>升級</span></button>
-        <button id="td-sell" class="order-action" type="button" disabled><b>↩</b><span>遣散</span></button>
-
+        <button type="button" data-build-kind="unit" data-build-type="hunter" hidden><b>➶</b><span>部署獵手</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="arcanist" hidden><b>✦</b><span>部署術士</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="rogue" hidden><b>◆</b><span>部署盜賊</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="shield" hidden><b>盾</b><span>部署盾衛</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="knight" hidden><b>槌</b><span>部署騎士</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="musketeer" hidden><b>銃</b><span>部署火槍手</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="halberdier" hidden><b>戟</b><span>部署長戟衛</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="skeleton" hidden><b>骷</b><span>部署骷髏</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="dragon" hidden><b>龍</b><span>部署幼龍</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="treant" hidden><b>樹</b><span>部署樹靈</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="dryad" hidden><b>鹿</b><span>部署林裔獵手</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="moonblade" hidden><b>刃</b><span>部署月刃哨兵</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="golem" hidden><b>像</b><span>部署魔像</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="banshee" hidden><b>魅</b><span>部署暮影女妖</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="boneRider" hidden><b>騎</b><span>部署幽騎骸將</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="orc" hidden><b>斧</b><span>部署半獸人</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="arrow"><b>♜</b><span>林地弩塔</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="iceward"><b>❄</b><span>寒鋼哨塔</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="frost"><b>❄</b><span>寒霜塔</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="cannon"><b>●</b><span>火砲塔</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="storm"><b>星葉雷霆塔</b><span>精靈 · 連鎖</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="totem"><b>赤牙祖靈柱</b><span>獸族 · 震地</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="crypt"><b>幽骨召喚殿</b><span>亡靈 · 召喚</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="soul"><b>靈魂收割塔</b><span>暗影 · 連鎖</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="barracks"><b>王國戰鼓堡</b><span>王國 · 齊射</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="grove"><b>翠靈古樹</b><span>精靈 · 禁錮</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="graveyard"><b>冥燈墓園</b><span>暗影 · 召喚</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="ballista"><b>獅翼弩砲台</b><span>王國 · 多重貫射</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="moonwell"><b>月泉稜鏡塔</b><span>精靈 · 折射緩速</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="plague"><b>瘟疫尖碑</b><span>暗影 · 腐化爆發</span><small></small></button>
         <button id="td-cancel-build" class="order-action" type="button"><b>✕</b><span>取消部署</span></button>
       </div>
     </section>
-    <footer id="td-help">① 選擇職業　② 招募守軍並點地面部署　③ 守住城門 · F 施放英雄大絕</footer>
+    <footer id="td-help">① 選擇職業　② 招募守軍並永久部署　③ 守住城門 · F 施放英雄大絕</footer>
   </main>
-  <section id="td-menu-screen" class="game-menu-overlay" role="dialog" aria-modal="true" aria-labelledby="td-menu-title" hidden><div class="game-menu-dialog"><div class="game-menu-heading"><small>HERO FRONTIER</small><h2 id="td-menu-title">遊戲選單</h2></div><div id="td-menu-actions" class="game-menu-actions"><button id="td-menu-continue" type="button">▶ 繼續遊戲</button><button id="td-menu-restart" type="button">↻ 重新開始本局</button><a href="index.html">⌂ 返回模式選擇</a><button id="td-menu-settings" type="button">⚙ 設定</button></div><div id="td-menu-confirm" class="game-menu-confirm" hidden><strong>重新開始本局？</strong><p>目前波次、資源與建造陣容會清空；將沿用本局的難度與英雄。</p><div><button id="td-menu-cancel-restart" type="button">取消</button><button id="td-menu-confirm-restart" type="button">確認重新開始</button></div></div><div id="td-menu-settings-panel" class="game-menu-settings" hidden><label>介面模式 <select id="td-menu-layout-mode" aria-label="遊戲選單介面模式"><option value="auto">自動切換</option><option value="desktop">電腦版</option><option value="mobile">手機版</option></select></label><p>電腦：點選單位／右鍵移動，M 移動、A 攻擊移動、H 固守、S 停止、F1 選英雄。手機：點選戰場與底部指揮面板。</p><button id="td-menu-settings-back" type="button">返回遊戲選單</button></div></div></section>
+  <section id="td-menu-screen" class="game-menu-overlay" role="dialog" aria-modal="true" aria-labelledby="td-menu-title" hidden><div class="game-menu-dialog"><div class="game-menu-heading"><small>HERO FRONTIER</small><h2 id="td-menu-title">遊戲選單</h2></div><div id="td-menu-actions" class="game-menu-actions"><button id="td-menu-continue" type="button">▶ 繼續遊戲</button><button id="td-menu-restart" type="button">↻ 重新開始本局</button><a href="index.html">⌂ 返回模式選擇</a><button id="td-menu-settings" type="button">⚙ 設定</button></div><div id="td-menu-confirm" class="game-menu-confirm" hidden><strong>重新開始本局？</strong><p>目前波次、資源與建造陣容會清空；將沿用本局的地圖、難度、英雄與軍團。</p><div><button id="td-menu-cancel-restart" type="button">取消</button><button id="td-menu-confirm-restart" type="button">確認重新開始</button></div></div><div id="td-menu-settings-panel" class="game-menu-settings" hidden><label>介面模式 <select id="td-menu-layout-mode" aria-label="遊戲選單介面模式"><option value="auto">自動切換</option><option value="desktop">電腦版</option><option value="mobile">手機版</option></select></label><p>英雄可點地面或右鍵移動；士兵與塔部署後永久固定並自動戰鬥。F1 可隨時選回英雄。手機與電腦共用同一套戰鬥規則。</p><button id="td-menu-settings-back" type="button">返回遊戲選單</button></div></div></section>
   <section id="td-shop-screen" class="shop-overlay" role="dialog" aria-modal="true" aria-labelledby="td-shop-title" hidden>
     <div class="shop-dialog"><div class="shop-heading"><div><small>FRONTIER MERCHANT</small><h2 id="td-shop-title">銀葉商店城</h2></div><button id="td-shop-close" type="button">返回戰場</button></div>
     <p>持有 <strong id="td-shop-gold">240G</strong> · 購物時戰鬥暫停 · 裝備本局有效</p>
@@ -135,12 +142,12 @@
       <button type="button" data-shop-item="spear" class="shop-weapon-offer"><i class="shop-item-icon" aria-hidden="true"></i><b>職業武器鍛造</b><small>每級普攻與傷害技能 +20%</small><span>100G</span></button>
       <button type="button" data-shop-item="rune"><b>◈ 迅捷符文</b><small>每級新施放技能冷卻 -10%</small><span>120G</span></button>
       <button type="button" data-shop-item="charm"><b>✧ 祖靈契約</b><small>每級守衛壽命 +3秒、傷害 +20%；Lv.3 多一名守衛</small><span>140G</span></button>
-    </div><h3>傭兵館 · 跨族契約</h3><p>只販售目前軍團無法自行建造的兵種；成功放置才扣款，可移動、升至 Lv.5、遣散回收70%。</p><div class="shop-items mercenary-items">
+    </div><h3>傭兵館 · 跨族契約</h3><p>只販售目前軍團無法自行建造的兵種；成功放置才扣款，部署後永久固定、自動攻擊、可升至 Lv.5、回收70%。</p><div class="shop-items mercenary-items">
       <button type="button" data-mercenary="hunter"><b>王國 · 遊俠傭兵</b><small>遠射，Lv.3／5 增加目標</small><span>105G</span></button>
-      <button type="button" data-mercenary="shield"><b>王國 · 重裝盾衛</b><small>高護甲攔截，每四擊附帶震懾</small><span>158G</span></button>
+      <button type="button" data-mercenary="shield"><b>王國 · 重裝盾衛</b><small>定點震懾，每四擊強力緩速</small><span>158G</span></button>
       <button type="button" data-mercenary="knight"><b>王國 · 獅翼騎士</b><small>近戰破陣，第四擊造成暈眩</small><span>192G</span></button>
       <button type="button" data-mercenary="musketeer"><b>王國 · 火槍手</b><small>遠距點殺輕甲，出手較慢</small><span>177G</span></button>
-      <button type="button" data-mercenary="halberdier"><b>王國 · 長戟衛</b><small>長兵攔截，第四擊震懾</small><span>168G</span></button>
+      <button type="button" data-mercenary="halberdier"><b>王國 · 長戟衛</b><small>近距長戟，第四擊震懾</small><span>168G</span></button>
       <button type="button" data-mercenary="arcanist"><b>精靈 · 秘法傭兵</b><small>魔法範圍爆破，剋制重甲</small><span>128G</span></button>
       <button type="button" data-mercenary="dragon"><b>精靈 · 翡翠幼龍</b><small>飛行範圍魔法攻擊</small><span>248G</span></button>
       <button type="button" data-mercenary="treant"><b>精靈 · 翠靈古衛</b><small>遠程緩速，牽制成群敵軍</small><span>207G</span></button>
@@ -148,7 +155,7 @@
       <button type="button" data-mercenary="moonblade"><b>精靈 · 月刃哨兵</b><small>近戰旋刃、攻擊小範圍敵軍</small><span>174G</span></button>
       <button type="button" data-mercenary="rogue"><b>暗影 · 刀鋒傭兵</b><small>快速攻擊，擊殺額外賞金</small><span>98G</span></button>
       <button type="button" data-mercenary="skeleton"><b>暗影 · 幽骨劍士</b><small>高速近戰，熟練後提高輸出</small><span>117G</span></button>
-      <button type="button" data-mercenary="golem"><b>暗影 · 冥鐵魔像</b><small>高生命範圍重擊，擅長阻路</small><span>222G</span></button>
+      <button type="button" data-mercenary="golem"><b>暗影 · 冥鐵魔像</b><small>近距範圍重擊，擅長清群</small><span>222G</span></button>
       <button type="button" data-mercenary="banshee"><b>暗影 · 暮影女妖</b><small>遠程靈能連鎖，剋制群體</small><span>206G</span></button>
       <button type="button" data-mercenary="boneRider"><b>暗影 · 幽騎骸將</b><small>高速衝陣與近戰濺射</small><span>237G</span></button>
     </div><p id="td-shop-message" role="status"></p></div>
@@ -160,7 +167,7 @@
     <div class="armory-dialog"><div class="armory-heading"><div><small>FIELD ARMORY</small><h2 id="td-armory-title">戰地軍械庫</h2></div><button id="td-armory-close" type="button">返回戰場</button></div><p>目前配置目標：<strong id="td-armory-target">尚未選取單位</strong></p><div id="td-armory-loadout" class="armory-loadout" aria-label="目前裝備欄位"></div><div id="td-armory-items" class="armory-items"></div><p id="td-armory-message" class="armory-message" role="status">通過軍械波次取得裝備，再配置給相符的英雄或守軍。</p></div>
   </section>
   <section id="td-report-screen" class="report-overlay" role="dialog" aria-modal="true" aria-labelledby="td-report-title" hidden>
-    <div class="report-dialog"><div class="report-heading"><div><small>BATTLE LEDGER</small><h2 id="td-report-title">邊境戰況</h2></div><button id="td-report-close" type="button">返回整備</button></div><p id="td-report-run">尚未開始戰役</p><div class="report-table" role="table" aria-label="逐波戰報"><div class="report-row report-head" role="row"><span>波次</span><span>評價</span><span>擊破</span><span>漏怪</span><span>損失</span><span>收入</span></div><div id="td-report-rows"></div></div><strong id="td-report-total" class="report-total">尚無完成波次</strong></div>
+    <div class="report-dialog"><div class="report-heading"><div><small>BATTLE LEDGER</small><h2 id="td-report-title">邊境戰況</h2></div><button id="td-report-close" type="button">返回整備</button></div><p id="td-report-run">尚未開始戰役</p><div class="report-table" role="table" aria-label="逐波戰報"><div class="report-row report-head" role="row"><span>波次</span><span>評價</span><span>擊破</span><span>漏怪</span><span>英雄倒下</span><span>收入</span></div><div id="td-report-rows"></div></div><strong id="td-report-total" class="report-total">尚無完成波次</strong></div>
   </section>
   <script src="src/td/namespace.js"></script>
   <script src="src/td/config.js"></script>
@@ -196,6 +203,10 @@
   <script src="src/td/systems/WaveSystem.js"></script>
   <script src="src/td/systems/BuildSystem.js"></script>
   <script src="src/td/TDGame.js"></script>
+  <script src="src/td/systems/BattlefieldCamera.js"></script>
+  <script src="src/td/systems/MiniMapView.js"></script>
+  <script src="src/td/maps.js"></script>
+  <script src="src/td/systems/FrontierTerrain.js"></script>
   <script src="src/td/main.js"></script>
 </body>
 </html>
