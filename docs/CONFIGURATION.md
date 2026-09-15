@@ -1,5 +1,9 @@
 # 設定手冊
 
+## 0.60.0 HUD 密度設定
+
+沒有新增玩家設定或環境變數。HUD 密度由 `td-combat.css` 依 CSS Viewport 自動判斷：1600px 以上寬桌面使用較大元件；1199px 以下或低高度使用緊湊元件。這些數值只屬 Presentation，不得寫回 Camera、World 或戰鬥設定。
+
 ## 0.59.0 選角圖片設定
 
 圖片不使用環境變數或外部 URL。英雄、軍團與難度分別由 `HeroRoster.js`、`FactionSystem.js`、`TDDifficultySystem.js` 的 `selectionArt` 指定；`selectionFocus` 調整單張圖片裁切焦點，難度共用圖集則由 `selectionPosition` 選取象限。所有路徑需相對專案根目錄並加入 `sw.js`。

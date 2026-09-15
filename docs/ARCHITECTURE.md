@@ -1,5 +1,19 @@
 # 系統架構
 
+## 0.60.0 瀏覽器縮放與 HUD 密度
+
+```text
+Browser Zoom
+   ↓ 改變 CSS Viewport／DPR
+CSS media query
+   ├─ Wide desktop：放大個別邊緣 HUD
+   └─ Narrow／short：緊湊 HUD＋控制列置中
+
+World／Camera／Canvas／Input ── 不變
+```
+
+此版沿用單一 DOM、單一 Gameplay 與單一 Responsive CSS。沒有新增 Scale Manager 或第二套 PC UI，也不以父層 transform 模擬瀏覽器縮放；因此地圖座標和 fixed 控件不會被額外的座標系影響。
+
 ## 0.59.0 遠征選角 Presentation
 
 ```text

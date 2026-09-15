@@ -1,5 +1,9 @@
 # 部署手冊
 
+## 0.60.0 待部署狀態
+
+本版目前只在本機，尚未推送 GitHub／Pages。部署單位包含 `td-combat.css`、回歸測試、所有文件、`package.json` 與 `sw.js`；沒有資料庫或 API 遷移。快取名為 `sky-strike-v0.60.0`。發布後需以實體桌面瀏覽器檢查 100%、150%、200%，特別確認倍速列置中、暫停鍵位於資源列最右側，以及 HUD 沒有遮住主要戰場操作。
+
 ## 0.59.0 待部署狀態
 
 本版目前只在本機，尚未推送 GitHub／Pages。部署必須包含 `assets/td/opening` 內四類難度場景、三張英雄立繪、三張軍團橫幅，以及 HeroRoster、FactionSystem、TDDifficultySystem、TDGame、CSS、測試、文件、`package.json` 與 `sw.js`。快取名為 `sky-strike-v0.59.0`，無資料或 API 遷移。發布後請確認所有 PNG 回應成功且軍團卡沒有退回英雄圖。

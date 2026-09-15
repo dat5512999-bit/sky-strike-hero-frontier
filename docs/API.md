@@ -1,5 +1,11 @@
 # API 文件（內部模組介面）
 
+## 0.60.0 HUD Presentation 契約
+
+- 本版沒有新增 JavaScript Gameplay API、資料欄位或事件。
+- `td-combat.css` 依 CSS Viewport 寬高切換 HUD 密度；地圖 World、Camera、Canvas 與 Pointer 換算仍是原 API。
+- `.hud-controls` 以固定斷點寬度及 `calc()` 水平置中，不使用父層 `transform`，以免改變其中 fixed 暫停按鈕的 containing block（定位參考層）。
+
 ## 0.59.0 選角美術資料介面
 
 - `HeroRoster.get(type).selectionArt`／`selectionFocus`：英雄選角立繪與 CSS `background-position` 焦點。

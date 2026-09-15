@@ -1,5 +1,9 @@
 # 安裝手冊
 
+## 0.60.0 安裝與啟動
+
+本版沒有新增套件或資料庫。完整更新 `td-combat.css`、`tests/td-edge-ui.test.js`、`package.json` 與 `sw.js`，執行 `npm run check`、`npm test`，再開啟 `http://127.0.0.1:4173/td.html?v=0.60.0`。若瀏覽器縮放後仍使用舊版排版，請強制重新整理並確認離線快取為 `sky-strike-v0.60.0`。
+
 ## 0.59.0 安裝與啟動
 
 沒有新增套件、資料庫或網路圖片依賴。請完整保留 `assets/td/opening`、三個選角資料系統、`TDGame.js`、`td.css` 與 `sw.js`，執行 `npm run check`、`npm test`，再以 `npm run serve:test` 啟動並開啟 `http://127.0.0.1:4173/td.html?v=0.59.0`。若仍看到軍團卡裁切英雄臉部，請重新載入並等待 Service Worker 更新為 `sky-strike-v0.59.0`。

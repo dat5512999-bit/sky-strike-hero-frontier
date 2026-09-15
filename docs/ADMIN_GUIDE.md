@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## 0.60.0 HUD 縮放維護
+
+桌面縮放適配集中在 `td-combat.css` 的 0.60.0 區段。不要對 `.td-game-shell` 或整個 HUD 使用 `transform: scale()`；瀏覽器縮放已經改變 CSS Viewport，再做整體縮放會破壞 fixed 定位與輸入換算。寬螢幕斷點只放大個別邊緣元件，1199px 以下與低高度斷點則以 `left: calc(50% - 寬度/2)` 置中 `.hud-controls`。修改後至少驗證 1920×900／DPR 1、1280×600／DPR 1.5、960×450／DPR 2，並確認 Wave、控制列、資源列互不重疊且暫停鍵在最右側。
+
 ## 0.59.0 選角素材維護
 
 英雄立繪路徑／焦點位於 `src/td/systems/HeroRoster.js` 的 `selectionArt`／`selectionFocus`；軍團橫幅位於 `FactionSystem.js` 的同名欄位；難度場景與圖集分區位於 `TDDifficultySystem.js` 的 `selectionArt`／`selectionPosition`。替換圖片時請維持英雄直式、軍團超寬橫式與難度 2×2 圖集用途，並同步加入 `sw.js`。不要把圖片 URL 寫入事件處理器，也不要用英雄戰鬥 Sprite 代替選角立繪。

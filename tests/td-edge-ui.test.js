@@ -89,6 +89,15 @@ test('戰鬥資源列使用單行圖示數值與既有暫停／選單入口',()=
  assert.match(css,/\.td-header>\.resource small\{[\s\S]*?clip-path:inset\(50%\)/);
  assert.match(css,/#td-pause\{[\s\S]*?position:fixed/);
 });
+test('桌面瀏覽器縮放只調整 HUD 密度，窄視窗速度列仍保持置中',()=>{
+ const css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
+ assert.match(css,/@media \(min-width:1600px\) and \(min-height:700px\)\{[\s\S]*?--hero-width:350px;--skills-width:520px/);
+ assert.match(css,/@media \(min-width:701px\) and \(max-width:1199px\)\{[\s\S]*?\.hud-controls\{left:calc\(50% - 206px\);right:auto;width:412px;[\s\S]*?transform:none/);
+ assert.match(css,/@media \(min-width:701px\) and \(max-width:1199px\) and \(max-height:600px\)\{[\s\S]*?left:calc\(50% - 186\.5px\);width:373px/);
+ assert.match(css,/@media \(min-width:1200px\) and \(max-height:600px\)\{[\s\S]*?left:calc\(50% - 202\.5px\);right:auto;width:405px/);
+ assert.doesNotMatch(css,/\.hud-controls\{[^}]*transform:translateX/);
+ assert.doesNotMatch(css,/\.td-shell\{[^}]*transform:scale\(/);
+});
 test('技能美術依英雄分列、保留文字 fallback，素材在專案及離線清單內',()=>{
  const css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
  for(const hero of ['hunter','arcanist','rogue'])assert.ok(css.includes('body[data-hero-class="'+hero+'"]'));

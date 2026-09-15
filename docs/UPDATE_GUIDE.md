@@ -1,5 +1,9 @@
 # 版本更新手冊
 
+## 0.60.0 升級方式
+
+拉取完整版本後執行 `npm run check` 與 `npm test`，再重新載入 `td.html?v=0.60.0`。沒有存檔遷移或新依賴；離線版確認快取更新為 `sky-strike-v0.60.0`。只更新 CSS 而不更新 Service Worker 可能持續看到舊斷點。更新後請在瀏覽器 100%、150%、200% 各檢查一次頂部控制列。
+
 ## 0.59.0 升級方式
 
 拉取完整版本後執行 `npm run check` 與 `npm test`，再重新載入 `td.html?v=0.59.0`。沒有存檔遷移；離線版確認快取更新為 `sky-strike-v0.59.0`。請勿只更新 CSS，七個新選角 PNG 與 Hero／Faction／Difficulty metadata 必須一起更新。

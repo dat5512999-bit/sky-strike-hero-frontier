@@ -432,3 +432,52 @@ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-scr
  body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]::before{grid-row:1/3;width:40px;height:38px;}
  body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] span{display:none;}
 }
+
+/* v0.60: desktop HUD density follows usable CSS viewport, including browser zoom.
+   Only presentation sizes change; the battlefield camera and world coordinates stay untouched. */
+@media (min-width:1600px) and (min-height:700px){
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]){--edge:16px;--hero-width:350px;--skills-width:520px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header{width:460px;height:52px;min-height:52px;grid-template-columns:minmax(0,1.1fr) minmax(0,.65fr) minmax(0,.65fr) minmax(0,1.35fr) 52px 52px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource{gap:5px;padding:0 5px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource .resource-icon{font-size:20px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource strong{font-size:20px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-menu-open{width:52px;height:50px;min-height:50px;font-size:24px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-pause{width:52px;min-width:52px;height:52px;min-height:52px;font-size:23px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-wave-info{width:430px;height:78px;grid-template-columns:72px 1fr;gap:11px;padding:7px 10px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .wave-index strong{font-size:34px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-wave-status{max-width:328px;font-size:15px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls{left:calc(50% - 305px);width:610px;height:54px;padding:4px;transform:none;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls button{min-height:44px;flex-basis:46px;font-size:13px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-wave-button{font-size:13px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-minimap{top:76px;width:290px;height:210px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail{top:294px;width:64px;gap:7px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail button{width:64px;height:64px;min-height:64px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail b{font-size:28px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-quick-rail small{font-size:11px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-details{top:294px;right:calc(var(--edge) + 72px);width:390px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls{top:512px;min-width:64px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-profile{bottom:94px;grid-template-columns:72px minmax(0,1fr) 44px;grid-template-rows:34px 62px 36px;padding:10px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select{grid-template-columns:72px minmax(0,1fr);}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-face{width:72px;height:84px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-select strong{font-size:18px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-rank strong{font-size:22px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label,body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label>span{font-size:11px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more summary{min-height:36px;font-size:13px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .command-tabs button{min-height:66px;font-size:15px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button{height:110px;min-height:110px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button span{font-size:12px;}
+ body.edge-combat[data-layout="desktop"][data-skill-art="ready"] .td-hero-dock .skill-button b{width:56px;height:56px;flex-basis:56px;}
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer,body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .placement-actions{bottom:94px;}
+}
+
+/* Browser zoom near 200% reduces the CSS viewport below 1200px. Keep the compact bar,
+   but center it below the wave panel instead of snapping it to the left edge. */
+@media (min-width:701px) and (max-width:1199px){
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls{left:calc(50% - 206px);right:auto;width:412px;max-width:calc(100vw - 2 * var(--edge));transform:none;}
+}
+@media (min-width:701px) and (max-width:1199px) and (max-height:600px){
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls{left:calc(50% - 186.5px);width:373px;max-width:calc(100vw - 2 * var(--edge));}
+}
+@media (min-width:1200px) and (max-height:600px){
+ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hud-controls{left:calc(50% - 202.5px);right:auto;width:405px;max-width:calc(100vw - 2 * var(--edge));transform:none;}
+}
