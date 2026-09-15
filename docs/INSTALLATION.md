@@ -1,5 +1,9 @@
 # 安裝手冊
 
+## 0.60.1 安裝與啟動
+
+無新增套件。完整更新 `td.html`、`td.css`、`src/td/main.js`、`src/td/TDGame.js`、測試、`package.json` 與 `sw.js`，執行 `npm run check`、`npm test`，再開啟 `http://127.0.0.1:4173/td.html?v=0.60.1`。進入戰鬥後由 ⚙ 選「返回遠征選擇」，網址應保持在 `td.html`。
+
 ## 0.60.0 安裝與啟動
 
 本版沒有新增套件或資料庫。完整更新 `td-combat.css`、`tests/td-edge-ui.test.js`、`package.json` 與 `sw.js`，執行 `npm run check`、`npm test`，再開啟 `http://127.0.0.1:4173/td.html?v=0.60.0`。若瀏覽器縮放後仍使用舊版排版，請強制重新整理並確認離線快取為 `sky-strike-v0.60.0`。

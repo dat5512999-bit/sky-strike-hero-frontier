@@ -19,7 +19,7 @@
   <main class="td-shell">
     <header class="td-header">
       <div class="td-brand"><h1>英雄塔防<small>HERO FRONTIER</small></h1></div>
-      <a href="index.html" aria-label="返回飛機射擊模式">← 飛機模式</a>
+      <a href="td.html" aria-label="返回遠征選擇">← 遠征選擇</a>
       <label class="td-layout-picker"><span>介面</span><select id="td-layout-mode" aria-label="介面模式"><option value="auto">自動</option><option value="desktop">電腦</option><option value="mobile">手機</option></select></label>
       <div class="resource" title="金幣"><span class="resource-icon" aria-hidden="true">🪙</span><small>GOLD</small><strong id="td-gold">240</strong></div>
       <div class="resource" title="木材"><span class="resource-icon" aria-hidden="true">🪵</span><small>木材</small><strong id="td-lumber">5</strong></div>
@@ -44,7 +44,7 @@
 
       <div id="td-profession-screen" class="td-profession-screen" role="dialog" aria-modal="true" aria-labelledby="td-opening-title">
         <div class="profession-dialog">
-          <div class="opening-topline"><a href="index.html">← 返回模式選擇</a><span>HERO FRONTIER · CHOOSE YOUR CHALLENGE</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
+          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>HERO FRONTIER · CHOOSE YOUR CHALLENGE</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
           <div class="opening-titlebar">
             <div class="opening-title-copy"><p>英雄塔防</p><h2 id="td-opening-title">選擇你的遠征</h2><span>選定挑戰、英雄與軍團，即刻守衛邊境。</span></div>
             <label class="map-choice"><span>目前戰場</span><select id="td-map-choice" aria-label="選擇戰場"><option value="beginner">新手谷地 · U 型防線</option></select><small id="td-map-note">U 型單路線｜草地部署｜道路與地形禁建</small></label>
@@ -78,7 +78,7 @@
         </div>
       </div>
       <div id="td-overlay" class="td-overlay" hidden>
-        <div><p>FRONTIER REPORT</p><h2 id="td-overlay-title">王城失守</h2><span id="td-overlay-message"></span><strong id="td-final-report" class="final-report"></strong><div class="result-actions"><button id="td-restart" type="button">再挑戰一次</button><button id="td-result-change" type="button">更換英雄、軍團與難度</button><a id="td-result-mode" href="index.html">返回模式選擇</a></div></div>
+        <div><p>FRONTIER REPORT</p><h2 id="td-overlay-title">王城失守</h2><span id="td-overlay-message"></span><strong id="td-final-report" class="final-report"></strong><div class="result-actions"><button id="td-restart" type="button">再挑戰一次</button><button id="td-result-change" type="button">返回遠征選擇</button></div></div>
       </div>
     </section>
     <section class="td-command" aria-label="建造與英雄指令">
@@ -138,7 +138,7 @@
     </section>
     <footer id="td-help">① 選擇職業　② 招募守軍並永久部署　③ 守住城門 · F 施放英雄大絕</footer>
   </main>
-  <section id="td-menu-screen" class="game-menu-overlay" role="dialog" aria-modal="true" aria-labelledby="td-menu-title" hidden><div class="game-menu-dialog"><div class="game-menu-heading"><small>HERO FRONTIER</small><h2 id="td-menu-title">遊戲選單</h2></div><div id="td-menu-actions" class="game-menu-actions"><button id="td-menu-continue" type="button">▶ 繼續遊戲</button><button id="td-menu-restart" type="button">↻ 重新開始本局</button><a href="index.html">⌂ 返回模式選擇</a><button id="td-menu-settings" type="button">⚙ 設定</button></div><div id="td-menu-confirm" class="game-menu-confirm" hidden><strong>重新開始本局？</strong><p>目前波次、資源與建造陣容會清空；將沿用本局的地圖、難度、英雄與軍團。</p><div><button id="td-menu-cancel-restart" type="button">取消</button><button id="td-menu-confirm-restart" type="button">確認重新開始</button></div></div><div id="td-menu-settings-panel" class="game-menu-settings" hidden><label>介面模式 <select id="td-menu-layout-mode" aria-label="遊戲選單介面模式"><option value="auto">自動切換</option><option value="desktop">電腦版</option><option value="mobile">手機版</option></select></label><p>英雄可點地面或右鍵移動；士兵與塔部署後永久固定並自動戰鬥。F1 可隨時選回英雄。手機與電腦共用同一套戰鬥規則。</p><button id="td-menu-settings-back" type="button">返回遊戲選單</button></div></div></section>
+  <section id="td-menu-screen" class="game-menu-overlay" role="dialog" aria-modal="true" aria-labelledby="td-menu-title" hidden><div class="game-menu-dialog"><div class="game-menu-heading"><small>HERO FRONTIER</small><h2 id="td-menu-title">遊戲選單</h2></div><div id="td-menu-actions" class="game-menu-actions"><button id="td-menu-continue" type="button">▶ 繼續遊戲</button><button id="td-menu-restart" type="button">↻ 重新開始本局</button><button id="td-menu-return" type="button">⌂ 返回遠征選擇</button><button id="td-menu-settings" type="button">⚙ 設定</button></div><div id="td-menu-confirm" class="game-menu-confirm" hidden><strong>重新開始本局？</strong><p>目前波次、資源與建造陣容會清空；將沿用本局的地圖、難度、英雄與軍團。</p><div><button id="td-menu-cancel-restart" type="button">取消</button><button id="td-menu-confirm-restart" type="button">確認重新開始</button></div></div><div id="td-menu-settings-panel" class="game-menu-settings" hidden><label>介面模式 <select id="td-menu-layout-mode" aria-label="遊戲選單介面模式"><option value="auto">自動切換</option><option value="desktop">電腦版</option><option value="mobile">手機版</option></select></label><p>英雄可點地面或右鍵移動；士兵與塔部署後永久固定並自動戰鬥。F1 可隨時選回英雄。手機與電腦共用同一套戰鬥規則。</p><button id="td-menu-settings-back" type="button">返回遊戲選單</button></div></div></section>
   <section id="td-shop-screen" class="shop-overlay" role="dialog" aria-modal="true" aria-labelledby="td-shop-title" hidden>
     <div class="shop-dialog"><div class="shop-heading"><div><small>FRONTIER MERCHANT</small><h2 id="td-shop-title">銀葉商店城</h2></div><button id="td-shop-close" type="button">返回戰場</button></div>
     <p>持有 <strong id="td-shop-gold">240G</strong> · 購物時戰鬥暫停 · 裝備本局有效</p>

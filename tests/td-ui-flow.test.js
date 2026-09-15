@@ -15,12 +15,13 @@ function button(filter){return {dataset:{buildFilter:filter},attributes:{},setAt
 
 test('開局、建造 Drawer 與統一選單保留同一套 UI 入口',()=>{
   const html=fs.readFileSync(path.join(root,'td.html'),'utf8');
-  for(const id of ['td-start-expedition','td-difficulty-detail','td-build-drawer','td-menu-screen','td-menu-confirm-restart','td-result-change'])assert.ok(html.includes('id="'+id+'"'),id);
+  for(const id of ['td-start-expedition','td-difficulty-detail','td-build-drawer','td-menu-screen','td-menu-confirm-restart','td-menu-return','td-result-change','td-opening-reset'])assert.ok(html.includes('id="'+id+'"'),id);
   assert.match(html,/data-build-filter="recent"/);
   assert.match(html,/data-profession="hunter" aria-pressed="false"/);
   assert.match(html,/data-faction="hunter" aria-pressed="false"/);
   assert.match(html,/id="td-faction-heading"/);
-  assert.match(html,/id="td-result-mode" href="index.html"/);
+  assert.doesNotMatch(html,/href="index\.html"/);
+  assert.equal((html.match(/返回遠征選擇/g)||[]).length,3);
   assert.match(html,/id="td-selection-actions"/);
   assert.doesNotMatch(html,/id="td-move"|id="td-attack-move"|id="td-hold"|id="td-stop"/);
 });
@@ -41,6 +42,13 @@ test('重新挑戰沿用上一局設定，並確實呼叫既有 reset',()=>{
   const calls=[],game={lastRun:{difficulty:'veteran',profession:'rogue',faction:'hunter'},ui:{menuScreen:{hidden:false}},reset(){calls.push('reset');},chooseDifficulty(id){calls.push('difficulty:'+id);},selectOpeningProfession(id){calls.push('hero:'+id);},selectOpeningFaction(id){calls.push('faction:'+id);},chooseProfession(hero,faction){calls.push('start:'+hero+'×'+faction);}};
   assert.equal(prototype().retrySameSetup.call(game),true);
   assert.deepEqual(calls,['reset','difficulty:veteran','hero:rogue','faction:hunter','start:rogue×hunter']);
+  assert.equal(game.ui.menuScreen.hidden,true);
+});
+
+test('返回遠征選擇留在 HERO FRONTIER 並關閉遊戲選單',()=>{
+  const calls=[],game={ui:{menuScreen:{hidden:false}},reset(){calls.push('reset');}};
+  assert.equal(prototype().returnToOpening.call(game),true);
+  assert.deepEqual(calls,['reset']);
   assert.equal(game.ui.menuScreen.hidden,true);
 });
 

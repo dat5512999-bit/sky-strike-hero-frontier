@@ -1,5 +1,9 @@
 # 部署手冊
 
+## 0.60.1 待部署狀態
+
+本版目前只在本機，尚未推送 GitHub／Pages。部署需同步 `td.html`、`td.css`、TDGame／main、測試、文件、`package.json` 與 `sw.js`，快取名為 `sky-strike-v0.60.1`。發布後確認遊戲選單與結算返回都停留在 `/td.html`，並確認 HTML 中沒有 `href="index.html"`。
+
 ## 0.60.0 待部署狀態
 
 本版目前只在本機，尚未推送 GitHub／Pages。部署單位包含 `td-combat.css`、回歸測試、所有文件、`package.json` 與 `sw.js`；沒有資料庫或 API 遷移。快取名為 `sky-strike-v0.60.0`。發布後需以實體桌面瀏覽器檢查 100%、150%、200%，特別確認倍速列置中、暫停鍵位於資源列最右側，以及 HUD 沒有遮住主要戰場操作。

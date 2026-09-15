@@ -1,5 +1,11 @@
 # API 文件（內部模組介面）
 
+## 0.60.1 遠征返回介面
+
+- `TDGame.returnToOpening()`：先隱藏目前遊戲選單，再呼叫既有 `reset()` 回到 HERO FRONTIER 遠征選擇；回傳 `true`。
+- `ui.menuReturn`、`ui.resultChange`、`ui.openingReset` 共用此入口；沒有新增頁面 Router 或第二套 Reset。
+- `td.html` 不再把 `index.html` 當成 HERO FRONTIER 模式選單。
+
 ## 0.60.0 HUD Presentation 契約
 
 - 本版沒有新增 JavaScript Gameplay API、資料欄位或事件。

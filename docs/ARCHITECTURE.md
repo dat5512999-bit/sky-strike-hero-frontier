@@ -1,5 +1,19 @@
 # 系統架構
 
+## 0.60.1 HERO FRONTIER 內部返回
+
+```text
+戰鬥選單／結算／選角重設
+          ↓
+TDGame.returnToOpening()
+          ↓
+關閉 Menu → 原 TDGame.reset() → td.html 遠征選擇
+
+index.html（另一款遊戲）── 不參與
+```
+
+此修正重用既有狀態重設與 Opening DOM，沒有加入 Router、主選單 Manager 或跨遊戲狀態共享。
+
 ## 0.60.0 瀏覽器縮放與 HUD 密度
 
 ```text

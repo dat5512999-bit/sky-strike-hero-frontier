@@ -29,12 +29,14 @@
   ui.menuSettingsPanel=document.getElementById('td-menu-settings-panel');
   ui.menuContinue=document.getElementById('td-menu-continue');
   ui.menuRestart=document.getElementById('td-menu-restart');
+  ui.menuReturn=document.getElementById('td-menu-return');
   ui.menuCancelRestart=document.getElementById('td-menu-cancel-restart');
   ui.menuConfirmRestart=document.getElementById('td-menu-confirm-restart');
   ui.menuSettings=document.getElementById('td-menu-settings');
   ui.menuSettingsBack=document.getElementById('td-menu-settings-back');
   ui.menuLayout=document.getElementById('td-menu-layout-mode');
   ui.resultChange=document.getElementById('td-result-change');
+  ui.openingReset=document.getElementById('td-opening-reset');
   ui.selectionShortcut=document.getElementById('td-selection-shortcut');
   ui.selectionDetails=document.querySelector('.selection-details');
   ui.armoryShortcut=document.getElementById('td-armory-shortcut');

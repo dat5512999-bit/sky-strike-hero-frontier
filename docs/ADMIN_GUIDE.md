@@ -1,5 +1,9 @@
 # 管理者手冊
 
+## 0.60.1 返回流程維護
+
+HERO FRONTIER 內部不得再以 `href="index.html"` 表示「返回模式選擇」；`index.html` 是另一款飛機遊戲，不是 TD 模式選單。戰鬥與結算回遠征頁統一呼叫 `TDGame.returnToOpening()`，由它關閉 Menu 後沿用既有 `reset()`。如未來需要跨產品入口，必須使用明確的「離開 HERO FRONTIER」文案並另行確認，不得混用遠征返回功能。
+
 ## 0.60.0 HUD 縮放維護
 
 桌面縮放適配集中在 `td-combat.css` 的 0.60.0 區段。不要對 `.td-game-shell` 或整個 HUD 使用 `transform: scale()`；瀏覽器縮放已經改變 CSS Viewport，再做整體縮放會破壞 fixed 定位與輸入換算。寬螢幕斷點只放大個別邊緣元件，1199px 以下與低高度斷點則以 `left: calc(50% - 寬度/2)` 置中 `.hud-controls`。修改後至少驗證 1920×900／DPR 1、1280×600／DPR 1.5、960×450／DPR 2，並確認 Wave、控制列、資源列互不重疊且暫停鍵在最右側。
