@@ -1,5 +1,13 @@
 # 部署手冊
 
+## 0.62.0 部署
+
+本版目前只在本機，尚未推送 GitHub／Pages。部署時同步 `BattleReportSystem.js`、`TDGame.js`、`main.js`、`td.html`、`td.css`、`td-combat.css`、測試、文件、`package.json` 與 `sw.js`。發布後確認 Cache 為 `sky-strike-v0.62.0`，完成一場成功及一場失敗煙霧測試，並重新載入確認最佳積分仍存在。
+
+## 0.61.0 待部署狀態
+
+本版目前在本機工作樹，尚未推送 GitHub／Pages。部署必須包含 TDGame、Camera、Economy、Shop、BattleReport、HeroRoster、Art、Map、HTML／CSS、manifest、測試、所有文件、`package.json` 與 `sw.js`；快取名為 `sky-strike-v0.61.0`。沒有資料庫或存檔遷移。發布後需以 PC 與實體橫向手機驗證英雄拖曳、空地 Pan、Pinch、觸控確認建造、兌換、積分面板、右上暫停及大絕文字。
+
 ## 0.60.1 待部署狀態
 
 本版目前只在本機，尚未推送 GitHub／Pages。部署需同步 `td.html`、`td.css`、TDGame／main、測試、文件、`package.json` 與 `sw.js`，快取名為 `sky-strike-v0.60.1`。發布後確認遊戲選單與結算返回都停留在 `/td.html`，並確認 HTML 中沒有 `href="index.html"`。

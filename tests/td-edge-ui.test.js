@@ -75,7 +75,7 @@ test('精簡 HUD 折疊保留原情報與全部鏡頭操作，無重複控件',(
  const html=fs.readFileSync(path.join(root,'td.html'),'utf8');
  assert.match(html,/<details class="wave-intel"><summary>下一波情報<\/summary><small id="td-wave-preview">/);
  assert.match(html,/<details id="td-camera-controls"[^>]*><summary>⌖ 鏡頭<\/summary>/);
- for(const id of ['td-camera-inspect','td-camera-home','td-camera-follow','td-camera-all','td-camera-out','td-camera-in'])assert.equal(html.split('id="'+id+'"').length-1,1);
+ for(const id of ['td-camera-close','td-camera-inspect','td-camera-home','td-camera-follow','td-camera-all','td-camera-out','td-camera-in'])assert.equal(html.split('id="'+id+'"').length-1,1);
  const css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
  assert.match(css,/prefers-reduced-motion:reduce/);
  assert.match(css,/\.wave-intel\[open\] #td-wave-preview/);
@@ -84,20 +84,29 @@ test('精簡 HUD 折疊保留原情報與全部鏡頭操作，無重複控件',(
 test('戰鬥資源列使用單行圖示數值與既有暫停／選單入口',()=>{
  const html=fs.readFileSync(path.join(root,'td.html'),'utf8');
  const css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
- for(const id of ['td-gold','td-lumber','td-merit','td-health'])assert.match(html,new RegExp('class="resource"[^>]*><span class="resource-icon"[^>]*>[^<]+<\\/span><small>[^<]+<\\/small><strong id="'+id+'"'));
+ for(const id of ['td-gold','td-lumber','td-merit','td-health'])assert.match(html,new RegExp('class="resource"[^>]*><span class="resource-icon[^"]*"[^>]*>[^<]+<\\/span><small>[^<]+<\\/small><strong id="'+id+'"'));
  for(const id of ['td-pause','td-menu-open'])assert.equal(html.split('id="'+id+'"').length-1,1);
  assert.match(css,/\.td-header>\.resource small\{[\s\S]*?clip-path:inset\(50%\)/);
- assert.match(css,/#td-pause\{[\s\S]*?position:fixed/);
+ assert.match(html,/<header class="td-header">[\s\S]*?id="td-pause"[\s\S]*?<\/header>/);
+ assert.match(css,/#td-pause\{[\s\S]*?position:static/);
+ assert.match(html,/class="resource-icon merit-icon"[^>]*>🏅<\/span><small>功勳/);
+ assert.doesNotMatch(html,/>💎<\/span><small>功勳/);
 });
 test('桌面瀏覽器縮放只調整 HUD 密度，窄視窗速度列仍保持置中',()=>{
  const css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
- assert.match(css,/@media \(min-width:1600px\) and \(min-height:700px\)\{[\s\S]*?--hero-width:350px;--skills-width:520px/);
+ assert.match(css,/@media \(min-width:1600px\) and \(min-height:700px\)\{[\s\S]*?--hero-width:162px/);
  assert.match(css,/@media \(min-width:701px\) and \(max-width:1199px\)\{[\s\S]*?\.hud-controls\{left:calc\(50% - 206px\);right:auto;width:412px;[\s\S]*?transform:none/);
  assert.match(css,/@media \(min-width:701px\) and \(max-width:1199px\) and \(max-height:600px\)\{[\s\S]*?left:calc\(50% - 186\.5px\);width:373px/);
  assert.match(css,/@media \(min-width:1200px\) and \(max-height:600px\)\{[\s\S]*?left:calc\(50% - 202\.5px\);right:auto;width:405px/);
- assert.doesNotMatch(css,/\.hud-controls\{[^}]*transform:translateX/);
+ assert.doesNotMatch(css,/data-layout="desktop"[^}]*\.hud-controls\{[^}]*transform:translateX/);
  assert.doesNotMatch(css,/\.td-shell\{[^}]*transform:scale\(/);
 });
+
+test('手機橫向 HUD、確認建造、資源兌換與直式提示都有獨立介面',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8'),css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8'),main=fs.readFileSync(path.join(root,'src/td/main.js'),'utf8');for(const id of ['td-orientation-gate','td-orientation-lock','td-placement-confirm','td-camera-close','td-shop-merit'])assert.equal(html.split('id="'+id+'"').length-1,1);assert.equal([...html.matchAll(/data-shop-exchange=/g)].length,2);assert.match(html,/1000 → 🏅 1/);assert.match(html,/🏅 1 → 🪙 1000/);assert.match(css,/data-combat-orientation="portrait"[^}]*\.orientation-gate\{display:grid/);assert.match(css,/data-combat-orientation="landscape"[^}]*\.hud-controls[\s\S]*?transform:translateX\(-50%\)/);assert.match(css,/data-combat-orientation="landscape"[^}]*\.selection-actions button[\s\S]*?min-height:29px/);assert.match(css,/\.shop-exchange/);assert.match(main,/screen\.orientation/);assert.match(main,/placementConfirm\.onclick/);});
+
+test('本局積分使用右側小圖塊、可關閉面板並併入含清場時間的逐波戰報',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8'),main=fs.readFileSync(path.join(root,'src/td/main.js'),'utf8'),game=fs.readFileSync(path.join(root,'src/td/TDGame.js'),'utf8');for(const id of ['td-score-shortcut','td-score-value','td-score-panel','td-score-close','td-score-total','td-score-grade','td-score-detail','td-score-best'])assert.equal(html.split('id="'+id+'"').length-1,1);assert.match(html,/🏆<\/b><small>積分/);assert.match(html,/<span>積分<\/span><span>清場時間<\/span><span>擊破<\/span>/);assert.match(main,/scoreShortcut\.addEventListener\('click'/);assert.match(game,/scoreState\(\)/);assert.match(game,/record\.timeBonus/);assert.match(game,/本次積分/);});
+
+test('祭司標記使用小型圓章，不再繪製遮住怪物的大十字方塊',()=>{const art=fs.readFileSync(path.join(root,'src/td/systems/ArtSystem.js'),'utf8');assert.match(art,/monster\.type==='healer'[\s\S]*?y=monster\.y-71[\s\S]*?ctx\.arc\(x,y,6\.5/);assert.doesNotMatch(art,/fillRect\(-2,-31,4,18\)/);});
 test('技能美術依英雄分列、保留文字 fallback，素材在專案及離線清單內',()=>{
  const css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
  for(const hero of ['hunter','arcanist','rogue'])assert.ok(css.includes('body[data-hero-class="'+hero+'"]'));
@@ -120,8 +129,9 @@ test('英雄戰鬥小卡只常駐 HP／MP，詳細資訊仍保留 XP、能力與
   assert.ok(card.includes('id="'+id+'"'));
   assert.ok(!main.includes('id="'+id+'"'),'次要資訊不應常駐：'+id);
  }
- assert.ok(card.includes('<summary>詳細資訊</summary>'));
+ assert.ok(card.includes('<summary>英雄資訊</summary>'));
  assert.match(css,/\.hero-extra\{[\s\S]*?position:absolute/);
+ assert.match(css,/\.hero-profile\{width:min\(162px/);
  assert.match(css,/\.hero-equipment:has\(>i\[hidden\]\)\{grid-template-columns:minmax\(0,1fr\) auto/);
  const baseCss=fs.readFileSync(path.join(root,'td.css'),'utf8');
  assert.match(baseCss,/\[data-mobile-panel="compact"\] \.hero-more\[open\] \.hero-equipment/);

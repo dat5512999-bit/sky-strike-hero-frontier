@@ -19,6 +19,7 @@
   ui.placementActions=document.getElementById('td-placement-actions');
   ui.placementTitle=document.getElementById('td-placement-title');
   ui.placementDetail=document.getElementById('td-placement-detail');
+  ui.placementConfirm=document.getElementById('td-placement-confirm');
   ui.placementCancel=document.getElementById('td-placement-cancel');
   ui.selectionActions=document.getElementById('td-selection-actions');
   ui.buildFilters=Array.from(document.querySelectorAll('[data-build-filter]'));
@@ -41,8 +42,24 @@
   ui.selectionDetails=document.querySelector('.selection-details');
   ui.armoryShortcut=document.getElementById('td-armory-shortcut');
   ui.armoryShortcutCount=document.getElementById('td-armory-shortcut-count');
+  ui.shopMerit=document.getElementById('td-shop-merit');
+  ui.shopExchanges=Array.from(document.querySelectorAll('[data-shop-exchange]'));
+  ui.orientationLock=document.getElementById('td-orientation-lock');
+  ui.cameraClose=document.getElementById('td-camera-close');
+  ui.scoreShortcut=document.getElementById('td-score-shortcut');
+  ui.scorePanel=document.getElementById('td-score-panel');
+  ui.scoreClose=document.getElementById('td-score-close');
+  ui.scoreValue=document.getElementById('td-score-value');
+  ui.scoreTotal=document.getElementById('td-score-total');
+  ui.scoreGrade=document.getElementById('td-score-grade');
+  ui.scoreDetail=document.getElementById('td-score-detail');
+  ui.scoreBest=document.getElementById('td-score-best');
   globalThis.towerFrontierGame=new ns.TDGame(document.getElementById('td-game'),ui);
   globalThis.towerFrontierGame.attachBuildDetails();
+  const requestLandscape=()=>{const orientation=globalThis.screen&&globalThis.screen.orientation;if(!orientation||typeof orientation.lock!=='function')return false;try{const result=orientation.lock('landscape');if(result&&typeof result.catch==='function')result.catch(()=>false);return true;}catch(error){return false;}};
+  if(ui.orientationLock)ui.orientationLock.onclick=requestLandscape;
+  if(ui.openingStart)ui.openingStart.addEventListener('click',requestLandscape);
+  if(ui.placementConfirm)ui.placementConfirm.onclick=()=>globalThis.towerFrontierGame.confirmPlacement();
   ui.placementCancel.onclick=()=>{globalThis.towerFrontierGame.build.cancel();globalThis.towerFrontierGame.updateUi();};
   const originalBuildAnchor=document.getElementById('td-cancel-build');
   const supportBuildings=new Set(['iceward','frost','crypt','grove','graveyard','moonwell','plague']);
@@ -52,8 +69,10 @@
   // Presentation only: reuse the same command buttons and gameplay handlers.
   const selectionDetails=ui.selectionDetails;
   const cameraDetails=document.getElementById('td-camera-controls');
-  ui.selectionShortcut.addEventListener('click',()=>{selectionDetails.open=!selectionDetails.open;if(selectionDetails.open)cameraDetails.open=false;});
-  ui.armoryShortcut.addEventListener('click',()=>{selectionDetails.open=false;globalThis.towerFrontierGame.openArmory();});
+  ui.selectionShortcut.addEventListener('click',()=>{selectionDetails.open=!selectionDetails.open;if(selectionDetails.open){cameraDetails.open=false;ui.scorePanel.hidden=true;ui.scoreShortcut.setAttribute('aria-expanded','false');}});
+  ui.scoreShortcut.addEventListener('click',()=>{const opening=ui.scorePanel.hidden;ui.scorePanel.hidden=!opening;ui.scoreShortcut.setAttribute('aria-expanded',String(opening));if(opening){selectionDetails.open=false;cameraDetails.open=false;globalThis.towerFrontierGame.updateScoreUi();}});
+  ui.scoreClose.addEventListener('click',()=>{ui.scorePanel.hidden=true;ui.scoreShortcut.setAttribute('aria-expanded','false');ui.scoreShortcut.focus();});
+  ui.armoryShortcut.addEventListener('click',()=>{selectionDetails.open=false;ui.scorePanel.hidden=true;ui.scoreShortcut.setAttribute('aria-expanded','false');globalThis.towerFrontierGame.openArmory();});
   function syncEdgePresentation(){
     document.body.classList.toggle('edge-combat',layout.resolved()==='desktop'||document.body.dataset.combatOrientation==='landscape');
   }
@@ -62,6 +81,7 @@
     const game=globalThis.towerFrontierGame;
     game.camera=new ns.systems.BattlefieldCamera(ns.config.width,ns.config.height);
     game.camera.attach(game,{inspect:document.getElementById('td-camera-inspect'),home:document.getElementById('td-camera-home'),follow:document.getElementById('td-camera-follow'),all:document.getElementById('td-camera-all'),plus:document.getElementById('td-camera-in'),minus:document.getElementById('td-camera-out'),status:document.getElementById('td-camera-status')});
+    if(ui.cameraClose)ui.cameraClose.onclick=()=>{cameraDetails.open=false;game.camera.inspect=false;game.camera.follow=false;game.dragHero=false;if(game.camera.sync)game.camera.sync();};
   }
   if(ns.systems.MiniMapView){const game=globalThis.towerFrontierGame;game.minimap=new ns.systems.MiniMapView(document.getElementById('td-minimap'));game.minimap.attach(game);}
   globalThis.addEventListener('resize',syncEdgePresentation);
@@ -72,8 +92,8 @@
     if(selectionDetails)selectionDetails.open=false;
   }));
   if(selectionDetails)selectionDetails.addEventListener('toggle',()=>{ui.selectionShortcut.setAttribute('aria-expanded',String(selectionDetails.open));if(selectionDetails.open)document.body.dataset.edgeOrders='false';});
-  cameraDetails.addEventListener('toggle',()=>{if(cameraDetails.open)selectionDetails.open=false;});
-  globalThis.addEventListener('keydown',event=>{if(event.key==='Escape'){document.body.dataset.edgeOrders='false';if(selectionDetails)selectionDetails.open=false;document.querySelectorAll('.wave-intel, #td-camera-controls').forEach(details=>{details.open=false;});}});
+  cameraDetails.addEventListener('toggle',()=>{if(cameraDetails.open){selectionDetails.open=false;ui.scorePanel.hidden=true;ui.scoreShortcut.setAttribute('aria-expanded','false');}});
+  globalThis.addEventListener('keydown',event=>{if(event.key==='Escape'){document.body.dataset.edgeOrders='false';if(selectionDetails)selectionDetails.open=false;ui.scorePanel.hidden=true;ui.scoreShortcut.setAttribute('aria-expanded','false');document.querySelectorAll('.wave-intel, #td-camera-controls').forEach(details=>{details.open=false;});}});
   layoutMode.addEventListener('change',syncBuildSurface);
   globalThis.addEventListener('resize',syncBuildSurface);
   ui.menuLayout.value=layout.choice;

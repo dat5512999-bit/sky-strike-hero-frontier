@@ -1,5 +1,17 @@
 # 管理者手冊
 
+## 0.62.0 計分與戰績維護
+
+速度分由 `BattleReportSystem.targetTime()` 與 `timeBonus()` 集中管理；目前提早基準時間每秒 5 分，完成該波才入分，失敗波沒有速度獎勵。`finalize(victory)` 只在整場結束時寫入 `heroFrontierScoreRecordsV1`，保留最高分與最近 20 場。清除瀏覽器網站資料會刪除戰績；部署或更新靜態檔案不會主動清除。
+
+修改速度公式時須同時檢查不同敵量、難度倍率、10／20 秒比較、失敗波、重複結算與 localStorage 不可用等情況。積分仍不得影響 Economy、Loot 或 Upgrade。
+
+## 0.61.0 維護重點
+
+手機 Gesture 分工由 `BattlefieldCamera` 與 `TDGame.attachInput()` 協作：Camera 只攔截空地／雙指手勢，英雄起手與建造狀態交回 Gameplay。不得讓觸控 `pointerdown` 直接呼叫 `confirmPlacement()`。資源兌換統一由 `ShopSystem.exchange()` 呼叫 `EconomySystem`，固定匯率常數是 `MERIT_GOLD_RATE=1000`。
+
+積分由既有 `BattleReportSystem` 擴充，不另建第二份戰報。`KILL_SCORES`、`DIFFICULTY_MULTIPLIERS`、每波加扣分集中在該模組；調整公式後必須重跑各難度、漏怪、英雄倒下及戰敗測試。評分不得直接修改 Economy、Loot 或 Upgrade。
+
 ## 0.60.1 返回流程維護
 
 HERO FRONTIER 內部不得再以 `href="index.html"` 表示「返回模式選擇」；`index.html` 是另一款飛機遊戲，不是 TD 模式選單。戰鬥與結算回遠征頁統一呼叫 `TDGame.returnToOpening()`，由它關閉 Menu 後沿用既有 `reset()`。如未來需要跨產品入口，必須使用明確的「離開 HERO FRONTIER」文案並另行確認，不得混用遠征返回功能。

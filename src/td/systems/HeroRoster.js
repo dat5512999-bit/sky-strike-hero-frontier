@@ -1,9 +1,9 @@
 (function(ns){
   'use strict';
   const CLASSES={
-    hunter:{name:'王國巡林者',faction:'人族 · 王國獵手',color:'#e6c56c',selectionArt:'assets/td/opening/hero-hunter-selection-v1.png',selectionFocus:'50% 22%',range:195,damage:20,interval:.75,attackType:'pierce',skills:['穿雲多重箭','獵獸陷阱','召喚戰狼'],icons:['➶','⌾','♞'],hints:['射程內最多三個敵人，冷卻9秒','在腳下布置8秒陷阱，持續緩速，冷卻12秒','召喚近戰戰狼，冷卻22秒']},
-    arcanist:{name:'銀葉守護者',faction:'精靈 · 奧術學院',color:'#70e7ff',selectionArt:'assets/td/opening/hero-arcanist-selection-v1.png',selectionFocus:'50% 20%',range:152,damage:18,interval:.58,attackType:'magic',skills:['霜環震擊','連鎖雷擊','召喚元素'],icons:['❄','ϟ','✧'],hints:['周圍冰爆並緩速，冷卻9秒','雷電跳躍最多四個敵人，冷卻12秒','召喚遠程元素守衛，冷卻22秒']},
-    rogue:{name:'暮影刀鋒',faction:'暗影氏族 · 暗影行會',color:'#c884df',selectionArt:'assets/td/opening/hero-rogue-selection-v1.png',selectionFocus:'50% 19%',range:100,damage:15,interval:.38,attackType:'chaos',skills:['暗影閃擊','淬毒煙幕','暗影分身'],icons:['◆','☠','◐'],hints:['閃至附近目標旁並重擊，冷卻9秒','腳下生成6秒毒霧，持續傷害，冷卻12秒','召喚快速近戰分身，冷卻22秒']}
+    hunter:{name:'王國巡林者',faction:'人族 · 王國獵手',color:'#e6c56c',selectionArt:'assets/td/opening/hero-hunter-selection-v1.png',selectionFocus:'50% 22%',range:195,damage:20,interval:.75,attackType:'pierce',skills:['穿雲多重箭','獵獸陷阱','召喚戰狼'],shortSkills:['穿雲箭','獵獸陷阱','召喚戰狼'],icons:['➶','⌾','♞'],hints:['射程內最多三個敵人，冷卻9秒','在腳下布置8秒陷阱，持續緩速，冷卻12秒','召喚近戰戰狼，冷卻22秒']},
+    arcanist:{name:'銀葉守護者',faction:'精靈 · 奧術學院',color:'#70e7ff',selectionArt:'assets/td/opening/hero-arcanist-selection-v1.png',selectionFocus:'50% 20%',range:152,damage:18,interval:.58,attackType:'magic',skills:['霜環震擊','連鎖雷擊','召喚元素'],shortSkills:['霜環','連鎖雷擊','召喚元素'],icons:['❄','ϟ','✧'],hints:['周圍冰爆並緩速，冷卻9秒','雷電跳躍最多四個敵人，冷卻12秒','召喚遠程元素守衛，冷卻22秒']},
+    rogue:{name:'暮影刀鋒',faction:'暗影氏族 · 暗影行會',color:'#c884df',selectionArt:'assets/td/opening/hero-rogue-selection-v1.png',selectionFocus:'50% 19%',range:100,damage:15,interval:.38,attackType:'chaos',skills:['暗影閃擊','淬毒煙幕','暗影分身'],shortSkills:['閃擊','淬毒煙幕','暗影分身'],icons:['◆','☠','◐'],hints:['閃至附近目標旁並重擊，冷卻9秒','腳下生成6秒毒霧，持續傷害，冷卻12秒','召喚快速近戰分身，冷卻22秒']}
   };
   class HeroRoster{
     static get(type){return CLASSES[type]||CLASSES.arcanist;}

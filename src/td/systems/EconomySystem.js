@@ -10,6 +10,9 @@
     addKill(monster,bountyBonus){const gold=this.addGold(monster.reward*(1+(bountyBonus||0))*this.rewardRate);const merit=monster.type==='boss'?1:0;this.merit+=merit;return{gold:gold,merit:merit};}
     completeWave(reward){const gold=this.addGold(reward.gold*this.rewardRate);const lumber=Math.max(0,Math.round(reward.lumber||0));this.lumber+=lumber;return{gold:gold,lumber:lumber};}
     refundGold(amount){const gold=Math.max(0,Math.round(amount||0));this.gold+=gold;return gold;}
+    exchangeGoldForMerit(){if(this.gold<EconomySystem.MERIT_GOLD_RATE)return false;this.gold-=EconomySystem.MERIT_GOLD_RATE;this.merit+=1;return true;}
+    exchangeMeritForGold(){if(this.merit<1)return false;this.merit-=1;this.gold+=EconomySystem.MERIT_GOLD_RATE;return true;}
   }
+  EconomySystem.MERIT_GOLD_RATE=1000;
   ns.systems.EconomySystem=EconomySystem;
 })(globalThis.TowerFrontier);

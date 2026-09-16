@@ -17,7 +17,7 @@
    spawn:{x:36,y:370},gate:{x:1500,y:650},heroSpawn:{x:525,y:470},roadClearance:60,roadUnits:true,heroVulnerable:false,
    openingFocus:{x:768,y:490},
    safeArea:{x:40,y:125,width:1460,height:650},
-   camera:Object.freeze({minUnitPixels:42,referenceUnitSize:112,maxZoom:1.65}),
+   camera:Object.freeze({minUnitPixels:42,referenceUnitSize:112,maxZoom:1.65,mobileInitialZoom:1.5}),
    // Only these meadow polygons accept deployment; the road is checked separately.
    buildAreas:Object.freeze([
     Object.freeze([{x:104,y:218},{x:326,y:205},{x:405,y:248},{x:420,y:316},{x:360,y:340},{x:112,y:326}]),

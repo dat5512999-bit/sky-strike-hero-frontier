@@ -1,5 +1,43 @@
 # 系統架構
 
+## 0.62.0 清場速度與持久化資料流
+
+```text
+WaveSystem.onStart
+  └─ 敵量 + 出兵間隔 + 波次 → targetTime → BattleReport.current.parTime
+Gameplay update(dt)
+  └─ 僅戰鬥進行且未暫停時計入 current.time
+Wave clear
+  └─ timeBonus + 擊殺／通關／無傷 − 損失 → 難度倍率 → Wave score
+Run end
+  └─ finalize(success | failure)
+       ├─ 結算 Overlay：結果／總分／評級／最佳紀錄
+       └─ localStorage：最高分 + 最近 20 場
+```
+
+持久化只發生在整場結束，不把中途離開誤列為完成戰績。積分紀錄與經濟、戰利品及建造模組保持單向讀取與低耦合。
+
+## 0.61.0 Input 與 Score 資料流
+
+```text
+Touch Pointer
+├─ 起手命中 Hero ─→ TDGame：拖曳英雄
+├─ Build pending ──→ TDGame：位置預覽 → 明確確認
+└─ 空地／雙指 ─────→ BattlefieldCamera：Pan／Pinch Zoom
+
+Monster Kill／Leak／Hero Down／Wave Finish
+                    ↓
+            BattleReportSystem
+             ├─ 原逐波戰報
+             └─ Score + Grade
+                    ↓
+        右側積分小圖塊／戰報表格／結算文字
+
+Shop UI → ShopSystem → EconomySystem（金幣 ⇄ 功勳）
+```
+
+評分層只讀取戰鬥事件，不寫回 Economy 或 Unit 能力。手機與 PC 共用同一套 World／Build／Report 資料，只在輸入手勢和顯示密度上分流。
+
 ## 0.60.1 HERO FRONTIER 內部返回
 
 ```text

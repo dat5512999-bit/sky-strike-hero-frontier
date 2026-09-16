@@ -7,7 +7,7 @@
   "start_url": "./td.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "landscape",
   "background_color": "#07100d",
   "theme_color": "#17392f",
   "icons": [

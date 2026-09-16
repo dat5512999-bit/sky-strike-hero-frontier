@@ -87,15 +87,15 @@ test('遊戲選單取消會回到原暫停狀態',()=>{
 });
 
 test('勝敗結算使用共用結果面板並保留再挑戰入口',()=>{
-  const game={report:{current:null,finalLine:()=> '本局 8 波'},waves:{wave:8,catalog:{total:()=>30}},ui:{overlay:{hidden:true},overlayTitle:{textContent:''},overlayMessage:{textContent:''},finalReport:{textContent:''}}};
+  const game={report:{current:null,finalize:victory=>({score:victory?888:321,grade:victory?'A':'C',isNewBest:victory}),finalLine:()=> '本局 8 波｜最佳紀錄 888'},waves:{wave:8,catalog:{total:()=>30}},ui:{overlay:{hidden:true},overlayTitle:{textContent:''},overlayMessage:{textContent:''},finalReport:{textContent:''}}};
   prototype().end.call(game,false);
   assert.equal(game.status,'gameover');
   assert.equal(game.ui.overlay.hidden,false);
-  assert.match(game.ui.overlayMessage.textContent,/第 8 波/);
+  assert.match(game.ui.overlayMessage.textContent,/第 8 波.*本次積分 321.*評級 C/);
   prototype().end.call(game,true);
   assert.equal(game.status,'victory');
-  assert.match(game.ui.overlayMessage.textContent,/30 波/);
-  assert.equal(game.ui.finalReport.textContent,'本局 8 波');
+  assert.match(game.ui.overlayMessage.textContent,/30 波.*本次積分 888.*評級 A.*刷新最佳紀錄/);
+  assert.equal(game.ui.finalReport.textContent,'本局 8 波｜最佳紀錄 888');
 });
 
 test('橫式手機沿用同一建造 Drawer，直式手機仍使用既有指令格',()=>{
@@ -114,15 +114,16 @@ test('橫式手機沿用同一建造 Drawer，直式手機仍使用既有指令�
   assert.match(fs.readFileSync(path.join(root,'td.html'),'utf8'),/class="td-orientation-hint"/);
 });
 
-test('戰場合法位置單擊直接提交建造，保留取消入口',()=>{
+test('電腦單擊直接建造，手機先預覽再按確認部署',()=>{
   const html=fs.readFileSync(path.join(root,'td.html'),'utf8');
-  for(const id of ['td-placement-actions','td-placement-title','td-placement-detail','td-placement-cancel'])assert.ok(html.includes('id="'+id+'"'),id);
-  assert.ok(!html.includes('id="td-placement-confirm"'));
+  for(const id of ['td-placement-actions','td-placement-title','td-placement-detail','td-placement-confirm','td-placement-cancel'])assert.ok(html.includes('id="'+id+'"'),id);
   const handlers={},game={canvas:{addEventListener(type,handler){handlers[type]=handler;}},status:'playing',profession:{selected:'hunter'},hero:{x:350,y:305},build:{pending:{type:'arrow'},stagePlacement(x){return x>50;},placementMessage(){return '地圖邊界不可部署';}},canvasPoint(event){return{x:event.clientX,y:event.clientY};},flash(){},updateUi(){},confirmPlacement(){this.confirmed=(this.confirmed||0)+1;return true;}};
   prototype().attachInput.call(game);
-  handlers.pointerdown({button:0,clientX:0,clientY:0});
+  handlers.pointerdown({button:0,pointerType:'touch',pointerId:1,clientX:0,clientY:0});
   assert.equal(game.confirmed,undefined);
-  handlers.pointerdown({button:0,clientX:480,clientY:250});
+  handlers.pointerdown({button:0,pointerType:'touch',pointerId:1,clientX:480,clientY:250});
+  assert.equal(game.confirmed,undefined);
+  handlers.pointerdown({button:0,pointerType:'mouse',pointerId:2,clientX:480,clientY:250});
   assert.equal(game.confirmed,1);
 });
 

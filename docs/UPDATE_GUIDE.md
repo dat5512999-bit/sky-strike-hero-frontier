@@ -1,5 +1,13 @@
 # 版本更新手冊
 
+## 更新至 0.62.0
+
+取得完整檔案後執行 `npm run check` 與 `npm test`，開啟 `td.html?v=0.62.0` 並確認快取為 `sky-strike-v0.62.0`。既有本機資料無需遷移；首次結算會建立 `heroFrontierScoreRecordsV1`。測試時用相同敵人分別在 10 秒與 20 秒清場，前者應多 50 分；成功及失敗結算都需顯示本次總分、評級與最佳紀錄。
+
+## 0.61.0 升級方式
+
+拉取完整版本後執行 `npm run check` 與 `npm test`，重新載入 `td.html?v=0.61.0`，並確認離線快取為 `sky-strike-v0.61.0`。無存檔遷移或新依賴。請勿只更新 CSS：Camera 觸控、建造確認、Economy／Shop 兌換、BattleReport 積分與 DOM 入口必須同版。更新後至少完成一次手機橫向手勢、建造確認、雙向兌換及一波積分結算。
+
 ## 0.60.1 升級方式
 
 完整更新後執行 `npm run check`、`npm test`，再重新載入 `td.html?v=0.60.1`；離線版確認快取為 `sky-strike-v0.60.1`。沒有存檔遷移。更新後進入一局，按 ⚙ →「返回遠征選擇」，確認網址未變成 `index.html`。

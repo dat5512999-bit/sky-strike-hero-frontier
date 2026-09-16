@@ -65,12 +65,16 @@ test('鏡頭拖曳攔截放置／移動，取消與第二指觸碰不發出指�
 });
 
 test('正式新手地圖依可讀尺寸自動 Fit，不用為最後一小塊拖曳',()=>{
- const map={width:1536,height:1024,openingFocus:{x:768,y:490},safeArea:{x:40,y:125,width:1460,height:650},camera:{minUnitPixels:42,referenceUnitSize:112,maxZoom:2.2}};
+ const map={width:1536,height:1024,openingFocus:{x:768,y:490},safeArea:{x:40,y:125,width:1460,height:650},camera:{minUnitPixels:42,referenceUnitSize:112,maxZoom:2.2,mobileInitialZoom:1.5}};
  for(const [label,w,h] of [['2560×1440',2560,1440],['1920×1080',1920,1080],['Laptop',1366,768],['Mobile 16:9',844,390],['Mobile Wide',932,430]]){
   const {camera}=setup();camera.configure(map);camera.resize(w,h);assert.equal(camera.initialView(),true,label);assert.equal(camera.overview,true,label);assert.ok(Math.abs(camera.visibleFraction()-1)<1e-9,label);assert.equal(camera.safeAreaVisible(),true,label);assert.ok(camera.scale()*112>=42,label);
  }
  const {camera:tiny}=setup();tiny.configure(map);tiny.resize(740,320);assert.equal(tiny.initialView(),false);assert.ok(tiny.visibleFraction()<1);assert.equal(tiny.safeAreaVisible(),true,'極窄視窗只裁外圍裝飾，核心安全區仍完整');
 });
+
+test('手機橫向初始鏡頭聚焦玩法區而非強制全圖',()=>{const {camera}=setup();camera.configure({width:1536,height:1024,openingFocus:{x:768,y:490},camera:{minUnitPixels:42,referenceUnitSize:112,maxZoom:2.2,mobileInitialZoom:1.5}});camera.resize(844,390);assert.equal(camera.initialView({preferFocus:true}),false);assert.equal(camera.overview,false);assert.equal(camera.zoom,1.5);assert.ok(camera.visibleFraction()<1);});
+
+test('手機空地單指平移、雙指縮放，從英雄或建造模式起手不攔截',()=>{const {camera}=setup();camera.configure({width:1536,height:1024,openingFocus:{x:768,y:490},camera:{minUnitPixels:42,referenceUnitSize:112,maxZoom:2.2,mobileInitialZoom:1.5}});camera.resize(844,390);camera.initialView({preferFocus:true});camera.enabled=true;const events=new Map(),captured=new Set(),canvas={classList:{toggle(){}},getBoundingClientRect:()=>({left:0,top:0,width:844,height:390}),addEventListener:(type,fn)=>events.set(type,fn),setPointerCapture:id=>captured.add(id),hasPointerCapture:id=>captured.has(id),releasePointerCapture:id=>captured.delete(id)};const button=()=>({setAttribute(){}}),ui={inspect:button(),follow:button(),home:button(),all:button(),plus:button(),minus:button(),status:{}},game={canvas,status:'playing',profession:{selected:'hunter'},hero:{active:true,x:768,y:490},build:{pending:null},ui:{buildButtons:[]},selectHero(){}};camera.attach(game,ui);const fire=(id,x,y)=>({pointerId:id,pointerType:'touch',button:0,clientX:x,clientY:y,preventDefault(){},stopImmediatePropagation(){}});const beforeX=camera.x;events.get('pointerdown')(fire(1,80,80));events.get('pointermove')(fire(1,130,80));assert.ok(camera.x<beforeX);events.get('pointerdown')(fire(2,300,80));const beforeZoom=camera.zoom;events.get('pointermove')(fire(2,360,80));assert.ok(camera.zoom>beforeZoom);events.get('pointerup')(fire(2,360,80));events.get('pointerup')(fire(1,130,80));const heroScreen=camera.worldToScreen(game.hero.x,game.hero.y);events.get('pointerdown')(fire(3,heroScreen.x,heroScreen.y));assert.equal(camera.touches.has(3),false);game.build.pending={kind:'building'};events.get('pointerdown')(fire(4,420,200));assert.equal(camera.touches.has(4),false);});
 
 test('滑鼠滾輪縮放以游標世界位置為錨點',()=>{
  const {camera,listeners}=setup();camera.configure({width:1536,height:1024,openingFocus:{x:768,y:490},camera:{minUnitPixels:42,referenceUnitSize:112}});camera.resize(1000,600);camera.enabled=true;camera.initialView();

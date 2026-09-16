@@ -1,5 +1,13 @@
 # 安裝手冊
 
+## 0.62.0 安裝與啟動
+
+無新增套件、資料庫或外部服務。更新後執行 `npm run check`、`npm test`，再以 `npm run serve:test` 開啟 `http://127.0.0.1:4173/td.html?v=0.62.0`。離線版快取名稱為 `sky-strike-v0.62.0`；既有本機戰績會自動保留於 `heroFrontierScoreRecordsV1`。
+
+## 0.61.0 安裝與啟動
+
+無新增套件、資料庫或外部服務。完整更新 TD 系統、HTML／CSS、兩份 manifest、`package.json`、`sw.js`、測試與文件後，執行 `npm run check`、`npm test`，再以 `npm run serve:test` 啟動並開啟 `http://127.0.0.1:4173/td.html?v=0.61.0`。離線版若仍顯示舊 HUD，請強制重新整理以切換到 `sky-strike-v0.61.0`。
+
 ## 0.60.1 安裝與啟動
 
 無新增套件。完整更新 `td.html`、`td.css`、`src/td/main.js`、`src/td/TDGame.js`、測試、`package.json` 與 `sw.js`，執行 `npm run check`、`npm test`，再開啟 `http://127.0.0.1:4173/td.html?v=0.60.1`。進入戰鬥後由 ⚙ 選「返回遠征選擇」，網址應保持在 `td.html`。

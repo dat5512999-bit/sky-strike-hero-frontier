@@ -1,5 +1,13 @@
 # 設定手冊
 
+## 0.62.0 速度計分參數
+
+`BattleReportSystem.TIME_POINTS_PER_SECOND=5` 控制提早一秒的獎勵；`targetTime(wave, enemyCount, spawnInterval)` 以 `18 + 敵量 × 出兵間隔 × 1.15 + 波次 × 0.8` 估算，最低 20 秒。未提供敵量時使用 `28 + 波次 × 1.5` 的相容估算。速度分先和擊殺／通關／無傷分合併、扣除損失，再乘難度倍率。`MAX_RECORDS=20` 控制本機歷史長度；修改時必須同步測試、FAQ 與戰報文案。
+
+## 0.61.0 觸控與評分設定
+
+正式新手地圖的 `mobileInitialZoom` 為 `1.5`，只影響手機初始 Camera，不改 World Coordinate 或建造判定。金幣／功勳固定匯率位於 `EconomySystem.MERIT_GOLD_RATE`。擊殺分值位於 `BattleReportSystem.KILL_SCORES`，難度倍率位於 `DIFFICULTY_MULTIPLIERS`；每波通關／無傷獎勵及漏怪／城門／英雄倒下扣分集中在 `finish()`。這些目前不是玩家設定，修改後需同步測試與文件。
+
 ## 0.60.1 返回行為
 
 沒有新增設定開關。HERO FRONTIER 的內部返回固定回到 `td.html` 遠征選擇；不允許用 Layout、裝置或玩家設定切回另一款遊戲。若未來新增真正的產品入口頁，應另設明確 URL 與離開確認。

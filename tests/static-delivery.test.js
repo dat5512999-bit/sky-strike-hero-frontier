@@ -62,7 +62,7 @@ test('PWA manifest 與離線快取引用的遊戲檔案都存在', () => {
   ['manifest.webmanifest', 'td.webmanifest'].forEach((filename) => {
     const manifest = JSON.parse(fs.readFileSync(path.join(root, filename), 'utf8'));
     assert.equal(manifest.display, 'standalone');
-    assert.equal(manifest.orientation, 'portrait');
+    assert.equal(manifest.orientation, filename === 'td.webmanifest' ? 'landscape' : 'portrait');
     manifest.icons.forEach((icon) => assert.ok(fs.existsSync(path.join(root, icon.src)), `缺少圖示：${icon.src}`));
   });
   const tdManifest = JSON.parse(fs.readFileSync(path.join(root, 'td.webmanifest'), 'utf8'));

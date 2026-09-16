@@ -1,5 +1,24 @@
 # API 文件（內部模組介面）
 
+## 0.62.0 清場計時與戰績介面
+
+- `BattleReportSystem.targetTime(wave, enemyCount?, spawnInterval?)`：產生每波基準清場秒數；缺少敵量資料時使用向後相容的波次估算。
+- `BattleReportSystem.timeBonus(time, parTime)`：每提早一秒加 `TIME_POINTS_PER_SECOND=5` 分，逾時最低為 0。
+- `startWave(..., { parTime })`／`finish()`：保存 `time`、`parTime`、`timeBonus` 並納入原分數與難度倍率。
+- `finalize(victory)`：產生 `{outcome,victory,score,grade,waves,time,timeBonus,bestScore,isNewBest}`，寫入本機最近 20 場並具冪等性。
+- `scoreState()`：另回傳 `bestScore`、`time`、`timeBonus`；`finalLine(result?)` 包含總時間、速度分與最佳紀錄。
+- 儲存鍵為 `heroFrontierScoreRecordsV1`；沒有 HTTP API、帳號服務或資料庫。
+
+## 0.61.0 觸控、兌換與評分介面
+
+- `BattlefieldCamera.initialView({ preferFocus })`：手機橫向可使用地圖焦點與 `mobileInitialZoom` 建立初始視野。
+- Camera Pointer：空地單指平移、雙指縮放；英雄起手與 `build.pending` 不攔截。
+- `EconomySystem.exchangeGoldForMerit()`／`exchangeMeritForGold()`：以 `MERIT_GOLD_RATE=1000` 原子式檢查與交換。
+- `ShopSystem.exchange(direction, economy)`：接受 `gold-to-merit`、`merit-to-gold`，回傳 `{ok,message}`。
+- `BattleReportSystem.scoreState()`：回傳 `score`、`completedScore`、`liveScore`、`grade`、`waves`、`multiplier`。
+- `BattleReportSystem.grade(score,waves)`：以每完成波平均積分輸出 `SS/S/A/B/C/D`，無波次為 `--`。
+- `TDGame.updateScoreUi()`：同步積分快捷圖塊與小型明細面板，不改戰鬥狀態。
+
 ## 0.60.1 遠征返回介面
 
 - `TDGame.returnToOpening()`：先隱藏目前遊戲選單，再呼叫既有 `reset()` 回到 HERO FRONTIER 遠征選擇；回傳 `true`。
