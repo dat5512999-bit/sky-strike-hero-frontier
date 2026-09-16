@@ -1,5 +1,15 @@
 # 管理者手冊
 
+## 0.64.0 維護契約
+
+本專案仍無後端管理介面、帳號或權限資料庫；維護者修改靜態資料並經 Git 發布。平衡參數在 `src/td/config.js`，英雄顯示名稱在 HeroRoster／ProfessionSystem，軍團在 FactionSystem；不要把中文名稱改成判斷鍵。
+
+所有傷害致死必須呼叫同一 `TDGame.onKill`；不要額外直接加金幣、積分或魂。漏怪不進 Enemy Death，死亡 Hook 冪等；折射彈不得再次折射，瘟疫擴散只一層。同兵種不可任意硬限數量，視覺預算不能影響戰鬥結算。
+
+`BattleSynergySystem` 保存本局亡魂、聖火及支援；`reset()` 必須與遊戲重開同步。沒有新持久化欄位。資產矩形在 ArtSystem，替換 PNG 後必須重跑美術／瀏覽器驗收。
+
+詳見 [規格與風險](FACTION_BUILDS_V1.md)、[QA](RELEASE_V064_QA.md)。以下版本章節為歷史，部署狀態請看最新版本與 GitHub Actions。
+
 ## 0.62.0 計分與戰績維護
 
 速度分由 `BattleReportSystem.targetTime()` 與 `timeBonus()` 集中管理；目前提早基準時間每秒 5 分，完成該波才入分，失敗波沒有速度獎勵。`finalize(victory)` 只在整場結束時寫入 `heroFrontierScoreRecordsV1`，保留最高分與最近 20 場。清除瀏覽器網站資料會刪除戰績；部署或更新靜態檔案不會主動清除。

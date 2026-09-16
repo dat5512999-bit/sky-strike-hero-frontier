@@ -63,7 +63,7 @@
   ui.placementCancel.onclick=()=>{globalThis.towerFrontierGame.build.cancel();globalThis.towerFrontierGame.updateUi();};
   const originalBuildAnchor=document.getElementById('td-cancel-build');
   const supportBuildings=new Set(['iceward','frost','crypt','grove','graveyard','moonwell','plague']);
-  ui.buildButtons.forEach(button=>{button.dataset.buildCategory=button.dataset.buildKind==='unit'?'unit':supportBuildings.has(button.dataset.buildType)?'support':'tower';});
+  ui.buildButtons.forEach(button=>{button.dataset.buildCategory=((button.dataset.buildKind==='unit'?ns.config.units:ns.config.buildings)[button.dataset.buildType]||{}).supportOnly||supportBuildings.has(button.dataset.buildType)?'support':button.dataset.buildKind==='unit'?'unit':'tower';});
   function syncBuildSurface(){const drawer=layout.resolved()==='desktop'||document.body.dataset.combatOrientation==='landscape',target=drawer?ui.buildDrawerGrid:ui.commandGrid;if(ui.buildButtons[0].parentElement!==target){ui.buildButtons.forEach(button=>{if(drawer)target.appendChild(button);else target.insertBefore(button,originalBuildAnchor);});globalThis.towerFrontierGame.showCommands('orders');}if(!drawer)ui.buildDrawer.hidden=true;}
   syncBuildSurface();
   // Presentation only: reuse the same command buttons and gameplay handlers.
@@ -84,6 +84,8 @@
     if(ui.cameraClose)ui.cameraClose.onclick=()=>{cameraDetails.open=false;game.camera.inspect=false;game.camera.follow=false;game.dragHero=false;if(game.camera.sync)game.camera.sync();};
   }
   if(ns.systems.MiniMapView){const game=globalThis.towerFrontierGame;game.minimap=new ns.systems.MiniMapView(document.getElementById('td-minimap'));game.minimap.attach(game);}
+  const game=globalThis.towerFrontierGame;
+  game.joystick=new ns.systems.HeroJoystick(game,document.getElementById('td-hero-joystick'));
   globalThis.addEventListener('resize',syncEdgePresentation);
   layoutMode.addEventListener('change',syncEdgePresentation);
   ui.menuLayout.addEventListener('change',()=>queueMicrotask(syncEdgePresentation));

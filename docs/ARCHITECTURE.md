@@ -1,5 +1,22 @@
 # 系統架構
 
+## 0.64.0 增量架構（不重寫戰鬥）
+
+資料夾沿用 `src/td/entities`、`src/td/systems`、`assets/td`、`tests`、`scripts`；只新增 HeroJoystick、BattleSynergySystem 兩個系統模組及測試／QA 腳本，無資料庫或 HTTP API。
+
+```text
+Touch 搖桿 → HeroJoystick → Navigation 檢查 → Hero.setTarget → Hero.update
+PC／英雄拖曳 ──────────────────────────────→ Hero.setTarget
+固定士兵／塔 → 原 Attack → Projectile → TDGame.onHit / onKill
+召喚系統 ───────────────→ Projectile          ├─ 既有資源／戰績
+                                            ├─ BattleSynergy：印記／魂／DOT
+                                            └─ CombatFeedback：有限 Canvas VFX
+```
+
+沒有第二套英雄移動、傷害、經濟或存檔系統。新能力採資料旗標與 Hook；UI 和預覽仍共用既有選擇／建造按鈕。完整 [規格](FACTION_BUILDS_V1.md) 與 [測試證據](RELEASE_V064_QA.md)。
+
+以下保留歷次架構變更。
+
 ## 0.62.0 清場速度與持久化資料流
 
 ```text

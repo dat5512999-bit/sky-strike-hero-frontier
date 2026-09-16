@@ -95,7 +95,7 @@
         if(blocked())return;
         if(event.pointerType==='touch'){
           if(game.build.pending)return;
-          const world=camera.point(event,canvas);if(game.hero.active&&Math.hypot(world.x-game.hero.x,world.y-game.hero.y)<32)return;
+          const world=camera.point(event,canvas);if(!(game.joystick&&game.joystick.active)&&game.hero.active&&Math.hypot(world.x-game.hero.x,world.y-game.hero.y)<32)return;
           event.preventDefault();camera.follow=false;camera.inspect=false;camera.overview=false;
           camera.touches.set(event.pointerId,{x:event.clientX,y:event.clientY});canvas.setPointerCapture(event.pointerId);
           const points=Array.from(camera.touches.values());

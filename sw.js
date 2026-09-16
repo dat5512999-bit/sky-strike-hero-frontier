@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.62.0';
+const CACHE_NAME = 'sky-strike-v0.64.0';
 const ASSETS = [
   './assets/td/opening/hero-hunter-selection-v1.png', './assets/td/opening/hero-arcanist-selection-v1.png', './assets/td/opening/hero-rogue-selection-v1.png', './assets/td/opening/difficulty-scenes-v1.png',
   './assets/td/opening/faction-kingdom-selection-v1.png', './assets/td/opening/faction-silverleaf-selection-v1.png', './assets/td/opening/faction-twilight-selection-v1.png',
@@ -8,6 +8,8 @@ const ASSETS = [
   './src/td/maps.js', './src/td/systems/FrontierTerrain.js',
   './src/td/systems/BattlefieldCamera.js',
   './src/td/systems/MiniMapView.js',
+  './src/td/systems/HeroJoystick.js',
+  './src/td/systems/BattleSynergySystem.js', './assets/td/faction-builds-v1.png',
   './td-combat.css',
   './src/td/systems/TargetSelector.js',
   './src/td/systems/TDDifficultySystem.js', './src/td/systems/EnemyTraitSystem.js', './src/td/systems/BattleReportSystem.js',

@@ -1,6 +1,9 @@
 (function(ns){
   'use strict';
   const TYPES={
+    halberdier:{name:'叛軍長戟衛',color:'#baae7d',speed:49,health:175,reward:23,radius:18,baseDamage:2,armor:3,armorType:'heavy'},
+    treant:{name:'腐化銀葉樹靈',color:'#769966',speed:38,health:240,reward:27,radius:24,baseDamage:2,armor:2,armorType:'arcane'},
+    fallenKnight:{name:'失誓日耀騎士',color:'#b9a566',speed:61,health:185,reward:26,radius:20,baseDamage:2,armor:3,armorType:'heavy'},
     grunt:{name:'邊境步兵',color:'#db604f',speed:55,health:74,reward:12,radius:16,baseDamage:1,armorType:'light'},
     runner:{name:'疾風獵犬',color:'#e6bb45',speed:98,health:56,reward:13,radius:13,baseDamage:1,armorType:'light'},
     brute:{name:'岩甲巨獸',color:'#8c78b8',speed:40,health:205,reward:24,radius:22,baseDamage:2,armor:2,armorType:'heavy',combatRole:'siege',attackRange:42,attackDamage:10,attackInterval:1.8},
@@ -23,8 +26,8 @@
       this.routeDistance=0;this.visualLane=0;this.visualStagger=0;this.hovered=false;
     }
     update(dt,hero,defenders,maxAdvance){
-      if(!this.active)return;this.displayHealth+=(this.health-this.displayHealth)*Math.min(1,dt*11);this.hitTime=Math.max(0,this.hitTime-dt);this.hitFlash=Math.max(0,this.hitFlash-dt);this.slowTimer=Math.max(0,this.slowTimer-dt);if(this.slowTimer<=0)this.slowFactor=1;
-      const heroFactor=hero&&hero.active&&ns.utils.distance(this,hero)<46?.78:1;const castFactor=this.abilityWindup>0?0:1,limit=Number.isFinite(maxAdvance)?Math.max(0,maxAdvance):Infinity;let remaining=Math.min(this.speed*this.slowFactor*(this.moveAura||1)*heroFactor*castFactor*dt,limit);
+      if(!this.active)return;this.displayHealth+=(this.health-this.displayHealth)*Math.min(1,dt*11);this.hitTime=Math.max(0,this.hitTime-dt);this.hitFlash=Math.max(0,this.hitFlash-dt);this.criticalFlash=Math.max(0,(this.criticalFlash||0)-dt);this.slowTimer=Math.max(0,this.slowTimer-dt);if(this.slowTimer<=0)this.slowFactor=1;
+      const heroFactor=hero&&hero.active&&ns.utils.distance(this,hero)<46?.78:1;const castFactor=this.abilityWindup>0?0:1,limit=Number.isFinite(maxAdvance)?Math.max(0,maxAdvance):Infinity;let remaining=Math.min(this.speed*(this.rootTime>0?0:1)*this.slowFactor*(this.moveAura||1)*heroFactor*castFactor*dt,limit);
       const stride=this.type==='runner'||this.type==='direwolf'?74:this.type==='brute'?80:64;let travelled=0;
       while(remaining>0&&this.active){const target=this.path[this.index];if(!target){this.active=false;this.leaked=true;break;}const distance=Math.hypot(target.x-this.x,target.y-this.y);if(distance>0){const dx=target.x-this.x;if(Math.abs(dx)>.1)this.facing=dx<0?Math.PI:0;}
       if(distance<=remaining){travelled+=distance;this.x=target.x;this.y=target.y;this.index+=1;remaining-=distance;}else{travelled+=remaining;this.x+=(target.x-this.x)/distance*remaining;this.y+=(target.y-this.y)/distance*remaining;remaining=0;}}
@@ -38,7 +41,7 @@
     updateDeath(dt){if(this.state!=='death')return;this.deathTime+=dt;this.frame=Math.min(3,Math.floor(this.deathTime/.16));}
 
     effectiveHealth(){return this.health+(this.barrier||0);}
-    takeDamage(amount){if(!this.active)return false;let damage=Math.max(1,amount-(this.armor||0)-(this.temporaryArmor||0));if(this.barrier>0){const absorbed=Math.min(this.barrier,damage);this.barrier-=absorbed;damage-=absorbed;}if(damage>0)this.health-=damage;this.hitFlash=.1;if(this.hitTime<=0){this.hitTime=.24;this.state='hit';this.frame=0;}if(this.health<=0){this.health=0;this.active=false;this.state='death';this.deathTime=0;this.frame=0;return true;}return false;}
+    takeDamage(amount,source){if(!this.active)return false;const vulnerable=this.vulnerability&&(!source||source.owner!==this.vulnerability.owner)?this.vulnerability.rate:0,rate=1+vulnerable+(this.shockTime>0?.1:0),armor=Math.max(0,(this.armor||0)+(this.temporaryArmor||0)-((source&&source.armorPierce)||0));let damage=Math.max(1,amount*rate-armor);if(this.barrier>0){const absorbed=Math.min(this.barrier,damage);this.barrier-=absorbed;damage-=absorbed;}if(damage>0)this.health-=damage;this.hitFlash=.1;if(this.hitTime<=0){this.hitTime=.24;this.state='hit';this.frame=0;}if(this.health<=0){this.health=0;this.active=false;this.state='death';this.deathTime=0;this.frame=0;return true;}return false;}
     applySlow(factor,time){this.slowFactor=Math.min(this.slowFactor,factor);this.slowTimer=Math.max(this.slowTimer,time);}
     progress(){if(!ns.config.mapId||ns.config.mapId==='classic')return this.index+this.x/10000;const a=this.path[this.index-1],b=this.path[this.index];if(!a||!b)return this.path.length;const length=Math.hypot(b.x-a.x,b.y-a.y);return this.index-1+(length?1-Math.hypot(b.x-this.x,b.y-this.y)/length:0);}
     visualPosition(){return{x:this.x,y:this.y};}
@@ -48,11 +51,11 @@
     drawHealthBar(ctx){if(!this.active||!this.showsHealthBar())return;const visual=this.visualPosition(),boss=this.type==='boss',width=boss?88:this.radius*2,barY=visual.y-({grunt:82,runner:76,direwolf:77,raider:87,revenant:91,brute:102,warder:105,shaman:92,healer:94,commander:109,boss:128}[this.type]||this.radius+18),left=visual.x-width/2;ctx.save();ctx.fillStyle='rgba(8,7,12,.88)';ctx.fillRect(left-1,barY-1,width+2,boss?8:7);ctx.fillStyle='#701f24';ctx.fillRect(left,barY,width*Math.max(0,this.health/this.maxHealth),5);ctx.globalAlpha=.78;ctx.fillStyle=boss?'#f4a45c':this.color;ctx.fillRect(left,barY,width*Math.max(0,this.displayHealth/this.maxHealth),5);ctx.globalAlpha=1;if(this.maxBarrier){ctx.fillStyle='#70c9ff';ctx.fillRect(left,barY-3,width*Math.max(0,this.barrier/this.maxBarrier),2);}if(boss){ctx.strokeStyle='#f3cb79';ctx.lineWidth=1;ctx.strokeRect(left-2,barY-2,width+4,9);}ctx.restore();}
     draw(ctx,art){
       const sizes={grunt:58,runner:58,direwolf:62,raider:67,revenant:66,brute:78,shaman:64,boss:108};const size=sizes[this.type]||58;
-      const visual=this.visualPosition();ctx.save();ctx.translate(visual.x-this.x,visual.y-this.y);
+      const visual=this.visualPosition();ctx.save();ctx.translate(visual.x-this.x+(this.criticalFlash>0?Math.sin(this.criticalFlash*100)*2:0),visual.y-this.y);
       ctx.save();if(this.state==='death')ctx.globalAlpha=Math.max(0,Math.min(1,(1-this.deathTime)/.35));
       if(!(art&&art.drawMonster&&art.drawMonster(ctx,this))&&!(art&&art.drawUnit(ctx,this.type,this.x,this.y,size))){ctx.save();ctx.translate(this.x,this.y);ctx.fillStyle=this.color;ctx.beginPath();ctx.arc(0,0,this.radius,0,Math.PI*2);ctx.fill();ctx.restore();}
       ctx.restore();if(this.state==='death'){ctx.restore();return;}
-      ctx.save();if(this.abilityWindup>0){const pulse=.45+Math.sin(this.abilityWindup*18)*.18;ctx.globalAlpha=pulse;ctx.fillStyle='rgba(255,54,70,.16)';ctx.strokeStyle='#ff4658';ctx.lineWidth=4;ctx.beginPath();ctx.arc(this.x,this.y,this.abilityRadius,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#ffe1b0';ctx.font='900 13px Segoe UI';ctx.textAlign='center';ctx.fillText('戰爭踐踏！',this.x,this.y-this.radius-26);}if(this.enraged){ctx.strokeStyle='#ff475b';ctx.shadowColor='#ff243e';ctx.shadowBlur=14;ctx.lineWidth=3;ctx.beginPath();ctx.arc(this.x,this.y,this.radius+8,0,Math.PI*2);ctx.stroke();}if(this.hitFlash>0){ctx.globalAlpha=this.hitFlash*5;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(this.x,this.y,this.radius+4,0,Math.PI*2);ctx.fill();}if(this.slowTimer>0){ctx.strokeStyle='#70e7ff';ctx.shadowColor='#70e7ff';ctx.shadowBlur=8;ctx.lineWidth=3;ctx.beginPath();ctx.arc(this.x,this.y+4,this.radius+7,0,Math.PI*2);ctx.stroke();}
+      ctx.save();if(this.abilityWindup>0){const pulse=.45+Math.sin(this.abilityWindup*18)*.18;ctx.globalAlpha=pulse;ctx.fillStyle='rgba(255,54,70,.16)';ctx.strokeStyle='#ff4658';ctx.lineWidth=4;ctx.beginPath();ctx.arc(this.x,this.y,this.abilityRadius,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#ffe1b0';ctx.font='900 13px Segoe UI';ctx.textAlign='center';ctx.fillText('戰爭踐踏！',this.x,this.y-this.radius-26);}if(this.enraged){ctx.strokeStyle='#ff475b';ctx.shadowColor='#ff243e';ctx.shadowBlur=14;ctx.lineWidth=3;ctx.beginPath();ctx.arc(this.x,this.y,this.radius+8,0,Math.PI*2);ctx.stroke();}if(this.hitFlash>0){ctx.globalAlpha=this.hitFlash*5;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(this.x,this.y,this.radius+4,0,Math.PI*2);ctx.fill();}
       ctx.restore();ctx.restore();
     }
   }

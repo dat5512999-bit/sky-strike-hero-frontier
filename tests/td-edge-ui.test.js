@@ -49,7 +49,7 @@ test('固定士兵不再打開舊指令面板，PC／橫向／直向仍重用原
   const context=vm.createContext({console,queueMicrotask:fn=>tasks.push(fn),innerWidth:1366,innerHeight:768,
     localStorage:{getItem:()=>null,setItem(){}},matchMedia:()=>({matches:false}),addEventListener:win.addEventListener.bind(win),
     document:{body,getElementById:element,querySelector:s=>s==='.command-grid'?commands:element(s),querySelectorAll:s=>s==='[data-build-type]'?cards:s==='[data-command-tab]'?tabs:[]}});
-  context.globalThis=context;context.TowerFrontier={systems:{},TDGame:class{
+  context.globalThis=context;context.TowerFrontier={config:{units:{},buildings:{}},systems:{HeroJoystick:class{}},TDGame:class{
     constructor(){this.calls=[];this.build={cancel(){}};}attachBuildDetails(){}showCommands(panel){this.calls.push(panel);}updateUi(){}
     openArmory(){this.calls.push('armory');}
   }};

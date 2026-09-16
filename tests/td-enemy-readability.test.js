@@ -74,7 +74,7 @@ test('連鎖線與傷害跳字落在模型視覺位置，不改傷害結果',()=
   const ns=load(),path=[{x:0,y:100},{x:700,y:100}],monsters=[100,135].map(x=>{const m=new ns.entities.Monster('grunt',1,path);m.x=x;m.y=100;m.visualLane=1;return m;});
   const projectile=new ns.entities.Projectile({x:80,y:100},monsters[0],{damage:12,chain:2,chainRange:40,attackType:'magic'});
   projectile.hit(monsters);
-  assert.equal(projectile.chainPoints[1].y,monsters[0].visualPosition().y);
+  assert.equal(projectile.chainPoints[1].y,monsters[0].visualPosition().y-30);
   assert.ok(monsters.every(monster=>monster.health<monster.maxHealth));
   const feedback=new ns.systems.CombatFeedbackSystem();feedback.hit(monsters[0],12,false,'#fff');
   assert.equal(feedback.items[0].y,monsters[0].visualPosition().y);

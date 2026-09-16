@@ -1,5 +1,20 @@
 # API 文件（內部模組介面）
 
+## 0.64.0 新增／擴充的內部介面
+
+沒有新增公開 HTTP API、DB schema 或網路服務。
+
+- `HeroJoystick(game, element)`：`sync()` 控制是否顯示，`update(dt)` 呼叫既有 Hero.setTarget，`reset()` 停止並釋放 Pointer Capture；`active` 用於既有 Camera／Touch 輸入仲裁。
+- `BattleSynergySystem(game)`：`prepare(owner,target,cfg,options)` 為 static 攻擊選項 Hook；`hit(monster,damage,source)`、`onEnemyDeath(monster)` 接既有 TDGame；`update(dt)` 處理 DOT／支援／召喚，`refract()` 在原攻擊生成後執行；`draw(ctx)` 不改邏輯，`reset()` 清空單局狀態。
+- `Projectile` options 新增 style、armorPierce、arcaneMark、natureMark、vulnerability、shock、plague、lineStart/lineEnd、reflected；chain 表示最多受擊目標數，非額外跳數。
+- `Summon` options 新增 tags、spawnTime、launchDelay、armedTime、splash；form 包含 bear／bomb／heavyBomb。仍是原 Summon，不是另一個 Entity System。
+- `CombatFeedbackSystem.explosion(position,radius,color,style)`、`soul(from,to)`、`aura(unit,color)`；`drawStatus(ctx,monster,clock)` 為 static。事件由既有 update 回收。
+- `BuildSystem.queueMercenary(type,kind='unit')` 支援 building；`discountedCost(cost,point)`、`upgradeCost(item?)`、`pendingCost(point?)` 統一報價，回收按實際花費。
+- `FactionSystem.canHire(id,kind='unit')` 不販售當前軍團已有項或 enemyOnly；`unlock` 也拒絕 enemyOnly。
+- `ArtSystem.preview(button,kind,type)` 與戰場共用圖集；`BUILD_CELLS/BUILD_RECTS` 可替換資產座標。
+
+詳細契約見 [Build V1](FACTION_BUILDS_V1.md)。以下是既有／歷史介面記錄。
+
 ## 0.62.0 清場計時與戰績介面
 
 - `BattleReportSystem.targetTime(wave, enemyCount?, spawnInterval?)`：產生每波基準清場秒數；缺少敵量資料時使用向後相容的波次估算。

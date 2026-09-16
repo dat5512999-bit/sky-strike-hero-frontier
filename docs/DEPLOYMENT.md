@@ -1,5 +1,15 @@
 # 部署手冊
 
+## 0.64.0 發布流程
+
+完整提交程式、圖集、測試及文件；版本為 `package.json 0.64.0`、快取為 `sky-strike-v0.64.0`。不要只更新 HTML 或圖片，兩個新系統腳本也必須一起發布。沒有資料庫遷移或新 secrets。
+
+推送 main 後，既有 `.github/workflows/pages.yml` 自動執行 check／tests，再上傳靜態站。到 GitHub Actions 確認成功後，開啟 `https://dat5512999-bit.github.io/sky-strike-hero-frontier/td.html?v=0.64.0`；推送成功不等於 Pages 已完成部署。
+
+部署後核對三個新英雄名稱、橫向手機搖桿、爆破工坊預覽及雷電連線；重新整理確認既有最佳積分仍存在。大型圖集仍為成功載入後按需快取，不阻塞 Service Worker 安裝。
+
+以下「本機／未部署」是各歷史版本撰寫時的狀態，不代表目前 GitHub 狀態。
+
 ## 0.62.0 部署
 
 本版目前只在本機，尚未推送 GitHub／Pages。部署時同步 `BattleReportSystem.js`、`TDGame.js`、`main.js`、`td.html`、`td.css`、`td-combat.css`、測試、文件、`package.json` 與 `sw.js`。發布後確認 Cache 為 `sky-strike-v0.62.0`，完成一場成功及一場失敗煙霧測試，並重新載入確認最佳積分仍存在。

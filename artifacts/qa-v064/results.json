@@ -1,0 +1,138 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "mercenaryPreviews": [
+        {
+          "id": "kingdomMage",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "alchemist",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "beastmaster",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "bountyHunter",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "pirate",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "blacksmith",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "timeMage",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "bombWorkshop",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "hunter",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "shield",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "knight",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "musketeer",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "arcanist",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "dragon",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "dryad",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        },
+        {
+          "id": "moonblade",
+          "ready": "true",
+          "hasImage": true,
+          "width": 590
+        }
+      ]
+    },
+    {
+      "mobileShop": {
+        "x": 62,
+        "y": 77.8125,
+        "width": 720,
+        "height": 304.1875
+      }
+    },
+    {
+      "stress": {
+        "mobile": false,
+        "monsters": 180,
+        "summons": 42,
+        "projectiles": 17,
+        "feedback": 102,
+        "visuals": 2,
+        "meanMs": 4.306250001986822,
+        "p95Ms": 4.900000095367432
+      }
+    },
+    {
+      "stress": {
+        "mobile": true,
+        "monsters": 180,
+        "summons": 42,
+        "projectiles": 17,
+        "feedback": 82,
+        "visuals": 0,
+        "meanMs": 3.824583333730698,
+        "p95Ms": 5
+      }
+    }
+  ],
+  "errors": []
+}

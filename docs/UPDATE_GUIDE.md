@@ -1,5 +1,13 @@
 # 版本更新手冊
 
+## 更新至 0.64.0
+
+先備份網站戰績；乾淨工作樹可執行 `git pull --ff-only`，有本機修改先保存，不使用強制覆寫。ZIP 使用者請將完整新版本解壓至另一資料夾後啟動驗證，不混合版本。
+
+執行 `npm run check` 和 `npm test`，啟動測試伺服器，開啟 `td.html?v=0.64.0`。看到「守誓者・雷恩／森語者・希爾芙／影行者・維菈」及傭兵工坊預覽即可再做 [驗收](RELEASE_V064_QA.md)。HTTP／PWA 快取名應為 `sky-strike-v0.64.0`；只清 Cache Storage，不要連戰績 localStorage 一起清除。
+
+沒有存檔遷移。回退看 [備份還原](BACKUP_RESTORE.md)。以下是歷史更新步驟。
+
 ## 更新至 0.62.0
 
 取得完整檔案後執行 `npm run check` 與 `npm test`，開啟 `td.html?v=0.62.0` 並確認快取為 `sky-strike-v0.62.0`。既有本機資料無需遷移；首次結算會建立 `heroFrontierScoreRecordsV1`。測試時用相同敵人分別在 10 秒與 20 秒清場，前者應多 50 分；成功及失敗結算都需顯示本次總分、評級與最佳紀錄。

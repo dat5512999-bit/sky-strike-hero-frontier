@@ -1,5 +1,13 @@
 # 設定手冊
 
+## 0.64.0 能力與搖桿設定
+
+不需環境變數。改名來源為 HeroRoster／ProfessionSystem／FactionSystem；請保留 hunter/arcanist/rogue ID。單位價格與能力旗標在 config.js，分支在 TowerEvolutionSystem；完整常數見 [Build V1](FACTION_BUILDS_V1.md)。
+
+手機搖桿依既有 Layout 的 mobile + landscape 顯示；設定 → 介面模式仍可手動選擇。尺寸由 td-combat.css 控制，中心死區由 HeroJoystick 的 0.16 控制，移速只讀 Hero.combatConfig().speed。不得為觸控另設移速／數值。
+
+VFX 上限集中在 CombatFeedback、BattleSynergy、TDGame 與 Summon 渲染入口；沒有新增 Graphics Quality 選單。
+
 ## 0.62.0 速度計分參數
 
 `BattleReportSystem.TIME_POINTS_PER_SECOND=5` 控制提早一秒的獎勵；`targetTime(wave, enemyCount, spawnInterval)` 以 `18 + 敵量 × 出兵間隔 × 1.15 + 波次 × 0.8` 估算，最低 20 秒。未提供敵量時使用 `28 + 波次 × 1.5` 的相容估算。速度分先和擊殺／通關／無傷分合併、扣除損失，再乘難度倍率。`MAX_RECORDS=20` 控制本機歷史長度；修改時必須同步測試、FAQ 與戰報文案。

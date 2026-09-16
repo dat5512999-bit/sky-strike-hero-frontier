@@ -1,5 +1,15 @@
 # 安裝手冊
 
+## 0.64.0 首次安裝與啟動
+
+1. 下載完整倉庫 ZIP 並解壓，或 `git clone https://github.com/dat5512999-bit/sky-strike-hero-frontier.git`。
+2. 安裝 Node.js 18+ 後，在專案根目錄執行 `npm run serve:test`（預設不需 npm install）；保持此終端開啟。
+3. 用瀏覽器開啟 `http://127.0.0.1:4173/td.html`，依序選難度、英雄、軍團，再開始遠征。勿開根目錄 index.html，那是另一個射擊模式。
+4. 手機開啟部署的 HTTPS /td.html，橫向遊玩，可加入主畫面。首次需要連線載入素材；不能用手機的 127.0.0.1 連到電腦。
+5. 開發驗證：`npm run check`、`npm test`；需瀏覽器 QA 時再按 [QA 文件](RELEASE_V064_QA.md) 裝選用 Playwright。
+
+本版必須包含 `HeroJoystick.js`、`BattleSynergySystem.js`、`assets/td/faction-builds-v1.png`；無帳號、密鑰、資料庫或新執行期依賴。以下舊版安裝章節為歷史補充。
+
 ## 0.62.0 安裝與啟動
 
 無新增套件、資料庫或外部服務。更新後執行 `npm run check`、`npm test`，再以 `npm run serve:test` 開啟 `http://127.0.0.1:4173/td.html?v=0.62.0`。離線版快取名稱為 `sky-strike-v0.62.0`；既有本機戰績會自動保留於 `heroFrontierScoreRecordsV1`。
@@ -83,7 +93,7 @@
 
 ## v0.45.0 安裝初驗
 
-無新依賴；完整複製專案後以 Chrome／Edge 開 `td.html`，或在專案目錄執行 `npm run serve:test` 並開 `http://127.0.0.1:4173/td.html`。選「王國巡林者 × 暮影盟約」並開始，應看到巡林者技能與暮影建造清單；再測另一個交叉組合。開發者驗證執行 `npm run check`、`npm test`。若仍顯示舊三步開局，關閉舊分頁重開，讓 `sky-strike-v0.45.0` 離線快取更新。未安裝任何資料庫或伺服器套件；手機 Pages 版待另外發布。
+無新依賴；完整複製專案後以 Chrome／Edge 開 `td.html`，或在專案目錄執行 `npm run serve:test` 並開 `http://127.0.0.1:4173/td.html`。選「守誓者・雷恩 × 暗影軍團」並開始，應看到巡林者技能與暮影建造清單；再測另一個交叉組合。開發者驗證執行 `npm run check`、`npm test`。若仍顯示舊三步開局，關閉舊分頁重開，讓 `sky-strike-v0.45.0` 離線快取更新。未安裝任何資料庫或伺服器套件；手機 Pages 版待另外發布。
 
 ## v0.44.2 安裝初驗
 
@@ -91,7 +101,7 @@
 
 ## v0.44.1 安裝初驗
 
-安裝方式與 v0.44.0 相同，無新增套件。完整複製專案後開 `td.html`，選王國巡林者，在商店買精鋼長弓，確認戰場上的弓靠近角色右手；轉向時應與角色一起翻面。公開 Pages 目前仍為 v0.44.0，待明確要求發布後才更新。
+安裝方式與 v0.44.0 相同，無新增套件。完整複製專案後開 `td.html`，選守誓者・雷恩，在商店買精鋼長弓，確認戰場上的弓靠近角色右手；轉向時應與角色一起翻面。公開 Pages 目前仍為 v0.44.0，待明確要求發布後才更新。
 
 ## v0.44.0 安裝與初驗
 
