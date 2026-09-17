@@ -1,10 +1,10 @@
 (function(ns){
   'use strict';
   const MODES={
-    story:{name:'遠征見習',description:'基礎軍備教學；終極士兵與高階戰術塔鎖定。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'0% 0%',enemyHealth:.85,enemySpeed:.96,enemyDamage:.72,enemyCount:.85,reward:1.1,baseHealth:25,preparation:1.25,spawnRate:1.15,content:'基礎軍備'},
-    standard:{name:'邊境守衛',description:'正式配隊挑戰；開放全部普通軍備，終極士兵鎖定。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'100% 0%',enemyHealth:1.2,healthGrowth:.008,enemySpeed:1.02,enemyDamage:1.08,enemyCount:1.15,reward:1,baseHealth:20,preparation:1,spawnRate:.92,content:'完整普通軍備'},
-    veteran:{name:'軍團老兵',description:'完整軍備開放；更密集且後段成長更快。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'0% 100%',enemyHealth:1.65,healthGrowth:.03,enemySpeed:1.09,enemyDamage:1.45,enemyCount:1.35,reward:.92,baseHealth:18,preparation:.85,spawnRate:.78,content:'全部軍備'},
-    calamity:{name:'災厄遠征',description:'完整軍備開放；最高密度與致命 Boss 壓力。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'100% 100%',enemyHealth:2.25,healthGrowth:.045,enemySpeed:1.16,enemyDamage:2,enemyCount:1.6,reward:.82,baseHealth:15,preparation:.7,spawnRate:.65,content:'全部軍備'}
+    story:{name:'遠征見習',description:'基礎軍備教學；終極士兵與高階戰術塔鎖定。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'0% 0%',enemyHealth:.85,enemySpeed:.96,enemyDamage:.72,enemyCount:.85,reward:.78,baseHealth:25,preparation:1.25,spawnRate:1.15,content:'基礎軍備'},
+    standard:{name:'邊境守衛',description:'正式配隊挑戰；開放全部普通軍備，終極士兵鎖定。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'100% 0%',enemyHealth:1.2,healthGrowth:.008,enemySpeed:1.02,enemyDamage:1.08,enemyCount:1.15,reward:.55,baseHealth:20,preparation:1,spawnRate:.92,content:'完整普通軍備'},
+    veteran:{name:'軍團老兵',description:'完整軍備開放；更密集且後段成長更快。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'0% 100%',enemyHealth:1.65,healthGrowth:.03,enemySpeed:1.09,enemyDamage:1.45,enemyCount:1.35,reward:.45,baseHealth:18,preparation:.85,spawnRate:.78,content:'全部軍備'},
+    calamity:{name:'災厄遠征',description:'完整軍備開放；最高密度與致命 Boss 壓力。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'100% 100%',enemyHealth:2.25,healthGrowth:.045,enemySpeed:1.16,enemyDamage:2,enemyCount:1.6,reward:.38,baseHealth:15,preparation:.7,spawnRate:.65,content:'全部軍備'}
   };
   const ULTIMATE_UNITS=['royalCommander','dragon','soulsteel'];
   const STORY_TOWERS=['armoryForge','ballista','moonwell','graveyard'];

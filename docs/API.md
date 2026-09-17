@@ -1,5 +1,13 @@
 # API 文件（內部模組介面）
 
+## v0.71.4 收益倍率
+
+`EconomySystem.setRewardRate(rate)` 接受 0.3～2；目前難度倍率為 0.78／0.55／0.45／0.38。`addKill()` 與 `completeWave()` 共用倍率，退款不受影響。沒有新增 HTTP API。
+
+## v0.71.3 難度內容 API
+
+`TDDifficultySystem.allows(kind,id)` 回傳目前難度是否允許部署；`lockReason(kind,id)` 提供玩家提示。`enemyCount` 現可低於 1，`WaveSystem.definition()` 會縮減非 Boss 編成且每組至少一名。`FactionSystem.contentGate` 防止商店繞過。沒有新增 HTTP API。
+
 ## 0.71.1 難度積分 API
 
 `BattleReportSystem.bestForDifficulty(map, difficulty)` 回傳指定地圖與難度的最高分；`scoreState()` 增加 `difficultyBestScore`、`difficulty`、`difficultyName`。本機 payload 升級為 `{version:3,bestByMap,bestByMapDifficulty,legacyBestScore,runs}`。

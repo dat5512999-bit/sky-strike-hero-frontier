@@ -1,5 +1,9 @@
 # 設定手冊
 
+## v0.71.3 難度級距
+
+`TDDifficultySystem.MODES` 的見習／標準／老兵／災厄血量為 0.85／1.2／1.65／2.25，敵量為 0.85／1.15／1.35／1.6，出兵間隔為 1.15／0.92／0.78／0.65，收益為 0.78／0.55／0.45／0.38。內容鎖由 `ULTIMATE_UNITS` 與 `STORY_TOWERS` 管理。
+
 ## 0.64.0 能力與搖桿設定
 
 不需環境變數。改名來源為 HeroRoster／ProfessionSystem／FactionSystem；請保留 hunter/arcanist/rogue ID。單位價格與能力旗標在 config.js，分支在 TowerEvolutionSystem；完整常數見 [Build V1](FACTION_BUILDS_V1.md)。

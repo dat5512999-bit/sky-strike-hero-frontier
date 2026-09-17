@@ -27,3 +27,14 @@ test('difficulty gate also prevents ultimate soldiers from bypassing through mer
   difficulty.choose('standard');assert.equal(factions.canHire('dragon','unit'),false);
   difficulty.choose('veteran');assert.equal(factions.canHire('dragon','unit'),true);
 });
+
+test('standard cumulative income through wave 14 stays below the previous runaway economy',()=>{
+  const {ns}=load(),difficulty=new ns.systems.TDDifficultySystem();difficulty.choose('standard');
+  const waves=new ns.systems.WaveSystem(),economy=new ns.systems.EconomySystem();waves.setModifiers(difficulty.modifiers());economy.setRewardRate(difficulty.current().reward);
+  for(let wave=1;wave<=14;wave++){
+    const definition=waves.definition(wave);
+    definition.groups.forEach(group=>{for(let i=0;i<group.count;i++)economy.addKill(new ns.entities.Monster(group.type,wave,undefined,{bountyScale:group.type==='boss'?1:definition.bountyScale}),0);});
+    economy.completeWave(waves.catalog.get(wave).reward);
+  }
+  assert.ok(economy.gold>=4300&&economy.gold<=4700,'wave 14 total '+economy.gold);
+});

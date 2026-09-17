@@ -1,5 +1,9 @@
 # 系統架構
 
+> v0.71.4：`TDDifficultySystem.reward` 傳入 `EconomySystem`，同時縮放擊殺賞金與清關金；`WaveSystem.bountyScale` 只抵銷不同敵量造成的賞金膨脹。回收與商店兌換保持獨立。
+
+> v0.71.3：難度選擇 → `TDDifficultySystem` 輸出 Wave 倍率與內容許可 → `WaveSystem` 生成編成；`TDGame` 顯示／攔截建造，`FactionSystem` 攔截跨族傭兵。
+
 ## 0.71.1 難度積分資料流
 
 `BattleReportSystem.multiplier → wave.score → finalize → bestByMapDifficulty[map][difficulty]`，同時更新 `bestByMap[map]` 全難度最高分。V2 遷移只根據 `runs[].difficulty` 回填分難度紀錄，缺少難度的舊場次只保留在全難度資料。
