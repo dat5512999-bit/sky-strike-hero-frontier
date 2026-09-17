@@ -525,3 +525,8 @@ body[data-layout="mobile"][data-game-screen="opening"] .profession-list button{
   background-position:center,var(--selection-focus,50% 22%);
 }
 body[data-layout="mobile"][data-game-screen="opening"] .profession-list b{font-size:10px}
+
+/* Selected identity stays above combat numbers and external bonuses. */
+.selection-card .selection-purpose{display:block;padding:7px 8px;border-left:3px solid #d8bb72;background:#23332c;color:#f3e5bc;font-size:12px;line-height:1.6;overflow-wrap:anywhere}.selection-card .selection-purpose[hidden]{display:none}
+button[data-difficulty-locked="true"]{filter:grayscale(.72);opacity:.58;position:relative;cursor:not-allowed}
+button[data-difficulty-locked="true"]::after{content:"🔒 難度鎖定";position:absolute;inset:auto 6px 6px;background:rgba(25,18,20,.9);color:#ffd08a;border:1px solid rgba(255,208,138,.45);border-radius:5px;padding:3px 5px;font-size:10px;font-weight:800;letter-spacing:.04em}

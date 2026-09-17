@@ -9,7 +9,7 @@ function load(){
   return {ns:context.TowerFrontier,context};
 }
 function game(ns){
-  const g=Object.create(ns.TDGame.prototype);Object.assign(g,{build:new ns.systems.BuildSystem(),hero:new ns.entities.Hero(100,100),economy:new ns.systems.EconomySystem(),feedback:new ns.systems.CombatFeedbackSystem(),monsters:[],corpses:[],summons:[],projectiles:[],effects:[],flash(){},updateScoreUi(){}});
+  const g=Object.create(ns.TDGame.prototype);Object.assign(g,{loot:new ns.systems.LootSystem(),profession:new ns.systems.ProfessionSystem(),factions:new ns.systems.FactionSystem(),fieldLoot:[],build:new ns.systems.BuildSystem(),hero:new ns.entities.Hero(100,100),economy:new ns.systems.EconomySystem(),feedback:new ns.systems.CombatFeedbackSystem(),monsters:[],corpses:[],summons:[],projectiles:[],effects:[],flash(){},updateScoreUi(){}});
   g.synergy=new ns.systems.BattleSynergySystem(g);g.hero.chooseClass('hunter');return g;
 }
 function enemy(ns,x=140,y=100,type='brute',health=1000){const m=new ns.entities.Monster(type,1,[{x:0,y},{x:2000,y}]);m.x=x;m.y=y;m.health=m.maxHealth=health;return m;}

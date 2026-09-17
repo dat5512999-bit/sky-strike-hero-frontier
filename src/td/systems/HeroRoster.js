@@ -15,6 +15,7 @@
       if(slot===0){
         if(!targets.length)return false;
         hero.skillTrails=targets.slice(0,hero.classType==='hunter'?3:1).map(target=>({x:hero.x,y:hero.y,tx:target.x,ty:target.y,time:.3,color:weaponColor}));
+        ns.systems.HeroSkillVFX.emit(hero,hero.classType==='hunter'?'arrows':'blink',{targets:targets.slice(0,3).map(m=>({x:m.x,y:m.y})),target:{x:targets[0].x,y:targets[0].y},duration:.45});
         if(hero.classType==='hunter')targets.slice(0,3).forEach(target=>new ns.entities.Projectile(hero,target,{damage:48*power,color:weaponColor,attackType:'pierce'}).hit(monsters,onKill,onHit));
         else{const target=targets[0];hero.x=ns.utils.clamp(target.x-28,25,695);hero.y=ns.utils.clamp(target.y+22,55,695);hero.setTarget(hero.x,hero.y);new ns.entities.Projectile(hero,target,{damage:95*power,color:weaponColor,attackType:'chaos'}).hit(monsters,onKill,onHit);}
         hero.novaCooldown=9*(1-hero.equipment.rune*.1);
@@ -25,11 +26,12 @@
       hero.beginCast();return true;
     }
     static updateFields(hero,dt,monsters,onKill,onHit){
+      ns.systems.HeroSkillVFX.update(hero,dt);
       hero.skillTrails=(hero.skillTrails||[]).filter(trail=>{trail.time-=dt;return trail.time>0;});
       hero.fields.forEach(field=>{const elapsed=Math.min(dt,field.time);field.time-=elapsed;field.tick+=elapsed;while(field.tick>=.5){field.tick-=.5;monsters.forEach(monster=>{if(!monster.active||ns.utils.distance(field,monster)>72)return;if(field.type==='hunter')monster.applySlow(.35,.7);else new ns.entities.Projectile(hero,monster,{damage:9*field.power,color:'#c884df',attackType:'chaos'}).hit(monsters,onKill,onHit);});}});
       hero.fields=hero.fields.filter(field=>field.time>0);
     }
-    static drawFields(ctx,hero){(hero.skillTrails||[]).forEach(trail=>{ctx.save();ctx.globalAlpha=trail.time/.3;ctx.strokeStyle=trail.color||this.get(hero.classType).color;ctx.lineWidth=4+hero.equipment.spear*.6;ctx.beginPath();ctx.moveTo(trail.x,trail.y);ctx.lineTo(trail.tx,trail.ty);ctx.stroke();ctx.restore();});hero.fields.forEach(field=>{ctx.save();ctx.fillStyle=field.type==='hunter'?'#d6b66b':'#b37ddb';ctx.strokeStyle=ctx.fillStyle;ctx.globalAlpha=.18;ctx.beginPath();ctx.arc(field.x,field.y,72,0,Math.PI*2);ctx.fill();ctx.globalAlpha=.7;ctx.lineWidth=2;ctx.stroke();ctx.font='bold 14px Segoe UI';ctx.textAlign='center';ctx.fillText(field.type==='hunter'?'獵獸陷阱':'淬毒煙幕',field.x,field.y);ctx.restore();});}
+    static drawFields(ctx,hero){hero.fields.forEach(field=>ns.systems.HeroSkillVFX.drawField(ctx,field));}
   }
   HeroRoster.CLASSES=CLASSES;ns.systems.HeroRoster=HeroRoster;
 })(globalThis.TowerFrontier);

@@ -433,9 +433,9 @@ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-scr
  body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] span{display:none;}
 }
 
-/* v0.60: desktop HUD density follows usable CSS viewport, including browser zoom.
-   Only presentation sizes change; the battlefield camera and world coordinates stay untouched. */
-@media (min-width:1600px) and (min-height:700px){
+/* v0.69.3: reserve the enlarged HUD for genuinely large desktop viewports.
+   A regular 1920 x 1080 display must keep the compact desktop controls. */
+@media (min-width:2200px) and (min-height:1100px){
  body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]){--edge:16px;--hero-width:350px;--skills-width:520px;}
  body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header{width:460px;height:52px;min-height:52px;grid-template-columns:minmax(0,1.1fr) minmax(0,.65fr) minmax(0,.65fr) minmax(0,1.35fr) 52px 52px;}
  body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header>.resource{gap:5px;padding:0 5px;}
@@ -489,7 +489,7 @@ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-scr
 .orientation-gate h2{margin:12px 0 6px;color:#f4dda0;font:700 24px Georgia,"Microsoft JhengHei",serif;}
 .orientation-gate p{margin:0 0 18px;color:#b9c5b9;font-size:13px;line-height:1.7;}
 .orientation-gate button{width:100%;border-color:#c4a45b;background:linear-gradient(#5c4826,#211a12);}
-body[data-layout="mobile"][data-combat-orientation="portrait"] .orientation-gate{display:grid;}
+body[data-layout="mobile"][data-combat-orientation="portrait"] .orientation-gate{display:none;}
 
 .camera-controls{position:relative;}
 .camera-controls .camera-close{position:absolute;z-index:2;top:3px;right:3px;display:grid;place-items:center;width:28px;min-width:28px;height:28px;min-height:28px;padding:0;border-color:#836f42;background:#0b1211;color:#f2d991;font-size:18px;line-height:1;}
@@ -595,7 +595,7 @@ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-scr
 body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-rank strong{font-size:12px;}
 body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label,body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-vitals label>span{font-size:7px;}
 body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-more summary{min-height:21px;padding:1px 4px;font-size:8px;}
-@media (min-width:1600px) and (min-height:700px){
+@media (min-width:2200px) and (min-height:1100px){
  body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]){--hero-width:162px;}
  body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) #td-pause{width:52px;min-width:52px;height:50px;min-height:50px;font-size:23px;}
  body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .camera-controls{top:583px;}
@@ -645,8 +645,8 @@ body.edge-combat[data-layout="mobile"] .hero-profile strong{font-size:9px;letter
 body.edge-combat .build-drawer-grid [data-preview-custom="true"]::before{display:none!important;content:none!important;}
 body.edge-combat .build-drawer-grid [data-preview-custom="true"] .build-preview{width:60px;height:56px;grid-column:1;grid-row:1;pointer-events:none;}
 body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer{max-height:min(340px,60svh);}
-body.edge-combat .shop-items.mercenary-items button{grid-template-columns:76px minmax(0,1fr);grid-template-rows:auto auto auto;gap:3px 10px;align-content:center;}
-body.edge-combat .shop-items.mercenary-items .mercenary-preview{grid-column:1;grid-row:1/4;width:76px;height:76px;float:none;margin:0;align-self:center;}
+body.edge-combat .shop-items.mercenary-items button{grid-template-columns:112px minmax(0,1fr);grid-template-rows:auto auto auto;gap:4px 12px;align-content:center;min-height:136px!important;}
+body.edge-combat .shop-items.mercenary-items .mercenary-preview{grid-column:1;grid-row:1/4;width:112px;height:112px;float:none;margin:0;align-self:center;image-rendering:auto;}
 body.edge-combat .shop-items.mercenary-items button>b{grid-column:2;grid-row:1;}
 body.edge-combat .shop-items.mercenary-items button>small{grid-column:2;grid-row:2;}
 body.edge-combat .shop-items.mercenary-items button>span{grid-column:2;grid-row:3;}
@@ -654,5 +654,68 @@ body.edge-combat .shop-items.mercenary-items button>span{grid-column:2;grid-row:
  body.edge-combat[data-layout="desktop"] .build-drawer-grid [data-preview-custom="true"] .build-preview{grid-row:1/3;width:40px;height:48px;}
 }
 body.edge-combat[data-layout="mobile"] .build-drawer-grid [data-preview-custom="true"] .build-preview{width:44px;height:42px;grid-row:1;}
-body.edge-combat[data-layout="mobile"] .shop-items.mercenary-items button{grid-template-columns:44px minmax(0,1fr);gap:2px 5px;min-height:98px!important;}
-body.edge-combat[data-layout="mobile"] .shop-items.mercenary-items .mercenary-preview{width:44px;height:60px;}
+body.edge-combat[data-layout="mobile"] .shop-items.mercenary-items button{grid-template-columns:72px minmax(0,1fr);gap:2px 7px;min-height:94px!important;}
+body.edge-combat[data-layout="mobile"] .shop-items.mercenary-items .mercenary-preview{width:72px;height:82px;}
+
+/* v0.65: menus own their scroll surface; no filtered ancestor for fixed dialogs. */
+body[data-game-screen="opening"]{padding:0;overflow:hidden;height:100svh;}
+body[data-game-screen="opening"] .td-shell{position:fixed;inset:0;width:100%;height:100%;margin:0;filter:none;}
+body[data-game-screen="opening"] .td-profession-screen{position:fixed;inset:0;align-items:start;overflow:hidden;backdrop-filter:none;}
+body[data-game-screen="opening"] .profession-dialog{margin:0 auto;max-height:100%;overflow-y:auto;overscroll-behavior:contain;grid-template-rows:auto auto auto auto auto;align-content:start;}
+body[data-game-screen="opening"] .opening-choice-grid{min-height:180px;}
+body[data-game-screen="opening"] .profession-list button{height:auto;min-height:160px;transform:none;}
+body[data-game-screen="opening"] .profession-list button:hover,body[data-game-screen="opening"] .profession-list button:focus-visible{transform:none;}
+body[data-game-screen="opening"] .opening-actions{position:sticky;bottom:0;background:#091411;padding-bottom:5px;}
+body[data-game-screen="opening"] .profession-dialog::before,body[data-game-screen="opening"] .profession-dialog::after{display:none;}
+
+/* The compact portrait stays below wave intelligence, away from the lower road. */
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .hero-profile.hero-profile{top:84px;bottom:auto;left:var(--edge);width:190px;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]):not([data-hero-expanded="true"]) .hero-profile.hero-profile{display:block;width:54px;height:72px;padding:3px;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:not([data-hero-expanded="true"]) .hero-profile .td-hero-select{display:block;width:46px;height:51px;min-height:0;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:not([data-hero-expanded="true"]) .hero-profile .hero-face{display:block;width:46px;height:51px;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:not([data-hero-expanded="true"]) .hero-profile .td-hero-select>span:not(.hero-face),
+body.edge-combat[data-combat-ui="edge"][data-layout]:not([data-hero-expanded="true"]) .hero-profile .hero-more{display:none;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:not([data-hero-expanded="true"]) .hero-profile .hero-rank{position:absolute;right:4px;top:36px;padding:1px;background:#07100ee8;pointer-events:none;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:not([data-hero-expanded="true"]) .hero-profile .hero-rank span{display:none;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:not([data-hero-expanded="true"]) .hero-profile .hero-rank strong{font-size:11px;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:not([data-hero-expanded="true"]) .hero-profile .hero-vitals{display:grid;gap:2px;margin-top:2px;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:not([data-hero-expanded="true"]) .hero-profile .hero-vitals label{display:block;font-size:0;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:not([data-hero-expanded="true"]) .hero-profile .hero-vitals label>span{display:none;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:not([data-hero-expanded="true"]) .hero-profile .hero-vitals i{display:block;height:4px;}
+body.edge-combat[data-combat-ui="edge"][data-layout] .hero-profile .hero-extra{top:calc(100% + 4px);bottom:auto;max-height:calc(100svh - 190px);}
+
+/* v0.66.0: persistent, keyboard/touch accessible battle flag status. */
+.aura-attack{display:block;color:#fff4da;margin-top:6px}.aura-attack strong{color:#81ef9b}.flag-status{margin-top:6px;color:#f5d571}.flag-status summary{cursor:pointer;min-height:28px}.flag-status span{display:block;color:#eadfbf;font-size:.9em}
+/* Portrait art reuses the selected hero illustration, rather than a sprite sheet. */
+body.edge-combat .hero-profile #td-hero-select[data-hero-class] .hero-face{background-size:cover;background-position:50% 18%;}
+body.edge-combat .hero-profile #td-hero-select[data-hero-class="hunter"] .hero-face{background-image:url('assets/td/opening/hero-hunter-selection-v1.png');}
+body.edge-combat .hero-profile #td-hero-select[data-hero-class="arcanist"] .hero-face{background-image:url('assets/td/opening/hero-arcanist-selection-v1.png');}
+body.edge-combat .hero-profile #td-hero-select[data-hero-class="rogue"] .hero-face{background-image:url('assets/td/opening/hero-rogue-selection-v1.png');}
+@media(max-width:650px){
+ body.edge-combat[data-layout="mobile"][data-game-screen="battle"] .td-wave-info{width:200px;}
+ body.edge-combat[data-layout="mobile"][data-game-screen="battle"] .td-header{width:244px;}
+ body.edge-combat[data-layout="mobile"][data-combat-orientation="landscape"][data-game-screen="battle"] .hud-controls{top:54px;}
+}
+
+/* v0.66.4: one preview renderer and aligned catalog rows at every viewport. */
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer{max-height:none;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid{display:flex;overflow-x:auto;overflow-y:hidden;gap:8px;padding:2px 2px 8px;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:72px 20px 42px 18px;align-content:start;justify-items:center;align-items:center;flex:0 0 144px;width:144px;height:178px;min-height:178px;border-width:2px;padding:7px;gap:3px;overflow:hidden;text-align:center;box-sizing:border-box;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] .build-preview{grid-column:1;grid-row:1;width:72px;height:72px;margin:0;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]>b{grid-column:1;grid-row:2;font-size:12px;line-height:20px;white-space:nowrap;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]>span{grid-column:1;grid-row:3;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;align-self:start;font-size:10px;line-height:14px;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]>small{grid-column:1;grid-row:4;font-size:11px;line-height:18px;white-space:nowrap;}
+@media(max-height:600px){
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]{grid-template-rows:48px 18px 36px 16px;flex-basis:126px;width:126px;height:138px;min-height:138px;padding:5px;gap:1px;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] .build-preview{width:48px;height:48px;}
+
+/* v0.68.6: compact purchasable armory stock. */
+body.edge-combat .gear-shop-items{grid-template-columns:repeat(2,minmax(0,1fr));}
+body.edge-combat .gear-shop-items button{min-height:86px;border-color:#8f7449;}
+body.edge-combat .gear-shop-items button[data-rarity="傳說"]{border-color:#d39142;box-shadow:inset 0 0 18px #f6a13b18;}
+body.edge-combat .gear-shop-items button[data-rarity="史詩"]{border-color:#9460b4;box-shadow:inset 0 0 18px #ad65d918;}
+@media(max-width:700px){body.edge-combat .gear-shop-items{grid-template-columns:1fr;}}
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]>span{font-size:10px;line-height:12px;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]>b{font-size:11px;line-height:18px;}
+body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]>small{font-size:10px;line-height:16px;}
+}

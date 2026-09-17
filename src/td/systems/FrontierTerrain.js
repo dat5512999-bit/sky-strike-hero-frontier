@@ -45,9 +45,11 @@
     ctx.fillStyle='#5ad88910';ctx.strokeStyle='#7aea9a66';ctx.lineWidth=1.5;ctx.setLineDash([8,8]);
     ns.config.buildAreas.forEach(area=>{ctx.beginPath();area.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fill();ctx.stroke();});ctx.setLineDash([]);
    }
+   ctx.fillStyle='#db624f45';ctx.strokeStyle='#ed8c73';ctx.lineWidth=1.5;
+   (ns.config.blockedAreas||[]).forEach(area=>{ctx.beginPath();area.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fill();ctx.stroke();});
    ctx.strokeStyle='#db624f32';ctx.lineWidth=(ns.config.roadClearance||55)*2;
    ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();
-   path.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();
+   (ns.config.routes||[path]).forEach(route=>route.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y)));ctx.stroke();
    ctx.strokeStyle='#f3cf8666';ctx.lineWidth=1;ctx.setLineDash([7,7]);
    ctx.strokeRect(42,62,w-84,h-108);ctx.setLineDash([]);
    for(const zone of map.zones||[]){

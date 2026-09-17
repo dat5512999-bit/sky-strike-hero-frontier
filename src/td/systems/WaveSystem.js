@@ -2,10 +2,10 @@
   'use strict';
   class WaveSystem{
     constructor(catalog){this.catalog=catalog||new ns.systems.WaveCatalog();this.reset();}
-    reset(){this.wave=0;this.queue=[];this.spawnTimer=0;this.phase='waiting';this.active=false;this.complete=false;this.countdown=0;this.pendingClear=null;this.bountyScale=1;this.modifiers={};}
+    reset(){this.wave=0;this.spawnIndex=0;this.queue=[];this.spawnTimer=0;this.phase='waiting';this.active=false;this.complete=false;this.countdown=0;this.pendingClear=null;this.bountyScale=1;this.modifiers={};}
     setModifiers(modifiers){this.modifiers=Object.assign({},modifiers||{});return this.modifiers;}
     spawnInterval(){const base=this.wave%5===0?Math.max(.78,.98-Math.max(0,this.wave-15)*.01):Math.max(.72,.96-this.wave*.008);return Math.max(.66,base*(this.modifiers.spawnRate||1));}
-    definition(wave){const source=this.catalog.get(wave);if(!source)return null;const factor=Math.max(1,Number(this.modifiers.enemyCount)||1),groups=source.groups.map(group=>({type:group.type,count:group.type==='boss'?group.count:Math.max(group.count,Math.round(group.count*factor))})),original=source.groups.reduce((sum,group)=>sum+(group.type==='boss'?0:group.count),0);let expanded=groups.reduce((sum,group)=>sum+(group.type==='boss'?0:group.count),0);if(expanded===original&&original){const largest=groups.filter(group=>group.type!=='boss').sort((a,b)=>b.count-a.count)[0];largest.count+=1;expanded+=1;}return Object.assign({},source,{groups:groups,bountyScale:original&&expanded?original/expanded:1});}
+    definition(wave){const source=this.catalog.get(wave);if(!source)return null;const factor=Math.max(.5,Number(this.modifiers.enemyCount)||1),groups=source.groups.map(group=>({type:group.type,count:group.type==='boss'?group.count:Math.max(1,Math.round(group.count*factor))})),original=source.groups.reduce((sum,group)=>sum+(group.type==='boss'?0:group.count),0);let expanded=groups.reduce((sum,group)=>sum+(group.type==='boss'?0:group.count),0);if(factor>1&&expanded===original&&original){const largest=groups.filter(group=>group.type!=='boss').sort((a,b)=>b.count-a.count)[0];largest.count+=1;expanded+=1;}return Object.assign({},source,{groups:groups,bountyScale:original&&expanded?original/expanded:1});}
     composition(wave){const definition=this.definition(wave);return definition?definition.groups:[];}
     preview(){return this.complete?null:this.definition(this.wave+1);}
     beginPreparation(){
@@ -20,7 +20,7 @@
     }
     update(dt,monsters){
       if(this.phase==='preparing'){this.countdown=Math.max(0,this.countdown-dt);if(this.countdown<=0)this.start();}
-      if(this.phase==='spawning'){this.spawnTimer-=dt;if(this.queue.length&&this.spawnTimer<=0){const type=this.queue.shift(),modifiers=Object.assign({},this.modifiers,{bountyScale:type==='boss'?1:this.bountyScale});monsters.push(new ns.entities.Monster(type,this.wave,ns.config.path,modifiers));this.spawnTimer=this.spawnInterval();}if(!this.queue.length)this.phase='clearing';}
+      if(this.phase==='spawning'){this.spawnTimer-=dt;if(this.queue.length&&this.spawnTimer<=0){const type=this.queue.shift(),modifiers=Object.assign({},this.modifiers,{bountyScale:type==='boss'?1:this.bountyScale});const routes=ns.config.routes||[ns.config.path],route=routes[this.spawnIndex++%routes.length];monsters.push(new ns.entities.Monster(type,this.wave,route,modifiers));this.spawnTimer=this.spawnInterval();}if(!this.queue.length)this.phase='clearing';}
       if(this.phase==='clearing'&&!monsters.some(function(monster){return monster.active;})){this.active=false;this.phase='reward';this.pendingClear=this.catalog.get(this.wave);}
       if(this.phase==='reward'&&this.pendingClear){const event=this.pendingClear;this.pendingClear=null;return event;}
       return null;

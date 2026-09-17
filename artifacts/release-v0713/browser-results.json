@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "branches": [
+        0
+      ],
+      "map": "autumn",
+      "asset": "http://127.0.0.1:4174/assets/td/autumn-ruins-v1.png",
+      "legal": true
+    },
+    {
+      "retry": "autumn",
+      "first": 1,
+      "second": 1
+    },
+    {
+      "stressEnemies": 180,
+      "convoyAndDrawP95Ms": 5.699999809265137
+    }
+  ],
+  "errors": []
+}

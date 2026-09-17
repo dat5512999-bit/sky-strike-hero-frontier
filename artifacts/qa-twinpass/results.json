@@ -1,0 +1,23 @@
+{
+  "results": [
+    {
+      "branches": [
+        0,
+        1
+      ],
+      "map": "twinpass",
+      "asset": "http://127.0.0.1:4173/assets/td/twin-pass-v1.png",
+      "legal": true
+    },
+    {
+      "retry": "twinpass",
+      "first": 1,
+      "second": 2
+    },
+    {
+      "stressEnemies": 180,
+      "convoyAndDrawP95Ms": 5.5
+    }
+  ],
+  "errors": []
+}

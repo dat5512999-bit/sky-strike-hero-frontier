@@ -1,5 +1,74 @@
 # 安裝手冊
 
+## 0.71.0 暮秋遺跡與整合發布
+
+新增第三張「暮秋遺跡 · 雙 U 型彎」，採縮窄第一個內圈的確認版本。遠征頁可直接選擇，沿用英雄／軍團／波次及地圖獨立戰績；路線、建造區、小地圖與离線資產同步，無新帳號、API 或設定。完整安裝、更新、架構圖、備份回復與測試見 [發布手冊](AUTUMN_RUINS_V0710.md)。
+
+> v0.70.0 無新增相依套件或資料遷移。更新完整檔案後重新開啟遊戲，確認服務工作者快取為 `sky-strike-v0.70.0`；翡翠古龍 Lv.2 原價應為 800G。
+
+## 0.69.9
+
+本版無新增套件、帳號、資料庫或設定。取得完整專案後開啟 `td.html`，或執行 `node scripts/serve-test.js`。
+
+## 0.69.8 地圖獨立積分
+
+安裝流程與 Node.js 需求不變，無新增套件或資料庫。更新完整專案後執行 npm run serve:test，使用原本 td.html 入口。舊戰績於載入時自動讀取及歸類，不需手動匯入。
+
+## 0.69.6 士兵裝備顯示修正
+
+安裝方法不變，完整更新專案後執行 npm run serve:test。這次不新增素材、套件或資料庫；ArtSystem.js、package.json 與 sw.js 應同版更新。
+
+> 0.69.3 手機安裝需以 HTTPS 發布完整專案。Android Chrome 可使用頁面顯示的「安裝」按鈕；iPhone／iPad Safari 使用分享選單的「加入主畫面」。兩者都會從 `td-mobile.html` 以橫向容器啟動。
+
+> 0.69.2 不增加安裝步驟；請確認 11 張新增動作圖與程式一起複製。清單見 [UNIT_ACTIONS_V0692.md](UNIT_ACTIONS_V0692.md)。
+
+## 0.68.5 馭獸師與熊戰鬥動作（2026-09-17）
+
+恢復馭獸師原本的鹿角、肩鳥與綠袍設計，新增待機及施法畫格；三階熊新增踏步與撲咬畫格，近戰命中顯示爪痕。使用既有 state、frameClock、attackTimer 切換，無資料庫、API 或權限變更。完整安裝、更新、回復與測試方式見 [動作更新紀錄](NATURE_MOTION_V0685.md)。
+
+
+## 0.68.4 森靈馭獸師造型（2026-09-17）
+
+沿用直接雙擊 td.html 或 npm run serve:test。新版素材需保留在 assets/td；不需額外套件或設定。
+
+
+## 0.68.0 雙隘口要塞（2026-09-17）
+
+無新執行期依賴；Node.js 18+，npm run serve:test 後開啟 td.html?v=0.68.0，在目前戰場選第二張。
+
+詳見 [第二張地圖規格、操作與回復](TWIN_PASS_V0680.md)。
+
+## 0.67.0 終極士兵（2026-09-17）
+
+完整取得0.67.0專案即可使用，不需新增套件、帳號或資料庫。開啟td.html，或執行node scripts/serve-test.js後進入本機遊戲。
+
+詳見[終極士兵操作、架構與驗收](ULTIMATE_SOLDIERS_V1.md)。
+
+## 0.66.5 直接開檔修復（2026-09-17）
+
+可直接雙擊 td.html；亦可 npm run serve:test 後開啟伺服器網址。手機入口 td-mobile.html 同樣支援直接開檔。
+
+
+## 0.66.4 建造預覽對齊（2026-09-17）
+
+沿用 npm run serve:test 啟動靜態網站，瀏覽 td.html。此版不新增執行套件；視覺 QA 腳本需可用的 Playwright 與 Edge。
+
+
+## 0.66.2 選取用途說明（2026-09-17）
+
+沿用既有 Node.js 18+ 與靜態啟動流程：npm test、npm run check、npm run serve:test。開啟伺服器提供的 td.html，部署／選取單位查看用途，無額外套件。
+
+
+## 0.66.1 新手谷地美術（2026-09-17）
+
+沿用 Node.js 18+ 與 npm run serve:test，不需新套件或設定。開啟 td.html?v=0.66.1。
+
+詳見 [地圖更新、架構與回復手冊](MAP_ART_V0661.md)。
+
+## 0.65.0 手機介面修正（2026-09-17）
+
+安裝步驟不變：Node.js 18+，執行 `npm run serve:test`，開啟 `http://127.0.0.1:4173/td.html`。完整複製專案，包含新增的 `td-mobile.html` 與 `src/td/mobile-entry.js`。手機與桌面使用同一入口，不需要另裝套件或資料庫。
+
 ## 0.64.0 首次安裝與啟動
 
 1. 下載完整倉庫 ZIP 並解壓，或 `git clone https://github.com/dat5512999-bit/sky-strike-hero-frontier.git`。
@@ -217,3 +286,63 @@
 正式網址必須使用 HTTPS（GitHub Pages 符合）。從 `td.html` 加入主畫面時使用 `td.webmanifest` 並直接啟動塔防；Android Chrome 選「安裝應用程式」，iOS Safari 由分享選單選「加入主畫面」。首次開啟需連線，完成離線快取後可再次離線啟動。
 
 v0.32.2 的 Pages 工作流程可自動初始化全新公開倉庫；若組織政策禁止 Pages，仍需由倉庫管理者開啟權限。
+
+
+## v0.66.0 戰旗光環
+
+v0.66.0 沿用既有安裝方式，無新增依賴。安裝 Node.js 18+ 後可執行 npm test、npm run check；npm run serve:test 啟動後開啟 http://127.0.0.1:4173/td.html。
+
+
+## 0.66.2 角色比例（2026-09-17）
+
+沿用既有安裝方式，無新增執行依賴。使用 Node.js 18 以上執行 npm test 與 npm run check；一般玩家不必執行素材量測工具。
+
+
+## v0.66.3 侵蝕特效
+
+v0.66.3 沿用原安裝與設定，不需新套件或下載素材。Node.js 18+ 執行 npm test、npm run check；npm run serve:test 後開啟 http://127.0.0.1:4173/td.html。
+
+## 0.66.4 波次提示
+
+波次預告改為怪物縮圖、數量與威脅標籤，新增入口倒數與短暫開戰提醒。操作、設定、架構、API、部署、還原與驗證方式見 [波次提示文件](WAVE_HUD_V0664.md)。
+
+
+## 0.67.1 手機波次版面修正
+
+修正波次與倒數重疊、速度列出界，縮小手機提示面板；無操作、設定或資料格式變更。原因、架構、更新、還原及觸控版面驗證見 [版面修正文件](WAVE_LAYOUT_V0671.md)。
+
+
+## 0.68.1 波次避讓與預覽修正
+
+波次改為靠左小列，預告按需展開，戰鬥提示可點穿；修正三種終極士兵卡片裁切。操作、API、架構、部署、還原與測試見 [版本文件](EDGE_WAVE_PREVIEW_V0681.md)。
+
+
+
+## v0.68.2 藤蔓纏繞
+
+v0.68.2 沿用原安裝與設定。無新增套件；Node.js 18+ 執行 npm test、npm run check。npm run serve:test 後開啟 http://127.0.0.1:4173/td.html。
+
+## 0.68.3 士兵尺寸微調（2026-09-17）
+
+我方部署士兵統一放大 12%，保留相對體型與腳底錨點；英雄、怪物、召喚物和卡片大小維持原設定。無新增操作、設定、API、權限或資料格式。ArtSystem.drawCombatUnit → 腳底縮放 → drawCombatUnitSprite；預覽直接使用未放大的 sprite 方法，避免再次裁切。
+
+安裝與部署流程不變，完整更新後關閉舊分頁再開啟。package.json 與 Service Worker 快取更新至 0.68.3。修改前 ArtSystem.js、package.json、sw.js 保存在 artifacts/soldier-v0683-backup/；若需還原，將 ArtSystem.js 放回 src/td/systems/，其餘放回根目錄，已有後續修改時先比較合併，部署使用新的快取名稱。
+
+驗證：342 項測試通過；全角色圖在 artifacts/qa-unit-scale/roster.png；三種終極士兵的六張卡片預覽仍完整。此版本只改畫面尺寸，射程、攻擊、碰撞與移動數值不變。
+
+
+## v0.69.0 英雄技能與動畫完整顯示
+
+沿用 Node.js 18+ 與原安裝方式，無新增套件。新增兩個 systems 檔須完整；npm test、npm run check；npm run serve:test 啟動本機網頁。
+## 0.69.1 安裝補充
+
+無新增外部依賴；需一併部署 FieldLoot 腳本。詳見 [版本文件](FIELD_LOOT_SHOP_V0691.md)。
+
+## 0.69.7 雙隘口路線校準
+
+依正式圖片的鋪石路面重新取樣上下道路中心，修正彎道偏向路緣；共用末段長度同步計算。沿用 maps → Monster／BuildSystem／MiniMapView 架構，不改圖片、素材腳底或 API。重新開始遠征即可使用新座標，無設定與存檔遷移；部署完整版本與新的 Service Worker 快取。回復前資料在 artifacts/route-v0697-backup，請逐檔比較，避免覆蓋其他工作。
+
+6 項雙路測試與語法檢查通過；新增獨立路面取樣回歸、完整路線怪物截圖，見 artifacts/qa-twinpass/full-route-battle.png。全套當次為 375/377 通過，兩項旗幟／統領光環測試失敗，涉及另行修改中的軍團平衡，未在此地圖修正中改動。
+## 0.71.1 安裝補充
+
+無新增依賴。部署完整檔案並重新開啟頁面後，難度卡應顯示積分倍率；既有瀏覽器戰績會在下次讀取與儲存時升級為 V3。

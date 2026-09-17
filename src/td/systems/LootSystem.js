@@ -38,6 +38,19 @@
       if(item.resources){context.economy.gold+=item.resources.gold||0;context.economy.lumber+=item.resources.lumber||0;context.economy.merit+=item.resources.merit||0;}
       return Object.assign({id:id},item);
     }
+    grant(id,context){if(!ITEMS[id])return null;this.pending=[id];return this.claim(id,context);}
+    rollDrop(monster,profession,faction,activeDrops){
+      const special=['boss','commander','healer','warder'].includes(monster.type),chance=monster.type==='boss'?1:special?.16:.018;
+      if((activeDrops||0)>=3||this.random()>chance)return null;
+      let pool=Object.keys(ITEMS).filter(id=>ITEMS[id].gear&&!this.claimed.has(id));
+      if(faction==='arcanist'||!faction&&profession==='hunter')pool=pool.filter(id=>id!=='dragon-egg');
+      if(!pool.length)pool=['frontier-supplies'];
+      const id=pool[Math.floor(this.random()*pool.length)];return Object.assign({id},ITEMS[id]);
+    }
+    milestone(wave,context){
+      const id={5:'orc-contract',10:'dragon-egg',15:'bone-contract'}[wave];
+      if(!id||this.claimed.has(id))return null;return this.grant(id,context);
+    }
   }
   LootSystem.ITEMS=ITEMS;ns.systems.LootSystem=LootSystem;
 })(globalThis.TowerFrontier);

@@ -30,6 +30,13 @@ test('商店在戰場快捷列獨立於四格英雄技能，大絕名稱與冷�
   assert.match(game,/if\(key==='r'\)\{self\.openShop\(\)/);
   assert.match(game,/querySelector\('span'\)\.textContent=ultimate\.name/);
 });
+test('商城傭兵預覽清楚可辨，點擊遮罩背景即可返回戰場',()=>{
+ const html=fs.readFileSync(path.join(root,'td.html'),'utf8'),css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8'),game=fs.readFileSync(path.join(root,'src/td/TDGame.js'),'utf8');
+ assert.match(html,/id="td-shop-dismiss-hint">點商城外側即可關閉/);
+ assert.match(css,/mercenary-preview\{grid-column:1;grid-row:1\/4;width:112px;height:112px/);
+ assert.match(css,/shop-items\.mercenary-items button\{grid-template-columns:112px minmax\(0,1fr\)[^}]*min-height:136px/);
+ assert.match(game,/shopScreen\.addEventListener\('click',function\(event\)\{if\(event\.target===self\.ui\.shopScreen\)self\.closeShop\(\);\}\)/);
+});
 
 test('固定士兵不再打開舊指令面板，PC／橫向／直向仍重用原建造按鈕',()=>{
   const elements=new Map(),tasks=[];
@@ -73,7 +80,7 @@ test('固定士兵不再打開舊指令面板，PC／橫向／直向仍重用原
 });
 test('精簡 HUD 折疊保留原情報與全部鏡頭操作，無重複控件',()=>{
  const html=fs.readFileSync(path.join(root,'td.html'),'utf8');
- assert.match(html,/<details class="wave-intel"><summary>下一波情報<\/summary><small id="td-wave-preview">/);
+ assert.match(html,/<details class="wave-intel"><summary aria-label="查看波次詳細情報">情報<\/summary><small id="td-wave-preview">/);
  assert.match(html,/<details id="td-camera-controls"[^>]*><summary>⌖ 鏡頭<\/summary>/);
  for(const id of ['td-camera-close','td-camera-inspect','td-camera-home','td-camera-follow','td-camera-all','td-camera-out','td-camera-in'])assert.equal(html.split('id="'+id+'"').length-1,1);
  const css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
@@ -94,7 +101,8 @@ test('戰鬥資源列使用單行圖示數值與既有暫停／選單入口',()=
 });
 test('桌面瀏覽器縮放只調整 HUD 密度，窄視窗速度列仍保持置中',()=>{
  const css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
- assert.match(css,/@media \(min-width:1600px\) and \(min-height:700px\)\{[\s\S]*?--hero-width:162px/);
+ assert.match(css,/@media \(min-width:2200px\) and \(min-height:1100px\)\{[\s\S]*?--hero-width:162px/);
+ assert.doesNotMatch(css,/@media \(min-width:1600px\) and \(min-height:700px\)/,'1920-class desktop must not receive the oversized HUD');
  assert.match(css,/@media \(min-width:701px\) and \(max-width:1199px\)\{[\s\S]*?\.hud-controls\{left:calc\(50% - 206px\);right:auto;width:412px;[\s\S]*?transform:none/);
  assert.match(css,/@media \(min-width:701px\) and \(max-width:1199px\) and \(max-height:600px\)\{[\s\S]*?left:calc\(50% - 186\.5px\);width:373px/);
  assert.match(css,/@media \(min-width:1200px\) and \(max-height:600px\)\{[\s\S]*?left:calc\(50% - 202\.5px\);right:auto;width:405px/);
@@ -102,7 +110,7 @@ test('桌面瀏覽器縮放只調整 HUD 密度，窄視窗速度列仍保持置
  assert.doesNotMatch(css,/\.td-shell\{[^}]*transform:scale\(/);
 });
 
-test('手機橫向 HUD、確認建造、資源兌換與直式提示都有獨立介面',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8'),css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8'),main=fs.readFileSync(path.join(root,'src/td/main.js'),'utf8');for(const id of ['td-orientation-gate','td-orientation-lock','td-placement-confirm','td-camera-close','td-shop-merit'])assert.equal(html.split('id="'+id+'"').length-1,1);assert.equal([...html.matchAll(/data-shop-exchange=/g)].length,2);assert.match(html,/1000 → 🏅 1/);assert.match(html,/🏅 1 → 🪙 1000/);assert.match(css,/data-combat-orientation="portrait"[^}]*\.orientation-gate\{display:grid/);assert.match(css,/data-combat-orientation="landscape"[^}]*\.hud-controls[\s\S]*?transform:translateX\(-50%\)/);assert.match(css,/data-combat-orientation="landscape"[^}]*\.selection-actions button[\s\S]*?min-height:29px/);assert.match(css,/\.shop-exchange/);assert.match(main,/screen\.orientation/);assert.match(main,/placementConfirm\.onclick/);});
+test('手機橫向 HUD、確認建造、資源兌換與橫式介面都有獨立入口',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8'),css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8'),main=fs.readFileSync(path.join(root,'src/td/main.js'),'utf8');for(const id of ['td-orientation-gate','td-orientation-lock','td-placement-confirm','td-camera-close','td-shop-merit'])assert.equal(html.split('id="'+id+'"').length-1,1);assert.equal([...html.matchAll(/data-shop-exchange=/g)].length,2);assert.match(html,/1000 → 🏅 1/);assert.match(html,/🏅 1 → 🪙 1000/);assert.match(css,/data-combat-orientation="portrait"[^}]*\.orientation-gate\{display:none/);assert.match(css,/data-combat-orientation="landscape"[^}]*\.hud-controls[\s\S]*?transform:translateX\(-50%\)/);assert.match(css,/data-combat-orientation="landscape"[^}]*\.selection-actions button[\s\S]*?min-height:29px/);assert.match(css,/\.shop-exchange/);assert.match(main,/screen\.orientation/);assert.match(main,/placementConfirm\.onclick/);});
 
 test('本局積分使用右側小圖塊、可關閉面板並併入含清場時間的逐波戰報',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8'),main=fs.readFileSync(path.join(root,'src/td/main.js'),'utf8'),game=fs.readFileSync(path.join(root,'src/td/TDGame.js'),'utf8');for(const id of ['td-score-shortcut','td-score-value','td-score-panel','td-score-close','td-score-total','td-score-grade','td-score-detail','td-score-best'])assert.equal(html.split('id="'+id+'"').length-1,1);assert.match(html,/🏆<\/b><small>積分/);assert.match(html,/<span>積分<\/span><span>清場時間<\/span><span>擊破<\/span>/);assert.match(main,/scoreShortcut\.addEventListener\('click'/);assert.match(game,/scoreState\(\)/);assert.match(game,/record\.timeBonus/);assert.match(game,/本次積分/);});
 
@@ -123,7 +131,7 @@ test('英雄戰鬥小卡只常駐 HP／MP，詳細資訊仍保留 XP、能力與
  const css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
  const card=html.match(/<div class="hero-profile">([\s\S]*?)<\/details>\s*<\/div>/)?.[1];
  assert.ok(card,'英雄小卡必須存在');
- const main=card.split('<details class="hero-more">')[0];
+ const main=card.split('<details class="hero-more"')[0];
  for(const id of ['td-hero-select','td-hero-level','td-hero-hp-text','td-hero-hp-fill','td-hero-mp-text','td-hero-mp-fill'])assert.ok(main.includes('id="'+id+'"'));
  for(const id of ['td-hero-xp-text','td-hero-xp-fill','td-stat-attack','td-stat-range','td-stat-speed','td-stat-move','td-hero-weapon']){
   assert.ok(card.includes('id="'+id+'"'));

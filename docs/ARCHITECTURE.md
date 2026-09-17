@@ -1,5 +1,87 @@
 # 系統架構
 
+## 0.71.1 難度積分資料流
+
+`BattleReportSystem.multiplier → wave.score → finalize → bestByMapDifficulty[map][difficulty]`，同時更新 `bestByMap[map]` 全難度最高分。V2 遷移只根據 `runs[].difficulty` 回填分難度紀錄，缺少難度的舊場次只保留在全難度資料。
+
+## 0.71.0 暮秋遺跡與整合發布
+
+新增第三張「暮秋遺跡 · 雙 U 型彎」，採縮窄第一個內圈的確認版本。遠征頁可直接選擇，沿用英雄／軍團／波次及地圖獨立戰績；路線、建造區、小地圖與离線資產同步，無新帳號、API 或設定。完整安裝、更新、架構圖、備份回復與測試見 [發布手冊](AUTUMN_RUINS_V0710.md)。
+
+> v0.70.0：`CombatUnit` 與 `Building` 各自以基礎造價及等級倍率產生升級原價，`BuildSystem` 再統一套用範圍折扣、原子扣款及實際投入紀錄；出售依實際投入計算 70% 回收。
+
+## 0.69.9 定位規則
+
+重甲與斬殺倍率沿用 Projectile 命中管線；女妖詛咒與統領攻速由 BattleSynergySystem 管理；支援建築依 Building 等級產生倍率。資料流與邊界見 [定位調整](ROSTER_BALANCE_V1.md)。
+
+## 0.69.8 地圖獨立積分
+
+分數仍由 BattleReportSystem 計算，TDGame.beginRun 傳入 map／mapName。結算流程：run.map → bestByMap[map] 比較／更新 → 各地圖保留最近 20 場 → localStorage V2；顯示端讀取當前地圖 bestScore。無新 HTTP API 或資料庫，未知舊地圖資料獨立保存。
+
+## 0.69.6 士兵裝備顯示修正
+
+呈現流程：CombatUnit.draw → ArtSystem.drawCombatUnit → 原角色動畫 → 還原縮放／翻轉 → drawSoldierEquipmentBadge。裝備數值仍由 ArmorySystem 管理；小標記與角色動畫分離，無資料庫或 API 變更。
+
+> 0.69.2：`CombatUnit/Summon state → ArtSystem.ACTION_PATHS → 4×4 action atlas → SpriteFrameBounds` 為新增的戰鬥動作資料流。詳見 [UNIT_ACTIONS_V0692.md](UNIT_ACTIONS_V0692.md)。
+
+## 0.68.5 馭獸師與熊戰鬥動作（2026-09-17）
+
+恢復馭獸師原本的鹿角、肩鳥與綠袍設計，新增待機及施法畫格；三階熊新增踏步與撲咬畫格，近戰命中顯示爪痕。使用既有 state、frameClock、attackTimer 切換，無資料庫、API 或權限變更。完整安裝、更新、回復與測試方式見 [動作更新紀錄](NATURE_MOTION_V0685.md)。
+
+
+## 0.68.4 森靈馭獸師造型（2026-09-17）
+
+馭獸師資料流：combatUnits.beastmaster → drawCombatUnitSprite → drawBeastmaster → 靜態矩形裁切 → 現有士兵縮放；preview 共用繪製入口。無執行時像素讀取。
+
+
+## 0.68.0 雙隘口要塞（2026-09-17）
+
+WaveSystem 交替指派地圖路線，Monster 保存各自路線，TDGame 處理分支獨立排隊與共用末段間距；BuildSystem 與 MiniMapView 共用 routes。完整架構圖見下方規格。
+
+詳見 [第二張地圖規格、操作與回復](TWIN_PASS_V0680.md)。
+
+## 0.67.0 終極士兵（2026-09-17）
+
+沿用 FactionSystem → CombatUnit → BattleSynergy → Projectile；ArtSystem 以實測四格來源框繪製終極士兵，其他兵種沿用既有圖集。架構圖見終極士兵專章。
+
+詳見[終極士兵操作、架構與驗收](ULTIMATE_SOLDIERS_V1.md)。
+
+## 0.66.5 直接開檔修復（2026-09-17）
+
+修正版資料流：素材 → 暫存 Canvas 繪製 → PREVIEW_BOUNDS 靜態邊界 → 等比例卡片預覽。執行時無 getImageData，file:// 與 HTTP 共用相同流程。
+
+
+## 0.66.4 建造預覽對齊（2026-09-17）
+
+預覽資料流：TDGame.updateUi → ArtSystem.preview → 384px 暫存繪圖 → 可見像素邊界 → 128px 預覽 Canvas → 四列卡片。每種類只掃描一次；不在戰場繪製迴圈掃描像素。無資料庫變更。
+
+
+## 0.66.2 選取用途說明（2026-09-17）
+
+用途資料流：config／單位 config() → TDGame.selectionPurpose → updateSelectionPurpose → td-selection-purpose。沿用現有選取與部署狀態，不新增資料庫或儲存格式。
+
+
+## 0.66.1 新手谷地美術（2026-09-17）
+
+仍由 maps → ArtSystem → FrontierTerrain → Camera → Canvas 繪製；MiniMapView 共用相同素材。沒有新增資料庫或模組。
+
+詳見 [地圖更新、架構與回復手冊](MAP_ART_V0661.md)。
+
+## 0.65.0 手機介面修正（2026-09-17）
+
+介面與戰鬥仍共用同一份 TDGame，沒有新資料庫或 API。手機容器只處理 viewport 與方向；觸控座標由瀏覽器轉換，不另外改寫搖桿、鏡頭、迷你地圖座標。
+
+```mermaid
+flowchart LR
+  Entry[td.html] --> Detect[mobile-entry.js]
+  Detect -->|小型觸控頂層| Shell[td-mobile.html]
+  Shell -->|同源 iframe / 保留實例| Game[td.html 遊戲]
+  Detect -->|桌面或已內嵌| Game
+  Game --> Layout[LayoutSystem / CSS]
+  Game --> Input[TDGame 觸控]
+  Input --> Preview[BuildSystem 預覽 / 確認]
+```
+
 ## 0.64.0 增量架構（不重寫戰鬥）
 
 資料夾沿用 `src/td/entities`、`src/td/systems`、`assets/td`、`tests`、`scripts`；只新增 HeroJoystick、BattleSynergySystem 兩個系統模組及測試／QA 腳本，無資料庫或 HTTP API。
@@ -515,6 +597,96 @@ Hero.equipment.spear > 0
 
 ## v0.32.1 雙入口 PWA
 
-`index.html` 與 `td.html` 保持同一個靜態站台與 Service Worker scope，但各自連到獨立 manifest。這讓兩種模式共用離線資產與更新週期，同時保有不同安裝名稱及啟動頁；圖示輸出由 `scripts/build-app-icons.ps1` 從版本化原圖機械式產生。
+`index.html` 與塔防入口保持同一個靜態站台與 Service Worker scope，但各自連到獨立 manifest。塔防 manifest 從 `td-mobile.html` 啟動，再由同源 iframe 載入 `td.html`；Android 與 iOS 因此共用橫向容器、離線資產與更新週期。圖示輸出由 `scripts/build-app-icons.ps1` 從版本化原圖機械式產生。
 
 v0.32.2 的 CI/CD 仍維持單一 `main → test → Pages` 管線，僅在 Configure Pages 階段允許第一次建立站台，不增加執行期服務或資料庫。
+
+
+## v0.66.0 戰旗光環
+
+沿用 entities、systems、tests 資料夾；無資料庫或新增 API。
+
+```text
+戰旗 config / 位置 / 存活 → BattleSynergySystem.flagRate
+  ├─ CombatUnit.config / Hero.combatConfig → Projectile
+  ├─ drawFlag → 腳下雙環與旗標
+  └─ TDGame.updateUi → 狀態、普攻分解與範圍人數
+```
+判定即時計算，不保存容易過期的戰旗狀態；範圍包含邊界。
+
+
+## 0.66.2 角色比例（2026-09-17）
+
+角色素材 → scripts/measure-unit-sprites.cjs（離線 alpha 量測）→ ArtSystem.SPRITE_METRICS + 體型設定 → 各 draw 方法 → Canvas。每組動畫採固定倍率，避免逐幀尺寸跳動；英雄與武器共用變換。遊戲迴圈不掃描圖片像素。
+
+
+## v0.66.3 侵蝕特效
+
+沿用 src/td/systems/CombatFeedbackSystem.js，未新增資料庫、素材或 HTTP API。
+
+```text
+BattleSynergy 真實易傷／瘟疫 → Monster 狀態
+  ├─ 原 takeDamage／DOT → 傷害計算（不變）
+  ├─ updateCorrosion → Map 視覺生命週期
+  │    └─ ground → 怪物繪製 → air → 血條
+  └─ drawCorrosionBadge → 易傷／瘟疫圖示
+```
+每輪線性同步敵人狀態；移除、死亡與 reset 釋放 Map 參照。
+
+## 0.66.4 波次提示
+
+波次預告改為怪物縮圖、數量與威脅標籤，新增入口倒數與短暫開戰提醒。操作、設定、架構、API、部署、還原與驗證方式見 [波次提示文件](WAVE_HUD_V0664.md)。
+
+
+## 0.67.1 手機波次版面修正
+
+修正波次與倒數重疊、速度列出界，縮小手機提示面板；無操作、設定或資料格式變更。原因、架構、更新、還原及觸控版面驗證見 [版面修正文件](WAVE_LAYOUT_V0671.md)。
+
+
+## 0.68.1 波次避讓與預覽修正
+
+波次改為靠左小列，預告按需展開，戰鬥提示可點穿；修正三種終極士兵卡片裁切。操作、API、架構、部署、還原與測試見 [版本文件](EDGE_WAVE_PREVIEW_V0681.md)。
+
+
+
+## v0.68.2 藤蔓纏繞
+
+沿用 systems、entities、tests，無資料庫或新檔案載入順序。
+
+```text
+BattleSynergy.rootPulse → Monster.rootTime → 原定身移動判定
+                              └→ Feedback.updateRoots → roots Map
+                                   ├→ ground：破土與碎屑
+                                   └→ air：纏腿粗藤、葉片與縮回
+nature burst → explosion(style=nature) → 放射藤枝
+```
+特效不寫入傷害、怪物位置或定身秒數。
+
+## 0.68.3 士兵尺寸微調（2026-09-17）
+
+我方部署士兵統一放大 12%，保留相對體型與腳底錨點；英雄、怪物、召喚物和卡片大小維持原設定。無新增操作、設定、API、權限或資料格式。ArtSystem.drawCombatUnit → 腳底縮放 → drawCombatUnitSprite；預覽直接使用未放大的 sprite 方法，避免再次裁切。
+
+安裝與部署流程不變，完整更新後關閉舊分頁再開啟。package.json 與 Service Worker 快取更新至 0.68.3。修改前 ArtSystem.js、package.json、sw.js 保存在 artifacts/soldier-v0683-backup/；若需還原，將 ArtSystem.js 放回 src/td/systems/，其餘放回根目錄，已有後續修改時先比較合併，部署使用新的快取名稱。
+
+驗證：342 項測試通過；全角色圖在 artifacts/qa-unit-scale/roster.png；三種終極士兵的六張卡片預覽仍完整。此版本只改畫面尺寸，射程、攻擊、碰撞與移動數值不變。
+
+
+## v0.69.0 英雄技能與動畫完整顯示
+
+新增 systems/HeroSkillVFX.js 與 SpriteFrameBounds.js，無資料庫。
+
+```text
+成功施法 → HeroSkillVFX.emit → updateFields 倒數 → TDGame.draw
+原始 PNG → 離線 measure-animation-frames → SpriteFrameBounds
+ArtSystem.drawFrame → 跨格取圖／鄰幀排除 → 原座標顯示
+```
+SpriteFrameBounds 在 ArtSystem 前載入；HeroSkillVFX 在 HeroRoster 前載入，皆加入離線快取。
+## 0.69.1 掉落架構
+
+死亡事件、地面物品、軍械庫與商城的資料流見 [版本文件](FIELD_LOOT_SHOP_V0691.md)。
+
+## 0.69.7 雙隘口路線校準
+
+依正式圖片的鋪石路面重新取樣上下道路中心，修正彎道偏向路緣；共用末段長度同步計算。沿用 maps → Monster／BuildSystem／MiniMapView 架構，不改圖片、素材腳底或 API。重新開始遠征即可使用新座標，無設定與存檔遷移；部署完整版本與新的 Service Worker 快取。回復前資料在 artifacts/route-v0697-backup，請逐檔比較，避免覆蓋其他工作。
+
+6 項雙路測試與語法檢查通過；新增獨立路面取樣回歸、完整路線怪物截圖，見 artifacts/qa-twinpass/full-route-battle.png。全套當次為 375/377 通過，兩項旗幟／統領光環測試失敗，涉及另行修改中的軍團平衡，未在此地圖修正中改動。

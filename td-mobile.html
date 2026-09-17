@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17392f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="英雄塔防">
+  <link rel="manifest" href="td.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon-180.png">
+  <title>英雄塔防</title>
+  <style>
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07100e;overscroll-behavior:none}
+    iframe{position:fixed;left:0;top:0;width:100%;height:100%;border:0;transform-origin:top left}
+    .install-card{position:fixed;z-index:10;left:50%;bottom:max(12px,env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr auto;gap:4px 10px;width:min(360px,calc(100% - 24px));padding:10px 12px;transform:translateX(-50%);border:1px solid #b89952;border-radius:8px;background:#0b1715f2;color:#e9d59b;box-shadow:0 8px 28px #000b;font:13px/1.45 system-ui,sans-serif}
+    .install-card[hidden]{display:none}.install-card strong{font-size:14px}.install-card small{grid-column:1;color:#bac6ba}.install-card button{grid-column:2;grid-row:1/3;min-width:86px;border:1px solid #d5b760;border-radius:5px;background:linear-gradient(#71572d,#332411);color:#fff0bd;font-weight:700}.install-card .dismiss{position:absolute;right:3px;top:-30px;min-width:28px;height:28px;background:#101b19}
+    @media (display-mode:standalone),(display-mode:fullscreen){.install-card{display:none!important}}
+  </style>
+</head>
+<body>
+  <iframe title="英雄塔防橫向遊戲" allow="fullscreen" allowfullscreen></iframe>
+  <aside id="install-card" class="install-card" hidden aria-live="polite"><strong id="install-title">安裝英雄塔防</strong><small id="install-copy">加入主畫面後會以橫向全螢幕開啟。</small><button id="install-action" type="button">安裝</button><button id="install-dismiss" class="dismiss" type="button" aria-label="關閉安裝提示">×</button></aside>
+  <script>
+    const frame=document.querySelector('iframe');
+    function resizeGame(){
+      const w=window.innerWidth,h=window.innerHeight,portrait=h>w;
+      frame.style.width=(portrait?h:w)+'px';
+      frame.style.height=(portrait?w:h)+'px';
+      frame.style.transform=portrait?'translateX('+w+'px) rotate(90deg)':'none';
+    }
+    resizeGame();
+    addEventListener('resize',resizeGame);
+    if(window.visualViewport)visualViewport.addEventListener('resize',resizeGame);
+    frame.src='td.html'+location.search+location.hash;
+  </script>
+  <script src="src/td/mobile-pwa.js"></script>
+</body>
+</html>

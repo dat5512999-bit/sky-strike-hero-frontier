@@ -34,6 +34,7 @@
         const slowTime=hero.classType==='arcanist'?3.2:hero.classType==='hunter'?2:1.2;
         new ns.entities.Projectile(hero,monster,{damage:damage,color:color,attackType:hero.classType==='hunter'?'pierce':hero.classType==='arcanist'?'magic':'chaos',slow:slow,slowTime:slowTime}).hit(monsters,onKill,onHit);
       });
+      ns.systems.HeroSkillVFX.emit(hero,'ultimate-'+hero.classType,{x:center.x,y:center.y,radius:cfg.radius,targets:victims.map(m=>({x:m.x,y:m.y})),duration:.8});
       hero.skillCooldowns.ultimate=cfg.cooldown*(1-hero.equipment.rune*.1);
       hero.beginCast();
       return{name:cfg.name,x:center.x,y:center.y,radius:cfg.radius,color:color,count:victims.length};

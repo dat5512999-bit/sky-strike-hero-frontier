@@ -3,14 +3,31 @@
   // Composition hooks over the existing Projectile / Summon / onKill pipeline.
   // Deployment anchors never move; charge and fly-by coordinates are visual only.
   class BattleSynergySystem{
-    constructor(game){this.game=game;this.reset();}
+    constructor(game){this.game=game;if(game.hero)game.hero.synergy=this;this.reset();}
     reset(){this.souls=0;this.clock=0;this.auraTick=-1;this.fields=[];this.visuals=[];}
+    flagRate(target){
+      if(!target||target.active===false||target.retired||(target!==this.game.hero&&target.kind!=='unit'))return 0;
+      let rate=0;
+      for(const source of this.game.build.items){if(source.retired||source.active===false||!ns.config.buildings[source.type]?.damageAura)continue;const cfg=source.config();if(ns.utils.distance(source,target)<=cfg.range)rate=Math.max(rate,cfg.damageAura);}
+      return rate;
+    }
+    static damageRate(target){return Math.max(target.supportDamage||0,target.synergy?target.synergy.flagRate(target):0);}
+    static attackStats(target){const total=(target.combatConfig?target.combatConfig():target.config()).damage,rate=BattleSynergySystem.damageRate(target),base=total/(1+rate);return {base,bonus:total-base,total};}
+    static drawFlag(ctx,target){
+      const synergy=target.synergy,rate=synergy&&synergy.flagRate(target);if(!rate)return;
+      const selected=synergy.game.build.selected,bright=selected&&selected.type==='battleflag'&&!selected.retired&&ns.utils.distance(selected,target)<=selected.config().range;
+      ctx.save();ctx.strokeStyle='#f5d571';ctx.fillStyle='#f5d571';ctx.globalAlpha=bright?.9:.38;ctx.lineWidth=bright?3:2;
+      ctx.beginPath();ctx.ellipse(target.x,target.y+16,31,12,0,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();ctx.ellipse(target.x,target.y+16,24,8,0,0,Math.PI*2);ctx.stroke();
+      ctx.globalAlpha=1;ctx.font='bold 14px Segoe UI';ctx.textAlign='center';ctx.fillText('⚑',target.x+32,target.y+31);ctx.restore();
+    }
     static prepare(owner,target,cfg,options){
-      Object.assign(options,{armorPierce:cfg.armorPierce,arcaneMark:cfg.arcaneMark,natureMark:cfg.natureMark,vulnerability:cfg.vulnerability,natureExplosion:cfg.natureExplosion,arcaneBounce:cfg.arcaneBounce,plague:cfg.plague,soulHarvest:cfg.soulHarvest});
+      Object.assign(options,{armorPierce:cfg.armorPierce,arcaneMark:cfg.arcaneMark,natureMark:cfg.natureMark,vulnerability:cfg.vulnerability,natureExplosion:cfg.natureExplosion,arcaneBounce:cfg.arcaneBounce,plague:cfg.plague,soulHarvest:cfg.soulHarvest,bonusVsHeavy:cfg.bonusVsHeavy,executeThreshold:cfg.executeThreshold,executeMultiplier:cfg.executeMultiplier});
       if(cfg.kingdomBounce)Object.assign(options,{chain:Math.min(5,owner.level+2),chainRange:112,shock:owner.level>=3,style:'lightning'});
       if(cfg.charge){options.lineEnd={x:target.x+(target.x-owner.x)*.4,y:target.y+(target.y-owner.y)*.4};options.lineStart={x:owner.x,y:owner.y};options.holyFire=owner.level>=2;options.speed=1100;options.style='flame';}
       if(cfg.charge||cfg.flyby)owner.excursion={x:options.lineEnd?options.lineEnd.x:target.x,y:options.lineEnd?options.lineEnd.y:target.y,time:.85,max:.85,fly:!!cfg.flyby};
       if(cfg.soulHarvest&&owner.synergy&&owner.synergy.souls>0){owner.synergy.souls--;options.damage*=1.8;options.splash=48;options.soulCharged=true;}
+      if(cfg.soulSlam&&owner.synergy&&owner.synergy.souls>=3){owner.synergy.souls-=3;options.damage*=1.5;options.splash=(options.splash||0)+20;options.soulCharged=true;}
       return options;
     }
     pulse(x,y,color,radius){this.visuals.push({x,y,color,radius:radius||35,time:.45});if(this.visuals.length>100)this.visuals.shift();}
@@ -43,7 +60,7 @@
     }
     update(dt){
       this.clock+=dt;const game=this.game;if(game.feedback)game.feedback.mobile=typeof document!=='undefined'&&document.body.dataset.layout==='mobile';const items=game.build.items.filter(t=>!t.retired&&t.active!==false);
-      game.hero.synergy=this;items.forEach(t=>{t.synergy=this;t.supportDamage=0;if(t.kind==='building')t.supportHaste=0;if(t.excursion)t.excursion.time=Math.max(0,t.excursion.time-dt);});
+      game.hero.synergy=this;items.forEach(t=>{t.synergy=this;t.supportDamage=0;t.supportHaste=t.kind==='unit'?(t.towerSupportHaste||0):0;if(t.excursion)t.excursion.time=Math.max(0,t.excursion.time-dt);});
       for(const monster of game.monsters){
         monster.arcaneMark=Math.max(0,(monster.arcaneMark||0)-dt);monster.shockTime=Math.max(0,(monster.shockTime||0)-dt);monster.rootTime=Math.max(0,(monster.rootTime||0)-dt);
         if(monster.vulnerability&&(monster.vulnerability.time-=dt)<=0)monster.vulnerability=null;
@@ -52,12 +69,13 @@
       }
       items.forEach(source=>{
         const cfg=source.config(),near=items.filter(t=>t!==source&&ns.utils.distance(source,t)<=cfg.range);
-        if(cfg.damageAura)near.filter(t=>t.kind==='unit').forEach(t=>{t.supportDamage=Math.max(t.supportDamage,cfg.damageAura);});
+        // Battle flags are queried live by both combat and presentation.
+        if(cfg.commandHaste)near.filter(t=>t.kind==='unit').forEach(t=>{t.supportHaste=Math.max(t.supportHaste||0,cfg.commandHaste);});
         if(cfg.forgeAura)near.filter(t=>t.kind==='building').forEach(t=>{t.supportDamage=Math.max(t.supportDamage,cfg.forgeAura);});
         if(cfg.natureAura)near.filter(t=>['dryad','dragon','beastmaster','grove'].includes(t.type)).forEach(t=>{t.supportDamage=Math.max(t.supportDamage,cfg.natureAura);});
         if(cfg.timeAura&&this.clock%8<3)near.forEach(t=>{t.supportHaste=Math.max(t.supportHaste||0,cfg.timeAura);});
         if(cfg.rootPulse){source.rootCooldown=(source.rootCooldown||0)-dt;if(source.rootCooldown<=0){const targets=game.monsters.filter(m=>m.active&&ns.utils.distance(source,m)<=cfg.range);if(targets.length){targets.forEach(m=>{m.rootTime=Math.max(m.rootTime||0,1.1+source.level*.1);});this.pulse(source.x,source.y,'#91e77b',cfg.range);source.rootCooldown=6;}}}
-        if(source.type==='beastmaster'&&!game.summons.some(s=>s.active&&s.owner===source&&s.form==='bear'))game.summons.push(new ns.entities.Summon(source,{form:'bear',tags:['summon','nature'],duration:22,level:source.level,damage:20*(1+.3*(source.level-1)),range:48,speed:115,leash:cfg.range+100,offsetX:0,color:cfg.color}));
+        if(source.type==='beastmaster'&&!game.summons.some(s=>s.active&&s.owner===source&&s.form==='bear'))game.summons.push(new ns.entities.Summon(source,{form:'bear',tags:['summon','nature'],duration:22,level:source.level,damage:20*(1+.3*(source.level-1)),range:48,speed:115,leash:cfg.range+100,offsetX:-62,offsetY:46,color:cfg.color}));
         if(source.type==='crypt')this.produceCrypt(source,cfg);
         if(source.type==='bombWorkshop'){source.robotCooldown=(source.robotCooldown||0)-dt;if(source.robotCooldown<=0){for(let i=0;i<(cfg.robotCount||1);i++)game.summons.push(new ns.entities.Summon(source,{form:cfg.heavyRobot?'heavyBomb':'bomb',launchDelay:i*.16,tags:['summon','mechanical'],duration:18,damage:cfg.robotDamage*(1+.22*(source.level-1)),splash:cfg.robotSplash,range:23,leash:cfg.range+100,speed:cfg.heavyRobot?80:130,offsetX:0,level:source.level,color:'#ffb467'}));source.robotCooldown=cfg.summonInterval;this.pulse(source.x,source.y,'#ffba71',25);}}
       });

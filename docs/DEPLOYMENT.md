@@ -1,5 +1,72 @@
 # 部署手冊
 
+## 0.71.0 暮秋遺跡與整合發布
+
+新增第三張「暮秋遺跡 · 雙 U 型彎」，採縮窄第一個內圈的確認版本。遠征頁可直接選擇，沿用英雄／軍團／波次及地圖獨立戰績；路線、建造區、小地圖與离線資產同步，無新帳號、API 或設定。完整安裝、更新、架構圖、備份回復與測試見 [發布手冊](AUTUMN_RUINS_V0710.md)。
+
+> v0.70.0 發布時須一併部署 `CombatUnit.js`、`package.json`、`sw.js`、測試與文件。部署後關閉舊分頁再開，抽查古龍 Lv.2 原價 800G。
+
+## 0.69.9 軍團定位平衡
+
+完整部署程式、測試、文件與 `sw.js`；確認快取為 `sky-strike-v0.69.9`。重開遊戲後檢查士兵說明、支援建築升級比例與三軍團配隊。
+
+## 0.69.8 地圖獨立積分
+
+發布時同步更新 BattleReportSystem.js、TDGame.js、package.json 與 sw.js。驗收至少切换兩張地圖確認最高分獨立，結算後重新載入確認保存。此次僅本機修改，未執行遠端發布。
+
+## 0.69.6 士兵裝備顯示修正
+
+完整部署包含本版 ArtSystem.js 及 sw.js 的靜態檔案；確認新版快取生效後檢查裝備標記。未在本次操作發布遠端網站。
+
+> 0.69.2 已將新增動作圖加入離線資產清單，快取版本為 `sky-strike-v0.69.2`。詳見 [UNIT_ACTIONS_V0692.md](UNIT_ACTIONS_V0692.md)。
+
+## 0.68.5 馭獸師與熊戰鬥動作（2026-09-17）
+
+恢復馭獸師原本的鹿角、肩鳥與綠袍設計，新增待機及施法畫格；三階熊新增踏步與撲咬畫格，近戰命中顯示爪痕。使用既有 state、frameClock、attackTimer 切換，無資料庫、API 或權限變更。完整安裝、更新、回復與測試方式見 [動作更新紀錄](NATURE_MOTION_V0685.md)。
+
+
+## 0.68.4 森靈馭獸師造型（2026-09-17）
+
+完整部署 0.68.4，快取 sky-strike-v0.68.4 包含 beastmaster-v2.png；驗收 Lv.3 馭獸師與建造預覽。
+
+
+## 0.68.0 雙隘口要塞（2026-09-17）
+
+需部署完整 v0.68.0（新增素材、路線系統、選圖 UI 與 sw.js），快取版號以 sw.js 的最新值為準（保留並行更新）。目前僅本機完成，未發布遠端。
+
+詳見 [第二張地圖規格、操作與回復](TWIN_PASS_V0680.md)。
+
+## 0.67.0 終極士兵（2026-09-17）
+
+整包部署0.67.0，包含三張assets/td/ultimate-*-v1.png與更新後的sw.js（sky-strike-v0.67.0）。確認新卡片預覽、角色部署及離線資產完整。
+
+詳見[終極士兵操作、架構與驗收](ULTIMATE_SOLDIERS_V1.md)。
+
+## 0.66.5 直接開檔修復（2026-09-17）
+
+完整更新至 0.66.5；HTTP 快取名稱 sky-strike-v0.66.5。驗收直接開檔及 HTTP 開局、迎戰、地圖與小地圖。
+
+
+## 0.66.4 建造預覽對齊（2026-09-17）
+
+完整部署 0.66.4 靜態檔案並確認快取 sky-strike-v0.66.4。開啟建造清單，確認魔法師與盾衛預覽大小接近、價格留在卡片內。
+
+
+## 0.66.2 選取用途說明（2026-09-17）
+
+整包部署後重新開啟 td.html?v=0.66.2，確認 Service Worker 快取 sky-strike-v0.66.2；選取時間術士確認用途欄。無後端遷移。
+
+
+## 0.66.1 新手谷地美術（2026-09-17）
+
+部署完整版本，包含 beginner-valley-v2.png、maps.js、ArtSystem.js、sw.js；快取名稱 sky-strike-v0.66.1。本次只完成本機更新，未發布遠端。
+
+詳見 [地圖更新、架構與回復手冊](MAP_ART_V0661.md)。
+
+## 0.65.0 手機介面修正（2026-09-17）
+
+部署必須同批更新 `td.html`、`td-mobile.html`、`src/td/mobile-entry.js`、`src/td/main.js`、`src/td/TDGame.js`、`td-combat.css` 與 `sw.js`；不要漏掉離線資產清單中的新檔。沿用 HTTPS 靜態主機，允許同源 iframe。驗證直式首開、橫向首開、離線重開與旋轉不重置遊戲。本次僅完成本機修改，未執行遠端發布。
+
 ## 0.64.0 發布流程
 
 完整提交程式、圖集、測試及文件；版本為 `package.json 0.64.0`、快取為 `sky-strike-v0.64.0`。不要只更新 HTML 或圖片，兩個新系統腳本也必須一起發布。沒有資料庫遷移或新 secrets。
@@ -230,3 +297,63 @@ v0.17.0 快取為 sky-strike-v0.17.0，必須包含 hero-actions-v1.png。同步
 最新快取為 `sky-strike-v0.32.2`。`actions/configure-pages@v5` 設定 `enablement: true`，避免空白新倉庫因尚無 Pages Site 而回傳 404。推送後必須確認 Actions 的 deploy job 成功，並實際開啟 Pages URL。
 
 正式部署已於 2026-09-12 驗收：GitHub Actions run `34619937429` 的第二次執行成功，站台為 `https://dat5512999-bit.github.io/sky-strike-hero-frontier/`，塔防入口為 `https://dat5512999-bit.github.io/sky-strike-hero-frontier/td.html`。
+
+
+## v0.66.0 戰旗光環
+
+完整部署 v0.66.0 專案靜態檔案，包含 src、td-combat.css、package.json 與 sw.js；service worker 快取版本為 sky-strike-v0.66.0。重新整理並在戰旗旁選取英雄，確認狀態與綠色加成。無資料遷移。
+
+
+## 0.66.2 角色比例（2026-09-17）
+
+發布 package.json、sw.js 與 src/td/systems/ArtSystem.js 的 0.66.2 版本。完整靜態專案部署方式不變；Service Worker 快取版本同步更新，關閉舊遊戲分頁後重新開啟。
+
+
+## v0.66.3 侵蝕特效
+
+完整部署靜態專案（含 src、package.json、sw.js）；快取升為 sky-strike-v0.66.3。更新後刷新頁面，以煉金術師或瘟疫尖碑命中敵人驗證。沒有資料遷移。
+
+## 0.66.4 波次提示
+
+波次預告改為怪物縮圖、數量與威脅標籤，新增入口倒數與短暫開戰提醒。操作、設定、架構、API、部署、還原與驗證方式見 [波次提示文件](WAVE_HUD_V0664.md)。
+
+
+## 0.67.1 手機波次版面修正
+
+修正波次與倒數重疊、速度列出界，縮小手機提示面板；無操作、設定或資料格式變更。原因、架構、更新、還原及觸控版面驗證見 [版面修正文件](WAVE_LAYOUT_V0671.md)。
+
+
+## 0.68.1 波次避讓與預覽修正
+
+波次改為靠左小列，預告按需展開，戰鬥提示可點穿；修正三種終極士兵卡片裁切。操作、API、架構、部署、還原與測試見 [版本文件](EDGE_WAVE_PREVIEW_V0681.md)。
+
+
+
+## v0.68.2 藤蔓纏繞
+
+完整更新靜態專案，包含 CombatFeedbackSystem.js、TDGame.js、package.json、sw.js；快取版本 sky-strike-v0.68.2。重新整理後用翠靈古樹命中敵人確認粗藤。無資料遷移。
+
+## 0.68.3 士兵尺寸微調（2026-09-17）
+
+我方部署士兵統一放大 12%，保留相對體型與腳底錨點；英雄、怪物、召喚物和卡片大小維持原設定。無新增操作、設定、API、權限或資料格式。ArtSystem.drawCombatUnit → 腳底縮放 → drawCombatUnitSprite；預覽直接使用未放大的 sprite 方法，避免再次裁切。
+
+安裝與部署流程不變，完整更新後關閉舊分頁再開啟。package.json 與 Service Worker 快取更新至 0.68.3。修改前 ArtSystem.js、package.json、sw.js 保存在 artifacts/soldier-v0683-backup/；若需還原，將 ArtSystem.js 放回 src/td/systems/，其餘放回根目錄，已有後續修改時先比較合併，部署使用新的快取名稱。
+
+驗證：342 項測試通過；全角色圖在 artifacts/qa-unit-scale/roster.png；三種終極士兵的六張卡片預覽仍完整。此版本只改畫面尺寸，射程、攻擊、碰撞與移動數值不變。
+
+
+## v0.69.0 英雄技能與動畫完整顯示
+
+完整部署 v0.69.0，包含新增 HeroSkillVFX.js、SpriteFrameBounds.js、td.html 與 sw.js。快取 sky-strike-v0.69.0；刷新後驗證技能差異與狼／元素攻擊動作。無資料遷移。
+## 0.69.1 部署補充
+
+靜態檔案與快取更新清單見 [版本文件](FIELD_LOOT_SHOP_V0691.md)。
+
+## 0.69.7 雙隘口路線校準
+
+依正式圖片的鋪石路面重新取樣上下道路中心，修正彎道偏向路緣；共用末段長度同步計算。沿用 maps → Monster／BuildSystem／MiniMapView 架構，不改圖片、素材腳底或 API。重新開始遠征即可使用新座標，無設定與存檔遷移；部署完整版本與新的 Service Worker 快取。回復前資料在 artifacts/route-v0697-backup，請逐檔比較，避免覆蓋其他工作。
+
+6 項雙路測試與語法檢查通過；新增獨立路面取樣回歸、完整路線怪物截圖，見 artifacts/qa-twinpass/full-route-battle.png。全套當次為 375/377 通過，兩項旗幟／統領光環測試失敗，涉及另行修改中的軍團平衡，未在此地圖修正中改動。
+## 0.71.1 部署補充
+
+一併部署 `BattleReportSystem.js`、`TDDifficultySystem.js`、`TDGame.js`、`td.html`、`package.json` 與 `sw.js`。此功能自 0.71.1 起提供；目前整包離線快取為 `sky-strike-v0.71.2`，無後端或資料庫遷移。

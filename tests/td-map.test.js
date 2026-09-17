@@ -1,18 +1,22 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
 function load(){const c=vm.createContext({console});c.globalThis=c;for(const file of ['namespace','config','maps','systems/PathSystem','systems/NavigationSystem','systems/BuildSystem','systems/BattlefieldCamera','systems/FrontierTerrain','entities/Monster','TDGame'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../src/td/'+file+'.js'),'utf8'),c);return c.TowerFrontier;}
+test('地圖美術更新保留同尺寸原版供回復，未增加執行期下載容量級別',()=>{
+ const root=path.join(__dirname,'..'),old=fs.readFileSync(path.join(root,'assets/td/beginner-valley-v1.png')),current=fs.readFileSync(path.join(root,'assets/td/beginner-valley-v2.png'));
+ assert.equal(current.readUInt32BE(16),old.readUInt32BE(16));assert.equal(current.readUInt32BE(20),old.readUInt32BE(20));assert.ok(current.length<old.length*1.5);assert.notDeepEqual(current,old);
+});
 test('正常玩家只看到正式新手谷地，兩張舊圖仍保留作回歸測試',()=>{
- const ns=load(),maps=ns.maps.publicMaps();assert.deepEqual(Array.from(maps,map=>map.id),['beginner']);assert.equal(ns.maps.defaultId,'beginner');
+ const ns=load(),maps=ns.maps.publicMaps();assert.deepEqual(Array.from(maps,map=>map.id),['twinpass','autumn','beginner']);assert.equal(ns.maps.defaultId,'beginner');
  assert.equal(ns.maps.definitions.classic.developmentOnly,true);assert.equal(ns.maps.definitions.frontier.developmentOnly,true);
  const html=fs.readFileSync(path.join(__dirname,'../td.html'),'utf8');assert.match(html,/value="beginner"/);assert.doesNotMatch(html,/value="frontier"|value="classic"/);
 });
 test('正式地圖以 1536×1024 原圖作世界，不拉伸且資料化 U 型路線',()=>{
- const ns=load(),map=ns.maps.definitions.beginner,asset=fs.readFileSync(path.join(__dirname,'../assets/td/beginner-valley-v1.png'));
+ const ns=load(),map=ns.maps.definitions.beginner,asset=fs.readFileSync(path.join(__dirname,'../assets/td/beginner-valley-v2.png'));
  assert.equal(asset.toString('ascii',1,4),'PNG');assert.equal(asset.readUInt32BE(16),1536);assert.equal(asset.readUInt32BE(20),1024);
- assert.equal(map.width,1536);assert.equal(map.height,1024);assert.equal(map.asset,'assets/td/beginner-valley-v1.png');assert.deepEqual(Array.from(map.path,p=>[p.x,p.y]),[[-28,370],[120,370],[240,378],[340,382],[400,380],[450,345],[480,290],[500,230],[545,190],[620,182],[690,194],[735,225],[765,285],[790,360],[795,440],[825,510],[900,550],[1000,555],[1100,560],[1200,555],[1280,575],[1350,620],[1430,650],[1564,650]]);
+ assert.equal(map.width,1536);assert.equal(map.height,1024);assert.equal(map.asset,'assets/td/beginner-valley-v2.png');assert.deepEqual(Array.from(map.path,p=>[p.x,p.y]),[[-28,370],[120,370],[240,378],[340,382],[400,380],[450,345],[480,290],[500,230],[545,190],[620,182],[690,194],[735,225],[765,285],[790,360],[795,440],[825,510],[900,550],[1000,555],[1100,560],[1200,555],[1280,575],[1350,620],[1430,650],[1564,650]]);
  assert.deepEqual({x:map.spawn.x,y:map.spawn.y},{x:36,y:370});assert.deepEqual({x:map.gate.x,y:map.gate.y},{x:1500,y:650});
  assert.equal(map.heroVulnerable,false);assert.equal(map.camera.maxZoom,1.65);
- for(const file of ['src/td/systems/ArtSystem.js','sw.js'])assert.match(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),/beginner-valley-v1\.png/);
+ for(const file of ['src/td/systems/ArtSystem.js','sw.js'])assert.match(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),/beginner-valley-v2\.png/);
 });
 test('新手谷地關閉英雄受傷，舊回歸地圖仍可重用英雄戰鬥機制',()=>{
  const ns=load();ns.maps.apply('beginner');assert.equal(ns.config.heroVulnerable,false);ns.maps.apply('classic');assert.equal(ns.config.heroVulnerable,true);

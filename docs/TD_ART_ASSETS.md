@@ -1,5 +1,27 @@
 # 塔防正式美術資產與生成提示
 
+## 0.71.0 暮秋遺跡與整合發布
+
+新增第三張「暮秋遺跡 · 雙 U 型彎」，採縮窄第一個內圈的確認版本。遠征頁可直接選擇，沿用英雄／軍團／波次及地圖獨立戰績；路線、建造區、小地圖與离線資產同步，無新帳號、API 或設定。完整安裝、更新、架構圖、備份回復與測試見 [發布手冊](AUTUMN_RUINS_V0710.md)。
+
+## 0.68.0 雙隘口要塞（2026-09-17）
+
+第二張正式素材 assets/td/twin-pass-v1.png，1536×1024，選用中央小遺跡與大片空地版；未使用增添池塘營地版。
+
+詳見 [第二張地圖規格、操作與回復](TWIN_PASS_V0680.md)。
+
+## 0.67.0 終極士兵（2026-09-17）
+
+新圖集為ultimate-dragon-v1.png、ultimate-commander-v1.png、ultimate-soulsteel-v1.png；每張2待機＋2攻擊。內建imagegen依核准概念圖生成，使用實測裁切框與固定腳底，舊龍圖集轉供wildDragon。
+
+詳見[終極士兵操作、架構與驗收](ULTIMATE_SOLDIERS_V1.md)。
+
+## 0.66.1 新手谷地美術（2026-09-17）
+
+正式新手谷地素材為 assets/td/beginner-valley-v2.png（1536×1024）；v1 保留作回復。戰鬥合成概念圖不作執行期素材。
+
+詳見 [地圖更新、架構與回復手冊](MAP_ART_V0661.md)。
+
 ## 0.64.0 新 Build 圖集與 VFX
 
 新增 `assets/td/faction-builds-v1.png`（1254×1254 RGBA），以使用者提供的王國、馭獸師、傭兵概念圖為風格參考，使用 imagegen 產生 16 個透明單位／建築 Asset Slot。角色、建築、三階熊與兩型機器人由 ArtSystem 的 BUILD_RECTS 精準取樣；不要假設是等分 4×4。
@@ -187,3 +209,8 @@ Use case: stylized-concept. Asset type: production 2D RTS sprite animation sheet
 - 最終提示摘要：original premium dark-fantasy mobile game icon，gold winged shield、sky fighter、stone fortress、cyan energy trail、deep navy／forest background，centered maskable safe zone，no text/logo/watermark/copyrighted character。
 
 v0.32.2 沒有改動美術輸出，只修正 GitHub Pages 首次發布設定。
+
+
+## 0.66.2 角色比例（2026-09-17）
+
+0.66.2 不修改 PNG 原圖；50 組素材與裁切區域的 alpha 輪廓資料內嵌於 ArtSystem.SPRITE_METRICS。重建指令：node scripts/measure-unit-sprites.cjs。驗收圖：artifacts/qa-unit-scale/roster.png。

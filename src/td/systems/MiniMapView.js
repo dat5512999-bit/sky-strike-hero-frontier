@@ -46,7 +46,7 @@
       else{ctx.fillStyle='#354a32';ctx.fillRect(0,0,w,h);}
       ctx.fillStyle='#07110b66';ctx.fillRect(0,0,w,h);
       ctx.strokeStyle='#e2c27fc0';ctx.lineWidth=4/fit.scale;ctx.lineJoin='round';ctx.lineCap='round';ctx.beginPath();
-      ns.config.path.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();
+      (ns.config.routes||[ns.config.path]).forEach(route=>route.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y)));ctx.stroke();
       ctx.restore();
       const dot=(x,y,color,r)=>{ctx.fillStyle=color;ctx.beginPath();ctx.arc(fit.x+x*fit.scale,fit.y+y*fit.scale,r,0,Math.PI*2);ctx.fill();};
       for(const enemy of game.monsters)if(enemy.active)dot(enemy.x,enemy.y,enemy.boss?'#ffca69':'#f35e5e',enemy.boss?4:2);

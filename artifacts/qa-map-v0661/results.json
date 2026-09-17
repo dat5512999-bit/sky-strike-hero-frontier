@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "src": "http://127.0.0.1:4173/assets/td/beginner-valley-v2.png",
+      "width": 1536,
+      "height": 1024,
+      "legal": true,
+      "road": false
+    },
+    {
+      "oldDrawMs": 0.14199999809265137,
+      "newDrawMs": 0.18200000286102294
+    }
+  ],
+  "errors": []
+}
