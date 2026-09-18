@@ -502,3 +502,6 @@ BattleSynergySystem.flagRate(target) 回傳當下有效戰旗倍率；排除失�
 # v0.77.0 章節存檔介面
 
 `ChapterCheckpointSystem` 提供 `read()`、`capture(game)`、`restore(game, snapshot)`、`describe()` 與 `clear()`。格式版本為 `schema: 1`，合法波次僅為 10、20。
+# v0.78.0 對戰介面
+
+`VersusMatch` 提供 `build(side,type,x,lane)`、`moveWorker(side,x,y)`、`update(dt)`、`visibleToPlayer(target)` 與 `finish(reason)`。`AIStrategy.PROFILES` 提供 fortress、rush、economy、split、feint 五種人格。

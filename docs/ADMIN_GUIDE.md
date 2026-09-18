@@ -371,3 +371,6 @@ HeroSkillVFX 最多保留 24 個事件。SpriteFrameBounds 是 measure-animation
 # v0.77.0 管理說明
 
 章節資料使用瀏覽器本機儲存鍵 `heroFrontierChapterCheckpointV1`。需強制放棄未完成遠征時，可刪除此鍵；戰績鍵不受影響。
+# v0.78.0 對戰管理
+
+對戰數值集中於 `src/versus/config.js`。正式平衡前應觀察主堡剩餘 HP、上下路使用率、建築組合與補給站持有時間；請勿把原型數值混入英雄遠征的 `BALANCE E2` 樣本。

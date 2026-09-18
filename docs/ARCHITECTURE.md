@@ -710,3 +710,6 @@ Boss 與商店兌換仍經 `EconomySystem`；補給資源由 `LootSystem` 套用
 # v0.77.0 章節存檔邊界
 
 `ChapterCheckpointSystem` 位於波次、經濟與角色系統之外，只序列化安全整備期的穩定狀態。`TDGame` 在獎勵、里程碑及地面掉落全部入帳後觸發存檔；恢復時重新建立實體與裝備索引，不保存怪物、投射物或召喚物。
+# v0.78.0 對戰架構
+
+`src/versus/` 是與 `src/td/` 分離的規則域：`VersusMatch` 管理計時、領地、經濟與勝負，`entities.js` 管理士兵／建築，`AIStrategy` 只透過公開建造與移動介面行動，因此電腦遵守與玩家相同的工人距離及保護區限制。

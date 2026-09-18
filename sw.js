@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.77.0';
+const CACHE_NAME = 'sky-strike-v0.78.0';
 const ASSETS = [
  './assets/td/bear-actions-v3.png', './assets/td/ultimate-dragon-actions-v3.png',
  './assets/td/kingdom-mage-actions-v2.png', './assets/td/alchemist-actions-v2.png', './assets/td/bounty-hunter-actions-v2.png', './assets/td/pirate-actions-v2.png', './assets/td/blacksmith-actions-v2.png', './assets/td/time-mage-actions-v2.png',
@@ -21,8 +21,8 @@ const ASSETS = [
   './td-combat.css',
   './src/td/systems/TargetSelector.js', './src/td/systems/ChapterCheckpointSystem.js',
   './src/td/systems/TDDifficultySystem.js', './src/td/systems/EnemyTraitSystem.js', './src/td/systems/BattleReportSystem.js',
-  './', './index.html', './styles.css', './td.html', './td.css', './manifest.webmanifest', './td.webmanifest', './assets/icons/game-icon.svg', './assets/icons/app-icon-192.png', './assets/icons/app-icon-512.png', './assets/icons/apple-touch-icon-180.png',
-  './src/namespace.js', './src/config.js', './src/utils/math.js',
+  './', './index.html', './styles.css', './td.html', './td.css', './versus.html', './versus.css', './manifest.webmanifest', './td.webmanifest', './assets/icons/game-icon.svg', './assets/icons/app-icon-192.png', './assets/icons/app-icon-512.png', './assets/icons/apple-touch-icon-180.png',
+  './src/namespace.js', './src/config.js', './src/utils/math.js', './src/versus/namespace.js', './src/versus/config.js', './src/versus/entities.js', './src/versus/AIStrategy.js', './src/versus/VersusMatch.js', './src/versus/main.js',
   './src/skins/SkinRegistry.js', './src/skins/SkinPacks.js',
   './src/entities/Bullet.js', './src/entities/EnemyBullet.js', './src/entities/Player.js', './src/entities/Enemy.js', './src/entities/Boss.js', './src/entities/PowerUp.js',
   './src/systems/Weapon.js', './src/systems/Collision.js', './src/systems/Spawner.js', './src/systems/GameState.js', './src/systems/Effects.js', './src/systems/BattlefieldRenderer.js', './src/systems/DifficultySystem.js', './src/systems/SkillSystem.js', './src/systems/ChallengeSystem.js', './src/systems/StageDirector.js', './src/systems/SupportSystem.js', './src/systems/InputController.js',

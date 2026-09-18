@@ -377,3 +377,6 @@ v0.17.0 快取為 sky-strike-v0.17.0，必須包含 hero-actions-v1.png。同步
 # v0.77.0 部署
 
 部署時確認 `ChapterCheckpointSystem.js` 可載入且離線快取名稱為 `sky-strike-v0.77.0`。舊版沒有相容檢查點，不需要遷移。
+# v0.78.0 部署
+
+離線快取名稱為 `sky-strike-v0.78.0`，並包含對戰頁面、樣式與六個對戰腳本。部署後從 `td.html` 開局頁測試對戰入口及返回遠征連結。
