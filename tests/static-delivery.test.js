@@ -33,7 +33,7 @@ test('英雄塔防入口引用的本機資產完整且不依賴網路', () => {
   assert.equal(/<script[^>]+type=["']module["']/i.test(html), false);
 });
 
-test('英雄塔防公開顯示目前程式與平衡資料版本',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8');assert.match(html,/v0\.79\.1/);assert.match(html,/BALANCE E2/);assert.doesNotMatch(html,/SHARED UX/);});
+test('英雄塔防公開顯示目前程式與平衡資料版本',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8');assert.match(html,/v0\.79\.2/);assert.match(html,/BALANCE E2/);assert.doesNotMatch(html,/SHARED UX/);});
 
 test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
   const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');
@@ -44,7 +44,8 @@ test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
   ['Q','W','E','R','F'].forEach((key) => assert.match(html, new RegExp(`<kbd>${key}</kbd>`)));
   assert.match(html, /id="td-ultimate"[^>]*aria-keyshortcuts="F"/);
   ['story','standard','veteran','calamity'].forEach((mode) => assert.match(html, new RegExp(`data-td-difficulty=["']${mode}["']`)));
-  ['td-report-open','td-report-screen','td-report-rows','td-report-analysis','td-report-readiness','td-report-history','td-strategy-choice','td-final-report'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
+  ['td-report-open','td-report-screen','td-report-rows','td-report-analysis','td-report-readiness','td-report-history','td-final-report'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
+  assert.doesNotMatch(html,/td-strategy-choice|本局測試標籤|擴軍測試|核心升級|混合測試/);
   ['td-armory-open','td-armory-screen','td-armory-loadout','td-armory-items','td-armory-target'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
 });
 

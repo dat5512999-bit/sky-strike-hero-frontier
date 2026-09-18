@@ -723,3 +723,6 @@ Canvas 先繪製場景，再依 `VersusMatch` 狀態疊加單位、建築、HP�
 # v0.79.1 原型邊界
 
 對戰規則與顯示檔案繼續與英雄遠征分離；正式 `td.html` 不建立通往 `versus.html` 的導覽關係。
+# v0.79.2 開局資料流
+
+`td.html` 不再提供策略標籤輸入；`TDGame` 沿用 `strategy || 'free'` 的相容性邊界，戰報 Schema 與 localStorage 無需遷移。

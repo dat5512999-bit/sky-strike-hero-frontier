@@ -384,3 +384,6 @@ HeroSkillVFX 最多保留 24 個事件。SpriteFrameBounds 是 measure-animation
 # v0.79.1 對戰原型隱藏
 
 `versus.html` 仍作為獨立開發頁保留，但 `td.html` 不得顯示通往該頁的玩家入口。
+# v0.79.2 戰報標籤管理
+
+開局 UI 不再收集人工策略標籤。`TDGame.chooseProfession()` 在無選單時依原有後備值寫入 `free`，不可刪除此後備值，以免舊戰績比較失敗。

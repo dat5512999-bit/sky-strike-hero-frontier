@@ -7,7 +7,6 @@
   ui.reportAnalysis=document.getElementById('td-report-analysis');
   ui.reportHistory=document.getElementById('td-report-history');
   ui.reportReadiness=document.getElementById('td-report-readiness');
-  ui.strategyChoice=document.getElementById('td-strategy-choice');
   ui.difficultyButtons=Array.from(document.querySelectorAll('[data-td-difficulty]'));
   ui.factionButtons=Array.from(document.querySelectorAll('[data-faction]'));
   ui.openingStart=document.getElementById('td-start-expedition');
