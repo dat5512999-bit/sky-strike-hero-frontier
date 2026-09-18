@@ -505,3 +505,6 @@ BattleSynergySystem.flagRate(target) 回傳當下有效戰旗倍率；排除失�
 # v0.78.0 對戰介面
 
 `VersusMatch` 提供 `build(side,type,x,lane)`、`moveWorker(side,x,y)`、`update(dt)`、`visibleToPlayer(target)` 與 `finish(reason)`。`AIStrategy.PROFILES` 提供 fortress、rush、economy、split、feint 五種人格。
+# v0.78.1 顯示層
+
+`src/versus/main.js` 的 `art` 表集中管理背景、塔、建築、三兵種及工人素材。顯示層不寫入 `VersusMatch` 戰鬥數值。

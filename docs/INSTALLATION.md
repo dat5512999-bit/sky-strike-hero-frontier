@@ -369,3 +369,6 @@ v0.68.2 沿用原安裝與設定。無新增套件；Node.js 18+ 執行 npm test
 # v0.78.0 安裝補充
 
 無新增套件。確認 `versus.html`、`versus.css` 與 `src/versus/` 一併部署；可直接以瀏覽器開啟 `versus.html`。
+# v0.78.1 安裝補充
+
+須包含 `assets/td/versus-battlefield-concept-v1.png` 及既有對戰引用圖集。缺少單一角色圖集時會使用簡化圖形，但缺少背景會退回純色戰場。

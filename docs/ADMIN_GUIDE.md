@@ -374,3 +374,6 @@ HeroSkillVFX 最多保留 24 個事件。SpriteFrameBounds 是 measure-animation
 # v0.78.0 對戰管理
 
 對戰數值集中於 `src/versus/config.js`。正式平衡前應觀察主堡剩餘 HP、上下路使用率、建築組合與補給站持有時間；請勿把原型數值混入英雄遠征的 `BALANCE E2` 樣本。
+# v0.78.1 美術管理
+
+對戰背景為 `assets/td/versus-battlefield-concept-v1.png`；角色與建築沿用 `assets/td/` 既有圖集。更換背景時不得直接修改規則座標，需另外校對雙路與補給站位置。

@@ -1,8 +1,8 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.78.0';
+const CACHE_NAME = 'sky-strike-v0.78.1';
 const ASSETS = [
- './assets/td/bear-actions-v3.png', './assets/td/ultimate-dragon-actions-v3.png',
+ './assets/td/versus-battlefield-concept-v1.png', './assets/td/bear-actions-v3.png', './assets/td/ultimate-dragon-actions-v3.png',
  './assets/td/kingdom-mage-actions-v2.png', './assets/td/alchemist-actions-v2.png', './assets/td/bounty-hunter-actions-v2.png', './assets/td/pirate-actions-v2.png', './assets/td/blacksmith-actions-v2.png', './assets/td/time-mage-actions-v2.png',
  './assets/td/bomb-robot-actions-v2.png', './assets/td/heavy-bomb-robot-actions-v2.png', './assets/td/ultimate-dragon-actions-v2.png', './assets/td/ultimate-commander-actions-v2.png', './assets/td/ultimate-soulsteel-actions-v2.png',
  './assets/td/beastmaster-actions-v3.png', './assets/td/bear-actions-v2.png',

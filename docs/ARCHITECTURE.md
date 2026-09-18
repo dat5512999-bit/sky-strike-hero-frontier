@@ -713,3 +713,6 @@ Boss 與商店兌換仍經 `EconomySystem`；補給資源由 `LootSystem` 套用
 # v0.78.0 對戰架構
 
 `src/versus/` 是與 `src/td/` 分離的規則域：`VersusMatch` 管理計時、領地、經濟與勝負，`entities.js` 管理士兵／建築，`AIStrategy` 只透過公開建造與移動介面行動，因此電腦遵守與玩家相同的工人距離及保護區限制。
+# v0.78.1 美術與規則分離
+
+Canvas 先繪製場景，再依 `VersusMatch` 狀態疊加單位、建築、HP、占領環及迷霧。所有素材載入失敗時仍有簡化圖形後備顯示，不阻止對局進行。
