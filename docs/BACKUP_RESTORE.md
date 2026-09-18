@@ -345,3 +345,6 @@ v0.32.2 只增加 Pages 首次啟用設定；回退至 v0.32.1 仍可本機遊�
 ## 0.71.1 還原補充
 
 程式回退不會刪除 V3 本機戰績；舊程式可能忽略 `bestByMapDifficulty`。若需完整還原資料格式，應先備份 localStorage 的 `heroFrontierScoreRecordsV1`，不要直接清除瀏覽器資料。
+# v0.74.0 備份與還原
+
+第三階段沿用 `heroFrontierScoreRecordsV1`，未改資料格式。清除網站資料會失去樣本；程式回退不需轉換紀錄，舊版會忽略新判定畫面。

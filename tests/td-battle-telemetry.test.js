@@ -49,3 +49,17 @@ test('壓力斷層只在有前期基準後標記，歷史比較限制相同配�
   const rows=restored.historyComparison();assert.equal(rows.length,1);assert.equal(rows[0].strategy,'expand');assert.deepEqual(Array.from(rows[0].spikes),[4]);
   restored.beginRun({map:'autumn'});assert.equal(restored.historyComparison().length,0);
 });
+
+test('第三階段需三種策略各三局才會提出平衡判定',()=>{
+  const {ns}=load(),report=new ns.systems.BattleReportSystem(),base={map:'beginner',difficulty:'standard',profession:'hunter',faction:'hunter'};
+  report.beginRun(base);
+  ['expand','core','mixed'].forEach(strategy=>{for(let i=0;i<3;i+=1)report.records.push(Object.assign({},base,{strategy,victory:i>0,waves:strategy==='expand'?24:22,score:1000,time:300,remainingGold:80,analysis:{totalSpent:1000}}));});
+  const ready=report.balanceReadiness();
+  assert.equal(ready.ready,true);assert.equal(ready.total,9);assert.equal(ready.groups.expand.count,3);assert.equal(ready.groups.core.winRate,2/3);assert.ok(ready.recommendations.length);
+});
+
+test('第三階段樣本不足時不建議直接調整經濟',()=>{
+  const {ns}=load(),report=new ns.systems.BattleReportSystem();report.beginRun({map:'beginner',difficulty:'standard',profession:'hunter',faction:'hunter'});
+  report.records.push({map:'beginner',difficulty:'standard',profession:'hunter',faction:'hunter',strategy:'expand',waves:10,score:100});
+  const state=report.balanceReadiness();assert.equal(state.ready,false);assert.equal(state.missing.length,3);assert.match(state.recommendations[0],/不建議修改塔價/);
+});

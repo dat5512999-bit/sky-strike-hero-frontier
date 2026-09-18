@@ -365,3 +365,6 @@ v0.17.0 快取為 sky-strike-v0.17.0，必須包含 hero-actions-v1.png。同步
 ## 0.71.1 部署補充
 
 一併部署 `BattleReportSystem.js`、`TDDifficultySystem.js`、`TDGame.js`、`td.html`、`package.json` 與 `sw.js`。此功能自 0.71.1 起提供；目前整包離線快取為 `sky-strike-v0.71.2`，無後端或資料庫遷移。
+# v0.74.0 部署
+
+部署後確認 Service Worker 快取為 `sky-strike-v0.74.0`，重新載入並在戰況看到「第三階段平衡判定」。無資料庫或伺服器部署步驟。

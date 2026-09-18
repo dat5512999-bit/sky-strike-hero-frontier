@@ -698,3 +698,6 @@ SpriteFrameBounds 在 ArtSystem 前載入；HeroSkillVFX 在 HeroRoster 前載�
 依正式圖片的鋪石路面重新取樣上下道路中心，修正彎道偏向路緣；共用末段長度同步計算。沿用 maps → Monster／BuildSystem／MiniMapView 架構，不改圖片、素材腳底或 API。重新開始遠征即可使用新座標，無設定與存檔遷移；部署完整版本與新的 Service Worker 快取。回復前資料在 artifacts/route-v0697-backup，請逐檔比較，避免覆蓋其他工作。
 
 6 項雙路測試與語法檢查通過；新增獨立路面取樣回歸、完整路線怪物截圖，見 artifacts/qa-twinpass/full-route-battle.png。全套當次為 375/377 通過，兩項旗幟／統領光環測試失敗，涉及另行修改中的軍團平衡，未在此地圖修正中改動。
+# v0.74.0 平衡判定層
+
+`BattleReportSystem` 依地圖、難度、英雄與軍團篩選 localStorage 戰績，再按三種受控策略聚合。`TDGame.renderReport()` 僅呈現結果；判定層不依賴 UI，也不寫入平衡設定。

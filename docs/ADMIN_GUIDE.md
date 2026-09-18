@@ -359,3 +359,6 @@ HeroSkillVFX 最多保留 24 個事件。SpriteFrameBounds 是 measure-animation
 ## 0.71.1 難度積分管理
 
 戰績仍儲存在瀏覽器 `heroFrontierScoreRecordsV1`，payload 版本為 3。`bestByMap` 是地圖全難度最高分，`bestByMapDifficulty` 是地圖內各難度最高分；不需伺服器或資料庫遷移。
+# v0.74.0 管理說明
+
+平衡判定完全在瀏覽器本機執行，沒有後台排程或自動改值。管理者應先確認同配置三策略各三局，再依 `balanceReadiness()` 訊號人工審核。
