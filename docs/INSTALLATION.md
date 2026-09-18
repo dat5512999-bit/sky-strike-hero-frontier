@@ -372,3 +372,6 @@ v0.68.2 沿用原安裝與設定。無新增套件；Node.js 18+ 執行 npm test
 # v0.78.1 安裝補充
 
 須包含 `assets/td/versus-battlefield-concept-v1.png` 及既有對戰引用圖集。缺少單一角色圖集時會使用簡化圖形，但缺少背景會退回純色戰場。
+# v0.79.0 安裝補充
+
+無新增依賴。更新 `versus.html`、`versus.css`、`src/versus/main.js` 與 `VersusMatch.js` 後即可使用新版介面。

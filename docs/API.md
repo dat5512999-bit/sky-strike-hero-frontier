@@ -508,3 +508,6 @@ BattleSynergySystem.flagRate(target) 回傳當下有效戰旗倍率；排除失�
 # v0.78.1 顯示層
 
 `src/versus/main.js` 的 `art` 表集中管理背景、塔、建築、三兵種及工人素材。顯示層不寫入 `VersusMatch` 戰鬥數值。
+# v0.79.0 建造與建築管理
+
+`VersusMatch.validateBuild()` 回傳 `{ok, reason, y, cost}`；`repair(side, structure)` 與 `demolish(side, structure)` 分別處理付費維修及 50% 拆除退款。

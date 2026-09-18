@@ -716,3 +716,6 @@ Boss 與商店兌換仍經 `EconomySystem`；補給資源由 `LootSystem` 套用
 # v0.78.1 美術與規則分離
 
 Canvas 先繪製場景，再依 `VersusMatch` 狀態疊加單位、建築、HP、占領環及迷霧。所有素材載入失敗時仍有簡化圖形後備顯示，不阻止對局進行。
+# v0.79.0 對戰 UI 邊界
+
+建造 UI 只呼叫 `validateBuild` 顯示原因，確認後才呼叫 `build`；選取面板透過 `repair`／`demolish` 改變模型。Canvas 顯示層不直接扣除資源。

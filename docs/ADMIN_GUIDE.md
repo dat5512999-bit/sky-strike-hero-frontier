@@ -377,3 +377,6 @@ HeroSkillVFX 最多保留 24 個事件。SpriteFrameBounds 是 measure-animation
 # v0.78.1 美術管理
 
 對戰背景為 `assets/td/versus-battlefield-concept-v1.png`；角色與建築沿用 `assets/td/` 既有圖集。更換背景時不得直接修改規則座標，需另外校對雙路與補給站位置。
+# v0.79.0 介面管理
+
+對戰 HUD 與面板遵循英雄塔防的深綠、金框、資源卡、快捷欄與抽屜層級。新增控制項需同時檢查桌面與 850px 以下橫向配置。
