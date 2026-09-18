@@ -1,5 +1,7 @@
 # 系統架構
 
+> v0.72.0：`BuildSystem／Projectile → TDGame → BattleReportSystem → 本機戰報 UI／localStorage`。遙測只讀取成功交易與實際有效傷害，不回寫戰鬥系統。
+
 > v0.71.4：`TDDifficultySystem.reward` 傳入 `EconomySystem`，同時縮放擊殺賞金與清關金；`WaveSystem.bountyScale` 只抵銷不同敵量造成的賞金膨脹。回收與商店兌換保持獨立。
 
 > v0.71.3：難度選擇 → `TDDifficultySystem` 輸出 Wave 倍率與內容許可 → `WaveSystem` 生成編成；`TDGame` 顯示／攔截建造，`FactionSystem` 攔截跨族傭兵。

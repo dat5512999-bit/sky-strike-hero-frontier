@@ -1,5 +1,7 @@
 # 備份與還原手冊
 
+> v0.72.0 還原時同步回退 BattleReportSystem、BuildSystem 交易回呼、TDGame 接線、戰況 UI 與快取版本。既有本機積分格式相容。
+
 > v0.71.4 還原需同步回退四難度 `reward`、EconomySystem倍率下限、UI、測試與快取版本；既有戰績不受影響。
 
 > v0.71.3 還原時同步回退難度倍率、軍備鎖、WaveSystem 縮量規則、UI 與快取版本。玩家戰績不需清除。

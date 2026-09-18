@@ -1,5 +1,9 @@
 # API 文件（內部模組介面）
 
+## v0.72.0 戰局統計 API
+
+`BattleReportSystem` 新增 `recordDamage`、`recordInvestment`、`armySnapshot`、`analysis` 與 `analysisLine`。`BuildSystem.onTransaction` 只在成功部署或升級後回報實付成本。沒有 HTTP API、遠端上傳或帳號資料。
+
 ## v0.71.4 收益倍率
 
 `EconomySystem.setRewardRate(rate)` 接受 0.3～2；目前難度倍率為 0.78／0.55／0.45／0.38。`addKill()` 與 `completeWave()` 共用倍率，退款不受影響。沒有新增 HTTP API。

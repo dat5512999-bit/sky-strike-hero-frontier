@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.71.4';
+const CACHE_NAME = 'sky-strike-v0.72.0';
 const ASSETS = [
  './assets/td/bear-actions-v3.png', './assets/td/ultimate-dragon-actions-v3.png',
  './assets/td/kingdom-mage-actions-v2.png', './assets/td/alchemist-actions-v2.png', './assets/td/bounty-hunter-actions-v2.png', './assets/td/pirate-actions-v2.png', './assets/td/blacksmith-actions-v2.png', './assets/td/time-mage-actions-v2.png',

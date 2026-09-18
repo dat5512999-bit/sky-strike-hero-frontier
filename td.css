@@ -315,6 +315,8 @@ body[data-layout="mobile"][data-combat-orientation="landscape"] .td-wave-copy sm
 body[data-layout="mobile"][data-combat-orientation="landscape"] .hud-controls{grid-column:auto;flex:none;gap:2px}
 body[data-layout="mobile"][data-combat-orientation="landscape"] .hud-controls>button,body[data-layout="mobile"][data-combat-orientation="landscape"] .speed-picker button{min-width:32px;min-height:36px;height:36px;padding:2px 4px;font-size:10px}
 body[data-layout="mobile"][data-combat-orientation="landscape"] .hud-controls #td-report-open{display:none}
+
+.report-analysis{margin:10px 0 0;padding:10px;border:1px solid #3e594d;background:#0c1714;color:#b9d9c8;font-size:11px;line-height:1.6}
 body[data-layout="mobile"][data-combat-orientation="landscape"] .speed-picker{flex:none;gap:1px}
 body[data-layout="mobile"][data-combat-orientation="landscape"] .td-wave-info #td-wave-button{flex:none;max-width:90px;width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px}
 body[data-layout="mobile"][data-combat-orientation="landscape"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-command{grid-column:2;grid-row:2;order:0;position:relative;bottom:auto;z-index:5;align-self:stretch;width:100%;max-height:none!important;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:5px;gap:4px;box-shadow:inset 0 1px #d9bf7040}
