@@ -707,3 +707,6 @@ Boss 與商店兌換仍經 `EconomySystem`；補給資源由 `LootSystem` 套用
 # v0.76.0 平衡資料邊界
 
 `TDGame` 將擊殺、戰利品、商店兌換與升級交易送入 `BattleReportSystem`；報表按 `balanceVersion` 隔離比較。經濟系統仍是實際收支權威，戰報只觀測、不回寫資源。
+# v0.77.0 章節存檔邊界
+
+`ChapterCheckpointSystem` 位於波次、經濟與角色系統之外，只序列化安全整備期的穩定狀態。`TDGame` 在獎勵、里程碑及地面掉落全部入帳後觸發存檔；恢復時重新建立實體與裝備索引，不保存怪物、投射物或召喚物。

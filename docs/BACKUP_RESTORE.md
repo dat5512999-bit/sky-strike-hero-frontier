@@ -354,3 +354,6 @@ v0.32.2 只增加 Pages 首次啟用設定；回退至 v0.32.1 仍可本機遊�
 # v0.76.0 備份與還原
 
 儲存鍵仍為 `heroFrontierScoreRecordsV1`，舊資料不刪除。新版讀取後會保留舊最佳分，但舊紀錄因缺少相同 `balanceVersion` 而不計入新平衡樣本；無需人工遷移。
+# v0.77.0 備份與還原
+
+章節進度儲存在 `heroFrontierChapterCheckpointV1`。備份瀏覽器站點資料可保留它；若資料毀損，系統會忽略存檔並允許正常開始新局。

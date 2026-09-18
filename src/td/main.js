@@ -11,6 +11,7 @@
   ui.difficultyButtons=Array.from(document.querySelectorAll('[data-td-difficulty]'));
   ui.factionButtons=Array.from(document.querySelectorAll('[data-faction]'));
   ui.openingStart=document.getElementById('td-start-expedition');
+  ui.openingContinue=document.getElementById('td-continue-expedition');
   ui.difficultyDetail=document.getElementById('td-difficulty-detail');
   ui.commandGrid=document.querySelector('.td-command .command-grid');
   ui.buildDrawer=document.getElementById('td-build-drawer');
@@ -60,6 +61,8 @@
   ui.scoreDetail=document.getElementById('td-score-detail');
   ui.scoreBest=document.getElementById('td-score-best');
   globalThis.towerFrontierGame=new ns.TDGame(document.getElementById('td-game'),ui);
+  if(ui.openingContinue)ui.openingContinue.addEventListener('click',()=>globalThis.towerFrontierGame.continueExpedition());
+  if(globalThis.towerFrontierGame.updateCheckpointUi)globalThis.towerFrontierGame.updateCheckpointUi();
   if(ns.systems.WaveHUD)globalThis.towerFrontierGame.waveHUD=new ns.systems.WaveHUD(globalThis.towerFrontierGame,document.getElementById('td-wave-hud'));
   globalThis.towerFrontierGame.attachBuildDetails();
   const requestLandscape=()=>{const orientation=globalThis.screen&&globalThis.screen.orientation;if(!orientation||typeof orientation.lock!=='function')return false;try{const result=orientation.lock('landscape');if(result&&typeof result.catch==='function')result.catch(()=>false);return true;}catch(error){return false;}};

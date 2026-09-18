@@ -499,3 +499,6 @@ BattleSynergySystem.flagRate(target) 回傳當下有效戰旗倍率；排除失�
 # v0.76.0 本機介面
 
 `BattleReportSystem` 新增 `recordMerit(source, amount)`、`recordExchange(direction, rate)`、`actualStrategy()` 與 `compatibleRecords()`。`analysis()` 新增 `actualStrategy`、`merit`、`spending.exchange`、`peakMerit`；完成紀錄新增版本與 `remainingMerit`。
+# v0.77.0 章節存檔介面
+
+`ChapterCheckpointSystem` 提供 `read()`、`capture(game)`、`restore(game, snapshot)`、`describe()` 與 `clear()`。格式版本為 `schema: 1`，合法波次僅為 10、20。

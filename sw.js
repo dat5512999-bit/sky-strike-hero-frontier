@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.76.0';
+const CACHE_NAME = 'sky-strike-v0.77.0';
 const ASSETS = [
  './assets/td/bear-actions-v3.png', './assets/td/ultimate-dragon-actions-v3.png',
  './assets/td/kingdom-mage-actions-v2.png', './assets/td/alchemist-actions-v2.png', './assets/td/bounty-hunter-actions-v2.png', './assets/td/pirate-actions-v2.png', './assets/td/blacksmith-actions-v2.png', './assets/td/time-mage-actions-v2.png',
@@ -19,7 +19,7 @@ const ASSETS = [
   './src/td/systems/HeroJoystick.js',
   './src/td/systems/BattleSynergySystem.js', './assets/td/faction-builds-v1.png',
   './td-combat.css',
-  './src/td/systems/TargetSelector.js',
+  './src/td/systems/TargetSelector.js', './src/td/systems/ChapterCheckpointSystem.js',
   './src/td/systems/TDDifficultySystem.js', './src/td/systems/EnemyTraitSystem.js', './src/td/systems/BattleReportSystem.js',
   './', './index.html', './styles.css', './td.html', './td.css', './manifest.webmanifest', './td.webmanifest', './assets/icons/game-icon.svg', './assets/icons/app-icon-192.png', './assets/icons/app-icon-512.png', './assets/icons/apple-touch-icon-180.png',
   './src/namespace.js', './src/config.js', './src/utils/math.js',

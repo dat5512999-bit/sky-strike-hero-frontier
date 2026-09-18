@@ -368,3 +368,6 @@ HeroSkillVFX 最多保留 24 個事件。SpriteFrameBounds 是 measure-animation
 # v0.76.0 管理說明
 
 調整經濟規則時必須更新 `BattleReportSystem.BALANCE_VERSION`；純介面或修錯只更新 `APP_VERSION`。舊紀錄保留最佳分，但不進入不同平衡版本的成熟度樣本。
+# v0.77.0 管理說明
+
+章節資料使用瀏覽器本機儲存鍵 `heroFrontierChapterCheckpointV1`。需強制放棄未完成遠征時，可刪除此鍵；戰績鍵不受影響。

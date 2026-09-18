@@ -374,3 +374,6 @@ v0.17.0 快取為 sky-strike-v0.17.0，必須包含 hero-actions-v1.png。同步
 # v0.76.0 部署
 
 部署後確認快取為 `sky-strike-v0.76.0`，開局顯示 `v0.76.0 · BALANCE E2`。重新整理後才開始新版樣本；既有進行中分頁仍使用載入時的舊程式。
+# v0.77.0 部署
+
+部署時確認 `ChapterCheckpointSystem.js` 可載入且離線快取名稱為 `sky-strike-v0.77.0`。舊版沒有相容檢查點，不需要遷移。

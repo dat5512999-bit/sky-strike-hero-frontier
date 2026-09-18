@@ -75,7 +75,7 @@
     finalLine(result){const total=this.totals(),final=result||this.finalResult,difficultyBest=final?final.difficultyBestScore:this.bestForDifficulty(this.mapId(),this.run.difficulty);return'總擊破 '+total.kills+'｜總漏怪 '+total.leaks+'｜城門損失 '+total.gateDamage+'｜英雄倒下 '+total.heroDowns+'｜用時 '+total.time.toFixed(1)+' 秒（速度 +'+total.timeBonus+'）｜積分 '+total.score+'｜評級 '+this.grade(total.score,this.waves.length)+'｜'+(this.run.difficultyName||this.run.difficulty)+'最佳紀錄 '+difficultyBest+'｜'+(this.run.mapName||this.mapId())+' 全難度最佳紀錄 '+(final?final.bestScore:this.bestScore);}
   }
   BattleReportSystem.STORAGE_KEY='heroFrontierScoreRecordsV1';
-  BattleReportSystem.APP_VERSION='0.76.0';
+  BattleReportSystem.APP_VERSION='0.77.0';
   BattleReportSystem.BALANCE_VERSION='economy-merit-v2';
   BattleReportSystem.MAX_RECORDS=20;
   BattleReportSystem.TIME_POINTS_PER_SECOND=5;
