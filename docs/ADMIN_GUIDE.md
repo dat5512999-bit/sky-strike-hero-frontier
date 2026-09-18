@@ -365,3 +365,6 @@ HeroSkillVFX 最多保留 24 個事件。SpriteFrameBounds 是 measure-animation
 # v0.75.0 管理說明
 
 功勳兌換率維持 `EconomySystem.MERIT_GOLD_RATE=1000`。額外來源在 `LootSystem` 移除；建築高階功勳成本由 `Building.upgradeCost()` 控制為 1／2。
+# v0.76.0 管理說明
+
+調整經濟規則時必須更新 `BattleReportSystem.BALANCE_VERSION`；純介面或修錯只更新 `APP_VERSION`。舊紀錄保留最佳分，但不進入不同平衡版本的成熟度樣本。

@@ -51,7 +51,7 @@ test('壓力斷層只在有前期基準後標記，歷史比較限制相同配�
 });
 
 test('第三階段需三種策略各三局才會提出平衡判定',()=>{
-  const {ns}=load(),report=new ns.systems.BattleReportSystem(),base={map:'beginner',difficulty:'standard',profession:'hunter',faction:'hunter'};
+  const {ns}=load(),report=new ns.systems.BattleReportSystem(),base={map:'beginner',difficulty:'standard',profession:'hunter',faction:'hunter',balanceVersion:ns.systems.BattleReportSystem.BALANCE_VERSION};
   report.beginRun(base);
   ['expand','core','mixed'].forEach(strategy=>{for(let i=0;i<3;i+=1)report.records.push(Object.assign({},base,{strategy,victory:i>0,waves:strategy==='expand'?24:22,score:1000,time:300,remainingGold:80,analysis:{totalSpent:1000}}));});
   const ready=report.balanceReadiness();
@@ -68,4 +68,14 @@ test('邊境補給不再產出功勳，Boss 與固定兌換仍保留',()=>{
   const {ns}=load(),loot=new ns.systems.LootSystem(),economy=new ns.systems.EconomySystem(),item=loot.get('frontier-supplies');
   assert.deepEqual(Object.assign({},item.resources),{gold:120,lumber:2});assert.equal(item.description.includes('功勳'),false);
   assert.equal(economy.addKill({reward:100,type:'boss'},0).merit,1);economy.gold=1000;assert.equal(economy.exchangeGoldForMerit(),true);assert.equal(economy.merit,2);
+});
+
+test('戰報分開記錄功勳來源、兌換、升級消耗與實際策略',()=>{
+  const {ns}=load(),report=new ns.systems.BattleReportSystem(),tower={kind:'building',type:'arrow',level:4};report.beginRun({strategy:'mixed'});
+  report.recordMerit('boss',3);report.recordMerit('loot',1);report.recordExchange('gold-to-merit',1000);report.recordExchange('merit-to-gold',1000);report.recordInvestment('deploy',{kind:'building',type:'arrow'},{gold:100});report.recordInvestment('upgrade',tower,{gold:700,merit:2});
+  const analysis=report.analysis();assert.equal(analysis.actualStrategy,'core');assert.equal(analysis.spending.exchange,1000);assert.deepEqual(Object.assign({},analysis.merit),{bossEarned:3,lootEarned:1,exchangeIn:1,exchangeOut:1,upgradeSpent:2});assert.match(report.analysisLine(),/實際 核心升級/);
+});
+
+test('不同平衡版本的舊戰績不會混入比較樣本',()=>{
+  const {ns}=load(),report=new ns.systems.BattleReportSystem();report.beginRun({map:'beginner',difficulty:'standard',profession:'hunter',faction:'hunter'});report.records.push({map:'beginner',difficulty:'standard',profession:'hunter',faction:'hunter',balanceVersion:'old-economy',strategy:'mixed',waves:30,score:999});assert.equal(report.historyComparison().length,0);assert.equal(report.balanceReadiness().total,0);
 });

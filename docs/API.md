@@ -496,3 +496,6 @@ BattleSynergySystem.flagRate(target) 回傳當下有效戰旗倍率；排除失�
 # v0.75.0 本機介面
 
 `Building.upgradeCost()` 的 `merit` 在目前等級 3／4 時回傳 1／2。`LootSystem.get('frontier-supplies').resources` 僅含 `gold:120`、`lumber:2`。兌換 API 不變。
+# v0.76.0 本機介面
+
+`BattleReportSystem` 新增 `recordMerit(source, amount)`、`recordExchange(direction, rate)`、`actualStrategy()` 與 `compatibleRecords()`。`analysis()` 新增 `actualStrategy`、`merit`、`spending.exchange`、`peakMerit`；完成紀錄新增版本與 `remainingMerit`。

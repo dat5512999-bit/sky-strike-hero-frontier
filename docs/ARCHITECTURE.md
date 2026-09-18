@@ -704,3 +704,6 @@ SpriteFrameBounds 在 ArtSystem 前載入；HeroSkillVFX 在 HeroRoster 前載�
 # v0.75.0 功勳資料流
 
 Boss 與商店兌換仍經 `EconomySystem`；補給資源由 `LootSystem` 套用；建築高階消耗由 `Building` 報價並由 `BuildSystem` 原子扣款。未新增儲存或網路層。
+# v0.76.0 平衡資料邊界
+
+`TDGame` 將擊殺、戰利品、商店兌換與升級交易送入 `BattleReportSystem`；報表按 `balanceVersion` 隔離比較。經濟系統仍是實際收支權威，戰報只觀測、不回寫資源。
