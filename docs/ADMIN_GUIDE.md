@@ -362,3 +362,6 @@ HeroSkillVFX 最多保留 24 個事件。SpriteFrameBounds 是 measure-animation
 # v0.74.0 管理說明
 
 平衡判定完全在瀏覽器本機執行，沒有後台排程或自動改值。管理者應先確認同配置三策略各三局，再依 `balanceReadiness()` 訊號人工審核。
+# v0.75.0 管理說明
+
+功勳兌換率維持 `EconomySystem.MERIT_GOLD_RATE=1000`。額外來源在 `LootSystem` 移除；建築高階功勳成本由 `Building.upgradeCost()` 控制為 1／2。

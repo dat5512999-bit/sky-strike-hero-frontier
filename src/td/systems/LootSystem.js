@@ -6,7 +6,7 @@
     'dragon-egg':{name:'翡翠龍卵',rarity:'傳說',icon:'龍',description:'解鎖幼龍守衛；牠能飛行並造成範圍魔法傷害。',unlock:{units:['dragon']}},
     'bone-contract':{name:'幽骨契約',rarity:'史詩',icon:'骷',description:'解鎖骷髏衛士與靈魂收割塔。',unlock:{units:['skeleton'],buildings:['soul']}},
     'royal-armory':{name:'王國軍械箱',rarity:'精良',icon:'盾',description:'解鎖重裝盾衛，並立即獲得 90 金幣。',unlock:{units:['shield']},resources:{gold:90}},
-    'frontier-supplies':{name:'邊境補給',rarity:'精良',icon:'箱',description:'立即取得 120 金幣、2 木材與 1 功勳。',resources:{gold:120,lumber:2,merit:1}},
+    'frontier-supplies':{name:'邊境補給',rarity:'精良',icon:'箱',description:'立即取得 120 金幣與 2 木材。',resources:{gold:120,lumber:2}},
     'gear-lion-bow':{name:'獅心王弓',rarity:'史詩',icon:'弓',description:'取得可裝備的獅心王弓。',gear:'lion-bow'},
     'gear-lion-shield':{name:'不落獅盾',rarity:'傳說',icon:'盾',description:'取得為盾衛攻擊附加聖盾震波的傳說獅盾。',gear:'lion-shield'},
     'gear-war-drum':{name:'先鋒戰鼓',rarity:'史詩',icon:'鼓',description:'取得強化盾衛或半獸人的戰鼓。',gear:'war-drum'},

@@ -242,7 +242,7 @@ BuildSystem.placementIssue(x,y,kind) 回傳 null／boundary／road／occupied；
 
 ## v0.42.0 塔與傷害資料契約
 
-- `Building.upgradeCost()` 回傳 `{gold,merit}` 或 Lv.5 的 `null`；`gold` 為塔原價乘 `[2.8,4.2,6.2,8.4]` 後取整至 10G，`merit` 僅 Lv.4→5 為 1。`BuildSystem.upgrade(economy)` 仍原子性扣款，失敗不升級。
+- `Building.upgradeCost()` 回傳 `{gold,merit}` 或 Lv.5 的 `null`；`gold` 為塔原價乘 `[2.8,4.2,6.2,8.4]` 後取整至 10G，v0.75.0 起 Lv.3→4／Lv.4→5 的 `merit` 為 1／2。`BuildSystem.upgrade(economy)` 仍原子性扣款，失敗不升級。
 - `config.buildings[type].slow/slowTime/bonusVsSlowed/role` 為選填欄位；`TowerSkillSystem.fire()` 將增傷欄位傳至 `Projectile`。`Projectile.hit()` 以命中前 `slowTimer>0 && slowFactor<=.8` 判定強緩速，對應傷害類型及怪物護甲仍照原公式結算。
 - `FactionSystem.available('building')` 王國起始含 `iceward`；`TowerEvolutionSystem.branches('iceward')` 有兩條互斥三級進階。無新外部 API、資料庫或帳號權限。
 
@@ -493,3 +493,6 @@ BattleSynergySystem.flagRate(target) 回傳當下有效戰旗倍率；排除失�
 # v0.74.0 本機介面
 
 `BattleReportSystem.balanceReadiness()` 回傳 `ready`、`total`、`minimumPerStrategy`、`groups`、`missing` 與 `recommendations`。這是本機 JavaScript 介面，未新增網路 API。
+# v0.75.0 本機介面
+
+`Building.upgradeCost()` 的 `merit` 在目前等級 3／4 時回傳 1／2。`LootSystem.get('frontier-supplies').resources` 僅含 `gold:120`、`lumber:2`。兌換 API 不變。

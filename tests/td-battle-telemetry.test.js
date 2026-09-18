@@ -63,3 +63,9 @@ test('第三階段樣本不足時不建議直接調整經濟',()=>{
   report.records.push({map:'beginner',difficulty:'standard',profession:'hunter',faction:'hunter',strategy:'expand',waves:10,score:100});
   const state=report.balanceReadiness();assert.equal(state.ready,false);assert.equal(state.missing.length,3);assert.match(state.recommendations[0],/不建議修改塔價/);
 });
+
+test('邊境補給不再產出功勳，Boss 與固定兌換仍保留',()=>{
+  const {ns}=load(),loot=new ns.systems.LootSystem(),economy=new ns.systems.EconomySystem(),item=loot.get('frontier-supplies');
+  assert.deepEqual(Object.assign({},item.resources),{gold:120,lumber:2});assert.equal(item.description.includes('功勳'),false);
+  assert.equal(economy.addKill({reward:100,type:'boss'},0).merit,1);economy.gold=1000;assert.equal(economy.exchangeGoldForMerit(),true);assert.equal(economy.merit,2);
+});

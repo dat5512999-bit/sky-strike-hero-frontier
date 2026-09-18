@@ -99,7 +99,7 @@ maps.js 定義 classic 720×720 與 frontier 1280×900；新圖 roadUnits=true�
 
 ## v0.42.0 塔與老兵平衡
 
-`Building.upgradeCost()` 依 `config.buildings[type].cost × [2.8,4.2,6.2,8.4]` 計價並四捨五入至 10G；只有最後一階需 1 功勳。林地弩塔原價 100G、升級 280／420／620／840G。`CombatUnit.upgradeCost()` 則依 `config.units[type].cost × [1,1.3,1.7,2.2]` 計價並取整至 5G；升至 Lv.4／Lv.5 另需 1／2 功勳。塔熟練門檻在 `TowerSkillSystem.THRESHOLDS=[0,8,22,45,80]`。冰／荊棘／毒塔的 `slow`（移速倍率）與 `slowTime` 位於 `config.buildings`；強緩速判定為命中前 `slowFactor<=.8`，增傷率由輸出塔的 `bonusVsSlowed` 控制。老兵 `healthGrowth=.03`、`spawnRate=.78`，第 1→30 波血量 165%→309%；其他難度不變。可用上述資料逐項微調，不需修改資料庫或 API。
+`Building.upgradeCost()` 依 `config.buildings[type].cost × [2.8,4.2,6.2,8.4]` 計價並四捨五入至 10G；升至 Lv.4／Lv.5 另需 1／2 功勳。林地弩塔原價 100G、升級 280／420／620／840G。`CombatUnit.upgradeCost()` 則依 `config.units[type].cost × [1,1.3,1.7,2.2]` 計價並取整至 5G；升至 Lv.4／Lv.5 同樣另需 1／2 功勳。塔熟練門檻在 `TowerSkillSystem.THRESHOLDS=[0,8,22,45,80]`。冰／荊棘／毒塔的 `slow`（移速倍率）與 `slowTime` 位於 `config.buildings`；強緩速判定為命中前 `slowFactor<=.8`，增傷率由輸出塔的 `bonusVsSlowed` 控制。老兵 `healthGrowth=.03`、`spawnRate=.78`，第 1→30 波血量 165%→309%；其他難度不變。可用上述資料逐項微調，不需修改資料庫或 API。
 
 ## v0.41.0 可調參數
 

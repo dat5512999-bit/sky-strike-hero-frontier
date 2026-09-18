@@ -25,4 +25,5 @@ test('ancient dragon and other ultimate soldiers require premium proportional in
 test('defense buildings retain their steeper proportional saving curve',()=>{
   const {ns}=load(),tower=new ns.entities.Building('arrow',100,100);
   assert.deepEqual([1,2,3,4].map(level=>{tower.level=level;return tower.upgradeCost().gold;}),[280,420,620,840]);
+  assert.deepEqual([1,2,3,4].map(level=>{tower.level=level;return tower.upgradeCost().merit;}),[0,0,1,2]);
 });

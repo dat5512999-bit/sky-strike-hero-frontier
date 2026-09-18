@@ -701,3 +701,6 @@ SpriteFrameBounds 在 ArtSystem 前載入；HeroSkillVFX 在 HeroRoster 前載�
 # v0.74.0 平衡判定層
 
 `BattleReportSystem` 依地圖、難度、英雄與軍團篩選 localStorage 戰績，再按三種受控策略聚合。`TDGame.renderReport()` 僅呈現結果；判定層不依賴 UI，也不寫入平衡設定。
+# v0.75.0 功勳資料流
+
+Boss 與商店兌換仍經 `EconomySystem`；補給資源由 `LootSystem` 套用；建築高階消耗由 `Building` 報價並由 `BuildSystem` 原子扣款。未新增儲存或網路層。
