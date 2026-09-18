@@ -21,6 +21,7 @@ test('開局、建造 Drawer 與統一選單保留同一套 UI 入口',()=>{
   assert.match(html,/data-faction="hunter" aria-pressed="false"/);
   assert.match(html,/id="td-faction-heading"/);
   assert.doesNotMatch(html,/href="index\.html"/);
+  assert.doesNotMatch(html,/href="versus\.html"|進入邊境對戰原型/);
   assert.equal((html.match(/返回遠征選擇/g)||[]).length,3);
   assert.match(html,/id="td-selection-actions"/);
   assert.doesNotMatch(html,/id="td-move"|id="td-attack-move"|id="td-hold"|id="td-stop"/);

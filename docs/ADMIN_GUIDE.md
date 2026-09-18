@@ -380,3 +380,7 @@ HeroSkillVFX 最多保留 24 個事件。SpriteFrameBounds 是 measure-animation
 # v0.79.0 介面管理
 
 對戰 HUD 與面板遵循英雄塔防的深綠、金框、資源卡、快捷欄與抽屜層級。新增控制項需同時檢查桌面與 850px 以下橫向配置。
+
+# v0.79.1 對戰原型隱藏
+
+`versus.html` 仍作為獨立開發頁保留，但 `td.html` 不得顯示通往該頁的玩家入口。

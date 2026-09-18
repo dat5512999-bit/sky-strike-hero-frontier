@@ -719,3 +719,7 @@ Canvas 先繪製場景，再依 `VersusMatch` 狀態疊加單位、建築、HP�
 # v0.79.0 對戰 UI 邊界
 
 建造 UI 只呼叫 `validateBuild` 顯示原因，確認後才呼叫 `build`；選取面板透過 `repair`／`demolish` 改變模型。Canvas 顯示層不直接扣除資源。
+
+# v0.79.1 原型邊界
+
+對戰規則與顯示檔案繼續與英雄遠征分離；正式 `td.html` 不建立通往 `versus.html` 的導覽關係。

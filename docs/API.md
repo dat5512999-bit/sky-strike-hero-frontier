@@ -511,3 +511,7 @@ BattleSynergySystem.flagRate(target) 回傳當下有效戰旗倍率；排除失�
 # v0.79.0 建造與建築管理
 
 `VersusMatch.validateBuild()` 回傳 `{ok, reason, y, cost}`；`repair(side, structure)` 與 `demolish(side, structure)` 分別處理付費維修及 50% 拆除退款。
+
+# v0.79.1 API 狀態
+
+本版未變更對戰或塔防 API，僅移除 `td.html` 的原型導覽連結。

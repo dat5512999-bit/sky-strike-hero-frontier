@@ -33,7 +33,7 @@ test('英雄塔防入口引用的本機資產完整且不依賴網路', () => {
   assert.equal(/<script[^>]+type=["']module["']/i.test(html), false);
 });
 
-test('英雄塔防公開顯示目前程式與平衡資料版本',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8');assert.match(html,/v0\.79\.0/);assert.match(html,/BALANCE E2/);assert.match(html,/SHARED UX/);});
+test('英雄塔防公開顯示目前程式與平衡資料版本',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8');assert.match(html,/v0\.79\.1/);assert.match(html,/BALANCE E2/);assert.doesNotMatch(html,/SHARED UX/);});
 
 test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
   const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');

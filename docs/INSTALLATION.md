@@ -375,3 +375,7 @@ v0.68.2 沿用原安裝與設定。無新增套件；Node.js 18+ 執行 npm test
 # v0.79.0 安裝補充
 
 無新增依賴。更新 `versus.html`、`versus.css`、`src/versus/main.js` 與 `VersusMatch.js` 後即可使用新版介面。
+
+# v0.79.1 安裝補充
+
+無新增依賴。對戰原型保留於專案中，但不從英雄遠征開局畫面公開導航。
