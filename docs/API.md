@@ -1,5 +1,9 @@
 # API 文件（內部模組介面）
 
+## v0.73.0 平衡實驗 API
+
+`BattleReportSystem` 新增 `setStrategy`、`recordSupport`、`efficiency` 與 `historyComparison`；完成紀錄增加 strategy、剩餘資源、最終軍備與分析摘要。舊紀錄欄位缺失時安全回退。沒有 HTTP API。
+
 ## v0.72.0 戰局統計 API
 
 `BattleReportSystem` 新增 `recordDamage`、`recordInvestment`、`armySnapshot`、`analysis` 與 `analysisLine`。`BuildSystem.onTransaction` 只在成功部署或升級後回報實付成本。沒有 HTTP API、遠端上傳或帳號資料。

@@ -26,3 +26,26 @@ test('未分類的經濟支出歸入商店且分析只提出訊號',()=>{
   const analysis=report.analysis();
   assert.equal(analysis.spending.shop,180);assert.ok(analysis.signals.length>=1);
 });
+
+test('策略標籤、投資效率、支援貢獻與升級里程碑可比較',()=>{
+  const {ns}=load(),report=new ns.systems.BattleReportSystem(),tower={kind:'building',type:'arrow',level:1,totalSpent:100,active:true},support={kind:'building',type:'battleflag'};
+  assert.equal(report.setStrategy('core'),true);assert.equal(report.setStrategy('invalid'),false);
+  report.recordInvestment('deploy',tower,{gold:100,wood:2});
+  report.recordDamage({owner:tower},500);report.recordKill({type:'grunt'},{gold:8},{owner:tower});
+  tower.level=3;report.recordInvestment('upgrade',tower,{gold:420,merit:0});
+  report.recordSupport(support,'bonusDamage',80);report.recordSupport(support,'coverageSeconds',12.4);
+  const analysis=report.analysis();
+  assert.equal(analysis.strategy,'core');assert.equal(analysis.milestones.level3.type,'arrow');
+  assert.equal(analysis.efficiency[0].source,'塔：arrow');assert.equal(analysis.efficiency[0].damagePer100,96);
+  assert.equal(analysis.support[0].bonusDamage,80);assert.equal(analysis.support[0].coverageSeconds,12);
+});
+
+test('壓力斷層只在有前期基準後標記，歷史比較限制相同配置',()=>{
+  const {ns}=load(),data=new Map(),storage={getItem:key=>data.get(key)||null,setItem:(key,value)=>data.set(key,value)},report=new ns.systems.BattleReportSystem(storage);
+  report.beginRun({map:'beginner',difficulty:'standard',profession:'hunter',faction:'hunter',strategy:'expand'});
+  [20,20,20,60].forEach((time,index)=>{report.startWave(index+1,{baseHealth:20,gold:100,lumber:5,parTime:20,army:[]});report.update(time);report.completeWave({baseHealth:index===3?16:20,gold:100,lumber:5,army:[]},{gold:0,lumber:0});});
+  assert.equal(report.latest().pressureSpike,true);const result=report.finalize(false);assert.deepEqual(Array.from(result.analysis.pressureSpikes),[4]);
+  const restored=new ns.systems.BattleReportSystem(storage);restored.beginRun({map:'beginner',difficulty:'standard',profession:'hunter',faction:'hunter'});
+  const rows=restored.historyComparison();assert.equal(rows.length,1);assert.equal(rows[0].strategy,'expand');assert.deepEqual(Array.from(rows[0].spikes),[4]);
+  restored.beginRun({map:'autumn'});assert.equal(restored.historyComparison().length,0);
+});

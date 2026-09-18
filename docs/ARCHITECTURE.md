@@ -1,5 +1,7 @@
 # 系統架構
 
+> v0.73.0：開局策略標籤 → BattleReportSystem.run；BuildSystem 實付／折扣、Projectile 有效傷害與 BattleSynergy 支援來源 → analysis；finalize 寫入本機歷史 → historyComparison 依同配置篩選。
+
 > v0.72.0：`BuildSystem／Projectile → TDGame → BattleReportSystem → 本機戰報 UI／localStorage`。遙測只讀取成功交易與實際有效傷害，不回寫戰鬥系統。
 
 > v0.71.4：`TDDifficultySystem.reward` 傳入 `EconomySystem`，同時縮放擊殺賞金與清關金；`WaveSystem.bountyScale` 只抵銷不同敵量造成的賞金膨脹。回收與商店兌換保持獨立。

@@ -10,7 +10,7 @@
     reset(){this.items=[];this.selected=null;this.pending=null;this.placement=null;this.nextUnitId=1;this.pointer={x:360,y:360,valid:false};}
     queue(type,kind){kind=kind||'unit';const catalog=kind==='building'?ns.config.buildings:ns.config.units;if(!catalog[type])return false;this.pending={type:type,kind:kind};this.placement=null;this.pointer.valid=false;this.selected=null;return true;}
     queueMercenary(type,kind){if(!this.queue(type,kind||'unit'))return false;this.pending.mercenary=true;return true;}
-    discountedCost(cost,point){if(!cost||!point)return cost;const rate=this.items.reduce((max,item)=>{const cfg=item.config();return !item.retired&&cfg.discount&&ns.utils.distance(item,point)<=cfg.range?Math.max(max,cfg.discount):max;},0);return Object.assign({},cost,{gold:Math.ceil(cost.gold*(1-rate))});}
+    discountedCost(cost,point){if(!cost||!point)return cost;let rate=0,source=null;this.items.forEach(item=>{const cfg=item.config();if(!item.retired&&cfg.discount&&ns.utils.distance(item,point)<=cfg.range&&cfg.discount>rate){rate=cfg.discount;source=item;}});const gold=Math.ceil(cost.gold*(1-rate));return Object.assign({},cost,{gold:gold,savedGold:Math.max(0,(cost.gold||0)-gold),discountSource:source});}
     upgradeCost(item){item=item||this.selected;return item?this.discountedCost(item.upgradeCost(),item):null;}
     pendingCost(point){if(!this.pending)return null;const p=this.pending,cfg=(p.kind==='building'?ns.config.buildings:ns.config.units)[p.type];return this.discountedCost({gold:p.mercenary?Math.ceil(cfg.cost*1.5):cfg.cost,wood:p.mercenary?0:cfg.wood},point||this.placement||(this.pointer.valid?this.pointer:null));}
     cancel(){this.pending=null;this.placement=null;}

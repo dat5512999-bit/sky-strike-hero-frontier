@@ -42,7 +42,7 @@ test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
   ['Q','W','E','R','F'].forEach((key) => assert.match(html, new RegExp(`<kbd>${key}</kbd>`)));
   assert.match(html, /id="td-ultimate"[^>]*aria-keyshortcuts="F"/);
   ['story','standard','veteran','calamity'].forEach((mode) => assert.match(html, new RegExp(`data-td-difficulty=["']${mode}["']`)));
-  ['td-report-open','td-report-screen','td-report-rows','td-final-report'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
+  ['td-report-open','td-report-screen','td-report-rows','td-report-analysis','td-report-history','td-strategy-choice','td-final-report'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
   ['td-armory-open','td-armory-screen','td-armory-loadout','td-armory-items','td-armory-target'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
 });
 
