@@ -41,6 +41,6 @@ update.html → update-client.refresh → Service Worker register/update（updat
 - [x] 版本訊息、等待啟用、拒絕錯版、離線失敗顯示重試且不重新導覽。
 - [x] 更新流程不存取或清除玩家儲存；設定連結從手機 iframe 開啟頂層更新頁。
 - [x] 本機瀏覽器更新入口自動開啟 0.85.10 主大廳；手機 iframe 的設定更新連結會返回頂層入口。
-- [ ] GitHub Pages 部署及公開手機入口驗證。
+- [x] GitHub Pages run `35883314667` 部署成功；先前載入 0.85.9 的線上分頁透過 `/update.html` 成功進入 0.85.10 主大廳。實際手機舊快取仍由使用者開啟同一入口確認。
 
 `npm run check` 與 `npm test`（595／595）通過；手機原本的快取環境仍需使用者從更新入口確認。
