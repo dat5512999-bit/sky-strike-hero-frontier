@@ -1,3 +1,5 @@
+> **v0.85.10（2026-09-23）：** 無新玩家設定；主入口立即註冊 worker，updateViaCache 為 none，更新頁最長等待 60 秒。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。
+
 > **v0.85.9：** 無新增玩家或管理設定；全圖部署圖層已移除，地形與道路距離仍由 `maps.js`、`BuildSystem` 判定。詳見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
 
 > **v0.85.8：** 霜原價格、傷害與攻擊間隔在既有 config.js／HeroRoster.js／FrostlandHero.js；無玩家新增選項。完整數值表見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-Hant" data-release="0.85.10">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17392f">
+  <title>更新遊戲 · HERO FRONTIER</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;background:#0b1513;color:#e7d39a;font:16px/1.7 system-ui,sans-serif;padding:24px}main{width:min(100%,520px);border:1px solid #877443;border-radius:12px;padding:32px;background:#14211e;box-shadow:0 16px 60px #0005}small{letter-spacing:.15em;color:#b7a779}h1{font-size:28px;line-height:1.3;margin:16px 0}p{color:#c5d0c9}button,a{display:inline-block;border:1px solid #d0b466;border-radius:6px;background:#68512b;color:#fff0bd;padding:12px 20px;font:inherit;text-decoration:none;cursor:pointer}[hidden]{display:none!important}footer{margin-top:24px;font-size:13px;color:#a9b9af}
+  </style>
+</head>
+<body>
+  <main>
+    <small>HERO FRONTIER</small>
+    <h1>更新遊戲</h1>
+    <p id="update-status" role="status" aria-live="polite">正在取得新版遊戲，完成後會自動開啟主大廳…</p>
+    <button id="update-retry" type="button" hidden>重新嘗試更新</button>
+    <noscript><p>請啟用 JavaScript 後重新開啟此頁。</p></noscript>
+    <footer>此操作只更新遊戲程式，保留此瀏覽器的玩家進度、購買紀錄與裝備。更新時請保持網路連線。</footer>
+  </main>
+  <script src="src/td/update-client.js"></script>
+</body>
+</html>

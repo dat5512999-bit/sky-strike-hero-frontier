@@ -93,7 +93,7 @@ test('PWA manifest 與離線快取引用的遊戲檔案都存在', () => {
   assets.forEach((asset) => assert.ok(fs.existsSync(path.join(root, asset)), `離線快取缺少檔案：${asset}`));
   assert.match(worker, /const PRECACHE = ASSETS\.filter/);
   assert.match(worker, /!asset\.startsWith\('\.\/assets\/td\/'\)/);
-  assert.match(worker, /caches\.match\(event\.request, \{ ignoreSearch: true \}\)/);
+  assert.match(worker, /cache\.match\(event\.request, \{ ignoreSearch: true \}\)/);
 });
 
 test('手機主畫面圖示具備標準 PNG 尺寸並由兩種模式引用', () => {

@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
-    addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); });
+    navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).catch(function () {});
   }
   const card=document.getElementById('install-card'),action=document.getElementById('install-action'),dismiss=document.getElementById('install-dismiss'),copy=document.getElementById('install-copy');
   if(!card||matchMedia('(display-mode: standalone)').matches||navigator.standalone===true)return;

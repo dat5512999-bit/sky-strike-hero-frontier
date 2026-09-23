@@ -1,3 +1,5 @@
+> **v0.85.10（2026-09-23）：** 更新不操作 localStorage 或 IndexedDB；程式回復使用 git revert 修復提交並同步回復 SW 與入口版本。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。
+
 > **v0.85.9：** 變更前 21 個檔案與 SHA-256 清單位於 `artifacts/deployment-visual-v0859-backup/`；逐檔回復並同步舊版快取／標示，保留其他未提交工作。詳見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
 
 > **v0.85.8：** 本輪變更前 22 個檔案保存於 artifacts/frostland-balance-v0858-backup；依 manifest 逐檔比對回復，保留其他未提交工作。見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。

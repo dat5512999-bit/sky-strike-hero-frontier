@@ -1,7 +1,8 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.9';
+const CACHE_NAME = 'sky-strike-v0.85.10';
 const ASSETS = [
+ './update.html', './src/td/update-client.js',
  './goblin-polish-preview.html', './src/td/goblin-polish-preview.js', './src/td/systems/GoblinPresentation.js', './assets/td/goblin/skill-icons-v2.png', './assets/td/goblin/spell-effects-v1.png',
  './battle-polish-preview.html', './src/td/battle-polish-preview.js', './td-polish.css', './assets/td/frostland/towers-atlas-v1.png', './assets/td/frostland/skill-icons-v1.png', './assets/td/frostland/spell-effects-v1.png', './src/td/systems/FrostlandTowerArt.js', './src/td/systems/FrostlandSpellArt.js',
  './assets/td/frostland/frostland_emblem.svg', './assets/td/frostland/frostland_hero.svg',
@@ -53,7 +54,7 @@ const ASSETS = [
 // 安裝時只預存遊戲殼；頁面直接載入完整美術，成功後由 fetch handler 快取，避免安裝流程同步等待約 90 MB。
 const PRECACHE = ASSETS.filter(function (asset) { return !asset.startsWith('./assets/td/'); });
 self.addEventListener('install', function (event) {
-  event.waitUntil(caches.open(CACHE_NAME).then(function (cache) { return cache.addAll(PRECACHE); }).then(function () { return self.skipWaiting(); }));
+  event.waitUntil(caches.open(CACHE_NAME).then(function (cache) { return cache.addAll(PRECACHE.map(function (asset) { return new Request(asset, { cache: 'reload' }); })); }).then(function () { return self.skipWaiting(); }));
 });
 
 self.addEventListener('activate', function (event) {
@@ -62,12 +63,16 @@ self.addEventListener('activate', function (event) {
   }).then(function () { return self.clients.claim(); }));
 });
 
+self.addEventListener('message', function (event) {
+  if (event.data && event.data.type === 'GAME_VERSION' && event.ports[0]) event.ports[0].postMessage(CACHE_NAME);
+});
+
 self.addEventListener('fetch', function (event) {
   if (event.request.method !== 'GET') return;
   // Optional media is never precached. Let the browser/server handle byte ranges.
   if (new URL(event.request.url).pathname.endsWith('.mp4') || event.request.headers.has('range')) return;
   if (new URL(event.request.url).pathname.includes('/assets/td/')) {
-    event.respondWith(caches.match(event.request, { ignoreSearch: true }).then(function (cached) {
+    event.respondWith(caches.open(CACHE_NAME).then(function (cache) { return cache.match(event.request, { ignoreSearch: true }); }).then(function (cached) {
       if (cached) return cached;
       return fetch(event.request).then(function (response) {
         if (response && response.ok && response.type !== 'opaque') {
@@ -79,10 +84,10 @@ self.addEventListener('fetch', function (event) {
     }));
     return;
   }
-  event.respondWith(fetch(event.request).then(function (response) {
+  event.respondWith(fetch(event.request, { cache: 'no-cache' }).then(function (response) {
       if (!response || response.status !== 200 || response.type === 'opaque') return response;
       const copy = response.clone();
       caches.open(CACHE_NAME).then(function (cache) { return cache.put(event.request, copy); }).catch(function () { /* 快取失敗不影響遊戲。 */ });
       return response;
-    }).catch(function () { return caches.match(event.request); }));
+    }).catch(function () { return caches.open(CACHE_NAME).then(function (cache) { return cache.match(event.request, { ignoreSearch: true }); }); }));
 });

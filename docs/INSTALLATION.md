@@ -1,3 +1,5 @@
+> **v0.85.10（2026-09-23）：** 安裝方式不變；update.html 需 HTTPS 或 localhost，修復舊画面時不必重新安裝或刪除存檔。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。
+
 > **v0.85.9：** Node.js 18 以上執行 `npm run check`、`npm test`，再以 `npm run serve:test` 開啟 `/td.html`；無新增套件。選卡後檢查全圖綠點與紅框已消失。詳見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
 
 > **v0.85.8：** 使用 Node.js 18 以上取得完整靜態檔，執行語法與霜原測試後啟動 td.html；無新增套件或設定。步驟見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。

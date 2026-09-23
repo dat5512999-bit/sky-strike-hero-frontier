@@ -1,3 +1,5 @@
+> **v0.85.10（2026-09-23）：** 新增 update-client.refresh／activated 與 GAME_VERSION 訊息；無網路 API 或玩家資料格式變更。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。
+
 > **v0.85.9：** `FrontierTerrain` 不再繪製部署抽樣點與禁建多邊形；`BuildSystem.updatePointer` 記錄預覽是否已啟動，原 `terrainIssue`／`placementIssue` 呼叫與傳回值不變。無新網路 API。詳見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
 
 > **v0.85.8：** 既有 ns.config、HeroRoster 與 FrostlandHero 內部數值調整；無新增 HTTP API、資料庫或呼叫參數。數值表與流程見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。

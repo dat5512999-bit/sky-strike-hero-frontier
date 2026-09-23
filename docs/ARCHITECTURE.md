@@ -1,3 +1,5 @@
+> **v0.85.10（2026-09-23）：** update.html → worker 更新及版號確認 → 新版大廳；殼層重新驗證 HTTP 快取，僅回退至當前版本快取。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。
+
 > **v0.85.9：** `FrontierTerrain` 只繪製地景，`BuildSystem` 負責放置判定及指標位置預覽；既有地圖資料、存檔、資料庫與 HTTP API 均未變。架構圖見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
 
 > **v0.85.8：** 霜原平衡仍由 config／HeroRoster／FrostlandHero 進入既有 CombatUnit、Building、Projectile、FrostStatusSystem；沒有新服務或資料層。架構圖見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。
