@@ -7,13 +7,13 @@
     calamity:{name:'災厄遠征',description:'完整軍備開放；最高密度與致命 Boss 壓力。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'100% 100%',enemyHealth:2.25,healthGrowth:.045,enemySpeed:1.16,enemyDamage:2,enemyCount:1.6,reward:.38,baseHealth:15,preparation:.7,spawnRate:.65,content:'全部軍備'}
   };
   const ULTIMATE_UNITS=['royalCommander','dragon','soulsteel'];
-  const STORY_TOWERS=['armoryForge','ballista','moonwell','graveyard'];
+  const STORY_TOWERS=['armoryForge','ballista','moonwell','graveyard','boulder','thunderTotem'];
   class TDDifficultySystem{
     constructor(){this.reset();}
     reset(){this.selected='standard';}
     choose(id){if(!MODES[id])return false;this.selected=id;return true;}
     current(){return MODES[this.selected];}
-    allows(kind,id){if((this.selected==='story'||this.selected==='standard')&&kind==='unit'&&ULTIMATE_UNITS.includes(id))return false;if(this.selected==='story'&&kind==='building'&&STORY_TOWERS.includes(id))return false;return true;}
+    allows(kind,id){if(this.selected==='story'&&kind==='unit'&&['minotaur','shaman'].includes(id))return false;if((this.selected==='story'||this.selected==='standard')&&kind==='unit'&&ULTIMATE_UNITS.includes(id))return false;if(this.selected==='story'&&kind==='building'&&STORY_TOWERS.includes(id))return false;return true;}
     lockReason(kind,id){if(this.allows(kind,id))return'';return kind==='unit'?'軍團老兵以上開放':'邊境守衛以上開放';}
     summary(totalWaves){const mode=this.current(),last=mode.enemyHealth*(1+(mode.healthGrowth||0)*(totalWaves-1)),score=ns.systems.BattleReportSystem&&ns.systems.BattleReportSystem.DIFFICULTY_MULTIPLIERS[this.selected]||1;return totalWaves+' 關 · 城門耐久 '+mode.baseHealth+' 點｜積分 ×'+score+'｜敵軍血量 '+Math.round(mode.enemyHealth*100)+'%'+(last>mode.enemyHealth?' → '+Math.round(last*100)+'%':'')+'｜敵量約 '+Math.round(mode.enemyCount*100)+'%｜金幣 '+Math.round(mode.reward*100)+'%｜'+mode.content+'｜士兵定點作戰且不承受傷害';}
     modifiers(){const mode=this.current();return{enemyHealth:mode.enemyHealth,healthGrowth:mode.healthGrowth||0,enemySpeed:mode.enemySpeed,enemyDamage:mode.enemyDamage,enemyCount:mode.enemyCount,preparation:mode.preparation,spawnRate:mode.spawnRate};}

@@ -1,4 +1,31 @@
+> **v0.85.9：** 無新增玩家或管理設定；全圖部署圖層已移除，地形與道路距離仍由 `maps.js`、`BuildSystem` 判定。詳見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
+
+> **v0.85.8：** 霜原價格、傷害與攻擊間隔在既有 config.js／HeroRoster.js／FrostlandHero.js；無玩家新增選項。完整數值表見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。
+
 # 設定手冊
+
+> **v0.85.7（2026-09-23）：** 無新增設定；地精沿用共用桌機 UI 尺寸、原快捷鍵與戰鬥規則。 操作、架構、部署、回復及驗收見 [地精視覺交付](GOBLIN_POLISH_V0857.md)。
+
+> **v0.85.6：** 無新設定；速度仍由畫面 ×1／×2／×3 控制，預設 ×1 的模擬基準在 `TDGame.loop` 乘 2。見 [速度調整](GAME_SPEED_V0856.md)。
+
+> **v0.85.5（2026-09-23）更新：** 桌機建造／技能介面放大；霜原七塔正式美術及四技能圖示／特效；排行榜僅收錄自由遠征完成至少 16 波的成績，原始戰報保留。當前操作、API、架構、安裝部署、回復與驗收以 [本版交付文件](BATTLE_POLISH_V0855.md) 為準。
+
+v0.85.3：劇情地圖建塔地面、底座範圍、道路禁建距離和最大放大倍率統一在 `src/td/maps.js` 設定；修改需同步重驗底圖與塔位。見 [戰場設定](STORY_MAP_REFINEMENT_V0853.md)。
+
+> **v0.84.7 現行商城：** 四位英雄外觀（獸人為「冥骨帝王」）與「日蝕王庭」已開放使用玩家檔案的試用水晶購買、保存與裝備；沒有真實付款。詳細規格、操作、限制、部署與測試見 [外觀上架交付](COSMETIC_RELEASE_V0847.md)。
+
+> v0.84.6：結算畫面無新增設定；使用現有劇情任務、地圖解鎖與戰報資料。視覺樣式集中於 `td-result.css`，詳見 [本版交付](RESULT_SCREEN_V0846.md)。
+
+> v0.84.3：衝擊波傷害／距離／速度／寬度在 ChiefShockwave.js，冷卻沿用 Hero.skillCooldowns.summon；無新使用者設定。詳見 [技能交付](CHIEF_SHOCKWAVE_V0843.md)。
+
+
+> v0.84.2：排行榜目前沒有伺服器端點或排名設定；只讀當前玩家的本機 SCORE_V1 紀錄，預覽不落盤。詳見 [排行榜資料來源](RANKING_UI_V0842.md)。
+
+> v0.83.6：新版版型偏好使用 towerFrontierLayout:pointer／:touch（auto、desktop、mobile）；舊 key 保留。舊手機設定不再強迫寬滑鼠桌機使用手機版型。 詳見 [右鍵與戰鬥版型修正](BATTLE_INPUT_LAYOUT_V0836.md)。
+
+> v0.83.5：商城與圖鑑入口不需新設定。商城使用隔離的展示資料；圖鑑使用大廳目前玩家。保持固定瀏覽器與入口位置，以維持同一份正式存檔。 詳見 [商城與圖鑑整合交付](FEATURE_INTEGRATION_V0835.md)。
+
+> v0.83.2：`WaveCatalog.WAVES` 的可選 `spawnPace` 只用於第 14／20／28 波（1.2／1.2／1.3），未設定預設為 1。它只乘出怪間隔，不改怪物血量、數量或獎勵。
 
 ## v0.71.3 難度級距
 
@@ -99,7 +126,7 @@ maps.js 定義 classic 720×720 與 frontier 1280×900；新圖 roadUnits=true�
 
 ## v0.42.0 塔與老兵平衡
 
-`Building.upgradeCost()` 依 `config.buildings[type].cost × [2.8,4.2,6.2,8.4]` 計價並四捨五入至 10G；升至 Lv.4／Lv.5 另需 1／2 功勳。林地弩塔原價 100G、升級 280／420／620／840G。`CombatUnit.upgradeCost()` 則依 `config.units[type].cost × [1,1.3,1.7,2.2]` 計價並取整至 5G；升至 Lv.4／Lv.5 同樣另需 1／2 功勳。塔熟練門檻在 `TowerSkillSystem.THRESHOLDS=[0,8,22,45,80]`。冰／荊棘／毒塔的 `slow`（移速倍率）與 `slowTime` 位於 `config.buildings`；強緩速判定為命中前 `slowFactor<=.8`，增傷率由輸出塔的 `bonusVsSlowed` 控制。老兵 `healthGrowth=.03`、`spawnRate=.78`，第 1→30 波血量 165%→309%；其他難度不變。可用上述資料逐項微調，不需修改資料庫或 API。
+`Building.upgradeCost()` v0.83.1 依 `config.buildings[type].cost × [1.6,4.2,6.2,8.4]` 計價並四捨五入至 10G；升至 Lv.4／Lv.5 另需 1／2 功勳。林地弩塔原價 100G、升級 160／420／620／840G。`CombatUnit.upgradeCost()` 依 `config.units[type].cost × [1,1.3,1.7,2.2]` 計價並取整至 5G，唯火槍手 Lv1→2 為 0.8 倍；升至 Lv.4／Lv.5 同樣另需 1／2 功勳。塔熟練門檻在 `TowerSkillSystem.THRESHOLDS=[0,8,22,45,80]`。冰／荊棘／毒塔的 `slow`（移速倍率）與 `slowTime` 位於 `config.buildings`；強緩速判定為命中前 `slowFactor<=.8`，增傷率由輸出塔的 `bonusVsSlowed` 控制。老兵 `healthGrowth=.03`、`spawnRate=.78`，第 1→30 波血量 165%→309%；其他難度不變。可用上述資料逐項微調，不需修改資料庫或 API。
 
 ## v0.41.0 可調參數
 
@@ -242,3 +269,6 @@ Monster.update中的stride控制完整步態需要的路程：步兵64、疾行�
 應用名稱、啟動頁、色彩與 Android 圖示在兩份 manifest 設定；iOS 名稱與 Touch Icon 在各 HTML `<head>` 設定。重新產生尺寸時執行 `scripts/build-app-icons.ps1 -SourcePath assets/icons/app-icon-source-v1.png`，不可只放大低解析度圖示。
 
 Pages 首次啟用由 `.github/workflows/pages.yml` 的 `enablement: true` 控制；已存在的 Pages Site 會沿用原設定。
+# 地精 V1 配置
+
+士兵／塔價格、射程和攻擊在 `src/td/config.js`；網路半徑、容量、超載、冷卻及每波回收上限在 `src/td/systems/GoblinNetworkSystem.js` 的 `RULES`。正式故事解鎖點未設定；不要把 TESTABLE 當 CANON。詳見 [地精 V1](GOBLIN_FACTION_V1.md)。

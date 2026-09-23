@@ -1,4 +1,44 @@
+> **v0.85.9：** `FrontierTerrain` 不再繪製部署抽樣點與禁建多邊形；`BuildSystem.updatePointer` 記錄預覽是否已啟動，原 `terrainIssue`／`placementIssue` 呼叫與傳回值不變。無新網路 API。詳見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
+
+> **v0.85.8：** 既有 ns.config、HeroRoster 與 FrostlandHero 內部數值調整；無新增 HTTP API、資料庫或呼叫參數。數值表與流程見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。
+
 # API 文件（內部模組介面）
+
+> **v0.85.7（2026-09-23）：** 新增純繪圖 GoblinPresentation 與 goblinBuildingImage 圖集快取接口；不新增 HTTP API。 操作、架構、部署、回復及驗收見 [地精視覺交付](GOBLIN_POLISH_V0857.md)。
+
+> **v0.85.6：** `TDGame.setGameSpeed(1|2|3)` 介面不變；`loop` 的模擬時間基準乘 2 並拆步執行。無 HTTP API 變更。見 [速度調整](GAME_SPEED_V0856.md)。
+
+> **v0.85.5（2026-09-23）更新：** 桌機建造／技能介面放大；霜原七塔正式美術及四技能圖示／特效；排行榜僅收錄自由遠征完成至少 16 波的成績，原始戰報保留。當前操作、API、架構、安裝部署、回復與驗收以 [本版交付文件](BATTLE_POLISH_V0855.md) 為準。
+
+v0.85.3 歷史紀錄：無新增網路 API；`BuildSystem.terrainIssue(x,y,kind)` 回報地形禁建原因，`placementIssue` 再檢查占位。當時 `FrontierTerrain` 使用前者繪製可建亮點；此圖層已在 v0.85.9 移除。見 [戰場架構](STORY_MAP_REFINEMENT_V0853.md)。
+
+v0.85.2：邊境對戰 API 已移除；霜原驗收頁僅補齊既有商城腳本依賴，沒有新增 API。見 [移除與驗收紀錄](VERSUS_REMOVAL_V0852.md)。
+
+v0.84.9：`ArmorySystem.resaleValue(id)` 回傳本局裝備售價，`sell(id, economy)` 拒售未持有或裝備中的物品，成功時移除副本並透過 `EconomySystem.refundGold` 返金；`ArmoryUI` 管理清單與角色配裝視窗。詳見 [軍械庫更新](ARMORY_V0849.md)。
+
+v0.84.8 地圖定義 `ns.maps.definitions` 與劇情 `StoryCatalog.missions/getMission` 的新增資料見 [三張劇情戰場](STORY_MAPS_V0848.md)；無對外 API 變更。
+
+> **v0.84.7 現行商城：** 四位英雄外觀（獸人為「冥骨帝王」）與「日蝕王庭」已開放使用玩家檔案的試用水晶購買、保存與裝備；沒有真實付款。詳細規格、操作、限制、部署與測試見 [外觀上架交付](COSMETIC_RELEASE_V0847.md)。
+
+> v0.84.6：`ResultScreen.view(result, options)` 產生結算顯示模型，`render(ui, result, options)` 寫入 DOM；`FrontierApp.onBattleEnd(victory)` 回傳模式、任務及解鎖／儲存狀態。詳見 [模組契約](RESULT_SCREEN_V0846.md)。
+
+> v0.84.4：`BattleReportSystem.finalize('retreated', {baseHealth})` 保存撤退積分；`RankingDataSource.read()` 讀實際戰報；`ProfileStore.setProfileArt(id)` 保存個人頁籤背景。無新增 HTTP API。詳見 [本版資料契約](EXPEDITION_SCORE_PROFILE_V0844.md)。
+
+> v0.84.3：新增 Hero.castShockwave(waves)、ChiefShockwave.update(dt,monsters,onKill,onHit)／draw(ctx)；沿用 Projectile.hit 傷害回報，無 HTTP API。詳見 [技能交付](CHIEF_SHOCKWAVE_V0843.md)。
+
+> v0.84.2：新增 RankingDataSource.read()/display() 與 RankingView.action()/render()/rows()；由 FrontierApp 讀取 ProfileStore.adapter(free)，無 HTTP API 或正式線上提交。詳見 [排行榜介面](RANKING_UI_V0842.md)。
+
+> v0.83.6：LayoutSystem 新增 preferenceKey()，使用 :pointer／:touch 的偏好 key；TDGame 空選取圖示改讀 HeroRoster。無新增網路 API。 詳見 [右鍵與戰鬥版型修正](BATTLE_INPUT_LAYOUT_V0836.md)。
+
+> v0.83.5：新增主程式 openShop／bindCodex 接線與 CodexHost；CodexIntegration 支援 readOnlyReplay。td.html 接受 panel=free、hero、map 或 panel=shop，所有遠征選擇再次檢查解鎖。無新增 HTTP API。 詳見 [商城與圖鑑整合交付](FEATURE_INTEGRATION_V0835.md)。
+
+> v0.83.4：新增 FrontierApp.walletButton(kind,amount)，產生含貨幣名稱 aria-label／title 的圖示數量按鈕。沿用 wallet action；無新 HTTP API。見 [介面說明](LOBBY_LAYOUT_V0834.md)。
+
+> v0.83.3：新增 TowerFrontier.cinematic.prologue、CinematicPlayer.play(id)、CinematicStoryAdapter.trigger(data,hook)、PrologueProgress.prologueSeen／complete(result,identity)／replay(id,player)。沿用 CodexSaveBridge 以單次 ProfileStore commit 寫入收藏；無 HTTP API。完整回傳值、字幕／Reference schema 與接線見 [序章 API](PROLOGUE_CINEMATIC_V1.md)。
+
+> v0.83.2：`WaveCatalog.get(wave)` 另回傳 `spawnPace`（預設 1），`WaveSystem.spawnInterval()` 在原難度間隔後乘此係數。僅第 14／20／28 波為 1.2／1.2／1.3；無 HTTP API 或資料遷移。
+
+> v0.83.1：`Building.upgradeCost()` 首級倍率 1.6，其餘不變；`CombatUnit.upgradeCost()` 火槍手首級倍率 0.8；`CombatUnit.config().shots` 獵手為 2／2／3／4／4。回傳物件格式不變，無 HTTP API。
 
 ## v0.73.0 平衡實驗 API
 
@@ -454,6 +494,7 @@ BattleSynergySystem.flagRate(target) 回傳當下有效戰旗倍率；排除失�
 波次預告改為怪物縮圖、數量與威脅標籤，新增入口倒數與短暫開戰提醒。操作、設定、架構、API、部署、還原與驗證方式見 [波次提示文件](WAVE_HUD_V0664.md)。
 
 
+
 ## 0.67.1 手機波次版面修正
 
 修正波次與倒數重疊、速度列出界，縮小手機提示面板；無操作、設定或資料格式變更。原因、架構、更新、還原及觸控版面驗證見 [版面修正文件](WAVE_LAYOUT_V0671.md)。
@@ -502,19 +543,40 @@ BattleSynergySystem.flagRate(target) 回傳當下有效戰旗倍率；排除失�
 # v0.77.0 章節存檔介面
 
 `ChapterCheckpointSystem` 提供 `read()`、`capture(game)`、`restore(game, snapshot)`、`describe()` 與 `clear()`。格式版本為 `schema: 1`，合法波次僅為 10、20。
-# v0.78.0 對戰介面
-
-`VersusMatch` 提供 `build(side,type,x,lane)`、`moveWorker(side,x,y)`、`update(dt)`、`visibleToPlayer(target)` 與 `finish(reason)`。`AIStrategy.PROFILES` 提供 fortress、rush、economy、split、feint 五種人格。
-# v0.78.1 顯示層
-
-`src/versus/main.js` 的 `art` 表集中管理背景、塔、建築、三兵種及工人素材。顯示層不寫入 `VersusMatch` 戰鬥數值。
-# v0.79.0 建造與建築管理
-
-`VersusMatch.validateBuild()` 回傳 `{ok, reason, y, cost}`；`repair(side, structure)` 與 `demolish(side, structure)` 分別處理付費維修及 50% 拆除退款。
-
-# v0.79.1 API 狀態
-
-本版未變更對戰或塔防 API，僅移除 `td.html` 的原型導覽連結。
 # v0.79.2 戰報相容性
 
 無新增 API。新局的 `strategy` 欄位仍寫入 `free`，但不再由玩家開局介面設定。
+
+## v0.80.0 內部介面
+
+- `FactionSystem.FACTIONS.wild`：第四軍團原生 units/buildings。
+- `ArmorySystem.recommend(id, targets)`：回傳最多三筆 `{target, score, reason}`。
+- `ArmorySystem.compare(id, target)`：回傳可顯示的 stat rows 與原始特殊效果描述。
+- `CombatUnit.tribalFrenzy`：戰鼓與大酋長共用的限時狂潮狀態。
+
+
+## 0.83.0 · 大廳與獨立測試輪次
+
+新增本機 ProfileStore、StoryCatalog、FrontierApp；Storage adapter 區分 profile 與 mode。沒有新增網路 API。 完整操作、限制、架構與回復步驟見 [P0 說明](LOBBY_P0_V083.md)。
+
+## v0.83.3
+
+ProfileStore profile 新增 wallet.gold、wallet.diamonds 非負安全整數欄位；缺欄位的舊存檔自動补零。TDGame.refreshRosterPreviews 重用 ArtSystem.preview；無新增 HTTP API。詳見 [v0.83.3](LOBBY_EXPEDITION_V0833.md)。
+
+# 地精本機規則接口
+
+`GoblinNetworkSystem.update(dt, items, economy, activeWave)` 從 BuildSystem items 重算連線；`activate(items)` 開始超載，`startWave()` 重設每波經濟額度，`snapshot()/restore(data)` 寫入／讀取可選檢查點狀態。無新 HTTP API、資料庫或對外權限。參數集中於 `GoblinNetworkSystem.RULES` 與 `ns.config.units/buildings`；見 [地精 V1](GOBLIN_FACTION_V1.md)。
+
+英雄武器資料與商店介面仍使用既有 `EquipmentSystem.WEAPONS`、`ShopSystem.offer/buy` 及 `equipment.spear`；新增圖集欄位與階級見 [v0.84.5 武器紀錄](FACTION_HERO_WEAPONS_V0845.md)。
+
+
+## 商城單一入口與雷霆戰王（0.6.1）
+
+正式商城統一由 `td.html` 大廳或 `td.html?panel=shop` 進入；獨立 `shop.html` 與專用啟動程式已刪除，舊 4187 展示服務已停止。雷霆戰王沿用原有玩家檔案保存購買與裝備，四組動作已接入正式戰場。共用商城元件及既有收藏保留。
+
+操作、API、部署、測試與回復限制見 [0.6.1 整合說明](shop/THUNDER_TD_V061.md)。
+
+> v0.85.4：`TDGame.onHit` 將完整來源傳給 `CombatFeedbackSystem.hit`；後仰只改 `Monster.visualPosition()`，沒有外部 API 或存檔 schema 變動。詳見 [命中回饋交付](HIT_FEEDBACK_V0854.md)。
+> v0.85.1：根目錄 `td.html` 已整合霜牙肖像與霜原盟族群像；介面與資產說明見[選角插畫交付](FROSTLAND_SELECTION_ART_V0851.md)。
+
+v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare／beforeHit／afterHit／death；FrostlandAnimation.queue／update 控制出手時間，FrostlandSprites 接 ArtSystem。Shop/Loot 依目前隊伍過濾軍械，存檔 schema 不變。完整接口與資料流見 [冰原 V1](FROSTLAND_FACTION_V1.md#i-core-與架構)。

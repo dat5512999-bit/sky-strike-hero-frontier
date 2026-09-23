@@ -251,30 +251,6 @@ body[data-game-screen="opening"] .opening-actions #td-start-expedition:not(:disa
  body:not([data-layout="mobile"])[data-game-screen="opening"] .profession-list b{font-size:13px}
 }
 
-body[data-layout="mobile"][data-game-screen="opening"] .td-profession-screen{overflow:auto;padding:5px}
-body[data-layout="mobile"][data-game-screen="opening"] .profession-dialog{display:grid;width:100%;height:calc(100svh - 10px);max-height:none;padding:8px;overflow:hidden}
-body[data-layout="mobile"][data-game-screen="opening"] .opening-titlebar{align-items:center;padding:4px 2px 6px;gap:8px}
-body[data-layout="mobile"][data-game-screen="opening"] .opening-title-copy>p{display:none}body[data-layout="mobile"][data-game-screen="opening"] .opening-title-copy>h2{margin:0;font-size:19px;letter-spacing:2px}body[data-layout="mobile"][data-game-screen="opening"] .opening-title-copy>span{font-size:8px}
-body[data-layout="mobile"][data-game-screen="opening"] .map-choice{display:block;width:min(48vw,270px);padding:5px;margin:0}body[data-layout="mobile"][data-game-screen="opening"] .map-choice>span,body[data-layout="mobile"][data-game-screen="opening"] .map-choice small{display:none}body[data-layout="mobile"][data-game-screen="opening"] .map-choice select{width:100%;padding:5px;font-size:9px}
-body[data-layout="mobile"][data-game-screen="opening"] .opening-step{margin-top:5px}body[data-layout="mobile"][data-game-screen="opening"] .opening-step-heading{margin-bottom:3px}body[data-layout="mobile"][data-game-screen="opening"] .opening-step-heading h3{font-size:12px}body[data-layout="mobile"][data-game-screen="opening"] .opening-step-heading h3 em{width:18px;height:18px;font-size:10px}body[data-layout="mobile"][data-game-screen="opening"] .opening-step-heading>span{font-size:8px}
-body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list button{min-height:69px;padding:5px}body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list button b{font-size:10px}body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list button strong{font-size:7px!important}body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list button small{font-size:7px!important;line-height:1.25!important}
-body[data-layout="mobile"][data-game-screen="opening"] .difficulty-rules{display:none}
-body[data-layout="mobile"][data-game-screen="opening"] .opening-choice-grid{grid-template-columns:minmax(0,1.55fr) minmax(220px,.9fr);gap:6px;min-height:0}
-body[data-layout="mobile"][data-game-screen="opening"] .profession-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}body[data-layout="mobile"][data-game-screen="opening"] .profession-list button{display:grid;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto auto;justify-items:center;min-height:0;height:100%;padding:3px;text-align:center}body[data-layout="mobile"][data-game-screen="opening"] .profession-preview{grid-row:auto;width:min(64px,9vh);height:min(64px,9vh)}body[data-layout="mobile"][data-game-screen="opening"] .profession-list b{font-size:9px}body[data-layout="mobile"][data-game-screen="opening"] .profession-list strong{font-size:7px}body[data-layout="mobile"][data-game-screen="opening"] .profession-list small{display:none}
-body[data-layout="mobile"][data-game-screen="opening"] .faction-list{grid-template-columns:1fr;grid-template-rows:repeat(3,minmax(0,1fr));gap:4px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button{min-height:0;padding:4px;grid-template-columns:24px 1fr;gap:1px 5px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button::before{width:22px;height:22px;font-size:12px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button b{font-size:9px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button strong{font-size:7px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button small{display:none}
-body[data-layout="mobile"][data-game-screen="opening"] .opening-actions{grid-template-columns:minmax(0,1fr) minmax(250px,42vw);gap:5px;margin-top:5px;padding-top:5px}body[data-layout="mobile"][data-game-screen="opening"] .opening-actions .art-loading{min-height:36px;padding:4px 7px;font-size:8px}body[data-layout="mobile"][data-game-screen="opening"] .opening-actions #td-start-expedition{min-width:0;min-height:36px;padding:4px 8px;font-size:11px}
-
-@media (max-width:540px) and (orientation:portrait){
- body[data-layout="mobile"][data-game-screen="opening"] .profession-dialog{height:calc(100svh - 10px)}
- body[data-layout="mobile"][data-game-screen="opening"] .opening-titlebar{display:grid;grid-template-columns:1fr auto}
- body[data-layout="mobile"][data-game-screen="opening"] .map-choice{grid-column:1/-1;width:100%}
- body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list{grid-template-columns:repeat(2,minmax(0,1fr))}body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list button{min-height:58px}
- body[data-layout="mobile"][data-game-screen="opening"] .opening-choice-grid{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}
- body[data-layout="mobile"][data-game-screen="opening"] .profession-list button{min-height:88px}
- body[data-layout="mobile"][data-game-screen="opening"] .faction-list{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button{display:block;min-height:72px;text-align:center}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button::before{margin:0 auto 3px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button strong{display:none}
- body[data-layout="mobile"][data-game-screen="opening"] .opening-actions{grid-template-columns:1fr}body[data-layout="mobile"][data-game-screen="opening"] .opening-actions .art-loading{display:none}
-}
-
 /* Shared menu and result actions; both reuse TDGame.reset and the current layout choice. */
 .td-menu-open{order:4;flex:none;min-width:37px;min-height:37px;margin-left:8px;padding:4px;color:#f4dda2;font-size:21px}
 .td-overlay{position:fixed;z-index:60;inset:0;padding:16px;background:#040809df;backdrop-filter:blur(5px)}.td-overlay>div{width:min(520px,100%);padding:26px}.td-overlay h2{font-size:30px}.result-actions{display:grid;gap:7px}.result-actions button,.result-actions a{display:grid;place-items:center;min-height:46px;text-align:center}.result-actions a,.game-menu-actions a{border:1px solid #655539;background:linear-gradient(#202a28,#0d1415);color:#e3d2a3;text-decoration:none}.result-actions a:hover,.game-menu-actions a:hover{border-color:#e1c67a}.result-actions #td-restart{border-color:#d0ae62;background:linear-gradient(#6c552e,#292012)}
@@ -415,6 +391,17 @@ body[data-layout="desktop"] .armory-items{gap:6px;margin:9px 0}
 body[data-layout="desktop"] .armory-item{grid-template-columns:58px 1fr auto;min-height:78px;padding:6px}
 body[data-layout="desktop"] .armory-item>i{width:56px;height:56px}
 
+/* v0.80 — fourth faction and four-choice opening layout */
+body[data-game-screen="opening"] .profession-list,body[data-game-screen="opening"] .faction-list{grid-template-rows:repeat(4,minmax(0,1fr))}
+body[data-game-screen="opening"] .profession-list button[data-profession="chief"]::before{content:"吼"}
+body[data-game-screen="opening"] .faction-list button[data-faction="wild"]::before{content:"角"}
+.command-grid [data-build-type="centaur"]::before{background-image:url('assets/td/wild-centaur-actions-v1.png');background-size:400% 400%}
+.command-grid [data-build-type="boarRider"]::before{background-image:url('assets/td/wild-boar-rider-actions-v1.png');background-size:400% 400%}
+.command-grid [data-build-type="minotaur"]::before{background-image:url('assets/td/wild-minotaur-actions-v1.png');background-size:400% 400%}
+.command-grid [data-build-type="shaman"]::before{background-image:url('assets/td/wild-shaman-actions-v1.png');background-size:400% 400%}
+.selection-portrait[data-subject="centaur"]{background-image:url('assets/td/wild-centaur-actions-v1.png')}.selection-portrait[data-subject="boarRider"]{background-image:url('assets/td/wild-boar-rider-actions-v1.png')}.selection-portrait[data-subject="minotaur"]{background-image:url('assets/td/wild-minotaur-actions-v1.png')}.selection-portrait[data-subject="shaman"]{background-image:url('assets/td/wild-shaman-actions-v1.png')}
+.armory-recommendations{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:-4px 0 7px;padding:6px;border-left:2px solid #a96643;background:#0b1111}.armory-recommendations>small{grid-column:1/-1;color:#e2aa75;font-size:9px;letter-spacing:1px}.armory-recommendations button{display:grid;gap:2px;min-height:54px;padding:6px;text-align:left;background:#151c19;border-color:#5d533c}.armory-recommendations b{color:#ead39d;font-size:9px}.armory-recommendations span{color:#a5b5aa;font-size:8px}.armory-recommendations em{color:#79d5a0;font-size:8px;font-style:normal}.armory-recommendations button:first-of-type{border-color:#cf8b50;background:#261b14}body[data-layout="mobile"] .armory-recommendations{grid-template-columns:1fr}
+
 body[data-layout="mobile"] .loot-overlay{place-items:end center;padding:0;background:#020708b8;backdrop-filter:blur(2px)}
 body[data-layout="mobile"] .loot-dialog{width:100%;max-height:84svh;border-radius:10px 10px 0 0;padding-bottom:max(12px,env(safe-area-inset-bottom))}
 
@@ -534,3 +521,696 @@ body[data-layout="mobile"][data-game-screen="opening"] .profession-list b{font-s
 .selection-card .selection-purpose{display:block;padding:7px 8px;border-left:3px solid #d8bb72;background:#23332c;color:#f3e5bc;font-size:12px;line-height:1.6;overflow-wrap:anywhere}.selection-card .selection-purpose[hidden]{display:none}
 button[data-difficulty-locked="true"]{filter:grayscale(.72);opacity:.58;position:relative;cursor:not-allowed}
 button[data-difficulty-locked="true"]::after{content:"🔒 難度鎖定";position:absolute;inset:auto 6px 6px;background:rgba(25,18,20,.9);color:#ffd08a;border:1px solid rgba(255,208,138,.45);border-radius:5px;padding:3px 5px;font-size:10px;font-weight:800;letter-spacing:.04em}
+/* Expedition Setup UI V2: two-page setup shared by desktop and mobile. */
+.opening-data-select{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.expedition-steps{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.expedition-steps button{display:flex;align-items:center;gap:10px;padding:7px 12px;text-align:left;border:1px solid #4d4938;background:#091211;color:#8d9389}.expedition-steps button>b{display:grid;place-items:center;width:34px;height:34px;border:1px solid currentColor;border-radius:50%;font:700 14px Georgia}.expedition-steps button span{font:700 14px Georgia,"Microsoft JhengHei",serif}.expedition-steps button small{display:block;margin-top:2px;color:#7f8e86;font:9px "Microsoft JhengHei"}.expedition-steps button[aria-pressed="true"]{border-color:#d3b768;color:#f3dda3;background:linear-gradient(90deg,#4a3a1d,#111917);box-shadow:0 0 14px #d4aa4540}.expedition-page[hidden]{display:none!important}.difficulty-step{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center}.difficulty-step .opening-step-heading{display:block}.difficulty-step .difficulty-rules{display:none}.difficulty-step .difficulty-list button{min-height:64px!important}.difficulty-step .difficulty-list button small{display:none!important}.map-browser-layout{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(270px,.72fr);gap:12px;margin-top:9px;min-height:0}.map-stage{display:grid;grid-template-rows:minmax(280px,1fr) auto;gap:8px;min-width:0}.map-preview{position:relative;min-height:280px;border:1px solid #73623b;background-size:cover;background-position:center;box-shadow:inset 0 0 55px #000}.map-preview>div{position:absolute;left:20px;bottom:17px;text-shadow:0 2px 8px #000}.map-preview small,.map-detail>small,.choice-detail small,.expedition-summary>small{color:#bca363;letter-spacing:2px;font-size:9px}.map-preview h3{margin:2px 0;color:#f4dda4;font:700 29px Georgia,"Microsoft JhengHei",serif;letter-spacing:3px}.map-preview p{margin:0;color:#d4d9cc;font-size:12px}.map-thumbnail-strip,.expedition-carousel{display:flex!important;grid-template-columns:none!important;gap:7px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin}.map-thumbnail-strip button{flex:0 0 150px;min-height:55px;padding:8px;border:1px solid #504b38;background:#101918;color:#bdc7bb;text-align:left;scroll-snap-align:start}.map-thumbnail-strip button[aria-pressed="true"]{border-color:#f0ca70;color:#ffe5a0;box-shadow:inset 0 0 18px #dfb24a36,0 0 10px #dcb04744}.map-thumbnail-strip small{display:block;color:#7e9289;font-size:9px}.map-detail{padding:14px;border:1px solid #574f37;background:linear-gradient(150deg,#14211f,#080d0e)}.map-detail h3{margin:5px 0;color:#f1d99b;font:700 23px Georgia,"Microsoft JhengHei",serif}.expedition-tags{display:flex;flex-wrap:wrap;gap:5px}.expedition-tags span{padding:3px 7px;border:1px solid #567168;border-radius:10px;color:#bcd8cb;font-size:9px}.map-detail>p,.choice-detail p,.expedition-summary p{color:#aebcb4;font-size:11px;line-height:1.6}.map-detail h4{margin:10px 0 4px;color:#e3ca8c}.map-detail ul{margin:0;padding-left:18px;color:#bdc8bd;font-size:10px;line-height:1.7}.route-preview,.map-record{margin-top:9px;padding:8px;border:1px solid #3d5048;background:#081210}.route-preview span,.map-record span{display:block;color:#81958a;font-size:9px}.route-preview b,.map-record b{display:block;margin:3px 0;color:#e3ca8c;font-size:11px}.route-preview small{color:#8fa096;font-size:9px}.map-detail #td-select-battlefield{width:100%;margin-top:11px;padding:11px;border-color:#d5b866;background:linear-gradient(#745d30,#332714);color:#ffe5a2;font-weight:800}.party-page .opening-choice-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,1.15fr) minmax(235px,.7fr)!important}.party-toolbar{display:flex;align-items:center;gap:12px;margin:7px 0}.party-toolbar>button{padding:7px 10px}.party-toolbar>span{color:#d9c586}.party-mobile-tabs{display:none}.opening-hero-step,.opening-faction-step{min-width:0}.party-page .profession-list button,.party-page .faction-list button{flex:0 0 132px;min-height:92px!important}.choice-detail{display:grid;grid-template-columns:34% 1fr;min-height:190px;margin-top:7px;border:1px solid #4d4b3a;background:#0a1212;overflow:hidden}.choice-detail>div{min-height:190px;background-size:cover;background-position:center}.choice-detail>section{padding:10px}.choice-detail h4{margin:3px 0;color:#efd99d;font:700 18px Georgia,"Microsoft JhengHei",serif}.choice-detail b{color:#c9b26e;font-size:11px}.choice-detail footer{margin-top:8px;padding-top:7px;border-top:1px solid #33453f;color:#9db2a7;font-size:9px}.faction-detail{grid-template-columns:42% 1fr}.phase-strip{display:grid;gap:3px}.phase-strip span{padding:4px 6px;border-left:2px solid #c19d4e;background:#18221e;color:#c2cec5;font-size:9px}.expedition-summary{padding:14px;border:1px solid #665638;background:linear-gradient(160deg,#17211e,#080d0e);min-width:0}.summary-map{height:82px;margin:7px 0 10px;padding:52px 10px 7px;background-size:cover;background-position:center;color:#ffe0a0;font-weight:800}.expedition-summary dl{margin:0}.expedition-summary dl>div{padding:8px 0;border-bottom:1px solid #344039}.expedition-summary dt{color:#788e83;font-size:9px}.expedition-summary dd{margin:2px 0;color:#e9d49c;font-size:12px}.summary-times dd{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.summary-times b{color:#d45f52}.expedition-summary .opening-actions{display:block!important;border:0!important}.expedition-summary .art-loading{margin-bottom:8px}.expedition-summary #td-start-expedition{width:100%;min-width:0!important;background:linear-gradient(#8b3027,#3b1312)!important;border-color:#dc715d!important}.party-page .opening-step-heading h3 em{display:none}
+@media (max-width:900px){body[data-layout="mobile"][data-game-screen="opening"] .profession-dialog{overflow:hidden!important}body[data-layout="mobile"] .expedition-steps{margin:3px 0}body[data-layout="mobile"] .expedition-steps button{padding:3px 7px}body[data-layout="mobile"] .expedition-steps button>b{width:25px;height:25px;font-size:10px}body[data-layout="mobile"] .difficulty-step{grid-template-columns:105px 1fr;gap:5px}body[data-layout="mobile"] .difficulty-step .difficulty-list button{min-height:46px!important}body[data-layout="mobile"] .map-browser-layout{grid-template-columns:minmax(0,1.6fr) minmax(240px,.8fr);gap:6px}body[data-layout="mobile"] .map-stage{grid-template-rows:minmax(165px,1fr) auto}body[data-layout="mobile"] .map-preview{min-height:165px}body[data-layout="mobile"] .map-detail{padding:8px}body[data-layout="mobile"] .map-detail>p,body[data-layout="mobile"] .map-detail ul{font-size:8px}body[data-layout="mobile"] .map-thumbnail-strip button{flex-basis:118px;min-height:39px;padding:4px}body[data-layout="mobile"] .party-page .opening-choice-grid{grid-template-columns:minmax(0,1fr) minmax(210px,.44fr)!important}body[data-layout="mobile"] .opening-faction-step{display:none!important}body[data-layout="mobile"][data-party-tab="faction"] .opening-hero-step{display:none!important}body[data-layout="mobile"][data-party-tab="faction"] .opening-faction-step{display:grid!important}body[data-layout="mobile"] .party-mobile-tabs{display:flex;margin-left:auto}body[data-layout="mobile"] .choice-detail{min-height:160px}body[data-layout="mobile"] .choice-detail>div{min-height:160px}body[data-layout="mobile"] .party-page .profession-list button,body[data-layout="mobile"] .party-page .faction-list button{display:block;flex:0 0 105px;min-height:62px!important}body[data-layout="mobile"] .party-page .profession-preview,body[data-layout="mobile"] .party-page .faction-preview{height:35px}body[data-layout="mobile"] .choice-detail p{font-size:8px;line-height:1.35}body[data-layout="mobile"] .expedition-summary{padding:8px}body[data-layout="mobile"] .summary-map{height:55px;padding-top:32px}body[data-layout="mobile"] .expedition-summary dl>div{padding:4px 0}body[data-layout="mobile"] .expedition-summary p{font-size:8px}body[data-layout="mobile"] .expedition-summary .art-loading{display:none}}
+
+.expedition-page{min-height:0;overflow:hidden}.battlefield-page{height:100%;display:grid;grid-template-rows:auto minmax(0,1fr)}.map-browser-layout{height:100%;min-height:0}.map-stage{grid-template-rows:minmax(0,1fr) auto;min-height:0}.map-preview{min-height:0}.map-detail #td-select-battlefield{margin-top:5px;padding:8px}
+
+.map-stage{position:relative}.map-thumbnail-strip{position:absolute;z-index:3;left:10px;right:10px;bottom:10px;padding:6px;background:#07100fd9;border:1px solid #554a31}.map-preview{padding-bottom:68px}.map-detail{position:relative;padding-bottom:52px}.map-detail #td-select-battlefield{position:absolute;left:10px;right:10px;bottom:9px;width:calc(100% - 20px)}
+
+.party-page{height:100%;display:grid;grid-template-rows:auto minmax(0,1fr)}.party-page .opening-choice-grid{height:100%;overflow:hidden}.party-page .opening-choice-grid>.opening-step{grid-template-rows:auto 145px minmax(0,1fr);overflow:hidden}.party-page .profession-list button,.party-page .faction-list button{height:145px!important}.party-page .profession-preview{width:74px!important;height:74px!important}.choice-detail,.choice-detail>div{min-height:0;height:100%}.expedition-summary{height:100%;overflow:hidden}.expedition-summary .opening-actions{position:absolute;left:12px;right:12px;bottom:10px}.expedition-summary{position:relative;padding-bottom:102px}
+
+/* v0.81.1 — cinematic desktop expedition composition based on the approved two-page layout. */
+@media (min-width:901px){
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page{padding-right:10px!important}
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .opening-choice-grid{
+    width:calc(100% - 238px)!important;max-width:calc(100% - 238px)!important;
+    grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr)!important;
+  }
+  body[data-game-screen="opening"] .td-profession-screen{padding:18px;background:radial-gradient(circle at 58% 15%,#263a35 0,#09100fdc 43%,#020505 100%)}
+  body[data-game-screen="opening"] .profession-dialog{
+    position:relative;display:grid;grid-template-rows:48px 102px minmax(0,1fr);gap:0;
+    width:min(1580px,calc(100vw - 36px));height:min(900px,calc(100svh - 36px));
+    box-sizing:border-box;padding:0 0 0 228px;overflow:hidden;border:1px solid #8f7844;
+    background:linear-gradient(145deg,#101b1bf2,#050a0bf8 65%,#111614f8);
+    box-shadow:0 26px 90px #000,inset 0 0 0 5px #030706,inset 0 0 0 6px #55492d;
+  }
+  body[data-game-screen="opening"] .profession-dialog::before{
+    content:"";position:absolute;z-index:0;left:0;top:0;bottom:0;width:227px;border-right:1px solid #5c4b2c;
+    background:
+      linear-gradient(180deg,#06100ce6 0,#06100c92 24%,#08100fb8 62%,#020505f7 100%),
+      linear-gradient(90deg,#0007,transparent 60%,#000b),
+      url("assets/td/opening/difficulty-scenes-v1.png");
+    background-size:auto,auto,430% 100%;background-position:center,center,28% center;background-repeat:no-repeat;
+    box-shadow:inset -28px 0 55px #0009;
+  }
+  body[data-game-screen="opening"] .profession-dialog::after{
+    content:"✦  HERO FRONTIER\A\A 不同的土地，\A 不同的敵人，\A 不同的故事。";
+    position:absolute;z-index:2;left:25px;bottom:30px;width:172px;white-space:pre-line;
+    color:#c7b47d;font:11px/1.8 Georgia,"Microsoft JhengHei",serif;letter-spacing:2px;text-shadow:0 2px 5px #000;
+  }
+  body[data-game-screen="opening"] .opening-topline{grid-row:1;position:relative;z-index:3;display:grid;grid-template-columns:150px 1fr 130px;align-items:center;margin:0;padding:6px 14px;border:0;border-bottom:1px solid #443b29;background:#050b0bd9}
+  body[data-game-screen="opening"] .opening-topline>span{text-align:center;color:#bca76d;font:10px Georgia;letter-spacing:1px}
+  body[data-game-screen="opening"] .opening-topline>button{min-height:34px;padding:5px 9px;border-color:#665735;background:#101917;color:#d9c487;font-size:10px}
+  body[data-game-screen="opening"] .expedition-steps{position:absolute;z-index:4;left:18px;top:96px;width:191px;display:grid;grid-template-columns:1fr;gap:6px;margin:0}
+  body[data-game-screen="opening"] .expedition-steps button{min-height:82px;padding:10px 10px;border-color:#4c493b;background:#07100edd;box-shadow:0 8px 20px #0008}
+  body[data-game-screen="opening"] .expedition-steps button>b{width:42px;height:42px;font-size:17px}
+  body[data-game-screen="opening"] .expedition-steps button span{font-size:14px}.expedition-steps button small{max-width:112px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  body[data-game-screen="opening"] .expedition-steps button[aria-pressed="true"]{border-color:#d9bd6d;background:linear-gradient(90deg,#5d4825e8,#151b18e8);box-shadow:0 0 18px #cfa44738,inset 0 0 18px #d1a84b1c}
+  body[data-game-screen="opening"] .opening-titlebar{grid-row:2;margin:0;padding:15px 22px;border:0;border-bottom:1px solid #67542f}
+  body[data-game-screen="opening"] .opening-title-copy p{margin:0 0 3px;color:#b9a368;font-size:9px;letter-spacing:4px}
+  body[data-game-screen="opening"] .opening-title-copy h2{margin:0;color:#f3dda3;font:700 30px Georgia,"Microsoft JhengHei",serif;letter-spacing:4px;text-shadow:0 3px 12px #000}
+  body[data-game-screen="opening"] .opening-title-copy span{display:block;margin-top:5px;color:#aebcb4;font-size:10px;letter-spacing:1px}
+  body[data-game-screen="opening"] .expedition-page{grid-row:3;padding:12px 15px 14px;overflow:hidden}
+  body[data-game-screen="opening"] .battlefield-page{grid-template-rows:88px minmax(0,1fr);gap:10px}
+  body[data-game-screen="opening"] .difficulty-step{grid-template-columns:140px minmax(0,1fr);gap:10px;padding:0;border-bottom:0}
+  body[data-game-screen="opening"] .difficulty-step .opening-step-heading h3{margin:0 0 4px;color:#ead49b;font:700 15px Georgia,"Microsoft JhengHei",serif}
+  body[data-game-screen="opening"] .difficulty-step .opening-step-heading span{font-size:9px;color:#74857d}
+  body[data-game-screen="opening"] .difficulty-list{gap:7px;min-width:0}.difficulty-list button{min-width:0}
+  body[data-game-screen="opening"] .difficulty-step .difficulty-list button{min-height:75px!important;padding:9px 11px;border-color:#504a38;background-size:auto,210% auto}
+  body[data-game-screen="opening"] .difficulty-list button b{font-size:13px}.difficulty-list button strong{font-size:9px}
+  body[data-game-screen="opening"] .difficulty-list button[aria-pressed="true"]{border-color:#f0cb70;box-shadow:0 0 13px #e2b3474a,inset 0 0 22px #d2a63f2b}
+  body[data-game-screen="opening"] .map-browser-layout{width:100%;max-width:100%;grid-template-columns:minmax(0,calc(100% - 342px)) 330px;gap:12px;margin:0;border-top:1px solid #2e3d36;padding-top:10px;overflow:hidden}
+  body[data-game-screen="opening"] .map-stage{width:100%;max-width:100%;min-width:0;border:1px solid #695a36;background:#050a0a;box-shadow:0 14px 32px #0008}
+  body[data-game-screen="opening"] .map-preview{border:0;padding-bottom:82px;background-position:center;box-shadow:inset 0 -100px 90px #030706d4,inset 0 0 0 1px #a2884e55}
+  body[data-game-screen="opening"] .map-preview>div{left:24px;bottom:94px;max-width:72%}
+  body[data-game-screen="opening"] .map-preview h3{font-size:27px}.map-preview p{font-size:10px}
+  body[data-game-screen="opening"] .map-thumbnail-strip{left:11px;right:11px;bottom:11px;height:65px;padding:6px;border-color:#6d5a32;background:#030807e8;backdrop-filter:blur(6px)}
+  body[data-game-screen="opening"] .map-thumbnail-strip button{position:relative;isolation:isolate;flex:1 0 145px;min-height:51px;padding:7px 9px;overflow:hidden;background-position:center;background-size:cover;color:#d7d8ca;text-shadow:0 2px 5px #000}
+  body[data-game-screen="opening"] .map-thumbnail-strip button::before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,#06100feb,#07100f8e)}
+  body[data-game-screen="opening"] .map-thumbnail-strip button[data-map-id="beginner"]{background-image:url("assets/td/beginner-valley-v2.png")}
+  body[data-game-screen="opening"] .map-thumbnail-strip button[data-map-id="twinpass"]{background-image:url("assets/td/twin-pass-v1.png")}
+  body[data-game-screen="opening"] .map-thumbnail-strip button[data-map-id="autumn"]{background-image:url("assets/td/autumn-ruins-v1.png")}
+  body[data-game-screen="opening"] .map-thumbnail-strip button[aria-pressed="true"]{border-color:#f3ce70;box-shadow:inset 0 0 16px #e7bd5552,0 0 9px #d8ab3d55}
+  body[data-game-screen="opening"] .map-detail{padding:16px 16px 62px;border-color:#675838;background:linear-gradient(145deg,#12201df2,#070c0dfa 70%);box-shadow:0 14px 32px #0008,inset 0 0 35px #172c2424}
+  body[data-game-screen="opening"] .map-detail h3{font-size:25px;margin:6px 0 8px}.map-detail>p{font-size:10px}.map-detail ul{font-size:9px}.map-detail h4{font-size:12px}
+  body[data-game-screen="opening"] .route-preview,body[data-game-screen="opening"] .map-record{margin-top:7px;padding:7px}
+  body[data-game-screen="opening"] .map-detail #td-select-battlefield{left:14px;right:14px;bottom:12px;width:calc(100% - 28px);min-height:42px;font-family:Georgia,"Microsoft JhengHei",serif;letter-spacing:1px}
+  body[data-game-screen="opening"] .party-page{grid-template-rows:35px minmax(0,1fr);gap:8px}
+  body[data-game-screen="opening"] .party-toolbar{margin:0}.party-toolbar>button{min-height:30px}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr) 265px!important;gap:9px}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step,body[data-game-screen="opening"] .expedition-summary{padding:10px;border:1px solid #5b5138;background:linear-gradient(155deg,#101b19,#070c0d);box-shadow:0 10px 25px #0007}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step{grid-template-rows:38px 126px minmax(0,1fr)}
+  body[data-game-screen="opening"] .party-page .profession-list button,body[data-game-screen="opening"] .party-page .faction-list button{height:126px!important;flex-basis:118px;padding:7px}
+  body[data-game-screen="opening"] .party-page .profession-list b{font-size:12px}.party-page .profession-list strong,.party-page .faction-list strong{font-size:8px}
+  body[data-game-screen="opening"] .choice-detail{margin-top:7px;border-color:#504831}.choice-detail h4{font-size:17px}.choice-detail p{font-size:9px}.choice-detail footer{font-size:8px}
+  body[data-game-screen="opening"] .expedition-summary{padding:13px 13px 98px}.summary-map{height:86px}.expedition-summary dl>div{padding:7px 0}
+  body[data-game-screen="opening"] .expedition-summary #td-start-expedition{min-height:45px;font-family:Georgia,"Microsoft JhengHei",serif;font-size:13px;letter-spacing:2px;box-shadow:0 0 18px #b8392c38}
+}
+
+/* Real game data is rendered above the concept skin where content must stay accurate. */
+@media (min-width:901px){
+  body[data-game-screen="opening"] .battlefield-page .map-preview{
+    position:absolute;z-index:3;left:15.45%;top:20.9%;display:block!important;width:46.3%;height:54.2%;min-height:0;padding:0;
+    border:1px solid #8e7644;background-size:cover;background-position:center;box-shadow:inset 0 -105px 75px #020505dc,inset 0 0 0 2px #050908;
+  }
+  body[data-game-screen="opening"] .battlefield-page .map-preview>div{display:block;left:2.2%;bottom:4.5%;max-width:88%}
+  body[data-game-screen="opening"] .battlefield-page .map-preview small{font-size:8px}.battlefield-page .map-preview h3{font-size:20px;letter-spacing:2px}.battlefield-page .map-preview p{font-size:9px}
+  body[data-game-screen="opening"] .battlefield-page .map-detail{
+    position:absolute;z-index:3;left:62.45%;top:20.9%;display:block;width:36.1%;height:59.6%;padding:14px 15px 56px;
+    border:1px solid #66583b;background:linear-gradient(150deg,#101a1aF5,#060b0cFA);box-shadow:inset 0 0 34px #20362d20;
+  }
+  body[data-game-screen="opening"] .battlefield-page .map-detail>*:not(#td-select-battlefield){display:revert!important}
+  body[data-game-screen="opening"] .battlefield-page .map-detail h3{margin:4px 0 6px;font-size:21px}.battlefield-page .map-detail>p{font-size:9px;line-height:1.5}.battlefield-page .map-detail h4{margin:7px 0 3px;font-size:11px}.battlefield-page .map-detail ul{font-size:8px;line-height:1.45}.battlefield-page .route-preview,.battlefield-page .map-record{margin-top:5px;padding:5px}
+  body[data-game-screen="opening"] .map-thumbnail-strip button{opacity:1!important;padding:7px 9px!important;border:1px solid #645739!important;background-position:center!important;background-size:cover!important;color:#e9dfc3!important;text-shadow:0 2px 5px #000;box-shadow:inset 0 -35px 30px #030706c7!important}
+  body[data-game-screen="opening"] .map-thumbnail-strip button>*{visibility:visible!important}
+  body[data-game-screen="opening"] .map-thumbnail-strip button[data-map-id="beginner"]{background-image:url("assets/td/beginner-valley-v2.png")!important}
+  body[data-game-screen="opening"] .map-thumbnail-strip button[data-map-id="twinpass"]{background-image:url("assets/td/twin-pass-v1.png")!important}
+  body[data-game-screen="opening"] .map-thumbnail-strip button[data-map-id="autumn"]{background-image:url("assets/td/autumn-ruins-v1.png")!important}
+  body[data-game-screen="opening"] .map-thumbnail-strip button[aria-pressed="true"]{border-color:#ffe291!important;box-shadow:inset 0 -35px 30px #30240ac4,0 0 13px #f4ca5d!important}
+  body[data-game-screen="opening"] .battlefield-page .map-detail #td-select-battlefield{left:auto;right:3%;top:auto;bottom:2.5%;width:34%;height:12%;opacity:1;border-color:#c9aa62;background:linear-gradient(#d8bd7b,#806736)!important;color:#17130c;font-size:11px}
+  body[data-game-screen="opening"] .party-page .summary-map{position:absolute;z-index:4;left:81.3%;top:10.5%;display:block!important;width:16.7%;height:15.7%;margin:0;padding:11% 7px 5px;background-size:cover;background-position:center;border:1px solid #66583b;color:#ffe2a0;font-size:10px}
+}
+
+/* v0.82.1 — supervised production rebuild: reference composition, live data everywhere. */
+@media (min-width:901px){
+  body:not([data-layout="mobile"])[data-game-screen="opening"] .td-profession-screen{padding:12px;background:radial-gradient(circle at 52% 12%,#2a3a35 0,#09100f 48%,#020505 100%)}
+  body:not([data-layout="mobile"])[data-game-screen="opening"] .profession-dialog{
+    position:relative;display:grid;width:calc(100% - 24px)!important;max-width:1660px;height:calc(100svh - 24px);max-height:980px;aspect-ratio:auto!important;
+    grid-template-columns:220px minmax(0,1fr);grid-template-rows:48px 108px minmax(0,1fr);padding:0!important;overflow:hidden;
+    border:1px solid #8e7542;background:linear-gradient(145deg,#12201ef7,#060b0cfc 62%,#101714fa);box-shadow:0 24px 80px #000,inset 0 0 0 3px #050909;
+  }
+  body[data-game-screen="opening"] .profession-dialog::before{content:"";display:block!important;position:absolute;z-index:0;left:0;top:0;bottom:0;width:219px;height:auto;border:0;border-right:1px solid #685633;opacity:1;background:linear-gradient(180deg,#07100cb8,#030706d9),url("assets/td/opening/difficulty-scenes-v1.png") 24% center/430% 100% no-repeat;box-shadow:inset -25px 0 45px #0009}
+  body[data-game-screen="opening"] .profession-dialog::after{content:"✦  HERO FRONTIER\A\A 不同的土地，\A 不同的敵人，\A 不同的故事。";display:block!important;position:absolute;z-index:2;left:24px;right:auto;top:auto;bottom:27px;width:165px;height:auto;white-space:pre-line;border:0;opacity:1;color:#c4b079;font:11px/1.8 Georgia,"Microsoft JhengHei",serif;letter-spacing:2px}
+  body[data-game-screen="opening"] .profession-dialog>.opening-topline{position:relative;z-index:2;grid-column:2;grid-row:1;display:grid!important;grid-template-columns:150px 1fr 125px;align-items:center;margin:0;padding:6px 14px;border-bottom:1px solid #4f422b;background:#050b0bdf}
+  body[data-game-screen="opening"] .profession-dialog>.opening-titlebar{position:relative;z-index:1;grid-column:2;grid-row:2;display:flex!important;align-items:center;padding:14px 20px;border-bottom:1px solid #685632;background:linear-gradient(90deg,#07100ff0 0,#0c1714bb 45%,#07100f91 100%)}
+  body[data-game-screen="opening"] .profession-dialog>.opening-titlebar::before{display:block}
+  body[data-game-screen="opening"] .opening-title-copy h2{font-size:31px}.opening-title-copy span{font-size:11px}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-steps{position:relative;z-index:3;grid-column:1;grid-row:1/4;inset:auto;align-self:start;display:grid;width:auto;margin:112px 16px 0!important;pointer-events:auto;gap:7px}
+  body[data-game-screen="opening"] .expedition-steps button{position:relative;inset:auto!important;width:100%;height:82px;min-height:82px;padding:9px;border:1px solid #5d5540;background:#07100edc!important;color:#89948d;opacity:1;box-shadow:0 8px 20px #0008!important;pointer-events:auto}
+  body[data-game-screen="opening"] .expedition-steps button[aria-pressed="true"]{border-color:#e1c274;background:linear-gradient(90deg,#5c4826d9,#151b18e9)!important;color:#f3dda3;box-shadow:0 0 17px #d2a74445!important}
+  body[data-game-screen="opening"] .expedition-steps button>b{width:40px;height:40px}.expedition-steps button span{font-size:13px}.expedition-steps button small{font-size:8px;color:#9ca79e}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-page{position:relative;z-index:1;grid-column:2;grid-row:3;inset:auto;width:100%;height:100%;min-width:0;padding:10px 14px 14px;overflow:hidden;background:transparent}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-page::before{display:none!important}
+  body[data-game-screen="opening"] .battlefield-page{display:grid;grid-template-rows:86px minmax(0,1fr);gap:10px}
+  body[data-game-screen="opening"] .difficulty-step{position:relative;display:grid;grid-template-columns:135px minmax(0,1fr);align-items:center;gap:10px;margin:0;padding:0}
+  body[data-game-screen="opening"] .difficulty-step>.opening-step-heading{display:block}.difficulty-step .opening-step-heading h3{margin:0 0 5px;font-size:16px}.difficulty-step .opening-step-heading span{font-size:9px}
+  body[data-game-screen="opening"] .difficulty-list{position:relative;inset:auto;display:grid;width:auto;height:76px;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:0}
+  body[data-game-screen="opening"] .difficulty-step .difficulty-list button{position:relative;inset:auto;min-width:0;min-height:76px!important;height:76px;padding:8px 10px;border:1px solid #62583d;background-image:linear-gradient(90deg,#07100fd9,#07100f6b),var(--selection-art)!important;background-size:auto,210% auto!important;color:#e9dbad;opacity:1;box-shadow:none!important}
+  body[data-game-screen="opening"] .difficulty-step .difficulty-list button>*{visibility:visible}.difficulty-list button b{font-size:12px!important}.difficulty-list button strong{font-size:8px!important;padding:3px 6px}
+  body[data-game-screen="opening"] .difficulty-step .difficulty-list button[aria-pressed="true"]{border-color:#f0cb70;background-image:linear-gradient(90deg,#3b2d10ce,#12171075),var(--selection-art)!important;box-shadow:0 0 12px #e1b44755!important}
+  body[data-game-screen="opening"] .map-browser-layout{position:relative;display:grid;width:100%;height:100%;grid-template-columns:minmax(0,1fr) clamp(285px,24%,350px);gap:11px;margin:0;padding:0;border-top:1px solid #314039;overflow:hidden}
+  body[data-game-screen="opening"] .map-stage{position:relative;display:grid;width:100%;height:100%;grid-template-rows:minmax(0,1fr) 70px;gap:8px;overflow:hidden;border:1px solid #685936;background:#050a0a;box-shadow:0 12px 28px #0008}
+  body[data-game-screen="opening"] .battlefield-page .map-preview{position:relative;inset:auto;display:block!important;width:100%;height:100%;min-height:0;padding:0;border:0;background-size:cover;background-position:center;box-shadow:inset 0 -105px 80px #020505dc}
+  body[data-game-screen="opening"] .battlefield-page .map-preview>div{display:block;left:20px;bottom:17px}.battlefield-page .map-preview h3{font-size:25px}.battlefield-page .map-preview p{font-size:10px}
+  body[data-game-screen="opening"] .map-thumbnail-strip{position:relative;z-index:4;inset:auto;display:grid!important;width:100%;height:70px;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px;margin:0;padding:5px;border:1px solid #665633;background:#050a09eb;overflow:hidden}
+  body[data-game-screen="opening"] .map-thumbnail-strip button{position:relative;min-width:0;min-height:58px;height:58px;padding:6px 8px!important;border:1px solid #645739!important;background-position:center!important;background-size:cover!important;color:#e9dfc3!important;opacity:1;box-shadow:inset 0 -35px 30px #030706c7!important;text-align:left}
+  body[data-game-screen="opening"] .map-thumbnail-strip button>*{visibility:visible!important}.map-thumbnail-strip button[aria-pressed="true"]{border-color:#ffe291!important;box-shadow:inset 0 -35px 30px #30240ac4,0 0 12px #f4ca5d!important}
+  body[data-game-screen="opening"] .battlefield-page .map-detail{position:relative;inset:auto;display:block;width:100%;height:100%;min-height:0;padding:14px 14px 58px;overflow:hidden;border:1px solid #66583b;background:linear-gradient(150deg,#101a1af6,#060b0cfa);box-shadow:inset 0 0 34px #20362d20}
+  body[data-game-screen="opening"] .battlefield-page .map-detail>*:not(#td-select-battlefield){display:revert!important}.battlefield-page .map-detail h3{font-size:23px}.battlefield-page .map-detail>p{font-size:10px}.battlefield-page .map-detail ul{font-size:9px}
+  body[data-game-screen="opening"] .battlefield-page .map-detail #td-select-battlefield{position:absolute;z-index:3;left:13px;right:13px;top:auto;bottom:11px;width:calc(100% - 26px);height:42px;min-height:42px;padding:7px;border:1px solid #d0ae63;background:linear-gradient(#d8bd7b,#806736)!important;color:#17130c;opacity:1;font-size:12px}
+  body[data-game-screen="opening"] .party-page{display:grid;grid-template-rows:34px minmax(0,1fr);gap:8px}
+  body[data-game-screen="opening"] .party-toolbar{display:flex;margin:0}.party-page .party-toolbar>button{min-height:30px}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid{position:relative;display:grid!important;width:100%;height:100%;grid-template-columns:minmax(0,1.06fr) minmax(0,1fr) clamp(230px,19%,280px)!important;gap:9px;overflow:hidden}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step,body[data-game-screen="opening"] .party-page .expedition-summary{position:relative;display:grid;padding:9px;border:1px solid #5b5138;background:linear-gradient(155deg,#101b19,#070c0d);box-shadow:0 10px 25px #0007}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step{grid-template-rows:36px 118px minmax(0,1fr)}
+  body[data-game-screen="opening"] .party-page .opening-step-heading{display:flex!important}
+  body[data-game-screen="opening"] .party-page .profession-list,body[data-game-screen="opening"] .party-page .faction-list{position:relative;inset:auto;display:flex!important;width:100%;height:118px;gap:6px;margin:0;overflow-x:auto}
+  body[data-game-screen="opening"] .party-page .profession-list button,body[data-game-screen="opening"] .party-page .faction-list button{position:relative;min-width:105px;flex:1 0 105px;min-height:118px!important;height:118px!important;padding:6px;border:1px solid #5f5841;background-image:linear-gradient(180deg,transparent,#07100feb),var(--selection-art)!important;background-size:cover!important;background-position:center var(--selection-focus,50% 22%)!important;color:#f3e3b5;opacity:1;box-shadow:none!important}
+  body[data-game-screen="opening"] .party-page .profession-list button>*,body[data-game-screen="opening"] .party-page .faction-list button>*{visibility:visible}.party-page .profession-list b,.party-page .faction-list b{font-size:11px}.party-page .profession-list strong,.party-page .faction-list strong{font-size:8px}
+  body[data-game-screen="opening"] .party-page .profession-list button[aria-pressed="true"],body[data-game-screen="opening"] .party-page .faction-list button[aria-pressed="true"]{border-color:#efca76;box-shadow:0 0 13px #d8ad4d66!important}
+  body[data-game-screen="opening"] .choice-detail{display:grid!important;min-height:0;height:100%;margin-top:7px}.choice-detail h4{font-size:17px}.choice-detail p{font-size:9px}
+  body[data-game-screen="opening"] .party-page .expedition-summary{display:block;height:100%;padding:12px 12px 96px;overflow:hidden!important}
+  body[data-game-screen="opening"] .party-page .expedition-summary>*:not(.opening-actions){display:revert!important}
+  body[data-game-screen="opening"] .party-page .summary-map{position:relative;inset:auto;display:block!important;width:100%;height:80px;margin:7px 0 9px;padding:52px 9px 6px;background-size:cover;background-position:center;font-size:10px}
+  body[data-game-screen="opening"] .expedition-summary .opening-actions{position:absolute;left:11px;right:11px;bottom:9px;display:block!important}.expedition-summary .art-loading{display:flex!important;margin-bottom:6px;padding:5px;font-size:8px}.expedition-summary #td-start-expedition{position:relative;inset:auto;width:100%;height:43px;min-height:43px;padding:7px;border:1px solid #dc715d;background:linear-gradient(#8b3027,#3b1312)!important;color:#ffe0c1;opacity:1;font-size:11px}
+}
+
+@media (min-width:901px) and (max-height:790px){
+  body:not([data-layout="mobile"])[data-game-screen="opening"] .profession-dialog{height:calc(100svh - 12px);grid-template-rows:42px 80px minmax(0,1fr)}
+  body[data-game-screen="opening"] .profession-dialog>.opening-titlebar{padding:8px 17px}.opening-title-copy h2{font-size:25px!important}.opening-title-copy span{font-size:9px!important}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-steps{margin-top:78px!important}.expedition-steps button{height:72px;min-height:72px}
+  body[data-game-screen="opening"] .battlefield-page{grid-template-rows:72px minmax(0,1fr)}.difficulty-list{height:63px!important}.difficulty-step .difficulty-list button{height:63px!important;min-height:63px!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step{grid-template-rows:31px 98px minmax(0,1fr)}.party-page .profession-list,.party-page .faction-list{height:98px!important}.party-page .profession-list button,.party-page .faction-list button{height:98px!important;min-height:98px!important}
+}
+
+/* Stable column layout: the navigation owns real space and can never cover page content. */
+@media (min-width:901px){
+  body:not([data-layout="mobile"])[data-game-screen="opening"] .profession-dialog{
+    display:grid;grid-template-columns:228px minmax(0,1fr);grid-template-rows:48px 102px minmax(0,1fr);
+    width:min(1580px,calc(100vw - 36px));height:min(900px,calc(100svh - 36px));
+    padding:0!important;
+  }
+  body[data-game-screen="opening"] .profession-dialog::before{z-index:0;width:227px;height:auto;right:auto;top:0;bottom:0;border:0;border-right:1px solid #5c4b2c;opacity:1}
+  body[data-game-screen="opening"] .profession-dialog::after{z-index:2;left:25px;right:auto;top:auto;bottom:30px;width:172px;height:auto;border:0;opacity:1}
+  body[data-game-screen="opening"] .profession-dialog>.opening-topline{z-index:2;grid-column:2;grid-row:1}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-steps{position:relative;z-index:3;grid-column:1;grid-row:1/4;align-self:start;left:auto;top:auto;width:auto;margin:102px 18px 0}
+  body[data-game-screen="opening"] .profession-dialog>.opening-titlebar{z-index:1;grid-column:2;grid-row:2}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-page{z-index:1;grid-column:2;grid-row:3;width:100%;min-width:0}
+  body[data-game-screen="opening"] .map-thumbnail-strip{pointer-events:auto}
+  body[data-game-screen="opening"] .map-thumbnail-strip button{cursor:pointer;pointer-events:auto}
+  body[data-game-screen="opening"] .map-stage{grid-template-rows:minmax(0,1fr) 70px;gap:8px;overflow:hidden}
+  body[data-game-screen="opening"] .map-preview{padding-bottom:0}
+  body[data-game-screen="opening"] .map-thumbnail-strip{position:relative;left:auto;right:auto;bottom:auto;width:100%;height:70px;margin:0;padding:6px}
+}
+
+@media (min-width:901px) and (max-height:760px){
+  body[data-game-screen="opening"] .td-profession-screen{padding:8px}
+  body[data-game-screen="opening"] .profession-dialog{height:calc(100svh - 16px);width:calc(100vw - 16px);grid-template-rows:42px 82px minmax(0,1fr)}
+  body[data-game-screen="opening"] .opening-titlebar{padding:8px 18px}.opening-title-copy h2{font-size:25px!important}.opening-title-copy span{margin-top:2px!important}
+  body[data-game-screen="opening"] .expedition-page{padding:8px 12px 10px}.battlefield-page{grid-template-rows:75px minmax(0,1fr)}
+  body[data-game-screen="opening"] .difficulty-step .difficulty-list button{min-height:64px!important}.difficulty-step{grid-template-columns:125px minmax(0,1fr)}
+  body[data-game-screen="opening"] .map-detail>p{margin:5px 0}.map-detail h4{margin:6px 0 2px}.map-detail ul{line-height:1.45}.route-preview,.map-record{margin-top:5px!important;padding:5px!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step{grid-template-rows:32px 105px minmax(0,1fr)}
+  body[data-game-screen="opening"] .party-page .profession-list button,body[data-game-screen="opening"] .party-page .faction-list button{height:105px!important}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-steps{margin-top:80px}.profession-dialog::after{bottom:17px!important}
+}
+
+@media (min-width:901px) and (max-width:1400px){
+  body:not([data-layout="mobile"])[data-game-screen="opening"] .profession-dialog{grid-template-columns:180px minmax(0,1fr);padding:0!important}
+  body[data-game-screen="opening"] .profession-dialog::before{width:179px}
+  body[data-game-screen="opening"] .profession-dialog::after{left:18px;width:140px;font-size:9px}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-steps{left:auto;top:auto;width:auto;margin-left:13px;margin-right:13px}
+  body[data-game-screen="opening"] .expedition-steps button{gap:7px;padding:8px 7px}
+  body[data-game-screen="opening"] .expedition-steps button>b{width:35px;height:35px;font-size:14px}
+  body[data-game-screen="opening"] .expedition-steps button span{font-size:12px}.expedition-steps button small{max-width:90px;font-size:7px}
+  body[data-game-screen="opening"] .difficulty-step{grid-template-columns:110px minmax(0,1fr)}
+  body[data-game-screen="opening"] .difficulty-list button{padding:7px 8px}.difficulty-list button b{font-size:11px!important}.difficulty-list button strong{padding:3px 5px;font-size:7px!important}
+  body[data-game-screen="opening"] .map-browser-layout{grid-template-columns:minmax(0,calc(100% - 272px)) 260px}
+  body[data-game-screen="opening"] .map-detail{padding-left:12px;padding-right:12px}.map-detail h3{font-size:21px!important}.expedition-tags span{font-size:7px}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 225px!important}
+}
+
+/* v0.82.1 QA fix: keep every live column inside the expedition frame. */
+@media (min-width:901px){
+  body:not([data-layout="mobile"])[data-game-screen="opening"] .profession-dialog{width:calc(100vw - 24px)!important;max-width:none!important}
+  body[data-game-screen="opening"] .profession-dialog,
+  body[data-game-screen="opening"] .profession-dialog *,
+  body[data-game-screen="opening"] .expedition-page,
+  body[data-game-screen="opening"] .difficulty-step,
+  body[data-game-screen="opening"] .difficulty-list,
+  body[data-game-screen="opening"] .map-browser-layout,
+  body[data-game-screen="opening"] .map-stage,
+  body[data-game-screen="opening"] .map-detail,
+  body[data-game-screen="opening"] .opening-choice-grid,
+  body[data-game-screen="opening"] .opening-step,
+  body[data-game-screen="opening"] .expedition-summary{box-sizing:border-box;min-width:0}
+  body[data-game-screen="opening"] .difficulty-list{display:flex!important;width:auto!important;max-width:100%;overflow:hidden}
+  body[data-game-screen="opening"] .difficulty-list>button{flex:0 0 calc((100% - 21px)/4)!important;width:calc((100% - 21px)/4)!important;max-width:calc((100% - 21px)/4)!important;min-width:0!important;overflow:hidden}
+  body[data-game-screen="opening"] .map-browser-layout{display:flex!important;width:auto!important;max-width:100%;overflow:hidden}
+  body[data-game-screen="opening"] .map-stage,
+  body[data-game-screen="opening"] .battlefield-page .map-detail{width:auto!important;max-width:100%;overflow:hidden}
+  body[data-game-screen="opening"] .map-stage{flex:0 0 calc(100% - 331px);width:calc(100% - 331px)!important}
+  body[data-game-screen="opening"] .battlefield-page .map-detail{flex:0 0 320px;width:320px!important}
+  body[data-game-screen="opening"] .battlefield-page .map-preview{width:auto!important;max-width:100%;overflow:hidden;contain:layout paint}
+  body[data-game-screen="opening"] .party-page{padding-right:278px!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid{position:static!important;display:grid!important;width:100%!important;max-width:100%;grid-template-columns:repeat(2,minmax(0,1fr))!important;overflow:visible!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step,
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.expedition-summary{position:absolute!important;top:0;bottom:0;height:100%!important;min-width:0!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-hero-step,
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-faction-step{position:relative!important;inset:auto;width:auto!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.expedition-summary{position:fixed!important;left:auto!important;right:26px!important;top:166px;bottom:24px;width:250px!important;height:auto!important;z-index:6}
+}
+
+@media (min-width:901px) and (max-width:1400px){
+  body[data-game-screen="opening"] .map-stage{flex-basis:calc(100% - 261px);width:calc(100% - 261px)!important}
+  body[data-game-screen="opening"] .battlefield-page .map-detail{flex-basis:250px;width:250px!important}
+  body[data-game-screen="opening"] .party-page{padding-right:238px!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.expedition-summary{width:210px!important}
+}
+
+/* v0.82.2 — PAGE 2 selection-first pass: compare every option at a glance. */
+@media (min-width:901px){
+  body[data-game-screen="opening"] .party-page{grid-template-rows:30px minmax(0,1fr);gap:6px}
+  body[data-game-screen="opening"] .party-toolbar{height:30px;gap:9px;font-size:10px}
+  body[data-game-screen="opening"] .party-toolbar>button{min-height:28px;padding:4px 8px;font-size:10px}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step{grid-template-rows:30px 142px minmax(0,1fr)!important;padding:8px!important}
+  body[data-game-screen="opening"] .party-page .opening-step-heading h3{font-size:13px!important;margin:0}
+  body[data-game-screen="opening"] .party-page .opening-step-heading span{font-size:8px!important}
+  body[data-game-screen="opening"] .party-page .profession-list,
+  body[data-game-screen="opening"] .party-page .faction-list{
+    display:grid!important;width:100%!important;height:142px!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:5px!important;
+    overflow:hidden!important;scrollbar-width:none;
+  }
+  body[data-game-screen="opening"] .party-page .profession-list button,
+  body[data-game-screen="opening"] .party-page .faction-list button{
+    display:flex!important;flex-direction:column;justify-content:flex-end;align-items:flex-start;
+    width:auto!important;min-width:0!important;max-width:none!important;height:142px!important;min-height:142px!important;
+    padding:6px!important;overflow:hidden;text-align:left;background-size:cover!important;
+  }
+  body[data-game-screen="opening"] .party-page .profession-list b,
+  body[data-game-screen="opening"] .party-page .faction-list b{font-size:10px!important;line-height:1.2;white-space:normal}
+  body[data-game-screen="opening"] .party-page .profession-list strong,
+  body[data-game-screen="opening"] .party-page .faction-list strong{font-size:7px!important;line-height:1.25;margin-top:3px}
+  body[data-game-screen="opening"] .party-page .profession-list small,
+  body[data-game-screen="opening"] .party-page .faction-list small{display:none!important}
+  body[data-game-screen="opening"] .party-page .choice-detail{grid-template-columns:34% minmax(0,1fr);margin-top:6px;overflow:hidden}
+  body[data-game-screen="opening"] .party-page .choice-detail>div{background-size:contain!important;background-repeat:no-repeat;background-position:center bottom!important;background-color:#0b1212}
+  body[data-game-screen="opening"] .party-page .faction-detail>div{background-size:cover!important}
+  body[data-game-screen="opening"] .party-page .choice-detail>section{padding:9px!important;overflow:hidden}
+  body[data-game-screen="opening"] .party-page .choice-detail h4{font-size:15px!important;margin:2px 0 4px}
+  body[data-game-screen="opening"] .party-page .choice-detail b{font-size:9px!important}
+  body[data-game-screen="opening"] .party-page .choice-detail p{font-size:8px!important;line-height:1.45;margin:6px 0}
+  body[data-game-screen="opening"] .party-page .choice-detail footer{font-size:7px!important;line-height:1.4}
+}
+
+/* v0.82.2 final review: readable comparison cards and decision details. */
+@media (min-width:901px){
+  body[data-game-screen="opening"] .party-page{padding-right:14px!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid{
+    position:relative!important;display:grid!important;width:100%!important;height:100%;
+    grid-template-columns:minmax(0,1.08fr) minmax(0,.96fr) 280px!important;gap:10px!important;overflow:hidden!important;
+  }
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step,
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.expedition-summary{
+    position:relative!important;inset:auto!important;width:auto!important;height:100%!important;min-width:0!important;
+  }
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.expedition-summary{display:block!important;padding:11px 11px 96px!important;z-index:1}
+  body[data-game-screen="opening"] .party-page .profession-list b,
+  body[data-game-screen="opening"] .party-page .faction-list b{font-size:14px!important;line-height:1.15}
+  body[data-game-screen="opening"] .party-page .profession-list strong,
+  body[data-game-screen="opening"] .party-page .faction-list strong{font-size:11px!important;line-height:1.25}
+  body[data-game-screen="opening"] .party-page .choice-detail{grid-template-columns:40% minmax(0,1fr)}
+  body[data-game-screen="opening"] .party-page .choice-detail>div{background-size:cover!important;background-position:center 18%!important}
+  body[data-game-screen="opening"] .party-page .faction-detail{grid-template-columns:34% minmax(0,1fr)}
+  body[data-game-screen="opening"] .party-page .faction-detail>div{background-position:center!important}
+  body[data-game-screen="opening"] .party-page .choice-detail h4{font-size:18px!important}
+  body[data-game-screen="opening"] .party-page .choice-detail b{font-size:12px!important;line-height:1.35}
+  body[data-game-screen="opening"] .party-page .choice-detail p{font-size:12px!important;line-height:1.45}
+  body[data-game-screen="opening"] .party-page .choice-detail h5{margin:8px 0 5px;color:#dbc27d;font:700 11px Georgia,"Microsoft JhengHei",serif;letter-spacing:1px}
+  body[data-game-screen="opening"] .hero-skill-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+  body[data-game-screen="opening"] .hero-skill-list span{display:grid;place-items:end center;min-height:50px;padding:26px 3px 5px;border-radius:2px;background:radial-gradient(circle at 50% 28%,#7d43a8,#1b1328 48%,#080b0c 74%);border-color:#8f69ae;color:#f1d8ff;font-size:9px;text-align:center}
+  body[data-game-screen="opening"] .faction-roster-list{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin-top:0;padding:0!important;border:0!important}
+  body[data-game-screen="opening"] .faction-roster-list>span{display:grid;grid-template-rows:47px auto;min-width:0;border:1px solid #504b39;background:#09100f;color:#dfd3ad;text-align:center}
+  body[data-game-screen="opening"] .faction-roster-list i{display:block;background-image:var(--unit-art);background-size:400% 400%;background-position:0 0;background-repeat:no-repeat}
+  body[data-game-screen="opening"] .faction-roster-list b{padding:3px 1px;font-size:8px!important;line-height:1.2;white-space:normal}
+  body[data-game-screen="opening"] .faction-roster-list>small{grid-column:1/-1;margin-top:3px;color:#91a299;font-size:8px;white-space:normal}
+}
+
+@media (min-width:901px) and (max-width:1400px){
+  body[data-game-screen="opening"] .party-page .opening-choice-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 230px!important}
+  body[data-game-screen="opening"] .party-page .profession-list,
+  body[data-game-screen="opening"] .party-page .faction-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:repeat(2,minmax(0,1fr));height:142px!important}
+  body[data-game-screen="opening"] .party-page .profession-list button,
+  body[data-game-screen="opening"] .party-page .faction-list button{height:auto!important;min-height:0!important;background-position:center 24%!important}
+}
+
+/* v0.82.3 — reference-led expedition layout: compact chrome, portrait choices, full map. */
+@media (min-width:901px){
+  body:not([data-layout="mobile"])[data-game-screen="opening"] .profession-dialog{
+    grid-template-columns:132px minmax(0,1fr)!important;
+    grid-template-rows:36px 58px minmax(0,1fr)!important;
+  }
+  body[data-game-screen="opening"] .profession-dialog::before{width:131px!important}
+  body[data-game-screen="opening"] .profession-dialog::after{left:12px!important;width:106px!important;font-size:8px!important;letter-spacing:1px!important}
+  body[data-game-screen="opening"] .profession-dialog>.opening-topline{grid-template-columns:126px 1fr 112px!important;padding:4px 10px!important;font-size:9px!important}
+  body[data-game-screen="opening"] .profession-dialog>.opening-topline button{min-height:26px!important;padding:3px 7px!important;font-size:9px!important}
+  body[data-game-screen="opening"] .profession-dialog>.opening-titlebar{padding:6px 13px!important}
+  body[data-game-screen="opening"] .opening-title-copy h2{font-size:21px!important;letter-spacing:2px!important}
+  body[data-game-screen="opening"] .opening-title-copy span{font-size:8px!important}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-steps{margin:69px 8px 0!important;gap:5px!important}
+  body[data-game-screen="opening"] .expedition-steps button{height:56px!important;min-height:56px!important;padding:5px!important;gap:5px!important}
+  body[data-game-screen="opening"] .expedition-steps button>b{width:28px!important;height:28px!important;font-size:11px!important}
+  body[data-game-screen="opening"] .expedition-steps button span{font-size:10px!important}
+  body[data-game-screen="opening"] .expedition-steps button small{max-width:70px!important;font-size:6px!important;white-space:normal}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-page{padding:7px 10px 10px!important}
+
+  body[data-game-screen="opening"] .battlefield-page{grid-template-rows:58px minmax(0,1fr)!important}
+  body[data-game-screen="opening"] .difficulty-step{grid-template-columns:92px minmax(0,1fr)!important;gap:7px!important}
+  body[data-game-screen="opening"] .difficulty-step .opening-step-heading h3{font-size:12px!important}
+  body[data-game-screen="opening"] .difficulty-step .opening-step-heading span{font-size:7px!important}
+  body[data-game-screen="opening"] .difficulty-list button{min-height:48px!important;padding:5px 7px!important}
+  body[data-game-screen="opening"] .difficulty-list button b{font-size:10px!important}
+  body[data-game-screen="opening"] .map-browser-layout{gap:9px!important}
+  body[data-game-screen="opening"] .map-browser-layout{justify-content:center!important;align-items:start!important}
+  body[data-game-screen="opening"] .map-stage{flex:0 1 720px!important;width:min(720px,calc(100% - 309px))!important;align-self:start!important;grid-template-rows:auto auto!important;align-content:start!important}
+  body[data-game-screen="opening"] .battlefield-page .map-detail{flex:0 0 300px!important;width:300px!important;padding:11px!important;align-self:start!important}
+  body[data-game-screen="opening"] .battlefield-page .map-preview{
+    width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:3/2!important;
+    background-size:contain!important;background-repeat:no-repeat!important;background-position:center!important;background-color:#050b0b!important;
+  }
+  body[data-game-screen="opening"] .battlefield-page .map-preview>div{left:14px!important;bottom:80px!important;padding:8px 12px;background:#030807b8;border-left:2px solid #c6a45c}
+  body[data-game-screen="opening"] .map-thumbnail-strip{left:8px!important;right:8px!important;bottom:8px!important}
+  body[data-game-screen="opening"] .map-stage>.map-thumbnail-strip{position:relative!important;inset:auto!important;margin-top:6px!important;padding:6px!important}
+
+  body[data-game-screen="opening"] .party-page{grid-template-rows:25px minmax(0,1fr)!important;gap:5px!important;padding-right:10px!important}
+  body[data-game-screen="opening"] .party-toolbar{height:25px!important;margin:0!important;font-size:9px!important}
+  body[data-game-screen="opening"] .party-toolbar>button{min-height:23px!important;padding:2px 7px!important;font-size:9px!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid{
+    grid-template-columns:minmax(0,1.12fr) minmax(0,.98fr) 238px!important;gap:8px!important;overflow:visible!important;
+  }
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step{
+    grid-template-rows:28px 168px minmax(0,1fr)!important;padding:7px!important;overflow:hidden!important;
+  }
+  body[data-game-screen="opening"] .party-page .profession-list,
+  body[data-game-screen="opening"] .party-page .faction-list{
+    display:flex!important;height:168px!important;gap:6px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory;scrollbar-width:thin;
+  }
+  body[data-game-screen="opening"] .party-page .profession-list button{
+    flex:0 0 calc((100% - 12px)/3)!important;width:calc((100% - 12px)/3)!important;height:160px!important;min-height:160px!important;
+    padding:8px!important;scroll-snap-align:start;background-size:cover!important;background-position:center 18%!important;
+    background-image:linear-gradient(180deg,transparent 36%,#050a09e8 78%,#050a09 100%),var(--selection-art)!important;
+  }
+  body[data-game-screen="opening"] .party-page .profession-list b{font-size:13px!important;text-shadow:0 2px 5px #000}
+  body[data-game-screen="opening"] .party-page .profession-list strong{font-size:9px!important}
+  body[data-game-screen="opening"] .party-page .faction-list button{
+    position:relative;flex:0 0 calc((100% - 12px)/3)!important;width:calc((100% - 12px)/3)!important;height:160px!important;min-height:160px!important;
+    padding:104px 6px 7px!important;align-items:center!important;text-align:center!important;scroll-snap-align:start;
+    background:linear-gradient(180deg,#111a18,#070c0c)!important;
+  }
+  body[data-game-screen="opening"] .party-page .faction-list button::before{
+    position:absolute!important;left:18%!important;right:18%!important;top:8px!important;width:auto!important;height:88px!important;margin:0!important;
+    display:grid!important;place-items:center!important;border:1px solid #76623c!important;border-radius:0!important;
+    background:linear-gradient(160deg,#27352f,#101816)!important;font-size:32px!important;clip-path:polygon(0 0,100% 0,100% 86%,50% 100%,0 86%);
+  }
+  body[data-game-screen="opening"] .party-page .faction-list button[data-faction="hunter"]::before{background:linear-gradient(160deg,#17446e,#0c2238)!important}
+  body[data-game-screen="opening"] .party-page .faction-list button[data-faction="arcanist"]::before{background:linear-gradient(160deg,#2d6339,#102b18)!important}
+  body[data-game-screen="opening"] .party-page .faction-list button[data-faction="rogue"]::before{background:linear-gradient(160deg,#56306d,#21102b)!important}
+  body[data-game-screen="opening"] .party-page .faction-list button[data-faction="wild"]::before{background:linear-gradient(160deg,#772a24,#32100e)!important}
+  body[data-game-screen="opening"] .party-page .faction-list b{font-size:12px!important}
+  body[data-game-screen="opening"] .party-page .faction-list strong{display:none!important}
+  body[data-game-screen="opening"] .party-page .choice-detail{margin-top:5px!important;min-height:0!important;height:auto!important;grid-template-columns:35% minmax(0,1fr)!important;overflow:auto!important}
+  body[data-game-screen="opening"] .party-page .choice-detail>div{min-height:100%!important;background-size:cover!important}
+  body[data-game-screen="opening"] .party-page .choice-detail>section{padding:8px!important;overflow:visible!important}
+  body[data-game-screen="opening"] .party-page .choice-detail h4{font-size:16px!important}
+  body[data-game-screen="opening"] .party-page .choice-detail b{font-size:10px!important}
+  body[data-game-screen="opening"] .party-page .choice-detail p{font-size:9px!important;line-height:1.35!important;margin:4px 0!important}
+  body[data-game-screen="opening"] .party-page .choice-detail h5{margin:5px 0 3px!important;font-size:9px!important}
+  body[data-game-screen="opening"] .hero-skill-list span{min-height:38px!important;padding:20px 2px 3px!important;font-size:8px!important}
+  body[data-game-screen="opening"] .faction-roster-list>span{grid-template-rows:38px auto!important}
+  body[data-game-screen="opening"] .party-page .expedition-summary{padding:9px 9px 84px!important;overflow-y:auto!important;overflow-x:hidden!important}
+  body[data-game-screen="opening"] .party-page .summary-map{height:70px!important;margin:5px 0 7px!important;padding:44px 7px 5px!important}
+  body[data-game-screen="opening"] .expedition-summary dl>div{padding:5px 0!important}
+  body[data-game-screen="opening"] .expedition-summary p{font-size:9px!important;line-height:1.45!important;white-space:normal!important;overflow:visible!important}
+  body[data-game-screen="opening"] .expedition-summary .opening-actions{left:8px!important;right:8px!important;bottom:7px!important}
+}
+
+/* v0.82.4 — compact selectors; keep complete decision details visible without vertical scrolling. */
+@media (min-width:901px){
+  body[data-game-screen="opening"] .party-page{position:relative!important;padding-right:268px!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid{
+    position:relative!important;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)!important;
+  }
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step{
+    width:100%!important;min-width:0!important;
+    grid-template-rows:26px 116px 190px!important;
+    align-content:start!important;overflow:hidden!important;
+  }
+  body[data-game-screen="opening"] .party-page .profession-list,
+  body[data-game-screen="opening"] .party-page .faction-list{height:116px!important}
+  body[data-game-screen="opening"] .party-page .profession-list button{
+    height:110px!important;min-height:110px!important;padding:6px!important;
+    background-position:center 17%!important;
+  }
+  body[data-game-screen="opening"] .party-page .profession-list b{font-size:11px!important;line-height:1.15!important}
+  body[data-game-screen="opening"] .party-page .profession-list strong,
+  body[data-game-screen="opening"] .party-page .profession-list small{display:none!important}
+  body[data-game-screen="opening"] .party-page .faction-list button{
+    height:110px!important;min-height:110px!important;padding:72px 4px 5px!important;
+  }
+  body[data-game-screen="opening"] .party-page .faction-list button::before{
+    top:5px!important;height:62px!important;font-size:24px!important;
+  }
+  body[data-game-screen="opening"] .party-page .faction-list b{font-size:10px!important;line-height:1.1!important}
+  body[data-game-screen="opening"] .party-page .choice-detail{
+    width:100%!important;min-width:0!important;height:190px!important;min-height:190px!important;overflow:hidden!important;
+    grid-template-columns:31% minmax(0,1fr)!important;
+  }
+  body[data-game-screen="opening"] .party-page .choice-detail>div{min-height:0!important;height:190px!important}
+  body[data-game-screen="opening"] .party-page .choice-detail>section{
+    min-height:0!important;padding:7px!important;overflow:visible!important;
+  }
+  body[data-game-screen="opening"] .party-page .choice-detail small{font-size:7px!important}
+  body[data-game-screen="opening"] .party-page .choice-detail h4{font-size:14px!important;margin:1px 0 2px!important}
+  body[data-game-screen="opening"] .party-page .choice-detail b{font-size:9px!important;line-height:1.2!important}
+  body[data-game-screen="opening"] .party-page .choice-detail p{font-size:8px!important;line-height:1.3!important;margin:3px 0!important}
+  body[data-game-screen="opening"] .party-page .choice-detail h5{margin:4px 0 3px!important;font-size:8px!important}
+  body[data-game-screen="opening"] .hero-skill-list{gap:3px!important}
+  body[data-game-screen="opening"] .hero-skill-list span{min-height:31px!important;padding:16px 2px 3px!important;font-size:7px!important}
+  body[data-game-screen="opening"] .party-page .choice-detail footer{margin-top:4px!important;padding-top:4px!important;font-size:7px!important}
+  body[data-game-screen="opening"] .phase-strip{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:3px!important}
+  body[data-game-screen="opening"] .phase-strip span{padding:3px!important;font-size:7px!important;line-height:1.2!important}
+  body[data-game-screen="opening"] .faction-roster-list{gap:3px!important}
+  body[data-game-screen="opening"] .faction-roster-list>span{grid-template-rows:34px auto!important}
+  body[data-game-screen="opening"] .faction-roster-list b{font-size:7px!important;padding:2px 1px!important}
+  body[data-game-screen="opening"] .faction-roster-list>small{font-size:7px!important;margin-top:1px!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.expedition-summary{
+    position:absolute!important;left:auto!important;right:-258px!important;top:0!important;bottom:0!important;
+    width:250px!important;height:auto!important;min-width:0!important;overflow:hidden!important;padding:8px 8px 80px!important;
+  }
+  body[data-game-screen="opening"] .party-page .summary-map{height:62px!important;padding-top:38px!important}
+  body[data-game-screen="opening"] .expedition-summary dl>div{padding:4px 0!important}
+  body[data-game-screen="opening"] .expedition-summary p{font-size:8px!important;line-height:1.35!important;margin:6px 0!important}
+}
+
+body[data-layout="mobile"][data-game-screen="opening"] .td-profession-screen{overflow:auto;padding:5px}
+body[data-layout="mobile"][data-game-screen="opening"] .profession-dialog{display:grid;width:100%;height:calc(100svh - 10px);max-height:none;padding:8px;overflow:hidden}
+body[data-layout="mobile"][data-game-screen="opening"] .opening-titlebar{align-items:center;padding:4px 2px 6px;gap:8px}
+body[data-layout="mobile"][data-game-screen="opening"] .opening-title-copy>p{display:none}body[data-layout="mobile"][data-game-screen="opening"] .opening-title-copy>h2{margin:0;font-size:19px;letter-spacing:2px}body[data-layout="mobile"][data-game-screen="opening"] .opening-title-copy>span{font-size:8px}
+body[data-layout="mobile"][data-game-screen="opening"] .map-choice{display:block;width:min(48vw,270px);padding:5px;margin:0}body[data-layout="mobile"][data-game-screen="opening"] .map-choice>span,body[data-layout="mobile"][data-game-screen="opening"] .map-choice small{display:none}body[data-layout="mobile"][data-game-screen="opening"] .map-choice select{width:100%;padding:5px;font-size:9px}
+body[data-layout="mobile"][data-game-screen="opening"] .opening-step{margin-top:5px}body[data-layout="mobile"][data-game-screen="opening"] .opening-step-heading{margin-bottom:3px}body[data-layout="mobile"][data-game-screen="opening"] .opening-step-heading h3{font-size:12px}body[data-layout="mobile"][data-game-screen="opening"] .opening-step-heading h3 em{width:18px;height:18px;font-size:10px}body[data-layout="mobile"][data-game-screen="opening"] .opening-step-heading>span{font-size:8px}
+body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list button{min-height:69px;padding:5px}body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list button b{font-size:10px}body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list button strong{font-size:7px!important}body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list button small{font-size:7px!important;line-height:1.25!important}
+body[data-layout="mobile"][data-game-screen="opening"] .difficulty-rules{display:none}
+body[data-layout="mobile"][data-game-screen="opening"] .opening-choice-grid{grid-template-columns:minmax(0,1.55fr) minmax(220px,.9fr);gap:6px;min-height:0}
+body[data-layout="mobile"][data-game-screen="opening"] .profession-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}body[data-layout="mobile"][data-game-screen="opening"] .profession-list button{display:grid;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto auto;justify-items:center;min-height:0;height:100%;padding:3px;text-align:center}body[data-layout="mobile"][data-game-screen="opening"] .profession-preview{grid-row:auto;width:min(64px,9vh);height:min(64px,9vh)}body[data-layout="mobile"][data-game-screen="opening"] .profession-list b{font-size:9px}body[data-layout="mobile"][data-game-screen="opening"] .profession-list strong{font-size:7px}body[data-layout="mobile"][data-game-screen="opening"] .profession-list small{display:none}
+body[data-layout="mobile"][data-game-screen="opening"] .faction-list{grid-template-columns:1fr;grid-template-rows:repeat(3,minmax(0,1fr));gap:4px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button{min-height:0;padding:4px;grid-template-columns:24px 1fr;gap:1px 5px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button::before{width:22px;height:22px;font-size:12px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button b{font-size:9px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button strong{font-size:7px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button small{display:none}
+body[data-layout="mobile"][data-game-screen="opening"] .opening-actions{grid-template-columns:minmax(0,1fr) minmax(250px,42vw);gap:5px;margin-top:5px;padding-top:5px}body[data-layout="mobile"][data-game-screen="opening"] .opening-actions .art-loading{min-height:36px;padding:4px 7px;font-size:8px}body[data-layout="mobile"][data-game-screen="opening"] .opening-actions #td-start-expedition{min-width:0;min-height:36px;padding:4px 8px;font-size:11px}
+
+@media (max-width:540px) and (orientation:portrait){
+ body[data-layout="mobile"][data-game-screen="opening"] .profession-dialog{height:calc(100svh - 10px)}
+ body[data-layout="mobile"][data-game-screen="opening"] .opening-titlebar{display:grid;grid-template-columns:1fr auto}
+ body[data-layout="mobile"][data-game-screen="opening"] .map-choice{grid-column:1/-1;width:100%}
+ body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list{grid-template-columns:repeat(2,minmax(0,1fr))}body[data-layout="mobile"][data-game-screen="opening"] .difficulty-list button{min-height:58px}
+ body[data-layout="mobile"][data-game-screen="opening"] .opening-choice-grid{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}
+ body[data-layout="mobile"][data-game-screen="opening"] .profession-list button{min-height:88px}
+ body[data-layout="mobile"][data-game-screen="opening"] .faction-list{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button{display:block;min-height:72px;text-align:center}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button::before{margin:0 auto 3px}body[data-layout="mobile"][data-game-screen="opening"] .faction-list button strong{display:none}
+ body[data-layout="mobile"][data-game-screen="opening"] .opening-actions{grid-template-columns:1fr}body[data-layout="mobile"][data-game-screen="opening"] .opening-actions .art-loading{display:none}
+}
+
+/* v0.82.5 — remove redundant chrome and spend the space on complete details. */
+@media (min-width:901px){
+  body:not([data-layout="mobile"])[data-game-screen="opening"] .profession-dialog{
+    grid-template-columns:112px minmax(0,1fr)!important;
+    grid-template-rows:0 54px minmax(0,1fr)!important;
+  }
+  body[data-game-screen="opening"] .profession-dialog::before{width:111px!important}
+  body[data-game-screen="opening"] .profession-dialog::after{left:9px!important;width:90px!important;font-size:7px!important}
+  body[data-game-screen="opening"] .profession-dialog>.opening-topline{display:none!important}
+  body[data-game-screen="opening"] .profession-dialog>.opening-titlebar{grid-row:2!important;padding:5px 12px!important}
+  body[data-game-screen="opening"] .opening-title-copy h2{font-size:19px!important}
+  body[data-game-screen="opening"] .opening-title-copy span{font-size:7px!important}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-steps{
+    grid-row:1/4!important;margin:60px 6px 0!important;
+  }
+  body[data-game-screen="opening"] .expedition-steps button{height:50px!important;min-height:50px!important}
+  body[data-game-screen="opening"] .expedition-steps button>b{width:25px!important;height:25px!important;font-size:10px!important}
+  body[data-game-screen="opening"] .expedition-steps button span{font-size:9px!important}
+  body[data-game-screen="opening"] .profession-dialog>.expedition-page{grid-row:3!important;padding-top:5px!important}
+  body[data-game-screen="opening"] .party-page{grid-template-rows:23px minmax(0,1fr)!important}
+  body[data-game-screen="opening"] .party-toolbar{height:23px!important}
+  body[data-game-screen="opening"] .party-toolbar>button{min-height:21px!important;padding:1px 6px!important;font-size:8px!important}
+  body[data-game-screen="opening"] .party-toolbar>span{font-size:8px!important}
+  body[data-game-screen="opening"] .party-page .opening-choice-grid>.opening-step{
+    grid-template-rows:24px 108px 238px!important;
+  }
+  body[data-game-screen="opening"] .party-page .profession-list,
+  body[data-game-screen="opening"] .party-page .faction-list{height:108px!important}
+  body[data-game-screen="opening"] .party-page .profession-list button,
+  body[data-game-screen="opening"] .party-page .faction-list button{height:102px!important;min-height:102px!important}
+  body[data-game-screen="opening"] .party-page .faction-list button{padding-top:67px!important}
+  body[data-game-screen="opening"] .party-page .faction-list button::before{height:57px!important}
+  body[data-game-screen="opening"] .party-page .choice-detail{
+    height:238px!important;min-height:238px!important;
+  }
+  body[data-game-screen="opening"] .party-page .choice-detail>div{height:238px!important}
+  body[data-game-screen="opening"] .party-page .choice-detail>section{padding:8px!important}
+  body[data-game-screen="opening"] .party-page .choice-detail p{font-size:9px!important;line-height:1.4!important;margin:4px 0!important}
+  body[data-game-screen="opening"] .party-page .choice-detail h5{font-size:9px!important;margin-top:5px!important}
+  body[data-game-screen="opening"] .hero-skill-list span{min-height:40px!important;padding-top:21px!important;font-size:8px!important}
+  body[data-game-screen="opening"] .faction-roster-list>span{grid-template-rows:43px auto!important}
+  body[data-game-screen="opening"] .faction-roster-list b{font-size:8px!important}
+  body[data-game-screen="opening"] .faction-roster-list>small{font-size:8px!important;margin-top:3px!important}
+}
+
+/* v0.82.6 — requested PAGE 2 header positions and fully visible detail content. */
+@media (min-width:901px){
+  body[data-game-screen="opening"][data-opening-page="party"] .profession-dialog>.opening-titlebar{
+    position:relative!important;display:grid!important;place-items:center!important;padding:0 140px!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .opening-title-copy{
+    display:grid!important;place-items:center!important;text-align:center!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .opening-title-copy>p{
+    display:block!important;margin:0!important;color:#c9ae68!important;font:700 13px Georgia,serif!important;letter-spacing:3px!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .opening-title-copy>h2,
+  body[data-game-screen="opening"][data-opening-page="party"] .opening-title-copy>span{display:none!important}
+  body[data-game-screen="opening"][data-opening-page="party"] .party-toolbar{
+    position:fixed!important;z-index:70!important;left:124px!important;top:12px!important;width:auto!important;height:42px!important;margin:0!important;
+    display:flex!important;align-items:center!important;background:transparent!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .party-toolbar>#td-change-battlefield{
+    min-height:31px!important;padding:5px 10px!important;font-size:10px!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .party-toolbar>#td-party-battlefield{
+    margin-left:8px!important;font-size:9px!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page{
+    grid-template-rows:minmax(0,1fr)!important;padding-top:5px!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .opening-choice-grid>.opening-step{
+    grid-template-rows:24px 104px 280px!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .profession-list,
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .faction-list{height:104px!important}
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .profession-list button,
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .faction-list button{height:98px!important;min-height:98px!important}
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .faction-list button{padding-top:64px!important}
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .faction-list button::before{height:54px!important}
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .choice-detail{
+    height:280px!important;min-height:280px!important;overflow:visible!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .faction-detail{
+    grid-template-columns:27% minmax(0,1fr)!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .choice-detail>div{height:280px!important}
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .choice-detail>section{
+    min-width:0!important;width:auto!important;overflow:hidden!important;padding:9px!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .faction-roster-list>small{
+    display:block!important;grid-column:1/-1!important;white-space:normal!important;overflow:visible!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .party-page .opening-choice-grid>.expedition-summary{
+    position:absolute!important;z-index:1!important;left:auto!important;right:-238px!important;top:0!important;bottom:0!important;
+    width:230px!important;height:auto!important;overflow:hidden!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .faction-roster-list{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;width:100%!important;overflow:visible!important;
+  }
+  body[data-game-screen="opening"][data-opening-page="party"] .faction-roster-list>span{
+    min-width:0!important;width:auto!important;
+  }
+}
+
+/* v0.82.7 — compact PAGE 2, complete army content, and illustrated chief skills. */
+@media (min-width:901px){
+ body[data-game-screen="opening"][data-opening-page="party"] .profession-dialog{grid-template-rows:0 40px minmax(0,1fr)!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .profession-dialog>.opening-titlebar{grid-row:2!important;height:40px!important;padding:0 120px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .opening-title-copy>p{font-size:12px!important;letter-spacing:1.5px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .profession-dialog>.expedition-page{grid-row:3!important;padding-top:3px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-toolbar{position:fixed!important;left:120px!important;top:5px!important;height:30px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-toolbar>#td-change-battlefield{min-height:27px!important;padding:3px 8px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-toolbar>#td-party-battlefield{font-size:8px!important;letter-spacing:0!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page{padding-right:7px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .opening-choice-grid{position:relative!important;width:100%!important;max-width:none!important;display:grid!important;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr) 178px!important;gap:7px!important;overflow:hidden!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .opening-choice-grid>.opening-step{position:relative!important;inset:auto!important;width:auto!important;min-width:0!important;grid-template-rows:24px 104px minmax(0,1fr)!important;padding:7px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .opening-choice-grid>.expedition-summary{position:relative!important;inset:auto!important;width:auto!important;min-width:0!important;height:100%!important;padding:8px 7px 58px!important;overflow:hidden!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .choice-detail{height:280px!important;min-height:0!important;overflow:hidden!important;grid-template-columns:31% minmax(0,1fr)!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .choice-detail>div{height:100%!important;min-height:0!important;background-size:cover!important;background-position:center top!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .faction-detail{grid-template-columns:25% minmax(0,1fr)!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .faction-detail>div{background-size:cover!important;background-position:54% center!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .choice-detail>section{overflow:hidden!important;padding:7px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .choice-detail h4{font-size:14px!important;margin:2px 0!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .choice-detail b{font-size:9px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .choice-detail p{font-size:8px!important;line-height:1.3!important;margin:3px 0!important;letter-spacing:0!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .phase-strip{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:2px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .phase-strip span{font-size:7px!important;padding:3px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .faction-roster-list{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:3px!important;overflow:hidden!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .faction-roster-list>span{grid-template-rows:41px auto!important;min-width:0!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .faction-roster-list i{background-size:cover!important;background-position:center!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .faction-roster-list b{font-size:6.5px!important;line-height:1.1!important;white-space:normal!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .faction-roster-list>small{font-size:7px!important;line-height:1.2!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .summary-map{height:50px!important;margin:5px 0!important;padding:30px 5px 4px!important;font-size:8px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .expedition-summary dl>div{padding:3px 0!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .expedition-summary dt{font-size:7px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .expedition-summary dd{font-size:9px!important;letter-spacing:0!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .expedition-summary .summary-times,body[data-game-screen="opening"][data-opening-page="party"] #td-combination-hint{display:none!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .expedition-summary .opening-actions{left:7px!important;right:7px!important;bottom:7px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .expedition-summary .art-loading{display:none!important}
+ body[data-game-screen="opening"][data-opening-page="party"] #td-start-expedition{height:39px!important;min-height:39px!important;font-size:11px!important;letter-spacing:.5px!important;padding:5px!important}
+}
+.hero-skill-list[data-hero="chief"] span{position:relative;padding-top:30px!important;background:#0c1111!important}
+.hero-skill-list[data-hero="chief"] span::before{content:"";position:absolute;top:2px;left:50%;width:26px;height:26px;transform:translateX(-50%);background-image:url('assets/td/opening/chief-skill-icons-v1.png');background-size:200% 200%;background-repeat:no-repeat;border:1px solid #a96b43;box-shadow:0 0 9px #ff713955}
+.hero-skill-list[data-hero="chief"] span[data-skill-index="0"]::before{background-position:0 0}.hero-skill-list[data-hero="chief"] span[data-skill-index="1"]::before{background-position:100% 0}.hero-skill-list[data-hero="chief"] span[data-skill-index="2"]::before{background-position:0 100%}
+body[data-hero-class="chief"] #td-skill-button b,body[data-hero-class="chief"] #td-thunder b,body[data-hero-class="chief"] #td-summon b,body[data-hero-class="chief"] #td-ultimate b{color:transparent;background-image:url('assets/td/opening/chief-skill-icons-v1.png');background-size:200% 200%;background-repeat:no-repeat;border-radius:4px}
+body[data-hero-class="chief"] #td-skill-button b{background-position:0 0}body[data-hero-class="chief"] #td-thunder b{background-position:100% 0}body[data-hero-class="chief"] #td-summon b{background-position:0 100%}body[data-hero-class="chief"] #td-ultimate b{background-position:100% 100%}
+.hero-skill-list[data-hero="chief"] span[data-skill-index="2"]::before{background-image:url('assets/td/combat-art/chief-shockwave-icon-v1.png');background-size:cover;background-position:center}
+body[data-hero-class="chief"] #td-summon b{background-image:url('assets/td/combat-art/chief-shockwave-icon-v1.png');background-size:cover;background-position:center}
+
+/* v0.82.7 visual QA corrections: pin the compact summary in the unused right rail. */
+@media (min-width:901px){
+ body[data-game-screen="opening"][data-opening-page="party"] .opening-title-copy{position:fixed!important;left:55%!important;top:8px!important;transform:translateX(-50%)!important;z-index:72!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page{padding-right:190px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .opening-choice-grid{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)!important;overflow:visible!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .opening-choice-grid>.expedition-summary{position:fixed!important;left:auto!important;right:12px!important;top:82px!important;bottom:auto!important;width:172px!important;height:320px!important;z-index:8!important;padding:8px 7px 58px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .faction-roster-list{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;width:100%!important}
+}
+@media (min-width:901px){
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page{position:relative!important;padding-right:7px!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .opening-choice-grid{position:relative!important;box-sizing:border-box!important;padding-right:185px!important;overflow:hidden!important}
+ body[data-game-screen="opening"][data-opening-page="party"] .party-page .opening-choice-grid>.expedition-summary{position:absolute!important;left:auto!important;right:0!important;top:0!important;bottom:auto!important;width:178px!important;height:320px!important;z-index:8!important}
+}
+.armory-dialog{width:min(1040px,calc(100vw - 32px));max-height:90svh}
+.armory-dialog>p,.armory-message{font-size:14px;line-height:1.55}
+.armory-items{gap:12px}
+.armory-item{grid-template-columns:76px minmax(0,1fr) auto;min-height:112px;gap:14px;padding:12px}
+.armory-item small{font-size:12px;letter-spacing:0}
+.armory-item b{font-size:19px;line-height:1.3}
+.armory-item em{font-size:14px;line-height:1.5}
+.armory-card-actions{display:grid;justify-items:end;gap:8px}
+.gear-status{display:block;max-width:150px;color:#d9c58a;font-size:12px;line-height:1.4;text-align:right}
+.armory-card-actions button{min-height:36px;padding:6px 12px;border:1px solid #d5ad63;background:#302616;color:#ffe0a0;font-size:14px;cursor:pointer}
+.armory-item[data-equipped="true"] .gear-status{color:#83dfb1}
+.equip-dialog{width:min(680px,calc(100vw - 32px))}
+.equip-dialog .armory-items{grid-template-columns:1fr}
+#td-unit-equip[hidden],#td-equip-screen[hidden]{display:none!important}
+body[data-layout="desktop"] .armory-dialog{width:min(1040px,calc(100vw - 32px));max-height:86svh;padding:20px}
+body[data-layout="desktop"] .armory-item{grid-template-columns:76px minmax(0,1fr) auto;min-height:112px;padding:12px}
+body[data-layout="desktop"] .armory-item>i{width:72px;height:72px}
+body[data-layout="desktop"] .equip-dialog{width:min(680px,calc(100vw - 32px))}
+body[data-layout="mobile"] .armory-item{grid-template-columns:60px minmax(0,1fr) auto;min-height:94px;padding:9px}
+body[data-layout="mobile"] .armory-item b{font-size:16px}
+body[data-layout="mobile"] .armory-item em{font-size:12px}
+body[data-layout="mobile"] .armory-card-actions button{font-size:12px}

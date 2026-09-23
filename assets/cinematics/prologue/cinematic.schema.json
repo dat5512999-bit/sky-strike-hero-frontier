@@ -1,0 +1,493 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HERO FRONTIER Prologue Cinematic V1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "cinematicId",
+    "title",
+    "duration",
+    "videoAsset",
+    "shots",
+    "subtitles",
+    "characters",
+    "locations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "cinematicId": {
+      "const": "prologue_before_shattered_peace"
+    },
+    "title": {
+      "type": "string"
+    },
+    "duration": {
+      "const": 60
+    },
+    "videoAsset": {
+      "type": "string"
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/$defs/shot"
+      }
+    },
+    "subtitles": {
+      "$ref": "#/$defs/subtitles"
+    },
+    "characters": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "$ref": "#/$defs/character"
+      }
+    },
+    "locations": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "$ref": "#/$defs/location"
+      }
+    }
+  },
+  "$defs": {
+    "character": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "status",
+        "referenceAsset",
+        "revision",
+        "continuity"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pending-approval",
+            "approved"
+          ]
+        },
+        "referenceAsset": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "continuity": {
+          "type": "object",
+          "required": [
+            "faceIdentity",
+            "hair",
+            "costume",
+            "factionSymbol",
+            "bodyProportion",
+            "ageAppearance",
+            "weapon"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "faceIdentity": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "hair": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "costume": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "factionSymbol": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "bodyProportion": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "ageAppearance": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "weapon": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "approved"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "referenceAsset": {
+                "type": "string",
+                "minLength": 1
+              },
+              "revision": {
+                "type": "string",
+                "minLength": 1
+              },
+              "continuity": {
+                "properties": {
+                  "faceIdentity": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "hair": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "costume": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "factionSymbol": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "bodyProportion": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "ageAppearance": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "weapon": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "location": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "status",
+        "referenceAsset",
+        "revision",
+        "continuity"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pending-approval",
+            "approved"
+          ]
+        },
+        "referenceAsset": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "continuity": {
+          "type": "object",
+          "required": [
+            "architecture",
+            "banner",
+            "factionSymbol",
+            "cityLayout",
+            "visualLanguage"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "architecture": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "banner": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "factionSymbol": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cityLayout": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "visualLanguage": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "approved"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "referenceAsset": {
+                "type": "string",
+                "minLength": 1
+              },
+              "revision": {
+                "type": "string",
+                "minLength": 1
+              },
+              "continuity": {
+                "properties": {
+                  "architecture": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "banner": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "factionSymbol": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "cityLayout": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "visualLanguage": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "shot": {
+      "type": "object",
+      "required": [
+        "id",
+        "start",
+        "end",
+        "title",
+        "imageAsset",
+        "description",
+        "characterRefs",
+        "locationRefs",
+        "direction"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "start": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 60
+        },
+        "end": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 60
+        },
+        "title": {
+          "type": "string"
+        },
+        "imageAsset": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string"
+        },
+        "characterRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "locationRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "subtitles": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "timeUnit",
+        "format",
+        "defaultLanguage",
+        "tracks",
+        "cues"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "timeUnit": {
+          "const": "seconds"
+        },
+        "format": {
+          "const": "WebVTT"
+        },
+        "defaultLanguage": {
+          "enum": [
+            "zh-TW",
+            "en",
+            "ja"
+          ]
+        },
+        "tracks": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "language",
+              "label",
+              "status",
+              "src"
+            ],
+            "properties": {
+              "language": {
+                "enum": [
+                  "zh-TW",
+                  "en",
+                  "ja"
+                ]
+              },
+              "label": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "concept",
+                  "approved",
+                  "pending-translation"
+                ]
+              },
+              "src": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "cues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "start",
+              "end",
+              "language",
+              "text"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "start": {
+                "type": "number",
+                "minimum": 0
+              },
+              "end": {
+                "type": "number",
+                "maximum": 60
+              },
+              "language": {
+                "enum": [
+                  "zh-TW",
+                  "en",
+                  "ja"
+                ]
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

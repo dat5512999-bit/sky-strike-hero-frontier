@@ -2,6 +2,11 @@ node_modules/
 .npm-cache/
 *.log
 
+# Local worktrees, release backups, and QA captures are not source releases.
+.worktrees/
+artifacts/
+_site/
+
 # Local concept/reference archive; the playable game does not load these files.
 assets/td/reference/
 

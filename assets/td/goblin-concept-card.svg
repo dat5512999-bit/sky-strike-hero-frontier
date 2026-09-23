@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 620" role="img" aria-label="地精工程團測試概念圖">
+ <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#162529"/><stop offset="1" stop-color="#433221"/></linearGradient><radialGradient id="core"><stop stop-color="#eaffd7"/><stop offset=".45" stop-color="#85dac8"/><stop offset="1" stop-color="#347d80"/></radialGradient></defs>
+ <rect width="480" height="620" fill="url(#bg)"/>
+ <path d="M0 472h480M45 470V227h66V138h55v332m130 0V165h70v305m28 0V239h48v231" fill="none" stroke="#7e6547" stroke-width="16"/>
+ <path d="M52 230h108m136-62h74m-28 65h94M0 511h480" fill="none" stroke="#b58b57" stroke-width="7"/>
+ <circle cx="240" cy="297" r="146" fill="#18292d" stroke="#b88f53" stroke-width="18" stroke-dasharray="26 12"/>
+ <circle cx="240" cy="297" r="94" fill="#463f32" stroke="#d1ad6c" stroke-width="11"/>
+ <circle cx="240" cy="297" r="58" fill="url(#core)" stroke="#f3d58c" stroke-width="9"/>
+ <path d="M240 203v-96m-94 190H50m284 0h96m-190 94v89" fill="none" stroke="#7bd3c4" stroke-width="7"/>
+ <circle cx="240" cy="107" r="11" fill="#f2bb71"/><circle cx="50" cy="297" r="11" fill="#f2bb71"/><circle cx="430" cy="297" r="11" fill="#f2bb71"/>
+ <rect x="40" y="512" width="400" height="69" rx="6" fill="#1d292b" stroke="#b88f53" stroke-width="3"/>
+ <text x="240" y="543" text-anchor="middle" font-family="sans-serif" font-size="26" font-weight="700" fill="#f3d58c">地精工程團</text>
+ <text x="240" y="567" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#a7e6d7">TESTABLE · CONCEPT ART</text>
+</svg>

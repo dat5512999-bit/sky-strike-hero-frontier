@@ -4,7 +4,20 @@
     width:720,height:720,roadClearance:55,roadUnits:true,startGold:240,startLumber:5,baseHealth:20,totalWaves:30,wave:{firstPreparation:18,preparation:12},
     path:[{x:-30,y:42},{x:155,y:94},{x:385,y:112},{x:540,y:164},{x:585,y:265},{x:558,y:350},{x:420,y:365},{x:235,y:350},{x:120,y:390},{x:104,y:486},{x:190,y:548},{x:390,y:574},{x:600,y:620},{x:750,y:690}],
     damageMultipliers:{pierce:{light:1.35,heavy:.75,arcane:1},magic:{light:.8,heavy:1.25,arcane:.7},chaos:{light:1,heavy:.9,arcane:1.35}},
+    frostRules:{"threshold":100,"slowStart":30,"maxSlow":0.4,"freezeDuration":1.6,"deepDuration":2.5,"deepSlow":0.7,"deepVulnerability":0.12,"decayDelay":2,"decayPerSecond":12,"recovery":3,"extensionCap":0.6,"shatterRadius":60,"winterDuration":6,"winterFrost":26,"chainRadius":75,"chainFrost":25,"chainDamage":32,"chainDepth":2,"chainBudget":24,"normal":{"frost":0,"freeze":0},"elite":{"frost":0.35,"freeze":0.5},"boss":{"frost":0.6,"freeze":0.25}},
     units:{
+      frostWolf:{"name":"冰原狼人","icon":"狼","cost":75,"wood":1,"damage":14,"range":125,"interval":0.55,"frost":16,"frozenBonus":1.2,"color":"#b6a68b","style":"claw","role":"開局累寒｜搭雪徑獵手點殺或暴雪祭壇清群；爪擊 +16 Frost；凍結傷害 ×1.2","health":100,"attackType":"chaos","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+      frostBear:{"name":"冰原巨熊","icon":"熊","cost":180,"wood":3,"damage":32,"range":135,"interval":1.8,"frost":3,"shatter":2,"shatterRadius":65,"color":"#d8cdb0","role":"中期碎冰｜慢速重擊；窗口首擊額外 2 倍基礎傷害、65 範圍半額碎片；需控制者","health":100,"attackType":"chaos","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+      frostBird:{"name":"極凍鳥","icon":"翼","cost":145,"wood":2,"damage":8,"range":185,"interval":1.3,"frost":22,"chain":3,"chainRange":100,"color":"#97d8db","role":"中期群寒｜冷羽跳躍三個敵人各 +22 Frost；固定空中盤旋，不移動","health":100,"attackType":"chaos","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+      frostHunter:{"name":"雪徑獵手","icon":"弓","cost":125,"wood":2,"damage":31,"range":245,"interval":1.35,"frost":5,"frozenBonus":2.2,"color":"#b18e6c","attackType":"pierce","style":"arrow","role":"開局遠射補刀｜與冰原狼人搭配守第一波；窗口傷害 ×2.2，低累寒；可用獅心王弓","health":100,"faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+      frostShaman:{"name":"霜骨薩滿","icon":"骨","cost":165,"wood":2,"damage":5,"range":165,"interval":1.6,"frost":20,"freezeExtension":0.25,"frostAura":0.15,"color":"#bc9bc4","role":"中後期支援｜附近累寒 +15%（取最高）；命中延長窗口 .25 秒、每窗上限 .6 秒","health":100,"attackType":"chaos","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+      frostMammoth:{"name":"冰脊長毛巨獸","icon":"牙","cost":650,"wood":5,"damage":65,"range":160,"interval":2.4,"frost":4,"splash":35,"shatter":1.8,"shatterRadius":80,"color":"#b89a78","role":"後期終結｜35 範圍重踏、80 範圍碎冰；昂貴且慢，依賴寒冷鋪墊","health":100,"attackType":"chaos","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+
+      goblinEngineer:{name:'地精工程師',faction:'地精',icon:'⚙',cost:75,wood:1,health:78,damage:11,range:145,interval:.9,color:'#d9ad65',attackType:'pierce',style:'bullet',networkCost:1,role:'前期基礎射手｜在機械網路內獲得供能增幅'},
+      goblinGunner:{name:'連發火器手',faction:'地精',icon:'銃',cost:115,wood:2,health:80,damage:16,range:170,interval:.48,color:'#dfa35a',attackType:'pierce',style:'bullet',networkCost:1,role:'快速單體射擊｜重甲效率較低'},
+      goblinRiveter:{name:'鉚釘重射手',faction:'地精',icon:'鉚',cost:150,wood:2,health:90,damage:43,range:215,interval:1.7,color:'#bfc8c4',attackType:'pierce',style:'bullet',armorPierce:7,networkCost:1,role:'遠距穿甲｜低攻速'},
+      goblinRecycler:{name:'回收技師',faction:'地精',icon:'♻',cost:130,wood:2,health:85,damage:6,range:125,interval:1.1,color:'#a7d2a1',attackType:'chaos',networkCost:1,role:'低輸出｜供電時協助附近一座機械 +8% 傷害'},
+      goblinMech:{name:'重型工程機偶',faction:'地精',icon:'▣',cost:550,wood:5,health:260,damage:84,range:175,interval:1.8,splash:55,color:'#d6a774',attackType:'chaos',style:'cannon',networkCost:2,role:'後期重砲｜需供電，超載後有冷卻窗口'},
       royalCommander:{name:'皇家重裝統領',faction:'王國',icon:'冠',cost:750,wood:5,health:260,damage:100,range:165,interval:1.5,splash:38,color:'#f3ce75',attackType:'chaos',style:'lightning',ultimate:true,commandHaste:.18,role:'終極士兵｜重鎚濺射｜165 範圍其他士兵攻速 +18%（同類取最高）'},
       soulsteel:{name:'深淵魂鋼魔像',faction:'暗影',icon:'魂',cost:850,wood:6,health:350,damage:120,range:145,interval:1.8,splash:48,color:'#b78aff',attackType:'chaos',style:'spirit',ultimate:true,soulSlam:true,role:'終極士兵｜每次攻擊有 3 魂則消耗，傷害 ×1.5、震地範圍 +20；無魂仍攻擊'},
       kingdomMage:{name:'王國魔法師',icon:'ϟ',cost:110,wood:2,health:75,damage:19,range:162,interval:1.15,color:'#71bcff',attackType:'magic',style:'lightning',kingdomBounce:true,role:'彈射 2／3／4 次｜Lv3 感電'},
@@ -15,7 +28,7 @@
       blacksmith:{name:'流浪鐵匠',icon:'⚒',cost:130,wood:0,health:100,damage:0,range:165,interval:1,color:'#ffcd87',attackType:'chaos',supportOnly:true,forgeAura:.2,role:'附近防禦塔傷害 +20%（不疊加）'},
       timeMage:{name:'時間術士',icon:'◷',cost:170,wood:0,health:80,damage:0,range:155,interval:1,color:'#9bd9ff',attackType:'magic',supportOnly:true,timeAura:.3,role:'每 8 秒加速附近友軍 3 秒'},
 
-      hunter:{name:'王國獵手',icon:'➶',cost:70,wood:1,health:92,armor:1,damage:17,range:150,interval:.68,speed:122,color:'#e6c56c',attackType:'pierce',role:'廉價多重箭｜Lv1～5 射擊 2／3／3／4／4 個不同目標'},
+      hunter:{name:'王國獵手',icon:'➶',cost:70,wood:1,health:92,armor:1,damage:17,range:150,interval:.68,speed:122,color:'#e6c56c',attackType:'pierce',role:'廉價多重箭｜Lv1～5 射擊 2／2／3／4／4 個不同目標'},
       arcanist:{name:'奧術學徒',icon:'✦',cost:85,wood:1,health:72,armor:0,damage:15,range:140,interval:.9,speed:104,color:'#ff8a52',attackType:'magic',splash:48,arcaneMark:true,role:'中期範圍魔法｜施加奧術印記，配合月刃彈射'},
       rogue:{name:'暗影盜賊',faction:'暗影',icon:'◆',cost:65,wood:1,health:80,armor:0,damage:11,range:118,interval:.45,speed:148,color:'#c884df',attackType:'chaos',bountyBonus:.35,role:'快速賞金收尾'},
       shield:{name:'王國盾衛',faction:'王國',icon:'盾',cost:105,wood:2,health:185,armor:5,damage:18,range:90,interval:.92,speed:92,color:'#6da4e8',attackType:'chaos',role:'低價控場｜每第四擊以小範圍盾震強力緩速'},
@@ -30,9 +43,28 @@
       golem:{name:'魂鋼魔像',faction:'暗影',icon:'像',cost:148,wood:3,health:218,armor:5,damage:34,range:94,interval:1.12,speed:76,color:'#9f72df',attackType:'chaos',splash:36,bonusVsHeavy:1.3,role:'中價破陣｜震地範圍攻擊，對重甲傷害 +30%'},
       banshee:{name:'暮影女妖',faction:'暗影',icon:'魅',cost:137,wood:2,health:82,armor:0,damage:14,range:164,interval:.98,speed:121,color:'#be9eff',attackType:'magic',chain:2,chainRange:104,style:'spirit',vulnerability:.12,role:'詛咒輔助｜連鎖命中使其他來源傷害 +12%，持續 4 秒'},
       boneRider:{name:'幽騎骸將',faction:'暗影',icon:'騎',cost:158,wood:3,health:173,armor:3,damage:30,range:96,interval:.88,speed:153,color:'#b995ef',attackType:'chaos',splash:19,style:'spirit',executeThreshold:.3,executeMultiplier:1.45,role:'殘血收割｜目標低於 30% 生命時傷害 ×1.45'},
-      orc:{name:'赤牙勇士',faction:'半獸人',icon:'斧',cost:125,wood:2,health:205,armor:4,damage:31,range:86,interval:.82,speed:106,color:'#e46c4d',attackType:'chaos',splash:24,role:'重擊戰吼'}
+      orc:{name:'赤牙狂戰士',faction:'荒野',icon:'斧',cost:125,wood:2,health:205,armor:4,damage:31,range:86,interval:.82,speed:106,color:'#e46c4d',attackType:'chaos',splash:24,berserk:true,role:'前期個體｜擊殺累積狂戰攻速；第四擊重斬｜缺點：短射程'},
+      centaur:{name:'人馬獵手',faction:'荒野',icon:'弓',cost:145,wood:2,health:118,armor:1,damage:27,range:238,interval:1.08,speed:142,color:'#d79458',attackType:'pierce',chain:2,chainRange:78,style:'arrow',role:'長線穿透｜箭矢沿敵群再穿一體｜缺點：轉角與重甲效率低'},
+      boarRider:{name:'戰豬騎兵',faction:'荒野',icon:'豬',cost:170,wood:3,health:190,armor:3,damage:38,range:128,interval:2.8,speed:132,color:'#d85d42',attackType:'chaos',splash:30,charge:true,role:'短距衝鋒｜沿衝鋒線撞擊敵群｜缺點：攻擊空窗長'},
+      minotaur:{name:'戰牛破陣者',faction:'荒野',icon:'牛',cost:720,wood:5,health:315,armor:5,damage:104,range:112,interval:1.75,speed:82,color:'#b94f39',attackType:'chaos',splash:78,tribalSlam:true,role:'荒野壓軸重兵｜重甲震地破陣｜高造價、短射程'},
+      shaman:{name:'祖靈薩滿',faction:'荒野',icon:'靈',cost:185,wood:3,health:92,armor:0,damage:8,range:175,interval:1.4,speed:96,color:'#62d9f2',attackType:'magic',chain:2,chainRange:98,style:'lightning',ancestralAura:.12,role:'戰團支援｜附近荒野士兵傷害 +12%｜缺點：自身輸出低'}
     },
     buildings:{
+      frostCrystal:{"name":"冰晶尖塔","icon":"晶","cost":90,"wood":2,"damage":14,"range":170,"interval":0.85,"frost":25,"color":"#86dbe8","role":"前期 Frost Generator｜穩定 +25 Frost，直接傷害低","attackType":"magic","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+      frostBlizzard:{"name":"暴雪祭壇","icon":"雪","cost":150,"wood":3,"damage":29,"range":160,"interval":1.2,"frost":28,"splash":62,"color":"#a9b9c9","role":"開局清群累寒｜搭冰原狼人守路口；62 範圍各 +28 Frost、逐步減速","attackType":"magic","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+      frostBallista:{"name":"碎冰重弩","icon":"弩","cost":195,"wood":3,"damage":35,"range":270,"interval":2,"frost":0,"shatter":2.4,"shatterRadius":58,"attackType":"pierce","style":"arrow","color":"#ae9473","role":"長距碎冰｜窗口首擊額外 2.4 倍基礎傷害；無 Frost 產出","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+      frostTotem:{"name":"霜骨圖騰","icon":"骨","cost":140,"wood":2,"damage":0,"range":175,"interval":1,"supportOnly":true,"frostAura":0.3,"color":"#cabb99","role":"支援｜附近 Frost 產出 +30%，同類及薩滿取最高；無直接輸出","attackType":"magic","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+      frostObelisk:{"name":"霜墓尖碑","icon":"碑","cost":225,"wood":3,"damage":20,"range":180,"interval":1.8,"frost":10,"chain":3,"shatter":1.2,"shatterRadius":55,"color":"#8c92b8","role":"中後期連鎖碎冰｜攻擊三個鄰近敵人，已凍結者各有一次碎冰窗口","attackType":"magic","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+      frostAurora:{"name":"極光獵台","icon":"光","cost":190,"wood":3,"damage":17,"range":220,"interval":1.1,"frost":15,"frozenBonus":1.8,"freezeExtension":0.2,"color":"#a0e3c0","role":"窗口維持｜命中延長 .2 秒、每窗共限 .6 秒；窗口傷害 ×1.8","attackType":"magic","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+      frostGlacier:{"name":"冰河核心","icon":"河","cost":420,"wood":5,"damage":18,"range":215,"interval":2.6,"frost":50,"splash":92,"color":"#82bdcd","role":"後期大範圍控制｜92 範圍 +50 Frost；造價高、攻擊空窗長","attackType":"magic","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
+
+      goblinGenerator:{name:'動力機座',faction:'地精',icon:'⚙',cost:125,wood:2,damage:0,range:175,interval:1,color:'#8edbd0',attackType:'magic',supportOnly:true,role:'機械網路核心｜半徑 175，容量 3 + 每級 1'},
+      goblinTurret:{name:'鉚釘武器台',faction:'地精',icon:'⌾',cost:110,wood:2,damage:26,range:165,interval:.85,color:'#e2be79',attackType:'pierce',style:'bullet',networkCost:1,role:'基本火力｜接入網路傷害 +22%'},
+      goblinMortar:{name:'蒸汽迫擊砲',faction:'地精',icon:'●',cost:190,wood:3,damage:53,range:145,interval:1.8,splash:60,color:'#e8a46e',attackType:'chaos',style:'cannon',networkCost:2,role:'範圍火力｜供電需求 2'},
+      goblinSnare:{name:'絞索控制台',faction:'地精',icon:'⌗',cost:135,wood:2,damage:9,range:130,interval:1.25,slow:.55,slowTime:1.1,color:'#a4d3ce',attackType:'pierce',networkCost:1,role:'短射程控場｜供電需求 1'},
+      goblinRecycler:{name:'工料回收站',faction:'地精',icon:'♻',cost:160,wood:3,damage:0,range:155,interval:1,color:'#b8d793',attackType:'pierce',supportOnly:true,networkCost:1,role:'每 2 秒作戰得 12G，每波上限 72G；必須供電'},
+      goblinCooler:{name:'冷凝支援站',faction:'地精',icon:'◇',cost:140,wood:2,damage:0,range:155,interval:1,color:'#a2cbd6',attackType:'magic',supportOnly:true,networkCost:1,role:'網路支援節點｜附近過熱冷卻加快 50%；本身無攻擊'},
+      goblinSiege:{name:'重載攻城架',faction:'地精',icon:'▣',cost:360,wood:5,damage:95,range:195,interval:2.1,splash:70,color:'#e5a65c',attackType:'chaos',style:'cannon',networkCost:2,role:'後期範圍重砲｜供電需求 2，超載後停機'},
       supply:{name:'補給站',icon:'⌂',cost:90,wood:1,damage:0,range:170,interval:1,color:'#e0c997',attackType:'pierce',supportOnly:true,discount:.15,role:'附近部署與升級金幣 -15%（不疊加）'},
       battleflag:{name:'王國戰旗',icon:'⚑',cost:100,wood:2,damage:0,range:170,interval:1,color:'#e5bf61',attackType:'pierce',supportOnly:true,damageAura:.12,role:'附近士兵與英雄普攻 +12%（不疊加；不含技能與召喚物）'},
       armoryForge:{name:'軍械工坊',icon:'⚒',cost:110,wood:2,damage:0,range:170,interval:1,color:'#efb769',attackType:'pierce',supportOnly:true,forgeAura:.15,role:'附近防禦塔傷害 +15%（不疊加）'},
@@ -51,7 +83,11 @@
       graveyard:{name:'冥燈墓園',faction:'暗影',icon:'墓',cost:165,wood:3,damage:14,range:148,interval:1.16,color:'#a985ed',attackType:'magic',supportOnly:true,summonAura:.25,role:'召喚物傷害強化｜亡靈、靈獸與機械通用'},
       ballista:{name:'獅翼弩砲台',faction:'王國',icon:'獅',cost:155,wood:3,damage:26,range:190,interval:1.18,color:'#f0c76a',attackType:'pierce',shots:2,priorityTargets:['healer','commander','shaman','revenant','boss'],role:'遠距點殺｜優先支援怪'},
       moonwell:{name:'月泉稜鏡塔',faction:'精靈',icon:'月',cost:160,wood:3,damage:18,range:168,interval:1.08,color:'#a9c8ff',attackType:'magic',supportOnly:true,refractChance:.25,role:'折射附近魔法｜25% 複製一發（不連鎖複製）'},
-      plague:{name:'瘟疫尖碑',faction:'暗影',icon:'疫',cost:150,wood:2,damage:18,range:150,interval:1.18,color:'#8fe45d',attackType:'chaos',splash:38,plague:true,role:'瘟疫持續傷害｜死亡擴散一次'}
+      plague:{name:'瘟疫尖碑',faction:'暗影',icon:'疫',cost:150,wood:2,damage:18,range:150,interval:1.18,color:'#8fe45d',attackType:'chaos',splash:38,plague:true,role:'瘟疫持續傷害｜死亡擴散一次'},
+      warDrum:{name:'部族戰鼓塔',faction:'荒野',icon:'鼓',cost:175,wood:3,damage:0,range:178,interval:1,color:'#e76845',attackType:'chaos',supportOnly:true,drumPulse:8,drumDuration:3,tribalHaste:.28,role:'每 8 秒重拍｜附近荒野士兵爆發 3 秒；各兵種戰技同步強化'},
+      boulder:{name:'巨石投射塔',faction:'荒野',icon:'石',cost:210,wood:4,damage:68,range:168,interval:2.2,color:'#c88b55',attackType:'chaos',splash:78,style:'cannon',role:'慢速巨石｜專殺密集敵群｜缺點：單體與快怪效率低'},
+      thunderTotem:{name:'雷霆圖騰',faction:'荒野',icon:'雷',cost:190,wood:3,damage:24,range:172,interval:1.3,color:'#65dcff',attackType:'magic',chain:4,chainRange:108,style:'lightning',role:'四段雷鏈｜分散敵群效率低'},
+      totem:{name:'赤牙祖靈柱',faction:'荒野',icon:'✹',cost:150,wood:2,damage:28,range:125,interval:1.25,color:'#ffbe66',attackType:'chaos',splash:25,role:'收編戰契塔｜近距震地封鎖突破口｜缺點：射程短'}
     },
     hero:{maxHealth:100,speed:215,range:152,damage:18,interval:.58,novaDamage:30,novaRange:118,novaCooldown:9,respawnTime:8,respawnHealth:.65,invulnerability:2}
   });

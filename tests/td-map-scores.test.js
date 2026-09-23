@@ -22,10 +22,10 @@ test('V2 地圖紀錄依紀錄中的明確難度安全升級，不猜測缺少�
  const {B,storage,read}=setup({version:2,bestByMap:{beginner:1200},legacyBestScore:0,runs:[{map:'beginner',difficulty:'story',score:400},{map:'beginner',difficulty:'veteran',score:800},{map:'beginner',score:1200}]});
  const r=new B(storage);assert.equal(r.bestForMap('beginner'),1200);assert.equal(r.bestForDifficulty('beginner','story'),400);assert.equal(r.bestForDifficulty('beginner','veteran'),800);assert.equal(r.bestForDifficulty('beginner','calamity'),0);r.saveRecords();assert.equal(read().version,3);
 });
-test('每張地圖保留二十場且淘汰舊紀錄不會丟失最高分',()=>{
+test('每張地圖保留每場實際紀錄且最高分不會丟失',()=>{
  const {B,storage}=setup(),r=new B(storage);finish(r,'beginner',1000);finish(r,'twinpass',2000);
  for(let i=0;i<25;i++)finish(r,'beginner',i);
- assert.equal(r.recordsForMap('beginner').length,20);assert.equal(r.recordsForMap('twinpass').length,1);
+ assert.equal(r.recordsForMap('beginner').length,26);assert.equal(r.recordsForMap('twinpass').length,1);
  assert.equal(new B(storage).bestForMap('beginner'),1000);
 });
 test('舊版只依實際地圖分數歸類，混合最高分不灌入任一地圖',()=>{

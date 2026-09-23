@@ -8,7 +8,7 @@
       for(const m of monsters){
         let state=this.roots.get(m);
         if(!m.active){this.roots.delete(m);continue;}
-        if(m.rootTime>0){
+        if(m.rootTime>0&&!(m.frostStatus?.window>0&&!m.frostStatus.deep)){
           if(!state||state.ending){state={age:0,fade:0,ending:false};this.roots.set(m,state);}
           state.age+=dt;
         }else if(state){state.ending=true;state.fade+=dt;if(state.fade>=.38)this.roots.delete(m);}
@@ -90,13 +90,18 @@
         ctx.restore();offset+=15;
       }
     }
-    push(item){const cap=this.mobile?90:140;if(['damage','gold','mote'].includes(item.type)&&this.items.filter(i=>i.type===item.type).length>=(this.mobile?18:30))return;this.items.push(item);if(this.items.length>cap)this.items.splice(0,this.items.length-cap);}
+    push(item){const cap=this.mobile?90:140;if(['damage','gold','mote','dust'].includes(item.type)&&this.items.filter(i=>i.type===item.type).length>=(this.mobile?18:30))return;this.items.push(item);if(this.items.length>cap)this.items.splice(0,this.items.length-cap);}
     visualPosition(monster){return typeof monster.visualPosition==='function'?monster.visualPosition():{x:monster.x,y:monster.y};}
-    hit(monster,damage,critical,color){
-      const position=this.visualPosition(monster);
-      monster.criticalFlash=critical?.16:0;this.push({type:'impact',x:position.x,y:position.y,time:critical?.3:.22,max:critical?.3:.22,heavy:critical,color:color||'#fff1b2'});
+    static impactKind(source){const style=source&&source.style;if(style==='ice')return'ice';if(style==='lightning')return'lightning';if(style==='nature')return'nature';if(style==='arrow'||style==='bullet'||(source&&source.attackType==='pierce'))return'pierce';if(style==='claw'||style==='moon'||(source&&source.attackType==='chaos'))return'slash';return'arcane';}
+    static impactColor(source,kind){if(typeof source==='string')return source;if(source&&source.color)return source.color;return({ice:'#aeeeff',lightning:'#d8e8ff',nature:'#c4f49d',pierce:'#ffe2a1',slash:'#ff9b74',arcane:'#d9b7ff'})[kind]||'#fff1b2';}
+    hit(monster,damage,critical,source){
+      const position=this.visualPosition(monster),hasDirection=Boolean(source&&typeof source==='object'&&(Number.isFinite(source.x)||Number.isFinite(source.startX))&&(Number.isFinite(source.y)||Number.isFinite(source.startY))),origin={x:Number.isFinite(source&&source.x)?source.x:Number.isFinite(source&&source.startX)?source.startX:position.x,y:Number.isFinite(source&&source.y)?source.y:Number.isFinite(source&&source.startY)?source.startY:position.y},dx=position.x-origin.x,dy=position.y-origin.y,length=Math.hypot(dx,dy)||1,normal={x:dx/length,y:dy/length},radius=Math.max(8,monster.radius||16),kind=CombatFeedbackSystem.impactKind(source),color=CombatFeedbackSystem.impactColor(source,kind),contact=hasDirection?{x:position.x+normal.x*radius*.58,y:position.y+normal.y*radius*.34-radius*.24}:position;
+      const kick=critical?6:3.5,duration=critical?.16:.12;if(typeof monster.setHitKick==='function')monster.setHitKick(normal.x*kick,normal.y*kick*.38,duration);else{monster.hitKickX=normal.x*kick;monster.hitKickY=normal.y*kick*.38;monster.hitKickDuration=duration;monster.hitKickTime=duration;}
+      monster.criticalFlash=critical?.16:0;this.push({type:'impact',x:contact.x,y:contact.y,time:critical?.3:.22,max:critical?.3:.22,heavy:critical,color,kind,incomingX:normal.x,incomingY:normal.y});
+      this.push({type:'dust',x:position.x-normal.x*radius*.18,y:position.y+4,time:critical?.28:.2,max:critical?.28:.2,directionX:normal.x,directionY:normal.y,color:kind==='ice'?'#c5edff':'#c4a678'});
       this.push({type:'damage',x:position.x+(Math.random()-.5)*12,y:position.y-monster.radius-12,time:.78,max:.78,value:Math.max(1,Math.round(damage)),critical:Boolean(critical)});
     }
+    drawGround(ctx){this.items.forEach(function(item){if(item.type!=='dust')return;const ratio=Math.max(0,item.time/item.max),age=1-ratio;ctx.save();ctx.globalAlpha=ratio*.48;ctx.fillStyle=item.color;for(let i=0;i<3;i++){const spread=(i-1)*6+item.directionX*age*11,rise=Math.abs(i-1)*2-item.directionY*age*5;ctx.beginPath();ctx.ellipse(item.x+spread,item.y+rise,4+age*3,1.5+age,0,0,Math.PI*2);ctx.fill();}ctx.restore();});}
     gold(monster,value){const position=this.visualPosition(monster);this.push({type:'gold',x:position.x,y:position.y-8,time:1.05,max:1.05,value:Math.round(value)});}
     death(monster){
       const position=this.visualPosition(monster);
@@ -124,7 +129,11 @@
         if(item.type==='damage'||item.type==='gold'||item.type==='allyDamage'||item.type==='heal'){
           ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='rgba(3,5,5,.9)';ctx.fillStyle=item.type==='gold'?'#f5c85b':item.type==='heal'?'#7df09b':item.type==='allyDamage'?'#ff7b69':item.critical?'#ff823d':'#fff1d2';ctx.font=(item.critical?'900 19px ':'800 14px ')+'Segoe UI';const label=item.type==='gold'?('+'+item.value+' Gold'):item.type==='heal'?('治療 +'+item.value):(item.critical?'暴擊 '+item.value:'-'+item.value);const y=item.y-age*(item.type==='gold'?30:22);ctx.strokeText(label,item.x,y);ctx.fillText(label,item.x,y);
         }else if(item.type==='impact'){
-          ctx.translate(item.x,item.y);ctx.rotate(age*Math.PI);ctx.strokeStyle=item.color;ctx.shadowColor=item.color;ctx.shadowBlur=8;ctx.lineWidth=item.heavy?3:2;for(let i=0;i<(item.heavy?7:4);i++){ctx.rotate(Math.PI*2/(item.heavy?7:4));ctx.beginPath();ctx.moveTo(5,0);ctx.lineTo(8+age*(item.heavy?25:13),0);ctx.stroke();}
+          const angle=Math.atan2(item.incomingY||0,item.incomingX||1),rays=item.heavy?7:5,reach=age*(item.heavy?27:17);ctx.translate(item.x,item.y);ctx.strokeStyle=item.color;ctx.fillStyle='#fff7d6';ctx.shadowColor=item.color;ctx.shadowBlur=8;ctx.lineCap='round';ctx.lineWidth=item.heavy?3:2;
+          // This short streak keeps the visual contact point readable after a projectile retires.
+          ctx.globalAlpha=ratio*.7;ctx.beginPath();ctx.moveTo(-(item.incomingX||0)*Math.max(7,reach),-(item.incomingY||0)*Math.max(7,reach));ctx.lineTo(0,0);ctx.stroke();ctx.globalAlpha=ratio;ctx.beginPath();ctx.arc(0,0,item.heavy?4:3,0,Math.PI*2);ctx.fill();
+          for(let i=0;i<rays;i++){const fan=angle+Math.PI+(i-(rays-1)/2)*Math.PI/(rays-1||1),start=item.heavy?3:2,end=7+reach*(.62+(i%2)*.25);ctx.beginPath();ctx.moveTo(Math.cos(fan)*start,Math.sin(fan)*start);ctx.lineTo(Math.cos(fan)*end,Math.sin(fan)*end);ctx.stroke();}
+          if(item.kind==='ice'){ctx.strokeStyle='#efffff';ctx.lineWidth=1.5;for(let i=0;i<4;i++){const shard=angle+i*Math.PI/2;ctx.beginPath();ctx.moveTo(Math.cos(shard)*5,Math.sin(shard)*5);ctx.lineTo(Math.cos(shard)*Math.max(9,reach),Math.sin(shard)*Math.max(9,reach));ctx.stroke();}}
         }else if(item.type==='death'){
           ctx.strokeStyle=item.color;ctx.lineWidth=3;if(item.variant==='magic'){ctx.globalAlpha=ratio*.55;ctx.beginPath();ctx.moveTo(item.x-15*ratio,item.y);ctx.quadraticCurveTo(item.x+20,item.y-25-age*25,item.x,item.y-55*age);ctx.stroke();}ctx.beginPath();ctx.ellipse(item.x,item.y+4,10+age*(item.variant==='boss'?75:28),4+age*(item.variant==='boss'?28:12),0,0,Math.PI*2);ctx.stroke();
         }else if(item.type==='warning'){

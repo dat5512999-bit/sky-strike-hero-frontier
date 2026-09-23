@@ -1,0 +1,192 @@
+/* Ranking: readable data first, framed with the lobby's blue and gold visual language. */
+#frontier-app[data-page=ranking]{background-image:linear-gradient(90deg,#030b13d9 0%,#081523a3 28%,#06122089 100%),url('assets/td/lobby/kingdom-lobby-v1.png')}
+#frontier-app[data-page=ranking] .lobby-content{padding:12px clamp(12px,1.25vw,24px) 18px;background:linear-gradient(90deg,#06101ac9,#07111cd9);overflow:auto}
+#frontier-app[data-page=ranking] .lobby-nav{background:linear-gradient(90deg,#06101af7,#071321e9 86%,#071321a8)}
+#frontier-app[data-page=ranking] .ranking-page{min-height:100%;display:flex;flex-direction:column;gap:10px;color:#f4f0e6}
+#frontier-app[data-page=ranking] .rank-heading{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-shrink:0}
+#frontier-app[data-page=ranking] .rank-heading small{color:#e5c27c;font:11px/1.3 system-ui;letter-spacing:.22em}
+#frontier-app[data-page=ranking] .rank-heading h1{font-size:clamp(28px,2.7vw,48px);letter-spacing:.15em;margin:1px 0 2px;text-shadow:0 3px 8px #000}
+#frontier-app[data-page=ranking] .rank-heading h1 span{font:clamp(12px,1vw,17px)/1.3 Georgia,serif;letter-spacing:.2em;color:#e4c483;margin-left:8px}
+#frontier-app[data-page=ranking] .rank-heading p{font-size:13px;letter-spacing:.08em;color:#ddd3bd;margin:0}
+#frontier-app[data-page=ranking] .rank-preview-toggle{font:12px/1.2 system-ui;padding:6px 12px;min-height:34px;white-space:nowrap}
+#frontier-app[data-page=ranking] .rank-scope{margin:0;background:#0b2032e8;border:1px solid #bb9a5f;color:#ffe2a4;border-radius:4px;padding:8px 12px;font:13px/1.4 system-ui;flex-shrink:0}
+#frontier-app[data-page=ranking] .rank-layout{display:grid;grid-template-columns:minmax(0,1.78fr) minmax(310px,.98fr);gap:12px;flex:1;min-height:0}
+#frontier-app[data-page=ranking] .rank-list-panel,#frontier-app[data-page=ranking] .rank-detail-panel{background:linear-gradient(#061321f2,#07131ded);border:1px solid #9c845d;box-shadow:inset 0 0 0 4px #1723308f,0 8px 22px #0009;border-radius:5px;padding:8px;min-height:0}
+#frontier-app[data-page=ranking] .rank-list-panel{display:flex;flex-direction:column}
+#frontier-app[data-page=ranking] .rank-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:8px}
+#frontier-app[data-page=ranking] .rank-tabs button{display:grid;grid-template-columns:28px minmax(0,1fr);grid-template-rows:auto auto;column-gap:8px;text-align:left;align-content:center;padding:8px!important;min-height:62px;background:linear-gradient(#112233,#08131d)!important;border-color:#536577!important}
+#frontier-app[data-page=ranking] .rank-tabs button.active{border-color:#ffce83!important;background:linear-gradient(#71502b,#281c13 60%,#0e1d29)!important;box-shadow:inset 0 0 9px #e5ab58,0 0 7px #de9137}
+#frontier-app[data-page=ranking] .rank-tabs button>span{grid-row:1/3;align-self:center;font:27px/1 Georgia;color:#eec37b}
+#frontier-app[data-page=ranking] .rank-tabs b{font-size:clamp(12px,1.1vw,18px);white-space:nowrap}
+#frontier-app[data-page=ranking] .rank-tabs small{color:#c5c5bf;font:11px/1.3 system-ui;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#frontier-app[data-page=ranking] .rank-filters{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:2px 0 9px;font:12px/1.3 system-ui;color:#d8d1c2}
+#frontier-app[data-page=ranking] .rank-filters button{min-height:30px;padding:4px 9px;font:12px/1.1 system-ui}
+#frontier-app[data-page=ranking] .rank-filters button.active{border-color:#f0c778;color:#ffe0a2;background:#47331d}
+#frontier-app[data-page=ranking] .rank-table{flex:1;min-height:0;display:flex;flex-direction:column}
+#frontier-app[data-page=ranking] .rank-columns,#frontier-app[data-page=ranking] .rank-row{display:grid;grid-template-columns:54px minmax(130px,1.3fr) minmax(100px,.82fr) minmax(135px,1.1fr) minmax(95px,.82fr);align-items:center;gap:5px}
+#frontier-app[data-page=ranking] .rank-columns{background:#122638;border:1px solid #4d6070;min-height:31px;text-align:center;font-size:13px;font-weight:bold;letter-spacing:.04em}
+#frontier-app[data-page=ranking] .rank-rows{overflow:auto;min-height:0;scrollbar-color:#846a48 #0a1722}
+#frontier-app[data-page=ranking] .rank-row{width:100%;min-height:60px!important;padding:4px 6px!important;text-align:left;border:1px solid #364856!important;border-radius:3px!important;background:linear-gradient(90deg,#102333ed,#071521ed)!important;color:#f6f2eb!important}
+#frontier-app[data-page=ranking] .rank-row:nth-child(even){background:linear-gradient(90deg,#14293bec,#091924f2)!important}
+#frontier-app[data-page=ranking] .rank-row.first{background:linear-gradient(90deg,#4c311adc,#1a2734ed 52%,#4a2e1ac9)!important}
+#frontier-app[data-page=ranking] .rank-row.selected{border-color:#e5ae68!important;box-shadow:inset 0 0 14px #dba15150,0 0 4px #efb469}
+#frontier-app[data-page=ranking] .rank-row:focus-visible{outline:2px solid #ffdd96;outline-offset:-2px}
+#frontier-app[data-page=ranking] .rank-position{text-align:center;font-size:20px;color:#eee}
+#frontier-app[data-page=ranking] .rank-position.medal{color:#ffd590;font-size:25px;text-shadow:0 0 9px #d18128}
+#frontier-app[data-page=ranking] .rank-row:nth-child(2) .rank-position.medal{color:#cde1fb}
+#frontier-app[data-page=ranking] .rank-row:nth-child(3) .rank-position.medal{color:#e6a890}
+#frontier-app[data-page=ranking] .rank-player,#frontier-app[data-page=ranking] .rank-map{display:flex;align-items:center;gap:8px;min-width:0}
+#frontier-app[data-page=ranking] .rank-player img{width:42px;height:42px;object-fit:cover;object-position:center 20%;border-radius:50%;border:1px solid #e4b76c;flex:none}
+#frontier-app[data-page=ranking] .rank-player>span,#frontier-app[data-page=ranking] .rank-map>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+#frontier-app[data-page=ranking] .rank-player small,#frontier-app[data-page=ranking] .rank-map small{display:block;font:11px/1.5 system-ui;color:#bed1df}
+#frontier-app[data-page=ranking] .rank-faction{font-size:13px;text-align:center;color:#d9e6de}
+#frontier-app[data-page=ranking] .rank-map img{width:56px;height:40px;object-fit:cover;border:1px solid #9b8564;border-radius:3px;flex:none}
+#frontier-app[data-page=ranking] .rank-map .difficulty,#frontier-app[data-page=ranking] .rank-detail-run .difficulty{display:inline-block;width:max-content;color:#fff;padding:1px 5px;border-radius:3px;background:#27517a}
+#frontier-app[data-page=ranking] .difficulty.calamity{background:#8e2a30!important}
+#frontier-app[data-page=ranking] .difficulty.veteran{background:#713493!important}
+#frontier-app[data-page=ranking] .difficulty.standard{background:#23587f!important}
+#frontier-app[data-page=ranking] .rank-score{text-align:right;padding-right:7px;font-size:clamp(16px,1.3vw,22px);color:#ffdea8;font-variant-numeric:tabular-nums}
+#frontier-app[data-page=ranking] .rank-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:5px;padding:7px 2px 0;min-height:30px;color:#bfc8cf;font:11px/1.4 system-ui}
+#frontier-app[data-page=ranking] .rank-footer nav{display:flex;align-items:center;gap:7px}
+#frontier-app[data-page=ranking] .rank-footer button{min-height:29px;padding:3px 8px;font:11px/1.2 system-ui}
+#frontier-app[data-page=ranking] .rank-footer button:disabled{opacity:.4;cursor:default}
+#frontier-app[data-page=ranking] .rank-empty{display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 20px;min-height:260px;background:linear-gradient(#091927ca,#0a1b2ce0),url('assets/td/lobby/expedition-card-v1.png') center/cover;border:1px solid #40536a}
+#frontier-app[data-page=ranking] .rank-empty>span{font-size:44px;color:#edc37a}
+#frontier-app[data-page=ranking] .rank-empty h2{font-size:23px;margin:7px 0}
+#frontier-app[data-page=ranking] .rank-empty p{font:14px/1.6 system-ui;max-width:390px;color:#d5dce1;margin:0 0 14px}
+#frontier-app[data-page=ranking] .rank-empty button{border-color:#e9bf78;background:#493118;font-size:14px}
+#frontier-app[data-page=ranking] .rank-detail-panel{display:flex;flex-direction:column;position:relative;overflow:auto}
+#frontier-app[data-page=ranking] .rank-detail-hero{position:relative;min-height:190px;background:linear-gradient(0deg,#061421 3%,#07152322 67%),var(--rank-hero) center 24%/cover;border:1px solid #8d805f;display:flex;flex-direction:column;justify-content:space-between;padding:11px}
+#frontier-app[data-page=ranking] .rank-detail-place{font-size:28px;color:#f9d48a;text-shadow:0 2px 8px #000}
+#frontier-app[data-page=ranking] .rank-detail-hero h2{font-size:clamp(23px,1.8vw,34px);margin:0;text-shadow:0 3px 6px #000}
+#frontier-app[data-page=ranking] .rank-detail-hero p{font-size:13px;margin:4px 0;text-shadow:0 2px 4px #000}
+#frontier-app[data-page=ranking] .rank-detail-hero small{font:11px/1.3 system-ui;color:#ffdd9f;background:#061422bc;padding:3px 6px}
+#frontier-app[data-page=ranking] .rank-detail-content{display:flex;flex-direction:column;gap:8px;padding:9px 4px}
+#frontier-app[data-page=ranking] .rank-detail-content h3{font-size:15px;margin:0 0 5px;color:#efdab3;border-bottom:1px solid #80714e;padding-bottom:4px}
+#frontier-app[data-page=ranking] .rank-detail-run{display:flex;gap:9px}
+#frontier-app[data-page=ranking] .rank-detail-run img{width:35%;height:105px;object-fit:cover;border:1px solid #b1976c;border-radius:3px}
+#frontier-app[data-page=ranking] .rank-detail-run>div{display:flex;flex-direction:column;gap:3px;font-size:14px}
+#frontier-app[data-page=ranking] .rank-detail-run small{font:12px/1.3 system-ui;color:#d8e0e7}
+#frontier-app[data-page=ranking] .rank-detail-total{text-align:center;border-top:1px solid #997849;border-bottom:1px solid #997849;padding:4px;background:#2b2016aa}
+#frontier-app[data-page=ranking] .rank-detail-total span{display:block;color:#e4c78c;font-size:13px}
+#frontier-app[data-page=ranking] .rank-detail-total strong{font-size:clamp(26px,2vw,37px);color:#ffe0a0;letter-spacing:.05em}
+#frontier-app[data-page=ranking] .rank-equipment>div{display:flex;gap:5px;flex-wrap:wrap}
+#frontier-app[data-page=ranking] .rank-equipment span{border:1px solid #846e50;background:#14283a;padding:5px 7px;color:#dbdce2;font:11px/1.3 system-ui;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+#frontier-app[data-page=ranking] .rank-detail-placeholder{flex:1;position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:310px;padding:20px;background:#091724;overflow:hidden}
+#frontier-app[data-page=ranking] .rank-detail-placeholder img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7}
+#frontier-app[data-page=ranking] .rank-detail-placeholder:after{content:'';position:absolute;inset:30% 0 0;background:linear-gradient(transparent,#061421)}
+#frontier-app[data-page=ranking] .rank-detail-placeholder h2,#frontier-app[data-page=ranking] .rank-detail-placeholder p{position:relative;z-index:1;text-shadow:0 2px 4px #000}
+#frontier-app[data-page=ranking] .rank-detail-placeholder h2{margin:0}
+#frontier-app[data-page=ranking] .rank-detail-placeholder p{font:13px/1.6 system-ui}
+#frontier-app[data-page=ranking] .rank-rules-button{margin-top:auto;width:100%;min-height:36px;padding:5px 12px;font-size:14px;border-color:#d6ae6d}
+#frontier-app[data-page=ranking] .rank-rules{font:12px/1.55 system-ui;color:#d8dce0;background:#091724;padding:4px 12px}
+@media(max-width:1350px){
+ #frontier-app[data-page=ranking] .rank-layout{grid-template-columns:minmax(0,1.6fr) minmax(280px,.9fr)}
+ #frontier-app[data-page=ranking] .rank-columns,#frontier-app[data-page=ranking] .rank-row{grid-template-columns:43px minmax(100px,1.2fr) minmax(80px,.7fr) minmax(125px,1fr) minmax(85px,.7fr)}
+ #frontier-app[data-page=ranking] .rank-tabs button{grid-template-columns:20px minmax(0,1fr);column-gap:4px;padding:5px!important}
+ #frontier-app[data-page=ranking] .rank-tabs button>span{font-size:20px}
+}
+@media(max-width:1050px){
+ #frontier-app[data-page=ranking] .rank-layout{grid-template-columns:1fr;min-height:auto}
+ #frontier-app[data-page=ranking] .rank-detail-panel{min-height:290px}
+ #frontier-app[data-page=ranking] .rank-detail-hero{min-height:190px}
+ #frontier-app[data-page=ranking] .rank-rows{max-height:480px}
+}
+@media(max-width:1050px) and (min-width:651px) and (orientation:landscape){
+ #frontier-app[data-page=ranking]{grid-template-columns:108px minmax(0,1fr)}
+ #frontier-app[data-page=ranking] .lobby-nav{padding:5px;overflow:hidden}
+ #frontier-app[data-page=ranking] .lobby-logo{padding:0 0 6px}
+ #frontier-app[data-page=ranking] .lobby-logo>span{font-size:22px}
+ #frontier-app[data-page=ranking] .lobby-logo strong{font-size:20px}
+ #frontier-app[data-page=ranking] .lobby-logo small{font-size:8px;letter-spacing:1px}
+ #frontier-app[data-page=ranking] .lobby-nav nav button{min-height:35px!important;padding:3px!important;gap:4px}
+ #frontier-app[data-page=ranking] .lobby-nav nav button span{font-size:11px}
+ #frontier-app[data-page=ranking] .lobby-nav nav button small{display:none}
+ #frontier-app[data-page=ranking] .lobby-nav .frontier-icon{width:18px;height:18px}
+ #frontier-app[data-page=ranking] .nav-motto{display:none}
+ #frontier-app[data-page=ranking] .lobby-top{min-height:38px;padding:2px 6px;gap:3px;flex-wrap:nowrap}
+ #frontier-app[data-page=ranking] .profile-badge{padding:2px;min-width:0}
+ #frontier-app[data-page=ranking] .profile-badge img{width:27px;height:27px}
+ #frontier-app[data-page=ranking] .profile-badge span{font-size:9px}
+ #frontier-app[data-page=ranking] .wallet-bar button,#frontier-app[data-page=ranking] .header-actions button{min-height:31px!important;padding:2px 4px!important;font-size:10px!important}
+ #frontier-app[data-page=ranking] .wallet-bar i{font-size:15px}
+ #frontier-app[data-page=ranking] .wallet-bar span{font-size:10px}
+ #frontier-app[data-page=ranking] .lobby-content{padding:3px 6px 7px}
+ #frontier-app[data-page=ranking] .ranking-page{gap:4px}
+ #frontier-app[data-page=ranking] .rank-heading h1{font-size:23px;margin:0}
+ #frontier-app[data-page=ranking] .rank-heading p{display:none}
+ #frontier-app[data-page=ranking] .rank-heading small{font-size:8px}
+ #frontier-app[data-page=ranking] .rank-preview-toggle{min-height:27px;padding:3px 6px;font-size:10px}
+ #frontier-app[data-page=ranking] .rank-scope{padding:3px 6px;font-size:10px}
+ #frontier-app[data-page=ranking] .rank-layout{grid-template-columns:minmax(0,1.5fr) minmax(0,.95fr);gap:5px}
+ #frontier-app[data-page=ranking] .rank-list-panel,#frontier-app[data-page=ranking] .rank-detail-panel{padding:4px}
+ #frontier-app[data-page=ranking] .rank-tabs{gap:2px;margin-bottom:4px}
+ #frontier-app[data-page=ranking] .rank-tabs button{min-height:36px;padding:2px!important;display:block;text-align:center}
+ #frontier-app[data-page=ranking] .rank-tabs button>span{display:none}
+ #frontier-app[data-page=ranking] .rank-tabs b{font-size:10px}
+ #frontier-app[data-page=ranking] .rank-tabs small{display:none}
+ #frontier-app[data-page=ranking] .rank-columns,#frontier-app[data-page=ranking] .rank-row{grid-template-columns:25px minmax(75px,1fr) minmax(95px,1.1fr) 66px;gap:2px}
+ #frontier-app[data-page=ranking] .rank-columns{min-height:21px;font-size:9px}
+ #frontier-app[data-page=ranking] .rank-columns span:nth-child(3),#frontier-app[data-page=ranking] .rank-faction{display:none}
+ #frontier-app[data-page=ranking] .rank-row{min-height:38px!important;padding:2px!important}
+ #frontier-app[data-page=ranking] .rank-position{font-size:13px}
+ #frontier-app[data-page=ranking] .rank-position.medal{font-size:15px}
+ #frontier-app[data-page=ranking] .rank-player img{width:29px;height:29px}
+ #frontier-app[data-page=ranking] .rank-map img{width:33px;height:26px}
+ #frontier-app[data-page=ranking] .rank-player,#frontier-app[data-page=ranking] .rank-map{gap:3px}
+ #frontier-app[data-page=ranking] .rank-player>span,#frontier-app[data-page=ranking] .rank-map>span{font-size:10px}
+ #frontier-app[data-page=ranking] .rank-player small,#frontier-app[data-page=ranking] .rank-map small{font-size:9px}
+ #frontier-app[data-page=ranking] .rank-score{font-size:12px;padding-right:1px}
+ #frontier-app[data-page=ranking] .rank-footer{font-size:9px;padding:2px 0 0}
+ #frontier-app[data-page=ranking] .rank-detail-hero{min-height:103px;padding:5px}
+ #frontier-app[data-page=ranking] .rank-detail-place{font-size:17px}
+ #frontier-app[data-page=ranking] .rank-detail-hero h2{font-size:17px}
+ #frontier-app[data-page=ranking] .rank-detail-hero p,#frontier-app[data-page=ranking] .rank-detail-hero small{font-size:9px}
+ #frontier-app[data-page=ranking] .rank-detail-content{gap:3px;padding:4px 2px}
+ #frontier-app[data-page=ranking] .rank-detail-content h3{font-size:11px;margin:0 0 2px;padding:0}
+ #frontier-app[data-page=ranking] .rank-detail-run{gap:4px}
+ #frontier-app[data-page=ranking] .rank-detail-run img{width:37%;height:63px}
+ #frontier-app[data-page=ranking] .rank-detail-run>div{font-size:10px;gap:0}
+ #frontier-app[data-page=ranking] .rank-detail-run small{font-size:9px}
+ #frontier-app[data-page=ranking] .rank-detail-total{padding:1px}
+ #frontier-app[data-page=ranking] .rank-detail-total span{font-size:9px}
+ #frontier-app[data-page=ranking] .rank-detail-total strong{font-size:20px}
+ #frontier-app[data-page=ranking] .rank-equipment span{font-size:9px;padding:2px 3px}
+ #frontier-app[data-page=ranking] .rank-rules-button{min-height:25px;font-size:10px;padding:2px}
+ #frontier-app[data-page=ranking] .rank-detail-placeholder{min-height:180px}
+}
+@media(max-width:650px){
+ #frontier-app[data-page=ranking]{grid-template-columns:1fr}
+ #frontier-app[data-page=ranking] .lobby-nav{padding:3px 6px;min-height:48px}
+ #frontier-app[data-page=ranking] .lobby-logo,#frontier-app[data-page=ranking] .nav-motto{display:none}
+ #frontier-app[data-page=ranking] .lobby-nav nav{flex-direction:row;overflow-x:auto}
+ #frontier-app[data-page=ranking] .lobby-nav nav button{min-height:40px!important;padding:5px 8px!important;flex:none;gap:3px}
+ #frontier-app[data-page=ranking] .lobby-nav nav button .frontier-icon{width:19px;height:19px}
+ #frontier-app[data-page=ranking] .lobby-nav nav button span{font-size:12px}
+ #frontier-app[data-page=ranking] .lobby-nav nav button small{display:none}
+ #frontier-app[data-page=ranking] .lobby-top{min-height:43px}
+ #frontier-app[data-page=ranking] .lobby-content{padding:8px}
+ #frontier-app[data-page=ranking] .rank-heading h1{font-size:25px}
+ #frontier-app[data-page=ranking] .rank-heading p{display:none}
+ #frontier-app[data-page=ranking] .rank-heading h1 span{font-size:11px}
+ #frontier-app[data-page=ranking] .rank-tabs{gap:3px}
+ #frontier-app[data-page=ranking] .rank-tabs button{display:flex;flex-direction:column;align-items:center;text-align:center;min-height:52px;padding:4px 2px!important}
+ #frontier-app[data-page=ranking] .rank-tabs button>span{font-size:17px}
+ #frontier-app[data-page=ranking] .rank-tabs b{font-size:11px}
+ #frontier-app[data-page=ranking] .rank-tabs small{display:none}
+ #frontier-app[data-page=ranking] .rank-columns,#frontier-app[data-page=ranking] .rank-row{grid-template-columns:34px minmax(100px,1fr) minmax(84px,.8fr);gap:4px}
+ #frontier-app[data-page=ranking] .rank-columns span:nth-child(3),#frontier-app[data-page=ranking] .rank-columns span:nth-child(4),#frontier-app[data-page=ranking] .rank-faction,#frontier-app[data-page=ranking] .rank-map{display:none}
+ #frontier-app[data-page=ranking] .rank-row{min-height:56px!important}
+ #frontier-app[data-page=ranking] .rank-player img{width:37px;height:37px}
+ #frontier-app[data-page=ranking] .rank-score{font-size:16px}
+ #frontier-app[data-page=ranking] .rank-detail-placeholder{min-height:240px}
+}
+@media(max-height:720px) and (min-width:1051px){
+ #frontier-app[data-page=ranking] .rank-heading p{display:none}
+ #frontier-app[data-page=ranking] .rank-heading h1{font-size:30px}
+ #frontier-app[data-page=ranking] .rank-tabs button{min-height:49px}
+ #frontier-app[data-page=ranking] .rank-row{min-height:51px!important}
+ #frontier-app[data-page=ranking] .rank-detail-hero{min-height:170px}
+}
+#frontier-app[data-page=ranking] .rank-outcome{display:block;font:11px/1.3 system-ui;color:#bfdbff;text-align:right}#frontier-app[data-page=ranking] .rank-outcome.retreated{color:#f2b981}#frontier-app[data-page=ranking] .rank-outcome.failure{color:#f29898}
+#frontier-app[data-page=ranking] .rank-detail-avatar{width:48px;height:48px;object-fit:cover;object-position:center 15%;border:2px solid #e4b76c;border-radius:50%;float:left;margin:0 9px 4px 0}#frontier-app[data-page=ranking] .rank-detail-content>button[data-action=profile]{align-self:flex-start;min-height:32px;padding:4px 10px;font-size:12px}

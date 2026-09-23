@@ -1,4 +1,44 @@
+> **v0.85.9：** `FrontierTerrain` 只繪製地景，`BuildSystem` 負責放置判定及指標位置預覽；既有地圖資料、存檔、資料庫與 HTTP API 均未變。架構圖見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
+
+> **v0.85.8：** 霜原平衡仍由 config／HeroRoster／FrostlandHero 進入既有 CombatUnit、Building、Projectile、FrostStatusSystem；沒有新服務或資料層。架構圖見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。
+
 # 系統架構
+
+> **v0.85.7（2026-09-23）：** GoblinPresentation 在 CosmeticArt 之後封裝繪圖，讀取技能事件及建築狀態，不回寫戰鬥邏輯。 操作、架構、部署、回復及驗收見 [地精視覺交付](GOBLIN_POLISH_V0857.md)。
+
+> **v0.85.6：** 速度按鈕 → `TDGame.setGameSpeed` → `loop` 的 2 倍基準與最多 33 毫秒步進 → `update`；每影格僅繪製一次。見 [速度調整](GAME_SPEED_V0856.md)。
+
+> **v0.85.5（2026-09-23）更新：** 桌機建造／技能介面放大；霜原七塔正式美術及四技能圖示／特效；排行榜僅收錄自由遠征完成至少 16 波的成績，原始戰報保留。當前操作、API、架構、安裝部署、回復與驗收以 [本版交付文件](BATTLE_POLISH_V0855.md) 為準。
+
+v0.85.3：三張地圖由 `maps.js` 定義美術與建塔地面，`BuildSystem` 檢查完整底座，`FrontierTerrain` 快取合法提示點；未變更存檔或網路架構。見 [戰場架構](STORY_MAP_REFINEMENT_V0853.md)。
+
+v0.85.2：邊境對戰原型及其獨立規則域已移除。正式入口維持 `td.html`，驗收頁和本機開發圖鑑各自獨立。見 [移除與驗收紀錄](VERSUS_REMOVAL_V0852.md)。
+
+v0.84.9 的軍械庫由 `ArmorySystem` 管理本局裝備、唯一持有人與販售，`ArmoryUI` 分隔收藏／販售及角色配裝；資料流程圖與存檔邊界見 [軍械庫更新](ARMORY_V0849.md)。
+
+v0.84.8 地圖、劇情、存檔與美術按需載入關係見 [三張劇情戰場](STORY_MAPS_V0848.md)。
+
+> **v0.84.7 現行商城：** 四位英雄外觀（獸人為「冥骨帝王」）與「日蝕王庭」已開放使用玩家檔案的試用水晶購買、保存與裝備；沒有真實付款。詳細規格、操作、限制、部署與測試見 [外觀上架交付](COSMETIC_RELEASE_V0847.md)。
+
+> v0.84.6：`TDGame.end → BattleReportSystem.finalize + FrontierApp.onBattleEnd → ResultScreen.render → 結算卡`，地圖按鈕開啟自由遠征選擇。資料流圖見 [結算架構](RESULT_SCREEN_V0846.md)。
+
+> v0.84.4：`TDGame → BattleReportSystem → ProfileStore.adapter('free') → RankingDataSource → RankingView`；個人圖塊存於 ProfileStore，商城概念品與戰鬥數值隔離。模組圖見 [本版架構](EXPEDITION_SCORE_PROFILE_V0844.md)。
+
+> v0.84.3：E 鍵 → TDGame → Hero.castShockwave → ChiefShockwave → Projectile.hit／戰報；Canvas 與 HeroSkillVFX 呈現地裂、波前、碎石。詳見 [技能交付](CHIEF_SHOCKWAVE_V0843.md)。
+
+> v0.84.2：FrontierApp → RankingView → RankingDataSource → ProfileStore.adapter(free)；版型獨立於 td-ranking.css，預覽資料不落盤。模組圖見 [排行榜架構](RANKING_UI_V0842.md)。
+
+> v0.83.6：英雄空選取介面由 HeroRoster 提供圖示；LayoutSystem 隔離滑鼠／觸控偏好；CSS HUD 放大與 BattlefieldCamera 座標獨立。 詳見 [右鍵與戰鬥版型修正](BATTLE_INPUT_LAYOUT_V0836.md)。
+
+> v0.83.5：FrontierApp 掛載／卸載 ShopView；CodexHost 注入正式 ProfileStore。真實生成／部署經 CodexBattleBridge 寫入圖鑑；序章回顧唯讀。完整資料流圖及模組關係見本次交付文件。 詳見 [商城與圖鑑整合交付](FEATURE_INTEGRATION_V0835.md)。
+
+> v0.83.4：輸入能力／viewport → td-lobby.css → 桌機左側導航或觸控大型宣傳卡；ProfileStore.wallet → walletButton → 既有帳戶詳情。完整架構圖見 [大廳版面](LOBBY_LAYOUT_V0834.md)。
+
+> v0.83.3：StoryCatalog → CinematicStoryAdapter → CinematicPlayer → PrologueProgress → CodexSaveBridge → ProfileStore。Replay 僅讀取，缺素材回退 storyboard；無戰鬥模組依賴。模組關係圖、資料夾與存檔契約見 [序章架構](PROLOGUE_CINEMATIC_V1.md)。
+
+> v0.83.2：`WaveCatalog`（每波 `spawnPace`）→ `WaveSystem.spawnInterval()` → 怪物逐隻生成；難度倍率仍由 `TDDifficultySystem` 提供。怪物實體、經濟及戰報資料流不變。
+
+> v0.83.1：`config.units` 招募價格 → `CombatUnit.upgradeCost/config` → `BuildSystem` 付款與出手；`config.buildings` 建造價格 → `Building.upgradeCost` → `BuildSystem`。`BuildSystem` 成功交易 → `BattleReportSystem` 記錄實付；不新增資料庫、服務或介面層。
 
 > v0.73.0：開局策略標籤 → BattleReportSystem.run；BuildSystem 實付／折扣、Projectile 有效傷害與 BattleSynergy 支援來源 → analysis；finalize 寫入本機歷史 → historyComparison 依同配置篩選。
 
@@ -646,6 +686,7 @@ BattleSynergy 真實易傷／瘟疫 → Monster 狀態
 波次預告改為怪物縮圖、數量與威脅標籤，新增入口倒數與短暫開戰提醒。操作、設定、架構、API、部署、還原與驗證方式見 [波次提示文件](WAVE_HUD_V0664.md)。
 
 
+
 ## 0.67.1 手機波次版面修正
 
 修正波次與倒數重疊、速度列出界，縮小手機提示面板；無操作、設定或資料格式變更。原因、架構、更新、還原及觸控版面驗證見 [版面修正文件](WAVE_LAYOUT_V0671.md)。
@@ -710,19 +751,37 @@ Boss 與商店兌換仍經 `EconomySystem`；補給資源由 `LootSystem` 套用
 # v0.77.0 章節存檔邊界
 
 `ChapterCheckpointSystem` 位於波次、經濟與角色系統之外，只序列化安全整備期的穩定狀態。`TDGame` 在獎勵、里程碑及地面掉落全部入帳後觸發存檔；恢復時重新建立實體與裝備索引，不保存怪物、投射物或召喚物。
-# v0.78.0 對戰架構
-
-`src/versus/` 是與 `src/td/` 分離的規則域：`VersusMatch` 管理計時、領地、經濟與勝負，`entities.js` 管理士兵／建築，`AIStrategy` 只透過公開建造與移動介面行動，因此電腦遵守與玩家相同的工人距離及保護區限制。
-# v0.78.1 美術與規則分離
-
-Canvas 先繪製場景，再依 `VersusMatch` 狀態疊加單位、建築、HP、占領環及迷霧。所有素材載入失敗時仍有簡化圖形後備顯示，不阻止對局進行。
-# v0.79.0 對戰 UI 邊界
-
-建造 UI 只呼叫 `validateBuild` 顯示原因，確認後才呼叫 `build`；選取面板透過 `repair`／`demolish` 改變模型。Canvas 顯示層不直接扣除資源。
-
-# v0.79.1 原型邊界
-
-對戰規則與顯示檔案繼續與英雄遠征分離；正式 `td.html` 不建立通往 `versus.html` 的導覽關係。
 # v0.79.2 開局資料流
 
 `td.html` 不再提供策略標籤輸入；`TDGame` 沿用 `strategy || 'free'` 的相容性邊界，戰報 Schema 與 localStorage 無需遷移。
+
+v0.80.0 資料流：`FactionSystem.wild` 決定建造清單；`CombatUnit` 提供狂戰與狂潮狀態；`BattleSynergySystem` 由戰鼓／薩滿寫入週期支援；既有 Projectile 處理穿透式 chain、衝鋒線與範圍傷害；`ArmorySystem` 讀取同一 config 產生推薦與比較。美術仍由 `ArtSystem → drawActionUnit → drawFrame` 處理，不建立荒野專用 renderer。
+
+- Expedition Setup UI V2 使用既有 TDGame 選擇狀態與同一份 DOM；兩頁僅切換呈現，不建立第二套 Gameplay state。展示文字由 map、HeroRoster、FactionSystem 與輕量 presentation metadata 組合。
+
+
+## 0.83.0 · 大廳與獨立測試輪次
+
+大廳 → FrontierApp → 原 TDGame；StoryCatalog 注入三波清單。ProfileStore 接管戰報與 checkpoint 的儲存介面，戰鬥系統保留。 完整操作、限制、架構與回復步驟見 [P0 說明](LOBBY_P0_V083.md)。
+
+## v0.83.3
+
+大廳／遠征分別由 td-lobby.css／td-expedition.css 管理；帳戶 wallet 與 EconomySystem 解耦。資料流圖见 [v0.83.3 架構](LOBBY_EXPEDITION_V0833.md)。
+
+# 地精機械網路接入
+
+`FactionSystem / HeroRoster / config → BuildSystem.items → GoblinNetworkSystem.update → Building / CombatUnit.config → 既有 Projectile / TowerSkillSystem`。TDGame 只負責每幀更新與繪製連線；英雄 F 經 HeroUltimateSystem 啟動，經濟使用 EconomySystem.addGold；ChapterCheckpointSystem 保存可選快照；CodexCatalog 直接讀同一份玩法資料。沒有平行戰鬥系統。詳見 [地精 V1](GOBLIN_FACTION_V1.md)。
+
+英雄武器三階資料位於 `EquipmentSystem`，商店沿用 `ShopSystem`，圖集由 `TDGame` 與 `GoblinArt` 顯示；見 [v0.84.5 武器紀錄](FACTION_HERO_WEAPONS_V0845.md)。
+
+
+## 商城單一入口與雷霆戰王（0.6.1）
+
+正式商城統一由 `td.html` 大廳或 `td.html?panel=shop` 進入；獨立 `shop.html` 與專用啟動程式已刪除，舊 4187 展示服務已停止。雷霆戰王沿用原有玩家檔案保存購買與裝備，四組動作已接入正式戰場。共用商城元件及既有收藏保留。
+
+操作、API、部署、測試與回復限制見 [0.6.1 整合說明](shop/THUNDER_TD_V061.md)。
+
+> v0.85.4 命中呈現資料流為 `Projectile → TDGame.onHit → CombatFeedbackSystem → Monster.visualPosition/draw`；原始 `x/y` 仍是唯一戰鬥座標。架構圖見 [命中回饋交付](HIT_FEEDBACK_V0854.md#程式接口與架構)。
+> v0.85.1：根目錄 `td.html` 已整合冰原選角資產；架構與裁切策略見[選角插畫交付](FROSTLAND_SELECTION_ART_V0851.md)。
+
+v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 Monster.applySlow、rootTime、onHit/onKill；不另建傷害或狀態更新迴圈。動作、圖集、特效與音訊各自分模組；無新資料庫。Mermaid 架構圖見 [冰原架構](FROSTLAND_FACTION_V1.md#i-core-與架構)。

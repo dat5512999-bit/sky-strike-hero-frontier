@@ -1,0 +1,40 @@
+/* Desktop legibility: leave the already-readable resource strip unchanged. */
+@media (min-width:1100px) and (min-height:650px) and (hover:hover) and (pointer:fine){
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]){--skills-width:396px;}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer{width:min(1480px,calc(100vw - 444px));}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]{grid-template-rows:124px 25px 40px 22px;flex-basis:184px;width:184px;height:240px;min-height:240px;padding:8px;gap:3px;}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type] .build-preview{width:124px;height:124px;}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]>b{font-size:16px;line-height:25px;}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]>span{font-size:13px;line-height:19px;-webkit-line-clamp:2;}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]>small{font-size:14px;line-height:22px;}
+ body.edge-combat[data-layout="desktop"] .build-drawer :is(header,header button,[data-build-filter]){font-size:15px;min-height:38px;}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock{zoom:1!important;width:100%;max-width:40vw;box-sizing:border-box;}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button{height:108px;min-height:108px;gap:5px;}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button b{width:66px;height:66px;flex-basis:66px;}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-hero-dock .skill-button span{font-size:14px;line-height:1.3;}
+ body.edge-combat[data-layout="desktop"] .skill-button kbd{font-size:13px;}
+ body.edge-combat[data-layout="desktop"] .build-drawer-heading strong{font-size:15px;}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) :is(.hero-profile,.selection-details){font-size:14px;}
+ body.edge-combat[data-combat-ui="edge"][data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) :is(.hero-vitals label,.hero-equipment b,.hero-equipment em){font-size:12px;}
+}
+body[data-hero-class="frostland"] .td-hero-dock :is(#td-skill-button,#td-thunder,#td-summon,#td-ultimate) b,
+#td-profession-screen #td-hero-skills[data-hero="frostland"] span::before{background-image:url('assets/td/frostland/skill-icons-v1.png')!important;background-size:200% 200%!important;background-repeat:no-repeat!important;font-size:0!important;color:transparent!important;}
+body[data-hero-class="frostland"] #td-skill-button b{background-position:0 0!important;}
+body[data-hero-class="frostland"] #td-thunder b{background-position:100% 0!important;}
+body[data-hero-class="frostland"] #td-summon b{background-position:0 100%!important;}
+body[data-hero-class="frostland"] #td-ultimate b{background-position:100% 100%!important;}
+#td-profession-screen #td-hero-skills[data-hero="frostland"] span[data-skill-index="0"]::before{background-position:0 0!important;}
+#td-profession-screen #td-hero-skills[data-hero="frostland"] span[data-skill-index="1"]::before{background-position:100% 0!important;}
+#td-profession-screen #td-hero-skills[data-hero="frostland"] span[data-skill-index="2"]::before{background-position:0 100%!important;}
+/* Every faction already owns a painted group portrait; show it instead of the legacy banner emblem. */
+#td-profession-screen .faction-list button[data-faction]::before{display:none!important;}
+#td-profession-screen .faction-list button[data-faction]{background-image:linear-gradient(0deg,#020810 0,transparent 65%),var(--selection-art)!important;background-size:cover!important;background-position:var(--selection-focus,50% 50%)!important;}
+#td-profession-screen #td-hero-detail-art[data-hero="frostland"]{background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important;background-color:#07131a!important;}
+@media (prefers-reduced-motion:reduce){.skill-button{animation:none!important;}}
+/* Goblin painted skills share the existing large desktop dock layout. */
+body[data-hero-class="goblin"] .td-hero-dock :is(#td-skill-button,#td-thunder,#td-summon,#td-ultimate) b,
+#td-profession-screen #td-hero-skills[data-hero="goblin"] span::before{background-image:url('assets/td/goblin/skill-icons-v2.png')!important;background-size:200% 200%!important;background-repeat:no-repeat!important;color:transparent!important;}
+body[data-hero-class="goblin"] #td-skill-button b{background-position:0 0!important;}
+body[data-hero-class="goblin"] #td-thunder b{background-position:100% 0!important;}
+body[data-hero-class="goblin"] #td-summon b{background-position:0 100%!important;}
+body[data-hero-class="goblin"] #td-ultimate b{background-position:100% 100%!important;}

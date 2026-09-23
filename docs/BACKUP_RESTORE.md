@@ -1,4 +1,44 @@
+> **v0.85.9：** 變更前 21 個檔案與 SHA-256 清單位於 `artifacts/deployment-visual-v0859-backup/`；逐檔回復並同步舊版快取／標示，保留其他未提交工作。詳見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
+
+> **v0.85.8：** 本輪變更前 22 個檔案保存於 artifacts/frostland-balance-v0858-backup；依 manifest 逐檔比對回復，保留其他未提交工作。見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。
+
 # 備份與還原手冊
+
+> **v0.85.7（2026-09-23）：** 地精調整前快照保存在 artifacts/goblin-polish-v0857-backup；依 manifest 比對回復，保留其他未提交工作。 操作、架構、部署、回復及驗收見 [地精視覺交付](GOBLIN_POLISH_V0857.md)。
+
+> **v0.85.6：** 回復舊速度須一起還原 `TDGame.js`、版本顯示和 Service Worker 快取名稱；玩家存檔格式未變。見 [速度調整](GAME_SPEED_V0856.md)。
+
+> **v0.85.5（2026-09-23）更新：** 桌機建造／技能介面放大；霜原七塔正式美術及四技能圖示／特效；排行榜僅收錄自由遠征完成至少 16 波的成績，原始戰報保留。當前操作、API、架構、安裝部署、回復與驗收以 [本版交付文件](BATTLE_POLISH_V0855.md) 為準。
+
+v0.85.3：更新前匯出玩家備份並保留上一版完整靜態目錄；回退需一起還原圖片、地圖規則與 Service Worker。見 [戰場回復說明](STORY_MAP_REFINEMENT_V0853.md)。
+
+v0.85.2：邊境對戰沒有獨立資料，無需遷移；回復時以同版完整靜態檔案和快取為單位。見 [移除與驗收紀錄](VERSUS_REMOVAL_V0852.md)。
+
+v0.84.9 沒有改動玩家檔案或本局存檔格式。回復舊介面需一併回復 `ArmoryUI.js`、HTML/CSS、`ArmorySystem.js` 與 Service Worker；詳見 [軍械庫更新](ARMORY_V0849.md)。
+
+v0.84.8 劇情關卡與地圖解鎖進度屬玩家檔案；更新或回復前的操作見 [三張劇情戰場](STORY_MAPS_V0848.md)。
+
+> **v0.84.7 現行商城：** 四位英雄外觀（獸人為「冥骨帝王」）與「日蝕王庭」已開放使用玩家檔案的試用水晶購買、保存與裝備；沒有真實付款。詳細規格、操作、限制、部署與測試見 [外觀上架交付](COSMETIC_RELEASE_V0847.md)。
+
+> v0.84.6：更新結算畫面前先由遊戲設定匯出玩家備份；存檔失敗時保留頁面並排查儲存空間，不要清除瀏覽器資料。局部程式回復參考見 [本版交付](RESULT_SCREEN_V0846.md)。
+
+> v0.84.4：更新前從設定匯出完整玩家檔案，包含新 `profileArt` 與自由遠征戰報。回復舊程式時保留原始玩家資料，勿清除本機儲存。詳見 [本版回復](EXPEDITION_SCORE_PROFILE_V0844.md)。
+
+> v0.84.3：修改前快照存於 artifacts/chief-shockwave-v0841-backup/；先備份現況再逐檔比較回復，勿覆蓋同期未提交內容。詳見 [技能交付](CHIEF_SHOCKWAVE_V0843.md)。
+
+> v0.84.2：更新前先匯出玩家備份；排行榜只讀資料，資料損毀不自動覆寫，回復舊版本無須刪除 localStorage。詳見 [排行榜備份與回復](RANKING_UI_V0842.md)。
+
+> v0.83.6：修改前快照為 artifacts/battle-v0836-backup/。若同檔案已有其他開發，僅撤回本次差異，勿整檔覆蓋；保留正式玩家資料。 詳見 [右鍵與戰鬥版型修正](BATTLE_INPUT_LAYOUT_V0836.md)。
+
+> v0.83.5：先匯出玩家備份。整合前程式快照位於 artifacts/integration-v0835-backup/，依相對路徑覆回可回復舊主入口；保留 localStorage 與其他未提交工作，不要 hard reset。 詳見 [商城與圖鑑整合交付](FEATURE_INTEGRATION_V0835.md)。
+
+> v0.83.4：修改前快照位於 artifacts/lobby-v0834-backup；先匯出玩家備份，再依同名相對路徑回復快照。不要清除 localStorage 或整體重設其他工作。見 [回復流程](LOBBY_LAYOUT_V0834.md)。
+
+> v0.83.3：先從設定匯出完整玩家備份。觀看 ID 與 Codex envelope 隨原有備份保存。本次程式修改前快照在 artifacts/prologue-v0833-backup，依原相對路徑覆回可回復；保留其他尚未提交工作，不使用 git reset --hard。詳見 [序章回復流程](PROLOGUE_CINEMATIC_V1.md)。
+
+> v0.83.2 不變更存檔。若要撤回節奏試調，先備份瀏覽器本機紀錄，再整套回復至 v0.83.1（含 `WaveCatalog.js`、`WaveSystem.js`、版號與快取）；不要只混用舊新波次腳本。
+
+> v0.83.1 未更動存檔結構。還原前備份瀏覽器本機資料；要回到 0.83.0，須整套回復程式、`td.html`、`sw.js` 與 `package.json`，勿只回復數值模組；既有戰績可保留。
 
 > v0.73.0 本機戰績新增可選分析欄位但沿用 V3 格式。還原舊版不需資料遷移；舊版會忽略未知欄位。
 
@@ -306,6 +346,7 @@ v0.32.2 只增加 Pages 首次啟用設定；回退至 v0.32.1 仍可本機遊�
 波次預告改為怪物縮圖、數量與威脅標籤，新增入口倒數與短暫開戰提醒。操作、設定、架構、API、部署、還原與驗證方式見 [波次提示文件](WAVE_HUD_V0664.md)。
 
 
+
 ## 0.67.1 手機波次版面修正
 
 修正波次與倒數重疊、速度列出界，縮小手機提示面板；無操作、設定或資料格式變更。原因、架構、更新、還原及觸控版面驗證見 [版面修正文件](WAVE_LAYOUT_V0671.md)。
@@ -357,19 +398,41 @@ v0.32.2 只增加 Pages 首次啟用設定；回退至 v0.32.1 仍可本機遊�
 # v0.77.0 備份與還原
 
 章節進度儲存在 `heroFrontierChapterCheckpointV1`。備份瀏覽器站點資料可保留它；若資料毀損，系統會忽略存檔並允許正常開始新局。
-# v0.78.0 備份與還原
-
-對戰 MVP 尚未保存進行中戰局或戰績，無額外使用者資料需要備份。回復上一版只需移除對戰頁面入口及 `src/versus/`。
-# v0.78.1 美術回復
-
-如需回復，可還原 `src/versus/main.js` 並移除 `versus-battlefield-concept-v1.png`；規則引擎與對戰測試資料不受影響。
 # v0.79.0 回復
 
 介面更新未變更任何持久資料格式；回復至 v0.78.1 不需轉換存檔。
 
-# v0.79.1 回復
-
-還原本版只需回復 `td.html` 的對戰連結與版本標示；對戰原型本體未被刪除。
 # v0.79.2 回復
 
 無存檔遷移。回復舊版只需還原 `td.html`、`td.css` 與 `src/td/main.js`；舊戰績中的策略標籤會繼續保留。
+
+v0.80.0 沒有資料庫遷移。章節存檔的 faction 字串可保存 `wild`；回復 0.79.x 前應先完成或刪除荒野章節存檔。舊存檔若含 `orc-contract` 歷史仍能讀取，退役項目只是不再發放。
+
+
+## 0.83.0 · 大廳與獨立測試輪次
+
+設定與測試提供 JSON 匯出／匯入；匯入前另存 .beforeImport。新測試輪次會封存舊輪。回退程式的前版檔案在 artifacts/p0-v0827-backup。 完整操作、限制、架構與回復步驟見 [P0 說明](LOBBY_P0_V083.md)。
+
+回復 0.82.7 時亦將 artifacts/p0-v0827-backup/BattleReportSystem.js 複製回 src/td/systems/BattleReportSystem.js。此備份保留本次改版前既有修改。
+
+## v0.83.3
+
+完整 JSON 備份包含各玩家與封存的 wallet；舊備份匯入會補零，更新前先匯出。介面回退不可覆蓋其他平衡修改。詳見 [備份與回退](LOBBY_EXPEDITION_V0833.md)。
+
+# 地精 V1 檢查點
+
+沿用 ProfileStore 存檔版本與既有章節檢查點 schema；新 `goblinNetwork` 欄位為可選，舊檔讀取時初始化為零。備份／還原原始 JSON 時勿刪除 `goblinNetwork`、裝置的 `recycleTimer` 或 `engineerBoost`。見 [地精 V1](GOBLIN_FACTION_V1.md)。
+
+v0.84.5 沿用 `equipment.spear` 武器等級，無須存檔遷移；回復內容見 [武器紀錄](FACTION_HERO_WEAPONS_V0845.md)。
+
+
+## 商城單一入口與雷霆戰王（0.6.1）
+
+正式商城統一由 `td.html` 大廳或 `td.html?panel=shop` 進入；獨立 `shop.html` 與專用啟動程式已刪除，舊 4187 展示服務已停止。雷霆戰王沿用原有玩家檔案保存購買與裝備，四組動作已接入正式戰場。共用商城元件及既有收藏保留。
+
+操作、API、部署、測試與回復限制見 [0.6.1 整合說明](shop/THUNDER_TD_V061.md)。
+
+> v0.85.4 沒有玩家資料遷移；回復時採完整靜態檔案或 `git revert`，不可在有未提交修改的目錄硬重設。詳見 [命中回饋交付](HIT_FEEDBACK_V0854.md#安裝部署更新與回復)。
+> v0.85.1：根目錄整合前的重疊檔案保存在 `artifacts/frostland-root-integration-backup-v0851/`；完整回復方式見[選角插畫交付](FROSTLAND_SELECTION_ART_V0851.md)。
+
+v0.85.0：先匯出完整玩家備份。舊 schema 保持相容；冰原檢查點保存新兵塔與 equipment.spear，不保存瞬時寒冬、Frost、Hunt 與動作。降版時使用更新前備份，舊程式不認識冰原兵塔。回復流程見 [冰原存檔](FROSTLAND_FACTION_V1.md#j-save-migration--備份與回復)。

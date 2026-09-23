@@ -16,7 +16,7 @@ test('双隘口兩路共享末段、正式素材與合法塔位，各路禁建�
  for(const route of m.routes)for(const p of route.filter(p=>p.x>42&&p.x<1494))assert.equal(b.canPlaceAt(p.x,p.y,'building'),false);
  for(const p of [[440,130],[430,335],[450,530],[510,770],[1160,355],[1160,585]])assert.equal(b.canPlaceAt(...p,'building'),true,p.join(','));
  for(const p of [[665,380],[140,440],[1480,400]])assert.equal(b.canPlaceAt(...p,'building'),false);
- ns.maps.apply('beginner');assert.equal(ns.config.routes.length,1);assert.equal(ns.config.blockedAreas,null);assert.equal(ns.config.sharedLength,0);
+ ns.maps.apply('beginner');assert.equal(ns.config.routes.length,1);assert.ok(ns.config.blockedAreas.length>0);assert.equal(ns.config.sharedLength,0);
 });
 test('波次總量不加倍，逐隻交替雙路，重置恢復上路先出兵',()=>{
  const ns=load(),w=new ns.systems.WaveSystem(),monsters=[];w.start();const count=w.queue.length;

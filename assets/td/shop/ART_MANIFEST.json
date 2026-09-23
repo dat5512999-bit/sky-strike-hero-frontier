@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "method": "Built-in image_gen",
+  "date": "2026-09-21",
+  "reference": "User-provided 商城PC.png and 商城PHONE.png; visual direction only; all generated art excludes UI text.",
+  "assets": [
+    {
+      "path": "assets/td/shop/frost-portrait-v2.png",
+      "prompt": "Use case: stylized-concept. Asset type: premium fantasy RPG shop character key art, vertical 2:3 composition. Create an exceptionally beautiful adult silver-haired elven ice princess with long flowing white hair, delicate silver and sapphire crystalline crown, elegant pointed ears, refined expressive face, blue eyes, luxurious white fur-trimmed royal cloak over intricately engraved silver and midnight blue armor, full body three-quarter view looking back over her shoulder. Frame head to below knees, body centered with breathing room, face at upper third. Ancient snowy gothic castle terrace, dark warm stone arches behind her and subtle icy blue magical motes. High end Asian fantasy game promotional painting, realistic painterly illustration, exquisite skin and fabric and metal detail, luminous cinematic moonlight rim lighting, deep rich blacks, sapphire blue highlights and gold warm bokeh. Art must be as polished as a AAA collectible character splash. No text, letters, UI, logos, borders, watermarks. This is a real game art asset, not a screenshot."
+    },
+    {
+      "path": "assets/td/shop/frost-banner-v2.png",
+      "prompt": "Use case: stylized-concept. Asset type: fantasy RPG shop promotional banner art. Very wide landscape 3:1. A breathtaking white-haired adult elf ice princess in a crystalline sapphire silver crown and white fur dark blue armor on right third, with a majestic ice wolf and sweeping crystalline ice wings behind her. Her head and shoulders fill the RIGHT HALF. Snowy gothic fortress in distance, moonlight, luxurious premium fantasy game key visual, extraordinarily polished realistic painterly illustration, detailed beautiful face and flowing white hair, glowing sapphire particles. LEFT HALF is beautiful darker midnight blue snowy sky and atmospheric distant mountains with no people, reserved as negative space for live HTML text later. Strong diagonal ice crystalline forms carry the eye toward princess on right. No text, no lettering, no UI, no borders, no watermark."
+    },
+    {
+      "path": "assets/td/shop/inferno-portrait-v2.png",
+      "prompt": "Use case: stylized-concept. Asset type: premium fantasy RPG skin shop product art. Vertical 2:3 composition. A monumental intimidating black obsidian armored demon knight, glowing crimson eyes visible through angular closed helmet, swept back dark horns, molten orange glowing seams in intricate black plate armor, dark red cape, standing centered amid a volcanic cathedral with ember particles. Head and upper torso prominent, head within upper third, full imposing silhouette down to knees. High end Asian fantasy game promotional art, sophisticated realistic painterly rendering, extraordinary metal and lava detail, dramatic cinematic fiery orange red rim lighting against deep black shadow. No text, UI, labels, logo or border. This is a real game asset."
+    },
+    {
+      "path": "assets/td/shop/merchant-hall-v2.png",
+      "prompt": "Use case: stylized-concept. Asset type: fantasy RPG storefront BACKGROUND environment. Wide landscape 16:9. Interior of an opulent medieval fantasy merchant treasury at night. Towering dark carved stone arches, rich warm brass candle lanterns, wooden tables with gold coins and faceted sapphire blue crystals mostly along bottom corners, luxurious very dark blue velvet, open archway on far right with snowy gothic city and moonlight. Center is subdued dark blue shadow so UI can be laid over it. Rich chiaroscuro, warm amber gold at edges contrasting cool blue middle. Cinematic realistic painterly AAA fantasy game environmental art, intricate material detail, magical ambient light. Empty scene, no people. No text, UI, border, labels or logos."
+    },
+    {
+      "path": "assets/td/shop/phoenix-v2.png",
+      "prompt": "Use case: stylized-concept. Asset type: fantasy RPG cosmetic skill-effect shop product art. Square 1:1 composition. A luminous ethereal phoenix made of violet and electric purple magical energy, wings beautifully spread in a V shape, long wispy feather trails swirling into an arcane summoning circle below, with tiny stars, glittering particles and sparks, on a deep almost black midnight purple background. Premium AAA fantasy game item splash illustration, spectacular translucent light sculpture, very sharp detailed feathers and delicate energy filaments, rich color, strong luminous silhouette in center with dark negative space at edges. No letters, text, UI, borders, watermark."
+    }
+  ]
+}

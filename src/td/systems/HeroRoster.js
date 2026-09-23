@@ -1,18 +1,29 @@
 (function(ns){
   'use strict';
   const CLASSES={
+    frostland:{"name":"霜牙・凜","faction":"冰原獵首 · CONCEPT","color":"#9bdbd5","selectionArt":"assets/td/frostland/hero-selection-v2.png","selectionFocus":"50% 16%","range":165,"damage":20,"interval":0.8,"attackType":"chaos","frost":16,"frozenBonus":1.4,"frostland":true,"skills":["霜痕獵令","破冰獵矛","獵群號令"],"shortSkills":["霜痕","破冰","獵群"],"icons":["❄","矛","狼"],"hints":["附近最多四名敵人 +45 Frost，冷卻 9 秒","優先追擊附近凍結敵人；60 基礎傷害與碎冰，冷卻 12 秒","附近冰原士兵與自身獵狩 5 秒，累寒 ×1.25、窗口倍率 +.25；冷卻 22 秒"],"passive":"普攻 +16 Frost，窗口傷害 ×1.4"},
     hunter:{name:'守誓者・雷恩',faction:'人族 · 王國獵手',color:'#e6c56c',selectionArt:'assets/td/opening/hero-hunter-selection-v1.png',selectionFocus:'50% 22%',range:195,damage:20,interval:.75,attackType:'pierce',skills:['穿雲多重箭','獵獸陷阱','召喚戰狼'],shortSkills:['穿雲箭','獵獸陷阱','召喚戰狼'],icons:['➶','⌾','♞'],hints:['射程內最多三個敵人，冷卻9秒','在腳下布置8秒陷阱，持續緩速，冷卻12秒','召喚近戰戰狼，冷卻22秒']},
     arcanist:{name:'森語者・希爾芙',faction:'精靈 · 奧術學院',color:'#70e7ff',selectionArt:'assets/td/opening/hero-arcanist-selection-v1.png',selectionFocus:'50% 20%',range:152,damage:18,interval:.58,attackType:'magic',skills:['霜環震擊','連鎖雷擊','召喚元素'],shortSkills:['霜環','連鎖雷擊','召喚元素'],icons:['❄','ϟ','✧'],hints:['周圍冰爆並緩速，冷卻9秒','雷電跳躍最多四個敵人，冷卻12秒','召喚遠程元素守衛，冷卻22秒']},
-    rogue:{name:'影行者・維菈',faction:'暗影氏族 · 暗影行會',color:'#c884df',selectionArt:'assets/td/opening/hero-rogue-selection-v1.png',selectionFocus:'50% 19%',range:100,damage:15,interval:.38,attackType:'chaos',skills:['暗影閃擊','淬毒煙幕','暗影分身'],shortSkills:['閃擊','淬毒煙幕','暗影分身'],icons:['◆','☠','◐'],hints:['閃至附近目標旁並重擊，冷卻9秒','腳下生成6秒毒霧，持續傷害，冷卻12秒','召喚快速近戰分身，冷卻22秒']}
+    rogue:{name:'影行者・維菈',faction:'暗影氏族 · 暗影行會',color:'#c884df',selectionArt:'assets/td/opening/hero-rogue-selection-v1.png',selectionFocus:'50% 19%',range:100,damage:15,interval:.38,attackType:'chaos',skills:['暗影閃擊','淬毒煙幕','暗影分身'],shortSkills:['閃擊','淬毒煙幕','暗影分身'],icons:['◆','☠','◐'],hints:['閃至附近目標旁並重擊，冷卻9秒','腳下生成6秒毒霧，持續傷害，冷卻12秒','召喚快速近戰分身，冷卻22秒']},
+    chief:{name:'大酋長・戈爾',faction:'荒野部族 · 萬族戰團',color:'#df6548',selectionArt:'assets/td/opening/hero-chief-selection-v2.png',selectionFocus:'50% 18%',skillArt:'assets/td/opening/chief-skill-icons-v1.png',range:112,damage:24,interval:.66,attackType:'chaos',splash:26,skills:['萬族戰吼','先祖怒火','裂地衝擊波'],shortSkills:['萬族戰吼','先祖怒火','裂地波'],icons:['吼','雷','裂'],hints:['附近荒野士兵立刻進入4秒狂潮，冷卻9秒','腳下形成6秒祖靈怒火，冷卻12秒','向前發射穿透衝擊波，傷害並緩速直線敵人，冷卻22秒']},
+    goblin:{name:'銅齒・奇克',faction:'地精工程團',color:'#d9ad65',selectionArt:'assets/td/goblin-chief-engineer-v1.png',selectionFocus:'50% 42%',range:145,damage:14,interval:.8,attackType:'pierce',skills:['臨場改裝','蒸汽洩壓','巡修機偶'],shortSkills:['改裝','洩壓','機偶'],icons:['⚙','◈','▣'],hints:['強化自身射速與附近一座供電機械 5 秒，冷卻 9 秒','噴出蒸汽傷害並緩速近敵，額外縮短網路冷卻 3 秒；冷卻 12 秒','部署一台可移動的巡修機偶，發射穿刺鉚釘；冷卻 22 秒']}
   };
   class HeroRoster{
     static get(type){return CLASSES[type]||CLASSES.arcanist;}
     static cast(hero,slot,monsters,onKill,onHit){
+      if(hero.classType==='frostland')return ns.systems.FrostlandHero.cast(hero,slot,monsters,onKill,onHit);
       const cfg=this.get(hero.classType),cooldown=slot===0?'novaCooldown':null;
       if((cooldown?hero[cooldown]:hero.skillCooldowns.thunder)>0)return false;
       const targets=monsters.filter(m=>m.active&&ns.utils.distance(hero,m)<=cfg.range+35).sort((a,b)=>b.progress()-a.progress());
       const power=typeof hero.skillPower==='function'?hero.skillPower():1+hero.equipment.spear*.2,weaponColor=ns.systems.EquipmentSystem.effectColor(hero,cfg.color);
       if(slot===0){
+        if(hero.classType==='goblin'){
+          const network=hero.synergy?.game?.goblinNetwork,items=hero.synergy?.game?.build?.items||[],powered=items.filter(item=>item.networkPowered&&ns.utils.distance(hero,item)<=210&&item.config().networkCost);
+          const item=powered[0];if(item){item.networkDamage=Math.max(item.networkDamage||0,.42);item.engineerBoost=5;}
+          hero.goblinOverclock=5;ns.systems.HeroSkillVFX.emit(hero,'goblin-modify',{target:item?{x:item.x,y:item.y}:{x:hero.x,y:hero.y},duration:.75});
+          hero.novaCooldown=9*(1-hero.equipment.rune*.1);hero.beginCast();return true;
+        }
+        if(hero.classType==='chief'){const allies=hero.synergy?hero.synergy.game.build.combatUnits().filter(unit=>['orc','centaur','boarRider','minotaur','shaman'].includes(unit.type)&&ns.utils.distance(hero,unit)<=210):[];allies.forEach(unit=>{unit.tribalFrenzy=Math.max(unit.tribalFrenzy||0,4);unit.commandPulse=4;});ns.systems.HeroSkillVFX.emit(hero,'chief-warcry',{radius:210,duration:.72});hero.novaCooldown=9*(1-hero.equipment.rune*.1);hero.beginCast();return true;}
         if(!targets.length)return false;
         hero.skillTrails=targets.slice(0,hero.classType==='hunter'?3:1).map(target=>({x:hero.x,y:hero.y,tx:target.x,ty:target.y,time:.3,color:weaponColor}));
         ns.systems.HeroSkillVFX.emit(hero,hero.classType==='hunter'?'arrows':'blink',{targets:targets.slice(0,3).map(m=>({x:m.x,y:m.y})),target:{x:targets[0].x,y:targets[0].y},duration:.45});
@@ -20,6 +31,13 @@
         else{const target=targets[0];hero.x=ns.utils.clamp(target.x-28,25,695);hero.y=ns.utils.clamp(target.y+22,55,695);hero.setTarget(hero.x,hero.y);new ns.entities.Projectile(hero,target,{damage:95*power,color:weaponColor,attackType:'chaos'}).hit(monsters,onKill,onHit);}
         hero.novaCooldown=9*(1-hero.equipment.rune*.1);
       }else{
+        if(hero.classType==='goblin'){
+          const network=hero.synergy?.game?.goblinNetwork,near=monsters.filter(m=>m.active&&ns.utils.distance(hero,m)<=112);
+          if(!near.length&&!(network?.cooling>0))return false;
+          if(network)network.cooling=Math.max(0,network.cooling-3);
+          near.forEach(monster=>{monster.applySlow(.52,2);new ns.entities.Projectile(hero,monster,{damage:24*power,color:'#b1f4dc',attackType:'chaos',style:'goblin-shot'}).hit(monsters,onKill,onHit);});
+          ns.systems.HeroSkillVFX.emit(hero,'goblin-cool',{radius:112,duration:.75});hero.skillCooldowns.thunder=12*(1-hero.equipment.rune*.1);hero.beginCast();return true;
+        }
         hero.fields.push({x:hero.x,y:hero.y,time:hero.classType==='hunter'?8:6,tick:0,type:hero.classType,power:power});
         hero.skillCooldowns.thunder=12*(1-hero.equipment.rune*.1);
       }

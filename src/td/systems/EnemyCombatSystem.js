@@ -34,7 +34,7 @@
       const target=this.validTargets(monster,hero,defenders).sort((a,b)=>ns.utils.distance(monster,a)-ns.utils.distance(monster,b))[0];if(target&&monster.attackCooldown<=0){monster.combatTarget=target;monster.attackWindup=monster.combatRole==='hunter'?.55:.36;monster.facing=Math.atan2(target.y-monster.y,target.x-monster.x);if(hooks&&hooks.onWarning&&monster.combatRole==='hunter')hooks.onWarning(monster,'虛空箭',0);}
     }
     update(dt,monsters,hero,defenders,hooks){
-      monsters.slice().forEach(monster=>{if(!monster.active)return;this.phase(monster,monsters,hooks);if(hooks&&hooks.allowHeroDamage===false){monster.combatTarget=null;monster.attackWindup=0;monster.abilityWindup=0;return;}if(this.bossAbility(dt,monster,hero,defenders,hooks))return;this.attack(dt,monster,hero,defenders,hooks);});
+      monsters.slice().forEach(monster=>{if(!monster.active||monster.frostStatus?.window>0&&!monster.frostStatus.deep)return;this.phase(monster,monsters,hooks);if(hooks&&hooks.allowHeroDamage===false){monster.combatTarget=null;monster.attackWindup=0;monster.abilityWindup=0;return;}if(this.bossAbility(dt,monster,hero,defenders,hooks))return;this.attack(dt,monster,hero,defenders,hooks);});
     }
   }
   ns.systems.EnemyCombatSystem=EnemyCombatSystem;

@@ -10,6 +10,7 @@ const mime = {
   '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8',
   '.webmanifest': 'application/manifest+json', '.png': 'image/png',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp',
+  '.mp4': 'video/mp4', '.vtt': 'text/vtt; charset=utf-8',
   '.svg': 'image/svg+xml', '.ico': 'image/x-icon'
 };
 const port = Number(process.env.TD_TEST_PORT) || 4173;

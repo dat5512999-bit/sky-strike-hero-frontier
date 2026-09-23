@@ -1,7 +1,7 @@
 (function(ns){
   'use strict';
   const ITEMS={
-    'orc-contract':{name:'赤牙戰契',rarity:'傳說',icon:'⚔',description:'解鎖可定點部署、可升級的半獸人勇士與赤牙祖靈柱。',unlock:{units:['orc'],buildings:['totem']}},
+    'orc-contract':{name:'赤牙舊戰契',rarity:'典藏',icon:'⚔',legacy:true,description:'已併入荒野部族；舊遠征紀錄仍可安全讀取。'},
     'wolf-core':{name:'狼王核心',rarity:'史詩',icon:'狼',description:'戰狼獲得裝甲進化，召喚數量與存續時間提升。',equipment:{charm:1}},
     'dragon-egg':{name:'翡翠龍卵',rarity:'傳說',icon:'龍',description:'解鎖幼龍守衛；牠能飛行並造成範圍魔法傷害。',unlock:{units:['dragon']}},
     'bone-contract':{name:'幽骨契約',rarity:'史詩',icon:'骷',description:'解鎖骷髏衛士與靈魂收割塔。',unlock:{units:['skeleton'],buildings:['soul']}},
@@ -21,12 +21,12 @@
     constructor(random){this.random=random||Math.random;this.reset();}
     reset(){this.claimed=new Set();this.pending=[];this.history=[];}
     get(id){return ITEMS[id]||null;}
+    usable(id,profession,faction){const gear=ITEMS[id]?.gear;if(!gear)return true;const item=ns.systems.ArmorySystem.item(gear),units=this.context?.factions?.available('unit')||ns.systems.FactionSystem.FACTIONS[faction]?.units||[];return Boolean(item&&((item.heroes||[]).includes(profession)||(item.types||[]).some(id=>units.includes(id))));}
     createOffers(wave,profession,faction){
-      let pool=Object.keys(ITEMS).filter(id=>!this.claimed.has(id)||ITEMS[id].resources);
+      let pool=Object.keys(ITEMS).filter(id=>this.usable(id,profession,faction)&&!ITEMS[id].legacy&&(!this.claimed.has(id)||ITEMS[id].resources));
       if(faction==='arcanist'||!faction&&profession==='hunter')pool=pool.filter(id=>id!=='dragon-egg');
       if(faction==='rogue')pool=pool.filter(id=>id!=='bone-contract');
       const offers=[];
-      if(wave===5&&!this.claimed.has('orc-contract'))offers.push('orc-contract');
       if(wave%3===0){let gearPool=pool.filter(id=>ITEMS[id].gear);if(wave===3){const starter={hunter:'lion-bow',arcanist:'moon-staff',rogue:'soul-lantern'}[profession];gearPool=gearPool.filter(id=>ITEMS[id].gear===starter);}if(gearPool.length){const id=gearPool[Math.floor(this.random()*gearPool.length)];offers.push(id);pool=pool.filter(entry=>entry!==id);}}
       while(offers.length<3&&pool.length){const index=Math.floor(this.random()*pool.length),id=pool.splice(index,1)[0];if(offers.indexOf(id)<0)offers.push(id);}
       this.pending=offers;return offers.map(id=>Object.assign({id:id},ITEMS[id]));
@@ -42,13 +42,13 @@
     rollDrop(monster,profession,faction,activeDrops){
       const special=['boss','commander','healer','warder'].includes(monster.type),chance=monster.type==='boss'?1:special?.16:.018;
       if((activeDrops||0)>=3||this.random()>chance)return null;
-      let pool=Object.keys(ITEMS).filter(id=>ITEMS[id].gear&&!this.claimed.has(id));
+      let pool=Object.keys(ITEMS).filter(id=>ITEMS[id].gear&&this.usable(id,profession,faction)&&!this.claimed.has(id));
       if(faction==='arcanist'||!faction&&profession==='hunter')pool=pool.filter(id=>id!=='dragon-egg');
       if(!pool.length)pool=['frontier-supplies'];
       const id=pool[Math.floor(this.random()*pool.length)];return Object.assign({id},ITEMS[id]);
     }
     milestone(wave,context){
-      const id={5:'orc-contract',10:'dragon-egg',15:'bone-contract'}[wave];
+      const id={10:'dragon-egg',15:'bone-contract'}[wave];
       if(!id||this.claimed.has(id))return null;return this.grant(id,context);
     }
   }

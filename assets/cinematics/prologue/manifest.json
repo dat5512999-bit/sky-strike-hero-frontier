@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "cinematicId": "prologue_before_shattered_peace",
+  "title": "《曾經的和平》",
+  "productionTitle": "序章｜破碎的和平之前",
+  "version": "1.0.0",
+  "status": "asset-slots",
+  "duration": 60,
+  "expectedDuration": {
+    "min": 45,
+    "max": 60
+  },
+  "chapter": 1,
+  "chapterTitle": "破碎的和平",
+  "firstMissionId": "chapter1-border",
+  "videoAsset": "assets/cinematics/prologue/prologue_zh_tw.mp4",
+  "subtitleTracks": [
+    {
+      "language": "zh-TW",
+      "label": "繁體中文",
+      "status": "concept",
+      "src": "assets/cinematics/prologue/subtitles/zh-TW.vtt"
+    },
+    {
+      "language": "en",
+      "label": "English（待翻譯）",
+      "status": "pending-translation",
+      "src": "assets/cinematics/prologue/subtitles/en.vtt"
+    },
+    {
+      "language": "ja",
+      "label": "日本語（翻訳準備中）",
+      "status": "pending-translation",
+      "src": "assets/cinematics/prologue/subtitles/ja.vtt"
+    }
+  ],
+  "subtitles": {
+    "schemaVersion": 1,
+    "timeUnit": "seconds",
+    "format": "WebVTT",
+    "defaultLanguage": "zh-TW",
+    "tracks": [
+      {
+        "language": "zh-TW",
+        "label": "繁體中文",
+        "status": "concept",
+        "src": "assets/cinematics/prologue/subtitles/zh-TW.vtt"
+      },
+      {
+        "language": "en",
+        "label": "English（待翻譯）",
+        "status": "pending-translation",
+        "src": "assets/cinematics/prologue/subtitles/en.vtt"
+      },
+      {
+        "language": "ja",
+        "label": "日本語（翻訳準備中）",
+        "status": "pending-translation",
+        "src": "assets/cinematics/prologue/subtitles/ja.vtt"
+      }
+    ],
+    "cues": [
+      {
+        "id": "shared-peace",
+        "start": 14,
+        "end": 23,
+        "language": "zh-TW",
+        "text": "我們曾相信，這就是和平。"
+      },
+      {
+        "id": "title-concept",
+        "start": 58,
+        "end": 60,
+        "language": "zh-TW",
+        "text": "有些戰爭，開始於仇恨。\n而有些……開始於一個謊言。"
+      }
+    ]
+  },
+  "unlockCondition": "completed-or-skipped",
+  "sourceType": "CONFIRMED",
+  "sourceContext": "STORY EXPERIENCE",
+  "bibleReference": "docs/WORLD_STORY_BIBLE_V1.md",
+  "shots": [
+    {
+      "id": "shot_01",
+      "start": 0,
+      "end": 6,
+      "title": "曾經的世界",
+      "imageAsset": "assets/cinematics/prologue/shot_01_world.webp",
+      "description": "和平時期的東方大陸。人類城市、銀葉自然文明、暮影領域存在於同一個世界。",
+      "characterRefs": [],
+      "locationRefs": [
+        "silverleaf_territory"
+      ],
+      "direction": "超廣角世界景觀；宏大、和平、充滿未知。"
+    },
+    {
+      "id": "shot_02",
+      "start": 6,
+      "end": 14,
+      "title": "第一次真正的交流",
+      "imageAsset": "assets/cinematics/prologue/shot_02_cooperation.webp",
+      "description": "人類商隊與銀葉交流。暮影魔法師協助其他文明。不同種族傭兵共同工作。早期傭兵制度源自跨種族合作。",
+      "characterRefs": [],
+      "locationRefs": [],
+      "direction": "呈現交流與合作。"
+    },
+    {
+      "id": "shot_03",
+      "start": 14,
+      "end": 23,
+      "title": "共同城市",
+      "imageAsset": "assets/cinematics/prologue/shot_03_shared_city.webp",
+      "description": "人類帶來工程、制度與建設；銀葉帶來自然與元素；暮影帶來魔法與知識。不同文明共同建立繁榮的城市。",
+      "characterRefs": [],
+      "locationRefs": [
+        "shared_city"
+      ],
+      "direction": "最後拉遠鏡頭，完整呈現共同城市。"
+    },
+    {
+      "id": "shot_04",
+      "start": 23,
+      "end": 31,
+      "title": "銀葉王子",
+      "imageAsset": "assets/cinematics/prologue/shot_04_silverleaf_prince.webp",
+      "description": "銀葉王子走在共同城市中。不同種族居民認識他，向他致意。",
+      "characterRefs": [
+        "silverleaf_prince"
+      ],
+      "locationRefs": [
+        "shared_city"
+      ],
+      "direction": "受到不同文明尊重的共同統治者人選；不宣告必然繼位。"
+    },
+    {
+      "id": "shot_05",
+      "start": 31,
+      "end": 38,
+      "title": "陰影",
+      "imageAsset": "assets/cinematics/prologue/shot_05_conspiracy.webp",
+      "description": "王宮內，共同城市地圖旁，一隻手推倒象徵王子的棋子。",
+      "characterRefs": [],
+      "locationRefs": [
+        "royal_palace"
+      ],
+      "direction": "音樂與畫面轉暗；不顯示完整面孔、身份或可辨識角色標記。"
+    },
+    {
+      "id": "shot_06",
+      "start": 38,
+      "end": 44,
+      "title": "暮影區",
+      "imageAsset": "assets/cinematics/prologue/shot_06_shadow_district.webp",
+      "description": "夜晚，銀葉王子進入暮影生活區。街道逐漸安靜，遠處存在不明人影。",
+      "characterRefs": [
+        "silverleaf_prince"
+      ],
+      "locationRefs": [
+        "shadow_district"
+      ],
+      "direction": "不明人影不綁定任何角色身份。"
+    },
+    {
+      "id": "shot_07",
+      "start": 44,
+      "end": 48,
+      "title": "死亡",
+      "imageAsset": "assets/cinematics/prologue/shot_07_assassination.webp",
+      "description": "門關上。劍刃反光。王子回頭。金屬聲。畫面切黑。",
+      "characterRefs": [
+        "silverleaf_prince"
+      ],
+      "locationRefs": [
+        "shadow_district"
+      ],
+      "direction": "快速剪接；不展示完整殺人過程或兇手。"
+    },
+    {
+      "id": "shot_08",
+      "start": 48,
+      "end": 53,
+      "title": "王子之死",
+      "imageAsset": "assets/cinematics/prologue/shot_08_prince_death.webp",
+      "description": "王子被發現倒在暮影區。現場有一件與古代暮影禁忌有關的物件。",
+      "characterRefs": [
+        "silverleaf_prince"
+      ],
+      "locationRefs": [
+        "shadow_district"
+      ],
+      "direction": "物件的身份、來源、是否造成死亡，均保持未知。"
+    },
+    {
+      "id": "shot_09",
+      "start": 53,
+      "end": 58,
+      "title": "和平破裂",
+      "imageAsset": "assets/cinematics/prologue/shot_09_war_begins.webp",
+      "description": "銀葉軍集結；王國城門封鎖；暮影居民察覺異常；禁衛軍團長閱讀案件資料；銀葉公主在遠方收到消息；銀葉王面對兒子的死亡。",
+      "characterRefs": [
+        "guard_commander",
+        "silverleaf_princess",
+        "silverleaf_king"
+      ],
+      "locationRefs": [
+        "shared_city",
+        "shadow_district",
+        "silverleaf_territory"
+      ],
+      "direction": "快速 Montage；不揭露真相。公主所在位置未定，不推定為銀葉領地。"
+    },
+    {
+      "id": "shot_10",
+      "start": 58,
+      "end": 60,
+      "title": "HERO FRONTIER",
+      "imageAsset": "assets/cinematics/prologue/shot_10_title.webp",
+      "description": "CHAPTER I\n《破碎的和平》",
+      "characterRefs": [],
+      "locationRefs": [],
+      "direction": "黑畫面與標題。"
+    }
+  ],
+  "characters": [
+    {
+      "id": "silverleaf_king",
+      "name": "Silverleaf King",
+      "status": "pending-approval",
+      "referenceAsset": null,
+      "revision": null,
+      "continuity": {
+        "faceIdentity": null,
+        "hair": null,
+        "costume": null,
+        "factionSymbol": null,
+        "bodyProportion": null,
+        "ageAppearance": null,
+        "weapon": null
+      }
+    },
+    {
+      "id": "silverleaf_prince",
+      "name": "Silverleaf Prince",
+      "status": "pending-approval",
+      "referenceAsset": null,
+      "revision": null,
+      "continuity": {
+        "faceIdentity": null,
+        "hair": null,
+        "costume": null,
+        "factionSymbol": null,
+        "bodyProportion": null,
+        "ageAppearance": null,
+        "weapon": null
+      }
+    },
+    {
+      "id": "silverleaf_princess",
+      "name": "Silverleaf Princess",
+      "status": "pending-approval",
+      "referenceAsset": null,
+      "revision": null,
+      "continuity": {
+        "faceIdentity": null,
+        "hair": null,
+        "costume": null,
+        "factionSymbol": null,
+        "bodyProportion": null,
+        "ageAppearance": null,
+        "weapon": null
+      }
+    },
+    {
+      "id": "guard_commander",
+      "name": "Guard Commander",
+      "status": "pending-approval",
+      "referenceAsset": null,
+      "revision": null,
+      "continuity": {
+        "faceIdentity": null,
+        "hair": null,
+        "costume": null,
+        "factionSymbol": null,
+        "bodyProportion": null,
+        "ageAppearance": null,
+        "weapon": null
+      }
+    },
+    {
+      "id": "king",
+      "name": "King",
+      "status": "pending-approval",
+      "referenceAsset": null,
+      "revision": null,
+      "continuity": {
+        "faceIdentity": null,
+        "hair": null,
+        "costume": null,
+        "factionSymbol": null,
+        "bodyProportion": null,
+        "ageAppearance": null,
+        "weapon": null
+      }
+    },
+    {
+      "id": "chancellor",
+      "name": "Chancellor",
+      "status": "pending-approval",
+      "referenceAsset": null,
+      "revision": null,
+      "continuity": {
+        "faceIdentity": null,
+        "hair": null,
+        "costume": null,
+        "factionSymbol": null,
+        "bodyProportion": null,
+        "ageAppearance": null,
+        "weapon": null
+      }
+    }
+  ],
+  "locations": [
+    {
+      "id": "shared_city",
+      "name": "Shared City",
+      "status": "pending-approval",
+      "referenceAsset": null,
+      "revision": null,
+      "continuity": {
+        "architecture": null,
+        "banner": null,
+        "factionSymbol": null,
+        "cityLayout": null,
+        "visualLanguage": null
+      }
+    },
+    {
+      "id": "royal_palace",
+      "name": "Royal Palace",
+      "status": "pending-approval",
+      "referenceAsset": null,
+      "revision": null,
+      "continuity": {
+        "architecture": null,
+        "banner": null,
+        "factionSymbol": null,
+        "cityLayout": null,
+        "visualLanguage": null
+      }
+    },
+    {
+      "id": "shadow_district",
+      "name": "Shadow District",
+      "status": "pending-approval",
+      "referenceAsset": null,
+      "revision": null,
+      "continuity": {
+        "architecture": null,
+        "banner": null,
+        "factionSymbol": null,
+        "cityLayout": null,
+        "visualLanguage": null
+      }
+    },
+    {
+      "id": "silverleaf_territory",
+      "name": "Silverleaf Territory",
+      "status": "pending-approval",
+      "referenceAsset": null,
+      "revision": null,
+      "continuity": {
+        "architecture": null,
+        "banner": null,
+        "factionSymbol": null,
+        "cityLayout": null,
+        "visualLanguage": null
+      }
+    }
+  ],
+  "continuityPolicy": "同一 reference ID 使用同一份核准設計；null 表示未定稿，不能自行補完。"
+}

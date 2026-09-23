@@ -6,7 +6,7 @@ test('地圖美術更新保留同尺寸原版供回復，未增加執行期下�
  assert.equal(current.readUInt32BE(16),old.readUInt32BE(16));assert.equal(current.readUInt32BE(20),old.readUInt32BE(20));assert.ok(current.length<old.length*1.5);assert.notDeepEqual(current,old);
 });
 test('正常玩家只看到正式新手谷地，兩張舊圖仍保留作回歸測試',()=>{
- const ns=load(),maps=ns.maps.publicMaps();assert.deepEqual(Array.from(maps,map=>map.id),['twinpass','autumn','beginner']);assert.equal(ns.maps.defaultId,'beginner');
+ const ns=load(),maps=ns.maps.publicMaps();assert.deepEqual(Array.from(maps,map=>map.id),['twinpass','autumn','silverleaf','shadowfall','frostborn','beginner']);assert.equal(ns.maps.defaultId,'beginner');
  assert.equal(ns.maps.definitions.classic.developmentOnly,true);assert.equal(ns.maps.definitions.frontier.developmentOnly,true);
  const html=fs.readFileSync(path.join(__dirname,'../td.html'),'utf8');assert.match(html,/value="beginner"/);assert.doesNotMatch(html,/value="frontier"|value="classic"/);
 });
@@ -25,11 +25,29 @@ test('正式地圖繪製使用原始寬高，不傳入拉伸尺寸',()=>{
  const ns=load();ns.maps.apply('beginner');const image={ready:true},calls=[],ctx=new Proxy({createRadialGradient:()=>({addColorStop(){}})},{get:(object,key)=>object[key]||((...args)=>calls.push([key,...args]))}),renderer=new ns.systems.FrontierTerrain();
  assert.equal(renderer.draw(ctx,{mapAssets:{beginner:image}}),true);const draw=calls.find(call=>call[0]==='drawImage');assert.deepEqual(draw,['drawImage',image,0,0]);assert.equal(renderer.cache,image);
 });
-test('新手圖只有草地可部署，U 型內圈與側翼有效，路面與裝飾區拒絕',()=>{
+
+test('選擇部署時不再把合法點與禁建框鋪滿整張地圖',()=>{
+ const ns=load();ns.maps.apply('silverleaf');
+ const image={ready:true},art={mapAssets:{silverleaf:image}},build=new ns.systems.BuildSystem();
+ const calls=()=>{const list=[],ctx=new Proxy({},{get:(_,key)=>(...args)=>list.push([key,...args])});assert.equal(new ns.systems.FrontierTerrain().draw(ctx,art,build),true);return list;};
+ const idle=calls();build.queue('arrow','building');const pending=calls();
+ assert.deepEqual(pending,idle);
+ assert.deepEqual(pending.filter(call=>call[0]==='drawImage'),[['drawImage',image,0,0]]);
+});
+
+test('建造預覽只在指標進入戰場後顯示，重新選卡不殘留紅圈',()=>{
+ const ns=load();ns.maps.apply('beginner');const build=new ns.systems.BuildSystem(),calls=[];
+ const ctx=new Proxy({},{get:(_,key)=>(...args)=>calls.push([key,...args])});
+ assert.equal(build.queue('arrow','building'),true);build.draw(ctx);assert.equal(calls.length,0);
+ build.updatePointer(600,400);assert.equal(build.pointer.valid,true);build.draw(ctx);
+ assert.ok(calls.some(call=>call[0]==='arc'));
+ calls.length=0;build.queue('frost','building');build.draw(ctx);assert.equal(calls.length,0);
+});
+test('新手圖只在清楚的草地部署，樹林、巨石、營地與道路拒絕',()=>{
  const ns=load();ns.maps.apply('beginner');const build=new ns.systems.BuildSystem();
- for(const p of [[525,470],[180,520],[470,130],[930,400]])for(const kind of ['unit','building'])assert.equal(build.canPlaceAt(p[0],p[1],kind),true,p.join(','));
- for(const p of [[80,350],[760,450],[900,900],[1200,100]])for(const kind of ['unit','building'])assert.equal(build.canPlaceAt(p[0],p[1],kind),false,p.join(','));
- assert.equal(build.placementIssue(80,350,'unit'),'road');assert.equal(build.placementIssue(900,900,'unit'),'terrain');assert.match(build.placementMessage(900,900,'unit'),/森林|山壁|水域/);
+ for(const p of [[600,400],[330,465],[560,110],[900,350],[1250,455],[1250,655]])for(const kind of ['unit','building'])assert.equal(build.canPlaceAt(p[0],p[1],kind),true,p.join(','));
+ for(const p of [[80,350],[760,450],[250,300],[900,420],[180,520],[900,900],[1200,100]])for(const kind of ['unit','building'])assert.equal(build.canPlaceAt(p[0],p[1],kind),false,p.join(','));
+ assert.equal(build.placementIssue(80,350,'unit'),'road');assert.equal(build.placementIssue(900,900,'unit'),'terrain');assert.match(build.placementMessage(900,900,'unit'),/平坦|森林|山壁|水域/);assert.doesNotMatch(build.placementMessage(900,900,'unit'),/亮點/);
 });
 test('大地圖可回復原圖，共用戰鬥資料且路線長度完全相同',()=>{
  const ns=load(),classic=ns.config;ns.maps.apply('frontier');assert.equal(ns.config.width,1280);assert.equal(ns.config.height,900);assert.equal(ns.config.units,classic.units);assert.equal(ns.config.buildings,classic.buildings);
@@ -99,6 +117,6 @@ test('原型地景僅首次繪製建立快取，不在每幀重製地圖',()=>{
  assert.equal(renderer.draw(ctx,art),false);assert.equal(canvases,0);art.background.ready=true;assert.equal(renderer.draw(ctx,art),true);const first=canvases;for(let i=0;i<100;i++)renderer.draw(ctx,art);assert.equal(canvases,first);assert.equal(renderer.cache.width,1280);const fallback=renderer.cache;art.frontierGround={ready:true};renderer.draw(ctx,art);assert.notEqual(renderer.cache,fallback);const upgraded=renderer.cache;renderer.draw(ctx,art);assert.equal(renderer.cache,upgraded);
  let keepDraws=0;art.keep={ready:true};art.drawKeep=(surface,x,y,size)=>{keepDraws++;assert.equal(surface,ctx);assert.equal(x,1204);assert.equal(y,750);assert.equal(size,168);return true;};renderer.draw(ctx,art);assert.equal(keepDraws,1);assert.equal(renderer.cache,upgraded,'晚載入地標不應重建地表快取');
  const build={pending:{kind:'building'},calls:0,canPlaceAt(){this.calls++;return true;}},saved=JSON.stringify(ns.config.path);
- renderer.draw(ctx,art,build);assert.equal(build.calls,3);assert.equal(renderer.cache,upgraded);const drawn=canvases;
- build.pending=null;renderer.draw(ctx,art,build);assert.equal(build.calls,3);assert.equal(canvases,drawn);assert.equal(JSON.stringify(ns.config.path),saved);
+ renderer.draw(ctx,art,build);assert.equal(build.calls,0);assert.equal(renderer.cache,upgraded);const drawn=canvases;
+ build.pending=null;renderer.draw(ctx,art,build);assert.equal(build.calls,0);assert.equal(canvases,drawn);assert.equal(JSON.stringify(ns.config.path),saved);
 });

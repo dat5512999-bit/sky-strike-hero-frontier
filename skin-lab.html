@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#08111b">
+  <link rel="icon" href="data:,">
+  <title>英雄造型試裝 · HERO FRONTIER</title>
+  <link rel="stylesheet" href="skin-lab.css">
+</head>
+<body>
+  <main class="skin-lab">
+    <header class="lab-header"><a href="td.html?panel=shop">‹ 返回商城</a><span>HERO FRONTIER <small>／ SKIN ATELIER</small></span><span class="lab-badge">純外觀試裝</span></header>
+    <section class="lab-intro"><div><p class="eyebrow">HEROES REIMAGINED</p><h1>你的英雄，你的全新造型。</h1><p id="look-subtitle">先選英雄，再選他的造型，開始換裝前後比較。</p></div><p class="lab-explainer">選一位英雄，試穿他的全新造型。<br>此頁為獨立試裝，不消耗水晶。</p></section>
+    <h2 class="lab-step">01 選擇英雄</h2><nav id="lab-heroes" class="lab-heroes" aria-label="選擇試裝英雄"></nav>
+    <section id="lab-skin-picker" hidden aria-labelledby="skins-heading"><h2 class="lab-step" id="skins-heading">02 選擇造型</h2><nav id="lab-skins" class="lab-skins" aria-label="此英雄的造型"></nav></section>
+    <p id="lab-status" class="lab-status" role="status" aria-live="polite">請先選擇一位英雄。</p>
+    <div id="lab-comparison" hidden>
+    <section class="lab-portraits" aria-label="選角立繪前後比較">
+      <article class="lab-portrait lab-before"><img src="assets/td/opening/hero-arcanist-selection-v1.png" alt="換裝前：森語者希爾芙的原版森林綠色選角立繪"><span class="lab-chip">BEFORE · 換裝前</span><div><small>原版英雄 · 精靈奧術法師</small><h2>森語者・希爾芙</h2><p>翠綠披風 ／ 棕色長髮 ／ 原版選角立繪</p></div></article>
+      <article class="lab-portrait lab-after"><img src="assets/td/shop/frost-portrait-v2.png" alt="換裝後概念：霜華之誓的銀白長髮、冰藍皇冠與白色毛披風"><span class="lab-chip">AFTER · 換裝後</span><div><small>銀葉公主 · 造型企劃名稱</small><h2>霜華之誓</h2><p>霜藍銀甲 ／ 銀白長髮 ／ 雪絨披風</p></div></article>
+    </section>
+    <section class="lab-stage-section" aria-label="同步戰場動作比較">
+      <div class="lab-toolbar"><div><h2>走進戰場</h2><p>同一個角色、同一個時間，只有造型不同。</p></div><div class="lab-actions" role="group" aria-label="角色動作"><button data-motion="idle" aria-pressed="true">待機</button><button data-motion="walk" aria-pressed="false">移動</button><button data-motion="attack" aria-pressed="false">攻擊</button><button data-motion="cast" aria-pressed="false">施法</button></div><div class="lab-options"><button id="lab-pause" aria-pressed="false">暫停</button><button id="lab-facing">轉向</button><label>尺寸 <select id="lab-zoom"><option value="2.5">放大檢視</option><option value="1">戰場原尺寸</option></select></label></div></div>
+      <div class="lab-stages"><figure><canvas id="before-stage" width="640" height="290" aria-label="原版角色戰場動作"></canvas><figcaption>原版戰場角色 <span>遊戲現有素材</span></figcaption></figure><figure><canvas id="after-stage" width="640" height="290" aria-label="新造型角色戰場動作試作"></canvas><figcaption><b id="after-name">霜華之誓</b> <span id="after-caption">動作素材載入中</span></figcaption></figure></div>
+
+      <div id="lab-stats" class="lab-stats" aria-label="共用戰鬥數值"></div>
+    </section>
+    </div>
+    <details class="lab-notes"><summary>造型已接入哪些地方？</summary><p>四位英雄皆保留原本身分與能力。此頁只做換裝比較，不消耗試用水晶，也不寫入玩家檔案。</p><p>霜華、曜陽、緋月與冥骨帝王可在大廳商城使用試用水晶取得，裝備後套用於正式戰場與選角立繪。雷霆戰王也已加入大廳商城，提供完整四組動作，使用同一玩家檔案保存購買與裝備。</p><p>新動作圖仍需逐幀校準；獨立技能特效、召喚物外觀及語音尚未補齊。圖內光效不會改變技能碰撞、傷害、掉落或分數。</p><a href="docs/shop/CHIEF_LAB_V050.md">查看造型來源與試裝文件</a></details>
+    <footer>外觀隨心，實力公平。<span>Skin Lab 0.6.1 · 不寫入遊戲存檔</span></footer>
+  </main>
+  <noscript>請啟用 JavaScript 以播放換裝前後比較。</noscript>
+  <script src="src/td/namespace.js"></script><script src="src/td/config.js"></script>
+  <script src="src/td/systems/HeroRoster.js"></script><script src="src/td/entities/Hero.js"></script>
+  <script src="src/td/systems/SpriteFrameBounds.js"></script><script src="src/td/systems/ArtSystem.js"></script>
+  <script src="src/td/shop/SkinSchema.js"></script><script src="src/td/shop/ThunderKing.js"></script><script src="src/td/shop/SkinCatalog.js"></script>
+  <script src="src/td/skin-lab/PreviewModel.js"></script><script src="src/td/skin-lab/ChiefPreview.js"></script><script src="src/td/skin-lab/HeroLooks.js"></script><script src="src/td/skin-lab/main.js"></script>
+</body>
+</html>

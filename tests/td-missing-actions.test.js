@@ -8,13 +8,13 @@ function art(){
 }
 
 test('previously static units, support units, robots and ultimates have complete action sheets',()=>{
-  const {A}=art(),types=['kingdomMage','alchemist','bountyHunter','pirate','blacksmith','timeMage','bomb','heavyBomb','dragon','royalCommander','soulsteel'];
+  const {A}=art(),types=['kingdomMage','alchemist','bountyHunter','pirate','blacksmith','timeMage','bomb','heavyBomb','dragon','royalCommander','soulsteel','chief','centaur','boarRider','minotaur','shaman'];
   assert.deepEqual(Array.from(Object.keys(A.ACTION_PATHS)),types);
   const source=fs.readFileSync('src/td/systems/SpriteFrameBounds.js','utf8');
   for(const type of types){
     const file=A.ACTION_PATHS[type],image=rgba(file);
     assert.equal(image.pixels[3],0,file+' should keep a transparent background');
-    if(!type.startsWith('dragon')&&!['royalCommander','soulsteel'].includes(type))assert.match(source,new RegExp(file.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
+    if(!['dragon','royalCommander','soulsteel','chief','centaur','boarRider','minotaur','shaman'].includes(type))assert.match(source,new RegExp(file.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
   }
 });
 

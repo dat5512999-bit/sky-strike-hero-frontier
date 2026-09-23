@@ -31,10 +31,16 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
+      - name: Prepare static site
+        run: |
+          mkdir -p _site
+          cp ./*.html ./*.css ./*.webmanifest sw.js .nojekyll _site/
+          cp -R assets src _site/
+          rm -f _site/codex-dev.html _site/src/td/codex/CodexDebug.js
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
         with:
-          path: .
+          path: _site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

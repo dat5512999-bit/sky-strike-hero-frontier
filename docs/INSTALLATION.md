@@ -1,4 +1,44 @@
+> **v0.85.9：** Node.js 18 以上執行 `npm run check`、`npm test`，再以 `npm run serve:test` 開啟 `/td.html`；無新增套件。選卡後檢查全圖綠點與紅框已消失。詳見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
+
+> **v0.85.8：** 使用 Node.js 18 以上取得完整靜態檔，執行語法與霜原測試後啟動 td.html；無新增套件或設定。步驟見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。
+
 # 安裝手冊
+
+> **v0.85.7（2026-09-23）：** Node.js 18 以上與既有靜態伺服器即可；無額外套件，兩張新地精 PNG 必須一併取得。 操作、架構、部署、回復及驗收見 [地精視覺交付](GOBLIN_POLISH_V0857.md)。
+
+> **v0.85.6：** 安裝步驟不變；啟動 `td.html` 後，預設 ×1 已採新節奏。若仍為舊節奏，重新載入以更新離線快取。見 [速度調整](GAME_SPEED_V0856.md)。
+
+> **v0.85.5（2026-09-23）更新：** 桌機建造／技能介面放大；霜原七塔正式美術及四技能圖示／特效；排行榜僅收錄自由遠征完成至少 16 波的成績，原始戰報保留。當前操作、API、架構、安裝部署、回復與驗收以 [本版交付文件](BATTLE_POLISH_V0855.md) 為準。
+
+v0.85.3：取得整份靜態目錄和三張新版地圖 PNG，執行 `npm run check`、`npm test`、`npm run serve:test` 後開啟 `/td.html`。見 [戰場安裝與驗收](STORY_MAP_REFINEMENT_V0853.md)。
+
+v0.85.2：安裝不需邊境對戰原型檔案；完整部署根目錄並更新離線快取。見 [移除與驗收紀錄](VERSUS_REMOVAL_V0852.md)。
+
+v0.84.9 安裝需包含新增的 `src/td/systems/ArmoryUI.js`；不需新套件或資料庫。啟動、更新與驗證見 [軍械庫更新](ARMORY_V0849.md)。
+
+v0.84.8 安裝後確認三張新地圖資產與劇情入口，詳見 [三張劇情戰場](STORY_MAPS_V0848.md)。
+
+> **v0.84.7 現行商城：** 四位英雄外觀（獸人為「冥骨帝王」）與「日蝕王庭」已開放使用玩家檔案的試用水晶購買、保存與裝備；沒有真實付款。詳細規格、操作、限制、部署與測試見 [外觀上架交付](COSMETIC_RELEASE_V0847.md)。
+
+> v0.84.6：結算畫面只需既有 Node.js 18+ 與靜態服務，無新增套件或資料庫；安裝後以 `td.html` 驗證，詳見 [本版交付](RESULT_SCREEN_V0846.md)。
+
+> v0.84.4：沿用 Node.js 18+，無新套件；完整複製 HTML、CSS、JS 與新增的日蝕王庭和地精圖集素材，以本機伺服器開啟 `td.html`。詳見 [本版安裝](EXPEDITION_SCORE_PROFILE_V0844.md)。
+
+> v0.84.3：沿用 Node.js 18+，無新套件；安裝完整專案並以本機伺服器開啟 td.html，確認版本 v0.84.3。詳見 [技能交付](CHIEF_SHOCKWAVE_V0843.md)。
+
+> v0.84.2：安裝時保留 td-ranking.css 與 src/td/ranking 兩個腳本，和 td.html 同版即可開啟排行榜；測試指令見 [排行榜安裝](RANKING_UI_V0842.md)。
+
+> v0.83.6：沿用 Node.js 18+ 與現有啟動方式，無新增套件。更新後確認大廳 v0.83.6，原分頁必須重新整理才載入修正。 詳見 [右鍵與戰鬥版型修正](BATTLE_INPUT_LAYOUT_V0836.md)。
+
+> v0.83.5：沿用 Node.js 18+、npm run check、npm test、npm run serve:test。新增頁面與 assets/td/shop、assets/td/codex 必須隨專案完整取得，不需新套件或金鑰。 詳見 [商城與圖鑑整合交付](FEATURE_INTEGRATION_V0835.md)。
+
+> v0.83.4：沿用 Node 18+ 與原安裝流程，不需新套件或設定。同步更新大廳樣式、FrontierApp、入口與快取；見 [安裝步驟](LOBBY_LAYOUT_V0834.md)。
+
+> v0.83.3：保留 src/td/cinematic、src/td/codex、assets/cinematics/prologue 與 td-cinematic.css；Node 18+ 執行 npm run check、npm test、npm run serve:test，開啟 /td.html。正式影片可稍後放入，不影響首次啟動。詳見 [序章安裝](PROLOGUE_CINEMATIC_V1.md)。
+
+> v0.83.2 無新增相依套件。重新載入 `td.html` 後確認遠征頁為 v0.83.2；若仍見舊版，關閉分頁重開並檢查離線快取是否更新。
+
+> v0.83.1 無新增相依套件或資料庫。開啟 `td.html`、重新整理使快取更新；可在遠征頁確認版本 v0.83.1，並選一座 100G 弩塔核對 Lv2 升級為 160G。
 
 > v0.73.0 無新增相依套件。重新開啟並載入 `sky-strike-v0.73.0`，開局頁應出現測試標籤，完成一局後戰況頁應顯示最近戰局。
 
@@ -315,6 +355,7 @@ v0.66.3 沿用原安裝與設定，不需新套件或下載素材。Node.js 18+ 
 波次預告改為怪物縮圖、數量與威脅標籤，新增入口倒數與短暫開戰提醒。操作、設定、架構、API、部署、還原與驗證方式見 [波次提示文件](WAVE_HUD_V0664.md)。
 
 
+
 ## 0.67.1 手機波次版面修正
 
 修正波次與倒數重疊、速度列出界，縮小手機提示面板；無操作、設定或資料格式變更。原因、架構、更新、還原及觸控版面驗證見 [版面修正文件](WAVE_LAYOUT_V0671.md)。
@@ -366,19 +407,35 @@ v0.68.2 沿用原安裝與設定。無新增套件；Node.js 18+ 執行 npm test
 # v0.77.0 安裝補充
 
 不需安裝新套件或建立資料庫。瀏覽器須允許本機儲存，才能在重新開啟後顯示「繼續遠征」。
-# v0.78.0 安裝補充
-
-無新增套件。確認 `versus.html`、`versus.css` 與 `src/versus/` 一併部署；可直接以瀏覽器開啟 `versus.html`。
-# v0.78.1 安裝補充
-
-須包含 `assets/td/versus-battlefield-concept-v1.png` 及既有對戰引用圖集。缺少單一角色圖集時會使用簡化圖形，但缺少背景會退回純色戰場。
-# v0.79.0 安裝補充
-
-無新增依賴。更新 `versus.html`、`versus.css`、`src/versus/main.js` 與 `VersusMatch.js` 後即可使用新版介面。
-
-# v0.79.1 安裝補充
-
-無新增依賴。對戰原型保留於專案中，但不從英雄遠征開局畫面公開導航。
 # v0.79.2 安裝補充
 
 無新增依賴或資料庫變更。重新載入後應更新至 `sky-strike-v0.79.2`。
+
+v0.80.0 無新增執行期依賴。覆蓋完整專案後重新載入，Service Worker 快取應顯示 `sky-strike-v0.80.0`；新荒野 PNG 必須與 `assets/td/opening` 一併保留。
+
+
+## 0.83.0 · 大廳與獨立測試輪次
+
+無新增套件。Node.js 18+，npm run serve:test 後開 td.html；手機使用 td-mobile.html。首次啟動複製舊存檔至管理者。 完整操作、限制、架構與回復步驟見 [P0 說明](LOBBY_P0_V083.md)。
+
+## v0.83.3
+
+v0.83.3 無新增依賴；使用既有 npm run serve:test。需完整保留新增 CSS 與造型圖。詳見 [版本安裝說明](LOBBY_EXPEDITION_V0833.md)。
+
+# 地精 V1 安裝補充
+
+沿用原有純靜態安裝流程；新版須連同 `src/td/systems/GoblinNetworkSystem.js`、`GoblinArt.js`、`assets/td/goblin-concept-card.svg` 和更新後的 `td.html` 一起部署。無資料庫與額外套件。見 [地精 V1](GOBLIN_FACTION_V1.md)。
+
+安裝後可依 [v0.84.5 武器紀錄](FACTION_HERO_WEAPONS_V0845.md) 在自由遠征檢查荒野與地精英雄三階武器。
+
+
+## 商城單一入口與雷霆戰王（0.6.1）
+
+正式商城統一由 `td.html` 大廳或 `td.html?panel=shop` 進入；獨立 `shop.html` 與專用啟動程式已刪除，舊 4187 展示服務已停止。雷霆戰王沿用原有玩家檔案保存購買與裝備，四組動作已接入正式戰場。共用商城元件及既有收藏保留。
+
+操作、API、部署、測試與回復限制見 [0.6.1 整合說明](shop/THUNDER_TD_V061.md)。
+
+> v0.85.4 沒有新相依或素材；完整安裝後直接開啟 `td.html` 即可。檔案清單見 [命中回饋交付](HIT_FEEDBACK_V0854.md#安裝部署更新與回復)。
+> v0.85.1：根目錄 `td.html` 已直接載入冰原系統與選角插畫；完整檔案清單見[選角插畫交付](FROSTLAND_SELECTION_ART_V0851.md)。
+
+v0.85.0：沿用 Node.js 18+，無新依賴。完整取得 assets/td/frostland 與 items/frostland-spears-v1.png，執行 npm run check、npm test、npm run serve:test，開啟 /td.html。也可開 /frostland-preview.html。步驟見 [冰原 V1](FROSTLAND_FACTION_V1.md)。

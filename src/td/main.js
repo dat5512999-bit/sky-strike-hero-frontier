@@ -12,6 +12,8 @@
   ui.openingStart=document.getElementById('td-start-expedition');
   ui.openingContinue=document.getElementById('td-continue-expedition');
   ui.difficultyDetail=document.getElementById('td-difficulty-detail');
+  ['openingTitle','openingSubtitle','stepBattleSummary','stepPartySummary','mapPreview','mapTitle','mapDetailName','mapQuote','mapTags','mapDescription','mapFeatures','routeLabel','mapRecord','selectBattlefield','changeBattlefield','partyBattlefield','heroDetailArt','heroDetailName','heroIdentity','heroDescription','heroSkills','heroPhase','factionDetailArt','factionDetailName','factionIdentity','factionDescription','factionPhases','factionRoster','summaryMap','summaryDifficulty','summaryHero','summaryHeroShort','summaryFaction','combinationHint'].forEach(function(key){const id='td-'+key.replace(/[A-Z]/g,function(letter){return'-'+letter.toLowerCase();});ui[key]=document.getElementById(id);});
+  ui.openingPageButtons=Array.from(document.querySelectorAll('[data-opening-page]'));ui.expeditionPages=Array.from(document.querySelectorAll('[data-expedition-page]'));ui.mapButtons=Array.from(document.querySelectorAll('[data-map-id]'));ui.partyTabButtons=Array.from(document.querySelectorAll('[data-party-tab]'));
   ui.commandGrid=document.querySelector('.td-command .command-grid');
   ui.buildDrawer=document.getElementById('td-build-drawer');
   ui.buildDrawerGrid=document.querySelector('.build-drawer-grid');
@@ -42,6 +44,20 @@
   ui.menuSettingsBack=document.getElementById('td-menu-settings-back');
   ui.menuLayout=document.getElementById('td-menu-layout-mode');
   ui.resultChange=document.getElementById('td-result-change');
+  ui.resultNext=document.getElementById('td-result-next');
+  ui.resultReport=document.getElementById('td-result-report');
+  ui.resultChapter=document.getElementById('td-result-chapter');
+  ui.resultSeal=document.getElementById('td-result-seal');
+  ui.resultStatus=document.getElementById('td-result-status');
+  ui.resultScore=document.getElementById('td-result-score');
+  ui.resultGrade=document.getElementById('td-result-grade');
+  ui.resultGradeLabel=document.getElementById('td-result-grade-label');
+  ui.resultTime=document.getElementById('td-result-time');
+  ui.resultTimeLabel=document.getElementById('td-result-time-label');
+  ui.resultHighlight=document.getElementById('td-result-highlight');
+  ui.resultUnlock=document.getElementById('td-result-unlock');
+  ui.resultUnlockLabel=document.getElementById('td-result-unlock-label');
+  ui.resultUnlockName=document.getElementById('td-result-unlock-name');
   ui.openingReset=document.getElementById('td-opening-reset');
   ui.selectionShortcut=document.getElementById('td-selection-shortcut');
   ui.selectionDetails=document.querySelector('.selection-details');
@@ -128,5 +144,5 @@
   ui.menuLayout.value=layout.choice;
   ui.menuLayout.addEventListener('change',function(){layout.select(ui.menuLayout.value);layoutMode.value=layout.choice;syncBuildSurface();});
   layoutMode.addEventListener('change',function(){ui.menuLayout.value=layout.choice;});
-  if(ns.maps){ui.mapChoice=document.getElementById('td-map-choice');ui.mapNote=document.getElementById('td-map-note');ui.mapChoice.addEventListener('change',()=>globalThis.towerFrontierGame.chooseMap(ui.mapChoice.value));globalThis.towerFrontierGame.chooseMap(ui.mapChoice.value);}
+  if(ns.maps){ui.mapChoice=document.getElementById('td-map-choice');ui.mapNote=document.getElementById('td-map-note');ui.mapChoice.addEventListener('change',()=>globalThis.towerFrontierGame.chooseMap(ui.mapChoice.value));ui.mapButtons.forEach(button=>button.addEventListener('click',()=>globalThis.towerFrontierGame.chooseMap(button.dataset.mapId)));globalThis.towerFrontierGame.chooseMap(ui.mapChoice.value);}
 })(globalThis.TowerFrontier);

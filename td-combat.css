@@ -719,3 +719,12 @@ body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battl
 body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]>b{font-size:11px;line-height:18px;}
 body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer-grid [data-build-type]>small{font-size:10px;line-height:16px;}
 }
+
+/* v0.83.6: readable desktop HUD, independent of the world/camera transform. */
+@media (hover:hover) and (pointer:fine) and (min-width:1200px) and (max-width:2199px) and (min-height:700px){
+ body.edge-combat[data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]){--battle-hud-zoom:1.1;}
+ body.edge-combat[data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]) :is(.td-header,#td-wave-hud,.hero-profile,.td-hero-dock,.td-minimap,.td-quick-rail,.camera-controls,.command-tabs){zoom:var(--battle-hud-zoom);}
+}
+@media (hover:hover) and (pointer:fine) and (min-width:1700px) and (max-width:2199px) and (min-height:700px){
+ body.edge-combat[data-layout="desktop"]:is([data-game-screen="battle"],[data-game-screen="result"]){--battle-hud-zoom:1.25;}
+}

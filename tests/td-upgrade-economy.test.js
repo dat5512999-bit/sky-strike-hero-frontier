@@ -9,7 +9,8 @@ test('all soldiers use a base-price upgrade curve instead of flat cheap upgrades
     const unit=new ns.entities.CombatUnit(type,100,100);
     for(let level=1;level<=4;level++){
       unit.level=level;
-      assert.equal(unit.upgradeCost().gold,Math.round(cfg.cost*ratios[level-1]/5)*5,type+' Lv.'+level);
+      const ratio=type==='musketeer'&&level===1?.8:ratios[level-1];
+      assert.equal(unit.upgradeCost().gold,Math.round(cfg.cost*ratio/5)*5,type+' Lv.'+level);
     }
   }
 });
@@ -22,8 +23,8 @@ test('ancient dragon and other ultimate soldiers require premium proportional in
   }
 });
 
-test('defense buildings retain their steeper proportional saving curve',()=>{
+test('defense buildings have an accessible first upgrade and retain late investment',()=>{
   const {ns}=load(),tower=new ns.entities.Building('arrow',100,100);
-  assert.deepEqual([1,2,3,4].map(level=>{tower.level=level;return tower.upgradeCost().gold;}),[280,420,620,840]);
+  assert.deepEqual([1,2,3,4].map(level=>{tower.level=level;return tower.upgradeCost().gold;}),[160,420,620,840]);
   assert.deepEqual([1,2,3,4].map(level=>{tower.level=level;return tower.upgradeCost().merit;}),[0,0,1,2]);
 });

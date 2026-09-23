@@ -11,6 +11,18 @@
     'bone-crown':{name:'幽骨王冠',rarity:'傳說',slot:'armor',column:1,row:2,types:['skeleton','golem','soulsteel'],description:'傷害 +32%，額外攻擊一個目標。',mods:{damage:1.32,shots:1},title:'幽骨死亡騎士'},
     'soul-lantern':{name:'噬魂冥燈',rarity:'史詩',slot:'relic',column:2,row:2,types:['rogue','skeleton'],heroes:['rogue'],description:'攻擊附帶靈魂連鎖，擊殺賞金再提高。',mods:{chain:2,bountyBonus:.2},title:'噬魂行者'}
   };
+  ITEMS['lion-bow'].types.push('frostHunter');
+  ITEMS['war-drum'].types.push('frostWolf','frostBear','frostMammoth');
+  ITEMS['moon-staff'].types.push('frostBird','frostShaman');
+  ITEMS['vine-crown'].types.push('frostBird','frostShaman');
+  ITEMS['war-drum'].heroes=['frostland'];
+  const WILD_COMPATIBILITY={'lion-bow':['centaur'],'lion-shield':['boarRider','minotaur'],'war-drum':['centaur','boarRider','minotaur','shaman'],'moon-staff':['shaman'],'vine-crown':['centaur','shaman']};
+  Object.entries(WILD_COMPATIBILITY).forEach(([id,types])=>{ITEMS[id].types=Array.from(new Set(ITEMS[id].types.concat(types)));});
+  ITEMS['war-drum'].heroes.push('chief');
+  ITEMS['war-drum'].types.push('goblinMech');
+  ITEMS['vine-crown'].heroes=['goblin'];
+  ITEMS['lion-bow'].types.push('goblinEngineer','goblinGunner','goblinRiveter');
+  ITEMS['war-drum'].types.push('goblinRecycler');
   class ArmorySystem{
     constructor(){this.reset();}
     reset(){this.owned=[];this.assignments=new Map();}
@@ -24,6 +36,10 @@
     unequip(slot,target){if(!target||!target.gear||!target.gear[slot])return{ok:false,message:'此欄位沒有裝備'};const beforeMax=target.maxHealth||0,id=target.gear[slot],item=this.get(id);delete target.gear[slot];this.assignments.delete(id);this.syncHealth(target,beforeMax);return{ok:true,item:item,message:this.targetLabel(target)+' 卸下 '+item.name+'，已回軍械庫'};}
     releaseTarget(target){if(!target||!target.gear)return[];const released=Object.keys(target.gear).map(slot=>this.unequip(slot,target).item).filter(Boolean);return released;}
     equipped(target){if(!target||!target.gear)return[];return Object.values(target.gear).map(id=>this.get(id)).filter(Boolean);}
+    resaleValue(id){const item=this.get(id);if(!item||!this.owned.includes(id))return 0;const base=String(id).replace(/#\d+$/,'');const shop=Object.values(ns.systems.ShopSystem?.ITEMS||{}).find(offer=>offer.gear===base);return Math.round((shop?.cost||({精良:180,史詩:250,傳說:320}[item.rarity]||180))*.5);}
+    sell(id,economy){if(!this.owned.includes(id))return{ok:false,message:'找不到這件裝備'};if(this.wearer(id))return{ok:false,message:'請先從持有人卸下這件裝備'};const gold=this.resaleValue(id);this.owned.splice(this.owned.indexOf(id),1);economy.refundGold(gold);return{ok:true,gold,message:'已販售 '+this.get(id).name+'，獲得 '+gold+'G'};}
+    recommend(id,targets){const item=this.get(id);if(!item)return[];return (targets||[]).filter(target=>this.canEquip(id,target)).map(target=>{const cfg=target.combatConfig?target.combatConfig():target.config(),mods=item.mods||{};let score=0,reasons=[];if(mods.interval){score+=(1/Math.max(.2,cfg.interval))*22;reasons.push('高攻速可更頻繁觸發效果');}if(mods.shots||mods.chain){score+=(cfg.shots||1)*12+(cfg.chain||0)*8+(mods.shots||0)*16;reasons.push((cfg.shots||1)>1||cfg.chain?'多目標攻擊能放大觸發次數':'裝備會增加多目標能力');}if(mods.splash){score+=(cfg.splash||0)*.35+12;reasons.push('範圍攻擊可擴大群體收益');}if(mods.range){score+=(cfg.range||0)*.08;reasons.push('長射程可提高持續開火時間');}if(mods.damage)score+=(cfg.damage||0)/Math.max(.25,cfg.interval||1)*mods.damage*.3;if(!Object.keys(target.gear||{}).length){score+=14;reasons.push('目前未裝備，無換裝成本');}return{target,score,reason:reasons.slice(0,2).join('；')||'能力類型與此裝備相容'};}).sort((a,b)=>b.score-a.score).slice(0,3);}
+    compare(id,target){const item=this.get(id);if(!item||!target||!this.canEquip(id,target))return null;const cfg=target.combatConfig?target.combatConfig():target.config(),mods=item.mods||{},rows=[];const add=(label,before,after,suffix)=>{const delta=after-before;if(Math.abs(delta)>.001)rows.push({label,before,after,delta,suffix:suffix||''});};add('攻擊',cfg.damage||0,(cfg.damage||0)*(mods.damage||1));add('攻速',1/(cfg.interval||1),1/((cfg.interval||1)*(mods.interval||1)));add('射程',cfg.range||0,(cfg.range||0)*(mods.range||1));add('目標',cfg.shots||1,(cfg.shots||1)+(mods.shots||0));add('範圍',cfg.splash||0,(cfg.splash||0)+(mods.splash||0));add('連鎖',cfg.chain||0,(cfg.chain||0)+(mods.chain||0));return{rows,special:item.description};}
     static item(id){return ITEMS[id]||ITEMS[String(id||'').replace(/#\d+$/,'')]||null;}
     static apply(target,config){const result=Object.assign({},config);if(!target||!target.gear)return result;Object.values(target.gear).forEach(function(id){const item=ArmorySystem.item(id);if(!item)return;const mods=item.mods||{};['damage','range','interval','speed','health'].forEach(function(key){if(mods[key]!==undefined){const source=key==='health'?'maxHealth':key;result[source]=(result[source]===undefined?(key==='health'?(result.health||0):0):result[source])*mods[key];}});['armor','shots','splash','chain','bountyBonus'].forEach(function(key){if(mods[key]!==undefined)result[key]=(result[key]===undefined&&key==='shots'?1:(result[key]||0))+mods[key];});});return result;}
     static title(target,fallback){if(!target||!target.gear)return fallback;const equipped=Object.values(target.gear).map(ArmorySystem.item).filter(Boolean);const signature=equipped.slice().reverse().find(item=>item.title);return signature?signature.title:fallback;}

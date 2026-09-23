@@ -1,4 +1,48 @@
+> **v0.85.9：** 同步部署 `FrontierTerrain.js`、`BuildSystem.js`、入口版本標示與 `sw.js`；離線快取為 `sky-strike-v0.85.9`。發布與檢查清單見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
+
+> **v0.85.8：** 同步發布霜原數值三檔、兩個版本顯示入口與 sw.js；離線快取為 sky-strike-v0.85.8。清單見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。
+
 # 部署手冊
+
+## GitHub Pages 發布 v0.85.9（2026-09-23）
+
+推送 `main` 會執行語法檢查與完整測試，通過後將根目錄 HTML／CSS／manifest、`sw.js`、`.nojekyll`、`assets/` 與 `src/` 打包至 `_site` 發布；排除 `codex-dev.html` 和 `CodexDebug.js`。本機工作樹與新產生的備份／QA 檔案不提交。此版發布前 `npm run check` 與 587 項測試通過。發布完成後檢查 `td.html` 的 0.85.9 版本與 `sky-strike-v0.85.9` 快取。
+
+> **v0.85.7（2026-09-23）：** 地精 PNG、GoblinPresentation、CSS 與預覽檔一併部署；離線快取更新到 sky-strike-v0.85.7。 操作、架構、部署、回復及驗收見 [地精視覺交付](GOBLIN_POLISH_V0857.md)。
+
+> **v0.85.6：** 速度調整需與 `TDGame.js`、版本顯示、`BattleReportSystem.js`、`package.json` 和 `sw.js` 同版部署；快取為 `sky-strike-v0.85.6`。見 [速度調整](GAME_SPEED_V0856.md)。
+
+> **v0.85.5（2026-09-23）更新：** 桌機建造／技能介面放大；霜原七塔正式美術及四技能圖示／特效；排行榜僅收錄自由遠征完成至少 16 波的成績，原始戰報保留。當前操作、API、架構、安裝部署、回復與驗收以 [本版交付文件](BATTLE_POLISH_V0855.md) 為準。
+
+v0.85.3：同步更新三張地圖 PNG、程式與 `sw.js`，使新 Service Worker 快取生效；重開舊分頁驗證選圖、放大及建塔。見 [戰場部署說明](STORY_MAP_REFINEMENT_V0853.md)。
+
+> **v0.85.2：** 以整份靜態目錄更新；移除舊版邊境對戰檔案，部署 `sw.js` 新快取並重新載入。`codex-dev.html` 與 `CodexDebug.js` 仍只供本機開發，不要部署。霜原驗收頁載入 `ThunderKing.js` 才能正常運作。詳見 [移除與驗收紀錄](VERSUS_REMOVAL_V0852.md)。
+
+v0.84.9 部署時須同步 `ArmoryUI.js`、軍械庫程式與 `td.html`／`td.css`／`sw.js`；離線快取為 `sky-strike-v0.84.9`。詳見 [軍械庫更新](ARMORY_V0849.md)。
+
+v0.84.8 部署需包含三張 PNG 與更新後的 Service Worker，詳見 [三張劇情戰場](STORY_MAPS_V0848.md)。
+
+> **v0.84.7 現行商城：** 四位英雄外觀（獸人為「冥骨帝王」）與「日蝕王庭」已開放使用玩家檔案的試用水晶購買、保存與裝備；沒有真實付款。詳細規格、操作、限制、部署與測試見 [外觀上架交付](COSMETIC_RELEASE_V0847.md)。
+
+> v0.84.6：部署時包含 `td-result.css`、`ResultScreen.js` 與結算背景圖，並更新 `sw.js` 快取版號；完整步驟見 [本版交付](RESULT_SCREEN_V0846.md)。
+
+> v0.84.4：一併部署 `td.html`、CSS、`src/td/`、新增 PNG 和 `sw.js`；確認離線快取 `sky-strike-v0.84.4` 更新。詳見 [本版部署](EXPEDITION_SCORE_PROFILE_V0844.md)。
+
+> v0.84.3：部署新 ChiefShockwave.js、衝擊波 SVG、更新的 HTML/CSS/JS 和 sw.js；關閉舊分頁再開以更新快取。詳見 [技能交付](CHIEF_SHOCKWAVE_V0843.md)。
+
+> v0.84.2：部署需同步發佈 td-ranking.css、src/td/ranking/* 與 sky-strike-v0.84.2 快取；確認線上頁面可開啟排行榜。詳見 [排行榜部署](RANKING_UI_V0842.md)。
+
+> v0.83.6：更新 TDGame.js、LayoutSystem.js、td-combat.css 及版本／SW 檔案。SW 為 0.83.6；此輪尚未远端發布。 詳見 [右鍵與戰鬥版型修正](BATTLE_INPUT_LAYOUT_V0836.md)。
+
+> v0.83.5：部署須包含 codex／shop／skin-lab 頁面、CSS、模組與素材。SW 版本升為 0.83.5；程式預快取，圖片按需快取。此輪只完成本機整合，未遠端部署。 詳見 [商城與圖鑑整合交付](FEATURE_INTEGRATION_V0835.md)。
+
+> v0.83.4：快取版本 sky-strike-v0.83.4；發布需包含新版 td-lobby.css 與 FrontierApp。這次只變更本機檔案，尚未部署；見 [更新與部署](LOBBY_LAYOUT_V0834.md)。
+
+> v0.83.3：同步部署 td.html、sw.js、新增播放器／Adapter／素材目錄及 CSS；快取版本 sky-strike-v0.83.3。未交付的 MP4／Key Frame 不預快取，避免安裝 404；影片及 Range 請求交由主機處理。正式主機設定 video/mp4、text/vtt 與 Range 支援。尚未進行發布，見 [序章部署](PROLOGUE_CINEMATIC_V1.md)。
+
+> v0.83.2：同步部署 `WaveCatalog.js`、`WaveSystem.js`、`td.html`、`sw.js` 與戰報版本；離線快取名稱 `sky-strike-v0.83.2`。抽查第 14／20／28 波間隔，其餘波次、敵量與獎勵不變。
+
+> v0.83.1：同步部署 `td.html`、`sw.js`、`src/td/config.js`、兩個實體模組及戰報版本；快取名稱 `sky-strike-v0.83.1`。部署後抽查首級塔／火槍手升級、獵手 Lv2／Lv3 箭數及舊紀錄。
 
 > v0.73.0 部署後抽查策略標籤不改變遊戲規則、同配置歷史能顯示、舊紀錄不報錯，並確認離線快取名稱為 `sky-strike-v0.73.0`。
 
@@ -326,6 +370,7 @@ v0.17.0 快取為 sky-strike-v0.17.0，必須包含 hero-actions-v1.png。同步
 波次預告改為怪物縮圖、數量與威脅標籤，新增入口倒數與短暫開戰提醒。操作、設定、架構、API、部署、還原與驗證方式見 [波次提示文件](WAVE_HUD_V0664.md)。
 
 
+
 ## 0.67.1 手機波次版面修正
 
 修正波次與倒數重疊、速度列出界，縮小手機提示面板；無操作、設定或資料格式變更。原因、架構、更新、還原及觸控版面驗證見 [版面修正文件](WAVE_LAYOUT_V0671.md)。
@@ -377,19 +422,35 @@ v0.17.0 快取為 sky-strike-v0.17.0，必須包含 hero-actions-v1.png。同步
 # v0.77.0 部署
 
 部署時確認 `ChapterCheckpointSystem.js` 可載入且離線快取名稱為 `sky-strike-v0.77.0`。舊版沒有相容檢查點，不需要遷移。
-# v0.78.0 部署
-
-離線快取名稱為 `sky-strike-v0.78.0`，並包含對戰頁面、樣式與六個對戰腳本。部署後從 `td.html` 開局頁測試對戰入口及返回遠征連結。
-# v0.78.1 部署
-
-離線快取更新為 `sky-strike-v0.78.1`，並列入對戰背景。部署後應檢查背景、工人、三兵種、塔與兵營均可顯示。
-# v0.79.0 部署
-
-快取版本為 `sky-strike-v0.79.0`。部署後測試建造預覽／取消、維修／拆除、規則面板、暫停選單及桌面／手機橫向版面。
-
-# v0.79.1 部署
-
-快取版本為 `sky-strike-v0.79.1`。部署後重新載入英雄遠征，確認開局介面無對戰原型連結。
 # v0.79.2 部署
 
 快取版本為 `sky-strike-v0.79.2`。部署後確認開局只顯示地圖、難度、英雄與軍團選擇，且完成戰局後戰報可正常儲存。
+
+v0.80.0 快取版本為 `sky-strike-v0.80.0`。部署後強制重新載入一次，確認第四張軍團卡、第四名英雄、五張荒野動作圖與軍械推薦皆由同源資產載入。
+
+
+## 0.83.0 · 大廳與獨立測試輪次
+
+部署新增 td-lobby.css、src/td/app/*.js 與 assets/td/lobby/ 四張 PNG。service worker cache 為 0.83.0，請部署完整資源集。 完整操作、限制、架構與回復步驟見 [P0 說明](LOBBY_P0_V083.md)。
+
+## v0.83.3
+
+v0.83.3 部署包含 td-expedition.css、skin-frost-v1.png、limited-orc-v1.png 與更新的 sw.js；快取同步升版。詳見 [部署說明](LOBBY_EXPEDITION_V0833.md)。
+
+# 地精 V1 部署補充
+
+靜態站部署需包含兩個 GoblinSystem 腳本與概念 SVG，更新 Service Worker 版本避免舊版 HTML 引用缺失。正式玩家入口仍維持故事鎖；此分支不得直接視為正史發布。見 [地精 V1](GOBLIN_FACTION_V1.md)。
+
+部署 v0.84.5 時須一併發佈 `assets/td/items/chief-axes-v1.png`、`goblin-tools-v1.png` 與新版 `sw.js`；見 [武器紀錄](FACTION_HERO_WEAPONS_V0845.md)。
+
+
+## 商城單一入口與雷霆戰王（0.6.1）
+
+正式商城統一由 `td.html` 大廳或 `td.html?panel=shop` 進入；獨立 `shop.html` 與專用啟動程式已刪除，舊 4187 展示服務已停止。雷霆戰王沿用原有玩家檔案保存購買與裝備，四組動作已接入正式戰場。共用商城元件及既有收藏保留。
+
+操作、API、部署、測試與回復限制見 [0.6.1 整合說明](shop/THUNDER_TD_V061.md)。
+
+> v0.85.4 發布時務必同步 `Monster.js`、`CombatFeedbackSystem.js`、`TDGame.js` 和新版 `sw.js`；快取名稱為 `sky-strike-v0.85.4`。完整步驟見 [命中回饋交付](HIT_FEEDBACK_V0854.md#安裝部署更新與回復)。
+> v0.85.1：部署根目錄 `td.html` 時須同步冰原 PNG、SVG、系統模組、CSS 與 service worker；詳見[選角插畫交付](FROSTLAND_SELECTION_ART_V0851.md)。
+
+v0.85.0：同步部署 td.html、td-expedition.css、codex.css、src/td、Frostland SVG／四張 PNG 和 sw.js（sky-strike-v0.85.1）；音效本機合成。無伺服器遷移。見 [冰原 V1](FROSTLAND_FACTION_V1.md)。

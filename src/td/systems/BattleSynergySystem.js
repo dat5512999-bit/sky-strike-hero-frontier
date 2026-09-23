@@ -4,7 +4,7 @@
   // Deployment anchors never move; charge and fly-by coordinates are visual only.
   class BattleSynergySystem{
     constructor(game){this.game=game;if(game.hero)game.hero.synergy=this;this.reset();}
-    reset(){this.souls=0;this.clock=0;this.auraTick=-1;this.fields=[];this.visuals=[];}
+    reset(){this.souls=0;this.clock=0;this.winter=null;this.frostChainBudget=0;this.frostVisuals=[];this.auraTick=-1;this.fields=[];this.visuals=[];}
     flagRate(target){
       if(!target||target.active===false||target.retired||(target!==this.game.hero&&target.kind!=='unit'))return 0;
       let rate=0,best=null;
@@ -29,6 +29,12 @@
       if(cfg.charge||cfg.flyby)owner.excursion={x:options.lineEnd?options.lineEnd.x:target.x,y:options.lineEnd?options.lineEnd.y:target.y,time:.85,max:.85,fly:!!cfg.flyby};
       if(cfg.soulHarvest&&owner.synergy&&owner.synergy.souls>0){owner.synergy.souls--;options.damage*=1.8;options.splash=48;options.soulCharged=true;}
       if(cfg.soulSlam&&owner.synergy&&owner.synergy.souls>=3){owner.synergy.souls-=3;options.damage*=1.5;options.splash=(options.splash||0)+20;options.soulCharged=true;}
+      if(owner.drumEmpowered){
+        const bursts={orc:{damage:1.25,splash:15},centaur:{chain:1},boarRider:{damage:1.3,splash:20},minotaur:{damage:1.35,splash:26},shaman:{chain:1}},burst=bursts[owner.type];
+        if(burst){options.damage*=burst.damage||1;options.splash=(options.splash||0)+(burst.splash||0);options.chain=(options.chain||0)+(burst.chain||0);options.drumBurst=true;}
+        owner.drumEmpowered=false;
+      }
+      if(ns.systems.FrostStatusSystem)ns.systems.FrostStatusSystem.prepare(owner,cfg,options);
       return options;
     }
     pulse(x,y,color,radius){this.visuals.push({x,y,color,radius:radius||35,time:.45});if(this.visuals.length>100)this.visuals.shift();}
@@ -51,7 +57,8 @@
       this.game.monsters.filter(m=>m.active&&ns.utils.distance(m,center)<=radius).forEach(m=>this.deal(m,damage,{owner,color,secondary:true}));
     }
     deal(monster,damage,source){if(!monster.active)return;const before=monster.effectiveHealth(),killed=monster.takeDamage(damage,source);this.game.onHit(monster,before-monster.effectiveHealth(),false,source);if(killed)this.game.onKill(monster,source);}
-    onEnemyDeath(monster){
+    onEnemyDeath(monster,source){
+      if(ns.systems.FrostStatusSystem&&!monster.soulHandled)ns.systems.FrostStatusSystem.death(this,monster,source);
       if(monster.leaked||monster.soulHandled)return;monster.soulHandled=true;this.souls++;const collector=this.game.build.items.find(t=>!t.retired&&['crypt','soul','graveyard'].includes(t.type));if(collector&&this.game.feedback)this.game.feedback.soul(monster,collector);
       // A harvested victim is worth one additional soul, regardless of last hitter.
       if(this.game.build.items.some(t=>t.type==='soul'&&!t.retired&&ns.utils.distance(t,monster)<=t.config().range))this.souls++;
@@ -60,9 +67,12 @@
       this.game.build.items.filter(t=>t.type==='crypt'&&!t.retired).forEach(t=>{t.summonCooldown=Math.max(0,t.summonCooldown-.35);});
     }
     update(dt){
+      if(ns.systems.FrostStatusSystem){this.frostChainBudget=ns.config.frostRules.chainBudget;ns.systems.FrostStatusSystem.updateBattle(this,dt);}
+      ns.systems.FrostlandVFX?.update(this,dt);
       this.clock+=dt;const game=this.game;if(game.feedback)game.feedback.mobile=typeof document!=='undefined'&&document.body.dataset.layout==='mobile';const items=game.build.items.filter(t=>!t.retired&&t.active!==false);
       game.hero.synergy=this;items.forEach(t=>{t.synergy=this;t.supportDamage=0;t.supportDamageSource=null;t.supportHaste=t.kind==='unit'?(t.towerSupportHaste||0):0;if(t.excursion)t.excursion.time=Math.max(0,t.excursion.time-dt);});
       for(const monster of game.monsters){
+        if(ns.systems.FrostStatusSystem)ns.systems.FrostStatusSystem.update(monster,dt);
         monster.arcaneMark=Math.max(0,(monster.arcaneMark||0)-dt);monster.shockTime=Math.max(0,(monster.shockTime||0)-dt);monster.rootTime=Math.max(0,(monster.rootTime||0)-dt);
         if(monster.vulnerability&&(monster.vulnerability.time-=dt)<=0)monster.vulnerability=null;
         if(monster.natureMark&&(monster.natureMark.time-=dt)<=0)monster.natureMark=null;
@@ -75,6 +85,8 @@
         if(cfg.forgeAura)near.filter(t=>t.kind==='building').forEach(t=>{if(cfg.forgeAura>=t.supportDamage){t.supportDamage=cfg.forgeAura;t.supportDamageSource=source;}if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
         if(cfg.natureAura)near.filter(t=>['dryad','dragon','beastmaster','grove'].includes(t.type)).forEach(t=>{if(cfg.natureAura>=t.supportDamage){t.supportDamage=cfg.natureAura;t.supportDamageSource=source;}if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
         if(cfg.timeAura&&this.clock%8<3)near.forEach(t=>{t.supportHaste=Math.max(t.supportHaste||0,cfg.timeAura);if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
+        if(cfg.ancestralAura)near.filter(t=>t.kind==='unit'&&['orc','centaur','boarRider','minotaur','shaman'].includes(t.type)).forEach(t=>{if(cfg.ancestralAura>=t.supportDamage){t.supportDamage=cfg.ancestralAura;t.supportDamageSource=source;}if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
+        if(cfg.drumPulse){source.drumCooldown=(source.drumCooldown===undefined?1:source.drumCooldown)-dt;if(source.drumCooldown<=0){near.filter(t=>t.kind==='unit'&&['orc','centaur','boarRider','minotaur','shaman'].includes(t.type)).forEach(t=>{t.tribalFrenzy=Math.max(t.tribalFrenzy||0,cfg.drumDuration);t.commandPulse=cfg.drumDuration;t.drumEmpowered=true;});source.drumCooldown=cfg.drumPulse;source.skillPulse=1;this.pulse(source.x,source.y,'#ff6a42',cfg.range);}}
         if(cfg.rootPulse){source.rootCooldown=(source.rootCooldown||0)-dt;if(source.rootCooldown<=0){const targets=game.monsters.filter(m=>m.active&&ns.utils.distance(source,m)<=cfg.range);if(targets.length){const duration=1.1+source.level*.1;targets.forEach(m=>{m.rootTime=Math.max(m.rootTime||0,duration);});if(game.report)game.report.recordSupport(source,'controlSeconds',duration*targets.length);this.pulse(source.x,source.y,'#91e77b',cfg.range);source.rootCooldown=6;}}}
         if(source.type==='beastmaster'&&!game.summons.some(s=>s.active&&s.owner===source&&s.form==='bear'))game.summons.push(new ns.entities.Summon(source,{form:'bear',tags:['summon','nature'],duration:22,level:source.level,damage:20*(1+.3*(source.level-1)),range:48,speed:115,leash:cfg.range+100,offsetX:-62,offsetY:46,color:cfg.color}));
         if(source.type==='crypt')this.produceCrypt(source,cfg);
@@ -101,6 +113,8 @@
     }
     static lineDistance(p,a,b){const dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy||1)));return Math.hypot(p.x-a.x-t*dx,p.y-a.y-t*dy);}
     draw(ctx){
+      ns.systems.FrostlandVFX?.draw(ctx,this);
+      if(ns.systems.FrostStatusSystem){this.game.monsters.filter(m=>m.active).slice(0,100).forEach(m=>ns.systems.FrostStatusSystem.draw(ctx,m));if(this.winter){ctx.save();ctx.fillStyle='rgba(105,190,210,.07)';ctx.fillRect(0,0,ns.config.width,ns.config.height);ctx.fillStyle='#d2fff1';ctx.font='bold 16px sans-serif';ctx.fillText('❄ 寒冬合獵 '+this.winter.time.toFixed(1)+'s',20,45);ctx.restore();}}
       ctx.save();this.fields.slice(0,this.game.feedback&&this.game.feedback.mobile?16:32).forEach(f=>{ctx.globalAlpha=.4;ctx.strokeStyle='#ffb347';ctx.lineWidth=13;ctx.beginPath();ctx.moveTo(f.a.x,f.a.y);ctx.lineTo(f.b.x,f.b.y);ctx.stroke();});
       this.visuals.forEach(v=>{ctx.globalAlpha=v.time/.45;ctx.strokeStyle=v.color;ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(v.x,v.y,v.radius*(1-v.time/.6),v.radius*.42,0,0,Math.PI*2);ctx.stroke();});
       this.game.monsters.filter(m=>m.active).slice(0,100).forEach(m=>ns.systems.CombatFeedbackSystem.drawStatus(ctx,m,this.clock));ctx.restore();

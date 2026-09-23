@@ -14,9 +14,9 @@ test('戰局統計記錄部署、升級、軍備快照與主力傷害',()=>{
   const record=report.completeWave({baseHealth:20,gold:economy.gold,lumber:economy.lumber,totalSpent:economy.totalSpent,army:build.towers()},{gold:20,lumber:1});
   assert.equal(record.armyBefore.count,1);assert.equal(record.armyAfter.levels[2],1);
   const analysis=report.analysis();
-  assert.equal(analysis.spending.deploy,100);assert.equal(analysis.spending.upgrade,280);
+  assert.equal(analysis.spending.deploy,100);assert.equal(analysis.spending.upgrade,160);
   assert.equal(analysis.topDamage[0].source,'塔：arrow');assert.equal(analysis.topDamage[0].damage,125);
-  assert.match(report.analysisLine(),/部署 100G／升級 280G/);
+  assert.match(report.analysisLine(),/部署 100G／升級 160G/);
 });
 
 test('未分類的經濟支出歸入商店且分析只提出訊號',()=>{

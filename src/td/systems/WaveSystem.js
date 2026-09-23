@@ -4,7 +4,7 @@
     constructor(catalog){this.catalog=catalog||new ns.systems.WaveCatalog();this.reset();}
     reset(){this.wave=0;this.spawnIndex=0;this.queue=[];this.spawnTimer=0;this.phase='waiting';this.active=false;this.complete=false;this.countdown=0;this.pendingClear=null;this.bountyScale=1;this.modifiers={};}
     setModifiers(modifiers){this.modifiers=Object.assign({},modifiers||{});return this.modifiers;}
-    spawnInterval(){const base=this.wave%5===0?Math.max(.78,.98-Math.max(0,this.wave-15)*.01):Math.max(.72,.96-this.wave*.008);return Math.max(.66,base*(this.modifiers.spawnRate||1));}
+    spawnInterval(){const base=this.wave%5===0?Math.max(.78,.98-Math.max(0,this.wave-15)*.01):Math.max(.72,.96-this.wave*.008),pace=this.catalog.get(this.wave)?.spawnPace||1;return Math.max(.66,base*(this.modifiers.spawnRate||1))*pace;}
     definition(wave){const source=this.catalog.get(wave);if(!source)return null;const factor=Math.max(.5,Number(this.modifiers.enemyCount)||1),groups=source.groups.map(group=>({type:group.type,count:group.type==='boss'?group.count:Math.max(1,Math.round(group.count*factor))})),original=source.groups.reduce((sum,group)=>sum+(group.type==='boss'?0:group.count),0);let expanded=groups.reduce((sum,group)=>sum+(group.type==='boss'?0:group.count),0);if(factor>1&&expanded===original&&original){const largest=groups.filter(group=>group.type!=='boss').sort((a,b)=>b.count-a.count)[0];largest.count+=1;expanded+=1;}return Object.assign({},source,{groups:groups,bountyScale:original&&expanded?original/expanded:1});}
     composition(wave){const definition=this.definition(wave);return definition?definition.groups:[];}
     preview(){return this.complete?null:this.definition(this.wave+1);}

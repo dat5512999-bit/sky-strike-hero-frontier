@@ -1,0 +1,9 @@
+{
+  "version": "0.3.1",
+  "method": "Built-in image_gen",
+  "path": "assets/td/shop/frost-cast-prototype-v1.png",
+  "reference": "assets/td/shop/frost-actions-prototype-v1.png",
+  "prompt": "Create a NEW animation asset sheet, reorganized into TWO COLUMNS AND TWO ROWS ONLY: exactly FOUR frost princess spellcast poses, one in each quadrant. Reference image is CHARACTER/COSTUME reference only. Do NOT reproduce its 4x4 layout. Square transparent PNG. Top-left: lift spear diagonally, channeling. Top-right: spear overhead with curling blue magical ribbon. Bottom-left: thrust spear to right with long spiraling blue spell plume. Bottom-right: lower spear in recovery with floating small blue ice shards. Silver hair, navy/silver armour, sapphire crown, white fur cape, exactly same princess identity. ALL four sprites must be SMALL inside their quadrants: character body is only 40 percent of quadrant height; total full glow and spear contained within 65 percent of quadrant width/height. Vast completely TRANSPARENT empty margins, with a wide fully empty CROSS-SHAPED GUTTER between quadrants. Every spear tip, cape, hair, glow, wisp must end organically before the transparent margin, absolutely NO cropping or overlapping frames. Same character scale across all four poses, feet at 78% of each quadrant height. Total FOUR sprites, no more. Painterly detailed game sprites, bright icy blue magic with soft transparent feathering, clean alpha edge, no white haze, no colourful noise. Transparent background, no floor, no text or grid or UI. This is a freshly laid-out four-frame CAST-ONLY atlas, NOT the original sixteen-frame sheet.",
+  "layout": "Four isolated cast poses; explicit frame rectangles and foot anchors in PreviewModel.castLayout. Not uniform cell sampling.",
+  "status": "Cosmetic Skin Lab prototype only. No new gameplay skill VFX or Core integration."
+}

@@ -1,0 +1,17 @@
+{
+  "version": "0.3.0",
+  "method": "Built-in image_gen",
+  "date": "2026-09-21",
+  "path": "assets/td/shop/frost-actions-prototype-v1.png",
+  "status": "prototype; not production or live combat integration",
+  "references": [
+    "assets/td/hero-actions-v1.png",
+    "assets/td/shop/frost-portrait-v2.png"
+  ],
+  "prompt": "Use case: identity-preserve sprite skin edit. Asset type: transparent 4-column by 4-row game character animation sprite sheet. Image 1 is the EDIT TARGET: preserve precisely all 16 poses, frame order, per-frame position, foot anchors, body proportions, weapon length, camera angle, action silhouette, transparent background and square canvas. Image 2 is the COSTUME reference only, not layout. Change ONLY the character cosmetic appearance of every frame in Image 1 into the silver-haired elf frost princess in Image 2: long silver-white hair, pointed elf ears, small silver sapphire crown, navy blue and silver armored dress, white fur-trimmed cape, blue crystal spear with elegant silver shaft. Keep armored boots and mobile battle-ready silhouette, no giant gown. Green fabric becomes dark navy, gold trim becomes silver, green weapon glows become icy blue. Match original small game sprite semi-realistic painterly rendering, rich detail and crisp silhouette, not portrait photographic style. Precisely maintain 4 by 4 grid: row1 four idle frames; row2 four running frames; row3 four spear attack frames; row4 four casting frames. Each frame must remain distinct, preserve original poses, no missing or added frames. Slightly reduce overhanging glows so frames do not collide. Real transparent alpha everywhere outside figures, NO black/white/checkerboard background, no shadows or floor, no text, no grid lines. Output square transparent PNG matching target composition. This is an in-game cosmetic swap animation atlas, not a collage.",
+  "animation": "4 columns × 4 rows; idle, walk, attack, cast; original pose and timing contract",
+  "limitations": [
+    "Needs manual per-frame edge/anchor review and unarmed weapon layer variants.",
+    "Embedded blue light is cosmetic sprite paint, not a replacement for HeroSkillVFX."
+  ]
+}

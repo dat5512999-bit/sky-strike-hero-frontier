@@ -1,9 +1,12 @@
 (function(ns){
   'use strict';
   const FACTIONS={
+    frostland:{"id":"frostland","name":"霜原盟族","theme":"寒冷累積 · 狩獵窗口 · 碎冰","color":"#9bdbd5","status":"TESTABLE","storyStatus":"CONCEPT","selectionArt":"assets/td/frostland/faction-selection-v1.png","selectionFocus":"50% 50%","units":["frostWolf","frostBear","frostBird","frostHunter","frostShaman","frostMammoth"],"buildings":["frostCrystal","frostBlizzard","frostBallista","frostTotem","frostObelisk","frostAurora","frostGlacier"]},
     hunter:{id:'hunter',name:'王國遠征軍',theme:'王國',color:'#e6c56c',selectionArt:'assets/td/opening/faction-kingdom-selection-v1.png',selectionFocus:'62% 50%',units:['hunter','shield','musketeer','knight','kingdomMage','alchemist','royalCommander'],buildings:['arrow','iceward','cannon','barracks','ballista','supply','battleflag','armoryForge']},
     arcanist:{id:'arcanist',name:'月影守望者',theme:'精靈',color:'#70e7ff',selectionArt:'assets/td/opening/faction-silverleaf-selection-v1.png',selectionFocus:'64% 50%',units:['arcanist','dragon','beastmaster','dryad','moonblade'],buildings:['frost','storm','grove','moonwell']},
-    rogue:{id:'rogue',name:'暗影軍團',theme:'暗影',color:'#c884df',selectionArt:'assets/td/opening/faction-twilight-selection-v1.png',selectionFocus:'64% 50%',units:['rogue','skeleton','golem','banshee','boneRider','soulsteel'],buildings:['crypt','soul','graveyard','plague']}
+    rogue:{id:'rogue',name:'暗影軍團',theme:'暗影',color:'#c884df',selectionArt:'assets/td/opening/faction-twilight-selection-v1.png',selectionFocus:'64% 50%',units:['rogue','skeleton','golem','banshee','boneRider','soulsteel'],buildings:['crypt','soul','graveyard','plague']},
+    wild:{id:'wild',name:'荒野部族',theme:'獸族',color:'#df6548',selectionArt:'assets/td/opening/faction-wild-selection-v1.png',selectionFocus:'56% 50%',units:['orc','centaur','boarRider','minotaur','shaman'],buildings:['warDrum','boulder','thunderTotem','totem']},
+    goblin:{id:'goblin',name:'地精工程團',theme:'工程 · 機械網路',color:'#d9ad65',status:'TESTABLE',storyStatus:'STORY_LOCKED',selectionArt:'assets/td/goblin/faction-selection-v1.png',selectionFocus:'50% 50%',units:['goblinEngineer','goblinGunner','goblinRiveter','goblinRecycler','goblinMech'],buildings:['goblinGenerator','goblinTurret','goblinMortar','goblinSnare','goblinRecycler','goblinCooler','goblinSiege']}
   };
   class FactionSystem{
     constructor(){this.reset();}

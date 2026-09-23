@@ -1,0 +1,56 @@
+/* Full-run result only. Wave-to-wave notices remain in the compact wave HUD. */
+.td-overlay[hidden],.td-overlay .result-card [hidden]{display:none!important}
+.td-overlay{z-index:60;overflow:auto;padding:16px;background:linear-gradient(90deg,#081218ad,#08121848 48%,#081218b8),linear-gradient(0deg,#061019c7,transparent 55%),url("assets/td/lobby/victory-background-v1.png") center/cover no-repeat}
+.td-overlay>.result-card{position:relative;width:min(730px,100%);max-height:calc(100dvh - 32px);overflow:auto;padding:34px 40px 28px;border:1px solid #d7b775;border-radius:12px;background:linear-gradient(145deg,#1a2325f8,#0f1b20f8);box-shadow:0 30px 80px #03090bcc,0 0 0 6px #111b1fcc;text-align:left}
+.td-overlay>.result-card::before{content:"";position:absolute;inset:6px;border:1px solid #b8985530;border-radius:7px;pointer-events:none}
+.td-overlay .result-card span{display:inline;margin:0}
+.result-eyebrow{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#c6b58c;font-size:11px;font-weight:700;letter-spacing:3px}
+.result-eyebrow #td-result-chapter{color:#afc0c0;letter-spacing:1px;text-align:right}
+.result-heading{display:flex;align-items:center;gap:20px;margin-top:22px}
+.td-overlay .result-seal{display:grid!important;place-items:center;flex:none;width:74px;height:74px;border:2px solid #ebc977;border-radius:50%;background:radial-gradient(circle,#91682f50,#3a2d1b48 72%);box-shadow:0 0 0 5px #caa45425,0 0 35px #d6aa4b3b;color:#ffde90;font-size:34px;line-height:1}
+.td-overlay .result-card h2{margin:0 0 5px;color:#fff0c8;font:700 37px/1.25 "Noto Serif TC","Songti TC",serif;letter-spacing:4px;text-shadow:0 2px 15px #f0bb6555}
+.result-heading #td-result-status{color:#e7d19e;font-size:18px;font-weight:700;letter-spacing:4px}
+.td-overlay .result-card .result-intro{margin:22px 0 25px;color:#c4cfcc;font-size:14px;line-height:1.6;letter-spacing:0}
+.td-overlay .result-card .result-highlight{margin:-14px 0 16px;color:#f0d487;font-size:12px;letter-spacing:0}
+.result-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.result-stats>div{min-height:94px;padding:15px 16px 12px;background:#0b171bbd;border:1px solid #bba27250;border-radius:6px}
+.result-stats small{display:block;margin-bottom:4px;color:#adbcba;font-size:12px;letter-spacing:1px}
+.result-stats strong{display:block;color:#f9df9d;font:700 32px/1.15 Georgia,"Noto Serif TC",serif}
+.td-overlay .result-stats strong span{font:inherit;line-height:inherit;color:inherit}
+.result-stats em{margin-left:5px;color:#bfc9c6;font:normal 14px "Microsoft JhengHei",sans-serif}
+.result-unlock{display:flex;gap:15px;align-items:center;margin:23px 0;padding:15px 17px;background:linear-gradient(100deg,#233d47d9,#162b34de);border:1px solid #74a7af80;border-radius:6px}
+.td-overlay .result-unlock-icon{display:grid!important;place-items:center;width:52px;height:52px;flex:none;border:1px solid #8bbbc0;border-radius:4px;background:#1c3540;color:#c8e6e5;font-size:29px;line-height:1}
+.result-unlock small{display:block;color:#a3d4d8;font-size:11px;font-weight:700;letter-spacing:2px}
+.result-unlock strong{display:block;margin:2px 0 3px;color:#f2eee1;font-size:20px}
+.td-overlay .result-card .result-unlock p{margin:0;color:#bacccd;font-size:12px;line-height:1.4;letter-spacing:0}
+.td-overlay .result-actions{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:23px}
+.td-overlay .result-actions button{display:grid;place-items:center;min-height:41px;padding:6px 12px;border:1px solid #77878a;border-radius:4px;background:#1a282b;color:#e0e8e5;font-size:14px;font-weight:700;text-align:center}
+.td-overlay .result-actions #td-result-next,.td-overlay[data-result-primary="retry"] .result-actions #td-restart{grid-column:1/-1;min-height:52px;border-color:#ffe0a4;background:linear-gradient(#c39a50,#8d632a);box-shadow:inset 0 1px #fff3ce70;color:#11191b;font-size:18px;font-weight:900;letter-spacing:2px}
+.td-overlay .result-actions #td-restart{border-color:#77878a;background:#1a282b}
+.td-overlay .result-actions button:focus-visible,.td-overlay .result-report-link:focus-visible{outline:3px solid #fff0b8;outline-offset:2px}
+.td-overlay .result-report-link{display:block;width:auto;min-height:0;margin:17px auto 0;padding:3px 5px;border:0!important;border-radius:0;background:transparent!important;box-shadow:none!important;color:#b9cdca;font-size:12px;font-weight:400;text-decoration:underline;text-underline-offset:3px}
+.td-overlay #td-final-report[hidden]{display:none!important}
+.td-overlay[data-result-outcome="failure"] .result-seal{border-color:#bd7770;box-shadow:0 0 0 5px #ad59452e;color:#efb3a1}
+.td-overlay[data-result-outcome="failure"] .result-card h2{color:#efd8c8}
+body[data-game-screen="result"] .report-overlay{z-index:95}
+@media(max-width:600px){
+  .td-overlay{padding:14px;background-position:38% center}
+  .td-overlay>.result-card{max-height:calc(100dvh - 28px);padding:25px 18px 20px}
+  .result-eyebrow{font-size:9px;letter-spacing:1.7px}.result-eyebrow #td-result-chapter{font-size:9px}
+  .result-heading{gap:13px;margin-top:19px}.td-overlay .result-seal{width:56px;height:56px;font-size:27px}
+  .td-overlay .result-card h2{font-size:29px;letter-spacing:2px}.result-heading #td-result-status{font-size:15px;letter-spacing:2px}
+  .td-overlay .result-card .result-intro{margin:17px 0;font-size:12px}
+  .result-stats{gap:6px}.result-stats>div{min-height:74px;padding:10px 8px}.result-stats small{font-size:10px}.result-stats strong{font-size:23px}.result-stats em{font-size:10px}
+  .result-unlock{gap:10px;margin:16px 0;padding:10px}.td-overlay .result-unlock-icon{width:42px;height:42px;font-size:23px}.result-unlock strong{font-size:17px}.td-overlay .result-card .result-unlock p{font-size:11px}
+  .td-overlay .result-actions{gap:8px;margin-top:16px}.td-overlay .result-actions #td-result-next,.td-overlay[data-result-primary="retry"] .result-actions #td-restart{font-size:16px}.td-overlay .result-actions button{font-size:12px}
+}
+@media(max-height:500px){
+  .td-overlay{padding:6px}
+  .td-overlay>.result-card{max-height:calc(100dvh - 12px);padding:14px 20px 12px}
+  .result-heading{margin-top:8px}.td-overlay .result-seal{width:43px;height:43px;font-size:23px}.td-overlay .result-card h2{font-size:22px}.result-heading #td-result-status{font-size:12px}
+  .td-overlay .result-card .result-intro{margin:7px 0;font-size:11px}.result-stats>div{min-height:54px;padding:5px 10px}.result-stats strong{font-size:21px}
+  .result-unlock{margin:6px 0;padding:4px 10px}.td-overlay .result-unlock-icon{width:34px;height:34px;font-size:19px}.result-unlock strong{font-size:14px}
+  .td-overlay .result-actions{margin-top:6px}.td-overlay .result-actions #td-result-next,.td-overlay[data-result-primary="retry"] .result-actions #td-restart{min-height:36px;font-size:14px}.td-overlay .result-actions button{min-height:29px;font-size:11px}
+  .td-overlay .result-report-link{margin-top:3px}
+}
+@media(prefers-reduced-motion:reduce){.td-overlay .result-card{scroll-behavior:auto}}

@@ -2,6 +2,18 @@
   'use strict';
   const RARITIES={base:{name:'制式',color:'#aeb7b5'},common:{name:'精良',color:'#d9e3e8'},epic:{name:'史詩',color:'#c96cff'},legendary:{name:'傳說',color:'#ffb347'}};
   const WEAPONS={
+    frostland:[
+      {"id":"frostland-spear-0","name":"骨柄獵矛","rarity":"base","color":"#bca887","column":0,"row":0,"atlas":"frostland-spears-v1.png","atlasColumns":4,"description":"獵首初始骨柄矛；普攻累積寒冷。"},
+      {"id":"frostland-spear-1","name":"霜鋼獵矛","rarity":"common","color":"#b1d4df","column":1,"row":0,"atlas":"frostland-spears-v1.png","atlasColumns":4,"description":"普攻與傷害技能累計提高 20%；獵矛換為霜鋼與淡藍冰晶，保留寒冷與碎冰互動。"},
+      {"id":"frostland-spear-2","name":"極光牙矛","rarity":"epic","color":"#ad9ae5","column":2,"row":0,"atlas":"frostland-spears-v1.png","atlasColumns":4,"description":"普攻與傷害技能累計提高 40%；獵矛換為紫色極光牙刃，保留寒冷與碎冰互動。"},
+      {"id":"frostland-spear-3","name":"寒冬王牙","rarity":"legendary","color":"#a7f4cd","column":3,"row":0,"atlas":"frostland-spears-v1.png","atlasColumns":4,"description":"普攻與傷害技能累計提高 60%；獵矛換為綠色寒冬王牙，保留寒冷與碎冰互動。"}
+    ],
+    chief:[
+      {id:'chief-axe',name:'酋長戰斧',rarity:'base',color:'#c5a27a',description:'大酋長原本的戰斧。'},
+      {id:'wildfang-axe',name:'荒牙戰斧',rarity:'common',color:'#d5c5a8',column:0,row:0,atlas:'chief-axes-v1.png',description:'普攻與傷害技能提高 20%；斧刃換上荒牙鍛鋼。'},
+      {id:'blood-oath-axe',name:'血誓戰斧',rarity:'epic',color:'#e77a58',column:1,row:0,atlas:'chief-axes-v1.png',description:'累計提高 40% 傷害；戰斧加入血誓紋與獠牙鉤。'},
+      {id:'earthsplitter-axe',name:'裂地王斧',rarity:'legendary',color:'#ff9b4a',column:2,row:0,atlas:'chief-axes-v1.png',description:'累計提高 60% 傷害；裂地熔光隨揮擊閃現。'}
+    ],
     hunter:[
       {id:'ranger-bow',name:'王國巡林弓',rarity:'base',color:'#e6c56c',description:'英雄原本的制式長弓。'},
       {id:'steel-longbow',name:'精鋼長弓',rarity:'common',color:'#dce8ef',column:0,row:0,description:'普攻與傷害技能提高 20%，箭矢留下銀白軌跡。'},
@@ -13,6 +25,12 @@
       {id:'crystal-staff',name:'澄藍晶杖',rarity:'common',color:'#78cfff',column:0,row:1,description:'普攻與傷害技能提高 20%，法球更加明亮。'},
       {id:'storm-staff',name:'雷霆風暴杖',rarity:'epic',color:'#55bfff',column:1,row:1,description:'累計提高 40% 傷害，施法時環繞雷光。'},
       {id:'holy-star-staff',name:'聖星權杖',rarity:'legendary',color:'#ffd869',column:2,row:1,description:'累計提高 60% 傷害，獲得聖星光環與金色法術回饋。'}
+    ],
+    goblin:[
+      {id:'engineer-tool',name:'工程扳手',rarity:'base',color:'#d9ad65',description:'測試型工程工具。'},
+      {id:'calibrated-tool',name:'校準扳手',rarity:'common',color:'#c8dcce',column:0,row:0,atlas:'goblin-tools-v1.png',description:'普攻與傷害技能提高 20%；裝上精密儀表。'},
+      {id:'pressure-tool',name:'蒸汽脈衝扳手',rarity:'epic',color:'#79daca',column:1,row:0,atlas:'goblin-tools-v1.png',description:'累計提高 40% 傷害；加入活塞與壓力導管。'},
+      {id:'master-tool',name:'首席超載機具',rarity:'legendary',color:'#f3bb6d',column:2,row:0,atlas:'goblin-tools-v1.png',description:'累計提高 60% 傷害；武器顯示超載能源核心。'}
     ],
     rogue:[
       {id:'guild-daggers',name:'行會匕首',rarity:'base',color:'#c884df',description:'暗影行會的制式雙刃。'},

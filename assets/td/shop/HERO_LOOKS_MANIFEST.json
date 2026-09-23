@@ -1,0 +1,37 @@
+{
+  "version": "0.4.0",
+  "method": "Built-in image_gen",
+  "status": "Cosmetic preview prototype; not live gameplay or purchasable inventory",
+  "assets": [
+    {
+      "path": "assets/td/shop/sun-portrait-v1.png",
+      "reference": "assets/td/opening/hero-hunter-selection-v1.png",
+      "prompt": "Create premium fantasy RPG skin portrait: edit the referenced adult male hero into his SUN LION costume. Preserve recognisable face, masculine jaw, brown eyes, short brown hair, heroic expression. Ivory enamel and antique gold plate armour with spectacular lion-sculpted shoulder, flowing deep crimson cape, sun-crest open-face gold helmet, elegant golden solar recurve bow held in one hand (he is an archer), quiver of amber arrows. Replace blue original cloth with crimson and ivory. Luxurious warm sunlit desert palace terrace, golden sandstone spires and distant falcons, floating gold dust. Cinematic AAA fantasy game realistic painterly key art, exceptionally detailed face and metal engraving, dramatic light, refined rich colours. Vertical 2:3, head to knees, face in upper third with ample headroom; leave room around body. No text or UI or logos."
+    },
+    {
+      "path": "assets/td/shop/moon-portrait-v1.png",
+      "reference": "assets/td/opening/hero-rogue-selection-v1.png",
+      "prompt": "Create premium fantasy RPG skin portrait: edit the referenced adult white-haired female rogue into CRIMSON MOON FOX costume. Preserve recognisable face, violet eyes, short flowing white hair and adult proportions. Elegant layered crimson battle robe with black lacquer light armour, ornate silver shoulder accents, white fox mask tipped to side of head (face visible), crimson hair ribbons, two curved silver short blades with subtle red moonlight edges. Armour is practical and tasteful, long sleeves and fitted layered battle skirt over dark leggings. Replace tattered purple hooded cape with luxurious structured crimson silks and white fur shoulder trim. Moonlit shrine rooftops with crimson maple leaves and pale full moon, cinematic deep ink blue setting. Exceptionally beautiful polished AAA fantasy game realistic painterly illustration, dramatic crimson rim light, detailed fine face and silk. Vertical 2:3 head to knees, face upper third, ample headroom. No text, UI, labels, logos."
+    },
+    {
+      "path": "assets/td/shop/sun-actions-v1.png",
+      "reference": "assets/td/hero-hunter-actions-v2.png",
+      "prompt": "EDIT TARGET is the original 4x4 archer animation atlas. Change only costume to SUN LION: ivory white and antique gold armour, lion-head shoulder, deep crimson cloak with gold sun embroidery, open-face sun crest helmet instead of blue hood, same adult male face and brown hair, golden solar recurve bow, amber arrow tips. Preserve all original 16 poses exactly, row order (idle, running, bow shooting, downed), foot locations, body proportions, original animation frame sizes and camera angle. Same small game sprite painterly art style as original. All blue cloth becomes ivory/crimson, helmet visibly new. Preserve ORIGINAL transparent padding; trim ornamental cloak and bow glow inside original frame silhouette so sprites never touch neighbours; NO large VFX. Truly transparent alpha, no black or white background or checkerboard, no gridlines, no words or labels, no added sprites. Exact square 4 columns x4 rows composition. Clean alpha silhouette without stray fragments. Skin swap atlas, not a scene."
+    },
+    {
+      "path": "assets/td/shop/moon-actions-v1.png",
+      "reference": "assets/td/hero-rogue-actions-v2.png",
+      "prompt": "EDIT TARGET is the original 4x4 female dual blade rogue animation atlas. Change only costume to CRIMSON MOON FOX: white hair, small white fox mask tipped to side of head, crimson ribbons, elegant short crimson layered battle robe with black lacquer light armour and silver trim, white fur at shoulders, dark leggings and boots, two silver crescent short blades with restrained crimson light. Replace purple hood with visible white-haired head and side fox mask, tattered purple cape becomes crimson silk panels. Preserve all original 16 poses exactly, row order (idle, running, blade attacking, downed), foot locations, body proportions, original frame sizes and same isometric camera angle. Match original small painterly game sprite rendering, not photoreal. Preserve original transparent gaps; all flowing panels and weapon arcs must end before the adjacent frame, no touching neighbouring figures. Attack arc compact, feathered crimson and silver, no large rectangular aura. Truly transparent background alpha, no black/white/checkerboard background, no words, no grids, no UI, exactly 4 columns and4 rows square. Clean alpha silhouette."
+    },
+    {
+      "path": "assets/td/shop/moon-attack-v1.png",
+      "reference": "assets/td/shop/moon-actions-v1.png",
+      "prompt": "Create a NEW isolated four-frame attack asset sheet. Exactly TWO columns and TWO rows, FOUR small full-body poses of the same white-haired CRIMSON MOON FOX adult female rogue shown in reference: white fox mask on side of head, red ribbons, white fur shoulders, black lacquer light armour and silver accents, crimson silk battle robe, black leggings and boots, two crescent silver blades. Top-left sword attack windup with right blade raised overhead; top-right attack winding opposite blade up; bottom-left two-blade sweeping strike to right with compact curved red crescent slash; bottom-right recovery crouch with right blade extended right. Maintain original character identity, same painterly small game sprite art and body scale in all4 poses. LARGE EMPTY TRANSPARENT GUTTERS: each pose and all blades, cape, hair, mask and slash must be isolated from neighbours. Bodies occupy only 45 percent quadrant height; allow a complete 20 percent quadrant width transparent margin all around each TOTAL silhouette. The slash must finish as a pointed soft curved crescent, NOT straight rectangular crop, and never touch neighbour. Broad empty central cross-shaped space. No extras, no text, no floor, no shadow background, no checkerboard. Truly transparent alpha and clean edges. Recompose into 2x2 FOUR sprite layout; do not recreate original4x4 sixteen sprites. Reference source is costume only."
+    },
+    {
+      "path": "assets/td/shop/sun-attack-v1.png",
+      "reference": "assets/td/shop/sun-actions-v1.png",
+      "prompt": "Create a NEW four-frame bow shooting sprite atlas of the referenced SUN LION male archer. EXACTLY TWO COLUMNS and TWO ROWS, four distinct attack poses: top-left preparing/nocking arrow with bow lowered; top-right drawing golden bow to cheek; bottom-left release with extended golden arrow and compact amber tip glow; bottom-right follow-through with bow held out. Same male face, sun crest open helmet, ivory enamel gold armour, lion shoulder, deep crimson cape, solar recurve bow and quiver. Original game painterly sprite style, same body scale across four frames. Recompose into new2x2, do NOT copy source4x4. Characters small relative to quadrants, body45% quadrant height. All bow tips, arrows, helmet, cape within quadrants, at least15% blank TRANSPARENT margin around total silhouette, broad empty central cross gutter. No scenery, floor, labels, grid, letters, effects beyond restrained amber arrow glow. Real alpha transparent background, no checkerboard/black/white backdrop. Four complete sprites, avoid any clipping, no adjacent-frame overlap."
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "status": "TESTABLE_MIXED_ART",
+  "reference": "使用者霜原盟族概念圖只作材質與剪影參考，不採用圖中文字為正史",
+  "slots": {
+    "frostland_emblem": {
+      "path": "assets/td/frostland/frostland_emblem.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostland_hero": {
+      "path": "assets/td/frostland/frostland_hero.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostWolf": {
+      "path": "assets/td/frostland/frostWolf.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostBear": {
+      "path": "assets/td/frostland/frostBear.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostBird": {
+      "path": "assets/td/frostland/frostBird.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostHunter": {
+      "path": "assets/td/frostland/frostHunter.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostShaman": {
+      "path": "assets/td/frostland/frostShaman.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostMammoth": {
+      "path": "assets/td/frostland/frostMammoth.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostCrystal": {
+      "path": "assets/td/frostland/frostCrystal.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostBlizzard": {
+      "path": "assets/td/frostland/frostBlizzard.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostBallista": {
+      "path": "assets/td/frostland/frostBallista.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostTotem": {
+      "path": "assets/td/frostland/frostTotem.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostObelisk": {
+      "path": "assets/td/frostland/frostObelisk.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostAurora": {
+      "path": "assets/td/frostland/frostAurora.svg",
+      "status": "PLACEHOLDER"
+    },
+    "frostGlacier": {
+      "path": "assets/td/frostland/frostGlacier.svg",
+      "status": "PLACEHOLDER"
+    }
+  },
+  "aliases": {
+    "frost_wolf": "frostWolf",
+    "frost_bear": "frostBear",
+    "frost_bird": "frostBird",
+    "frost_hunter": "frostHunter",
+    "frost_shaman": "frostShaman",
+    "frost_mammoth": "frostMammoth"
+  },
+  "atlases": {
+    "hero": "assets/td/frostland/hero-actions-v1.png",
+    "soldiers": "assets/td/frostland/soldier-actions-v1.png",
+    "weapons": "assets/td/items/frostland-spears-v1.png"
+  },
+  "selectionArt": {
+    "hero": "assets/td/frostland/hero-selection-v1.png",
+    "faction": "assets/td/frostland/faction-selection-v1.png"
+  }
+}

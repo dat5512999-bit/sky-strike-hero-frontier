@@ -33,7 +33,16 @@ test('英雄塔防入口引用的本機資產完整且不依賴網路', () => {
   assert.equal(/<script[^>]+type=["']module["']/i.test(html), false);
 });
 
-test('英雄塔防公開顯示目前程式與平衡資料版本',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8');assert.match(html,/v0\.79\.2/);assert.match(html,/BALANCE E2/);assert.doesNotMatch(html,/SHARED UX/);});
+test('英雄塔防在主大廳初始化完成前遮住戰場，完成後才解除啟動畫面', () => {
+  const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');
+  const app = fs.readFileSync(path.join(root, 'src/td/app/FrontierApp.js'), 'utf8');
+  assert.match(html, /body:not\(\[data-app-ready\]\) \.td-shell/);
+  assert.match(html, /id="td-boot-screen"/);
+  assert.match(html, /body\[data-app-ready\] #td-boot-screen\{display:none\}/);
+  assert.match(app, /document\.body\.dataset\.appReady='true'/);
+});
+
+test('英雄塔防公開顯示目前程式與平衡資料版本',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8');assert.ok(html.includes('v'+JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8')).version));assert.match(html,/FROSTLAND TESTABLE V1/);assert.doesNotMatch(html,/SHARED UX/);});
 
 test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
   const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');
@@ -46,7 +55,7 @@ test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
   ['story','standard','veteran','calamity'].forEach((mode) => assert.match(html, new RegExp(`data-td-difficulty=["']${mode}["']`)));
   ['td-report-open','td-report-screen','td-report-rows','td-report-analysis','td-report-readiness','td-report-history','td-final-report'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
   assert.doesNotMatch(html,/td-strategy-choice|本局測試標籤|擴軍測試|核心升級|混合測試/);
-  ['td-armory-open','td-armory-screen','td-armory-loadout','td-armory-items','td-armory-target'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
+  ['td-armory-open','td-armory-screen','td-armory-items','td-armory-target','td-equip-screen','td-equip-items','td-unit-equip'].forEach((id) => assert.equal((html.match(new RegExp(`id=["']${id}["']`, 'g')) || []).length, 1));
 });
 
 test('手機版提供可記憶的戰場優先指揮面板與安全區', () => {
