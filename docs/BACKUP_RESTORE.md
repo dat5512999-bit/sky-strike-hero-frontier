@@ -1,3 +1,5 @@
+> **v0.85.11（2026-09-23）：** 本次不改玩家資料格式；以 Git revert 回復修復提交，程式、CSS 與快取版號需一起回復。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
+
 > **v0.85.10（2026-09-23）：** 更新不操作 localStorage 或 IndexedDB；程式回復使用 git revert 修復提交並同步回復 SW 與入口版本。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。
 
 > **v0.85.9：** 變更前 21 個檔案與 SHA-256 清單位於 `artifacts/deployment-visual-v0859-backup/`；逐檔回復並同步舊版快取／標示，保留其他未提交工作。詳見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。

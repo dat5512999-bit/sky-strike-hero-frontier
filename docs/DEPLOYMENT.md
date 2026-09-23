@@ -1,3 +1,5 @@
+> **v0.85.11（2026-09-23）：** 同步發布排行榜 CSS、搖桿、Hero 與版本檔；快取名 sky-strike-v0.85.11。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
+
 > **v0.85.10（2026-09-23）：** 發布 update.html、update-client.js、入口註冊與版本檔；快取名 sky-strike-v0.85.10。發布後驗證更新入口。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。
 
 > **v0.85.9：** 同步部署 `FrontierTerrain.js`、`BuildSystem.js`、入口版本標示與 `sw.js`；離線快取為 `sky-strike-v0.85.9`。發布與檢查清單見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。

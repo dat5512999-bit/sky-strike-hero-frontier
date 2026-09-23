@@ -38,6 +38,42 @@ test('放開後立即取消目標並回中；中心死區不會漂移',()=>{
   assert.equal(hero.x,stopped);assert.equal(hero.targetX,hero.x);assert.equal(stick.active,false);
   assert.equal(element.style['--stick-x'],'0px');assert.equal(element.hasPointerCapture(1),false);
 });
+test('小幅推動慢走、越接近外圈越快，半推約四分之一速度',()=>{
+  const distances=[];
+  for(const fraction of [.1,.2,.25,.5,.75,1,2]){
+    const {hero,element,tick,stick}=setup(),x=hero.x;
+    element.fire('pointerdown',{clientX:160+36*fraction});
+    for(let i=0;i<50;i++)tick();
+    const ratio=(hero.x-x)/hero.combatConfig().speed;
+    assert.ok(Math.abs(ratio-stick.strength)<1e-8);
+    distances.push(ratio);
+  }
+  assert.equal(distances[0],0);assert.equal(distances[1],0);
+  assert.ok(distances[2]>0&&distances[2]<.05);
+  assert.ok(distances[3]>.2&&distances[3]<.3);
+  assert.ok(distances[4]>distances[3]&&distances[4]<1);
+  assert.ok(Math.abs(distances[5]-1)<1e-8);assert.equal(distances[5],distances[6]);
+});
+test('慢走可在小時間步移動，回中不漂移，放手後點地恢復全速',()=>{
+  const {hero,element,tick,stick}=setup();
+  element.fire('pointerdown',{clientX:178});
+  const start=hero.x;for(let i=0;i<120;i++)tick(1/120);
+  assert.ok(Math.abs(hero.x-start-hero.combatConfig().speed*stick.strength)<1e-8);
+  element.fire('pointermove',{clientX:160});const stopped=hero.x;tick();assert.equal(hero.x,stopped);
+  element.fire('pointermove',{clientX:178});tick();element.fire('pointerup');
+  assert.equal(stick.strength,0);assert.equal(hero.moveSpeedScale,1);
+  const x=hero.x;hero.setTarget(x+100,hero.y);hero.update(.02,[],[]);
+  assert.ok(Math.abs(hero.x-x-hero.combatConfig().speed*.02)<1e-8);
+});
+test('半推各方向速度相同，降低輸入速度不延長技能冷卻',()=>{
+  for(const angle of [0,Math.PI/4,Math.PI/2,Math.PI*1.3]){
+    const {hero,element,tick,stick}=setup(),start={x:hero.x,y:hero.y};hero.skillCooldowns.thunder=5;
+    element.fire('pointerdown',{clientX:160+Math.cos(angle)*18,clientY:260+Math.sin(angle)*18});
+    for(let i=0;i<25;i++)tick();
+    assert.ok(Math.abs(Math.hypot(hero.x-start.x,hero.y-start.y)-hero.combatConfig().speed*.5*stick.strength)<1e-8);
+    assert.ok(Math.abs(hero.skillCooldowns.thunder-4.5)<1e-8);
+  }
+});
 test('只追蹤搖桿持有手指，越界拖曳仍捕捉；其他手指的 UI 操作不改方向',()=>{
   const {element,stick,hero,tick}=setup();const event=element.fire('pointerdown',{clientX:210});
   assert.equal(event.prevented,true);assert.equal(event.stopped,true);assert.equal(element.hasPointerCapture(1),true);

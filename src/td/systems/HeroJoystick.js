@@ -3,7 +3,7 @@
   // Pointer input only. Hero.setTarget/update remain the sole movement implementation.
   class HeroJoystick{
     constructor(game,element){
-      this.game=game;this.element=element;this.pointerId=null;this.hero=null;this.direction={x:0,y:0};
+      this.game=game;this.element=element;this.pointerId=null;this.hero=null;this.direction={x:0,y:0};this.strength=0;
       this.attach();this.sync();
     }
     get active(){return this.pointerId!==null;}
@@ -57,7 +57,10 @@
     }
     readPointer(event){
       const dx=event.clientX-this.center.x,dy=event.clientY-this.center.y,length=Math.hypot(dx,dy),travel=Math.min(length,this.radius);
-      this.direction=length>this.radius*.16?{x:dx/length,y:dy/length}:{x:0,y:0};
+      // A small neutral zone absorbs finger jitter; ease into full speed near the rim.
+      const deadzone=this.radius*.2,input=Math.max(0,(travel-deadzone)/(this.radius-deadzone));
+      this.strength=Math.pow(input,1.5);
+      this.direction=this.strength>0?{x:dx/length,y:dy/length}:{x:0,y:0};
       this.element.style.setProperty('--stick-x',(length?dx/length*travel:0)+'px');
       this.element.style.setProperty('--stick-y',(length?dy/length*travel:0)+'px');
       this.element.style.setProperty('--stick-angle',Math.atan2(dy,dx)+'rad');
@@ -65,7 +68,7 @@
       if(!this.direction.x&&!this.direction.y)this.hero.setTarget(this.hero.x,this.hero.y);
     }
     reset(){
-      const id=this.pointerId,hero=this.hero;this.pointerId=null;this.hero=null;this.direction={x:0,y:0};
+      const id=this.pointerId,hero=this.hero;this.pointerId=null;this.hero=null;this.direction={x:0,y:0};this.strength=0;
       if(hero)hero.setTarget(hero.x,hero.y);
       this.element.dataset.active='false';this.element.dataset.moving='false';
       this.element.style.setProperty('--stick-x','0px');this.element.style.setProperty('--stick-y','0px');
@@ -81,7 +84,7 @@
       const target=navigation.clampPoint({x:hero.x+this.direction.x*distance,y:hero.y+this.direction.y*distance});
       // Reuse navigation clearance, but allow exiting a tower built over the hero.
       const obstacles=game.build.items.filter(item=>item.kind==='building'&&!(ns.utils.distance(hero,item)<navigation.obstacleRadius&&ns.utils.distance(target,item)>ns.utils.distance(hero,item)));
-      if(navigation.segmentClear(hero,target,obstacles))hero.setTarget(target.x,target.y);
+      if(navigation.segmentClear(hero,target,obstacles))hero.setTarget(target.x,target.y,this.strength);
       else hero.setTarget(hero.x,hero.y);
     }
   }

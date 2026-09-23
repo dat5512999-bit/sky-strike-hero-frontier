@@ -1,3 +1,5 @@
+> **v0.85.11（2026-09-23）：** Hero.setTarget(x,y,speedScale=1) 新增可選移動速度比例；HeroJoystick 輸出漸進強度。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
+
 > **v0.85.10（2026-09-23）：** 新增 update-client.refresh／activated 與 GAME_VERSION 訊息；無網路 API 或玩家資料格式變更。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。
 
 > **v0.85.9：** `FrontierTerrain` 不再繪製部署抽樣點與禁建多邊形；`BuildSystem.updatePointer` 記錄預覽是否已啟動，原 `terrainIssue`／`placementIssue` 呼叫與傳回值不變。無新網路 API。詳見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。

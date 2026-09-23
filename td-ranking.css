@@ -92,8 +92,11 @@
  #frontier-app[data-page=ranking] .rank-detail-hero{min-height:190px}
  #frontier-app[data-page=ranking] .rank-rows{max-height:480px}
 }
-@media(max-width:1050px) and (min-width:651px) and (orientation:landscape){
+/* Only a pointer layout has an in-flow sidebar. Touch navigation sits at the bottom. */
+@media(hover:hover) and (pointer:fine) and (max-width:1050px) and (min-width:651px) and (orientation:landscape){
  #frontier-app[data-page=ranking]{grid-template-columns:108px minmax(0,1fr)}
+}
+@media(max-width:1050px) and (min-width:651px) and (orientation:landscape){
  #frontier-app[data-page=ranking] .lobby-nav{padding:5px;overflow:hidden}
  #frontier-app[data-page=ranking] .lobby-logo{padding:0 0 6px}
  #frontier-app[data-page=ranking] .lobby-logo>span{font-size:22px}
@@ -180,6 +183,16 @@
  #frontier-app[data-page=ranking] .rank-player img{width:37px;height:37px}
  #frontier-app[data-page=ranking] .rank-score{font-size:16px}
  #frontier-app[data-page=ranking] .rank-detail-placeholder{min-height:240px}
+}
+@media(hover:none) and (pointer:coarse) and (max-width:1100px){
+ #frontier-app[data-page=ranking]{grid-template-columns:minmax(0,1fr)}
+ #frontier-app[data-page=ranking] .lobby-main{grid-column:1/-1;min-height:0}
+ #frontier-app[data-page=ranking] .lobby-logo{display:none}
+ #frontier-app[data-page=ranking] .lobby-nav{padding:3px 8px}
+ #frontier-app[data-page=ranking] .lobby-nav nav button{min-height:48px!important}
+ #frontier-app[data-page=ranking] .lobby-top{flex-shrink:0}
+ #frontier-app[data-page=ranking] .rank-tabs button{min-height:44px}
+ #frontier-app[data-page=ranking] .rank-row{min-height:44px!important}
 }
 @media(max-height:720px) and (min-width:1051px){
  #frontier-app[data-page=ranking] .rank-heading p{display:none}

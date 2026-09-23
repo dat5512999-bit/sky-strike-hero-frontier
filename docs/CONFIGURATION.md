@@ -1,3 +1,5 @@
+> **v0.85.11（2026-09-23）：** 搖桿預設採 20% 死區與漸進速度；不需新增玩家設定。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
+
 > **v0.85.10（2026-09-23）：** 無新玩家設定；主入口立即註冊 worker，updateViaCache 為 none，更新頁最長等待 60 秒。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。
 
 > **v0.85.9：** 無新增玩家或管理設定；全圖部署圖層已移除，地形與道路距離仍由 `maps.js`、`BuildSystem` 判定。詳見 [地圖部署視覺整理](DEPLOYMENT_VISUAL_V0859.md)。
