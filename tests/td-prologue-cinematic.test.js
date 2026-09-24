@@ -90,12 +90,19 @@ test('Chronicle replay is locked until experienced, then remains completely read
   progress.complete(result(api)); const before = store.export(); await progress.replay(api.prologue.cinematicId, player);
   assert.equal(calls, 1); assert.equal(store.export(), before);
 });
-test('Story entry plays once, shows Chapter I and bypasses mandatory replay afterward', async () => {
+test('Story entry plays prologue once, then offers three cards before battle', async () => {
   const { ns, api, store } = setup(), app = Object.create(ns.systems.FrontierApp.prototype);
-  let plays = 0, launches = 0; Object.assign(app, { store, cinematicPlayer: { play: async () => { plays++; return result(api, 'skipped'); } }, run: fn => fn(), show(page) { this.page = page; }, launchStory() { launches++; } });
+  let plays = 0, launches = 0; Object.assign(app, { store, root:{querySelector(){return null;}}, cinematicPlayer: { play: async () => { plays++; return result(api, 'skipped'); } }, run: fn => fn(), show(page) { this.page = page; }, render() {}, launchStory() { launches++; } });
   await app.startCinematic(); assert.equal(app.page, 'chapter-start'); assert.equal(launches, 0); assert.equal(plays, 1);
-  app.act('chapter-battle'); assert.equal(launches, 1);
-  await app.startCinematic(); assert.equal(plays, 1); assert.equal(launches, 2);
+  app.act('chapter-battle'); assert.equal(app.page, 'story-cards'); assert.equal(launches, 0);
+  assert.match(app.renderStoryCards(), /邊境烽火亮起/);
+  app.act('story-card-next'); assert.match(app.renderStoryCards(), /對面也是王國士兵/);
+  app.act('story-card-next'); assert.match(app.renderStoryCards(), /查清命令從何而來/);
+  app.act('story-card-next'); assert.equal(launches, 1);
+  await app.startCinematic(); assert.equal(plays, 1); assert.equal(app.page, 'story-cards'); assert.equal(launches, 1);
+  app.act('story-card-skip'); assert.equal(launches, 2);
+  const beforeCards = store.export(); app.act('story-card-replay'); assert.equal(app.page, 'story-cards');
+  app.act('story-card-skip'); assert.equal(app.page, 'story'); assert.equal(launches, 2); assert.equal(store.export(), beforeCards);
   app.replayOnly = true; const before = store.export(); await app.startCinematic();
   assert.equal(plays, 2); assert.equal(launches, 2); assert.equal(store.export(), before);
 });

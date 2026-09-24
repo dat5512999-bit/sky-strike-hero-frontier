@@ -1,3 +1,5 @@
+> **v0.85.12（2026-09-24）：** 同步部署第一關劇情資料、`FrontierApp.js`、`td-lobby.css`、更新頁與 `sw.js`；快取名 `sky-strike-v0.85.12`。詳見 [部署與驗收](STORY_CARDS_V08512.md)。
+
 > **v0.85.11（2026-09-23）：** 同步發布排行榜 CSS、搖桿、Hero 與版本檔；快取名 sky-strike-v0.85.11。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
 
 > **v0.85.10（2026-09-23）：** 發布 update.html、update-client.js、入口註冊與版本檔；快取名 sky-strike-v0.85.10。發布後驗證更新入口。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。

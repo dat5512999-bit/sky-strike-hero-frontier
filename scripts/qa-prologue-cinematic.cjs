@@ -25,7 +25,14 @@ const url = process.env.PROLOGUE_TEST_URL || 'http://127.0.0.1:4175/td.html';
     await page.locator('[data-action="chapter-battle"]').waitFor();
     let state = await page.evaluate(() => frontierApp.store.current());
     assert.deepEqual(state.completed, []); assert.ok(state.cinematics.includes('cinematic:prologue_before_shattered_peace'));
-    checks.push('HTTP 404 video + all images: placeholder, pause, skip, atomic collection, Chapter I');
+    await page.locator('[data-action="chapter-battle"]').click();
+    assert.match(await page.locator('.story-card').textContent(), /邊境烽火亮起/);
+    await page.locator('[data-action="story-card-next"]').click();
+    assert.match(await page.locator('.story-card').textContent(), /對面也是王國士兵/);
+    await page.locator('[data-action="story-card-skip"]').click();
+    assert.equal(await page.evaluate(() => document.body.dataset.appPage), 'battle');
+    await page.evaluate(() => frontierApp.home());
+    checks.push('HTTP 404 video + all images: placeholder, pause, skip, atomic collection, Chapter I cards and battle');
     await page.locator('[data-action="codex"]').click();
     await page.waitForFunction(() => globalThis.HeroFrontierCodex);
     await page.locator('[data-category="chronicle"]').click();
@@ -53,9 +60,10 @@ const url = process.env.PROLOGUE_TEST_URL || 'http://127.0.0.1:4175/td.html';
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.locator('a[aria-label="返回遊戲"]').click(); await page.waitForFunction(() => globalThis.frontierApp);
     await page.locator('[data-action="story"]').first().click(); await page.locator('[data-action="cinematic"]').first().click();
+    await page.locator('[data-action="story-card-skip"]').click();
     await page.waitForFunction(() => document.body.dataset.appPage === 'battle');
     assert.equal(await page.locator('.hf-cinematic').count(), 0);
-    checks.push('persisted Continue bypasses prologue and reaches existing Story mission');
+    checks.push('persisted Continue bypasses prologue, offers story cards, and reaches existing Story mission');
 
     // Accelerate only the storyboard clock; no video or story content is synthesized.
     const natural = await browser.newPage({ viewport: { width: 1440, height: 900 }, serviceWorkers: 'block' });

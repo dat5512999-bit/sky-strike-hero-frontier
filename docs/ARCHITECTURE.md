@@ -1,3 +1,5 @@
+> **v0.85.12（2026-09-24）：** 第一關的 `StoryCatalog.storyCards` → `FrontierApp` 閱讀狀態 → 既有 `launchStory`，回顧路徑返回章節頁。版面在 `td-lobby.css`，沒有新儲存或服務端。詳見 [架構與劇情卡流程](STORY_CARDS_V08512.md)。
+
 > **v0.85.11（2026-09-23）：** 觸控排行榜使用單欄底部導覽；搖桿方向與強度經導航檢查後交由 Hero 更新移動。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
 
 > **v0.85.10（2026-09-23）：** update.html → worker 更新及版號確認 → 新版大廳；殼層重新驗證 HTTP 快取，僅回退至當前版本快取。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。

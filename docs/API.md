@@ -1,3 +1,5 @@
+> **v0.85.12（2026-09-24）：** `StoryCatalog.mission.storyCards` 提供第一關三張卡的標題、短句與既有圖片；`FrontierApp.startStoryCards(replay)`／`finishStoryCards()` 管理閱讀與進戰鬥，不新增 HTTP API 或存檔欄位。詳見 [劇情卡交付](STORY_CARDS_V08512.md)。
+
 > **v0.85.11（2026-09-23）：** Hero.setTarget(x,y,speedScale=1) 新增可選移動速度比例；HeroJoystick 輸出漸進強度。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
 
 > **v0.85.10（2026-09-23）：** 新增 update-client.refresh／activated 與 GAME_VERSION 訊息；無網路 API 或玩家資料格式變更。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。

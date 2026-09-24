@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.11';
+const CACHE_NAME = 'sky-strike-v0.85.12';
 const ASSETS = [
  './update.html', './src/td/update-client.js',
  './goblin-polish-preview.html', './src/td/goblin-polish-preview.js', './src/td/systems/GoblinPresentation.js', './assets/td/goblin/skill-icons-v2.png', './assets/td/goblin/spell-effects-v1.png',
