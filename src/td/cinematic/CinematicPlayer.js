@@ -24,7 +24,9 @@
         const image = element('img', 'hf-cinematic-image'); image.alt = ''; image.hidden = true;
         const placeholder = element('div', 'hf-cinematic-placeholder');
         const shotLabel = element('small', ''), shotTitle = element('h3', ''), description = element('p', '');
-        placeholder.append(shotLabel, shotTitle, description); frame.append(image, placeholder);
+        const titleCard = element('div', 'hf-cinematic-title-card'); titleCard.hidden = true; titleCard.setAttribute('aria-hidden', 'true');
+        titleCard.append(element('small', '', 'CHAPTER I'), element('strong', '', 'HERO FRONTIER'), element('span', '', '《破碎的和平》'));
+        placeholder.append(shotLabel, shotTitle, description); frame.append(image, placeholder, titleCard);
         const captions = element('p', 'hf-cinematic-captions');
         stage.append(video, frame, captions);
         const status = element('p', 'hf-cinematic-status', '正在載入影像；也可以隨時跳過。'); status.setAttribute('role', 'status');
@@ -60,6 +62,7 @@
           shotIndex = index; const shot = entry.shots[index];
           shotLabel.textContent = '分鏡預覽 · SHOT ' + String(index + 1).padStart(2, '0') + ' / ' + entry.shots.length;
           shotTitle.textContent = shot.title; description.textContent = shot.description;
+          titleCard.hidden = shot.id !== 'shot_10';
           placeholder.hidden = false; image.hidden = true;
           image.onload = () => { if (!done) { image.hidden = false; placeholder.hidden = true; } };
           image.onerror = () => { image.hidden = true; placeholder.hidden = false; };
@@ -70,7 +73,7 @@
           elapsed = Math.min(Number.isFinite(video.currentTime) ? video.currentTime : 0, entry.duration - .01);
           mode = 'storyboard'; video.pause(); video.hidden = true; video.removeAttribute('src'); video.load();
           frame.hidden = false; fallbackButton.hidden = true; last = performance.now();
-          status.textContent = '分鏡預覽：缺少圖片時顯示文字，播放完成或跳過都會收錄。'; showShot();
+          status.textContent = '分鏡預覽：正在播放原創 Key Frame；只有缺少個別圖片時才會顯示文字。播放完成或跳過都會收錄。'; showShot();
         };
         const finish = reason => {
           if (done) return;

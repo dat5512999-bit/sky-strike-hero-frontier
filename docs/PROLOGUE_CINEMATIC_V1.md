@@ -4,9 +4,9 @@
 
 ## 產品範圍與開發決策
 
-交付播放、資料、Story 觸發、Chronicle 收藏與 Asset 插槽。採使用者提供的 10 個 Shot，總長 60 秒；不新增鏡頭或 Canon。WORLD_STORY_BIBLE_V1.md 保持原樣；不修改 Combat Balance。此版本沒有正式影片、正式 Key Frame、配音或新角色設計。
+交付播放、資料、Story 觸發、Chronicle 收藏與 10 張原創 Key Frame。採使用者提供的 10 個 Shot，總長 60 秒；不新增鏡頭或 Canon。WORLD_STORY_BIBLE_V1.md 保持原樣；不修改 Combat Balance。此版本沒有正式影片、配音或新角色設計定稿。
 
-先定義資料與素材／Reference，再實作播放器，再接入玩家進度與收藏，最後驗收及補齊文件。未知角色外觀與場景設計維持 null／pending-approval。片尾兩句 Concept Line 僅有 2 秒，是沿用指定 Shot 時段；正式配音前需由製作方確認可讀性，不能擅自延長或增加 Shot。
+先定義資料與素材／Reference，再實作播放器，再接入玩家進度與收藏，最後驗收及補齊文件。十張 Key Frame 是供這段分鏡播放的原創敘事插畫，不會把角色 Reference 的 null／pending-approval 改成角色設計定稿。片尾兩句 Concept Line 僅有 2 秒，是沿用指定 Shot 時段；正式配音前需由製作方確認可讀性，不能擅自延長或增加 Shot。
 
 ## 安裝與第一次使用
 
@@ -24,7 +24,7 @@
 ## A／B／C：素材與字幕
 
 - MP4：`assets/cinematics/prologue/prologue_zh_tw.mp4`。
-- 10 張 Key Frame：`assets/cinematics/prologue/shot_01_world.webp` 至 `shot_10_title.webp`；完整檔名與時間見 [素材插槽](../assets/cinematics/prologue/README.md)。
+- 10 張已交付的原創 Key Frame：`assets/cinematics/prologue/shot_01_world.webp` 至 `shot_10_title.webp`；完整檔名與時間見 [分鏡素材](../assets/cinematics/prologue/README.md)。這些圖讓 MP4 缺席時的播放器可完整展示故事，而不是只顯示文字。
 - 字幕：`assets/cinematics/prologue/subtitles/zh-TW.vtt`、`en.vtt`、`ja.vtt`，UTF-8 WebVTT。
 - 角色、地點及字幕 Schema：`assets/cinematics/prologue/cinematic.schema.json` 的 `$defs.character`、`$defs.location`、`$defs.subtitles`。
 - 製作資料匯出：`assets/cinematics/prologue/manifest.json`。
@@ -117,4 +117,4 @@ flowchart TD
 
 本次驗收：`npm run check` 通過；完整測試 453／453 通過；兩組 Edge 瀏覽器測試皆無 pageerror。截圖與結果在 `artifacts/qa-prologue-v0833/`；變更檔案與修改前／後雜湊在 `artifacts/prologue-v0833-release.json`。
 
-正式 MP4、圖片與翻譯到位後，仍須驗收影片音畫、實際字幕同步、十張圖的一致性及角色身分保密。Reference approved 前不視為正式美術完成。這些尚未製作的內容不會阻擋目前 Story。
+正式 MP4 與翻譯到位後，仍須驗收影片音畫、實際字幕同步及角色身分保密。已交付 Key Frame 已通過瀏覽器解碼驗收；Reference approved 前仍不視為正式角色美術定稿。這些尚未製作的內容不會阻擋目前 Story。

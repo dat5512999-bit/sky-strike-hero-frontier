@@ -13,6 +13,11 @@ test('prologue contains exactly ten contiguous shots and the requested asset slo
   assert.deepEqual(plain(p.shots.map(s => [s.start, s.end])), [[0,6],[6,14],[14,23],[23,31],[31,38],[38,44],[44,48],[48,53],[53,58],[58,60]]);
   assert.equal(new Set(p.shots.map(s => s.imageAsset)).size, 10);
   assert.ok(p.shots.every(s => s.imageAsset.startsWith('assets/cinematics/prologue/shot_')));
+  assert.equal(p.status, 'key-art-storyboard');
+  for (const asset of p.shots.map(s => s.imageAsset)) {
+    assert.ok(fs.existsSync(asset), asset);
+    assert.ok(fs.statSync(asset).size > 100000, asset + ' must be a real storyboard key frame');
+  }
   assert.equal(p.videoAsset, 'assets/cinematics/prologue/prologue_zh_tw.mp4');
   assert.ok(Object.isFrozen(p.shots[0]));
   assert.deepEqual(JSON.parse(fs.readFileSync('assets/cinematics/prologue/manifest.json', 'utf8')), plain(p));
@@ -125,7 +130,7 @@ test('Story adapter resolves missing/failed playback without multiple completion
   assert.equal(answer.reason, 'player-error'); assert.equal(completed, 1);
   await assert.rejects(adapter.trigger({}, 'invalid'), /未知/);
 });
-test('missing optional media is absent from service-worker install, while player and subtitles ship', () => {
+test('optional video is absent from service-worker install, while player, key frames and subtitles ship', () => {
   const { api } = setup(), worker = fs.readFileSync('sw.js', 'utf8');
   for (const file of [api.prologue.videoAsset, ...api.prologue.shots.map(s => s.imageAsset)]) assert.ok(!worker.includes("'./" + file + "'"));
   assert.ok(worker.includes('CinematicPlayer.js')); assert.ok(worker.includes('subtitles/zh-TW.vtt'));

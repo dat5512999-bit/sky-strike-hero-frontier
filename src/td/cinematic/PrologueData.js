@@ -46,7 +46,7 @@
   };
   const prologue = {
     schemaVersion: 1, cinematicId, title: '《曾經的和平》', productionTitle: '序章｜破碎的和平之前',
-    version: '1.0.0', status: 'asset-slots', duration: 60, expectedDuration: { min: 45, max: 60 },
+    version: '1.0.0', status: 'key-art-storyboard', duration: 60, expectedDuration: { min: 45, max: 60 },
     chapter: 1, chapterTitle: '破碎的和平', firstMissionId: 'chapter1-border',
     videoAsset: base + 'prologue_zh_tw.mp4', subtitleTracks: subtitles.tracks, subtitles,
     unlockCondition: 'completed-or-skipped', sourceType: 'CONFIRMED', sourceContext: 'STORY EXPERIENCE',
@@ -57,7 +57,7 @@
   api.prologue = freeze(prologue);
   api.prologueChronicle = freeze({
     id: cinematicId, name: prologue.title, category: 'Cinematic Collection', chapter: 1,
-    cinematicId, cinematicStatus: 'asset-slots', visualType: 'EVENT', timelineEra: 'pre-chapter',
+    cinematicId, cinematicStatus: 'key-art-storyboard', visualType: 'EVENT', timelineEra: 'pre-chapter',
     sourceType: 'CONFIRMED', sourceContext: 'STORY EXPERIENCE', spoilerPolicy: 'HIDE_TITLE',
     requires: { allOf: ['prologue.experienced'] }, relatedEntries: [],
     fragments: [{ id: 'story-experience', sourceType: 'CONFIRMED', sourceContext: 'STORY EXPERIENCE',
