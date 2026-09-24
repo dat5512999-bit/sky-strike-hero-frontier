@@ -16,21 +16,21 @@
     ['shadow_district', 'Shadow District'], ['silverleaf_territory', 'Silverleaf Territory']
   ].map(([id, name]) => reference(id, name, locationFields));
   // Only the user's approved shot brief is represented. Unnamed figures have no character binding.
-  const shot = (number, start, end, title, asset, description, characterRefs, locationRefs, direction) => ({
+  const shot = (number, start, end, title, asset, description, characterRefs, locationRefs, direction, narration) => ({
     id: 'shot_' + String(number).padStart(2, '0'), start, end, title,
-    imageAsset: base + asset + '.webp', description, characterRefs, locationRefs, direction
+    imageAsset: base + asset + '.webp', description, characterRefs, locationRefs, direction, narration
   });
   const shots = [
-    shot(1, 0, 6, '曾經的世界', 'shot_01_world', '和平時期的東方大陸。人類城市、銀葉自然文明、暮影領域存在於同一個世界。', [], ['silverleaf_territory'], '超廣角世界景觀；宏大、和平、充滿未知。'),
-    shot(2, 6, 14, '第一次真正的交流', 'shot_02_cooperation', '人類商隊與銀葉交流。暮影魔法師協助其他文明。不同種族傭兵共同工作。早期傭兵制度源自跨種族合作。', [], [], '呈現交流與合作。'),
-    shot(3, 14, 23, '共同城市', 'shot_03_shared_city', '人類帶來工程、制度與建設；銀葉帶來自然與元素；暮影帶來魔法與知識。不同文明共同建立繁榮的城市。', [], ['shared_city'], '最後拉遠鏡頭，完整呈現共同城市。'),
-    shot(4, 23, 31, '銀葉王子', 'shot_04_silverleaf_prince', '銀葉王子走在共同城市中。不同種族居民認識他，向他致意。', ['silverleaf_prince'], ['shared_city'], '受到不同文明尊重的共同統治者人選；不宣告必然繼位。'),
-    shot(5, 31, 38, '陰影', 'shot_05_conspiracy', '王宮內，共同城市地圖旁，一隻手推倒象徵王子的棋子。', [], ['royal_palace'], '音樂與畫面轉暗；不顯示完整面孔、身份或可辨識角色標記。'),
-    shot(6, 38, 44, '暮影區', 'shot_06_shadow_district', '夜晚，銀葉王子進入暮影生活區。街道逐漸安靜，遠處存在不明人影。', ['silverleaf_prince'], ['shadow_district'], '不明人影不綁定任何角色身份。'),
-    shot(7, 44, 48, '死亡', 'shot_07_assassination', '門關上。劍刃反光。王子回頭。金屬聲。畫面切黑。', ['silverleaf_prince'], ['shadow_district'], '快速剪接；不展示完整殺人過程或兇手。'),
-    shot(8, 48, 53, '王子之死', 'shot_08_prince_death', '王子被發現倒在暮影區。現場有一件與古代暮影禁忌有關的物件。', ['silverleaf_prince'], ['shadow_district'], '物件的身份、來源、是否造成死亡，均保持未知。'),
-    shot(9, 53, 58, '和平破裂', 'shot_09_war_begins', '銀葉軍集結；王國城門封鎖；暮影居民察覺異常；禁衛軍團長閱讀案件資料；銀葉公主在遠方收到消息；銀葉王面對兒子的死亡。', ['guard_commander', 'silverleaf_princess', 'silverleaf_king'], ['shared_city', 'shadow_district', 'silverleaf_territory'], '快速 Montage；不揭露真相。公主所在位置未定，不推定為銀葉領地。'),
-    shot(10, 58, 60, 'HERO FRONTIER', 'shot_10_title', 'CHAPTER I\n《破碎的和平》', [], [], '黑畫面與標題。')
+    shot(1, 0, 6, '曾經的世界', 'shot_01_world', '和平時期的東方大陸。人類城市、銀葉自然文明、暮影領域存在於同一個世界。', [], ['silverleaf_territory'], '超廣角世界景觀；宏大、和平、充滿未知。', '人類、銀葉與暮影，曾在同一片大陸並肩生活。'),
+    shot(2, 6, 14, '第一次真正的交流', 'shot_02_cooperation', '人類商隊與銀葉交流。暮影魔法師協助其他文明。不同種族傭兵共同工作。早期傭兵制度源自跨種族合作。', [], [], '呈現交流與合作。', '商隊、工匠與法師，讓陌生的文明開始互相信任。'),
+    shot(3, 14, 23, '共同城市', 'shot_03_shared_city', '人類帶來工程、制度與建設；銀葉帶來自然與元素；暮影帶來魔法與知識。不同文明共同建立繁榮的城市。', [], ['shared_city'], '最後拉遠鏡頭，完整呈現共同城市。', '工程、自然與魔法，共同築起一座繁榮之城。'),
+    shot(4, 23, 31, '銀葉王子', 'shot_04_silverleaf_prince', '銀葉王子走在共同城市中。不同種族居民認識他，向他致意。', ['silverleaf_prince'], ['shared_city'], '受到不同文明尊重的共同統治者人選；不宣告必然繼位。', '銀葉王子受到各族敬意，也被視為和平的象徵。'),
+    shot(5, 31, 38, '陰影', 'shot_05_conspiracy', '王宮內，共同城市地圖旁，一隻手推倒象徵王子的棋子。', [], ['royal_palace'], '音樂與畫面轉暗；不顯示完整面孔、身份或可辨識角色標記。', '然而在王宮深處，有人悄悄推動了命運。'),
+    shot(6, 38, 44, '暮影區', 'shot_06_shadow_district', '夜晚，銀葉王子進入暮影生活區。街道逐漸安靜，遠處存在不明人影。', ['silverleaf_prince'], ['shadow_district'], '不明人影不綁定任何角色身份。', '那一夜，王子走進暮影區；街道逐漸安靜。'),
+    shot(7, 44, 48, '死亡', 'shot_07_assassination', '門關上。劍刃反光。王子回頭。金屬聲。畫面切黑。', ['silverleaf_prince'], ['shadow_district'], '快速剪接；不展示完整殺人過程或兇手。', '門闔上、金屬聲響起——真相沒有留下名字。'),
+    shot(8, 48, 53, '王子之死', 'shot_08_prince_death', '王子被發現倒在暮影區。現場有一件與古代暮影禁忌有關的物件。', ['silverleaf_prince'], ['shadow_district'], '物件的身份、來源、是否造成死亡，均保持未知。', '黎明時，人們在暮影區發現王子與一件來歷不明的古物。'),
+    shot(9, 53, 58, '和平破裂', 'shot_09_war_begins', '銀葉軍集結；王國城門封鎖；暮影居民察覺異常；禁衛軍團長閱讀案件資料；銀葉公主在遠方收到消息；銀葉王面對兒子的死亡。', ['guard_commander', 'silverleaf_princess', 'silverleaf_king'], ['shared_city', 'shadow_district', 'silverleaf_territory'], '快速 Montage；不揭露真相。公主所在位置未定，不推定為銀葉領地。', '猜忌快過真相。城門封鎖，軍隊集結，和平開始崩裂。'),
+    shot(10, 58, 60, 'HERO FRONTIER', 'shot_10_title', 'CHAPTER I\n《破碎的和平》', [], [], '黑畫面與標題。', '《破碎的和平》')
   ];
   const subtitles = {
     schemaVersion: 1, timeUnit: 'seconds', format: 'WebVTT', defaultLanguage: 'zh-TW',

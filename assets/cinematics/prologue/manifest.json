@@ -92,7 +92,8 @@
       "locationRefs": [
         "silverleaf_territory"
       ],
-      "direction": "超廣角世界景觀；宏大、和平、充滿未知。"
+      "direction": "超廣角世界景觀；宏大、和平、充滿未知。",
+      "narration": "人類、銀葉與暮影，曾在同一片大陸並肩生活。"
     },
     {
       "id": "shot_02",
@@ -103,7 +104,8 @@
       "description": "人類商隊與銀葉交流。暮影魔法師協助其他文明。不同種族傭兵共同工作。早期傭兵制度源自跨種族合作。",
       "characterRefs": [],
       "locationRefs": [],
-      "direction": "呈現交流與合作。"
+      "direction": "呈現交流與合作。",
+      "narration": "商隊、工匠與法師，讓陌生的文明開始互相信任。"
     },
     {
       "id": "shot_03",
@@ -116,7 +118,8 @@
       "locationRefs": [
         "shared_city"
       ],
-      "direction": "最後拉遠鏡頭，完整呈現共同城市。"
+      "direction": "最後拉遠鏡頭，完整呈現共同城市。",
+      "narration": "工程、自然與魔法，共同築起一座繁榮之城。"
     },
     {
       "id": "shot_04",
@@ -131,7 +134,8 @@
       "locationRefs": [
         "shared_city"
       ],
-      "direction": "受到不同文明尊重的共同統治者人選；不宣告必然繼位。"
+      "direction": "受到不同文明尊重的共同統治者人選；不宣告必然繼位。",
+      "narration": "銀葉王子受到各族敬意，也被視為和平的象徵。"
     },
     {
       "id": "shot_05",
@@ -144,7 +148,8 @@
       "locationRefs": [
         "royal_palace"
       ],
-      "direction": "音樂與畫面轉暗；不顯示完整面孔、身份或可辨識角色標記。"
+      "direction": "音樂與畫面轉暗；不顯示完整面孔、身份或可辨識角色標記。",
+      "narration": "然而在王宮深處，有人悄悄推動了命運。"
     },
     {
       "id": "shot_06",
@@ -159,7 +164,8 @@
       "locationRefs": [
         "shadow_district"
       ],
-      "direction": "不明人影不綁定任何角色身份。"
+      "direction": "不明人影不綁定任何角色身份。",
+      "narration": "那一夜，王子走進暮影區；街道逐漸安靜。"
     },
     {
       "id": "shot_07",
@@ -174,7 +180,8 @@
       "locationRefs": [
         "shadow_district"
       ],
-      "direction": "快速剪接；不展示完整殺人過程或兇手。"
+      "direction": "快速剪接；不展示完整殺人過程或兇手。",
+      "narration": "門闔上、金屬聲響起——真相沒有留下名字。"
     },
     {
       "id": "shot_08",
@@ -189,7 +196,8 @@
       "locationRefs": [
         "shadow_district"
       ],
-      "direction": "物件的身份、來源、是否造成死亡，均保持未知。"
+      "direction": "物件的身份、來源、是否造成死亡，均保持未知。",
+      "narration": "黎明時，人們在暮影區發現王子與一件來歷不明的古物。"
     },
     {
       "id": "shot_09",
@@ -208,7 +216,8 @@
         "shadow_district",
         "silverleaf_territory"
       ],
-      "direction": "快速 Montage；不揭露真相。公主所在位置未定，不推定為銀葉領地。"
+      "direction": "快速 Montage；不揭露真相。公主所在位置未定，不推定為銀葉領地。",
+      "narration": "猜忌快過真相。城門封鎖，軍隊集結，和平開始崩裂。"
     },
     {
       "id": "shot_10",
@@ -219,7 +228,8 @@
       "description": "CHAPTER I\n《破碎的和平》",
       "characterRefs": [],
       "locationRefs": [],
-      "direction": "黑畫面與標題。"
+      "direction": "黑畫面與標題。",
+      "narration": "《破碎的和平》"
     }
   ],
   "characters": [

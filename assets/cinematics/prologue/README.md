@@ -19,6 +19,8 @@ ID：`prologue_before_shattered_peace`；名稱：《曾經的和平》。10 張
 
 正式影片未來放 `prologue_zh_tw.mp4`。字幕放 `subtitles/zh-TW.vtt`、`subtitles/en.vtt`、`subtitles/ja.vtt`。英文與日文目前只有空白 WebVTT 插槽，不代表已完成翻譯。
 
+分鏡模式會在每張已成功載入的 Key Frame 疊加 Shot 編號、標題與短敘事；「上一張／下一張」可直接跳到相鄰分鏡。MP4 尚未交付時，播放器會使用可關閉的 Web Audio 原創氛圍配樂：前段明亮、陰謀段轉暗、和平破裂段收緊。瀏覽器若阻擋自動音訊，玩家可按「開啟配樂」。
+
 `manifest.json` 是可提供給製作團隊的資料匯出，包含全部 Shot、字幕、角色與地點 Reference。`cinematic.schema.json` 定義字幕、角色、地點及 Shot 結構。角色的 null 欄位不得當成生成指令；應先核准參考圖，填寫 revision、referenceAsset 及所有 continuity 欄位（無武器時明確填寫「無」），再改為 approved。Shot 05 的手與不明人影沒有角色 Reference，禁止綁定為首相或兇手。
 
 資料唯一編輯來源是 `src/td/cinematic/PrologueData.js`。修改後執行 `node scripts/export-prologue-manifest.cjs`，並同步更新 WebVTT。影片與圖片不在離線安裝清單中，缺少任一素材會回退為該段文字預覽，但玩家仍可跳過。替換素材後應更新快取版本並重新驗收。

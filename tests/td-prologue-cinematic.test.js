@@ -14,6 +14,7 @@ test('prologue contains exactly ten contiguous shots and the requested asset slo
   assert.equal(new Set(p.shots.map(s => s.imageAsset)).size, 10);
   assert.ok(p.shots.every(s => s.imageAsset.startsWith('assets/cinematics/prologue/shot_')));
   assert.equal(p.status, 'key-art-storyboard');
+  assert.ok(p.shots.every(shot => typeof shot.narration === 'string' && shot.narration.trim()), 'every key frame has visible short narration');
   for (const asset of p.shots.map(s => s.imageAsset)) {
     assert.ok(fs.existsSync(asset), asset);
     assert.ok(fs.statSync(asset).size > 100000, asset + ' must be a real storyboard key frame');
