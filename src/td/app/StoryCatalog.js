@@ -2,9 +2,9 @@
   'use strict';
   const mission={id:'chapter1-border',chapter:1,name:'烽火初燃',map:'beginner',hero:'hunter',faction:'hunter',difficulty:'story',objective:'守住谷地城門，擊退 3 波王國叛軍。',rewards:{maps:['twinpass','silverleaf']},discovered:['kingdom-rebellion'],cinematic:['邊境的烽火，比信使先抵達王城。','昔日守衛商路的長戟衛，如今將兵鋒指向谷地。雷恩奉命守住城門，查清叛亂的源頭。','部署王國士兵守住道路，使用陷阱拖慢重甲叛軍。城門還在，希望就還在。']};
   mission.storyCards=[
-    {title:'烽火初燃',label:'谷地 · 戰前',line:'邊境烽火亮起。信使還沒抵達。',image:'assets/td/beginner-valley-v2.png',focus:'center'},
-    {title:'同一面旗',label:'雷恩',line:'「對面也是王國士兵。為何刀要指向自己人？」',image:'assets/td/opening/hero-hunter-selection-v1.png',focus:'center 28%'},
-    {title:'守住城門',label:'此刻的選擇',line:'先守住谷地，才有機會查清命令從何而來。',image:'assets/td/opening/faction-kingdom-selection-v1.png',focus:'center'}
+    {title:'烽火初燃',label:'谷地 · 戰前',line:'邊境烽火亮起。信使還沒抵達。',image:'assets/td/story/kingdom-border-at-dusk-v1.png',focus:'center'},
+    {title:'同一面旗',label:'雷恩',line:'「對面也是王國士兵。為何刀要指向自己人？」',image:'assets/td/story/rhen-oathkeeper-v1.png',focus:'center'},
+    {title:'守住城門',label:'此刻的選擇',line:'先守住谷地，才有機會查清命令從何而來。',image:'assets/td/story/kingdom-checkpoint-order-v1.png',focus:'center'}
   ];
   const waves=[{name:'谷地哨兵',hint:'長戟衛護甲較高，先部署守軍再開戰',groups:[{type:'halberdier',count:4}]},{name:'叛軍集結',hint:'在彎道集中火力，利用陷阱延長輸出時間',groups:[{type:'halberdier',count:6}]},{name:'失誓騎士',hint:'失誓騎士帶隊壓境，召喚戰狼支援前線',groups:[{type:'halberdier',count:5},{type:'fallenKnight',count:2}]}];
   const silverleaf={id:'chapter1-silverleaf',chapter:1,name:'溪谷餘音',map:'silverleaf',hero:'hunter',faction:'hunter',difficulty:'story',requires:mission.id,objective:'沿溪谷守住橋樑，讓調查隊取得銀葉保留的舊日記錄。',rewards:{maps:['shadowfall']},discovered:['silverleaf-record'],cinematic:['溪水仍清澈，昔日盟約卻開始動搖。','王國調查隊進入銀葉溪谷，尋找能解釋衝突的記錄。這些線索尚不足以判定兇手。','守住橋樑，讓記錄安全離開溪谷。'],waves:[{name:'橋前追兵',hint:'先守第一座橋，保留金錢給後段',groups:[{type:'halberdier',count:4}]},{name:'溪谷包抄',hint:'中央草地可照顧兩段道路',groups:[{type:'runner',count:5},{type:'halberdier',count:3}]},{name:'撤離掩護',hint:'城門前留一層補漏防線',groups:[{type:'fallenKnight',count:2},{type:'halberdier',count:5}]}]};

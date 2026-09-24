@@ -106,6 +106,18 @@ test('Story entry plays prologue once, then offers three cards before battle', a
   app.replayOnly = true; const before = store.export(); await app.startCinematic();
   assert.equal(plays, 2); assert.equal(launches, 2); assert.equal(store.export(), before);
 });
+test('first mission story cards use original Chapter I key art, including a later Shadowfolk scene', () => {
+  const catalog = setup().ns.systems.StoryCatalog.mission;
+  assert.deepEqual(plain(catalog.storyCards.map(card => card.image)), [
+    'assets/td/story/kingdom-border-at-dusk-v1.png',
+    'assets/td/story/rhen-oathkeeper-v1.png',
+    'assets/td/story/kingdom-checkpoint-order-v1.png'
+  ]);
+  for (const file of [...catalog.storyCards.map(card => card.image), 'assets/td/story/shadowfolk-evacuation-v1.png']) {
+    assert.ok(fs.existsSync(file), file);
+    assert.ok(fs.statSync(file).size > 100000, file + ' must be a real key-art asset');
+  }
+});
 test('Story adapter resolves missing/failed playback without multiple completion callbacks', async () => {
   const { api } = setup(); let completed = 0;
   const adapter = new api.CinematicStoryAdapter({ play: async () => { throw Error('media'); } });
