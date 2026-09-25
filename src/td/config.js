@@ -21,7 +21,7 @@
       nagaTideguard:{name:'潮汐衛士',faction:'娜迦',icon:'潮',cost:105,wood:2,health:178,armor:4,damage:20,range:94,interval:.9,speed:98,color:'#55d3d0',attackType:'chaos',naga:true,role:'前排守衛｜第四擊以殼盾衝擊短暫緩速；承受第一線壓力'},
       nagaShellbreaker:{name:'鹽甲破殼者',faction:'娜迦',icon:'殼',cost:175,wood:3,health:248,armor:6,damage:36,range:104,interval:1.35,speed:78,color:'#7ed8d1',attackType:'chaos',splash:24,naga:true,role:'重甲破陣｜殼盾突擊造成小範圍傷害；故事前期同類會以敵軍登場'},
       nagaDeepWargod:{name:'深潮戰神',faction:'娜迦',icon:'神',cost:720,wood:5,health:330,armor:5,damage:96,range:118,interval:1.55,speed:84,color:'#2ab9c6',attackType:'chaos',splash:66,ultimate:true,naga:true,role:'娜迦壓軸重兵｜雙刃震潮範圍攻擊；高造價、短射程'},
-      nagaMantaRaider:{name:'魔鬼魚翼襲者',faction:'娜迦',icon:'翼',cost:155,wood:2,health:102,armor:1,damage:24,range:218,interval:1.05,speed:148,color:'#77e2e0',attackType:'pierce',chain:2,chainRange:82,style:'moon',naga:true,role:'空中遠射｜月牙刃彈射兩個鄰近目標；機動高、生命低'},
+      nagaMantaRaider:{name:'魔鬼魚翼襲者',faction:'娜迦',icon:'翼',cost:155,wood:2,health:102,armor:1,damage:24,range:218,interval:1.05,speed:148,color:'#77e2e0',attackType:'pierce',chain:2,chainRange:82,style:'tide-glaive',naga:true,role:'空中遠射｜潮刃彈射兩個鄰近目標；機動高、生命低'},
       nagaVenomStalker:{name:'毒沼潛獵者',faction:'娜迦',icon:'毒',cost:138,wood:2,health:94,armor:1,damage:18,range:172,interval:.74,speed:138,color:'#65cc8b',attackType:'magic',style:'plague',vulnerability:.12,naga:true,role:'中距削弱｜毒鏢使其他來源傷害 +12%；需前排掩護'},
       royalCommander:{name:'皇家重裝統領',faction:'王國',icon:'冠',cost:750,wood:5,health:260,damage:100,range:165,interval:1.5,splash:38,color:'#f3ce75',attackType:'chaos',style:'lightning',ultimate:true,commandHaste:.18,role:'終極士兵｜重鎚濺射｜165 範圍其他士兵攻速 +18%（同類取最高）'},
       soulsteel:{name:'深淵魂鋼魔像',faction:'暗影',icon:'魂',cost:850,wood:6,health:350,damage:120,range:145,interval:1.8,splash:48,color:'#b78aff',attackType:'chaos',style:'spirit',ultimate:true,soulSlam:true,role:'終極士兵｜每次攻擊有 3 魂則消耗，傷害 ×1.5、震地範圍 +20；無魂仍攻擊'},
@@ -63,10 +63,10 @@
       frostAurora:{"name":"極光獵台","icon":"光","cost":190,"wood":3,"damage":17,"range":220,"interval":1.1,"frost":15,"frozenBonus":1.8,"freezeExtension":0.2,"color":"#a0e3c0","role":"窗口維持｜命中延長 .2 秒、每窗共限 .6 秒；窗口傷害 ×1.8","attackType":"magic","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
       frostGlacier:{"name":"冰河核心","icon":"河","cost":420,"wood":5,"damage":18,"range":215,"interval":2.6,"frost":50,"splash":92,"color":"#82bdcd","role":"後期大範圍控制｜92 範圍 +50 Frost；造價高、攻擊空窗長","attackType":"magic","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
 
-      nagaTidegate:{name:'潮門尖塔',faction:'娜迦',icon:'門',cost:115,wood:2,damage:22,range:174,interval:.92,color:'#55dbe2',attackType:'magic',vulnerability:.1,naga:true,role:'潮壓標記｜穩定遠攻；命中使其他來源傷害 +10%，適合建立首波節奏'},
-      nagaShellBastion:{name:'鹽甲棱堡',faction:'娜迦',icon:'盾',cost:165,wood:3,damage:38,range:148,interval:1.35,color:'#8fe7da',attackType:'pierce',armorPierce:3,shots:2,naga:true,role:'雙叉拒馬｜雙發穿甲，優先處理重甲；射程較短'},
+      nagaTidegate:{name:'潮門尖塔',faction:'娜迦',icon:'門',cost:115,wood:2,damage:22,range:174,interval:.92,color:'#55dbe2',attackType:'magic',style:'tidebolt',vulnerability:.1,naga:true,role:'潮壓標記｜穩定潮箭；命中使其他來源傷害 +10%，適合建立首波節奏'},
+      nagaShellBastion:{name:'鹽甲棱堡',faction:'娜迦',icon:'盾',cost:165,wood:3,damage:38,range:148,interval:1.35,color:'#8fe7da',attackType:'pierce',style:'tide-spear',armorPierce:3,shots:2,naga:true,role:'雙叉拒馬｜雙發潮叉穿甲，優先處理重甲；射程較短'},
       nagaAbyssShrine:{name:'深淵祭壇',faction:'娜迦',icon:'淵',cost:175,wood:3,damage:0,range:178,interval:1,color:'#3dc6cf',attackType:'magic',supportOnly:true,nagaHaste:.18,naga:true,role:'潮衛共鳴｜附近娜迦士兵與英雄攻速 +18%，同類不疊加；本身不攻擊'},
-      nagaMantaAerie:{name:'翼潮獵台',faction:'娜迦',icon:'翼',cost:235,wood:4,damage:31,range:218,interval:1.18,color:'#76e6e2',attackType:'magic',chain:3,chainRange:102,slow:.72,slowTime:1.1,naga:true,role:'高台雷潮｜三段連鎖並緩速，擅長壓制分散敵群'},
+      nagaMantaAerie:{name:'翼潮獵台',faction:'娜迦',icon:'翼',cost:235,wood:4,damage:31,range:218,interval:1.18,color:'#76e6e2',attackType:'magic',chain:3,chainRange:102,style:'tide-chain',slow:.72,slowTime:1.1,naga:true,role:'翼潮連鎖｜三段潮線並緩速，擅長壓制分散敵群'},
 
       goblinGenerator:{name:'動力機座',faction:'地精',icon:'⚙',cost:95,wood:1,damage:0,range:175,interval:1,color:'#8edbd0',attackType:'magic',supportOnly:true,role:'機械網路核心｜半徑 175，容量 3 + 每級 1'},
       goblinTurret:{name:'鉚釘武器台',faction:'地精',icon:'⌾',cost:110,wood:2,damage:26,range:165,interval:.85,color:'#e2be79',attackType:'pierce',style:'bullet',networkCost:1,role:'基本火力｜接入網路傷害 +22%'},

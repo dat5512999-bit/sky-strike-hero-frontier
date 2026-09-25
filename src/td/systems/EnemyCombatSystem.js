@@ -30,7 +30,13 @@
     }
     attack(dt,monster,hero,defenders,hooks){
       if(!monster.combatRole)return;monster.attackCooldown-=dt;
-      if(monster.attackWindup>0){const before=monster.attackWindup;monster.attackWindup=Math.max(0,monster.attackWindup-dt);if(before>0&&monster.attackWindup<=0){const target=monster.combatTarget;if(target&&target.active&&ns.utils.distance(monster,target)<=monster.attackRange+24)this.strike(monster,target,1,hooks,'attack');monster.combatTarget=null;monster.attackCooldown=(monster.attackInterval||2)*(monster.enraged?.65:1);}return;}
+      if(monster.attackWindup>0){
+        const target=monster.combatTarget;
+        // Moving the hero out of range cancels the windup immediately.  The
+        // monster resumes its route instead of visually tethering the hero.
+        if(!target||!target.active||ns.utils.distance(monster,target)>monster.attackRange+24){monster.attackWindup=0;monster.attackVisualTime=monster.attackVisualDuration||0;monster.combatTarget=null;monster.attackCooldown=Math.min(monster.attackCooldown,.14);return;}
+        const before=monster.attackWindup;monster.attackWindup=Math.max(0,monster.attackWindup-dt);if(before>0&&monster.attackWindup<=0){if(ns.utils.distance(monster,target)<=monster.attackRange+24)this.strike(monster,target,1,hooks,'attack');monster.combatTarget=null;monster.attackCooldown=(monster.attackInterval||2)*(monster.enraged?.65:1);}return;
+      }
       const target=this.validTargets(monster,hero,defenders).sort((a,b)=>ns.utils.distance(monster,a)-ns.utils.distance(monster,b))[0];if(target&&monster.attackCooldown<=0){monster.combatTarget=target;monster.attackWindup=monster.combatRole==='hunter'?.55:.36;monster.attackVisualTime=0;monster.attackVisualRelease=monster.attackWindup;monster.attackVisualDuration=monster.attackWindup+.18;monster.facing=Math.atan2(target.y-monster.y,target.x-monster.x);monster.visualHeading=monster.facing;if(hooks&&hooks.onWarning&&monster.combatRole==='hunter')hooks.onWarning(monster,'虛空箭',0);}
     }
     update(dt,monsters,hero,defenders,hooks){

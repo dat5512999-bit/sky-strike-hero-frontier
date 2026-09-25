@@ -41,8 +41,8 @@
     naga:[
       {id:'tidebreaker-spear-0',name:'破潮三叉戟',rarity:'base',color:'#55d3d0',visual:'trident',description:'破潮者的初始潮門三叉戟。'},
       {id:'tidebreaker-spear-1',name:'珊瑚潮鋼戟',rarity:'common',color:'#9ce6df',visual:'trident',description:'普攻與傷害技能累計提高 20%；潮鋼刃留下青白水痕。'},
-      {id:'tidebreaker-spear-2',name:'深淵潮印戟',rarity:'epic',color:'#4aaedb',visual:'trident',description:'普攻與傷害技能累計提高 40%；35% 機率觸發兩段潮電連鎖。',chainChance:.35,chain:2,chainRange:98,chainStyle:'lightning'},
-      {id:'tidebreaker-spear-3',name:'萬潮王戟',rarity:'legendary',color:'#b7fff0',visual:'trident',description:'普攻與傷害技能累計提高 60%；保留潮電連鎖，並造成半徑 30 的破潮濺射。',chainChance:.35,chain:2,chainRange:98,chainStyle:'lightning',splash:30,style:'spirit'}
+      {id:'tidebreaker-spear-2',name:'深淵潮印戟',rarity:'epic',color:'#4aaedb',visual:'trident',description:'普攻與傷害技能累計提高 40%；35% 機率觸發兩段潮線連鎖。',chainChance:.35,chain:2,chainRange:98,chainStyle:'tide-chain'},
+      {id:'tidebreaker-spear-3',name:'萬潮王戟',rarity:'legendary',color:'#b7fff0',visual:'trident',description:'普攻與傷害技能累計提高 60%；保留潮線連鎖，並造成半徑 30 的破潮濺射。',chainChance:.35,chain:2,chainRange:98,chainStyle:'tide-chain',splash:30,style:'tide-splash'}
     ]
   };
   class EquipmentSystem{

@@ -113,12 +113,10 @@ test('腳下剛建成塔時允許向外離開，但不允許繼續走入塔中�
   element.fire('pointerdown',{clientX:210});tick();assert.equal(hero.x,350);
   element.fire('pointermove',{clientX:100});tick();assert.ok(hero.x<350);
 });
-test('搖桿保留自動攻擊與施法鎖定，攻擊／施法完成後繼續既有移動',()=>{
+test('搖桿移動會立即中斷攻擊與施法，讓英雄直接脫離戰鬥',()=>{
   const {hero,element,tick}=setup(),shots=[],enemy={active:true,x:410,y:305,progress:()=>1};
-  element.fire('pointerdown',{clientX:210});tick(.02,[enemy],shots);assert.equal(hero.state,'attack');
-  for(let i=0;i<25;i++)tick(.02,[enemy],shots);assert.ok(shots.length>0);
-  hero.beginCast();const x=hero.x;tick(.02,[],shots);assert.equal(hero.x,x);assert.equal(hero.state,'cast');
-  for(let i=0;i<40;i++)tick(.02,[],shots);assert.ok(hero.x>x);assert.equal(hero.state,'walk');
+  element.fire('pointerdown',{clientX:210});tick(.02,[enemy],shots);assert.equal(hero.state,'walk');assert.equal(shots.length,0);
+  hero.beginCast();const x=hero.x;tick(.02,[],shots);assert.ok(hero.x>x);assert.equal(hero.castTimer,0);assert.equal(hero.state,'walk');
 });
 test('重新開局更換英雄物件後，不會沿用前局搖桿手勢',()=>{
   const {game,ns,element,stick}=setup();element.fire('pointerdown',{clientX:210});game.hero=new ns.entities.Hero(100,100);stick.update(.02);

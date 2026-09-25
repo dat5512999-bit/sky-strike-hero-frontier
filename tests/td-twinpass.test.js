@@ -32,7 +32,7 @@ test('不同分支獨立前進、匯流後保持間距，兩路最終都能抵�
   for(let tick=0;tick<18000&&enemies.some(m=>m.active);tick++){
    ns.TDGame.prototype.updateMonsterConvoy.call(state,speed/60);
    const merged=enemies.filter(m=>m.active&&m.remainingDistance()<ns.config.sharedLength).sort((a,b)=>a.remainingDistance()-b.remainingDistance());
-   for(let i=1;i<merged.length;i++)assert.ok(merged[i].remainingDistance()-merged[i-1].remainingDistance()>=ns.entities.Monster.minimumHeadway(merged[i-1],merged[i])-1e-6);
+   for(let i=1;i<merged.length;i++){const leader=merged[i-1],follower=merged[i],hard=Math.max(27,(leader.radius+follower.radius)*1.03);assert.ok(follower.remainingDistance()-leader.remainingDistance()>=hard-1e-6);}
   }
   assert.equal(enemies.some(m=>m.active),false);assert.equal(leaks,20);ns.TDGame.prototype.updateMonsterConvoy.call(state,1);assert.equal(leaks,20);
  }

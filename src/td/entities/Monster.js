@@ -38,10 +38,11 @@
     update(dt,hero,defenders,maxAdvance){
       if(!this.active)return;this.displayHealth+=(this.health-this.displayHealth)*Math.min(1,dt*11);this.hitTime=Math.max(0,this.hitTime-dt);this.hitFlash=Math.max(0,this.hitFlash-dt);this.criticalFlash=Math.max(0,(this.criticalFlash||0)-dt);this.hitKickTime=Math.max(0,(this.hitKickTime||0)-dt);if(this.hitKickTime<=0){this.hitKickX=0;this.hitKickY=0;}this.slowTimer=Math.max(0,this.slowTimer-dt);if(this.slowTimer<=0)this.slowFactor=1;
       const heroFactor=hero&&hero.active&&ns.utils.distance(this,hero)<46?.78:1;
-      // Plant the feet for windup and recovery, then use the rest of this tick to
-      // resume the route. This keeps the pause stable at different game speeds.
+      // An ordinary swing remains readable but no longer freezes the whole march.
+      // Only a telegraphed boss ability, roots and freezes can fully halt a route.
       const attackBrace=Math.max(0,this.attackWindup,this.attackVisualDuration-this.attackVisualTime);
-      const movingDt=this.abilityWindup>0?0:Math.max(0,dt-attackBrace),limit=Number.isFinite(maxAdvance)?Math.max(0,maxAdvance):Infinity,pressure=this.mapPressure;let movement=this.speed*(this.rootTime>0?0:1)*this.slowFactor*(this.moveAura||1)*heroFactor;
+      const attackStride=attackBrace>0?(this.combatRole==='boss'?.76:.91):1;
+      const movingDt=this.abilityWindup>0?0:dt*attackStride,limit=Number.isFinite(maxAdvance)?Math.max(0,maxAdvance):Infinity,pressure=this.mapPressure;let movement=this.speed*(this.rootTime>0?0:1)*this.slowFactor*(this.moveAura||1)*heroFactor;
       // Control can erase most, but never all, of the wind bonus. Existing root
       // remains a short stop rather than becoming a map-specific exception.
       if(pressure&&!(this.rootTime>0)){movement*=pressure.speedMultiplier;if(this.slowTimer>0&&this.slowFactor<1)movement=Math.max(this.speed*pressure.controlFloor,movement);}

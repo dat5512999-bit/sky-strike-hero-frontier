@@ -1,7 +1,7 @@
 (function(ns){
   'use strict';
   const THRESHOLDS=[0,8,22,45,80];
-  const NAMES={arrow:'穿雲齊射',iceward:'寒鋼凍陣',frost:'冰霜新星',cannon:'熔火重砲',storm:'雷霆連鎖',totem:'祖靈震地',crypt:'幽骨召喚',soul:'靈魂收割',barracks:'軍團齊射',grove:'根脈纏繞',graveyard:'亡魂祝福',ballista:'獅翼貫射',moonwell:'月潮折射',plague:'瘟疫蔓延',warDrum:'部族重拍',boulder:'裂地巨石',thunderTotem:'萬靈雷鏈',nagaTidegate:'潮門標記',nagaShellBastion:'鹽甲叉陣',nagaAbyssShrine:'潮衛共鳴',nagaMantaAerie:'翼潮雷擊'};
+  const NAMES={arrow:'穿雲齊射',iceward:'寒鋼凍陣',frost:'冰霜新星',cannon:'熔火重砲',storm:'雷霆連鎖',totem:'祖靈震地',crypt:'幽骨召喚',soul:'靈魂收割',barracks:'軍團齊射',grove:'根脈纏繞',graveyard:'亡魂祝福',ballista:'獅翼貫射',moonwell:'月潮折射',plague:'瘟疫蔓延',warDrum:'部族重拍',boulder:'裂地巨石',thunderTotem:'萬靈雷鏈',nagaTidegate:'潮門標記',nagaShellBastion:'鹽甲叉陣',nagaAbyssShrine:'潮衛共鳴',nagaMantaAerie:'翼潮連鎖'};
   class TowerSkillSystem{
     static rank(kills){return 1+THRESHOLDS.slice(1).filter(function(value){return kills>=value;}).length;}
     static progress(tower){const rank=this.rank(tower.kills);return{rank:rank,next:THRESHOLDS[rank]||null,kills:tower.kills};}
@@ -27,7 +27,7 @@
     }
     static fire(tower,targets,projectiles,summons){
       const cfg=tower.config(),rank=this.rank(tower.kills),empowered=tower.shotsFired%4===0;
-      let options={damage:cfg.damage,color:cfg.color,splash:cfg.splash,slow:cfg.slow,slowTime:cfg.slowTime,bonusVsSlowed:cfg.bonusVsSlowed,attackType:cfg.attackType,speed:tower.type==='cannon'?280:440};
+      let options={damage:cfg.damage,color:cfg.color,splash:cfg.splash,slow:cfg.slow,slowTime:cfg.slowTime,bonusVsSlowed:cfg.bonusVsSlowed,attackType:cfg.attackType,style:cfg.style,speed:tower.type==='cannon'?280:440};
       let count=cfg.shots||1;
       if(tower.type==='arrow'&&empowered)count=rank+1;
       if(tower.type==='barracks'&&empowered)count=Math.max(count,rank+2);
@@ -35,7 +35,7 @@
       if(tower.type==='frost'&&empowered)Object.assign(options,{splash:(40+rank*9)*(cfg.burstRadius||1),slow:Math.min(.45,cfg.slow||1),slowTime:(1.5+rank*.25)*(cfg.slowTime/ns.config.buildings.frost.slowTime)});
       if(tower.type==='iceward'&&empowered)Object.assign(options,{splash:42+rank*8,slow:.36,slowTime:(1.5+rank*.25)*(cfg.slowTime/ns.config.buildings.iceward.slowTime)});
       if(tower.type==='cannon'&&empowered)Object.assign(options,{damage:cfg.damage*(1.3+rank*.15),splash:cfg.splash+rank*8});
-      if((tower.type==='storm'&&tower.branch!=='surge')||cfg.chain)Object.assign(options,{chain:Math.max(cfg.chain||0,tower.type==='storm'?rank+1:0),chainRange:95,style:tower.type==='soul'?'spirit':'lightning'});
+      if((tower.type==='storm'&&tower.branch!=='surge')||cfg.chain)Object.assign(options,{chain:Math.max(cfg.chain||0,tower.type==='storm'?rank+1:0),chainRange:cfg.chainRange||95,style:cfg.style||(tower.type==='soul'?'spirit':'lightning')});
       if(tower.type==='totem'&&empowered)Object.assign(options,{damage:cfg.damage*(1.2+rank*.2),splash:55+rank*8,slow:.6,slowTime:1+rank*.2});
       if(ns.systems.BattleSynergySystem)ns.systems.BattleSynergySystem.prepare(tower,targets[0],cfg,options);
       if(tower.type==='cannon')options.style='cannon';

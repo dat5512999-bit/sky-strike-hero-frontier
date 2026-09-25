@@ -32,23 +32,21 @@ test('怪物攻擊影格依預備、打擊與收勢前進，不受先前走路�
   monster.update(.2,hero,null,0);assert.equal(monster.state,'idle');assert.equal(monster.frame,0);
 });
 
-test('怪物攻擊蓄力與收勢時站穩面向目標，結束後沿原路前進',()=>{
-  const ns=load(),hero={x:-20,y:0,active:true,takeDamage(){return 1;}},path=[{x:0,y:0},{x:1000,y:0}],monster=new ns.entities.Monster('brute',1,path),coarse=new ns.entities.Monster('brute',1,path),combat=new ns.systems.EnemyCombatSystem();
+test('普通怪物攻擊時維持前推，只有控制與首領技能會完全站穩',()=>{
+  const ns=load(),hero={x:-20,y:0,active:true,takeDamage(){return 1;}},path=[{x:0,y:0},{x:1000,y:0}],monster=new ns.entities.Monster('brute',1,path),boss=new ns.entities.Monster('boss',5,path),combat=new ns.systems.EnemyCombatSystem();
   monster.attackCooldown=0;combat.update(.01,[monster],hero,[]);
-  coarse.attackCooldown=0;combat.update(.01,[coarse],hero,[]);
   assert.equal(monster.facing,Math.PI);
   for(let i=0;i<4;i++){
     monster.update(.12,hero);
     combat.update(.12,[monster],hero,[]);
-    assert.equal(monster.routeDistance,0);
-    assert.equal(monster.facing,Math.PI);
   }
+  assert.ok(monster.routeDistance>0);
+  boss.abilityWindup=.3;boss.update(.12,hero);assert.equal(boss.routeDistance,0);
+  const before=monster.routeDistance;
   monster.update(.12,hero);
   combat.update(.12,[monster],hero,[]);
-  coarse.update(.6,hero);
-  assert.ok(monster.routeDistance>0);
+  assert.ok(monster.routeDistance>before);
   assert.equal(monster.facing,0);
-  assert.ok(Math.abs(monster.routeDistance-coarse.routeDistance)<.0001);
 });
 
 test('守軍在冷卻末段預備，發射當格顯示打擊姿勢，收勢不重複發射',()=>{

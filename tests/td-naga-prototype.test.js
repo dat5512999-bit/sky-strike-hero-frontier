@@ -50,6 +50,18 @@ test('四座娜迦建築可部署、具不同實際戰術並有兩條進階分�
   shrine.level=3;assert.equal(shrine.chooseBranch('covenant'),true);assert.equal(shrine.config().nagaHaste,.28);
 });
 
+test('娜迦的投射與連鎖使用潮汐視覺語彙，不回退成通用雷電',()=>{
+  const {ns}=load(),buildings=ns.config.buildings;
+  assert.equal(buildings.nagaTidegate.style,'tidebolt');
+  assert.equal(buildings.nagaShellBastion.style,'tide-spear');
+  assert.equal(buildings.nagaMantaAerie.style,'tide-chain');
+  const hero=new ns.entities.Hero(100,100),target=new ns.entities.Monster('grunt',1);hero.chooseClass('naga');target.x=135;target.y=100;
+  const shots=[];hero.update(.01,[target],shots);hero.update(.2,[target],shots);
+  assert.equal(shots[0].style,'tidebolt');
+  hero.equipment.spear=2;
+  assert.equal(ns.systems.EquipmentSystem.projectileOptions(hero,{style:'tidebolt'},()=>0).style,'tide-chain');
+});
+
 test('破潮者武器有初始版與三階連續鍛造，娜迦兵種皆有可用軍械',()=>{
   const {ns}=load(),hero={classType:'naga',equipment:{spear:0}},weapons=ns.systems.EquipmentSystem.WEAPONS.naga;
   assert.equal(weapons.length,4);assert.equal(ns.systems.EquipmentSystem.weapon(hero).id,'tidebreaker-spear-0');
