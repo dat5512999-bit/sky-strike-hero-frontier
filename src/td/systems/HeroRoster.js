@@ -11,6 +11,20 @@
   };
   class HeroRoster{
     static get(type){return CLASSES[type]||CLASSES.arcanist;}
+    // W is a ground aura, not twelve invisible projectiles.  Keeping its damage
+    // path self-contained prevents an unusual monster callback from breaking the
+    // requestAnimationFrame loop and freezing the entire battlefield.
+    static nagaPulse(hero,field,monsters,onKill,onHit){
+      const limit=Math.min(12,Math.max(1,Number(field.maxTargets)||12)),progress=monster=>typeof monster.progress==='function'&&Number.isFinite(monster.progress())?monster.progress():(Number(monster.routeDistance)||0),targets=[];
+      for(const monster of monsters||[]){if(monster&&monster.active&&ns.utils.distance(field,monster)<=72)targets.push(monster);}
+      targets.sort((a,b)=>progress(b)-progress(a));
+      const source={owner:hero,x:hero.x,y:hero.y,damage:16*field.power,color:'#6df5ef',attackType:'magic',slow:.2,slowTime:.72,style:'maelstrom',fieldPulse:true};
+      for(const monster of targets.slice(0,limit)){
+        if(!monster.active)continue;if(typeof monster.applySlow==='function')monster.applySlow(source.slow,source.slowTime);
+        const table=ns.config.damageMultipliers[source.attackType]||{},multiplier=table[monster.armorType]||1,before=typeof monster.effectiveHealth==='function'?monster.effectiveHealth():monster.health,damage=source.damage*multiplier,killed=typeof monster.takeDamage==='function'&&monster.takeDamage(damage,source),after=typeof monster.effectiveHealth==='function'?monster.effectiveHealth():monster.health;
+        if(onHit)onHit(monster,Math.max(0,before-after),multiplier>=1.25,source);if(killed&&onKill)onKill(monster,source);
+      }
+    }
     static cast(hero,slot,monsters,onKill,onHit){
       if(hero.classType==='frostland')return ns.systems.FrostlandHero.cast(hero,slot,monsters,onKill,onHit);
       const cfg=this.get(hero.classType),cooldown=slot===0?'novaCooldown':null;
@@ -68,20 +82,20 @@
       ns.systems.HeroSkillVFX.update(hero,dt);
       hero.skillTrails=(hero.skillTrails||[]).filter(trail=>{trail.time-=dt;return trail.time>0;});
       hero.fields.forEach(field=>{const elapsed=Math.min(Math.max(0,Number(dt)||0),field.time);field.time-=elapsed;field.tick+=elapsed;
-        const resolve=targets=>targets.forEach(monster=>{if(field.type==='hunter')monster.applySlow(.35,.7);else if(field.type==='naga'){monster.applySlow(.2,.72);new ns.entities.Projectile(hero,monster,{damage:16*field.power,color:'#6df5ef',attackType:'magic',slow:.2,slowTime:.72,style:'maelstrom'}).hit(monsters,onKill,onHit);}else new ns.entities.Projectile(hero,monster,{damage:9*field.power,color:'#c884df',attackType:'chaos'}).hit(monsters,onKill,onHit);});
+        const resolve=targets=>targets.forEach(monster=>{if(field.type==='hunter'){monster.applySlow(.35,.7);return;}new ns.entities.Projectile(hero,monster,{damage:9*field.power,color:'#c884df',attackType:'chaos'}).hit(monsters,onKill,onHit);});
         if(field.type==='naga'){
           if(field.tick<.5)return;
           // Do not catch up old pulses. A resumed tab receives at most one current
           // pulse, then discards its stale accumulator. Naga also prioritizes the
           // frontmost nearby enemies so a 50-wave swarm cannot fan out unbounded
           // projectile work in a single frame.
-          field.tick=0;field.pulses=(field.pulses||0)+1;resolve(monsters.filter(monster=>monster.active&&ns.utils.distance(field,monster)<=72).sort((a,b)=>(b.progress?.()||0)-(a.progress?.()||0)).slice(0,field.maxTargets||12));if(field.pulses>=field.maxPulses)field.time=0;return;
+          field.tick=0;field.pulses=(field.pulses||0)+1;try{this.nagaPulse(hero,field,monsters,onKill,onHit);}catch(error){field.time=0;hero.nagaFieldFault=String(error&&error.message||error||'unknown');}if(field.pulses>=field.maxPulses)field.time=0;return;
         }
         while(field.tick>=.5){field.tick-=.5;resolve(monsters.filter(monster=>monster.active&&ns.utils.distance(field,monster)<=72));}
       });
       hero.fields=hero.fields.filter(field=>field.time>0);
     }
-    static drawFields(ctx,hero){hero.fields.forEach(field=>ns.systems.HeroSkillVFX.drawField(ctx,field));}
+    static drawFields(ctx,hero){try{hero.fields.forEach(field=>ns.systems.HeroSkillVFX.drawField(ctx,field));}catch(error){hero.fields=hero.fields.filter(field=>field.type!=='naga');hero.nagaFieldFault=String(error&&error.message||error||'draw failure');}}
   }
   HeroRoster.CLASSES=CLASSES;ns.systems.HeroRoster=HeroRoster;
 })(globalThis.TowerFrontier);

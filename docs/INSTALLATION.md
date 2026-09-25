@@ -1,3 +1,5 @@
+> **v0.85.49：** 安裝包需同版包含 `HeroRoster.js`、`TDGame.js`、`td.html` 與 `sw.js`；重新開啟後確認頁面顯示 0.85.49，再於密集敵軍測試娜迦 W。見 [旋潮防護說明](NAGA_MAELSTROM_FAILSAFE_V08549.md)。
+
 > **v0.85.42：** 部署包必須包含 `ember-road-encounter-v1.png`、地圖／故事／壓力／怪物／HUD 腳本、同版 `td.html` 與 `sw.js`；執行地圖壓力、故事地圖、語法與完整測試。見 [2-2 安裝驗收](CHAPTER2_MAP_2_2_V08542.md)。
 
 > **v0.85.39：** 部署包必須包含 `MapPressureSystem.js`、同版 `td.html`、`sw.js` 與西境地圖；執行 `npm run check:map-pressure`、`npm run check`、`npm test`。見 [安裝驗收](MAP_PRESSURE_V08539.md)。

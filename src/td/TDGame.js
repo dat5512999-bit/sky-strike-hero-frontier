@@ -174,7 +174,7 @@
       if(this.synergy)this.synergy.update(dt);
       this.hero.update(dt,this.monsters,this.projectiles);
       if(this.hero.justRevived){this.feedback.revive(this.hero);this.flash('英雄已於營地復活 · 獲得 2 秒守護','#95ffe0');}
-      ns.systems.HeroRoster.updateFields(this.hero,dt,this.monsters,(monster,source)=>this.onKill(monster,source),(monster,damage,critical,source)=>this.onHit(monster,damage,critical,source));
+      ns.systems.HeroRoster.updateFields(this.hero,dt,this.monsters,(monster,source)=>this.onKill(monster,source),(monster,damage,critical,source)=>this.onHit(monster,damage,critical,source));if(this.hero.nagaFieldFault){this.flash('旋潮領域已安全中止，戰場仍可繼續','#ffb36b');this.hero.nagaFieldFault=null;}
       this.goblinNetwork ||= new ns.systems.GoblinNetworkSystem();
       this.goblinNetwork.update(dt,this.build.items,this.economy,this.waves.active);
       this.build.towers().forEach(function(item){item.update(dt,this.monsters,this.projectiles,item.kind==='unit'?null:this.summons);},this);

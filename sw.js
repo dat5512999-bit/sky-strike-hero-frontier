@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.48';
+const CACHE_NAME = 'sky-strike-v0.85.49';
 const ASSETS = [
  './assets/td/goblin-steam-scavenger-actions-v1.png', './assets/td/goblin-bomb-sapper-actions-v1.png', './assets/td/orc-war-banner-actions-v1.png', './assets/td/orc-skullcrusher-actions-v1.png', './assets/td/frostland-rime-stalker-actions-v1.png', './assets/td/frostland-rime-priest-actions-v1.png',
  './assets/td/naga/siltwater-demonlord-actions-v1.png', './assets/td/naga/silt-imp-actions-v1.png', './assets/td/naga/brine-shellbreaker-actions-v1.png', './assets/td/naga/tidebreaker-hero-actions-v1.png', './assets/td/naga/tidebreaker-selection-v1.png', './assets/td/naga/faction-selection-v1.png', './assets/td/naga/tidebreaker-skill-icons-v1.png', './assets/td/naga/tideguard-actions-v1.png', './assets/td/naga/deep-tide-wargod-actions-v1.png', './assets/td/naga/manta-wing-raider-actions-v1.png', './assets/td/naga/venom-marsh-stalker-actions-v1.png', './assets/td/naga/naga-buildings-v1.png',

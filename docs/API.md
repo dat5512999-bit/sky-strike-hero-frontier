@@ -1,3 +1,5 @@
+> **v0.85.49：** `HeroRoster.nagaPulse(hero, field, monsters, onKill, onHit)` 是娜迦旋潮的內部有界處理器：選取範圍內最多 12 名有效敵軍、直接套用傷害與緩速；`updateFields()` 與 `drawFields()` 各自隔離例外。無 HTTP API、資料庫或存檔 schema 變更。見 [旋潮防護說明](NAGA_MAELSTROM_FAILSAFE_V08549.md)。
+
 > **v0.85.42：** `maps.emberroad` 與 `chapter2-ember-road` 是故事專用資料；`MapPressureSystem` 產生暫態 `mapPressure.armorBonus`，`Monster.takeDamage()` 才讀取它。無 HTTP API、資料庫或存檔 schema 變更。見 [2-2 介面](CHAPTER2_MAP_2_2_V08542.md)。
 
 > **v0.85.39：** `MapPressureSystem` 只讀取 `ns.config.mapPressure`，將地圖路段換算為怪物暫態 `mapPressure`；`Monster.update()` 消費此狀態。無 HTTP API、資料庫或存檔 schema 變更。見 [地圖壓力](MAP_PRESSURE_V08539.md)。

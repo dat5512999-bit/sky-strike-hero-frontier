@@ -929,6 +929,13 @@ v0.85.0 冰原：npm run test:frostland 檢查狀態、兵塔、36 種 Hero×Fac
 
 > **v0.85.17：** 加入實際獵手卡、商城武器購買與遮罩上層可點擊驗收；用新手谷地座標模擬首波斥候擊倒。詳見 [教學操作修正](CHAPTER1_ONBOARDING_V08517.md)。
 > **v0.85.21：** 驗收獵手卡只有一個圖示、光圈先指向獵手、回收鎖住、第三波暫停有明確文案，並確認完成／跳過後下一波會倒數。詳見 [教學驗收](CHAPTER1_ONBOARDING_V08521.md)。
+# v0.85.49 旋潮領域防當機回歸
+
+- [x] 密集敵軍下，旋潮每脈衝最多直接處理 12 名目標，不建立逐目標投射物鏈。
+- [x] 敵軍傷害回呼拋出例外時，領域會中止且主更新迴圈可繼續。
+- [x] Canvas 旋潮繪製拋出例外時，僅移除領域且後續畫面可繼續。
+- [x] `node --test tests/td-naga-prototype.test.js tests/td-core.test.js` 與 `npm run check` 通過。
+
 # v0.85.48 戰場可靠性回歸
 
 - [x] 選取賽洛時右側肖像使用 `tidebreaker-selection-v1.png`，不是舊奧術英雄圖集。

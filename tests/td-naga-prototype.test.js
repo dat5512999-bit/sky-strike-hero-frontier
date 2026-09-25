@@ -131,6 +131,18 @@ test('旋潮領域在掉幀或回到前景時只結算一個目前脈衝，且�
   assert.equal(hero.fields.length,0,'領域在長時間背景後應正常到期');assert.ok(hits<=12,'娜迦旋潮單次最多處理 12 名附近敵軍');
 });
 
+test('旋潮遇到異常敵軍回呼時只安全中止領域，不得中斷整個戰場迴圈',()=>{
+  const {ns}=load(),hero=new ns.entities.Hero(180,220);hero.chooseClass('naga');
+  const broken={active:true,x:190,y:220,radius:16,routeDistance:0,health:100,maxHealth:100,armorType:'light',applySlow(){},takeDamage(){throw new Error('test pulse fault');}};
+  assert.equal(hero.castThunder([broken],()=>{},[],()=>{}),true);assert.doesNotThrow(()=>ns.systems.HeroRoster.updateFields(hero,.5,[broken],()=>{},()=>{}));assert.equal(hero.fields.length,0);assert.match(hero.nagaFieldFault,/test pulse fault/);
+});
+
+test('旋潮地面繪製異常時只移除領域，不得停止後續畫面更新',()=>{
+  const {ns}=load(),hero=new ns.entities.Hero(180,220);hero.chooseClass('naga');hero.fields.push({type:'naga',x:180,y:220,time:6});
+  const ctx={save(){},restore(){},translate(){},beginPath(){},arc(){throw new Error('test draw fault');}};
+  assert.doesNotThrow(()=>ns.systems.HeroRoster.drawFields(ctx,hero));assert.equal(hero.fields.length,0);assert.match(hero.nagaFieldFault,/test draw fault/);
+});
+
 test('英雄選取肖像直接使用英雄正式立繪，支援攻速會顯示來源而非只改隱藏數值',()=>{
   const game=fs.readFileSync('src/td/TDGame.js','utf8'),synergy=fs.readFileSync('src/td/systems/BattleSynergySystem.js','utf8');
   assert.match(game,/heroClass\.selectionArt/);assert.match(game,/supportHasteSource\?\.config/);assert.match(game,/潮衛共鳴：/);

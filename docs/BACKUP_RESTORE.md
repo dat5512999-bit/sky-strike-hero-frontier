@@ -1,3 +1,5 @@
+> **v0.85.49：** 無玩家資料遷移。若需回復，請將 `HeroRoster.js`、`TDGame.js`、入口 HTML 與 `sw.js` 回復至同一版本；不可只替換技能腳本，否則可能載到不相容快取。見 [旋潮防護說明](NAGA_MAELSTROM_FAILSAFE_V08549.md)。
+
 > **v0.85.42：** 無玩家資料遷移；回復時同步回復 2-2 地圖 PNG、地圖／任務／壓力／怪物／HUD、HTML、測試與 Service Worker，切勿只回復單一腳本。見 [回復說明](CHAPTER2_MAP_2_2_V08542.md)。
 
 > **v0.85.39：** 無玩家資料遷移；回復時同步回復荒風系統、地圖資料、怪物移動、HUD、HTML 與 Service Worker，切勿只回復單一腳本。見 [回復說明](MAP_PRESSURE_V08539.md)。

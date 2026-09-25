@@ -1,6 +1,6 @@
 (function(ns){
   'use strict';
-  const KEY='heroFrontierProfilesV1', VERSION='0.85.48';
+  const KEY='heroFrontierProfilesV1', VERSION='0.85.49';
   const clone=value=>JSON.parse(JSON.stringify(value));
   function profile(id,kind,round){return {id,kind,round,startedAt:new Date().toISOString(),startedVersion:VERSION,completed:[],encountered:[],discovered:[],cinematics:[],unlocks:{heroes:['hunter','naga'],factions:['hunter','naga'],maps:['beginner','westernsignal','emberroad'],difficulties:['story','standard']},wallet:{gold:0,diamonds:0},data:{},lastRun:null};}
   class ProfileStore{

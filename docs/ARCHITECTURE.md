@@ -1,3 +1,5 @@
+> **v0.85.49：** `TDGame.update()` → `HeroRoster.updateFields()` → `nagaPulse()` 直接處理有限目標；脈衝或 Canvas 發生例外時轉成英雄暫態故障訊號，由 `TDGame` 顯示提示，主迴圈不因單一技能停止。見 [旋潮防護架構](NAGA_MAELSTROM_FAILSAFE_V08549.md)。
+
 > **v0.85.42：** `emberroad` 宣告故事地圖與煙障 → `StoryCatalog` 排入 2-1 後 → `MapPressureSystem` 計算路段暫態護甲 → `Monster.takeDamage()` 消費 → HUD／Canvas 呈現；建造與存檔不讀此狀態。見 [2-2 架構](CHAPTER2_MAP_2_2_V08542.md)。
 
 > **v0.85.39：** `maps.js` 宣告壓力 → `MapPressureSystem` 標記怪物路段 → `Monster.update()` 計算移速 → `WaveHUD`／Canvas 顯示；建造與路徑系統不讀壓力。見 [架構與驗收](MAP_PRESSURE_V08539.md)。
