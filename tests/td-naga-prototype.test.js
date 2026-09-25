@@ -46,7 +46,7 @@ test('四座娜迦建築可部署、具不同實際戰術並有兩條進階分�
   for(const type of faction.available('building')){const tower=new ns.entities.Building(type,100,100);assert.ok(tower.config().role);assert.equal(ns.systems.TowerEvolutionSystem.branches(type).length,2,type);}
   const shrine=new ns.entities.Building('nagaAbyssShrine',100,100),guard=new ns.entities.CombatUnit('nagaTideguard',105,100),hero=new ns.entities.Hero(106,100);hero.chooseClass('naga');
   const game={hero,build:{items:[shrine,guard]},monsters:[],summons:[],projectiles:[],feedback:null,report:null};const synergy=new ns.systems.BattleSynergySystem(game);synergy.update(.1);
-  assert.equal(guard.supportHaste,.18);assert.equal(hero.supportHaste,.18);
+  assert.equal(guard.supportHaste,.18);assert.equal(hero.supportHaste,.18);assert.equal(guard.supportHasteSource,shrine);assert.equal(hero.supportHasteSource,shrine);
   shrine.level=3;assert.equal(shrine.chooseBranch('covenant'),true);assert.equal(shrine.config().nagaHaste,.28);
 });
 
@@ -128,7 +128,14 @@ test('旋潮領域在掉幀或回到前景時只結算一個目前脈衝，且�
   const monsters=Array.from({length:54},(_,index)=>{const monster=new ns.entities.Monster('grunt',1,[{x:0,y:220},{x:2000,y:220}]);monster.x=190+(index%9)*4;monster.y=205+Math.floor(index/9)*5;monster.health=monster.maxHealth=5000;return monster;});
   assert.equal(hero.castThunder(monsters,()=>{},[],()=>{}),true);let hits=0;
   assert.doesNotThrow(()=>ns.systems.HeroRoster.updateFields(hero,20,monsters,()=>{},()=>{hits++;}));
-  assert.equal(hero.fields.length,0,'領域在長時間背景後應正常到期');assert.ok(hits<=18,'娜迦旋潮單次最多處理 18 名附近敵軍');
+  assert.equal(hero.fields.length,0,'領域在長時間背景後應正常到期');assert.ok(hits<=12,'娜迦旋潮單次最多處理 12 名附近敵軍');
+});
+
+test('英雄選取肖像直接使用英雄正式立繪，支援攻速會顯示來源而非只改隱藏數值',()=>{
+  const game=fs.readFileSync('src/td/TDGame.js','utf8'),synergy=fs.readFileSync('src/td/systems/BattleSynergySystem.js','utf8');
+  assert.match(game,/heroClass\.selectionArt/);assert.match(game,/supportHasteSource\?\.config/);assert.match(game,/潮衛共鳴：/);
+  const build=fs.readFileSync('src/td/systems/BuildSystem.js','utf8');
+  assert.match(synergy,/applyHaste\(target,rate,source\)/);assert.match(synergy,/game\.hero\.supportHasteSource=null/);assert.match(build,/towerSupportHasteSource/);
 });
 
 test('賽洛英雄渲染有獨立接地陰影與尾部水痕，不再走帶軍階標籤的通用士兵繪製器',()=>{

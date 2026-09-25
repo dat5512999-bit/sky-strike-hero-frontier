@@ -495,3 +495,6 @@ v0.85.0：同步部署 td.html、td-expedition.css、codex.css、src/td、Frostl
 
 > **v0.85.17：** 同步發布首波內容、教學腳本、CSS 與 `sw.js`，快取名稱為 `sky-strike-v0.85.17`。詳見 [教學操作修正](CHAPTER1_ONBOARDING_V08517.md)。
 > **v0.85.21：** 同步部署 `TutorialSystem.js`、`TutorialIntegration.js`、`ArmoryUI.js`、`td-tutorial.css`、入口版本檔及 `sw.js`；快取名 `sky-strike-v0.85.21`。詳見 [部署清單](CHAPTER1_ONBOARDING_V08521.md)。
+# v0.85.48 部署補充
+
+部署必須同時帶上 `src/td/TDGame.js`、`src/td/systems/BattleSynergySystem.js`、`src/td/systems/HeroRoster.js`、`src/td/entities/Monster.js`、`td.html` 與 `sw.js`；不可使用新程式搭配舊 Service Worker。發布後確認快取鍵為 `sky-strike-v0.85.48`，並依 `NAGA_RUNTIME_RELIABILITY_V08548.md` 驗收。

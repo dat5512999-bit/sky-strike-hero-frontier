@@ -486,3 +486,6 @@ v0.80.0 的 `wild` 原生名冊由 `FactionSystem` 管理。`orc-contract` 必�
 
 v0.85.0：冰原僅為 TESTABLE，管理者可玩，新測試輪次故事鎖定。不得自行指定章節或改寫正史。數值在 config.frostRules；未來獨立授予英雄／軍團解鎖。維護與驗收見 [冰原 V1](FROSTLAND_FACTION_V1.md)。
 > **v0.85.21（2026-09-24）：** 發版同步教學腳本、樣式、軍械 UI、入口版本檔和 `sky-strike-v0.85.21`；沒有新權限、後端或存檔遷移。詳見 [教學流程修正](CHAPTER1_ONBOARDING_V08521.md)。
+# v0.85.48 發版規範
+
+所有寫入 `supportHaste` 的光環都必須透過 `BattleSynergySystem.applyHaste(target, rate, source)`（或等效同時記錄來源的流程），讓 UI 顯示實際來源與比例；不可只改戰鬥間隔而沒有玩家可驗證的回饋。新英雄右側肖像必須由 `HeroRoster.CLASSES[type].selectionArt` 驅動，不能依賴舊英雄 CSS 圖集。

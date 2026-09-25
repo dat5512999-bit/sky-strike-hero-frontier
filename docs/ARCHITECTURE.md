@@ -827,3 +827,6 @@ v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 M
 
 > **v0.85.17：** 教學以 `queueDeploy`、商城開關與購買事件串接實際操作；`TutorialSystem` 只管理流程、補給與聚焦層級，未改寫戰鬥或商城領域規則。詳見 [教學操作修正](CHAPTER1_ONBOARDING_V08517.md)。
 > **v0.85.21：** `TutorialSystem` 以畫面光圈呈現戰場單位，再由既有選取事件前進至升級；它擁有教學彈窗的收尾責任，`TutorialIntegration` 鎖住回收操作。詳見 [流程圖](CHAPTER1_ONBOARDING_V08521.md)。
+# v0.85.48 資料流補充
+
+`config.buildings.*Haste → BattleSynergySystem.applyHaste → target.supportHaste + supportHasteSource → Hero/CombatUnit.combatConfig 與 TDGame 選取卡`。數值由戰鬥模型使用，來源只供 UI 可讀性；同類支援仍採最高值，不寫入存檔。

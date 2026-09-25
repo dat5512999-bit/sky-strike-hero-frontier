@@ -623,3 +623,6 @@ v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare�
 
 > **v0.85.17：** 無新增 HTTP API、資料庫或 schema；新增的部署、商城開關與購買引導皆是既有前端方法的事件包裝。詳見 [教學操作修正](CHAPTER1_ONBOARDING_V08517.md)。
 > **v0.85.21：** `TutorialSystem.onUnitSelected()` 管理先選士兵再升級；`dismissTutorialModal()` 安全收尾教學開啟的裝備／掉落面板。無 HTTP API 或存檔 schema 變更。詳見 [教學流程修正](CHAPTER1_ONBOARDING_V08521.md)。
+# v0.85.48 支援光環介面
+
+`BattleSynergySystem.applyHaste(target, rate, source)` 以最高值規則更新 `target.supportHaste`，並同步寫入 `target.supportHasteSource`。`TDGame` 讀取後在英雄／守軍選取卡顯示來源與百分比。沒有新增 HTTP API、帳號欄位或資料庫 migration。

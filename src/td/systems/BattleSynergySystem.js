@@ -5,6 +5,10 @@
   class BattleSynergySystem{
     constructor(game){this.game=game;if(game.hero)game.hero.synergy=this;this.reset();}
     reset(){this.souls=0;this.clock=0;this.winter=null;this.frostChainBudget=0;this.frostVisuals=[];this.auraTick=-1;this.fields=[];this.visuals=[];}
+    // Keep the strongest haste and the object that granted it together.  Combat
+    // consumes supportHaste while the selection panel consumes supportHasteSource;
+    // separating them was the reason real buffs looked like they did nothing.
+    applyHaste(target,rate,source){if(rate>=(target.supportHaste||0)){target.supportHaste=rate;target.supportHasteSource=source;}}
     flagRate(target){
       if(!target||target.active===false||target.retired||(target!==this.game.hero&&target.kind!=='unit'))return 0;
       let rate=0,best=null;
@@ -70,7 +74,7 @@
       if(ns.systems.FrostStatusSystem){this.frostChainBudget=ns.config.frostRules.chainBudget;ns.systems.FrostStatusSystem.updateBattle(this,dt);}
       ns.systems.FrostlandVFX?.update(this,dt);
       this.clock+=dt;const game=this.game;if(game.feedback)game.feedback.mobile=typeof document!=='undefined'&&document.body.dataset.layout==='mobile';const items=game.build.items.filter(t=>!t.retired&&t.active!==false);
-      game.hero.synergy=this;game.hero.supportHaste=0;items.forEach(t=>{t.synergy=this;t.supportDamage=0;t.supportDamageSource=null;t.supportHaste=t.kind==='unit'?(t.towerSupportHaste||0):0;if(t.excursion)t.excursion.time=Math.max(0,t.excursion.time-dt);});
+      game.hero.synergy=this;game.hero.supportHaste=0;game.hero.supportHasteSource=null;items.forEach(t=>{t.synergy=this;t.supportDamage=0;t.supportDamageSource=null;t.supportHaste=t.kind==='unit'?(t.towerSupportHaste||0):0;t.supportHasteSource=t.kind==='unit'?(t.towerSupportHasteSource||null):null;if(t.excursion)t.excursion.time=Math.max(0,t.excursion.time-dt);});
       for(const monster of game.monsters){
         if(ns.systems.FrostStatusSystem)ns.systems.FrostStatusSystem.update(monster,dt);
         monster.arcaneMark=Math.max(0,(monster.arcaneMark||0)-dt);monster.shockTime=Math.max(0,(monster.shockTime||0)-dt);monster.rootTime=Math.max(0,(monster.rootTime||0)-dt);
@@ -81,12 +85,12 @@
       items.forEach(source=>{
         const cfg=source.config(),near=items.filter(t=>t!==source&&ns.utils.distance(source,t)<=cfg.range);
         // Battle flags are queried live by both combat and presentation.
-        if(cfg.commandHaste)near.filter(t=>t.kind==='unit').forEach(t=>{t.supportHaste=Math.max(t.supportHaste||0,cfg.commandHaste);if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
+        if(cfg.commandHaste)near.filter(t=>t.kind==='unit').forEach(t=>{this.applyHaste(t,cfg.commandHaste,source);if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
         if(cfg.forgeAura)near.filter(t=>t.kind==='building').forEach(t=>{if(cfg.forgeAura>=t.supportDamage){t.supportDamage=cfg.forgeAura;t.supportDamageSource=source;}if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
         if(cfg.natureAura)near.filter(t=>['dryad','dragon','beastmaster','grove'].includes(t.type)).forEach(t=>{if(cfg.natureAura>=t.supportDamage){t.supportDamage=cfg.natureAura;t.supportDamageSource=source;}if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
-        if(cfg.timeAura&&this.clock%8<3)near.forEach(t=>{t.supportHaste=Math.max(t.supportHaste||0,cfg.timeAura);if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
+        if(cfg.timeAura&&this.clock%8<3)near.forEach(t=>{this.applyHaste(t,cfg.timeAura,source);if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
         if(cfg.ancestralAura)near.filter(t=>t.kind==='unit'&&['orc','centaur','boarRider','minotaur','shaman'].includes(t.type)).forEach(t=>{if(cfg.ancestralAura>=t.supportDamage){t.supportDamage=cfg.ancestralAura;t.supportDamageSource=source;}if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
-        if(cfg.nagaHaste)near.concat(game.hero&&game.hero.classType==='naga'&&ns.utils.distance(source,game.hero)<=cfg.range?[game.hero]:[]).filter(t=>(t===game.hero&&t.classType==='naga')||(t.kind==='unit'&&ns.config.units[t.type]?.naga)).forEach(t=>{t.supportHaste=Math.max(t.supportHaste||0,cfg.nagaHaste);if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
+        if(cfg.nagaHaste)near.concat(game.hero&&game.hero.classType==='naga'&&ns.utils.distance(source,game.hero)<=cfg.range?[game.hero]:[]).filter(t=>(t===game.hero&&t.classType==='naga')||(t.kind==='unit'&&ns.config.units[t.type]?.naga)).forEach(t=>{this.applyHaste(t,cfg.nagaHaste,source);if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
         if(cfg.drumPulse){source.drumCooldown=(source.drumCooldown===undefined?1:source.drumCooldown)-dt;if(source.drumCooldown<=0){near.filter(t=>t.kind==='unit'&&['orc','centaur','boarRider','minotaur','shaman'].includes(t.type)).forEach(t=>{t.tribalFrenzy=Math.max(t.tribalFrenzy||0,cfg.drumDuration);t.commandPulse=cfg.drumDuration;t.drumEmpowered=true;});source.drumCooldown=cfg.drumPulse;source.skillPulse=1;this.pulse(source.x,source.y,'#ff6a42',cfg.range);}}
         if(cfg.rootPulse){source.rootCooldown=(source.rootCooldown||0)-dt;if(source.rootCooldown<=0){const targets=game.monsters.filter(m=>m.active&&ns.utils.distance(source,m)<=cfg.range);if(targets.length){const duration=1.1+source.level*.1;targets.forEach(m=>{m.rootTime=Math.max(m.rootTime||0,duration);});if(game.report)game.report.recordSupport(source,'controlSeconds',duration*targets.length);this.pulse(source.x,source.y,'#91e77b',cfg.range);source.rootCooldown=6;}}}
         if(source.type==='beastmaster'&&!game.summons.some(s=>s.active&&s.owner===source&&s.form==='bear'))game.summons.push(new ns.entities.Summon(source,{form:'bear',tags:['summon','nature'],duration:22,level:source.level,damage:20*(1+.3*(source.level-1)),range:48,speed:115,leash:cfg.range+100,offsetX:-62,offsetY:46,color:cfg.color}));

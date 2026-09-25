@@ -45,7 +45,10 @@
           // A field is allowed one damage resolution per rendered update.  This
           // prevents a background-tab frame from replaying many half-second ticks
           // against every enemy when the browser resumes.
-          hero.fields.push({x:hero.x,y:hero.y,time:6,tick:0,type:'naga',power:power,maxTargets:18});
+          // A second field is never useful, but could be queued by a rapid tap
+          // before the button repaint.  Reject it so field work remains bounded.
+          if(hero.fields.some(field=>field.type==='naga'&&field.time>0))return false;
+          hero.fields.push({x:hero.x,y:hero.y,time:6,tick:0,type:'naga',power:power,maxTargets:12,pulses:0,maxPulses:12});
           ns.systems.HeroSkillVFX.emit(hero,'naga-maelstrom',{radius:76,duration:.82});
           hero.skillCooldowns.thunder=12*(1-hero.equipment.rune*.1);hero.beginCast();return true;
         }
@@ -72,7 +75,7 @@
           // pulse, then discards its stale accumulator. Naga also prioritizes the
           // frontmost nearby enemies so a 50-wave swarm cannot fan out unbounded
           // projectile work in a single frame.
-          field.tick=0;resolve(monsters.filter(monster=>monster.active&&ns.utils.distance(field,monster)<=72).sort((a,b)=>(b.progress?.()||0)-(a.progress?.()||0)).slice(0,field.maxTargets||18));return;
+          field.tick=0;field.pulses=(field.pulses||0)+1;resolve(monsters.filter(monster=>monster.active&&ns.utils.distance(field,monster)<=72).sort((a,b)=>(b.progress?.()||0)-(a.progress?.()||0)).slice(0,field.maxTargets||12));if(field.pulses>=field.maxPulses)field.time=0;return;
         }
         while(field.tick>=.5){field.tick-=.5;resolve(monsters.filter(monster=>monster.active&&ns.utils.distance(field,monster)<=72));}
       });
