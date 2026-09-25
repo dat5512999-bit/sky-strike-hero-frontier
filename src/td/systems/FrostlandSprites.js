@@ -5,7 +5,7 @@
   function atlas(system,key){
     system.frostAtlases||={};if(system.frostAtlases[key])return system.frostAtlases[key];
     const img=system.frostAtlases[key]=system.load(ns.systems.FrostlandAtlas[key].path);
-    img.addEventListener?.('load',()=>{for(const id of Object.keys(heights))system.previewCache?.delete('unit:'+id);if(typeof document!=='undefined')document.querySelectorAll('[data-roster-unit^="frost"],[data-build-type^="frost"]').forEach(card=>delete card.dataset.previewReady);system.game?.refreshRosterPreviews?.();},{once:true});return img;
+    img.addEventListener?.('load',()=>{for(const id of Object.keys(heights))system.previewCache?.delete('unit:'+id);if(typeof document!=='undefined')document.querySelectorAll('[data-roster-unit^="frost"],[data-build-type^="frost"],[data-mercenary^="frost"]').forEach(card=>delete card.dataset.previewReady);system.game?.refreshRosterPreviews?.();system.game?.updateUi?.();},{once:true});return img;
   }
   function frame(ctx,image,meta,index,height){
     const f=meta.frames[index],r=f.rect,scale=height/meta.maxHeight;

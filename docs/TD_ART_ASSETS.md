@@ -1,4 +1,12 @@
+> **v0.85.25：** 步兵與巨獸新增上下行走／攻擊 4×4 透明圖集，逐格留邊與腳底錨點規格見 [怪物方向動作](COMBAT_MOTION_V08525.md)。
+
+> v0.85.20 怪物攻擊站姿與路徑銜接：參見 [完整操作、架構、部署、回復與驗收](COMBAT_MOTION_V08520.md)。
+
 # 塔防正式美術資產與生成提示
+
+## v0.85.13 軍團與地精動作圖
+
+日蝕王庭七兵使用 `combat-art/eclipse-units-a-actions-v2.png`（4×4，四種士兵）及 `combat-art/eclipse-units-b-actions-v2.png`（3×4，三種士兵）；每列依序為待機、步伐 A、步伐 B、攻擊。地精英雄與五兵使用 `goblin/hero-actions-v2.png`（4×4）及 `goblin/soldier-actions-v2.png`（4×5）。每格統一 320×320、透明 RGBA 並留邊。既有 v1 圖保存以便回復；製作、接入與檢查方式見 [v0.85.13 交付](FACTION_MOTION_V08513.md)。
 
 ## 0.71.0 暮秋遺跡與整合發布
 

@@ -9,6 +9,11 @@
     static update(synergy,dt){synergy.frostVisuals=(synergy.frostVisuals||[]).filter(v=>{v.age+=dt;return v.age<v.duration;});}
     static shard(ctx,x,y,size,angle,color){ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(0,-size);ctx.lineTo(size*.3,0);ctx.lineTo(0,size*.45);ctx.lineTo(-size*.3,0);ctx.closePath();ctx.fill();ctx.restore();}
     static draw(ctx,synergy){
+      if(synergy.game.feedback?.reducedFx){
+        ctx.save();ctx.lineWidth=2;ctx.strokeStyle='#d7f9ff';ctx.fillStyle='#fff';ctx.font='bold 12px sans-serif';ctx.textAlign='center';
+        for(const v of synergy.frostVisuals||[]){if(v.type==='attack')continue;ctx.globalAlpha=Math.max(0,1-v.age/v.duration);ctx.beginPath();ctx.ellipse(v.x,v.y,Math.min(36,v.radius||24),11,0,0,Math.PI*2);ctx.stroke();if(v.type==='freeze')ctx.fillText('凍',v.x,v.y-16);}
+        ctx.restore();return;
+      }
       const mobile=synergy.game.feedback?.mobile;ctx.save();
       for(const v of synergy.frostVisuals||[]){const t=v.age/v.duration,fade=1-t;ctx.globalAlpha=fade;ctx.strokeStyle=v.color;ctx.fillStyle=v.color;ctx.lineWidth=2.5*fade;
         if(ns.systems.FrostlandSpellArt?.draw(ctx,v,synergy))continue;

@@ -18,6 +18,24 @@ test('Codex covers real catalogs without altering or copying balance sources', (
   assert.ok(!entries.some(e => e.id === 'unit:halberdier'));
   for (const entry of entries) for (const id of entry.relatedEntries) assert.ok(entries.some(e => e.id === id), id);
 });
+test('every playable faction has a sharp dedicated vertical Codex portrait', () => {
+  const ns = load(), catalog = new ns.codex.CodexCatalog();
+  for (const id of ['hunter', 'arcanist', 'rogue', 'wild', 'goblin', 'frostland']) {
+    const asset = 'assets/td/codex/faction-' + id + '-v2.jpg';
+    const entry = catalog.all().find(row => row.id === 'faction:' + id);
+    const bytes = fs.readFileSync(path.join(root, asset));
+    assert.equal(entry.art, asset, id + ' detail art');
+    assert.equal(ns.codex.thumbnails['faction:' + id], asset, id + ' card thumbnail');
+    assert.deepEqual([...bytes.subarray(0, 3)], [0xff, 0xd8, 0xff], id + ' uses JPEG');
+    assert.ok(bytes.length < 150000, id + ' remains suitable for a Codex card');
+  }
+});
+test('visible Codex text translates internal faction status codes without changing the source data', () => {
+  const source = fs.readFileSync(path.join(root, 'src/td/codex/CodexView.js'), 'utf8');
+  assert.match(source, /STORY_LOCKED', '劇情尚未開放'/);
+  assert.match(source, /CONCEPT', '概念設定'/);
+  assert.match(source, /function facts\(rows\).*playerText\(value\)/);
+});
 test('new gameplay entries appear without a UI or catalog switch', () => {
   const ns = load(); ns.systems.HeroRoster.CLASSES.test = { name: 'New Hero', skills: [], hints: [] };
   assert.ok(new ns.codex.CodexCatalog().all().some(e => e.id === 'hero:test'));

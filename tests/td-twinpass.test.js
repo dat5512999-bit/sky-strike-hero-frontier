@@ -40,9 +40,9 @@ test('不同分支獨立前進、匯流後保持間距，兩路最終都能抵�
 test('最接近城門索敵使用剩餘距離，不因上下路長短與節點數而顛倒',()=>{
  const ns=load(),a=new ns.entities.Monster('grunt',1,ns.config.routes[0]),b=new ns.entities.Monster('grunt',1,ns.config.routes[1]);a.setRouteDistance(a.routeLength-300);b.setRouteDistance(b.routeLength-200);assert.equal(ns.systems.TargetSelector.select({x:0,y:0},[a,b],'front'),b);
 });
-test('雙路 30 波生成、行進、清場與獎勵流程可完成，不增減原波次敵量',()=>{
+test('雙路 50 波生成、行進、清場與獎勵流程可完成，不增減各波敵量',()=>{
  const ns=load(),w=new ns.systems.WaveSystem(),g=game(ns,[]);let cleared=0,spawned=0;
- for(let wave=1;wave<=30;wave++){
+ for(let wave=1;wave<=50;wave++){
   assert.equal(w.start(),true);const expected=w.queue.length;
   for(let tick=0;tick<5000&&w.phase!=='reward';tick++){
    const before=g.monsters.length;w.update(.1,g.monsters);spawned+=g.monsters.length-before;
@@ -50,5 +50,5 @@ test('雙路 30 波生成、行進、清場與獎勵流程可完成，不增減�
   }
   assert.equal(w.phase,'reward','wave '+wave);assert.equal(spawned,expected);assert.equal(g.monsters.length,0);assert.equal(w.acknowledgeReward(),true);spawned=0;cleared++;
  }
- assert.equal(cleared,30);assert.equal(w.complete,true);
+ assert.equal(cleared,50);assert.equal(w.complete,true);
 });

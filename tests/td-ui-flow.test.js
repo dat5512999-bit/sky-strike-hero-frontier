@@ -42,8 +42,8 @@ test('開局選擇在單一桌面視窗並排英雄與軍團，手機共用相�
   assert.match(css,/data-game-screen="opening"[^}]*\.td-profession-screen\{overflow:hidden/);
   assert.match(css,/\.opening-choice-grid\{display:grid;grid-template-columns:minmax\(0,2fr\)/);
   assert.match(css,/data-layout="mobile"[^}]*data-game-screen="opening"[^}]*\.opening-choice-grid/);
-  assert.equal((html.match(/data-profession=/g)||[]).length,6);
-  assert.equal((html.match(/data-faction=/g)||[]).length,6);
+  assert.equal((html.match(/data-profession=/g)||[]).length,7);
+  assert.equal((html.match(/data-faction=/g)||[]).length,7);
 });
 
 test('重新挑戰沿用上一局設定，並確實呼叫既有 reset',()=>{
@@ -141,7 +141,7 @@ test('電腦單擊直接建造，手機先預覽再按確認部署',()=>{
 test('所有建造卡只顯示定位與價格，完整能力留在第二層',()=>{
   const html=fs.readFileSync(path.join(root,'td.html'),'utf8');
   const cards=[...html.matchAll(/data-build-kind="(unit|building)" data-build-type="([^"]+)"[^>]*><b>[^<]+<\/b><span>[^<]+<\/span><small><\/small><\/button>/g)];
-  assert.equal(cards.length,62);
+  assert.equal(cards.length,71);
   const game=Object.create(prototype());
   for(const [,kind,type] of cards){const detail=game.buildDetailDescription(kind,type);assert.ok(!detail.includes('基礎作戰'),type+' 缺少定位');assert.match(detail,/攻擊 \d+ · 射程 \d+/);assert.match(detail,/G／\d+木/);}
   const ui={buildDetail:{hidden:true},buildDetailName:{textContent:''},buildDetailText:{textContent:''}};

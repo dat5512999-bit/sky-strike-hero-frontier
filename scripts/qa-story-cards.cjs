@@ -33,10 +33,27 @@ const url = process.env.STORY_CARDS_TEST_URL || 'http://127.0.0.1:4175/td.html';
       await frame.locator('[data-action="story-card-next"]').click();
       assert.equal(await frame.evaluate(() => document.body.dataset.appPage), 'story');
       assert.equal(await frame.evaluate(() => frontierApp.store.export()), before);
+      if (view.name === 'desktop') {
+        const laterMissions = await frame.evaluate(() => frontierApp.constructor && towerFrontierGame.systems.StoryCatalog.missions.slice(1).map(mission => ({ id: mission.id, name: mission.name })));
+        for (const mission of laterMissions) {
+          await frame.evaluate(id => {
+            const selected = towerFrontierGame.systems.StoryCatalog.getMission(id);
+            frontierApp.startStoryCards(selected, true);
+          }, mission.id);
+          assert.equal(await frame.locator('.story-card').getAttribute('aria-label'), mission.name + '戰前劇情');
+          for (let index = 0; index < 3; index++) {
+            await frame.locator('.story-card-stage img').evaluate(image => image.decode());
+            if (index < 2) await frame.locator('[data-action="story-card-next"]').click();
+          }
+          await frame.locator('[data-action="story-card-next"]').click();
+          assert.equal(await frame.evaluate(() => document.body.dataset.appPage), 'story');
+        }
+        assert.equal(await frame.evaluate(() => frontierApp.store.export()), before);
+      }
       assert.deepEqual(errors, []);
       await page.close();
     }
-    console.log('Story cards: desktop, landscape, portrait, image decode, navigation, and read-only replay passed.');
+    console.log('Story cards: all four Chapter I card sets, desktop, landscape, portrait, image decode, navigation, and read-only replay passed.');
   } finally {
     await browser.close();
   }

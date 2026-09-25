@@ -19,6 +19,12 @@
   const WILD_COMPATIBILITY={'lion-bow':['centaur'],'lion-shield':['boarRider','minotaur'],'war-drum':['centaur','boarRider','minotaur','shaman'],'moon-staff':['shaman'],'vine-crown':['centaur','shaman']};
   Object.entries(WILD_COMPATIBILITY).forEach(([id,types])=>{ITEMS[id].types=Array.from(new Set(ITEMS[id].types.concat(types)));});
   ITEMS['war-drum'].heroes.push('chief');
+  ITEMS['war-drum'].heroes.push('naga');
+  ITEMS['lion-shield'].types.push('nagaTideguard','nagaShellbreaker','nagaDeepWargod');
+  ITEMS['war-drum'].types.push('nagaTideguard','nagaShellbreaker','nagaDeepWargod');
+  ITEMS['lion-bow'].types.push('nagaMantaRaider','nagaVenomStalker');
+  ITEMS['moon-staff'].types.push('nagaVenomStalker');
+  ITEMS['vine-crown'].types.push('nagaMantaRaider','nagaVenomStalker');
   ITEMS['war-drum'].types.push('goblinMech');
   ITEMS['vine-crown'].heroes=['goblin'];
   ITEMS['lion-bow'].types.push('goblinEngineer','goblinGunner','goblinRiveter');

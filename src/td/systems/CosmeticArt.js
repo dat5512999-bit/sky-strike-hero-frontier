@@ -9,10 +9,10 @@
   const kingdomUnits=new Set(ns.systems.FactionSystem.FACTIONS.hunter.units);
   const kingdomBuildings=new Set(ns.systems.FactionSystem.FACTIONS.hunter.buildings);
   const eclipseUnits={
-    hunter:['eclipse-units-a-v1.png',4,0,78],shield:['eclipse-units-a-v1.png',4,1,83],
-    musketeer:['eclipse-units-a-v1.png',4,2,80],knight:['eclipse-units-a-v1.png',4,3,88],
-    kingdomMage:['eclipse-units-b-v1.png',3,0,84],alchemist:['eclipse-units-b-v1.png',3,1,80],
-    royalCommander:['eclipse-units-b-v1.png',3,2,101]
+    hunter:['eclipse-units-a-actions-v2.png',4,0,78],shield:['eclipse-units-a-actions-v2.png',4,1,83],
+    musketeer:['eclipse-units-a-actions-v2.png',4,2,80],knight:['eclipse-units-a-actions-v2.png',4,3,88],
+    kingdomMage:['eclipse-units-b-actions-v2.png',3,0,84],alchemist:['eclipse-units-b-actions-v2.png',3,1,80],
+    royalCommander:['eclipse-units-b-actions-v2.png',3,2,101]
   };
   const eclipseBuildings={arrow:0,iceward:3,cannon:1,barracks:2,ballista:0,supply:3,battleflag:3,armoryForge:2};
   const combatArtPath=name=>'assets/td/combat-art/'+name;
@@ -68,12 +68,12 @@
     if(this.cosmeticFaction==='eclipse-court'&&kingdomUnits.has(unit.type)){
       const [name,columns,index,height]=eclipseUnits[unit.type]||[],image=name&&combatImage(this,name);
       if(image?.ready){
-        const cell=image.width/columns,width=height*cell/image.height;
-        const clock=unit.frameClock||0,walking=unit.state==='walk',attacking=unit.state==='attack';
-        const lift=walking?Math.abs(Math.sin(clock*8))*3:0,lunge=attacking?Math.sin(Math.min(1,Math.max(0,unit.attackTimer||0)*4)*Math.PI)*4:0;
-        ctx.save();ctx.translate(unit.x,unit.y+12-lift);if(Math.cos(unit.facing||0)<0)ctx.scale(-1,1);
+        const cellW=image.width/columns,cellH=image.height/4,width=height*cellW/cellH;
+        const clock=unit.frameClock||0,walking=unit.state==='walk',attacking=unit.state==='attack'||unit.attackTimer>0;
+        const row=attacking?3:walking?1+Math.floor(clock)%2:Math.floor(clock/2)%2;
+        ctx.save();ctx.translate(unit.x,unit.y+12);if(Math.cos(unit.facing||0)<0)ctx.scale(-1,1);
         if(unit.level>=2){ctx.shadowColor='#f5cf81';ctx.shadowBlur=Math.min(14,unit.level*2);}
-        ctx.drawImage(image,index*cell,0,cell,image.height,-width/2+lunge,-height,width,height);
+        ctx.drawImage(image,index*cellW,row*cellH,cellW,cellH,-width/2,-height,width,height);
         this.drawGearPieces?.(ctx,unit,false);ctx.restore();
         this.drawRank?.(ctx,unit.x,unit.y,unit.level||1,'#e5c884',false,unit.type);
         return true;

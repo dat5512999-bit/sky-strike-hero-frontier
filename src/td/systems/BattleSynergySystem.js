@@ -37,7 +37,7 @@
       if(ns.systems.FrostStatusSystem)ns.systems.FrostStatusSystem.prepare(owner,cfg,options);
       return options;
     }
-    pulse(x,y,color,radius){this.visuals.push({x,y,color,radius:radius||35,time:.45});if(this.visuals.length>100)this.visuals.shift();}
+    pulse(x,y,color,radius){if(this.game.feedback?.reducedFx)return;this.visuals.push({x,y,color,radius:radius||35,time:.45});if(this.visuals.length>100)this.visuals.shift();}
     hit(monster,damage,source){
       if(!source||damage<=0)return;const owner=source.owner;if(!source.vfxResolved){source.vfxResolved=true;if(source.splash&&this.game.feedback)this.game.feedback.explosion(source.target||monster,source.splash,source.color,source.style);}
       if(!source.secondary&&monster.active){
@@ -70,7 +70,7 @@
       if(ns.systems.FrostStatusSystem){this.frostChainBudget=ns.config.frostRules.chainBudget;ns.systems.FrostStatusSystem.updateBattle(this,dt);}
       ns.systems.FrostlandVFX?.update(this,dt);
       this.clock+=dt;const game=this.game;if(game.feedback)game.feedback.mobile=typeof document!=='undefined'&&document.body.dataset.layout==='mobile';const items=game.build.items.filter(t=>!t.retired&&t.active!==false);
-      game.hero.synergy=this;items.forEach(t=>{t.synergy=this;t.supportDamage=0;t.supportDamageSource=null;t.supportHaste=t.kind==='unit'?(t.towerSupportHaste||0):0;if(t.excursion)t.excursion.time=Math.max(0,t.excursion.time-dt);});
+      game.hero.synergy=this;game.hero.supportHaste=0;items.forEach(t=>{t.synergy=this;t.supportDamage=0;t.supportDamageSource=null;t.supportHaste=t.kind==='unit'?(t.towerSupportHaste||0):0;if(t.excursion)t.excursion.time=Math.max(0,t.excursion.time-dt);});
       for(const monster of game.monsters){
         if(ns.systems.FrostStatusSystem)ns.systems.FrostStatusSystem.update(monster,dt);
         monster.arcaneMark=Math.max(0,(monster.arcaneMark||0)-dt);monster.shockTime=Math.max(0,(monster.shockTime||0)-dt);monster.rootTime=Math.max(0,(monster.rootTime||0)-dt);
@@ -86,6 +86,7 @@
         if(cfg.natureAura)near.filter(t=>['dryad','dragon','beastmaster','grove'].includes(t.type)).forEach(t=>{if(cfg.natureAura>=t.supportDamage){t.supportDamage=cfg.natureAura;t.supportDamageSource=source;}if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
         if(cfg.timeAura&&this.clock%8<3)near.forEach(t=>{t.supportHaste=Math.max(t.supportHaste||0,cfg.timeAura);if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
         if(cfg.ancestralAura)near.filter(t=>t.kind==='unit'&&['orc','centaur','boarRider','minotaur','shaman'].includes(t.type)).forEach(t=>{if(cfg.ancestralAura>=t.supportDamage){t.supportDamage=cfg.ancestralAura;t.supportDamageSource=source;}if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
+        if(cfg.nagaHaste)near.concat(game.hero&&game.hero.classType==='naga'&&ns.utils.distance(source,game.hero)<=cfg.range?[game.hero]:[]).filter(t=>(t===game.hero&&t.classType==='naga')||(t.kind==='unit'&&ns.config.units[t.type]?.naga)).forEach(t=>{t.supportHaste=Math.max(t.supportHaste||0,cfg.nagaHaste);if(game.report)game.report.recordSupport(source,'coverageSeconds',dt);});
         if(cfg.drumPulse){source.drumCooldown=(source.drumCooldown===undefined?1:source.drumCooldown)-dt;if(source.drumCooldown<=0){near.filter(t=>t.kind==='unit'&&['orc','centaur','boarRider','minotaur','shaman'].includes(t.type)).forEach(t=>{t.tribalFrenzy=Math.max(t.tribalFrenzy||0,cfg.drumDuration);t.commandPulse=cfg.drumDuration;t.drumEmpowered=true;});source.drumCooldown=cfg.drumPulse;source.skillPulse=1;this.pulse(source.x,source.y,'#ff6a42',cfg.range);}}
         if(cfg.rootPulse){source.rootCooldown=(source.rootCooldown||0)-dt;if(source.rootCooldown<=0){const targets=game.monsters.filter(m=>m.active&&ns.utils.distance(source,m)<=cfg.range);if(targets.length){const duration=1.1+source.level*.1;targets.forEach(m=>{m.rootTime=Math.max(m.rootTime||0,duration);});if(game.report)game.report.recordSupport(source,'controlSeconds',duration*targets.length);this.pulse(source.x,source.y,'#91e77b',cfg.range);source.rootCooldown=6;}}}
         if(source.type==='beastmaster'&&!game.summons.some(s=>s.active&&s.owner===source&&s.form==='bear'))game.summons.push(new ns.entities.Summon(source,{form:'bear',tags:['summon','nature'],duration:22,level:source.level,damage:20*(1+.3*(source.level-1)),range:48,speed:115,leash:cfg.range+100,offsetX:-62,offsetY:46,color:cfg.color}));
@@ -117,7 +118,7 @@
       if(ns.systems.FrostStatusSystem){this.game.monsters.filter(m=>m.active).slice(0,100).forEach(m=>ns.systems.FrostStatusSystem.draw(ctx,m));if(this.winter){ctx.save();ctx.fillStyle='rgba(105,190,210,.07)';ctx.fillRect(0,0,ns.config.width,ns.config.height);ctx.fillStyle='#d2fff1';ctx.font='bold 16px sans-serif';ctx.fillText('❄ 寒冬合獵 '+this.winter.time.toFixed(1)+'s',20,45);ctx.restore();}}
       ctx.save();this.fields.slice(0,this.game.feedback&&this.game.feedback.mobile?16:32).forEach(f=>{ctx.globalAlpha=.4;ctx.strokeStyle='#ffb347';ctx.lineWidth=13;ctx.beginPath();ctx.moveTo(f.a.x,f.a.y);ctx.lineTo(f.b.x,f.b.y);ctx.stroke();});
       this.visuals.forEach(v=>{ctx.globalAlpha=v.time/.45;ctx.strokeStyle=v.color;ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(v.x,v.y,v.radius*(1-v.time/.6),v.radius*.42,0,0,Math.PI*2);ctx.stroke();});
-      this.game.monsters.filter(m=>m.active).slice(0,100).forEach(m=>ns.systems.CombatFeedbackSystem.drawStatus(ctx,m,this.clock));ctx.restore();
+      const statusBadges=[];this.game.monsters.filter(m=>m.active).slice(0,100).forEach(m=>ns.systems.CombatFeedbackSystem.drawStatus(ctx,m,this.clock,statusBadges));ctx.restore();
     }
   }
   ns.systems.BattleSynergySystem=BattleSynergySystem;

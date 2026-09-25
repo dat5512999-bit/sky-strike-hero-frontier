@@ -49,7 +49,7 @@
         const dialog = element('dialog', 'hf-cinematic');
         dialog.setAttribute('aria-label', entry.title);
         const head = element('header', 'hf-cinematic-head');
-        head.append(element('span', '', options.replay ? 'CINEMATIC COLLECTION · 回顧' : entry.productionTitle), element('h2', '', entry.title));
+        head.append(element('span', '', options.replay ? '劇情典藏 · 回顧' : entry.productionTitle), element('h2', '', entry.title));
         const stage = element('div', 'hf-cinematic-stage');
         const video = element('video', 'hf-cinematic-video'); video.playsInline = true; video.preload = 'auto';
         const frame = element('div', 'hf-cinematic-frame'); frame.hidden = true;
@@ -59,7 +59,7 @@
         const storyCopy = element('section', 'hf-cinematic-story-copy'); storyCopy.setAttribute('aria-live', 'polite'); storyCopy.hidden = true;
         const storyShot = element('small', ''), storyTitle = element('h3', ''), storyNarration = element('p', ''); storyCopy.append(storyShot, storyTitle, storyNarration);
         const titleCard = element('div', 'hf-cinematic-title-card'); titleCard.hidden = true; titleCard.setAttribute('aria-hidden', 'true');
-        titleCard.append(element('small', '', 'CHAPTER I'), element('strong', '', 'HERO FRONTIER'), element('span', '', '《破碎的和平》'));
+        titleCard.append(element('small', '', '第一章'), element('strong', '', '英雄邊境'), element('span', '', '《破碎的和平》'));
         placeholder.append(shotLabel, shotTitle, description); frame.append(image, placeholder, storyCopy, titleCard);
         const captions = element('p', 'hf-cinematic-captions');
         stage.append(video, frame, captions);
@@ -72,11 +72,12 @@
         const fallbackButton = element('button', '', '使用分鏡預覽');
         const language = element('select', ''); language.setAttribute('aria-label', '字幕語言');
         for (const track of entry.subtitleTracks) {
-          const option = element('option', '', track.label); option.value = track.language;
+          const subtitleLabel = track.language === 'en' ? '英文（待翻譯）' : track.language === 'ja' ? '日文（翻譯準備中）' : track.label;
+          const option = element('option', '', subtitleLabel); option.value = track.language;
           option.disabled = track.status === 'pending-translation'; language.append(option);
           if (!option.disabled) {
             const node = element('track', ''); node.kind = 'subtitles'; node.srclang = track.language;
-            node.label = track.label; node.src = track.src; node.default = track.language === 'zh-TW';
+            node.label = subtitleLabel; node.src = track.src; node.default = track.language === 'zh-TW';
             video.append(node);
           }
         }
@@ -104,10 +105,10 @@
           const index = entry.shots.findIndex(shot => elapsed >= shot.start && elapsed < shot.end);
           if (index < 0 || index === shotIndex) return;
           shotIndex = index; const shot = entry.shots[index];
-          shotLabel.textContent = '分鏡預覽 · SHOT ' + String(index + 1).padStart(2, '0') + ' / ' + entry.shots.length;
-          shotTitle.textContent = shot.title; description.textContent = shot.description;
-          storyShot.textContent = 'SHOT ' + String(index + 1).padStart(2, '0') + ' / ' + entry.shots.length;
-          storyTitle.textContent = shot.title; storyNarration.textContent = shot.narration || shot.description;
+          shotLabel.textContent = '分鏡預覽 · 第 ' + String(index + 1).padStart(2, '0') + ' 張／共 ' + entry.shots.length + ' 張';
+          shotTitle.textContent = shot.title === 'HERO FRONTIER' ? '英雄邊境' : shot.title; description.textContent = shot.description.replace('CHAPTER I', '第一章');
+          storyShot.textContent = '第 ' + String(index + 1).padStart(2, '0') + ' 張／共 ' + entry.shots.length + ' 張';
+          storyTitle.textContent = shot.title === 'HERO FRONTIER' ? '英雄邊境' : shot.title; storyNarration.textContent = shot.narration || shot.description;
           titleCard.hidden = shot.id !== 'shot_10';
           placeholder.hidden = false; storyCopy.hidden = true; image.hidden = true;
           image.onload = () => { if (!done) { image.hidden = false; placeholder.hidden = true; storyCopy.hidden = shot.id === 'shot_10'; } };

@@ -2,10 +2,10 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
 const {load}=require('./helpers/td-runtime.cjs');
 
-test('all six faction cards use their own painted group portraits instead of legacy emblems',()=>{
+test('all seven faction cards use their own painted group portraits instead of legacy emblems',()=>{
   const {ns}=load(),css=fs.readFileSync('td-polish.css','utf8');
   const factions=ns.systems.FactionSystem.FACTIONS;
-  assert.equal(Object.keys(factions).length,6);
+  assert.equal(Object.keys(factions).length,7);
   for(const [id,faction] of Object.entries(factions)){
     assert.ok(faction.selectionArt,id+' needs selectionArt');
     assert.ok(fs.existsSync(faction.selectionArt),id+' painted faction art is missing');

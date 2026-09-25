@@ -22,6 +22,7 @@ test('real wins, failures and retreats share one score order with visible outcom
 });
 test('records remain isolated by player profile and map filters',()=>{
   const {ns}=load(),store=new ns.systems.ProfileStore(storage());
+  store.switchTo('admin');
   save(store,[record('a',1200),record('b',1500,'failure','twinpass')]);
   const view=new ns.ranking.RankingView(store);view.action('ranking-tab','map');view.action('ranking-map','twinpass');assert.equal(view.rows().records.length,1);
   store.newRound();assert.equal(new ns.ranking.RankingView(store).rows().records.length,0);
@@ -45,6 +46,7 @@ test('retreat stores the visible live score once with its result and current wav
 });
 test('profile art follows the active player and the expedition screen starts hidden',()=>{
   const {ns}=load(),store=new ns.systems.ProfileStore(storage());
+  store.switchTo('admin');
   store.setProfileArt('goblin');assert.equal(store.current().profileArt,'goblin');
   store.newRound();assert.equal(store.current().profileArt,undefined);
   store.setProfileArt('snow');store.switchTo('admin');assert.equal(store.current().profileArt,'goblin');

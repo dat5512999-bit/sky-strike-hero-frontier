@@ -90,7 +90,7 @@
         ctx.restore();offset+=15;
       }
     }
-    push(item){const cap=this.mobile?90:140;if(['damage','gold','mote','dust'].includes(item.type)&&this.items.filter(i=>i.type===item.type).length>=(this.mobile?18:30))return;this.items.push(item);if(this.items.length>cap)this.items.splice(0,this.items.length-cap);}
+    push(item){if(this.reducedFx&&['mote','dust','soul','aura'].includes(item.type))return;const cap=this.mobile?90:140;if(['damage','gold','mote','dust'].includes(item.type)&&this.items.filter(i=>i.type===item.type).length>=(this.mobile?18:30))return;this.items.push(item);if(this.items.length>cap)this.items.splice(0,this.items.length-cap);}
     visualPosition(monster){return typeof monster.visualPosition==='function'?monster.visualPosition():{x:monster.x,y:monster.y};}
     static impactKind(source){const style=source&&source.style;if(style==='ice')return'ice';if(style==='lightning')return'lightning';if(style==='nature')return'nature';if(style==='arrow'||style==='bullet'||(source&&source.attackType==='pierce'))return'pierce';if(style==='claw'||style==='moon'||(source&&source.attackType==='chaos'))return'slash';return'arcane';}
     static impactColor(source,kind){if(typeof source==='string')return source;if(source&&source.color)return source.color;return({ice:'#aeeeff',lightning:'#d8e8ff',nature:'#c4f49d',pierce:'#ffe2a1',slash:'#ff9b74',arcane:'#d9b7ff'})[kind]||'#fff1b2';}
@@ -112,16 +112,24 @@
     soul(from,to){if(this.items.filter(i=>i.type==='soul').length>=(this.mobile?10:18))return;this.push({type:'soul',x:from.x,y:from.y,toX:to.x,toY:to.y-30,time:.65,max:.65,color:'#bea1ff'});}
     aura(unit,color){this.push({type:'aura',x:unit.x,y:unit.y,color,time:.6,max:.6});}
     allyHit(target,value){this.push({type:'allyDamage',x:target.x+(Math.random()-.5)*10,y:target.y-34,time:.72,max:.72,value:Math.round(value)});this.push({type:'impact',x:target.x,y:target.y-8,time:.2,max:.2,color:'#ff765c'});}
-    warning(source,label,radius){this.push({type:'warning',x:source.x,y:source.y,time:1.05,max:1.05,label:label,radius:radius||24});}
+    warning(source,label,radius){this.push({type:'warning',x:source.x,y:source.y,time:1.05,max:1.05,label:label,radius:radius||24});if(radius>=60&&this.announcer){this.announcer.textContent='首領蓄力：'+label;}}
     revive(hero){this.push({type:'revive',x:hero.x,y:hero.y,time:.8,max:.8,color:'#95ffe0'});}
     heal(target,value){this.push({type:'heal',x:target.x,y:target.y-target.radius-10,time:.75,max:.75,value:Math.round(value)});}
-    update(dt){this.items.forEach(function(item){item.time-=dt;if(item.type==='mote'){item.x+=item.vx*dt;item.y+=item.vy*dt;item.vy+=55*dt;}});this.items=this.items.filter(function(item){return item.time>0;});}
-    static drawStatus(ctx,m,clock){
+    update(dt){this.items.forEach(function(item){item.time-=dt;if(item.type==='mote'){item.x+=item.vx*dt;item.y+=item.vy*dt;item.vy+=55*dt;}});this.items=this.items.filter(function(item){return item.time>0;});if(this.announcer&&!this.items.some(item=>item.type==='warning'&&item.radius>=60))this.announcer.textContent='';}
+    static drawStatus(ctx,m,clock,occupied){
       if(!m.active)return;ctx.save();ctx.translate(m.x,m.y);const pulse=.5+Math.sin((clock||0)*8)*.15;ctx.lineWidth=1.5;
       if(m.slowTimer>0){ctx.strokeStyle='#99e5ff';ctx.globalAlpha=.65;for(let i=0;i<3;i++){const x=(i-1)*13;ctx.beginPath();ctx.moveTo(x-3,5);ctx.lineTo(x, -8-i%2*5);ctx.lineTo(x+4,5);ctx.stroke();}}
       if(m.shockTime>0&&Math.sin(clock*23)>.1){ctx.strokeStyle='#b3dfff';ctx.globalAlpha=.85;ctx.beginPath();ctx.moveTo(-15,-8);ctx.lineTo(-8,-27);ctx.lineTo(3,-19);ctx.lineTo(13,-40);ctx.stroke();}
       if(m.natureMark){ctx.fillStyle='#91eaa1';ctx.globalAlpha=.65;ctx.beginPath();ctx.ellipse(16,-21,5,2,clock,0,Math.PI*2);ctx.fill();}
       if(m.arcaneMark>0){ctx.strokeStyle='#b9a0f5';ctx.globalAlpha=.5;ctx.beginPath();ctx.arc(0,3,18,clock,clock+Math.PI*1.4);ctx.stroke();}
+      // Short labels preserve status meaning when hue and particle motion are hard to see.
+      const labels=[];if(m.mapPressure)labels.push(m.mapPressure.status||'壓');if(m.frostStatus?.window>0)labels.push('凍');else if(m.rootTime>0)labels.push('定');else if(m.slowTimer>0)labels.push('緩');
+      if(m.plagueDot?.time>0)labels.push('腐');else if(m.shockTime>0)labels.push('電');
+      const shown=labels.slice(0,2),width=shown.length*19-2,radius=m.radius||16;
+      const candidates=[{x:m.x+radius+5,y:m.y-27},{x:m.x-radius-5-width,y:m.y-27},{x:m.x-width/2,y:m.y-radius-38}];
+      const clear=rect=>rect.x>=0&&rect.y>=0&&rect.x+width<=ns.config.width&&rect.y+17<=ns.config.height&&!(occupied||[]).some(other=>rect.x<other.x+other.width+3&&rect.x+width+3>other.x&&rect.y<other.y+other.height+3&&rect.y+20>other.y);
+      const badge=shown.length?(occupied?candidates.find(clear):candidates[0]):null;
+      if(badge){if(occupied)occupied.push({x:badge.x,y:badge.y,width,height:17});ctx.globalAlpha=1;shown.forEach((label,i)=>{const x=badge.x-m.x+i*19,y=badge.y-m.y;ctx.fillStyle='#071319';ctx.fillRect(x,y,17,17);ctx.strokeStyle='#fff3ce';ctx.strokeRect(x+.5,y+.5,16,16);ctx.fillStyle='#fff';ctx.font='bold 12px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,x+8.5,y+8.5);});}
       ctx.restore();
     }
     draw(ctx){

@@ -1,7 +1,7 @@
 (function(ns){
   'use strict';
   const THRESHOLDS=[0,8,22,45,80];
-  const NAMES={arrow:'穿雲齊射',iceward:'寒鋼凍陣',frost:'冰霜新星',cannon:'熔火重砲',storm:'雷霆連鎖',totem:'祖靈震地',crypt:'幽骨召喚',soul:'靈魂收割',barracks:'軍團齊射',grove:'根脈纏繞',graveyard:'亡魂祝福',ballista:'獅翼貫射',moonwell:'月潮折射',plague:'瘟疫蔓延',warDrum:'部族重拍',boulder:'裂地巨石',thunderTotem:'萬靈雷鏈'};
+  const NAMES={arrow:'穿雲齊射',iceward:'寒鋼凍陣',frost:'冰霜新星',cannon:'熔火重砲',storm:'雷霆連鎖',totem:'祖靈震地',crypt:'幽骨召喚',soul:'靈魂收割',barracks:'軍團齊射',grove:'根脈纏繞',graveyard:'亡魂祝福',ballista:'獅翼貫射',moonwell:'月潮折射',plague:'瘟疫蔓延',warDrum:'部族重拍',boulder:'裂地巨石',thunderTotem:'萬靈雷鏈',nagaTidegate:'潮門標記',nagaShellBastion:'鹽甲叉陣',nagaAbyssShrine:'潮衛共鳴',nagaMantaAerie:'翼潮雷擊'};
   class TowerSkillSystem{
     static rank(kills){return 1+THRESHOLDS.slice(1).filter(function(value){return kills>=value;}).length;}
     static progress(tower){const rank=this.rank(tower.kills);return{rank:rank,next:THRESHOLDS[rank]||null,kills:tower.kills};}

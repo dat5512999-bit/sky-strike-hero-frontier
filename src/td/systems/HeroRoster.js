@@ -6,7 +6,8 @@
     arcanist:{name:'森語者・希爾芙',faction:'精靈 · 奧術學院',color:'#70e7ff',selectionArt:'assets/td/opening/hero-arcanist-selection-v1.png',selectionFocus:'50% 20%',range:152,damage:18,interval:.58,attackType:'magic',skills:['霜環震擊','連鎖雷擊','召喚元素'],shortSkills:['霜環','連鎖雷擊','召喚元素'],icons:['❄','ϟ','✧'],hints:['周圍冰爆並緩速，冷卻9秒','雷電跳躍最多四個敵人，冷卻12秒','召喚遠程元素守衛，冷卻22秒']},
     rogue:{name:'影行者・維菈',faction:'暗影氏族 · 暗影行會',color:'#c884df',selectionArt:'assets/td/opening/hero-rogue-selection-v1.png',selectionFocus:'50% 19%',range:100,damage:15,interval:.38,attackType:'chaos',skills:['暗影閃擊','淬毒煙幕','暗影分身'],shortSkills:['閃擊','淬毒煙幕','暗影分身'],icons:['◆','☠','◐'],hints:['閃至附近目標旁並重擊，冷卻9秒','腳下生成6秒毒霧，持續傷害，冷卻12秒','召喚快速近戰分身，冷卻22秒']},
     chief:{name:'大酋長・戈爾',faction:'荒野部族 · 萬族戰團',color:'#df6548',selectionArt:'assets/td/opening/hero-chief-selection-v2.png',selectionFocus:'50% 18%',skillArt:'assets/td/opening/chief-skill-icons-v1.png',range:112,damage:24,interval:.66,attackType:'chaos',splash:26,skills:['萬族戰吼','先祖怒火','裂地衝擊波'],shortSkills:['萬族戰吼','先祖怒火','裂地波'],icons:['吼','雷','裂'],hints:['附近荒野士兵立刻進入4秒狂潮，冷卻9秒','腳下形成6秒祖靈怒火，冷卻12秒','向前發射穿透衝擊波，傷害並緩速直線敵人，冷卻22秒']},
-    goblin:{name:'銅齒・奇克',faction:'地精工程團',color:'#d9ad65',selectionArt:'assets/td/goblin-chief-engineer-v1.png',selectionFocus:'50% 42%',range:145,damage:14,interval:.8,attackType:'pierce',skills:['臨場改裝','蒸汽洩壓','巡修機偶'],shortSkills:['改裝','洩壓','機偶'],icons:['⚙','◈','▣'],hints:['強化自身射速與附近一座供電機械 5 秒，冷卻 9 秒','噴出蒸汽傷害並緩速近敵，額外縮短網路冷卻 3 秒；冷卻 12 秒','部署一台可移動的巡修機偶，發射穿刺鉚釘；冷卻 22 秒']}
+    goblin:{name:'銅齒・奇克',faction:'地精工程團',color:'#d9ad65',selectionArt:'assets/td/goblin-chief-engineer-v1.png',selectionFocus:'50% 42%',range:145,damage:16,interval:.8,attackType:'pierce',skills:['臨場改裝','蒸汽洩壓','巡修機偶'],shortSkills:['改裝','洩壓','機偶'],icons:['⚙','◈','▣'],hints:['自身攻速 +30%，並改裝最近的供電攻擊機械：傷害 +42%、攻速 +20%，持續 5 秒；冷卻 9 秒','噴出蒸汽傷害並緩速近敵，額外縮短網路冷卻 3 秒；冷卻 12 秒','部署一台可移動的巡修機偶，發射穿刺鉚釘；冷卻 22 秒']}
+    ,naga:{name:'破潮者・賽洛',faction:'娜迦潮衛 · CONCEPT',color:'#55d3d0',selectionArt:'assets/td/naga/tidebreaker-hero-actions-v1.png',selectionFocus:'14% 14%',range:142,damage:23,interval:.68,attackType:'chaos',skills:['潮門突刺','旋潮領域','潮衛號令'],shortSkills:['潮門','旋潮','潮衛'],icons:['≋','◉','♜'],hints:['突入目標身旁並以破潮矛重擊，冷卻 9 秒','腳下形成 6 秒旋潮領域，持續傷害附近敵軍，冷卻 12 秒','預留為娜迦盟約後的軍團號令；尚未在故事中解鎖。']}
   };
   class HeroRoster{
     static get(type){return CLASSES[type]||CLASSES.arcanist;}
@@ -18,8 +19,8 @@
       const power=typeof hero.skillPower==='function'?hero.skillPower():1+hero.equipment.spear*.2,weaponColor=ns.systems.EquipmentSystem.effectColor(hero,cfg.color);
       if(slot===0){
         if(hero.classType==='goblin'){
-          const network=hero.synergy?.game?.goblinNetwork,items=hero.synergy?.game?.build?.items||[],powered=items.filter(item=>item.networkPowered&&ns.utils.distance(hero,item)<=210&&item.config().networkCost);
-          const item=powered[0];if(item){item.networkDamage=Math.max(item.networkDamage||0,.42);item.engineerBoost=5;}
+          const network=hero.synergy?.game?.goblinNetwork,items=hero.synergy?.game?.build?.items||[],powered=items.filter(item=>item.networkPowered&&ns.utils.distance(hero,item)<=210&&item.config().networkCost).sort((a,b)=>ns.utils.distance(hero,a)-ns.utils.distance(hero,b)),item=powered.find(candidate=>candidate.config().damage>0)||null;
+          if(item){item.networkDamage=Math.max(item.networkDamage||0,.42);item.engineerBoost=5;item.engineerHaste=.2;}
           hero.goblinOverclock=5;ns.systems.HeroSkillVFX.emit(hero,'goblin-modify',{target:item?{x:item.x,y:item.y}:{x:hero.x,y:hero.y},duration:.75});
           hero.novaCooldown=9*(1-hero.equipment.rune*.1);hero.beginCast();return true;
         }

@@ -37,6 +37,12 @@
       {id:'steel-daggers',name:'精鋼雙匕',rarity:'common',color:'#e2e8ee',column:0,row:2,description:'普攻與傷害技能提高 20%，雙刃泛起冷鋼光。'},
       {id:'shadow-crescents',name:'影魔月刃',rarity:'epic',color:'#ca62ff',column:1,row:2,description:'累計提高 40% 傷害，攻擊留下紫色雙重殘影。'},
       {id:'demonfang-blades',name:'魔王獠牙',rarity:'legendary',color:'#ff3e4f',column:2,row:2,description:'累計提高 60% 傷害；普攻化為半徑 38 的魔焰斬擊。',splash:38,style:'flame'}
+    ],
+    naga:[
+      {id:'tidebreaker-spear-0',name:'破潮三叉戟',rarity:'base',color:'#55d3d0',description:'破潮者的初始潮門三叉戟。'},
+      {id:'tidebreaker-spear-1',name:'珊瑚潮鋼戟',rarity:'common',color:'#9ce6df',description:'普攻與傷害技能累計提高 20%；潮鋼刃留下青白水痕。'},
+      {id:'tidebreaker-spear-2',name:'深淵潮印戟',rarity:'epic',color:'#4aaedb',description:'普攻與傷害技能累計提高 40%；35% 機率觸發兩段潮電連鎖。',chainChance:.35,chain:2,chainRange:98,chainStyle:'lightning'},
+      {id:'tidebreaker-spear-3',name:'萬潮王戟',rarity:'legendary',color:'#b7fff0',description:'普攻與傷害技能累計提高 60%；保留潮電連鎖，並造成半徑 30 的破潮濺射。',chainChance:.35,chain:2,chainRange:98,chainStyle:'lightning',splash:30,style:'spirit'}
     ]
   };
   class EquipmentSystem{

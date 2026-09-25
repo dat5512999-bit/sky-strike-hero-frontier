@@ -21,6 +21,7 @@
               :'成功守住 '+waves+' 波攻勢，但進度尚未儲存。請保留此頁並匯出備份。'
           :'敵軍突破城門，抵達第 '+reached+' 波。調整部署後再挑戰。'
         :won?'完成 '+waves+' 波遠征，防線守住了。':'敵軍突破城門，抵達第 '+reached+' 波。調整部署後再挑戰。';
+      if(story&&won&&options.mission?.aftermath)intro+='\n\n線索推進：'+options.mission.aftermath;
       if(result?.persisted===false)intro+=' 戰報尚未儲存，請檢查儲存空間。';
       const highlight=!story&&result?.isNewBest?'刷新本地圖最佳紀錄！':!story&&result?.isNewDifficultyBest?'刷新本難度最佳紀錄！':'';
       return{

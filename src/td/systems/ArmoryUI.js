@@ -34,7 +34,7 @@
     document.getElementById('td-equip-summary').textContent=target.kind==='unit'?'僅顯示這名士兵能用的裝備；每名士兵最多一件。':'僅顯示這位英雄能用的裝備；武器、護甲、戰器各一件。';
     list.replaceChildren();let count=0;
     for(const id of this.armory.owned){if(!this.armory.canEquip(id,target))continue;count++;const item=this.armory.get(id),wearer=this.armory.wearer(id),equipped=wearer===target,status=equipped?'目前裝備':wearer?'裝備中：'+this.armory.targetLabel(wearer):'可裝備';
-      const {row,actions}=card(item,status),button=document.createElement('button');button.type='button';button.textContent=equipped?'卸下':wearer?'轉裝':'裝上';button.onclick=()=>{
+      const {row,actions}=card(item,status),button=document.createElement('button');row.dataset.gearId=id;button.type='button';button.dataset.equipGear=id;button.textContent=equipped?'卸下':wearer?'轉裝':'裝上';button.onclick=()=>{
         const result=equipped?this.armory.unequip(item.slot,target):this.armory.equip(id,target);
         document.getElementById('td-equip-message').textContent=result.message;
         if(result.ok){this.renderEquipmentPicker();this.updateUi();}

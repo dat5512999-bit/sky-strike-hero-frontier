@@ -1,3 +1,34 @@
+> **v0.85.42：** 部署包必須包含 `ember-road-encounter-v1.png`、地圖／故事／壓力／怪物／HUD 腳本、同版 `td.html` 與 `sw.js`；執行地圖壓力、故事地圖、語法與完整測試。見 [2-2 安裝驗收](CHAPTER2_MAP_2_2_V08542.md)。
+
+> **v0.85.39：** 部署包必須包含 `MapPressureSystem.js`、同版 `td.html`、`sw.js` 與西境地圖；執行 `npm run check:map-pressure`、`npm run check`、`npm test`。見 [安裝驗收](MAP_PRESSURE_V08539.md)。
+
+> **v0.85.38：** 安裝需求維持 Node.js 18+ 與靜態伺服器；完整保留倍速計時器、戰場頁及提示樣式，執行 `npm run check`、`npm test`。見 [安裝驗收](LONG_SESSION_FOLLOWUP_V08538.md)。
+
+> **v0.85.36：** 部署包新增 td-accessibility.css；Node.js 18+ 與原靜態伺服器流程不變。安裝後開大廳設定測試偏好保存。見 [安裝驗收](LONG_SESSION_COMBAT_ACCESS_V08536.md)。
+
+> **v0.85.35：** 部署包須包含進化規則／呈現腳本、兩張徽記 PNG、`td.html` 與同版 `sw.js`；無新套件或設定。見 [安裝驗收](HERO_EVOLUTION_ANIMATION_V08535.md)。
+
+> **v0.85.33：** Node.js 18+ 和靜態伺服器需求不變；全新安裝進入一般玩家第 1 輪。同步安裝三個修改模組及 `sky-strike-v0.85.33` 快取。見 [安裝與驗收](PLAYER_ENTRY_FRAME_PACING_V08533.md)。
+
+> **v0.85.31：** 沿用 Node.js 18+ 和靜態伺服器；新增兩支本地效能腳本，無新套件。見 [安裝與驗收](FRAME_PACING_V08531.md)。
+
+> **v0.85.30：** 既有 Node.js 18+ 與靜態伺服器不變；取得完整專案時需包含六張 `assets/td/codex/faction-*-v2.jpg`。沒有新套件、設定或帳號。見 [圖鑑軍團肖像交付](CODEX_FACTION_ART_V08530.md)。
+> **v0.85.32：** 部署必須包含 `src/td/systems/HeroEvolutionSystem.js`，並以 `sky-strike-v0.85.32` Service Worker 快取版本更新；完整清單見 [英雄進化交付](HERO_EVOLUTION_V08532.md)。
+
+> **v0.85.26：** 既有 Node.js 18+ 與靜態伺服器不變，沒有新套件或素材。見 [地精前期平衡](GOBLIN_EARLY_GAME_V08526.md)。
+
+> **v0.85.25：** 仍用 Node.js 18+ 與既有靜態伺服器；新增兩張怪物 PNG，無新套件或設定。見 [安裝與驗收](COMBAT_MOTION_V08525.md)。
+
+> **v0.85.24：** Node.js 18+ 與既有安裝方式不變，沒有新素材、套件或設定；見 [供能可讀性熱修](GOBLIN_NETWORK_VISIBILITY_V08524.md)。
+
+> v0.85.20 怪物攻擊站姿與路徑銜接：參見 [完整操作、架構、部署、回復與驗收](COMBAT_MOTION_V08520.md)。
+
+> **v0.85.19：** 安裝需求與設定不變；首次開啟確認為 v0.85.19，第一關的掉落與配裝教學不需額外帳號或服務。詳見 [安裝與更新](CHAPTER1_ONBOARDING_V08519.md)。
+
+> **v0.85.18：** 安裝需求與設定不變；首次開啟確認畫面版本 v0.85.18，動作更新檔案見 [安裝與更新](COMBAT_MOTION_V08518.md)。
+
+> **v0.85.13（2026-09-24）：** Node.js 18+ 與原啟動方式不變；部署時須帶四張 v2 透明動作圖。首次安裝與設定見 [軍團動作圖交付](FACTION_MOTION_V08513.md)。
+
 > **v0.85.12（2026-09-24）：** 安裝仍需 Node.js 18+；劇情卡使用既有圖片，無新依賴或額外設定。啟動 `td.html` 後從劇情模式進入第一關驗收。詳見 [劇情卡交付](STORY_CARDS_V08512.md)。
 
 > **v0.85.11（2026-09-23）：** 沿用 Node.js 18+ 與原啟動方式；沒有新增依賴、安裝或設定步驟。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
@@ -445,3 +476,9 @@ v0.83.3 無新增依賴；使用既有 npm run serve:test。需完整保留新�
 > v0.85.1：根目錄 `td.html` 已直接載入冰原系統與選角插畫；完整檔案清單見[選角插畫交付](FROSTLAND_SELECTION_ART_V0851.md)。
 
 v0.85.0：沿用 Node.js 18+，無新依賴。完整取得 assets/td/frostland 與 items/frostland-spears-v1.png，執行 npm run check、npm test、npm run serve:test，開啟 /td.html。也可開 /frostland-preview.html。步驟見 [冰原 V1](FROSTLAND_FACTION_V1.md)。
+> **v0.85.14：** 安裝需求不變；更新後重開頁面以取得 `sky-strike-v0.85.14` 和第一章教學檔案。詳見 [第一章引導](CHAPTER1_ONBOARDING_V08514.md)。
+> **v0.85.15：** 安裝需求不變；更新後重開頁面以取得 `sky-strike-v0.85.15`。詳見 [引導修正](CHAPTER1_ONBOARDING_V08515.md)。
+> **v0.85.16：** 安裝需求不變；更新後重開頁面以取得 `sky-strike-v0.85.16`。詳見 [教學修正](CHAPTER1_ONBOARDING_V08516.md)。
+
+> **v0.85.17：** 安裝需求不變；更新後重開頁面以取得 `sky-strike-v0.85.17`。詳見 [教學操作修正](CHAPTER1_ONBOARDING_V08517.md)。
+> **v0.85.21：** 安裝需求不變；首次開啟確認 v0.85.21，第一關選取、升級與掉落教學不需額外設定。詳見 [安裝與更新](CHAPTER1_ONBOARDING_V08521.md)。

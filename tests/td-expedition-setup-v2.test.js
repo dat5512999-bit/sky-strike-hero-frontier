@@ -16,8 +16,8 @@ test('PAGE 1 使用可擴充地圖瀏覽列並保留四種難度',()=>{
 });
 
 test('PAGE 2 保持英雄軍團獨立選擇並即時組合摘要',()=>{
-  assert.equal((html.match(/data-profession=/g)||[]).length,6);
-  assert.equal((html.match(/data-faction=/g)||[]).length,6);
+  assert.equal((html.match(/data-profession=/g)||[]).length,7);
+  assert.equal((html.match(/data-faction=/g)||[]).length,7);
   for(const id of ['td-hero-detail','td-faction-detail','td-summary-map','td-summary-difficulty','td-summary-hero','td-summary-faction','td-combination-hint'])assert.ok(html.includes('id="'+id+'"'));
   assert.match(game,/hero\.name\+' × '\+faction\.name/);assert.match(game,/chooseProfession\(this\.selectedProfession,this\.selectedFaction\)/);
 });

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#091119">
-  <title>世界圖鑑 · HERO FRONTIER CODEX</title>
+  <title>世界圖鑑 · 英雄邊境</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='50'%3E♜%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="codex.css">
   <link rel="stylesheet" href="td-cinematic.css">
@@ -12,13 +12,13 @@
 <body>
   <div class="codex-shell">
     <header class="masthead">
-      <a class="brand" href="td.html" aria-label="返回英雄邊境"><span>HERO</span><span>FRONTIER</span><small>— 英雄的邊境 —</small></a>
-      <div class="heading"><p class="eyebrow">THE WORLD REMEMBERS</p><h1>世界圖鑑 <span>CODEX</span></h1><p class="subtitle">探索這個世界的過去、現在，與尚未揭曉的真相。</p></div>
-      <div class="header-actions"><span class="edition">ARCHIVE / VOL. I</span><button id="help" aria-label="圖鑑使用說明">?</button><a class="icon-button" href="td.html" aria-label="返回遊戲">⌂</a></div>
+      <a class="brand" href="td.html" aria-label="返回英雄邊境"><span>英雄</span><span>邊境</span><small>— 英雄的邊境 —</small></a>
+      <div class="heading"><p class="eyebrow">世界仍在記得</p><h1>世界圖鑑 <span>圖鑑</span></h1><p class="subtitle">探索這個世界的過去、現在，與尚未揭曉的真相。</p></div>
+      <div class="header-actions"><span class="edition">世界圖鑑／第一卷</span><button id="help" aria-label="圖鑑使用說明">?</button><a class="icon-button" href="td.html" aria-label="返回遊戲">⌂</a></div>
     </header>
     <nav id="categories" class="categories" aria-label="圖鑑分類"></nav>
     <main class="collection" aria-label="收藏列表">
-      <div class="collection-heading"><div><p class="eyebrow" id="category-en">HEROES OF THE FRONTIER</p><h2 id="collection-title">英雄收藏</h2></div><span id="collection-number" class="collection-number"></span></div>
+      <div class="collection-heading"><div><p class="eyebrow" id="category-en">邊境英雄</p><h2 id="collection-title">英雄收藏</h2></div><span id="collection-number" class="collection-number"></span></div>
       <div class="filters">
         <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜尋名稱或定位…" aria-label="搜尋名稱或定位" maxlength="120"></label>
         <label class="filter-label"><span>收藏狀態</span><select id="state" aria-label="收藏狀態"><option value="">全部狀態</option><option value="unlocked">可用 / 可閱讀</option><option value="locked">尚未解鎖 / 未取得</option><option value="unknown">完全未知</option><option value="encountered">已遇見</option><option value="discovered">已發現</option><option value="fullyKnown">完整資料</option><option value="updated">有新史料</option><option value="favorite">我的收藏</option></select></label>
@@ -29,7 +29,7 @@
       <footer class="collection-footer"><span id="count" aria-live="polite"></span><button id="clear-filters" class="text-button">重設篩選</button></footer>
     </main>
     <aside id="detail" class="detail" aria-label="項目詳情"><div id="detail-content"></div></aside>
-    <footer class="shell-footer"><span>HERO FRONTIER <i>Different Heroes · One World</i></span><span id="storage-status" role="status"></span><span>CODEX · 1.2.0</span></footer>
+    <footer class="shell-footer"><span>英雄邊境 <i>不同的英雄 · 同一個世界</i></span><span id="storage-status" role="status"></span><span>世界圖鑑 · 1.2.0</span></footer>
   </div>
   <div id="toast" role="status" class="toast" hidden></div>
   <dialog id="modal"><button id="close-modal" class="modal-close" aria-label="關閉視窗">✕</button><div id="modal-body"></div></dialog>

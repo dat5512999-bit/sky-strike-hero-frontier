@@ -1,9 +1,9 @@
 (function (ns) {
   'use strict';
   const categories = [
-    ['hero', '英雄', 'HERO', '♜'], ['faction', '軍團', 'FACTION', '⚑'], ['unit', '士兵', 'UNIT', '♞'],
-    ['tower', '防禦塔', 'TOWER', '♖'], ['enemy', '敵人', 'ENEMY', '♟'], ['equipment', '裝備', 'EQUIPMENT', '⚔'],
-    ['map', '地圖', 'MAP', '◇'], ['chronicle', '編年史', 'CHRONICLE', '▤']
+    ['hero', '英雄', '英雄', '♜'], ['faction', '軍團', '軍團', '⚑'], ['unit', '士兵', '士兵', '♞'],
+    ['tower', '防禦塔', '防禦塔', '♖'], ['enemy', '敵人', '敵人', '♟'], ['equipment', '裝備', '裝備', '⚔'],
+    ['map', '地圖', '地圖', '◇'], ['chronicle', '編年史', '編年史', '▤']
   ];
   const sources = { CONFIRMED: '已確認史實', SILVERLEAF_BELIEF: '銀葉信仰', SILVERLEAF_RECORD: '銀葉史料', SHADOW_RECORD: '暮影記載', KINGDOM_OFFICIAL: '王國官方紀錄', ORC_ORAL_HISTORY: '獸人口述', LEGEND: '傳說', UNKNOWN: '真實性未知' };
   const attackNames = { pierce: '穿刺', magic: '魔法', chaos: '混沌' };
@@ -41,14 +41,14 @@
         const id = type + ':' + key;
         const meta = this.metadata[id] || {};
         const entry={ id, type, key, name: source.name, source, icon: source.icon || '◇', color: source.color || '#b5c7c7',
-          art: source.selectionArt || source.asset || null, thumbnail: thumb(id), role: source.role || '',
+          art: source.codexArt || source.selectionArt || source.asset || null, thumbnail: thumb(id), role: source.role || '',
           hiddenUntilEncountered: 'name', defaults: { ...defaults }, unlockRequirement: '等待冒險進度開放。',
           lore: [], relatedEntries: [], gameplayInfo: [], ...extra, ...meta };
         if(key.startsWith('goblin')||source.frostland||key==='frostland'||key.startsWith('frostland-')){
           entry.defaults={encountered:false,discovered:false,unlocked:false};
           entry.hiddenUntilEncountered='hidden';
-          entry.unlockRequirement='TESTABLE／STORY_LOCKED；正式劇情尚未指定解鎖章節';
-          entry.lore=[{text:'歷史、發跡地與其他文明關係尚未定案。CONCEPT / UNKNOWN。',sourceType:'UNKNOWN'}];
+          entry.unlockRequirement='可測試／劇情尚未解鎖；正式劇情尚未指定解鎖章節';
+          entry.lore=[{text:'歷史、發跡地與其他文明關係尚未定案。概念設定／未知。',sourceType:'UNKNOWN'}];
         }
         if(source.frostland||key==='frostland'){entry.thumbnail=source.selectionArt||'assets/td/frostland/'+key+'.svg';entry.gameplayInfo.push(field('狩獵規則','100 Frost 開啟窗口；Boss 深寒持續移動；碎冰每窗口一次，重控間隔 3 秒'));}
         entries.push(entry);

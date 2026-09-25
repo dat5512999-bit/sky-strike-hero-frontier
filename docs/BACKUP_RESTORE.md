@@ -1,3 +1,32 @@
+> **v0.85.42：** 無玩家資料遷移；回復時同步回復 2-2 地圖 PNG、地圖／任務／壓力／怪物／HUD、HTML、測試與 Service Worker，切勿只回復單一腳本。見 [回復說明](CHAPTER2_MAP_2_2_V08542.md)。
+
+> **v0.85.39：** 無玩家資料遷移；回復時同步回復荒風系統、地圖資料、怪物移動、HUD、HTML 與 Service Worker，切勿只回復單一腳本。見 [回復說明](MAP_PRESSURE_V08539.md)。
+
+> **v0.85.38：** 無玩家資料遷移；回復至 v0.85.37 須同步還原倍速保護、提示 UI、樣式和 Service Worker 版本。見 [回復說明](LONG_SESSION_FOLLOWUP_V08538.md)。
+
+> **v0.85.36：** 無存檔 schema 變更；變身與施法動畫是自動過期的戰鬥暫態資料。回復時同步回復呈現腳本、版本與 Service Worker。見 [回復說明](HERO_EVOLUTION_ANIMATION_V08536.md)。
+
+> **v0.85.33：** 新存檔同時包含一般玩家第 1 輪與管理者檔；舊存檔維持原啟用身份。匯出完整玩家檔後再更新；回復程式至 v0.85.32 不需轉換存檔。見 [備份與回復](PLAYER_ENTRY_FRAME_PACING_V08533.md)。
+
+> **v0.85.31：** 無玩家資料遷移；回復時把戰鬥腳本、頁面、樣式、版本與快取一同還原至 v0.85.30。見 [回復步驟](FRAME_PACING_V08531.md)。
+
+> **v0.85.30：** 圖鑑肖像只新增靜態美術與讀取路徑，沒有存檔遷移。若需回復，將六張圖、三個圖鑑腳本、版本標示與 Service Worker 快取一併回到同一版；玩家資料保持不動。見 [圖鑑軍團肖像交付](CODEX_FACTION_ART_V08530.md)。
+> **v0.85.32：** 章節快照新增可選欄位 `economy.emblems`、`hero.evolution`；舊快照缺欄位會以未進化／0 勳章安全還原。見 [英雄進化交付](HERO_EVOLUTION_V08532.md)。
+
+> **v0.85.26：** 無存檔遷移；回復成本、版本檔與 SW 快取即可，玩家資料保留。見 [地精前期平衡](GOBLIN_EARLY_GAME_V08526.md)。
+
+> **v0.85.25：** 無存檔遷移；回復時將兩張怪物圖、程式、版本頁與 SW 快取一起還原至 v0.85.24。見 [回復步驟](COMBAT_MOTION_V08525.md)。
+
+> **v0.85.24：** 沒有存檔遷移；回復時連同地精程式、版本號與 SW 快取還原，玩家資料保留。見 [供能可讀性熱修](GOBLIN_NETWORK_VISIBILITY_V08524.md)。
+
+> v0.85.20 怪物攻擊站姿與路徑銜接：參見 [完整操作、架構、部署、回復與驗收](COMBAT_MOTION_V08520.md)。
+
+> **v0.85.19：** 沒有存檔遷移；教學步驟與當局掉落都不寫入玩家備份。回復時連同腳本與快取版號回到同一版。詳見 [備份與回復](CHAPTER1_ONBOARDING_V08519.md)。
+
+> **v0.85.18：** 無存檔遷移；回復上一版時一併還原動作程式與快取版號。詳見 [備份與回復](COMBAT_MOTION_V08518.md)。
+
+> **v0.85.13（2026-09-24）：** 美術更新不遷移存檔；先匯出玩家資料，回復時一起還原程式與快取版號。詳見 [軍團動作圖回復](FACTION_MOTION_V08513.md)。
+
 > **v0.85.12（2026-09-24）：** 劇情卡不修改玩家存檔格式；更新前仍可由設定匯出備份，回復時需一起回復程式、CSS 與快取版號。詳見 [劇情卡回復](STORY_CARDS_V08512.md)。
 
 > **v0.85.11（2026-09-23）：** 本次不改玩家資料格式；以 Git revert 回復修復提交，程式、CSS 與快取版號需一起回復。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
@@ -442,3 +471,9 @@ v0.84.5 沿用 `equipment.spear` 武器等級，無須存檔遷移；回復內�
 > v0.85.1：根目錄整合前的重疊檔案保存在 `artifacts/frostland-root-integration-backup-v0851/`；完整回復方式見[選角插畫交付](FROSTLAND_SELECTION_ART_V0851.md)。
 
 v0.85.0：先匯出完整玩家備份。舊 schema 保持相容；冰原檢查點保存新兵塔與 equipment.spear，不保存瞬時寒冬、Frost、Hunt 與動作。降版時使用更新前備份，舊程式不認識冰原兵塔。回復流程見 [冰原存檔](FROSTLAND_FACTION_V1.md#j-save-migration--備份與回復)。
+> **v0.85.14：** 新手引導完成旗標隨既有 story profile 備份；回復程式時請同步回復版本與 Service Worker。詳見 [第一章引導](CHAPTER1_ONBOARDING_V08514.md)。
+> **v0.85.15：** 新版進度鍵為 `chapter1-border-onboarding-v2`，仍隨既有 story profile 備份；不影響角色與裝備。詳見 [引導修正](CHAPTER1_ONBOARDING_V08515.md)。
+> **v0.85.16：** 吸附與容錯沒有新增備份資料；既有 story profile 可直接回復。詳見 [教學修正](CHAPTER1_ONBOARDING_V08516.md)。
+
+> **v0.85.17：** 新兵補給和商城操作只存在當局記憶體，沒有新增備份資料；既有 story profile 可直接回復。詳見 [教學操作修正](CHAPTER1_ONBOARDING_V08517.md)。
+> **v0.85.21：** 無存檔遷移；回復時連同新手教學腳本、樣式與快取版號回到同一版。詳見 [備份與回復](CHAPTER1_ONBOARDING_V08521.md)。

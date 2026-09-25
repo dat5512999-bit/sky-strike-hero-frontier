@@ -1,7 +1,7 @@
 (function(ns){
   'use strict';
   ns.config=Object.freeze({
-    width:720,height:720,roadClearance:55,roadUnits:true,startGold:240,startLumber:5,baseHealth:20,totalWaves:30,wave:{firstPreparation:18,preparation:12},
+    width:720,height:720,roadClearance:55,roadUnits:true,startGold:240,startLumber:5,baseHealth:20,totalWaves:50,wave:{firstPreparation:18,preparation:12},
     path:[{x:-30,y:42},{x:155,y:94},{x:385,y:112},{x:540,y:164},{x:585,y:265},{x:558,y:350},{x:420,y:365},{x:235,y:350},{x:120,y:390},{x:104,y:486},{x:190,y:548},{x:390,y:574},{x:600,y:620},{x:750,y:690}],
     damageMultipliers:{pierce:{light:1.35,heavy:.75,arcane:1},magic:{light:.8,heavy:1.25,arcane:.7},chaos:{light:1,heavy:.9,arcane:1.35}},
     frostRules:{"threshold":100,"slowStart":30,"maxSlow":0.4,"freezeDuration":1.6,"deepDuration":2.5,"deepSlow":0.7,"deepVulnerability":0.12,"decayDelay":2,"decayPerSecond":12,"recovery":3,"extensionCap":0.6,"shatterRadius":60,"winterDuration":6,"winterFrost":26,"chainRadius":75,"chainFrost":25,"chainDamage":32,"chainDepth":2,"chainBudget":24,"normal":{"frost":0,"freeze":0},"elite":{"frost":0.35,"freeze":0.5},"boss":{"frost":0.6,"freeze":0.25}},
@@ -14,10 +14,15 @@
       frostMammoth:{"name":"冰脊長毛巨獸","icon":"牙","cost":650,"wood":5,"damage":65,"range":160,"interval":2.4,"frost":4,"splash":35,"shatter":1.8,"shatterRadius":80,"color":"#b89a78","role":"後期終結｜35 範圍重踏、80 範圍碎冰；昂貴且慢，依賴寒冷鋪墊","health":100,"attackType":"chaos","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
 
       goblinEngineer:{name:'地精工程師',faction:'地精',icon:'⚙',cost:75,wood:1,health:78,damage:11,range:145,interval:.9,color:'#d9ad65',attackType:'pierce',style:'bullet',networkCost:1,role:'前期基礎射手｜在機械網路內獲得供能增幅'},
-      goblinGunner:{name:'連發火器手',faction:'地精',icon:'銃',cost:115,wood:2,health:80,damage:16,range:170,interval:.48,color:'#dfa35a',attackType:'pierce',style:'bullet',networkCost:1,role:'快速單體射擊｜重甲效率較低'},
-      goblinRiveter:{name:'鉚釘重射手',faction:'地精',icon:'鉚',cost:150,wood:2,health:90,damage:43,range:215,interval:1.7,color:'#bfc8c4',attackType:'pierce',style:'bullet',armorPierce:7,networkCost:1,role:'遠距穿甲｜低攻速'},
+      goblinGunner:{name:'連發火器手',faction:'地精',icon:'銃',cost:115,wood:2,health:80,damage:18,range:170,interval:.48,color:'#dfa35a',attackType:'pierce',style:'bullet',networkCost:1,role:'快速單體射擊｜重甲效率較低'},
+      goblinRiveter:{name:'鉚釘重射手',faction:'地精',icon:'鉚',cost:150,wood:2,health:90,damage:43,range:215,interval:1.7,color:'#bfc8c4',attackType:'pierce',style:'bullet',armorPierce:7,bonusVsHeavy:1.25,networkCost:1,role:'遠距穿甲｜對重甲 +25%｜低攻速'},
       goblinRecycler:{name:'回收技師',faction:'地精',icon:'♻',cost:130,wood:2,health:85,damage:6,range:125,interval:1.1,color:'#a7d2a1',attackType:'chaos',networkCost:1,role:'低輸出｜供電時協助附近一座機械 +8% 傷害'},
       goblinMech:{name:'重型工程機偶',faction:'地精',icon:'▣',cost:550,wood:5,health:260,damage:84,range:175,interval:1.8,splash:55,color:'#d6a774',attackType:'chaos',style:'cannon',networkCost:2,role:'後期重砲｜需供電，超載後有冷卻窗口'},
+      nagaTideguard:{name:'潮汐衛士',faction:'娜迦',icon:'潮',cost:105,wood:2,health:178,armor:4,damage:20,range:94,interval:.9,speed:98,color:'#55d3d0',attackType:'chaos',naga:true,role:'前排守衛｜第四擊以殼盾衝擊短暫緩速；承受第一線壓力'},
+      nagaShellbreaker:{name:'鹽甲破殼者',faction:'娜迦',icon:'殼',cost:175,wood:3,health:248,armor:6,damage:36,range:104,interval:1.35,speed:78,color:'#7ed8d1',attackType:'chaos',splash:24,naga:true,role:'重甲破陣｜殼盾突擊造成小範圍傷害；故事前期同類會以敵軍登場'},
+      nagaDeepWargod:{name:'深潮戰神',faction:'娜迦',icon:'神',cost:720,wood:5,health:330,armor:5,damage:96,range:118,interval:1.55,speed:84,color:'#2ab9c6',attackType:'chaos',splash:66,ultimate:true,naga:true,role:'娜迦壓軸重兵｜雙刃震潮範圍攻擊；高造價、短射程'},
+      nagaMantaRaider:{name:'魔鬼魚翼襲者',faction:'娜迦',icon:'翼',cost:155,wood:2,health:102,armor:1,damage:24,range:218,interval:1.05,speed:148,color:'#77e2e0',attackType:'pierce',chain:2,chainRange:82,style:'moon',naga:true,role:'空中遠射｜月牙刃彈射兩個鄰近目標；機動高、生命低'},
+      nagaVenomStalker:{name:'毒沼潛獵者',faction:'娜迦',icon:'毒',cost:138,wood:2,health:94,armor:1,damage:18,range:172,interval:.74,speed:138,color:'#65cc8b',attackType:'magic',style:'plague',vulnerability:.12,naga:true,role:'中距削弱｜毒鏢使其他來源傷害 +12%；需前排掩護'},
       royalCommander:{name:'皇家重裝統領',faction:'王國',icon:'冠',cost:750,wood:5,health:260,damage:100,range:165,interval:1.5,splash:38,color:'#f3ce75',attackType:'chaos',style:'lightning',ultimate:true,commandHaste:.18,role:'終極士兵｜重鎚濺射｜165 範圍其他士兵攻速 +18%（同類取最高）'},
       soulsteel:{name:'深淵魂鋼魔像',faction:'暗影',icon:'魂',cost:850,wood:6,health:350,damage:120,range:145,interval:1.8,splash:48,color:'#b78aff',attackType:'chaos',style:'spirit',ultimate:true,soulSlam:true,role:'終極士兵｜每次攻擊有 3 魂則消耗，傷害 ×1.5、震地範圍 +20；無魂仍攻擊'},
       kingdomMage:{name:'王國魔法師',icon:'ϟ',cost:110,wood:2,health:75,damage:19,range:162,interval:1.15,color:'#71bcff',attackType:'magic',style:'lightning',kingdomBounce:true,role:'彈射 2／3／4 次｜Lv3 感電'},
@@ -58,7 +63,12 @@
       frostAurora:{"name":"極光獵台","icon":"光","cost":190,"wood":3,"damage":17,"range":220,"interval":1.1,"frost":15,"frozenBonus":1.8,"freezeExtension":0.2,"color":"#a0e3c0","role":"窗口維持｜命中延長 .2 秒、每窗共限 .6 秒；窗口傷害 ×1.8","attackType":"magic","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
       frostGlacier:{"name":"冰河核心","icon":"河","cost":420,"wood":5,"damage":18,"range":215,"interval":2.6,"frost":50,"splash":92,"color":"#82bdcd","role":"後期大範圍控制｜92 範圍 +50 Frost；造價高、攻擊空窗長","attackType":"magic","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
 
-      goblinGenerator:{name:'動力機座',faction:'地精',icon:'⚙',cost:125,wood:2,damage:0,range:175,interval:1,color:'#8edbd0',attackType:'magic',supportOnly:true,role:'機械網路核心｜半徑 175，容量 3 + 每級 1'},
+      nagaTidegate:{name:'潮門尖塔',faction:'娜迦',icon:'門',cost:115,wood:2,damage:22,range:174,interval:.92,color:'#55dbe2',attackType:'magic',vulnerability:.1,naga:true,role:'潮壓標記｜穩定遠攻；命中使其他來源傷害 +10%，適合建立首波節奏'},
+      nagaShellBastion:{name:'鹽甲棱堡',faction:'娜迦',icon:'盾',cost:165,wood:3,damage:38,range:148,interval:1.35,color:'#8fe7da',attackType:'pierce',armorPierce:3,shots:2,naga:true,role:'雙叉拒馬｜雙發穿甲，優先處理重甲；射程較短'},
+      nagaAbyssShrine:{name:'深淵祭壇',faction:'娜迦',icon:'淵',cost:175,wood:3,damage:0,range:178,interval:1,color:'#3dc6cf',attackType:'magic',supportOnly:true,nagaHaste:.18,naga:true,role:'潮衛共鳴｜附近娜迦士兵與英雄攻速 +18%，同類不疊加；本身不攻擊'},
+      nagaMantaAerie:{name:'翼潮獵台',faction:'娜迦',icon:'翼',cost:235,wood:4,damage:31,range:218,interval:1.18,color:'#76e6e2',attackType:'magic',chain:3,chainRange:102,slow:.72,slowTime:1.1,naga:true,role:'高台雷潮｜三段連鎖並緩速，擅長壓制分散敵群'},
+
+      goblinGenerator:{name:'動力機座',faction:'地精',icon:'⚙',cost:95,wood:1,damage:0,range:175,interval:1,color:'#8edbd0',attackType:'magic',supportOnly:true,role:'機械網路核心｜半徑 175，容量 3 + 每級 1'},
       goblinTurret:{name:'鉚釘武器台',faction:'地精',icon:'⌾',cost:110,wood:2,damage:26,range:165,interval:.85,color:'#e2be79',attackType:'pierce',style:'bullet',networkCost:1,role:'基本火力｜接入網路傷害 +22%'},
       goblinMortar:{name:'蒸汽迫擊砲',faction:'地精',icon:'●',cost:190,wood:3,damage:53,range:145,interval:1.8,splash:60,color:'#e8a46e',attackType:'chaos',style:'cannon',networkCost:2,role:'範圍火力｜供電需求 2'},
       goblinSnare:{name:'絞索控制台',faction:'地精',icon:'⌗',cost:135,wood:2,damage:9,range:130,interval:1.25,slow:.55,slowTime:1.1,color:'#a4d3ce',attackType:'pierce',networkCost:1,role:'短射程控場｜供電需求 1'},

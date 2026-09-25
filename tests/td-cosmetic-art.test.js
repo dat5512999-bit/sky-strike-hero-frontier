@@ -26,7 +26,7 @@ test('equipped hero art uses its actual atlas and keeps the hero unchanged',()=>
   art.cosmeticEquipped={};assert.equal(art.drawHero(ctx,hero),'original');
   art.cosmeticFaction='eclipse-court';
   assert.equal(art.drawCombatUnitSprite(ctx,{type:'hunter'}),true);
-  assert.equal(drawn.at(-1),'assets/td/combat-art/eclipse-units-a-v1.png');
+  assert.equal(drawn.at(-1),'assets/td/combat-art/eclipse-units-a-actions-v2.png');
   assert.equal(art.drawBuilding(ctx,'arrow',0,0,1,null),true);
   assert.equal(drawn.at(-1),'assets/td/combat-art/eclipse-buildings-v1.png');
 });

@@ -9,7 +9,7 @@ const files=['src/td/namespace.js','src/td/config.js','src/td/systems/TargetSele
 function load(){const context=vm.createContext({console});context.globalThis=context;files.forEach(file=>vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file}));return context.TowerFrontier;}
 function enemy(ns,type,x,index){const monster=new ns.entities.Monster(type,1);monster.x=x;monster.y=100;monster.index=index;return monster;}
 
-test('所有塔在建造卡上有不同的用途說明',()=>{const ns=load(),roles=Object.values(ns.config.buildings).map(tower=>tower.role);assert.equal(roles.length,35);assert.ok(roles.every(Boolean));assert.equal(new Set(roles).size,roles.length);});
+test('所有塔在建造卡上有不同的用途說明',()=>{const ns=load(),roles=Object.values(ns.config.buildings).map(tower=>tower.role);assert.equal(roles.length,39);assert.ok(roles.every(Boolean));assert.equal(new Set(roles).size,roles.length);});
 
 test('戰鼓只支援範圍內守軍，兩座不疊加，移除後效果消失',()=>{const ns=load(),build=new ns.systems.BuildSystem(),near=new ns.entities.CombatUnit('hunter',100,100),far=new ns.entities.CombatUnit('hunter',500,500),first=new ns.entities.Building('barracks',110,100),second=new ns.entities.Building('barracks',105,105);build.items.push(near,far,first,second);const base=near.config().interval;build.applyTowerSupport();assert.equal(near.supportHaste,.08);assert.equal(far.supportHaste,0);assert.ok(near.config().interval<base);first.level=3;first.chooseBranch('command');build.applyTowerSupport();assert.equal(near.supportHaste,.15);assert.ok(near.config().interval<base*.9);first.retired=true;build.applyTowerSupport();assert.equal(near.supportHaste,.08);second.retired=true;build.applyTowerSupport();assert.equal(near.supportHaste,0);assert.equal(near.config().interval,base);});
 

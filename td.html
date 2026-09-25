@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="td.css">
   <link rel="stylesheet" href="td-combat.css">
   <link rel="stylesheet" href="td-wave.css">
+  <link rel="stylesheet" href="td-tutorial.css">
   <link rel="stylesheet" href="td-lobby.css">
   <link rel="stylesheet" href="td-ranking.css">
   <link rel="stylesheet" href="td-cinematic.css">
@@ -31,18 +32,19 @@
   <link rel="stylesheet" href="td-expedition.css">
   <link rel="stylesheet" href="td-result.css">
   <link rel="stylesheet" href="td-polish.css">
+  <link rel="stylesheet" href="td-accessibility.css">
 </head>
 <body data-combat-ui="edge">
-  <div id="td-boot-screen" role="status" aria-live="polite"><strong>HERO FRONTIER</strong><span>正在開啟主大廳…</span></div>
+  <div id="td-boot-screen" role="status" aria-live="polite"><strong>英雄邊境</strong><span>正在開啟主大廳…</span></div>
   <aside id="td-orientation-gate" class="orientation-gate" role="dialog" aria-modal="true" aria-labelledby="td-orientation-title">
-    <div><b aria-hidden="true">↻</b><h2 id="td-orientation-title">請將手機轉為橫向</h2><p>HERO FRONTIER 的戰場、選角與建造介面以橫向操作設計。</p><button id="td-orientation-lock" type="button">嘗試切換橫向顯示</button></div>
+    <div><b aria-hidden="true">↻</b><h2 id="td-orientation-title">請將手機轉為橫向</h2><p>《英雄邊境》的戰場、選角與建造介面以橫向操作設計。</p><button id="td-orientation-lock" type="button">嘗試切換橫向顯示</button></div>
   </aside>
   <main class="td-shell">
     <header class="td-header">
-      <div class="td-brand"><h1>英雄塔防<small>HERO FRONTIER</small></h1></div>
+      <div class="td-brand"><h1>英雄塔防<small>英雄邊境</small></h1></div>
       <a href="td.html" aria-label="返回遠征選擇">← 遠征選擇</a>
       <label class="td-layout-picker"><span>介面</span><select id="td-layout-mode" aria-label="介面模式"><option value="auto">自動</option><option value="desktop">電腦</option><option value="mobile">手機</option></select></label>
-      <div class="resource" title="金幣"><span class="resource-icon" aria-hidden="true">🪙</span><small>GOLD</small><strong id="td-gold">240</strong></div>
+      <div class="resource" title="金幣"><span class="resource-icon" aria-hidden="true">🪙</span><small>金幣</small><strong id="td-gold">240</strong></div>
       <div class="resource" title="木材"><span class="resource-icon" aria-hidden="true">🪵</span><small>木材</small><strong id="td-lumber">5</strong></div>
       <div class="resource" title="功勳"><span class="resource-icon merit-icon" aria-hidden="true">🏅</span><small>功勳</small><strong id="td-merit">0</strong></div>
       <div class="resource" title="城門耐久"><span class="resource-icon" aria-hidden="true">❤️</span><small>城門</small><strong id="td-health">20 / 20</strong></div>
@@ -52,15 +54,17 @@
     <section id="td-wave-hud" class="td-wave-info" aria-label="波次資訊">
       <div class="wave-index"><strong id="td-wave-number">第 1／30 波</strong></div>
       <div class="td-wave-copy"><span id="td-wave-status">等待第一波</span></div>
-      <button id="td-wave-button" type="button">立即迎戰</button><div class="wave-forecast"><div id="td-wave-groups" aria-label="來襲敵軍"></div><div id="td-wave-tags" aria-label="本波威脅"></div><details class="wave-intel"><summary aria-label="查看波次詳細情報">情報</summary><small id="td-wave-preview"></small></details></div><div id="td-wave-toast" role="status" aria-live="polite" hidden></div><div class="hud-controls"><button id="td-report-open" type="button" title="查看本局逐波戰報">戰況</button><div class="speed-picker" aria-label="遊戲速度"><button type="button" data-game-speed="1" aria-pressed="true">×1</button><button type="button" data-game-speed="2" aria-pressed="false">×2</button><button type="button" data-game-speed="3" aria-pressed="false">×3</button></div></div>
+      <button id="td-wave-button" type="button">立即迎戰</button><div class="wave-forecast"><div id="td-wave-groups" aria-label="來襲敵軍"></div><div id="td-wave-tags" aria-label="本波威脅"></div><details class="wave-intel"><summary aria-label="查看波次詳細情報">情報</summary><small id="td-wave-preview"></small></details></div><div id="td-wave-toast" role="status" aria-live="polite" hidden></div><div class="hud-controls"><button id="td-report-open" type="button" title="查看本局逐波戰報">戰況</button><div class="speed-picker" aria-label="遊戲速度"><button type="button" data-game-speed="1" aria-pressed="true">×1</button><button type="button" data-game-speed="2" aria-pressed="false">×2</button><button type="button" data-game-speed="3" aria-pressed="false">×3</button></div><small id="td-speed-status" role="status" aria-live="polite" hidden></small></div>
     </section>
     <section class="td-stage">
       <canvas id="td-game" width="720" height="720" aria-label="英雄塔防戰場"></canvas>
+      <output id="td-battle-announcement" class="td-screen-reader-only" role="status" aria-live="polite" aria-atomic="true"></output>
+      <output id="td-performance-panel" class="td-performance-panel" aria-label="戰場效能資訊" aria-live="off" hidden></output>
       <div id="td-hero-joystick" class="hero-joystick" role="group" aria-label="英雄移動搖桿：輕推慢走，推到底全速，放開停止" hidden><span class="joystick-direction" aria-hidden="true"></span><span class="joystick-thumb" aria-hidden="true"></span><small aria-hidden="true">輕推慢走</small></div>
       <details id="td-camera-controls" class="camera-controls" aria-label="戰場鏡頭"><summary>⌖ 鏡頭</summary><button id="td-camera-close" class="camera-close" type="button" aria-label="關閉鏡頭工具並返回操作">×</button><div><button id="td-camera-inspect" type="button" aria-pressed="false">✥ 拖曳查看</button><button id="td-camera-home" type="button">◎ 回英雄</button><button id="td-camera-follow" type="button" aria-pressed="false">跟隨</button><button id="td-camera-all" type="button">全圖</button><button id="td-camera-out" type="button" aria-label="縮小戰場">−</button><button id="td-camera-in" type="button" aria-label="放大戰場">＋</button></div><small id="td-camera-status">中鍵／空白＋拖曳查看</small></details>
       <button id="td-minimap" class="td-minimap" type="button" aria-label="戰場小地圖，點擊移動視野" title="戰場全圖 · 點擊移動視野"><canvas id="td-minimap-canvas" width="200" height="142" aria-hidden="true"></canvas><span>戰場全圖 · 點擊定位</span></button>
       <div class="td-quick-rail" role="group" aria-label="戰場快捷面板"><button id="td-selection-shortcut" type="button" aria-label="開啟選取資訊" aria-expanded="false" title="選取資訊"><b aria-hidden="true">▣</b><small>選取</small></button><button id="td-score-shortcut" type="button" aria-label="開啟本局積分" aria-expanded="false" title="本局積分"><b aria-hidden="true">🏆</b><small>積分</small><em id="td-score-value">0</em></button><button id="td-armory-shortcut" type="button" aria-label="開啟軍械庫" title="軍械庫" disabled><b aria-hidden="true">⚔</b><small>軍械</small><em id="td-armory-shortcut-count">0</em></button><button id="td-shop-open" class="shop-button" type="button" aria-label="開啟商店（R）" aria-keyshortcuts="R" title="商店城 · R"><b aria-hidden="true">♜</b><small>商店</small><kbd>R</kbd></button></div>
-      <aside id="td-score-panel" class="score-panel" aria-label="本局積分與評級" hidden><button id="td-score-close" type="button" aria-label="關閉積分面板">×</button><small>BATTLE SCORE</small><div><strong id="td-score-total">0</strong><b id="td-score-grade">--</b></div><p id="td-score-detail">完成波次後會計算積分與評級。</p><span id="td-score-best">最佳紀錄 0｜每波越快清除，時間獎勵越高。</span></aside>
+      <aside id="td-score-panel" class="score-panel" aria-label="本局積分與評級" hidden><button id="td-score-close" type="button" aria-label="關閉積分面板">×</button><small>戰局積分</small><div><strong id="td-score-total">0</strong><b id="td-score-grade">--</b></div><p id="td-score-detail">完成波次後會計算積分與評級。</p><span id="td-score-best">最佳紀錄 0｜每波越快清除，時間獎勵越高。</span></aside>
       <p class="td-orientation-hint">橫向握持可在同一畫面查看戰場與指令</p>
       <div id="td-placement-actions" class="placement-actions" role="group" aria-label="建造位置預覽" hidden><strong id="td-placement-title">點戰場選擇位置</strong><small id="td-placement-detail">先預覽位置，再確認部署</small><div><button id="td-placement-confirm" type="button" disabled>✓ 確認部署</button><button id="td-placement-cancel" type="button">× 取消</button></div></div>
       <div id="td-selection-actions" class="selection-actions" role="group" aria-label="選取單位快捷操作" hidden><button id="td-upgrade" type="button"><b>⬆</b><span>升級</span></button><button id="td-sell" type="button"><b>↩</b><span>回收</span></button><button id="td-unit-equip" type="button" hidden><b>⚔</b><span>裝備</span></button></div>
@@ -68,9 +72,9 @@
 
       <div id="td-profession-screen" class="td-profession-screen" role="dialog" aria-modal="true" aria-labelledby="td-opening-title" hidden>
         <div class="profession-dialog">
-          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>HERO FRONTIER · v0.85.12 · FROSTLAND TESTABLE V1</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
+          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>英雄邊境 · v0.85.42 · 第二章・燼道相逢／娜迦自由遠征</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
           <nav class="expedition-steps" aria-label="遠征配置步驟"><button type="button" data-opening-page="battlefield" aria-pressed="true"><b>01</b><span>選擇戰場</span></button><button type="button" data-opening-page="party"><b>02</b><span>組建隊伍</span></button></nav>
-          <div class="opening-titlebar"><div class="opening-title-copy"><p>HERO FRONTIER</p><h2 id="td-opening-title">選擇戰場</h2><span id="td-opening-subtitle">踏上新的戰場，書寫屬於你的傳奇。</span></div><select id="td-map-choice" class="opening-data-select" aria-label="選擇戰場"><option value="beginner">新手谷地</option><option value="twinpass">雙隘口要塞</option><option value="autumn">暮秋遺跡</option><option value="silverleaf">銀葉溪谷</option><option value="shadowfall">暮影舊城</option><option value="frostborn">冰原裂谷</option></select></div>
+          <div class="opening-titlebar"><div class="opening-title-copy"><p>英雄邊境</p><h2 id="td-opening-title">選擇戰場</h2><span id="td-opening-subtitle">踏上新的戰場，書寫屬於你的傳奇。</span></div><select id="td-map-choice" class="opening-data-select" aria-label="選擇戰場"><option value="beginner">新手谷地</option><option value="twinpass">雙隘口要塞</option><option value="autumn">暮秋遺跡</option><option value="silverleaf">銀葉溪谷</option><option value="shadowfall">暮影舊城</option><option value="frostborn">冰原裂谷</option></select></div>
           <section class="expedition-page battlefield-page" data-expedition-page="battlefield">
           <section class="opening-step difficulty-step" aria-labelledby="td-difficulty-heading"><div class="opening-step-heading"><h3 id="td-difficulty-heading">選擇難度</h3><span>敵軍與收益維持現行規則</span></div>
             <div class="difficulty-list" aria-label="塔防難度">
@@ -81,7 +85,7 @@
             </div>
             <details class="difficulty-rules"><summary>詳細規則與完整倍率</summary><p id="td-difficulty-detail"></p></details>
           </section>
-          <div class="map-browser-layout"><section class="map-stage"><div id="td-map-preview" class="map-preview" role="img" aria-label="目前戰場預覽"><div><small>SELECTED BATTLEFIELD</small><h3 id="td-map-title">新手谷地</h3><p id="td-map-quote">明顯的 U 型道路，適合學習射程與部署位置。</p></div></div><div id="td-map-browser" class="map-thumbnail-strip" aria-label="戰場瀏覽"><button type="button" data-map-id="beginner" aria-pressed="true"><b>新手谷地</b><small>U 型防線</small></button><button type="button" data-map-id="twinpass"><b>雙隘口要塞</b><small>雙路匯流</small></button><button type="button" data-map-id="autumn"><b>暮秋遺跡</b><small>雙 U 型彎</small></button><button type="button" data-map-id="silverleaf"><b>銀葉溪谷</b><small>溪谷橋樑</small></button><button type="button" data-map-id="shadowfall"><b>暮影舊城</b><small>中央廣場</small></button><button type="button" data-map-id="frostborn"><b>冰原裂谷</b><small>提早匯流</small></button></div></section><aside class="map-detail"><small>BATTLEFIELD INTEL</small><h3 id="td-map-detail-name">新手谷地</h3><div id="td-map-tags" class="expedition-tags"></div><p id="td-map-description"></p><h4>戰場特色</h4><ul id="td-map-features"></ul><div class="route-preview"><span>路線預覽</span><b id="td-route-label">單一路線 · U 型防線</b><small id="td-map-note">U 型單路線｜草地部署｜道路與地形禁建</small></div><div class="map-record"><span>最佳紀錄</span><b id="td-map-record">尚無紀錄</b></div><button id="td-select-battlefield" type="button">選擇此戰場　→</button></aside></div>
+          <div class="map-browser-layout"><section class="map-stage"><div id="td-map-preview" class="map-preview" role="img" aria-label="目前戰場預覽"><div><small>目前選擇的戰場</small><h3 id="td-map-title">新手谷地</h3><p id="td-map-quote">明顯的 U 型道路，適合學習射程與部署位置。</p></div></div><div id="td-map-browser" class="map-thumbnail-strip" aria-label="戰場瀏覽"><button type="button" data-map-id="beginner" aria-pressed="true"><b>新手谷地</b><small>U 型防線</small></button><button type="button" data-map-id="twinpass"><b>雙隘口要塞</b><small>雙路匯流</small></button><button type="button" data-map-id="autumn"><b>暮秋遺跡</b><small>雙 U 型彎</small></button><button type="button" data-map-id="silverleaf"><b>銀葉溪谷</b><small>溪谷橋樑</small></button><button type="button" data-map-id="shadowfall"><b>暮影舊城</b><small>中央廣場</small></button><button type="button" data-map-id="frostborn"><b>冰原裂谷</b><small>提早匯流</small></button></div></section><aside class="map-detail"><small>戰場情報</small><h3 id="td-map-detail-name">新手谷地</h3><div id="td-map-tags" class="expedition-tags"></div><p id="td-map-description"></p><h4>戰場特色</h4><ul id="td-map-features"></ul><div class="route-preview"><span>路線預覽</span><b id="td-route-label">單一路線 · U 型防線</b><small id="td-map-note">U 型單路線｜草地部署｜道路與地形禁建</small></div><div class="map-record"><span>最佳紀錄</span><b id="td-map-record">尚無紀錄</b></div><button id="td-select-battlefield" type="button">選擇此戰場　→</button></aside></div>
           </section>
           <section class="expedition-page party-page" data-expedition-page="party" hidden>
           <div class="party-toolbar"><button id="td-change-battlefield" type="button">← 更換戰場</button><span id="td-party-battlefield">新手谷地 · 邊境守衛</span><div class="party-mobile-tabs"><button type="button" data-party-tab="hero" aria-pressed="true">英雄</button><button type="button" data-party-tab="faction">軍團</button></div></div>
@@ -94,7 +98,8 @@
                 <button type="button" data-profession="chief" aria-pressed="false"><b>大酋長・戈爾</b><strong>戰團指揮 · 狂潮爆發</strong><small>戰吼 / 祖靈怒火 / 裂地衝擊波</small></button>
                 <button type="button" data-profession="frostland" aria-pressed="false"><b>霜牙・凜</b><strong>冰原獵首 · 寒冬合獵</strong><small>寒冷 / 狩獵 / 碎冰</small></button>
                 <button type="button" data-profession="goblin" aria-pressed="false"><b>銅齒・奇克</b><strong>首席工程師 · 網路超載</strong><small>改裝 / 洩壓 / 巡修機偶</small></button>
-              </div><article id="td-hero-detail" class="choice-detail"><div id="td-hero-detail-art"></div><section><small>HERO IDENTITY</small><h4 id="td-hero-detail-name">選擇英雄</h4><b id="td-hero-identity">不同英雄會改變你的操作核心。</b><p id="td-hero-description"></p><h5>核心技能</h5><div id="td-hero-skills" class="expedition-tags hero-skill-list"></div><footer id="td-hero-phase"></footer></section></article>
+                <button type="button" data-profession="naga" aria-pressed="false"><b>破潮者・賽洛</b><strong>潮壓突進 · 旋潮控場</strong><small>潮門突刺 / 旋潮領域 / 潮衛號令</small></button>
+              </div><article id="td-hero-detail" class="choice-detail"><div id="td-hero-detail-art"></div><section><small>英雄定位</small><h4 id="td-hero-detail-name">選擇英雄</h4><b id="td-hero-identity">不同英雄會改變你的操作核心。</b><p id="td-hero-description"></p><h5>核心技能</h5><div id="td-hero-skills" class="expedition-tags hero-skill-list"></div><footer id="td-hero-phase"></footer></section></article>
             </section>
             <section class="opening-step opening-faction-step" aria-labelledby="td-faction-heading"><div class="opening-step-heading"><h3 id="td-faction-heading"><em>3</em> 選擇軍團</h3><span>決定可建造部隊</span></div>
               <div class="faction-list expedition-carousel" aria-label="開局軍團">
@@ -104,7 +109,8 @@
                 <button type="button" data-faction="wild" aria-pressed="false"><b>荒野部族</b><strong>野性個體 · 戰團集結 · 部族狂潮</strong><small>週期爆發｜5 兵・4 塔</small></button>
                 <button type="button" data-faction="frostland" aria-pressed="false"><b>霜原盟族</b><strong>先累寒 → 再凍結 → 碎冰獵殺</strong><small>6 兵・7 塔</small></button>
                 <button type="button" data-faction="goblin" aria-pressed="false"><b>地精工程團</b><strong>機械網路 · 投資回收 · 超載</strong><small>工程布局｜5 兵・7 裝置</small></button>
-              </div><article id="td-faction-detail" class="choice-detail faction-detail"><div id="td-faction-detail-art"></div><section><small>ARMY IDENTITY</small><h4 id="td-faction-detail-name">選擇軍團</h4><b id="td-faction-identity">軍團決定整場可使用的守軍與建築。</b><p id="td-faction-description"></p><div id="td-faction-phases" class="phase-strip"></div><h5>代表軍隊</h5><footer id="td-faction-roster" class="faction-roster-list"></footer></section></article>
+                <button type="button" data-faction="naga" aria-pressed="false"><b>娜迦潮衛</b><strong>潮壓標記 · 重甲叉陣 · 翼潮連鎖</strong><small>潮門軍勢｜5 兵・4 建築</small></button>
+              </div><article id="td-faction-detail" class="choice-detail faction-detail"><div id="td-faction-detail-art"></div><section><small>軍團定位</small><h4 id="td-faction-detail-name">選擇軍團</h4><b id="td-faction-identity">軍團決定整場可使用的守軍與建築。</b><p id="td-faction-description"></p><div id="td-faction-phases" class="phase-strip"></div><h5>代表軍隊</h5><footer id="td-faction-roster" class="faction-roster-list"></footer></section></article>
             </section>
             <aside class="expedition-summary"><small>本次遠征</small><div id="td-summary-map" class="summary-map"></div><dl><div><dt>難度</dt><dd id="td-summary-difficulty">邊境守衛</dd></div><div><dt>英雄</dt><dd id="td-summary-hero">尚未選擇</dd></div><div class="summary-times"><dt>組合</dt><dd><span id="td-summary-hero-short">英雄</span><b>×</b><span id="td-summary-faction">軍團</span></dd></div></dl><p id="td-combination-hint">選擇英雄與軍團，建立本次出征配置。</p><div class="opening-actions"><div id="td-art-loading" class="art-loading" role="status" aria-live="polite"><span id="td-art-status">正在載入戰場美術…</span><button id="td-art-retry" type="button" hidden>重新載入圖片</button></div><button id="td-continue-expedition" type="button" hidden>繼續遠征</button><button id="td-start-expedition" type="button" disabled>開始遠征</button></div></aside>
           </div>
@@ -113,7 +119,7 @@
       </div>
       <div id="td-overlay" class="td-overlay" role="dialog" aria-modal="true" aria-labelledby="td-overlay-title" hidden>
         <div class="result-card">
-          <header class="result-eyebrow"><span>FRONTIER REPORT</span><span id="td-result-chapter">遠征戰報</span></header>
+          <header class="result-eyebrow"><span>邊境戰報</span><span id="td-result-chapter">遠征戰報</span></header>
           <div class="result-heading"><span id="td-result-seal" class="result-seal" aria-hidden="true">✦</span><div><h2 id="td-overlay-title">遠征結果</h2><strong id="td-result-status">戰鬥結束</strong></div></div>
           <p id="td-overlay-message" class="result-intro"></p>
           <p id="td-result-highlight" class="result-highlight" hidden></p>
@@ -137,24 +143,24 @@
       </div>
     </section>
     <section class="td-command" aria-label="建造與英雄指令">
-      <div class="panel-heading"><span>英雄指揮所</span><small>HERO COMMAND</small><button id="td-mobile-panel-toggle" class="mobile-panel-toggle" type="button" aria-expanded="true">收合面板</button></div>
+      <div class="panel-heading"><span>英雄指揮所</span><small>英雄指令</small><button id="td-mobile-panel-toggle" class="mobile-panel-toggle" type="button" aria-expanded="true">收合面板</button></div>
       <div class="hero-profile">
         <button id="td-hero-select" aria-expanded="false" aria-controls="td-hero-more" class="td-hero-select" type="button" aria-pressed="false" disabled title="選取英雄（F1），再點地面移動"><span class="hero-face" aria-hidden="true"></span><span><strong>森語者・希爾芙</strong><small>點我控制英雄 · F1</small></span><span class="hero-select-state">選取</span></button>
-        <div class="hero-rank"><span>LV.</span><strong id="td-hero-level">1</strong></div>
-        <div class="hero-vitals"><label class="hero-health-vital">HP <span id="td-hero-hp-text">100 / 100</span><i><b id="td-hero-hp-fill"></b></i></label><label>MP <span id="td-hero-mp-text">冷卻能量</span><i class="mana"><b id="td-hero-mp-fill"></b></i></label></div>
-        <details class="hero-more" id="td-hero-more"><summary>英雄資訊</summary><div class="hero-extra"><div class="hero-xp"><label>XP <span id="td-hero-xp-text">0 / 52</span><i class="experience"><b id="td-hero-xp-fill"></b></i></label></div><div class="hero-stats" aria-label="英雄能力"><span>⚔ 攻擊 <b id="td-stat-attack">18</b></span><span>◎ 射程 <b id="td-stat-range">152</b></span><span>✥ 攻速 <b id="td-stat-speed">0.58s</b></span><span>➤ 移速 <b id="td-stat-move">215</b></span></div><div id="td-hero-weapon" class="hero-equipment" data-rarity="base"><i aria-hidden="true"></i><span><small>目前武器</small><b>銀葉法杖</b></span><em>制式</em></div><button id="td-hero-equip" type="button">英雄裝備</button></div></details>
+        <div class="hero-rank"><span>等級</span><strong id="td-hero-level">1</strong></div>
+        <div class="hero-vitals"><label class="hero-health-vital">生命 <span id="td-hero-hp-text">100 / 100</span><i><b id="td-hero-hp-fill"></b></i></label><label>能量 <span id="td-hero-mp-text">冷卻能量</span><i class="mana"><b id="td-hero-mp-fill"></b></i></label></div>
+        <details class="hero-more" id="td-hero-more"><summary>英雄資訊</summary><div class="hero-extra"><div class="hero-xp"><label>經驗 <span id="td-hero-xp-text">0 / 52</span><i class="experience"><b id="td-hero-xp-fill"></b></i></label></div><div class="hero-stats" aria-label="英雄能力"><span>⚔ 攻擊 <b id="td-stat-attack">18</b></span><span>◎ 射程 <b id="td-stat-range">152</b></span><span>✥ 攻速 <b id="td-stat-speed">0.58s</b></span><span>➤ 移速 <b id="td-stat-move">215</b></span></div><div id="td-hero-weapon" class="hero-equipment" data-rarity="base"><i aria-hidden="true"></i><span><small>目前武器</small><b>銀葉法杖</b></span><em>制式</em></div><button id="td-hero-evolve" class="hero-evolve" type="button" hidden>英雄進化</button><button id="td-hero-equip" type="button">英雄裝備</button></div></details>
       </div>
-      <div class="panel-section-label"><span>技能</span><small>SKILLS · Q W E F</small></div>
+      <div class="panel-section-label"><span>技能</span><small>快捷鍵 · Q W E F</small></div>
       <div class="td-hero-dock"><button id="td-skill-button" class="skill-button" type="button"><kbd>Q</kbd><b>❄</b><span>霜環震擊</span></button><button id="td-thunder" class="skill-button" type="button" title="攻擊附近最多四個敵人，冷卻12秒"><kbd>W</kbd><b>ϟ</b><span>連鎖雷擊</span></button><button id="td-summon" class="skill-button" type="button" title="召喚兩名守衛協助攻擊，冷卻22秒"><kbd>E</kbd><b>✧</b><span>祖靈守衛</span></button><button id="td-ultimate" class="skill-button ultimate-button" type="button" aria-keyshortcuts="F" title="大絕：選擇英雄後查看效果"><kbd>F</kbd><b>✦</b><span>星墜寒潮</span><small class="skill-cooldown" aria-hidden="true"></small></button></div>
       <details class="selection-details"><summary>選取資訊</summary>
-      <div class="panel-section-label"><span>選取資訊</span><small>SELECTION</small></div>
+      <div class="panel-section-label"><span>選取資訊</span><small>目前選取</small></div>
       <div class="selection-card"><div id="td-portrait" class="selection-portrait">?</div><div><small id="td-selection-type">目前指令</small><strong id="td-selection">先選擇守備職業</strong><span id="td-selection-purpose" class="selection-purpose" hidden></span><span id="td-selection-stats">經典 RTS 職業科技</span></div></div>
       <label id="td-target-controls" class="target-controls" hidden>士兵索敵 <select id="td-target-strategy" aria-label="選取士兵的索敵策略"><option value="front">最接近城門</option><option value="nearest">距離最近</option><option value="lowestHealth">血量最低</option><option value="highestHealth">血量最高</option><option value="fastest">速度最快</option></select></label>
       <button id="td-armory-open" class="armory-open" type="button" disabled><span>軍械庫</span><b id="td-armory-count">0 件</b><small>查看本局裝備、持有人與販售</small></button>
       <p id="td-tower-skill" class="tower-skill-info" hidden></p>
       <div id="td-tower-branches" class="tower-branches" hidden><small>選擇進階建築</small><div><button type="button" data-tower-branch="0"></button><button type="button" data-tower-branch="1"></button></div></div>
       </details>
-      <div class="panel-section-label"><span>命令與建造</span><small>COMMAND / BUILD</small></div>
+      <div class="panel-section-label"><span>命令與建造</span><small>指令／建造</small></div>
       <div class="command-tabs" aria-label="建造面板"><button type="button" data-command-tab="build" aria-pressed="true">招募／建造</button></div>
       <div id="td-army-summary" class="army-summary">選擇軍團後展開可建造清單</div>
       <div class="command-grid" data-panel="build">
@@ -216,6 +222,15 @@
         <button type="button" data-build-kind="building" data-build-type="frostObelisk" hidden><b>碑</b><span>霜墓尖碑</span><small></small></button>
         <button type="button" data-build-kind="building" data-build-type="frostAurora" hidden><b>光</b><span>極光獵台</span><small></small></button>
         <button type="button" data-build-kind="building" data-build-type="frostGlacier" hidden><b>河</b><span>冰河核心</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="nagaTideguard" hidden><b>潮</b><span>潮汐衛士</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="nagaShellbreaker" hidden><b>殼</b><span>鹽甲破殼者</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="nagaDeepWargod" hidden><b>神</b><span>深潮戰神</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="nagaMantaRaider" hidden><b>翼</b><span>魔鬼魚翼襲者</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="nagaVenomStalker" hidden><b>毒</b><span>毒沼潛獵者</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="nagaTidegate" hidden><b>門</b><span>潮門尖塔</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="nagaShellBastion" hidden><b>盾</b><span>鹽甲棱堡</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="nagaAbyssShrine" hidden><b>淵</b><span>深淵祭壇</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="nagaMantaAerie" hidden><b>翼</b><span>翼潮獵台</span><small></small></button>
         <button type="button" data-build-kind="building" data-build-type="arrow"><b>♜</b><span>林地弩塔</span><small></small></button>
         <button type="button" data-build-kind="building" data-build-type="iceward"><b>❄</b><span>寒鋼哨塔</span><small></small></button>
         <button type="button" data-build-kind="building" data-build-type="frost"><b>❄</b><span>寒霜塔</span><small></small></button>
@@ -238,15 +253,16 @@
     </section>
     <footer id="td-help">① 選擇職業　② 招募守軍並永久部署　③ 守住城門 · F 施放英雄大絕</footer>
   </main>
-  <section id="td-menu-screen" class="game-menu-overlay" role="dialog" aria-modal="true" aria-labelledby="td-menu-title" hidden><div class="game-menu-dialog"><div class="game-menu-heading"><small>HERO FRONTIER</small><h2 id="td-menu-title">遊戲選單</h2></div><div id="td-menu-actions" class="game-menu-actions"><button id="td-menu-continue" type="button">▶ 繼續遊戲</button><button id="td-menu-restart" type="button">↻ 重新開始本局</button><button id="td-menu-return" type="button">⌂ 返回遠征選擇</button><button id="td-menu-settings" type="button">⚙ 設定</button></div><div id="td-menu-confirm" class="game-menu-confirm" hidden><strong>重新開始本局？</strong><p>目前波次、資源與建造陣容會清空；將沿用本局的地圖、難度、英雄與軍團。</p><div><button id="td-menu-cancel-restart" type="button">取消</button><button id="td-menu-confirm-restart" type="button">確認重新開始</button></div></div><div id="td-menu-settings-panel" class="game-menu-settings" hidden><label>介面模式 <select id="td-menu-layout-mode" aria-label="遊戲選單介面模式"><option value="auto">自動切換</option><option value="desktop">電腦版</option><option value="mobile">手機版</option></select></label><p>電腦可點地面或右鍵移動英雄；手機可按住左下搖桿，輕推慢走、推到底全速，放開停止；也保留從英雄身上起手拖曳。手機拖曳空地移動鏡頭、雙指縮放。士兵與塔部署後永久固定並自動戰鬥。</p><button id="td-frost-audio" type="button" aria-pressed="false">冰原戰鬥音效：關</button><button id="td-menu-settings-back" type="button">返回遊戲選單</button></div></div></section>
+  <section id="td-menu-screen" class="game-menu-overlay" role="dialog" aria-modal="true" aria-labelledby="td-menu-title" hidden><div class="game-menu-dialog"><div class="game-menu-heading"><small>英雄邊境</small><h2 id="td-menu-title">遊戲選單</h2></div><div id="td-menu-actions" class="game-menu-actions"><button id="td-menu-continue" type="button">▶ 繼續遊戲</button><button id="td-menu-restart" type="button">↻ 重新開始本局</button><button id="td-menu-return" type="button">⌂ 返回遠征選擇</button><button id="td-menu-settings" type="button">⚙ 設定</button></div><div id="td-menu-confirm" class="game-menu-confirm" hidden><strong>重新開始本局？</strong><p>目前波次、資源與建造陣容會清空；將沿用本局的地圖、難度、英雄與軍團。</p><div><button id="td-menu-cancel-restart" type="button">取消</button><button id="td-menu-confirm-restart" type="button">確認重新開始</button></div></div><div id="td-menu-settings-panel" class="game-menu-settings" hidden><label>介面模式 <select id="td-menu-layout-mode" aria-label="遊戲選單介面模式"><option value="auto">自動切換</option><option value="desktop">電腦版</option><option value="mobile">手機版</option></select></label><fieldset class="td-access-controls"><legend>戰場辨識</legend><label><input id="td-access-contrast" type="checkbox"> 提高文字與按鈕對比</label><label><input id="td-access-text" type="checkbox"> 放大戰鬥資訊文字</label><label><input id="td-access-effects" type="checkbox"> 減少裝飾特效與動態</label><small>危險預警、命中與控制狀態仍會顯示；設定儲存在此裝置。</small></fieldset><p>電腦可點地面或右鍵移動英雄；手機可按住左下搖桿，輕推慢走、推到底全速，放開停止；也保留從英雄身上起手拖曳。手機拖曳空地移動鏡頭、雙指縮放。士兵與塔部署後永久固定並自動戰鬥。</p><button id="td-frost-audio" type="button" aria-pressed="false">冰原戰鬥音效：關</button><button id="td-performance-toggle" type="button" aria-pressed="false">顯示效能資訊：關</button><button id="td-menu-settings-back" type="button">返回遊戲選單</button></div></div></section>
   <section id="td-shop-screen" class="shop-overlay" role="dialog" aria-modal="true" aria-labelledby="td-shop-title" aria-describedby="td-shop-dismiss-hint" hidden>
-    <div class="shop-dialog"><div class="shop-heading"><div><small>FRONTIER MERCHANT</small><h2 id="td-shop-title">銀葉商店城</h2></div><button id="td-shop-close" type="button">返回戰場</button></div>
-    <p class="shop-wallet">持有 <strong id="td-shop-gold">240G</strong> · <strong id="td-shop-merit">🏅 0 功勳</strong> · 購物時戰鬥暫停 · <span id="td-shop-dismiss-hint">點商城外側即可關閉</span></p>
-    <section class="shop-exchange" aria-labelledby="td-shop-exchange-title"><div><small>RESOURCE EXCHANGE</small><h3 id="td-shop-exchange-title">資源兌換</h3><p>固定匯率，兌換前先確認目前餘額。</p></div><div><button type="button" data-shop-exchange="gold-to-merit"><b>🪙 1000 → 🏅 1</b><span>金幣兌換功勳</span></button><button type="button" data-shop-exchange="merit-to-gold"><b>🏅 1 → 🪙 1000</b><span>功勳兌換金幣</span></button></div></section>
+    <div class="shop-dialog"><div class="shop-heading"><div><small>邊境商人</small><h2 id="td-shop-title">銀葉商店城</h2></div><button id="td-shop-close" type="button">返回戰場</button></div>
+    <p class="shop-wallet">持有 <strong id="td-shop-gold">240G</strong> · <strong id="td-shop-merit">🏅 0 功勳</strong> · <strong id="td-shop-emblems">✦ 0 首領勳章</strong> · 購物時戰鬥暫停 · <span id="td-shop-dismiss-hint">點商城外側即可關閉</span></p>
+    <section class="shop-exchange" aria-labelledby="td-shop-exchange-title"><div><small>資源兌換</small><h3 id="td-shop-exchange-title">資源兌換</h3><p>固定匯率，兌換前先確認目前餘額。</p></div><div><button type="button" data-shop-exchange="gold-to-merit"><b>🪙 1000 → 🏅 1</b><span>金幣兌換功勳</span></button><button type="button" data-shop-exchange="merit-to-gold"><b>🏅 1 → 🪙 1000</b><span>功勳兌換金幣</span></button></div></section>
     <div class="shop-items">
       <button type="button" data-shop-item="spear" class="shop-weapon-offer"><i class="shop-item-icon" aria-hidden="true"></i><b>職業武器鍛造</b><small>每級普攻與傷害技能 +20%</small><span>100G</span></button>
       <button type="button" data-shop-item="rune"><b>◈ 迅捷符文</b><small>每級新施放技能冷卻 -10%</small><span>120G</span></button>
       <button type="button" data-shop-item="charm"><b>✧ 祖靈契約</b><small>守衛／衝擊波強化，依英雄職業顯示效果</small><span>140G</span></button>
+      <button type="button" data-shop-item="evolution-stone" class="shop-evolution-offer"><b>✦ 英雄進化石</b><small>以首領勳章購買，通過專屬試煉後進化。</small><span>鎖定中</span></button>
     </div><h3>軍械商品 · 購買後收入軍械庫</h3><p>每種最多購買三件，先選英雄或士兵，再到軍械庫配置。</p><div class="shop-items gear-shop-items">
       <button type="button" data-shop-item="gear-lion-bow"><b>獅心王弓</b><small></small><span></span></button>
       <button type="button" data-shop-item="gear-moon-staff"><b>月銀古杖</b><small></small><span></span></button>
@@ -254,7 +270,7 @@
       <button type="button" data-shop-item="gear-war-drum"><b>先鋒戰鼓</b><small></small><span></span></button>
       <button type="button" data-shop-item="gear-soul-lantern"><b>噬魂冥燈</b><small></small><span></span></button>
       <button type="button" data-shop-item="gear-bone-crown"><b>幽骨王冠</b><small></small><span></span></button>
-    </div><h3>傭兵館 · 跨族契約</h3><p>販售本軍團以外的士兵與特殊建築，圖片就是部署外觀。成功放置才扣款，部署點固定，可升至 Lv.5、回收70%；召喚物會自動追擊。</p><div class="shop-items mercenary-items">
+    </div><h3>傭兵館 · 跨族契約</h3><p>販售本軍團以外的士兵與特殊建築，圖片就是部署外觀。成功放置才扣款，部署點固定，可升至等級 5、回收70%；召喚物會自動追擊。</p><div class="shop-items mercenary-items">
       <button type="button" data-mercenary="royalCommander"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="soulsteel"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="kingdomMage"><b></b><small></small><span></span></button>
@@ -265,7 +281,11 @@
       <button type="button" data-mercenary="blacksmith"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="timeMage"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="bombWorkshop" data-mercenary-kind="building"><b>爆破工坊</b><small></small><span></span></button>
-      <button type="button" data-mercenary="hunter"><b>王國 · 遊俠傭兵</b><small>遠射，Lv.3／5 增加目標</small><span>105G</span></button>
+      <button type="button" data-mercenary="frostWolf"><b></b><small></small><span></span></button>
+      <button type="button" data-mercenary="frostBird"><b></b><small></small><span></span></button>
+      <button type="button" data-mercenary="goblinGunner"><b></b><small></small><span></span></button>
+      <button type="button" data-mercenary="goblinRiveter"><b></b><small></small><span></span></button>
+      <button type="button" data-mercenary="hunter"><b>王國 · 遊俠傭兵</b><small>遠射，等級 3／5 增加目標</small><span>105G</span></button>
       <button type="button" data-mercenary="shield"><b>王國 · 重裝盾衛</b><small>定點震懾，每四擊強力緩速</small><span>158G</span></button>
       <button type="button" data-mercenary="knight"><b>王國 · 獅翼騎士</b><small>近戰破陣，第四擊造成暈眩</small><span>192G</span></button>
       <button type="button" data-mercenary="musketeer"><b>王國 · 火槍手</b><small>遠距點殺輕甲，出手較慢</small><span>177G</span></button>
@@ -283,14 +303,14 @@
     </div><p id="td-shop-message" role="status"></p></div>
   </section>
   <section id="td-loot-screen" class="loot-overlay" role="dialog" aria-modal="true" aria-labelledby="td-loot-title" hidden>
-    <div class="loot-dialog"><small id="td-loot-kicker">BATTLE TROPHY</small><h2 id="td-loot-title">選擇一件戰利品</h2><p id="td-loot-intro">獎勵會立即改變本局可建造軍團；未選擇前戰鬥保持暫停。</p><div id="td-loot-options" class="loot-options"></div><div class="loot-history"><span>本局收藏</span><strong id="td-loot-history">尚未取得戰利品</strong></div></div>
+    <div class="loot-dialog"><small id="td-loot-kicker">戰場戰利品</small><h2 id="td-loot-title">選擇一件戰利品</h2><p id="td-loot-intro">獎勵會立即改變本局可建造軍團；未選擇前戰鬥保持暫停。</p><div id="td-loot-options" class="loot-options"></div><div class="loot-history"><span>本局收藏</span><strong id="td-loot-history">尚未取得戰利品</strong></div></div>
   </section>
   <section id="td-armory-screen" class="armory-overlay" role="dialog" aria-modal="true" aria-labelledby="td-armory-title" hidden>
-    <div class="armory-dialog"><div class="armory-heading"><div><small>FIELD ARMORY</small><h2 id="td-armory-title">戰地軍械庫</h2></div><button id="td-armory-close" type="button">返回戰場</button></div><p>本局裝備 <strong id="td-armory-target">0 件</strong> · 點選士兵後使用「裝備」配裝</p><div id="td-armory-items" class="armory-items"></div><p id="td-armory-message" class="armory-message" role="status">裝備中物品須先卸下才能販售。</p></div>
+    <div class="armory-dialog"><div class="armory-heading"><div><small>戰地軍械</small><h2 id="td-armory-title">戰地軍械庫</h2></div><button id="td-armory-close" type="button">返回戰場</button></div><p>本局裝備 <strong id="td-armory-target">0 件</strong> · 點選士兵後使用「裝備」配裝</p><div id="td-armory-items" class="armory-items"></div><p id="td-armory-message" class="armory-message" role="status">裝備中物品須先卸下才能販售。</p></div>
   </section>
-  <section id="td-equip-screen" class="armory-overlay" role="dialog" aria-modal="true" aria-labelledby="td-equip-title" hidden><div class="armory-dialog equip-dialog"><div class="armory-heading"><div><small>EQUIPMENT</small><h2 id="td-equip-title">選擇裝備</h2></div><button id="td-equip-close" type="button">返回戰場</button></div><p id="td-equip-summary">僅顯示此角色可使用的裝備。</p><div id="td-equip-items" class="armory-items"></div><p id="td-equip-message" class="armory-message" role="status">每件裝備同時只能由一名角色持有。</p></div></section>
+  <section id="td-equip-screen" class="armory-overlay" role="dialog" aria-modal="true" aria-labelledby="td-equip-title" hidden><div class="armory-dialog equip-dialog"><div class="armory-heading"><div><small>裝備</small><h2 id="td-equip-title">選擇裝備</h2></div><button id="td-equip-close" type="button">返回戰場</button></div><p id="td-equip-summary">僅顯示此角色可使用的裝備。</p><div id="td-equip-items" class="armory-items"></div><p id="td-equip-message" class="armory-message" role="status">每件裝備同時只能由一名角色持有。</p></div></section>
   <section id="td-report-screen" class="report-overlay" role="dialog" aria-modal="true" aria-labelledby="td-report-title" hidden>
-    <div class="report-dialog"><div class="report-heading"><div><small>BATTLE LEDGER</small><h2 id="td-report-title">邊境戰況</h2></div><button id="td-report-close" type="button">返回整備</button></div><p id="td-report-run">尚未開始戰役</p><div class="report-table" role="table" aria-label="逐波戰報"><div class="report-row report-head" role="row"><span>波次</span><span>評價</span><span>積分</span><span>清場時間</span><span>擊破</span><span>漏怪</span><span>英雄倒下</span><span>收入</span></div><div id="td-report-rows"></div></div><strong id="td-report-total" class="report-total">尚無完成波次</strong><p id="td-report-analysis" class="report-analysis">完成第一波後顯示軍備投入與主力傷害分析。</p><section class="report-readiness"><h3>第三階段平衡判定</h3><div id="td-report-readiness"><p class="report-empty">每種測試策略至少需要三局。</p></div></section><section class="report-history"><h3>相同配置最近戰局</h3><div id="td-report-history"><p class="report-empty">完成本局後會加入比較。</p></div></section></div>
+    <div class="report-dialog"><div class="report-heading"><div><small>戰鬥紀錄</small><h2 id="td-report-title">邊境戰況</h2></div><button id="td-report-close" type="button">返回整備</button></div><p id="td-report-run">尚未開始戰役</p><div class="report-table" role="table" aria-label="逐波戰報"><div class="report-row report-head" role="row"><span>波次</span><span>評價</span><span>積分</span><span>清場時間</span><span>擊破</span><span>漏怪</span><span>英雄倒下</span><span>收入</span></div><div id="td-report-rows"></div></div><strong id="td-report-total" class="report-total">尚無完成波次</strong><p id="td-report-analysis" class="report-analysis">完成第一波後顯示軍備投入與主力傷害分析。</p><section class="report-readiness"><h3>第三階段平衡判定</h3><div id="td-report-readiness"><p class="report-empty">每種測試策略至少需要三局。</p></div></section><section class="report-history"><h3>相同配置最近戰局</h3><div id="td-report-history"><p class="report-empty">完成本局後會加入比較。</p></div></section></div>
   </section>
   <script src="src/td/namespace.js"></script>
   <script src="src/td/config.js"></script>
@@ -318,6 +338,7 @@
   <script src="src/td/entities/Summon.js"></script>
   <script src="src/td/entities/FieldLoot.js"></script>
   <script src="src/td/entities/Monster.js"></script>
+  <script src="src/td/systems/MapPressureSystem.js"></script>
   <script src="src/td/systems/EnemyCombatSystem.js"></script>
   <script src="src/td/systems/EnemyTraitSystem.js"></script>
   <script src="src/td/entities/Projectile.js"></script>
@@ -325,16 +346,22 @@
   <script src="src/td/entities/Building.js"></script>
   <script src="src/td/systems/HeroSkillVFX.js"></script>
   <script src="src/td/systems/HeroRoster.js"></script>
+  <script src="src/td/systems/HeroEvolutionSystem.js"></script>
+  <script src="src/td/systems/HeroEvolutionPresentation.js"></script>
   <script src="src/td/systems/ResultScreen.js"></script>
   <script src="src/td/systems/ChiefShockwave.js"></script>
   <script src="src/td/systems/HeroUltimateSystem.js"></script>
   <script src="src/td/entities/Hero.js"></script>
   <script src="src/td/systems/WaveSystem.js"></script>
+  <script src="src/td/systems/FrameTimingSystem.js"></script>
+  <script src="src/td/systems/PerformanceMonitor.js"></script>
+  <script src="src/td/systems/TutorialSystem.js"></script>
   <script src="src/td/systems/WaveHUD.js"></script>
   <script src="src/td/systems/BuildSystem.js"></script>
   <script src="src/td/systems/GoblinNetworkSystem.js"></script>
   <script src="src/td/systems/GoblinAnimation.js"></script>
   <script src="src/td/systems/GoblinArt.js"></script>
+  <script src="src/td/systems/NagaArt.js"></script>
   <script src="src/td/systems/FrostlandAnimation.js"></script>
   <script src="src/td/systems/FrostlandAudio.js"></script>
   <script src="src/td/systems/FrostlandSpellArt.js"></script>
@@ -382,5 +409,6 @@
   <script src="src/td/ranking/RankingDataSource.js"></script>
   <script src="src/td/ranking/RankingView.js"></script>
   <script src="src/td/app/FrontierApp.js"></script>
+  <script src="src/td/app/TutorialIntegration.js"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@ test('thunder purchases preserve old cosmetics and remain isolated to the active
   const {ns,context}=load(),shop=context.FrontierShop,mem=new Map(),storage={getItem:k=>mem.get(k)??null,setItem:(k,v)=>mem.set(k,v)};
   const profiles=new ns.systems.ProfileStore(storage);
   profiles.change(s=>{s.profiles.admin.data['shop:state']=JSON.stringify({version:1,revision:8,balance:2000,ownedSkins:['bone-emperor','astral-oath','eclipse-court'],equippedSkins:{'hero:chief':'bone-emperor','hero:arcanist':'astral-oath','faction:hunter':'eclipse-court'}});});
+  profiles.switchTo('admin');
   const store=await new shop.SkinStore(shop.catalog,new shop.ProfileSkinAdapter(profiles)).init();
   await store.buy('thunder-king');await store.equip('thunder-king');await assert.rejects(store.buy('thunder-king'),/已擁有/);
   const reloaded=new ns.systems.ProfileStore(storage),again=await new shop.SkinStore(shop.catalog,new shop.ProfileSkinAdapter(reloaded)).init();

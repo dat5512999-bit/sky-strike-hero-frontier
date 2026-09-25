@@ -1,3 +1,31 @@
+> **v0.85.42：** `emberroad` 宣告故事地圖與煙障 → `StoryCatalog` 排入 2-1 後 → `MapPressureSystem` 計算路段暫態護甲 → `Monster.takeDamage()` 消費 → HUD／Canvas 呈現；建造與存檔不讀此狀態。見 [2-2 架構](CHAPTER2_MAP_2_2_V08542.md)。
+
+> **v0.85.39：** `maps.js` 宣告壓力 → `MapPressureSystem` 標記怪物路段 → `Monster.update()` 計算移速 → `WaveHUD`／Canvas 顯示；建造與路徑系統不讀壓力。見 [架構與驗收](MAP_PRESSURE_V08539.md)。
+
+> **v0.85.38：** `SpeedLoadGuard` 讀取計時器結果並選擇有效倍速；`TDGame` 只負責套用及顯示，沒有資料庫或新 API。缺木提示由現有經濟與升級規則推導。見 [架構說明](LONG_SESSION_FOLLOWUP_V08538.md)。
+
+> **v0.85.36：** `HeroEvolutionSystem` 管理暫態變身／施法動畫狀態，`HeroEvolutionPresentation` 在 `Hero.draw()` 的角色與武器圖層後唯讀繪製職業 VFX，與商城外觀低耦合。見 [動畫責任](HERO_EVOLUTION_ANIMATION_V08536.md)。
+
+> **v0.85.33：** `ProfileStore` 的全新存檔入口改為一般玩家；鎖定提示共用 `StoryCatalog` 任務獎勵；`FrameTimingSystem` 上限改為 12 個細步，仍保留待辦與略過安全限額。見 [架構圖](PLAYER_ENTRY_FRAME_PACING_V08533.md)。
+
+> **v0.85.32：** `HeroEvolutionSystem` 將首領勳章、進化石、試煉與六英雄替換技能集中於同一領域；既有武器、軍械與商城造型保持獨立。見 [流程與責任](HERO_EVOLUTION_V08532.md)。
+
+> **v0.85.31：** 戰鬥時間先經 `FrameTimingSystem` 分步與限額，怪物路程和繪圖相位維持分離，面板只讀取效能樣本。見 [流程圖](FRAME_PACING_V08531.md)。
+
+> **v0.85.26：** 地精網路架構不變；僅降低動力機座的前期成本。見 [地精前期平衡](GOBLIN_EARLY_GAME_V08526.md)。
+
+> **v0.85.25：** 怪物路程與繪圖相位分開計算；`ArtSystem` 依 `visualHeading` 選方向圖、以每列腳底錨點保持落地。見 [流程圖](COMBAT_MOTION_V08525.md)。
+
+> **v0.85.24：** `GoblinNetworkSystem.stateLabel` 與 `draw` 只讀取既有網路更新結果，戰鬥真相仍只在網路更新階段決定。見 [供能可讀性熱修](GOBLIN_NETWORK_VISIBILITY_V08524.md)。
+
+> v0.85.20 怪物攻擊站姿與路徑銜接：參見 [完整操作、架構、部署、回復與驗收](COMBAT_MOTION_V08520.md)。
+
+> **v0.85.19：** `TutorialSystem` 暫時將唯一聚焦 DOM 控制項傳送到 `body` 的遮罩上方，並以 placeholder 回復；`TutorialIntegration` 只包裝既有掉落、開啟配裝與成功裝備事件。流程圖見 [新手裝備教學](CHAPTER1_ONBOARDING_V08519.md)。
+
+> **v0.85.18：** `EnemyCombatSystem → Monster` 管理攻擊視覺時間，`CombatUnit` 依既有冷卻選預備／出手／收勢，最後由 `ArtSystem` 繪製；架構圖見 [戰鬥動作時序](COMBAT_MOTION_V08518.md)。
+
+> **v0.85.13（2026-09-24）：** 士兵狀態 → `CosmeticArt`／`GoblinArt` → 透明圖集 → Canvas；缺圖回退既有畫法。架構圖與素材規格見 [軍團動作圖交付](FACTION_MOTION_V08513.md)。
+
 > **v0.85.12（2026-09-24）：** 第一關的 `StoryCatalog.storyCards` → `FrontierApp` 閱讀狀態 → 既有 `launchStory`，回顧路徑返回章節頁。版面在 `td-lobby.css`，沒有新儲存或服務端。詳見 [架構與劇情卡流程](STORY_CARDS_V08512.md)。
 
 > **v0.85.11（2026-09-23）：** 觸控排行榜使用單欄底部導覽；搖桿方向與強度經導航檢查後交由 Hero 更新移動。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
@@ -9,6 +37,8 @@
 > **v0.85.8：** 霜原平衡仍由 config／HeroRoster／FrostlandHero 進入既有 CombatUnit、Building、Projectile、FrostStatusSystem；沒有新服務或資料層。架構圖見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。
 
 # 系統架構
+
+> **v0.85.30：** 圖鑑軍團圖由 `FactionSystem.FACTIONS[id].codexArt` 作為唯一詳情來源；`CodexCatalog` 將它寫入 `entry.art`，`thumbnails.js` 為同一軍團提供卡片縮圖。三者都只讀美術路徑，不寫入戰鬥或存檔。詳見 [圖鑑軍團肖像交付](CODEX_FACTION_ART_V08530.md)。
 
 > **v0.85.7（2026-09-23）：** GoblinPresentation 在 CosmeticArt 之後封裝繪圖，讀取技能事件及建築狀態，不回寫戰鬥邏輯。 操作、架構、部署、回復及驗收見 [地精視覺交付](GOBLIN_POLISH_V0857.md)。
 
@@ -791,3 +821,9 @@ v0.80.0 資料流：`FactionSystem.wild` 決定建造清單；`CombatUnit` 提�
 > v0.85.1：根目錄 `td.html` 已整合冰原選角資產；架構與裁切策略見[選角插畫交付](FROSTLAND_SELECTION_ART_V0851.md)。
 
 v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 Monster.applySlow、rootTime、onHit/onKill；不另建傷害或狀態更新迴圈。動作、圖集、特效與音訊各自分模組；無新資料庫。Mermaid 架構圖見 [冰原架構](FROSTLAND_FACTION_V1.md#i-core-與架構)。
+> **v0.85.14：** 第一章引導採 `StoryCatalog → TutorialSystem → TutorialIntegration → WaveSystem` 的低耦合流程；詳見 [第一章引導](CHAPTER1_ONBOARDING_V08514.md)。
+> **v0.85.15：** 波次轉場固定由 `WaveSystem.acknowledgeReward()` 驅動；聚焦遮罩與按鈕相鄰卡片由 `TutorialSystem` 管理。詳見 [引導修正](CHAPTER1_ONBOARDING_V08515.md)。
+> **v0.85.16：** 教學吸附僅包裝既有 `BuildSystem.stagePlacement()`；引導事件與繪製隔離，不可中止戰鬥迴圈。詳見 [教學修正](CHAPTER1_ONBOARDING_V08516.md)。
+
+> **v0.85.17：** 教學以 `queueDeploy`、商城開關與購買事件串接實際操作；`TutorialSystem` 只管理流程、補給與聚焦層級，未改寫戰鬥或商城領域規則。詳見 [教學操作修正](CHAPTER1_ONBOARDING_V08517.md)。
+> **v0.85.21：** `TutorialSystem` 以畫面光圈呈現戰場單位，再由既有選取事件前進至升級；它擁有教學彈窗的收尾責任，`TutorialIntegration` 鎖住回收操作。詳見 [流程圖](CHAPTER1_ONBOARDING_V08521.md)。

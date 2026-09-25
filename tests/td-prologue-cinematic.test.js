@@ -80,7 +80,7 @@ test('reload, export/import and profile rounds retain independent seen state', (
   const reloaded = new ns.systems.ProfileStore(disk); assert.equal(new api.PrologueProgress(reloaded).prologueSeen, true);
   const imported = new ns.systems.ProfileStore(storage()); imported.import(store.export());
   assert.equal(new api.PrologueProgress(imported).prologueSeen, true);
-  imported.switchTo('admin'); assert.equal(new api.PrologueProgress(imported).prologueSeen, true);
+  imported.switchTo('admin'); assert.equal(new api.PrologueProgress(imported).prologueSeen, false);
 });
 test('completion rejects abandoned, unknown, and switched-profile sessions', () => {
   const { api, store, progress } = setup(), identity = progress.identity();
@@ -112,17 +112,54 @@ test('Story entry plays prologue once, then offers three cards before battle', a
   app.replayOnly = true; const before = store.export(); await app.startCinematic();
   assert.equal(plays, 2); assert.equal(launches, 2); assert.equal(store.export(), before);
 });
-test('first mission story cards use original Chapter I key art, including a later Shadowfolk scene', () => {
+test('first mission story cards use the current continuity-approved Chapter I key art', () => {
   const catalog = setup().ns.systems.StoryCatalog.mission;
   assert.deepEqual(plain(catalog.storyCards.map(card => card.image)), [
-    'assets/td/story/kingdom-border-at-dusk-v1.png',
-    'assets/td/story/rhen-oathkeeper-v1.png',
-    'assets/td/story/kingdom-checkpoint-order-v1.png'
+    'assets/td/story/kingdom-border-at-dusk-v2.png',
+    'assets/td/story/rhen-oathkeeper-v2.png',
+    'assets/td/story/kingdom-checkpoint-order-v2.png'
   ]);
-  for (const file of [...catalog.storyCards.map(card => card.image), 'assets/td/story/shadowfolk-evacuation-v1.png']) {
+  for (const file of [...catalog.storyCards.map(card => card.image), 'assets/td/story/chapter1-hero-continuity-v1.png']) {
     assert.ok(fs.existsSync(file), file);
     assert.ok(fs.statSync(file).size > 100000, file + ' must be a real key-art asset');
   }
+  const continuity = fs.readFileSync('docs/STORY_CHARACTER_CONTINUITY_V1.md', 'utf8');
+  for (const source of ['hero-hunter-selection-v1.png', 'hero-arcanist-selection-v1.png', 'hero-rogue-selection-v1.png', 'hero-chief-selection-v2.png']) assert.ok(continuity.includes(source), source);
+});
+test('every playable Chapter I mission has three original story cards and a spoiler-safe aftermath beat', () => {
+  const missions = setup().ns.systems.StoryCatalog.missions.filter(mission => mission.chapter === 1);
+  assert.equal(missions.length, 4);
+  for (const mission of missions) {
+    assert.equal(mission.storyCards.length, 3, mission.id);
+    assert.match(mission.aftermath, /.+/, mission.id + ' aftermath');
+    for (const card of mission.storyCards) {
+      assert.ok(fs.existsSync(card.image), card.image);
+      assert.ok(fs.statSync(card.image).size > 100000, card.image + ' must be a real story key-art asset');
+    }
+  }
+  assert.match(missions[1].aftermath, /不足以判定王子之死/);
+  assert.match(missions[2].aftermath, /沒有證明現代暮影/);
+  assert.match(missions[3].aftermath, /不受禁衛軍管轄/);
+});
+test('story cards launch and replay the selected mission rather than always returning to the first mission', () => {
+  const { ns, store } = setup(), app = Object.create(ns.systems.FrontierApp.prototype), selected = ns.systems.StoryCatalog.getMission('chapter1-shadowfall');
+  Object.assign(app, { store, root: { querySelector(){ return null; } }, show(page){ this.page = page; }, render(){}, launchStory(mission){ this.launched = mission; return true; } });
+  app.act('story-battle', selected.id); assert.equal(app.storyCardMission, selected); assert.match(app.renderStoryCards(), /被懷疑的人們也在等答案/);
+  app.act('story-card-next'); app.act('story-card-next'); app.act('story-card-next'); assert.equal(app.launched, selected);
+  app.act('story-card-replay', selected.id); assert.equal(app.storyCardReplay, true); assert.match(app.renderStoryCards(), /舊城疑雲/);
+  app.act('story-card-skip'); assert.equal(app.page, 'story');
+});
+test('Chapter II 2-1 is a three-card browseable preview and never launches a battle', () => {
+  const { ns, store } = setup(), preview = ns.systems.StoryCatalog.chapter2Preview, app = Object.create(ns.systems.FrontierApp.prototype);
+  Object.assign(app, { store, root: { querySelector(){ return null; } }, show(page){ this.page = page; }, render(){}, launchStory(){ throw Error('Chapter II preview must not launch a battle'); } });
+  assert.equal(preview.id, 'chapter2-western-signal-preview'); assert.equal(preview.chapter, 2); assert.equal(preview.previewOnly, true); assert.equal(preview.storyCards.length, 3);
+  for (const card of preview.storyCards) { assert.ok(fs.existsSync(card.image), card.image); assert.ok(fs.statSync(card.image).size > 100000, card.image); }
+  app.act('story-card-replay', preview.id); assert.equal(app.page, 'story-cards'); assert.equal(app.storyCardReplay, true);
+  assert.match(app.renderStoryCards(), /CHAPTER 2/); assert.match(app.renderStoryCards(), /西境風號/);
+  app.act('story-card-next'); assert.match(app.renderStoryCards(), /不急著相信/);
+  app.act('story-card-next'); assert.match(app.renderStoryCards(), /護送這條路/);
+  app.act('story-card-next'); assert.equal(app.page, 'story');
+  app.act('story-battle', preview.id); assert.equal(app.storyCardReplay, true); app.act('story-card-skip'); assert.equal(app.page, 'story');
 });
 test('Story adapter resolves missing/failed playback without multiple completion callbacks', async () => {
   const { api } = setup(); let completed = 0;

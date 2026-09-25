@@ -1,3 +1,32 @@
+> **v0.85.42：** 同版部署新地圖 PNG、故事任務、壓力規則、怪物／HUD 呈現、測試與 `sky-strike-v0.85.42`；更新後先檢查 2-2 鎖定順序，再檢查第 3 波煙障。見 [部署清單](CHAPTER2_MAP_2_2_V08542.md)。
+
+> **v0.85.39：** 同版部署地圖壓力、地圖／戰鬥／HUD 腳本、`td.html` 與 `sw.js`；確認 `sky-strike-v0.85.39`，重新開啟後第 2 波可見荒風提示。見 [部署清單](MAP_PRESSURE_V08539.md)。
+
+> **v0.85.38：** 同版部署 `FrameTimingSystem.js`、`TDGame.js`、`td.html`、`td-accessibility.css` 與 `sw.js`，確認 `sky-strike-v0.85.38` 快取與有效倍速提示。見 [部署清單](LONG_SESSION_FOLLOWUP_V08538.md)。
+
+> **v0.85.36：** 將進化呈現與規則腳本、頁面與 `sky-strike-v0.85.36` 快取同版部署；更新後確認大廳與戰報皆顯示 0.85.36，並實測六英雄動畫。見 [部署清單](HERO_EVOLUTION_ANIMATION_V08536.md)。
+
+> **v0.85.33：** 將 `ProfileStore.js`、`FrontierApp.js`、`FrameTimingSystem.js`、入口 HTML 與 `sw.js` 同版部署；新玩家與舊存檔分別驗收。目標手機長局效能仍待現場量測。見 [部署清單](PLAYER_ENTRY_FRAME_PACING_V08533.md)。
+
+> **v0.85.31：** 同步發布時間、效能、怪物、戰鬥頁與樣式腳本，Service Worker 快取 `sky-strike-v0.85.31`。見 [發布清單](FRAME_PACING_V08531.md)。
+
+> **v0.85.30：** 同步發布六張 `assets/td/codex/faction-*-v2.jpg`、圖鑑三個腳本、版本頁與 `sw.js`；快取為 `sky-strike-v0.85.30`。發布後進入「世界圖鑑 → 軍團」檢查六張圖。見 [圖鑑軍團肖像交付](CODEX_FACTION_ART_V08530.md)。
+> **v0.85.32：** 發布 `td.html`、`sw.js`、HeroEvolutionSystem 與相關核心檔案為同一版本；先關閉舊分頁，避免 HTML 與快取腳本不同步。見 [英雄進化交付](HERO_EVOLUTION_V08532.md)。
+
+> **v0.85.26：** 同步發布 `config.js`、版本頁與 `sw.js`；快取為 `sky-strike-v0.85.26`。見 [地精前期平衡](GOBLIN_EARLY_GAME_V08526.md)。
+
+> **v0.85.25：** 同步發布怪物方向圖、三個相關腳本、版本頁與 `sw.js`；快取 `sky-strike-v0.85.25`。見 [發布清單](COMBAT_MOTION_V08525.md)。
+
+> **v0.85.24：** 同步發布地精網路 UI 腳本與 `sw.js`，快取名 `sky-strike-v0.85.24`；清單見 [供能可讀性熱修](GOBLIN_NETWORK_VISIBILITY_V08524.md)。
+
+> v0.85.20 怪物攻擊站姿與路徑銜接：參見 [完整操作、架構、部署、回復與驗收](COMBAT_MOTION_V08520.md)。
+
+> **v0.85.19：** 同步部署 `TutorialSystem.js`、`TutorialIntegration.js`、`ArmoryUI.js`、`td-tutorial.css`、故事資料、入口版本檔與 `sw.js`；快取名 `sky-strike-v0.85.19`。詳見 [部署清單](CHAPTER1_ONBOARDING_V08519.md)。
+
+> **v0.85.18：** 同步部署怪物／守軍動作程式、`td.html`、`update.html` 與 `sw.js`；快取名 `sky-strike-v0.85.18`。詳見 [部署清單](COMBAT_MOTION_V08518.md)。
+
+> **v0.85.13（2026-09-24）：** 同步部署四張 v2 動作圖、`CosmeticArt.js`、`GoblinArt.js` 與 `sw.js`；快取名 `sky-strike-v0.85.13`。詳見 [部署與驗收](FACTION_MOTION_V08513.md)。
+
 > **v0.85.12（2026-09-24）：** 同步部署第一關劇情資料、`FrontierApp.js`、`td-lobby.css`、更新頁與 `sw.js`；快取名 `sky-strike-v0.85.12`。詳見 [部署與驗收](STORY_CARDS_V08512.md)。
 
 > **v0.85.11（2026-09-23）：** 同步發布排行榜 CSS、搖桿、Hero 與版本檔；快取名 sky-strike-v0.85.11。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
@@ -460,3 +489,9 @@ v0.83.3 部署包含 td-expedition.css、skin-frost-v1.png、limited-orc-v1.png 
 > v0.85.1：部署根目錄 `td.html` 時須同步冰原 PNG、SVG、系統模組、CSS 與 service worker；詳見[選角插畫交付](FROSTLAND_SELECTION_ART_V0851.md)。
 
 v0.85.0：同步部署 td.html、td-expedition.css、codex.css、src/td、Frostland SVG／四張 PNG 和 sw.js（sky-strike-v0.85.1）；音效本機合成。無伺服器遷移。見 [冰原 V1](FROSTLAND_FACTION_V1.md)。
+> **v0.85.14：** 發布 `td-tutorial.css`、兩支教學腳本與新版 `sw.js`，快取名稱為 `sky-strike-v0.85.14`。詳見 [第一章引導](CHAPTER1_ONBOARDING_V08514.md)。
+> **v0.85.15：** 同步發布故事波次、教學腳本與 `sw.js`，快取名稱為 `sky-strike-v0.85.15`。詳見 [引導修正](CHAPTER1_ONBOARDING_V08515.md)。
+> **v0.85.16：** 同步發布故事位置、教學腳本與 `sw.js`，快取名稱為 `sky-strike-v0.85.16`。詳見 [教學修正](CHAPTER1_ONBOARDING_V08516.md)。
+
+> **v0.85.17：** 同步發布首波內容、教學腳本、CSS 與 `sw.js`，快取名稱為 `sky-strike-v0.85.17`。詳見 [教學操作修正](CHAPTER1_ONBOARDING_V08517.md)。
+> **v0.85.21：** 同步部署 `TutorialSystem.js`、`TutorialIntegration.js`、`ArmoryUI.js`、`td-tutorial.css`、入口版本檔及 `sw.js`；快取名 `sky-strike-v0.85.21`。詳見 [部署清單](CHAPTER1_ONBOARDING_V08521.md)。

@@ -1,7 +1,7 @@
 (function (ns) {
   'use strict';
   const escape = text => String(text).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const categories = [['all', '精選推薦', 'FEATURED'], ['hero', '英雄造型', 'HERO SKIN'], ['faction', '軍團外觀', 'FACTION SKIN'], ['effect', '特效外觀', 'EFFECT SKIN'], ['other', '其他外觀', 'COSMETICS'], ['collaboration', '聯名企劃', 'COLLABORATION']];
+  const categories = [['all', '精選推薦', '精選'], ['hero', '英雄造型', '英雄造型'], ['faction', '軍團外觀', '軍團外觀'], ['effect', '特效外觀', '特效外觀'], ['other', '其他外觀', '其他外觀'], ['collaboration', '聯名企劃', '聯名企劃']];
   const labels = { portrait: '頭像', selectionArt: '選角立繪', battlefieldSprite: '戰場角色', skillVfx: '技能特效', summonAppearance: '召喚物', animation: '動作', voice: '語音', soldierAppearance: '士兵外觀', towerAppearance: '防禦塔', banner: '旗幟', buildVfx: '建造特效', attackVfx: '攻擊特效' };
   const rarities = { rare: '稀有', epic: '史詩', legendary: '傳說' };
   const states = { available: '可購買', owned: '已擁有', equipped: '已裝備', locked: '未開放' };
@@ -22,8 +22,8 @@
     const collection = view.category === 'all' && !view.ownedOnly;
     return `
       <header class="hf-top">
-        <div class="hf-brand"><span>HERO</span><strong>FRONTIER</strong><small>─ 英雄的邊境 ─</small></div>
-        <div class="hf-title"><h1>商城</h1><small>SHOP</small></div>
+        <div class="hf-brand"><span>英雄</span><strong>邊境</strong><small>─ 英雄的邊境 ─</small></div>
+        <div class="hf-title"><h1>商城</h1><small>造型商城</small></div>
         <div class="hf-profile"><img src="assets/td/opening/hero-hunter-selection-v1.png" alt="玩家頭像"><div>邊境旅人<small>外觀典藏 · 本機玩家檔案</small><i></i></div></div>
         <div class="hf-wallet">${ns.crystal}<div><small>試用水晶</small><b>${state.balance.toLocaleString('en-US')}</b></div></div>
         ${b('owned', ns.icon('book') + '<span>我的收藏</span>', '', `class="hf-collection-button" aria-label="我的收藏" aria-pressed="${view.ownedOnly}"`)}
@@ -31,12 +31,12 @@
       </header>
       <nav class="hf-categories" aria-label="外觀分類">
         ${categories.map(([id, name, en]) => b('category', ns.icon(id) + '<span>' + name + '<small>' + en + '</small></span>', id, `aria-pressed="${view.category === id}"`)).join('')}
-        <div class="hf-compass" aria-hidden="true">✧</div><p>Different Heroes<br>One World</p>
+        <div class="hf-compass" aria-hidden="true">✧</div><p>不同的英雄<br>同一個世界</p>
       </nav>
       <section class="hf-browse" aria-label="外觀商品">
         <div class="hf-banner">
           <img src="assets/td/shop/frost-banner-v2.png" alt="霜華之誓：冰雪公主與霜狼">
-          <div class="hf-banner-copy"><small>全 新 造 型 登 場</small><h2>霜華之誓 <span>❄</span></h2><em>OATH OF THE FROST</em><p>「冰雪不熄，誓言永恆。」</p></div>
+          <div class="hf-banner-copy"><small>全 新 造 型 登 場</small><h2>霜華之誓 <span>❄</span></h2><em>霜雪誓約</em><p>「冰雪不熄，誓言永恆。」</p></div>
           ${b('select', '探索典藏 ' + ns.icon('arrow'), 'astral-oath', 'class="hf-banner-cta"')}
           <div class="hf-banner-dots" aria-hidden="true"><i></i><i></i><i></i></div>
         </div>
@@ -47,7 +47,7 @@
         <div class="hf-note"><span>✧ 外觀隨心，實力公平。</span><small>純外觀 · 不影響戰鬥能力與排名</small></div>
       </section>
       <aside class="hf-detail" aria-label="外觀詳情">
-        <div class="hf-detail-top"><span>More Than Power <br>A New Legend</span>${b('close-detail', ns.icon('close'), '', 'aria-label="關閉詳情"')}</div>
+        <div class="hf-detail-top"><span>不只是力量<br>更是新的傳說</span>${b('close-detail', ns.icon('close'), '', 'aria-label="關閉詳情"')}</div>
         <div class="hf-preview" data-type="${asset?.type || 'fallback'}">${view.preview(asset, skin)}<span class="hf-preview-label">${view.previewSlot === 'cover' ? '造型立繪' : labels[view.previewSlot]}${asset ? '' : skin.id==='eclipse-court'&&['soldierAppearance','towerAppearance'].includes(view.previewSlot)?' · 黑金配色' : ' · 沿用原版'}</span></div>
         <div class="hf-detail-copy">
           <span class="hf-rarity ${skin.rarity}">${rarities[skin.rarity]} · ${states[status]}</span><h2>${escape(skin.name)}</h2><p>${escape(skin.subtitle)}</p>

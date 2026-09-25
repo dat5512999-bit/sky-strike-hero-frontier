@@ -76,6 +76,7 @@
     if(item.networkCooling){GoblinPresentation.sprite(ctx,image,0,x+10,y-65-(time%1)*16,58,65,.28);}
     else if(item.networkOverloaded){GoblinPresentation.sprite(ctx,image,1,x,y-42,68,72,.25+.15*Math.sin(time*14));}
     else if(item.networkPowered){ctx.strokeStyle='#79d9c5';ctx.globalAlpha=.25+.12*Math.sin(time*3);ctx.lineWidth=1.5;ctx.beginPath();ctx.ellipse(x,y-43,12,6,0,0,TAU);ctx.stroke();}
+    if(item.engineerBoost>0){ctx.globalAlpha=.48+.2*Math.sin(time*12);ctx.strokeStyle='#c4ffe8';ctx.lineWidth=2.5;ctx.setLineDash([4,3]);ctx.beginPath();ctx.ellipse(x,y-42,29,12,0,0,TAU);ctx.stroke();ctx.setLineDash([]);}
     ctx.restore();return true;
   };
   // Full source footprint including the siege rack's tall rockets and wide legs.

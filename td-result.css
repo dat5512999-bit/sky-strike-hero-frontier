@@ -10,7 +10,7 @@
 .td-overlay .result-seal{display:grid!important;place-items:center;flex:none;width:74px;height:74px;border:2px solid #ebc977;border-radius:50%;background:radial-gradient(circle,#91682f50,#3a2d1b48 72%);box-shadow:0 0 0 5px #caa45425,0 0 35px #d6aa4b3b;color:#ffde90;font-size:34px;line-height:1}
 .td-overlay .result-card h2{margin:0 0 5px;color:#fff0c8;font:700 37px/1.25 "Noto Serif TC","Songti TC",serif;letter-spacing:4px;text-shadow:0 2px 15px #f0bb6555}
 .result-heading #td-result-status{color:#e7d19e;font-size:18px;font-weight:700;letter-spacing:4px}
-.td-overlay .result-card .result-intro{margin:22px 0 25px;color:#c4cfcc;font-size:14px;line-height:1.6;letter-spacing:0}
+.td-overlay .result-card .result-intro{margin:22px 0 25px;color:#c4cfcc;font-size:14px;line-height:1.6;letter-spacing:0;white-space:pre-line}
 .td-overlay .result-card .result-highlight{margin:-14px 0 16px;color:#f0d487;font-size:12px;letter-spacing:0}
 .result-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
 .result-stats>div{min-height:94px;padding:15px 16px 12px;background:#0b171bbd;border:1px solid #bba27250;border-radius:6px}

@@ -118,7 +118,7 @@
         available ? (look.heroId === 'chief' ? '' + look.name + '：待機、移動、揮斧與戰吼；兩邊共用角色數值，光效不增加傷害。' : look.heroId === 'arcanist' ? '待機、移動、攻擊、施法同步播放。' : '待機、移動、攻擊同步比較；技能動作沿用攻擊動作。') + '可切換戰場原尺寸。' : '動作素材載入失敗，目前兩邊都顯示原版。可重新選取此造型再試。';
       if (portrait.status !== 'fulfilled') status.textContent += ' 新立繪載入失敗，暫顯原版。';
       const stats = model.stats();
-      document.querySelector('#lab-stats').innerHTML = `<span>兩種外觀共用</span><span>ATK<strong>${stats.damage}</strong></span><span>HP<strong>${stats.maxHealth}</strong></span><span>射程<strong>${stats.range}</strong></span><span>攻擊間隔<strong>${stats.interval}s</strong></span><span>造型能力加成<strong>0</strong></span>`;
+      document.querySelector('#lab-stats').innerHTML = `<span>兩種外觀共用</span><span>攻擊<strong>${stats.damage}</strong></span><span>生命<strong>${stats.maxHealth}</strong></span><span>射程<strong>${stats.range}</strong></span><span>攻擊間隔<strong>${stats.interval}s</strong></span><span>造型能力加成<strong>0</strong></span>`;
       document.querySelectorAll('button[data-motion]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.motion === 'idle')));
       const pause = document.querySelector('#lab-pause'); pause.textContent = model.paused ? '播放' : '暫停'; pause.setAttribute('aria-pressed', String(model.paused));
       document.querySelectorAll('.lab-toolbar button,.lab-toolbar select').forEach(button => { button.disabled = false; });

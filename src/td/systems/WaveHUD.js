@@ -5,15 +5,17 @@
     static model(game){
       const w=game.waves,preparing=w.canStart(),number=Math.min(w.catalog.total(),Math.max(1,w.wave+(preparing?1:0))),definition=preparing?w.preview():w.definition(number);
       const groups=definition?definition.groups:[],types=groups.map(g=>g.type),tags=[];
-      if(types.includes('boss'))tags.push('首領');
+      const boss=types.some(t=>(ns.entities.Monster.TYPES[t]||{}).combatRole==='boss');
+      if(boss)tags.push('首領');
       if(types.includes('healer'))tags.push('治療');
       if(types.includes('commander'))tags.push('加速支援');
       if(types.some(t=>(ns.entities.Monster.TYPES[t]||{}).speed>=90))tags.push('高速');
       if(types.includes('warder'))tags.push('護盾');
       if(types.some(t=>(ns.entities.Monster.TYPES[t]||{}).armorType==='heavy'))tags.push('重甲');
+      const pressure=game.mapPressure&&game.mapPressure.summary(game,number);if(pressure)tags.unshift(pressure.short);
       if(!tags.length)tags.push(types.includes('shaman')||types.includes('revenant')?'秘法':'輕甲');
       const remaining=w.queue.length+game.monsters.filter(m=>m.active).length;
-      return {number,total:w.catalog.total(),definition,groups,tags,preparing,remaining,boss:types.includes('boss'),status:game.status!=='playing'?(game.status==='victory'?'遠征完成':'遠征結束'):game.paused?'已暫停':w.complete?'全數守成':preparing?(w.phase==='preparing'?Math.ceil(w.countdown)+' 秒':'待命'):'剩餘 '+remaining};
+      return {number,total:w.catalog.total(),definition,groups,tags,pressure,preparing,remaining,boss,status:game.status!=='playing'?(game.status==='victory'?'遠征完成':'遠征結束'):game.paused?'已暫停':w.complete?'全數守成':preparing?(w.phase==='preparing'?Math.ceil(w.countdown)+' 秒':'待命'):'剩餘 '+remaining};
     }
     constructor(game,root){
       this.game=game;this.root=root;this.groupKey='';this.cards=[];this.toastUntil=0;this.lastUpdate=0;
@@ -25,7 +27,7 @@
     }
     setExpanded(expanded){this.root.dataset.expanded=String(expanded);this.toggle.setAttribute('aria-expanded',String(expanded));this.toggle.textContent=expanded?'收起':'預告';if(!expanded)this.detail.open=false;}
     announce(wave){
-      const model=WaveHUD.model(this.game);this.toast.textContent=(model.boss?'⚔ 首領來襲':'第 '+wave+' 波開始')+' · '+model.tags.slice(0,2).join('／');
+      const model=WaveHUD.model(this.game);this.toast.textContent=model.pressure?.startsNow?model.pressure.name+'啟動 · '+model.pressure.detail:(model.boss?'⚔ 首領來襲':'第 '+wave+' 波開始')+' · '+model.tags.slice(0,2).join('／');
       this.toast.dataset.boss=String(model.boss);this.toastUntil=performance.now()+(model.boss?2500:1600);this.toast.hidden=false;this.detail.open=false;
     }
     update(now){
@@ -41,7 +43,7 @@
       const key=JSON.stringify([m.number,m.preparing,m.groups]);
       if(key!==this.groupKey){
         this.groupKey=key;this.setExpanded(false);this.detail.open=false;this.groups.replaceChildren();this.cards=[];
-        this.preview.textContent=(m.definition?m.definition.name+' · '+m.definition.hint:'遠征完成')+'｜難度：'+game.difficulty.current().name;
+        this.preview.textContent=(m.definition?m.definition.name+' · '+m.definition.hint:'遠征完成')+(m.pressure?'｜地圖壓力：'+m.pressure.name+' · '+m.pressure.detail:'')+'｜難度：'+game.difficulty.current().name;
         m.groups.forEach(group=>{
           const cfg=ns.entities.Monster.TYPES[group.type]||{},button=document.createElement('button'),canvas=document.createElement('canvas'),count=document.createElement('span');
           button.type='button';button.className='wave-enemy';button.setAttribute('aria-label',(cfg.name||group.type)+' × '+group.count+'，查看情報');button.title=(cfg.name||group.type)+' × '+group.count;

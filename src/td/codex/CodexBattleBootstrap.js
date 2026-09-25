@@ -13,7 +13,7 @@
   });
   // Small navigation entry in the existing opening screen; never opens a modal during combat.
   const link = document.createElement('a'); link.href = 'codex.html'; link.className = 'codex-navigation';
-  const refresh = () => { link.textContent = '世界圖鑑' + (progression.unread().length ? ' · NEW' : ''); };
+  const refresh = () => { link.textContent = '世界圖鑑' + (progression.unread().length ? ' · 新內容' : ''); };
   (game.ui.professionScreen || document.body).append(link);
   progression.progress.subscribe(refresh); progression.chronicleProgress.subscribe(refresh); refresh();
 })(globalThis.TowerFrontier);

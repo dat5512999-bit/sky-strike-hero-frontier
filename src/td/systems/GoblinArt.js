@@ -13,9 +13,9 @@
     const goblin=hero.classType==='goblin',key=goblin?'goblinToolsAtlas':'chiefAxesAtlas',path=goblin?'goblin-tools-v1.png':'chief-axes-v1.png';
     const atlas=system[key]||(system[key]=system.load('assets/td/items/'+path));
     if(!atlas.ready)return;
-    const sw=atlas.width/3,sh=atlas.height,height=goblin?47:55,width=height*sw/sh;
+    const sw=atlas.width/3,sh=atlas.height,height=goblin?45:55,width=height*sw/sh;
     ctx.save();ctx.translate(hero.x,hero.y);if(Math.cos(hero.facing||0)<0)ctx.scale(-1,1);
-    ctx.translate(goblin?22:26,goblin?-39:-52);ctx.rotate(hero.state==='attack'?-.5:-.14);
+    ctx.translate(goblin?21:26,goblin?-37:-52);ctx.rotate(hero.state==='attack'?-.5:-.14);
     ctx.shadowColor=goblin?'#72e9da':'#ff9b4a';ctx.shadowBlur=level===3?7:0;
     ctx.drawImage(atlas,(level-1)*sw,0,sw,sh,-width/2,-height/2,width,height);ctx.restore();
   }
@@ -28,8 +28,8 @@
   function actionAtlas(system,kind){
     const key=kind==='hero'?'goblinHeroActions':'goblinSoldierActions';
     if(system[key])return system[key];
-    const image=system[key]=system.load('assets/td/goblin/'+kind+'-actions-v1.png');
-    image.addEventListener?.('load',()=>{for(const id of Object.keys(soldierRows))system.previewCache?.delete('unit:'+id);if(typeof document!=='undefined')document.querySelectorAll('[data-roster-unit^="goblin"],[data-build-type^="goblin"]').forEach(card=>delete card.dataset.previewReady);system.game?.refreshRosterPreviews?.();},{once:true});
+    const image=system[key]=system.load('assets/td/goblin/'+kind+'-actions-v2.png');
+    image.addEventListener?.('load',()=>{for(const id of Object.keys(soldierRows))system.previewCache?.delete('unit:'+id);if(typeof document!=='undefined')document.querySelectorAll('[data-roster-unit^="goblin"],[data-build-type^="goblin"],[data-mercenary^="goblin"]').forEach(card=>delete card.dataset.previewReady);system.game?.refreshRosterPreviews?.();system.game?.updateUi?.();},{once:true});
     return image;
   }
   const buildingFrames={goblinGenerator:['a',4,0,93],goblinTurret:['a',4,1,92],goblinMortar:['a',4,2,98],goblinSnare:['a',4,3,94],goblinRecycler:['b',3,0,96],goblinCooler:['b',3,1,96],goblinSiege:['b',3,2,116]};
@@ -53,7 +53,7 @@
     const image=system.goblinSoldierAtlas=system.load('assets/td/goblin-soldiers-atlas-v2.png');
     const refreshPreviews=()=>{
       for(const key of Object.keys(soldierFrames))system.previewCache?.delete('unit:'+key);
-      if(typeof document!=='undefined')document.querySelectorAll('[data-roster-unit^="goblin"],[data-build-type^="goblin"]').forEach(card=>delete card.dataset.previewReady);
+      if(typeof document!=='undefined')document.querySelectorAll('[data-roster-unit^="goblin"],[data-build-type^="goblin"],[data-mercenary^="goblin"]').forEach(card=>delete card.dataset.previewReady);
       system.game?.refreshRosterPreviews?.();system.game?.updateUi?.();
     };
     if(image.ready)refreshPreviews();
@@ -122,12 +122,12 @@
       const row={idle:0,walk:1,attack:2,cast:3}[hero.state]||0,column=Math.max(0,Math.min(3,hero.frame||0));
       ctx.save();ctx.translate(hero.x,hero.y+8);if(Math.cos(hero.facing||0)<0)ctx.scale(-1,1);
       ctx.fillStyle='rgba(0,0,0,.24)';ctx.beginPath();ctx.ellipse(0,4,24,7,0,0,Math.PI*2);ctx.fill();
-      const sw=actions.width/4,sh=actions.height/4,w=99*sw/sh;ctx.drawImage(actions,column*sw,row*sh,sw,sh,-w/2,-99,w,99);
+      const sw=actions.width/4,sh=actions.height/4,height=94,w=height*sw/sh;ctx.drawImage(actions,column*sw,row*sh,sw,sh,-w/2,-height,w,height);
       ctx.restore();if(hero.equipment?.spear>0)drawHeroWeapon(this,ctx,hero);return true;
     }
     const image=this.goblinChiefImage||(this.goblinChiefImage=this.load('assets/td/combat-art/goblin-chief-v1.png'));
     if(!image.ready)return false;
-    const height=94,width=height*image.width/image.height,clock=hero.frameClock||0;
+    const height=90,width=height*image.width/image.height,clock=hero.frameClock||0;
     const walking=hero.state==='walk',casting=hero.state==='cast',attacking=hero.state==='attack';
     const bob=walking?Math.abs(Math.sin(clock*8))*3:0,lunge=attacking?3:0;
     ctx.save();ctx.translate(hero.x,hero.y+8-bob);if(Math.cos(hero.facing||0)<0)ctx.scale(-1,1);

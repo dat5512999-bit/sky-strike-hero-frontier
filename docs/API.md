@@ -1,3 +1,34 @@
+> **v0.85.42：** `maps.emberroad` 與 `chapter2-ember-road` 是故事專用資料；`MapPressureSystem` 產生暫態 `mapPressure.armorBonus`，`Monster.takeDamage()` 才讀取它。無 HTTP API、資料庫或存檔 schema 變更。見 [2-2 介面](CHAPTER2_MAP_2_2_V08542.md)。
+
+> **v0.85.39：** `MapPressureSystem` 只讀取 `ns.config.mapPressure`，將地圖路段換算為怪物暫態 `mapPressure`；`Monster.update()` 消費此狀態。無 HTTP API、資料庫或存檔 schema 變更。見 [地圖壓力](MAP_PRESSURE_V08539.md)。
+
+> **v0.85.38：** `SpeedLoadGuard.speed(requested)` 回傳有效倍速，`observe(plan, requested, active)` 回報切換；不新增 HTTP API、資料庫或存檔欄位。見 [模組介面](LONG_SESSION_FOLLOWUP_V08538.md)。
+
+> **v0.85.36：** `HeroEvolutionPresentation.draw(ctx, art, hero)` 會唯讀 `evolutionCast` 與 `evolutionReveal` 繪製職業 VFX；無 HTTP API、資料庫或存檔 schema 變更。見 [介面責任](HERO_EVOLUTION_ANIMATION_V08536.md)。
+
+> **v0.85.33：** `ProfileStore` 首次建立時啟用既有 `test` 檔第 1 輪；`FrontierApp.lockReason()` 查實際故事獎勵；`FrameTimingSystem.next()` 最多回傳 12 個細步。無 HTTP API、資料庫或存檔 schema 變更。見 [架構與 API](PLAYER_ENTRY_FRAME_PACING_V08533.md)。
+
+> **v0.85.31：** 新增內部 `FrameTimingSystem.next()`、`PerformanceMonitor.record()`；無 HTTP API、資料庫或存檔 schema 變更。見 [架構說明](FRAME_PACING_V08531.md)。
+
+> **v0.85.30：** `FactionSystem.FACTIONS[id].codexArt` 是圖鑑專用直式軍團肖像的唯讀資產路徑；`CodexCatalog` 優先把它公開為 `entry.art`。沒有 HTTP API、存檔 schema 或戰鬥規則變更。見 [圖鑑軍團肖像交付](CODEX_FACTION_ART_V08530.md)。
+> **v0.85.32：** `HeroEvolutionSystem` 是英雄階段、技能組、進化石、試煉與進化倍率的唯一入口；`EconomySystem.emblems` 與原功勳獨立，`ChapterCheckpointSystem` 同步保存二者。無網路 API。詳見 [英雄進化交付](HERO_EVOLUTION_V08532.md)。
+
+> **v0.85.26：** 僅更新 `config.buildings.goblinGenerator` 的成本；沒有 HTTP API 或存檔 schema 變更。見 [地精前期平衡](GOBLIN_EARLY_GAME_V08526.md)。
+
+> **v0.85.25：** `Monster.walkPhase`／`visualHeading` 是當局繪圖狀態，`ArtSystem.DIRECTIONAL_MONSTERS` 是方向圖集規格；沒有 HTTP API 或存檔 schema 變更。見 [架構說明](COMBAT_MOTION_V08525.md)。
+
+> **v0.85.24：** `GoblinNetworkSystem.stateLabel(item)` 將既有網路狀態轉成玩家可讀的戰鬥結果；沒有 HTTP API 或存檔 schema。見 [供能可讀性熱修](GOBLIN_NETWORK_VISIBILITY_V08524.md)。
+
+> v0.85.20 怪物攻擊站姿與路徑銜接：參見 [完整操作、架構、部署、回復與驗收](COMBAT_MOTION_V08520.md)。
+
+> **第二章 2-1 預覽：** `StoryCatalog.chapter2Preview` 是一筆沒有地圖、波次或獎勵的唯讀劇情資料；`getMission(id)` 可解析它以供 `FrontierApp` 的既有 `story-card-replay` 路徑讀取。其 `replay=true` 保證結束時只返回劇情頁，不呼叫 `launchStory()`，無 HTTP API、存檔 schema 或解鎖變更。詳見 [第二章劇情本](CHAPTER2_STORY_TREATMENT_V1.md)。
+
+> **v0.85.19：** `TutorialSystem.onLootClaim()`、`onEquipmentPickerOpened()` 與 `onEquipmentEquipped()` 串接既有軍械操作；`ArmoryUI` 提供可辨識的 `data-equip-gear`。沒有 HTTP API 或存檔 schema 變更。詳見 [新手裝備教學](CHAPTER1_ONBOARDING_V08519.md)。
+
+> **v0.85.18：** `Monster.update()` 以獨立視覺計時選攻擊影格；`CombatUnit.animate()` 依冷卻與出手選姿勢。對外 API 與存檔格式不變。詳見 [戰鬥動作時序](COMBAT_MOTION_V08518.md)。
+
+> **v0.85.13（2026-09-24）：** `CosmeticArt.drawCombatUnitSprite` 依狀態選日蝕圖集列，`GoblinArt` 改載 v2 動作圖；介面參數、存檔與 HTTP API 不變。詳見 [軍團動作圖交付](FACTION_MOTION_V08513.md)。
+
 > **v0.85.12（2026-09-24）：** `StoryCatalog.mission.storyCards` 提供第一關三張卡的標題、短句與既有圖片；`FrontierApp.startStoryCards(replay)`／`finishStoryCards()` 管理閱讀與進戰鬥，不新增 HTTP API 或存檔欄位。詳見 [劇情卡交付](STORY_CARDS_V08512.md)。
 
 > **v0.85.11（2026-09-23）：** Hero.setTarget(x,y,speedScale=1) 新增可選移動速度比例；HeroJoystick 輸出漸進強度。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
@@ -586,3 +617,9 @@ ProfileStore profile 新增 wallet.gold、wallet.diamonds 非負安全整數欄�
 > v0.85.1：根目錄 `td.html` 已整合霜牙肖像與霜原盟族群像；介面與資產說明見[選角插畫交付](FROSTLAND_SELECTION_ART_V0851.md)。
 
 v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare／beforeHit／afterHit／death；FrostlandAnimation.queue／update 控制出手時間，FrostlandSprites 接 ArtSystem。Shop/Loot 依目前隊伍過濾軍械，存檔 schema 不變。完整接口與資料流見 [冰原 V1](FROSTLAND_FACTION_V1.md#i-core-與架構)。
+> **v0.85.14：** 無新增 HTTP API；前端新增 `TutorialSystem`、`WaveSystem.holdPreparation()` 與 story profile 引導旗標。詳見 [第一章引導](CHAPTER1_ONBOARDING_V08514.md)。
+> **v0.85.15：** 無新增 HTTP API 或 schema；教學波次轉場由既有 `acknowledgeReward()` 事件接入。詳見 [引導修正](CHAPTER1_ONBOARDING_V08515.md)。
+> **v0.85.16：** 無新增 HTTP API 或 schema；僅擴充前端教學位置半徑與既有放置事件。詳見 [教學修正](CHAPTER1_ONBOARDING_V08516.md)。
+
+> **v0.85.17：** 無新增 HTTP API、資料庫或 schema；新增的部署、商城開關與購買引導皆是既有前端方法的事件包裝。詳見 [教學操作修正](CHAPTER1_ONBOARDING_V08517.md)。
+> **v0.85.21：** `TutorialSystem.onUnitSelected()` 管理先選士兵再升級；`dismissTutorialModal()` 安全收尾教學開啟的裝備／掉落面板。無 HTTP API 或存檔 schema 變更。詳見 [教學流程修正](CHAPTER1_ONBOARDING_V08521.md)。

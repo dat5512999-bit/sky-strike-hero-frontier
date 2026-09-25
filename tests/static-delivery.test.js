@@ -42,7 +42,7 @@ test('英雄塔防在主大廳初始化完成前遮住戰場，完成後才解�
   assert.match(app, /document\.body\.dataset\.appReady='true'/);
 });
 
-test('英雄塔防公開顯示目前程式與平衡資料版本',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8');assert.ok(html.includes('v'+JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8')).version));assert.match(html,/FROSTLAND TESTABLE V1/);assert.doesNotMatch(html,/SHARED UX/);});
+test('英雄塔防公開顯示目前程式與平衡資料版本',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8');assert.ok(html.includes('v'+JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8')).version));assert.match(html,/娜迦自由遠征/);assert.doesNotMatch(html,/SHARED UX/);});
 
 test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
   const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');
@@ -179,8 +179,9 @@ test('跨族傭兵名冊與召喚／換裝圖集完整加入離線版本', () =>
   const worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
   const game = fs.readFileSync(path.join(root, 'src/td/TDGame.js'), 'utf8');
   const mercenaries = Array.from(html.matchAll(/data-mercenary="([^"]+)"/g), (match) => match[1]);
-  assert.deepEqual(mercenaries, ['royalCommander','soulsteel','kingdomMage','alchemist','beastmaster','bountyHunter','pirate','blacksmith','timeMage','bombWorkshop','hunter','shield','knight','musketeer','halberdier','arcanist','dragon','treant','dryad','moonblade','rogue','skeleton','golem','banshee','boneRider']);
+  assert.deepEqual(mercenaries, ['royalCommander','soulsteel','kingdomMage','alchemist','beastmaster','bountyHunter','pirate','blacksmith','timeMage','bombWorkshop','frostWolf','frostBird','goblinGunner','goblinRiveter','hunter','shield','knight','musketeer','halberdier','arcanist','dragon','treant','dryad','moonblade','rogue','skeleton','golem','banshee','boneRider']);
   assert.equal(mercenaries.includes('orc'), false, '戰利解鎖的半獸人不應重複放入商店');
+  assert.equal(mercenaries.includes('goblinMech'), false, '需完整供電網才可作戰的機偶不應作為獨立傭兵販售');
   assert.match(game, /if\(!self\.factions\.canHire\(type,kind\)\)return/, '隱藏按鈕之外仍需阻擋本族傭兵購買');
   ['arcane-elemental-actions-v1.png','crypt-wraith-actions-v1.png','graveyard-revenant-actions-v1.png','hero-hunter-actions-unarmed-v4.png','hero-arcanist-actions-unarmed-v1.png'].forEach((file) => {
     assert.ok(fs.existsSync(path.join(root, 'assets/td', file)));
