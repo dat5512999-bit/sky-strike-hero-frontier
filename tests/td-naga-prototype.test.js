@@ -26,10 +26,19 @@ test('娜迦可直接作為自由遠征軍團，並保留指定英雄、軍團�
 
 test('新玩家與既有存檔都直接取得娜迦自由遠征資格',()=>{
   const {ns}=load(),data=new Map(),storage={getItem:key=>data.get(key)??null,setItem:(key,value)=>data.set(key,value),removeItem:key=>data.delete(key)},first=new ns.systems.ProfileStore(storage);
-  assert.equal(first.allows('heroes','naga'),true);assert.equal(first.allows('factions','naga'),true);
-  const legacy=JSON.parse(first.export());for(const profile of Object.values(legacy.profiles).concat(legacy.archives)){profile.unlocks.heroes=profile.unlocks.heroes.filter(id=>id!=='naga');profile.unlocks.factions=profile.unlocks.factions.filter(id=>id!=='naga');}
+  assert.equal(first.allows('heroes','naga'),true);assert.equal(first.allows('factions','naga'),true);assert.equal(first.allows('maps','westernsignal'),true);assert.equal(first.allows('maps','emberroad'),true);
+  const legacy=JSON.parse(first.export());for(const profile of Object.values(legacy.profiles).concat(legacy.archives)){profile.unlocks.heroes=profile.unlocks.heroes.filter(id=>id!=='naga');profile.unlocks.factions=profile.unlocks.factions.filter(id=>id!=='naga');profile.unlocks.maps=profile.unlocks.maps.filter(id=>!['westernsignal','emberroad'].includes(id));}
   storage.setItem(ns.systems.ProfileStore.KEY,JSON.stringify(legacy));const migrated=new ns.systems.ProfileStore(storage);
-  assert.equal(migrated.allows('heroes','naga'),true);assert.equal(migrated.allows('factions','naga'),true);
+  assert.equal(migrated.allows('heroes','naga'),true);assert.equal(migrated.allows('factions','naga'),true);assert.equal(migrated.allows('maps','westernsignal'),true);assert.equal(migrated.allows('maps','emberroad'),true);
+});
+
+test('娜迦選角使用正式單人與軍團立繪，三次鍛造有可辨識的三叉戟戰場表現',()=>{
+  const {ns}=load(),hero=ns.systems.HeroRoster.get('naga'),faction=ns.systems.FactionSystem.FACTIONS.naga,cache=fs.readFileSync('sw.js','utf8');
+  assert.equal(hero.selectionArt,'assets/td/naga/tidebreaker-selection-v1.png');assert.equal(faction.selectionArt,'assets/td/naga/faction-selection-v1.png');
+  for(const asset of [hero.selectionArt,faction.selectionArt]){assert.ok(fs.existsSync(asset),asset);assert.ok(fs.statSync(asset).size>400000,asset+' should be a painted selection asset');assert.ok(cache.includes('./'+asset),asset+' should be cached');}
+  assert.equal(new ns.systems.ProfessionSystem().choose('naga'),true);
+  assert.ok(ns.systems.EquipmentSystem.WEAPONS.naga.every(item=>item.visual==='trident'));
+  assert.equal(hero.skillArt,'assets/td/naga/tidebreaker-skill-icons-v1.png');assert.ok(fs.existsSync(hero.skillArt));assert.ok(cache.includes('./'+hero.skillArt));
 });
 
 test('四座娜迦建築可部署、具不同實際戰術並有兩條進階分支',()=>{
@@ -78,4 +87,20 @@ test('娜迦建築圖集可離線使用，四個建築格均有透明背景與�
     for(let y=Math.floor(row*cellH+cellH*.2);y<Math.floor(row*cellH+cellH*.8);y+=4)for(let x=Math.floor(column*cellW+cellW*.2);x<Math.floor(column*cellW+cellW*.8);x+=4)if(pixels[(y*width+x)*4+3]>80)filled++;
     assert.ok(filled>80,'building cell '+column+','+row+' must have visible art');
   }
+});
+
+test('賽洛技能是娜迦專屬實作：突刺、旋潮、潮衛號令與萬潮裁決不會套用人族邏輯',()=>{
+  const {ns}=load(),hero=new ns.entities.Hero(180,220),enemy=new ns.entities.Monster('grunt',1,[{x:0,y:0},{x:720,y:0}]);hero.chooseClass('naga');enemy.x=260;enemy.y=220;enemy.active=true;
+  const start=enemy.health;assert.equal(hero.castNova([enemy],()=>{},()=>{}),true);assert.ok(enemy.health<start);assert.equal(hero.skillVfx.at(-1).type,'naga-tidegate');
+  hero.skillCooldowns.thunder=0;assert.equal(hero.castThunder([enemy],()=>{},[],()=>{}),true);assert.equal(hero.fields.at(-1).type,'naga');
+  const guard=new ns.entities.CombatUnit('nagaTideguard',hero.x+40,hero.y),game={build:{combatUnits:()=>[guard]}};hero.synergy={game};hero.skillCooldowns.summon=0;assert.equal(hero.castSummon([]),true);assert.ok(guard.nagaCommand>4.9);assert.ok(guard.config().damage>ns.config.units.nagaTideguard.damage);
+  hero.skillCooldowns.ultimate=0;enemy.active=true;enemy.health=enemy.maxHealth;enemy.x=hero.x+90;enemy.y=hero.y;const result=ns.systems.HeroUltimateSystem.cast(hero,[enemy],()=>{},()=>{});assert.equal(result.name,'萬潮裁決');assert.equal(hero.skillVfx.at(-1).type,'ultimate-naga');
+});
+
+test('娜迦十六格動作均走跨格邊界資料，長兵器與翼膜不會被格線截掉',()=>{
+  const {ns}=load(),bounds=ns.systems.SpriteFrameBounds,art=fs.readFileSync('src/td/systems/ArtSystem.js','utf8');
+  for(const file of ['assets/td/naga/tidebreaker-hero-actions-v1.png','assets/td/naga/tideguard-actions-v1.png','assets/td/naga/brine-shellbreaker-actions-v1.png','assets/td/naga/deep-tide-wargod-actions-v1.png','assets/td/naga/manta-wing-raider-actions-v1.png','assets/td/naga/venom-marsh-stalker-actions-v1.png']){
+    const atlas=bounds[file];assert.ok(atlas&&atlas.frames.length===16,file+' needs measured frame bounds');assert.ok(atlas.frames.some((frame,index)=>frame[0]<index%4*atlas.width/4||frame[0]+frame[2]>(index%4+1)*atlas.width/4||frame[1]<Math.floor(index/4)*atlas.height/4||frame[1]+frame[3]>(Math.floor(index/4)+1)*atlas.height/4),file+' should preserve at least one intentional overflow pose');
+  }
+  assert.match(art,/SpriteFrameBounds/);assert.match(art,/allow the source and destination to cross cell edges/);
 });

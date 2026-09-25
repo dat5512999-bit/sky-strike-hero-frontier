@@ -46,6 +46,11 @@ test('開局選擇在單一桌面視窗並排英雄與軍團，手機共用相�
   assert.equal((html.match(/data-faction=/g)||[]).length,7);
 });
 
+test('開局英雄卡只更新選擇，開始鈕才會以完整英雄×軍團組合開局',()=>{
+  const game=fs.readFileSync(path.join(root,'src/td/TDGame.js'),'utf8');
+  assert.match(game,/bindOpeningHeroCards\.call\(this\);[\s\S]*?selectOpeningProfession\(button\.dataset\.profession\)/);
+});
+
 test('重新挑戰沿用上一局設定，並確實呼叫既有 reset',()=>{
   const calls=[],game={lastRun:{difficulty:'veteran',profession:'rogue',faction:'hunter'},ui:{menuScreen:{hidden:false}},reset(){calls.push('reset');},chooseDifficulty(id){calls.push('difficulty:'+id);},selectOpeningProfession(id){calls.push('hero:'+id);},selectOpeningFaction(id){calls.push('faction:'+id);},chooseProfession(hero,faction){calls.push('start:'+hero+'×'+faction);}};
   assert.equal(prototype().retrySameSetup.call(game),true);

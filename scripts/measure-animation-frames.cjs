@@ -1,8 +1,8 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),{rgba}=require('../tests/png-pixels.cjs');
 const c=vm.createContext({Image:class{}});c.globalThis=c;for(const p of ['src/td/namespace.js','src/td/systems/ArtSystem.js'])vm.runInContext(fs.readFileSync(p,'utf8'),c);
-const ArtSystem=c.TowerFrontier.systems.ArtSystem,a=new ArtSystem();for(const type of Object.keys(ArtSystem.ACTION_PATHS||{}))a.actionImage(type);
-const paths=[...new Set([...Object.values(a.combatUnits),...Object.values(a.enemyActions),a.hero,a.heroHunter,a.heroRogue,a.heroHunterUnarmed,a.heroArcanistUnarmed,a.rogueUnarmed,a.wolf,a.arcaneElemental,a.cryptWraith,a.graveyardRevenant].map(i=>i.assetSrc))].filter(p=>p&&!p.includes('ultimate-')&&!p.includes('beastmaster'));
+const ArtSystem=c.TowerFrontier.systems.ArtSystem,a=new ArtSystem();for(const type of Object.keys(ArtSystem.ACTION_PATHS||{}))a.actionImage(type);a.nagaHero=a.load('assets/td/naga/tidebreaker-hero-actions-v1.png');
+const paths=[...new Set([...Object.values(a.combatUnits),...Object.values(a.enemyActions),a.hero,a.heroHunter,a.heroRogue,a.heroHunterUnarmed,a.heroArcanistUnarmed,a.nagaHero,a.rogueUnarmed,a.wolf,a.arcaneElemental,a.cryptWraith,a.graveyardRevenant].map(i=>i.assetSrc))].filter(p=>p&&!p.includes('ultimate-')&&!p.includes('beastmaster'));
 const data={},report=[];
 for(const path of paths){const {width:w,height:h,pixels:p}=rgba(path),seen=new Uint8Array(w*h),queue=new Int32Array(w*h),parts=[];
  for(let i=0;i<w*h;i++){if(seen[i]||p[i*4+3]<160)continue;let head=0,tail=1;queue[0]=i;seen[i]=1;let x0=w,y0=h,x1=0,y1=0;

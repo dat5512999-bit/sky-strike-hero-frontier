@@ -39,10 +39,10 @@
       {id:'demonfang-blades',name:'魔王獠牙',rarity:'legendary',color:'#ff3e4f',column:2,row:2,description:'累計提高 60% 傷害；普攻化為半徑 38 的魔焰斬擊。',splash:38,style:'flame'}
     ],
     naga:[
-      {id:'tidebreaker-spear-0',name:'破潮三叉戟',rarity:'base',color:'#55d3d0',description:'破潮者的初始潮門三叉戟。'},
-      {id:'tidebreaker-spear-1',name:'珊瑚潮鋼戟',rarity:'common',color:'#9ce6df',description:'普攻與傷害技能累計提高 20%；潮鋼刃留下青白水痕。'},
-      {id:'tidebreaker-spear-2',name:'深淵潮印戟',rarity:'epic',color:'#4aaedb',description:'普攻與傷害技能累計提高 40%；35% 機率觸發兩段潮電連鎖。',chainChance:.35,chain:2,chainRange:98,chainStyle:'lightning'},
-      {id:'tidebreaker-spear-3',name:'萬潮王戟',rarity:'legendary',color:'#b7fff0',description:'普攻與傷害技能累計提高 60%；保留潮電連鎖，並造成半徑 30 的破潮濺射。',chainChance:.35,chain:2,chainRange:98,chainStyle:'lightning',splash:30,style:'spirit'}
+      {id:'tidebreaker-spear-0',name:'破潮三叉戟',rarity:'base',color:'#55d3d0',visual:'trident',description:'破潮者的初始潮門三叉戟。'},
+      {id:'tidebreaker-spear-1',name:'珊瑚潮鋼戟',rarity:'common',color:'#9ce6df',visual:'trident',description:'普攻與傷害技能累計提高 20%；潮鋼刃留下青白水痕。'},
+      {id:'tidebreaker-spear-2',name:'深淵潮印戟',rarity:'epic',color:'#4aaedb',visual:'trident',description:'普攻與傷害技能累計提高 40%；35% 機率觸發兩段潮電連鎖。',chainChance:.35,chain:2,chainRange:98,chainStyle:'lightning'},
+      {id:'tidebreaker-spear-3',name:'萬潮王戟',rarity:'legendary',color:'#b7fff0',visual:'trident',description:'普攻與傷害技能累計提高 60%；保留潮電連鎖，並造成半徑 30 的破潮濺射。',chainChance:.35,chain:2,chainRange:98,chainStyle:'lightning',splash:30,style:'spirit'}
     ]
   };
   class EquipmentSystem{
@@ -53,6 +53,7 @@
     static drawSignature(ctx,hero){const weapon=this.weapon(hero);if(!weapon.level||!hero.active)return;const pulse=.65+Math.sin(hero.animationTime*5)*.15,attack=hero.state==='attack';ctx.save();ctx.translate(hero.x,hero.y-17);ctx.rotate(hero.facing);ctx.globalCompositeOperation='screen';ctx.strokeStyle=weapon.color;ctx.fillStyle=weapon.color;ctx.shadowColor=weapon.color;ctx.shadowBlur=weapon.level>=3?15:8;ctx.globalAlpha=.35+.13*weapon.level;ctx.lineWidth=1.5+weapon.level*.65;
       if(hero.classType==='rogue'){if(!attack){ctx.restore();return;}ctx.globalAlpha=.1+.08*weapon.level;ctx.lineWidth=1+weapon.level*.45;const reach=12+weapon.level*2;for(let side=-1;side<=1;side+=2){ctx.beginPath();ctx.arc(13,side*4,reach,-.48,.48);ctx.stroke();}}
       else if(hero.classType==='hunter'){ctx.beginPath();ctx.arc(11,0,17+weapon.level*3,-1.05,1.05);ctx.stroke();ctx.beginPath();ctx.moveTo(19,-14);ctx.lineTo(19,14);ctx.stroke();}
+      else if(weapon.visual==='trident'){const reach=24+weapon.level*4;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-7,6);ctx.lineTo(reach,0);ctx.stroke();for(const offset of [-7,0,7]){ctx.beginPath();ctx.moveTo(reach-9,offset*.34);ctx.lineTo(reach+5,offset);ctx.stroke();}if(weapon.level>=2){ctx.globalAlpha*=pulse;ctx.beginPath();ctx.arc(reach-4,0,10+weapon.level*2,0,Math.PI*2);ctx.stroke();}}
       else{ctx.beginPath();ctx.arc(21,-7,5+weapon.level*2,0,Math.PI*2);ctx.stroke();ctx.globalAlpha*=pulse;ctx.beginPath();ctx.arc(21,-7,11+weapon.level*2,0,Math.PI*2);ctx.stroke();}
       if(weapon.level>=3){for(let i=0;i<3;i++){const angle=hero.animationTime*2+i*Math.PI*2/3;ctx.globalAlpha=.65;ctx.beginPath();ctx.arc(Math.cos(angle)*31,Math.sin(angle)*13,2.2,0,Math.PI*2);ctx.fill();}}
       ctx.restore();

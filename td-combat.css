@@ -282,6 +282,13 @@ body[data-hero-class="rogue"]{--skill-y:66.666667%;}
 body[data-skill-art="ready"] .td-quick-rail #td-shop-open b{display:block;width:27px;height:27px;background:url('assets/td/hero-skill-icons-v1.png') 0% 100%/400% 400% no-repeat;font-size:0!important;color:transparent!important;filter:drop-shadow(0 1px 3px #000)}
 body[data-skill-art="ready"] .skill-button.is-cooling b{filter:saturate(.5) brightness(.65);}
 @media(max-height:600px){body[data-skill-art="ready"] .td-hero-dock .skill-button b{width:32px;height:32px;flex-basis:32px;}}
+/* Naga's four abilities use a dedicated readable 2×2 atlas, never recycled human icons. */
+body[data-hero-class="naga"]{--skill-y:100%;}
+body[data-hero-class="naga"][data-skill-art="ready"] .td-hero-dock .skill-button b{background-image:url('assets/td/naga/tidebreaker-skill-icons-v1.png');background-size:200% 200%;background-repeat:no-repeat;color:transparent!important;font-size:0!important;filter:drop-shadow(0 1px 4px #021314)}
+body[data-hero-class="naga"][data-skill-art="ready"] .td-hero-dock #td-skill b{background-position:0 0}
+body[data-hero-class="naga"][data-skill-art="ready"] .td-hero-dock #td-thunder b{background-position:100% 0}
+body[data-hero-class="naga"][data-skill-art="ready"] .td-hero-dock #td-summon b{background-position:0 100%}
+body[data-hero-class="naga"][data-skill-art="ready"] .td-hero-dock #td-ultimate b{background-position:100% 100%}
 /* V0.53: a single visual resource/action strip, using the existing pause button. */
 body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header{
  width:336px;height:38px;min-height:38px;display:grid;

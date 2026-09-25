@@ -68,7 +68,7 @@ test('frostborn routes merge early and share exactly the same defensive tail',()
   assert.ok(map.sharedLength>500);
 });
 
-test('chapter missions preserve first-chapter unlock order and keep Chapter II map access story-only',()=>{
+test('chapter missions preserve first-chapter unlock order while Chapter II maps stay separately playable in free expedition',()=>{
   const ns=setup(),missions=ns.systems.StoryCatalog.missions;
   const chapter1=missions.filter(m=>m.chapter===1),chapter2=missions.filter(m=>m.chapter===2);
   assert.deepEqual(Array.from(chapter1,m=>m.map),['beginner','silverleaf','shadowfall','frostborn']);
@@ -92,7 +92,7 @@ test('chapter missions preserve first-chapter unlock order and keep Chapter II m
 
 test('western signal keeps its logical road, obstacles and camera targets separate from painted art',()=>{
   const ns=setup(),map=ns.maps.definitions.westernsignal;ns.maps.apply(map.id);
-  assert.equal(map.visible,false,'2-1 is a story map, not an unearned free-expedition map');
+  assert.equal(map.visible,true,'2-1 is also an available free-expedition map');
   assert.equal(map.roadClearance,62);assert.equal(map.path.length>=16,true);
   assert.deepEqual(JSON.parse(JSON.stringify(map.mapPressure.segments)),[{startIndex:7,endIndex:12}]);assert.equal(map.mapPressure.startsAtWave,2);
   const build=new ns.systems.BuildSystem();
@@ -103,7 +103,7 @@ test('western signal keeps its logical road, obstacles and camera targets separa
 
 test('ember road keeps the burning caravan, rock shelf and escort gate out of deployable ground',()=>{
   const ns=setup(),map=ns.maps.definitions.emberroad;ns.maps.apply(map.id);const build=new ns.systems.BuildSystem();
-  assert.equal(map.visible,false,'2-2 is a story map, not an unearned free-expedition map');assert.equal(map.path.length>=18,true);assert.equal(map.mapPressure.startsAtWave,3);
+  assert.equal(map.visible,true,'2-2 is also an available free-expedition map');assert.equal(map.path.length>=18,true);assert.equal(map.mapPressure.startsAtWave,3);
   for(const point of map.path.slice(1,-1))assert.equal(build.canPlaceAt(point.x,point.y,'building'),false,'road must remain non-buildable');
   for(const [x,y] of [[600,350],[250,480],[1370,720]])assert.equal(build.canPlaceAt(x,y,'building'),false,'painted obstacle needs explicit collision');
   assert.ok(map.safeArea.width>1200&&map.safeArea.height>650);assert.ok(map.camera.mobileInitialZoom>=1.2);

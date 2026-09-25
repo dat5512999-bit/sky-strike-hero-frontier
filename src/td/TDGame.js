@@ -4,7 +4,9 @@
   Object.assign(MAP_PRESENTATION,{
     silverleaf:{quote:'溪谷橋樑串起分段防線。',tags:['故事戰場','單一路線','橋樑'],description:'沿河谷的連續道路依序穿過橋樑與彎道；草地平台分別照顧前、中、後段。',features:['只有一條清楚的敵軍道路','沿路配置火力，不必分攤雙線預算','水域與聖樹不可建造'],route:'單一路線 · 溪谷橋樑'},
     shadowfall:{quote:'舊城中央廣場，決定火力重心。',tags:['故事戰場','單入口','中央廣場'],description:'單一路線繞過中央廣場；可在前段、廣場與後段各自建立不同火力點。',features:['中央廣場可建塔並覆蓋彎道','外側小平台各有特定守備路段','暗黑塔位於遠景，不佔可建區'],route:'單一路線 · 舊城彎道'},
-    frostborn:{quote:'雙路提早匯流，集中守住冰橋。',tags:['故事戰場','雙入口','提早匯流'],description:'左右入口的敵軍很快匯入同一條長路，玩家可把主要火力集中在共用防線。',features:['雙入口交替進軍，前段壓力分時出現','共用長路降低建造兩套防線的成本','雪地平台可建造，冰水與裂谷禁建'],route:'雙入口 · 提早匯流'}
+    frostborn:{quote:'雙路提早匯流，集中守住冰橋。',tags:['故事戰場','雙入口','提早匯流'],description:'左右入口的敵軍很快匯入同一條長路，玩家可把主要火力集中在共用防線。',features:['雙入口交替進軍，前段壓力分時出現','共用長路降低建造兩套防線的成本','雪地平台可建造，冰水與裂谷禁建'],route:'雙入口 · 提早匯流'},
+    westernsignal:{quote:'荒風穿過舊哨，讓中段敵軍加速推進。',tags:['第二章 2-1','單一路線','荒風隘道'],description:'S 彎古道在中段穿越風口；從第 2 波開始，順風會加快敵軍，既有控制只能部分緩解。',features:['第 2 波起隘道敵軍順風 +10%','緩速、冰凍與定身可壓低部分風勢','懸崖、古碑、道路與城門區域禁止建造'],route:'單一路線 · S 彎高地'},
+    emberroad:{quote:'煙障壓過商道，控制能削弱但不能完全消除護甲。',tags:['第二章 2-2','單一路線','燼火煙障'],description:'補給車旁的煙障從第 3 波開始提供敵軍護甲；在該路段以控制減壓，並保留出口補漏。',features:['第 3 波起煙障提供敵軍 +2 護甲','受控敵軍僅降至 +1 護甲，不能完全破解','補給車、高台、道路與遺跡區域禁止建造'],route:'單一路線 · 補給車煙障'}
   });
   const HERO_PRESENTATION={frostland:{identity:'寒冷累積、獵群號令與碎冰獵殺',description:'先以霜痕建立寒冷，再用獵矛擊碎凍結目標；寒冬合獵覆蓋整個戰場。CONCEPT：身世與歷史未定。',phase:'前期建立寒冷｜中期追擊凍結｜後期全場寒冬'},hunter:{identity:'遠程多目標輸出與戰狼協戰',description:'保持距離處理成群敵軍，以陷阱控制路線，再由戰狼補足近戰壓力。',phase:'前期穩定清群｜中期陷阱控場｜後期多重箭與召喚協攻'},arcanist:{identity:'範圍控場、雷擊與元素召喚',description:'用冰霜降低敵軍速度，連鎖雷擊清理密集目標，元素守衛提供持續遠程火力。',phase:'前期冰霜緩速｜中期連鎖清群｜後期元素守線'},rogue:{identity:'近戰爆發、毒霧與分身突襲',description:'主動接近高威脅目標，以瞬間爆發和持續毒傷創造局部優勢。',phase:'前期快速斬殺｜中期毒霧壓線｜後期分身突襲'},chief:{identity:'戰團指揮、祖靈怒火與週期狂潮',description:'親自站在戰團附近，以戰吼讓荒野士兵同步爆發，並以裂地衝擊波穿透並減速敵軍。',phase:'前期近戰震懾｜中期戰團指揮｜後期狂潮爆發'},goblin:{identity:'工程支援與全網超載',description:'投資供能裝置並在關鍵波次啟動全網超載。',phase:'前期工程投資｜中期聯網火力｜後期超載與冷卻調度'},naga:{identity:'破潮突進、潮壓標記與陣線控場',description:'以潮門突刺切入前線，讓潮壓標記放大軍團輸出；旋潮領域用來守住最危險的缺口。',phase:'前期標記破口｜中期旋潮控線｜後期萬潮決斷'}};
   const FACTION_PRESENTATION={frostland:{identity:'Frost Setup → Hunt Window → Shatter',description:'先用狼人、極凍鳥與冰晶塔累積寒冷，再由巨熊與重弩碎冰。Boss 進入深寒而非完全凍住；每次窗口後有恢復間隔。',phases:['前期：累寒成形','中期：控制者＋獵殺者','後期：寒冬與連鎖碎冰']},hunter:{identity:'協同火力與正面推進',description:'以盾衛穩住部署區，遠射與衝鋒兵種分工處理不同敵人。',phases:['前期：盾衛與獵手成形','中期：火槍、法師協同','後期：統領強化正面軍勢']},arcanist:{identity:'奧術印記、自然爆發與區域控制',description:'透過緩速、印記和自然連鎖，在彎道建立持續控制區。',phases:['前期：冰霜控速','中期：印記與自然連動','後期：靈獸與古龍壓場']},rogue:{identity:'賞金尾刀、亡魂召喚與瘟疫擴散',description:'利用擊殺累積資源，以召喚物和持續傷害滾動擴大優勢。',phases:['前期：精準尾刀','中期：亡魂集結','後期：瘟疫與魂鋼爆發']},wild:{identity:'野性個體、戰團集結與部族狂潮',description:'個體先建立前線，戰鼓與薩滿讓整個戰團在固定節奏同步爆發。',phases:['前期：野性個體','中期：戰團集結','後期：部族狂潮']},goblin:{identity:'工程建設、機械網路與超載',description:'動力機座供應附近裝置；回收站在戰鬥時回本，超載後全網冷卻。',phases:['前期：工程投資','中期：供能布局','後期：全網超載']},naga:{identity:'潮壓標記、鹽甲陣線與翼潮連鎖',description:'潮門尖塔先標記敵軍，鹽甲棱堡擋住重甲，深淵祭壇加速潮衛，再由翼潮獵台處理分散的敵群。',phases:['前期：潮門標記成形','中期：棱堡與祭壇控線','後期：戰神與翼潮收束']}};
@@ -311,6 +313,23 @@
   TDGame.prototype.onKill=function(monster,projectile){
     if(monster?.evolutionTrial){if(monster.rewardHandled)return;monster.rewardHandled=true;if(this.corpses)this.corpses.push(monster);if(this.feedback)this.feedback.death(monster);ns.systems.HeroEvolutionSystem.completeTrial(this,monster);this.updateUi();return;}
     const wasBoss=monster?.type==='boss';rewardEvolutionKill.call(this,monster,projectile);if(wasBoss&&monster?.rewardHandled){const value=this.economy.addEmblems(1);if(value)this.flash('擊破首領 · 首領勳章 +'+value,'#ffe08a');}
+  };
+  // The opening screen selects both sides independently.  A legacy in-battle
+  // handler used to overwrite these cards and attempted to start with no faction.
+  const bindOpeningHeroCards=TDGame.prototype.attachUi;
+  TDGame.prototype.attachUi=function(){
+    bindOpeningHeroCards.call(this);
+    (this.ui.professionButtons||[]).forEach(button=>button.onclick=()=>this.selectOpeningProfession(button.dataset.profession));
+  };
+  const attachFreeChapterMaps=TDGame.prototype.attachDifficultyUi;
+  TDGame.prototype.attachDifficultyUi=function(){
+    attachFreeChapterMaps.call(this);
+    const browser=globalThis.document&&document.getElementById('td-map-browser'),choice=this.ui.mapChoice||globalThis.document&&document.getElementById('td-map-choice');
+    for(const map of [{id:'westernsignal',label:'西境舊哨',caption:'2-1 · 荒風隘道'},{id:'emberroad',label:'燼火商道',caption:'2-2 · 燼火煙障'}]){
+      if(choice&&!choice.querySelector('option[value="'+map.id+'"]')){const option=document.createElement('option');option.value=map.id;option.textContent=map.label+'（'+map.caption.split(' · ')[0]+'）';choice.append(option);}
+      if(!browser||browser.querySelector('[data-map-id="'+map.id+'"]'))continue;
+      const button=document.createElement('button');button.type='button';button.dataset.mapId=map.id;button.setAttribute('aria-pressed','false');button.style.backgroundImage='url("'+ns.maps.definitions[map.id].asset+'")';button.innerHTML='<b>'+map.label+'</b><small>'+map.caption+'</small>';button.onclick=()=>this.chooseMap(map.id);browser.append(button);this.ui.mapButtons=Array.from(this.ui.mapButtons||[]).concat(button);
+    }
   };
   ns.TDGame=TDGame;
 })(globalThis.TowerFrontier);

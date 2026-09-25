@@ -12,7 +12,7 @@ test('PAGE 1 使用可擴充地圖瀏覽列並保留四種難度',()=>{
   assert.equal((html.match(/data-map-id=/g)||[]).length,6);
   assert.equal((html.match(/data-td-difficulty=/g)||[]).length,4);
   for(const id of ['td-map-preview','td-map-tags','td-map-features','td-route-label','td-map-record'])assert.ok(html.includes('id="'+id+'"'));
-  assert.match(css,/\.map-thumbnail-strip/);assert.match(css,/overflow-x:auto/);assert.match(main,/ui\.mapButtons/);
+  assert.match(css,/\.map-thumbnail-strip/);assert.match(css,/overflow-x:auto/);assert.match(main,/ui\.mapButtons/);assert.match(game,/attachFreeChapterMaps/);assert.match(game,/westernsignal/);assert.match(game,/emberroad/);
 });
 
 test('PAGE 2 保持英雄軍團獨立選擇並即時組合摘要',()=>{

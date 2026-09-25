@@ -32,7 +32,7 @@
    blockedAreas:[points([[268,333],[374,336],[382,382],[266,390]]),points([[482,469],[557,468],[561,515],[476,518]]),points([[552,495],[604,495],[614,552],[550,555]]),points([[844,639],[901,641],[909,688],[841,693]])],zones:[]}),
   // Chapter II 2-1. Route points were surveyed against western-signal-v1,
   // while clearings and ruins are explicit gameplay geometry rather than pixels.
-  westernsignal:Object.freeze({id:'westernsignal',name:'西境舊哨',note:'西境單路古道｜S 彎高地｜懸崖、古碑與城門禁建',visible:false,width:1536,height:1024,asset:'assets/td/western-signal-v1.png',
+  westernsignal:Object.freeze({id:'westernsignal',name:'西境舊哨',note:'西境單路古道｜S 彎高地｜懸崖、古碑與城門禁建',visible:true,width:1536,height:1024,asset:'assets/td/western-signal-v1.png',
    path:points([[-28,-8],[70,55],[165,125],[265,205],[385,270],[505,312],[615,350],[690,405],[730,475],[755,545],[800,600],[890,630],[1010,635],[1120,650],[1230,675],[1350,705],[1450,730],[1564,748]]),
    spawn:{x:18,y:24},gate:{x:1564,y:748},heroSpawn:{x:830,y:505},roadClearance:62,buildFootprint:{x:22,y:12},roadUnits:true,heroVulnerable:false,openingFocus:{x:790,y:470},safeArea:{x:70,y:80,width:1370,height:770},camera:{minUnitPixels:42,referenceUnitSize:112,maxZoom:1.45,mobileInitialZoom:1.2},
    mapPressure:{id:'western-wind-pass',name:'荒風隘道',short:'順風加速',detail:'第 2 波起，敵軍穿越中段隘道時順風 +10%；受緩速控制時仍保留 +3.5% 推進。',startsAtWave:2,speedMultiplier:1.10,controlFloor:1.035,marker:{x:696,y:292},segments:[{startIndex:7,endIndex:12}]},
@@ -41,7 +41,7 @@
   // Chapter II 2-2. Geometry is deliberately separate from the painted caravan,
   // smoke and canyon: the rescue route stays unblocked and every obstacle has a
   // deterministic collision shape.
-  emberroad:Object.freeze({id:'emberroad',name:'燼火商道',note:'燼火商道單線｜補給車煙障｜高台與車隊遺跡禁建',visible:false,width:1536,height:1024,asset:'assets/td/ember-road-encounter-v1.png',
+  emberroad:Object.freeze({id:'emberroad',name:'燼火商道',note:'燼火商道單線｜補給車煙障｜高台與車隊遺跡禁建',visible:true,width:1536,height:1024,asset:'assets/td/ember-road-encounter-v1.png',
    path:points([[-28,-8],[48,68],[105,146],[185,195],[290,220],[420,226],[555,238],[675,270],[790,320],[870,385],[905,455],[875,520],[800,585],[750,650],[805,695],[920,720],[1050,748],[1180,775],[1300,800],[1425,805],[1505,815]]),
    spawn:{x:15,y:20},gate:{x:1505,y:815},heroSpawn:{x:855,y:540},roadClearance:62,buildFootprint:{x:22,y:12},roadUnits:true,heroVulnerable:false,openingFocus:{x:790,y:450},safeArea:{x:60,y:65,width:1390,height:820},camera:{minUnitPixels:42,referenceUnitSize:112,maxZoom:1.45,mobileInitialZoom:1.2},
    mapPressure:{id:'ember-road-smoke',name:'燼火煙障',short:'煙障護甲',detail:'第 3 波起，敵軍穿越燒毀補給車旁的煙障時 +2 護甲；被緩速、冰凍或定身時降為 +1。',startsAtWave:3,speedMultiplier:1,controlFloor:1,armorBonus:2,controlArmorBonus:1,status:'煙',visual:'ember',activeLabel:'煙障 +2甲',marker:{x:625,y:455},segments:[{startIndex:5,endIndex:10}]},

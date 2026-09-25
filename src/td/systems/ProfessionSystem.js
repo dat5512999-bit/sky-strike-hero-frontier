@@ -6,7 +6,8 @@
     arcanist:{name:'森語者・希爾芙',title:'英雄 · 法術控場',description:'冰霜新星、連鎖雷擊與元素召喚。',color:'#70e7ff'},
     rogue:{name:'影行者・維菈',title:'英雄 · 近戰突襲',description:'閃擊、持續傷害毒霧與分身。',color:'#c884df'},
     chief:{name:'大酋長・戈爾',title:'英雄 · 戰團爆發',description:'戰吼引爆荒野狂潮，以近戰重斧帶領戰團。',color:'#df6548'},
-    goblin:{name:'銅齒・奇克',title:'首席工程師 · 機械調度',description:'臨場改裝、蒸汽洩壓、巡修機偶與全網超載。',color:'#d9ad65'}
+    goblin:{name:'銅齒・奇克',title:'首席工程師 · 機械調度',description:'臨場改裝、蒸汽洩壓、巡修機偶與全網超載。',color:'#d9ad65'},
+    naga:{name:'破潮者・賽洛',title:'英雄 · 潮門突進',description:'以三叉戟切開防線，靠潮壓標記與旋潮領域穩住破口。',color:'#55d3d0'}
   };
   class ProfessionSystem{
     constructor(){this.selected=null;}

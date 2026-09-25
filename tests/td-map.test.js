@@ -5,8 +5,8 @@ test('地圖美術更新保留同尺寸原版供回復，未增加執行期下�
  const root=path.join(__dirname,'..'),old=fs.readFileSync(path.join(root,'assets/td/beginner-valley-v1.png')),current=fs.readFileSync(path.join(root,'assets/td/beginner-valley-v2.png'));
  assert.equal(current.readUInt32BE(16),old.readUInt32BE(16));assert.equal(current.readUInt32BE(20),old.readUInt32BE(20));assert.ok(current.length<old.length*1.5);assert.notDeepEqual(current,old);
 });
-test('正常玩家只看到正式新手谷地，兩張舊圖仍保留作回歸測試',()=>{
- const ns=load(),maps=ns.maps.publicMaps();assert.deepEqual(Array.from(maps,map=>map.id),['twinpass','autumn','silverleaf','shadowfall','frostborn','beginner']);assert.equal(ns.maps.defaultId,'beginner');
+test('正常玩家只看到正式戰場，兩張舊圖仍保留作回歸測試',()=>{
+ const ns=load(),maps=ns.maps.publicMaps();assert.deepEqual(Array.from(maps,map=>map.id),['twinpass','autumn','silverleaf','shadowfall','frostborn','westernsignal','emberroad','beginner']);assert.equal(ns.maps.defaultId,'beginner');
  assert.equal(ns.maps.definitions.classic.developmentOnly,true);assert.equal(ns.maps.definitions.frontier.developmentOnly,true);
  const html=fs.readFileSync(path.join(__dirname,'../td.html'),'utf8');assert.match(html,/value="beginner"/);assert.doesNotMatch(html,/value="frontier"|value="classic"/);
 });

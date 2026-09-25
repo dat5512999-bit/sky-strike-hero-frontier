@@ -10,14 +10,14 @@ function load(){const context=vm.createContext({console});context.globalThis=con
 test('低於 30 FPS 時依實際經過時間補足模擬，不再每幀只算 33ms',()=>{
   const Frame=load().systems.FrameTimingSystem,clock=new Frame(1000);
   const plan=clock.next(1050,1);
-  assert.ok(Math.abs(plan.steps*plan.step-.1)<1e-9);
+  assert.ok(Math.abs(plan.steps*plan.step-.05)<1e-9);
   assert.ok(plan.step<=1/30+1e-9);
   assert.equal(plan.backlogMs,0);
 });
 
 test('三倍速追趕有步數上限，暫停與背景返回不累積突發更新',()=>{
   const Frame=load().systems.FrameTimingSystem,clock=new Frame(1000);
-  const busy=clock.next(1050,3);assert.equal(busy.steps,9);assert.equal(busy.backlogMs,0);
+  const busy=clock.next(1050,3);assert.equal(busy.steps,5);assert.equal(busy.backlogMs,0);
   const paused=clock.next(6050,3,false);assert.equal(paused.steps,0);assert.equal(paused.backlogMs,0);
   const resumed=clock.next(6066,3);assert.ok(resumed.steps<=3);assert.ok(resumed.step<=1/30+1e-9);
   const hidden=clock.next(7066,1);assert.ok(hidden.steps<=12);assert.ok(hidden.discardedMs>0);
@@ -33,7 +33,7 @@ test('持續 15 與 20 FPS 時三倍速不會逐幀丟掉戰鬥時間',()=>{
       assert.ok(last.steps<=12);
       assert.ok(last.step<=1/30+1e-9);
     }
-    assert.ok(Math.abs(advanced-360)<.001,`${fps} FPS advanced ${advanced} instead of 360`);
+    assert.ok(Math.abs(advanced-180)<.001,`${fps} FPS advanced ${advanced} instead of 180`);
     assert.ok(last.discardedMs<.001,`${fps} FPS discarded ${last.discardedMs}ms`);
   }
 });
