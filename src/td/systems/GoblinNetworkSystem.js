@@ -29,13 +29,15 @@
       if(cfg.networkCost>=2&&cfg.damage>0)return '缺電＝停機';
       return '缺電 '+this.effectLabel(item,false);
     }
+    capacity(core){return RULES.capacity+(core.level||1)-1+(core.config().networkCapacity||0);}
+    radius(core){return core.config().range||RULES.radius;}
     preview(items,candidate){
       const consumers=items.filter(item=>item.config&&item.config().networkCost&&!item.retired),generators=items.filter(item=>item.type==='goblinGenerator'&&!item.retired),source=new Map(),used=new Map();
       if(!candidate||!candidate.config||!candidate.config().networkCost)return {powered:false,source:null,used:0,capacity:0};
       consumers.push(candidate);
       generators.forEach(core=>{
-        let remaining=RULES.capacity+(core.level||1)-1;
-        consumers.filter(item=>Math.hypot(item.x-core.x,item.y-core.y)<=RULES.radius)
+        let remaining=this.capacity(core);
+        consumers.filter(item=>Math.hypot(item.x-core.x,item.y-core.y)<=this.radius(core))
           .sort((a,b)=>Math.hypot(a.x-core.x,a.y-core.y)-Math.hypot(b.x-core.x,b.y-core.y))
           .forEach(item=>{
             const cost=item.config().networkCost;
@@ -44,7 +46,7 @@
           });
       });
       const core=source.get(candidate)||null;
-      return {powered:Boolean(core),source:core,used:core?used.get(core)||0:0,capacity:core?RULES.capacity+(core.level||1)-1:0};
+      return {powered:Boolean(core),source:core,used:core?used.get(core)||0:0,capacity:core?this.capacity(core):0};
     }
     update(dt,items,economy,activeWave){
       dt=Math.max(0,Math.min(.05,Number(dt)||0));
@@ -56,8 +58,8 @@
       this.consumers=consumers;
       consumers.forEach(item=>{item.networkSource=null;item.engineerBoost=Math.max(0,(item.engineerBoost||0)-dt);item.engineerHaste=Math.max(0,(item.engineerHaste||0)-dt);item.engineerSupportTarget=null;});
       generators.forEach(core=>{
-        let remaining=RULES.capacity+(core.level||1)-1;
-        consumers.filter(item=>Math.hypot(item.x-core.x,item.y-core.y)<=RULES.radius)
+        let remaining=this.capacity(core);
+        consumers.filter(item=>Math.hypot(item.x-core.x,item.y-core.y)<=this.radius(core))
           .sort((a,b)=>Math.hypot(a.x-core.x,a.y-core.y)-Math.hypot(b.x-core.x,b.y-core.y))
           .forEach(item=>{
             if(item.networkSource||remaining<item.config().networkCost)return;
@@ -65,16 +67,16 @@
           });
       });
       consumers.forEach(item=>{
-        const powered=Boolean(item.networkSource);
+        const cfg=item.config(),powered=Boolean(item.networkSource);
         item.networkPowered=powered;
         item.networkOverloaded=powered&&this.overload>0;
         item.networkCooling=powered&&this.cooling>0;
         item.networkDamage=powered?Math.max(item.engineerBoost>0?.42:0,item.networkOverloaded?RULES.overloadDamage:RULES.boost):0;
         item.networkHaste=powered&&item.networkOverloaded?RULES.overloadHaste:0;
-        if(item.type==='goblinRecycler'&&item.kind==='building'&&powered&&activeWave&&this.cooling<=0&&this.waveGold<RULES.recyclerWaveCap){
+        if(item.type==='goblinRecycler'&&item.kind==='building'&&powered&&activeWave&&this.cooling<=0&&this.waveGold<(cfg.recyclerCap||RULES.recyclerWaveCap)){
           item.recycleTimer=(item.recycleTimer||0)+dt;
-          while(item.recycleTimer>=2&&this.waveGold<RULES.recyclerWaveCap){
-            item.recycleTimer-=2;const gold=Math.min(RULES.recyclerGold,RULES.recyclerWaveCap-this.waveGold);
+          while(item.recycleTimer>=2&&this.waveGold<(cfg.recyclerCap||RULES.recyclerWaveCap)){
+            item.recycleTimer-=2;const cap=cfg.recyclerCap||RULES.recyclerWaveCap,gold=Math.min(cfg.recyclerGold||RULES.recyclerGold,cap-this.waveGold);
             if(typeof economy.addGold==='function')economy.addGold(gold);else economy.gold+=gold;
             this.waveGold+=gold;
           }
@@ -87,7 +89,7 @@
           technician.engineerSupportTarget=target||null;
           if(target)target.networkDamage=Math.max(target.networkDamage,.08+(target.networkOverloaded?RULES.overloadDamage:RULES.boost));
         });
-      if(activeWave&&this.cooling>0&&consumers.some(item=>item.type==='goblinCooler'&&item.networkPowered))this.cooling=Math.max(0,this.cooling-dt*.5);
+      if(activeWave&&this.cooling>0){const cooling=Math.max(0,...consumers.filter(item=>item.type==='goblinCooler'&&item.networkPowered).map(item=>item.config().coolingBonus??.5));if(cooling)this.cooling=Math.max(0,this.cooling-dt*cooling);}
       // Do not serialize object references to generator instances in checkpoints.
       consumers.forEach(item=>{item.networkSource=null;});
     }
@@ -106,7 +108,7 @@
         ctx.save();ctx.globalAlpha=.94;ctx.fillStyle='rgba(9,25,26,.82)';ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.beginPath();ctx.roundRect(x-width/2,y-10,width,17,7);ctx.fill();ctx.stroke();ctx.fillStyle=color;ctx.font='800 10px Segoe UI';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,x,y-.5);ctx.restore();
       });
       usage.forEach((used,core)=>{
-        const capacity=RULES.capacity+(core.level||1)-1,x=core.x,y=core.y-75;
+        const capacity=this.capacity(core),x=core.x,y=core.y-75;
         ctx.save();ctx.globalAlpha=.96;ctx.fillStyle='rgba(9,25,26,.86)';ctx.strokeStyle='#75f2cf';ctx.lineWidth=1.5;ctx.beginPath();ctx.roundRect(x-27,y-10,54,17,7);ctx.fill();ctx.stroke();ctx.fillStyle='#c8fff0';ctx.font='800 10px Segoe UI';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('供能 '+used+'/'+capacity,x,y-.5);ctx.restore();
       });
       this.links.map(([,item])=>item).filter(item=>item.engineerSupportTarget).forEach(technician=>{

@@ -104,3 +104,9 @@ test('娜迦十六格動作均走跨格邊界資料，長兵器與翼膜不會�
   }
   assert.match(art,/SpriteFrameBounds/);assert.match(art,/allow the source and destination to cross cell edges/);
 });
+
+test('賽洛待機與施法不會輪播到倒地收勢格，避免英雄在戰鬥中卡格跳位',()=>{
+ const {ns}=load(),hero=new ns.entities.Hero(180,220);hero.chooseClass('naga');
+ hero.beginCast();hero.update(.5,[],[]);assert.equal(hero.state,'cast');assert.ok(hero.frame<=2);
+ hero.castTimer=0;hero.targetX=hero.x;hero.targetY=hero.y;hero.update(.9,[],[]);assert.equal(hero.state,'idle');assert.ok(hero.frame<=1);
+});

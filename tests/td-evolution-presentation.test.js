@@ -49,3 +49,18 @@ test('evolution casts and transformations are six-class visual-only transient st
   }
   assert.ok(calls.some(([name])=>name==='arc'),'visual effects should draw animated geometry');
 });
+
+test('七個軍團的每名守軍都有五階名稱，且每個軍團至少有一座可分支進階建築',()=>{
+  const {ns}=load(),factions=ns.systems.FactionSystem.FACTIONS;
+  for(const faction of Object.values(factions)){
+    for(const type of faction.units){const unit=new ns.entities.CombatUnit(type,0,0),names=[];for(let level=1;level<=5;level++){names.push(unit.evolutionName());if(level<5)unit.upgrade();}assert.equal(new Set(names).size,5,faction.id+' · '+type);}
+    assert.ok(faction.buildings.some(type=>ns.systems.TowerEvolutionSystem.branches(type).length===2),faction.id+' needs a visible branch choice');
+  }
+});
+
+test('地精與霜原分支改變實際戰鬥或網路資料，而不是只更換名稱',()=>{
+  const {ns}=load(),network=new ns.systems.GoblinNetworkSystem(),generator=new ns.entities.Building('goblinGenerator',100,100),recycler=new ns.entities.Building('goblinRecycler',120,100),crystal=new ns.entities.Building('frostCrystal',100,100);
+  generator.level=3;assert.equal(generator.chooseBranch('dynamo'),true);assert.equal(network.capacity(generator),7);
+  recycler.level=3;assert.equal(recycler.chooseBranch('mint'),true);assert.equal(recycler.config().recyclerGold,20);assert.equal(recycler.config().recyclerCap,110);
+  crystal.level=3;assert.equal(crystal.chooseBranch('permafrost'),true);assert.equal(crystal.config().frost,37.5);assert.equal(crystal.config().slow,.5);
+});

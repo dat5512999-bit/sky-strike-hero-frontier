@@ -32,7 +32,15 @@
       else if(distance>2){const move=Math.min(distance,cfg.speed*dt*(this.moveSpeedScale??1));this.x+=dx/distance*move;this.y+=dy/distance*move;this.facing=Math.atan2(dy,dx);this.setState('walk');}
       else this.setState('idle');
       if(this.cooldown<=0&&this.castTimer<=0&&this.attackTimer<=0){const target=monsters.filter(function(m){return m.active&&ns.utils.distance(this,m)<=cfg.range;},this).sort(function(a,b){return b.progress()-a.progress();})[0];if(target){this.facing=Math.atan2(target.y-this.y,target.x-this.x);this.pendingTarget=target;this.attackTimer=.36;this.cooldown=cfg.interval;this.setState('attack');}}
-      this.animationTime+=dt;this.frame=(this.state==='attack'||this.state==='cast')?Math.min(3,Math.floor(this.animationTime/(this.state==='cast'?.14:.09))):Math.floor(this.animationTime*(this.state==='walk'?9:3))%4;
+      this.animationTime+=dt;
+      // 賽洛的原始圖集第 4 格是倒地收勢，不可當作施法循環的最後一格；
+      // 待機也只在兩個呼吸姿勢間切換，避免長兵器每 1/3 秒跳位。
+      if(this.classType==='naga'){
+        if(this.state==='cast')this.frame=Math.min(2,Math.floor(this.animationTime/.16));
+        else if(this.state==='attack')this.frame=Math.min(3,Math.floor(this.animationTime/.1));
+        else if(this.state==='walk')this.frame=Math.floor(this.animationTime*6)%4;
+        else this.frame=Math.floor(this.animationTime*1.25)%2;
+      }else this.frame=(this.state==='attack'||this.state==='cast')?Math.min(3,Math.floor(this.animationTime/(this.state==='cast'?.14:.09))):Math.floor(this.animationTime*(this.state==='walk'?9:3))%4;
     }
     castNova(monsters,onKill,onHit){if(!this.active)return false;if(this.classType!=='arcanist')return ns.systems.HeroRoster.cast(this,0,monsters,onKill,onHit);const cfg=this.combatConfig();if(this.novaCooldown>0)return false;const targets=monsters.filter(function(monster){return monster.active&&ns.utils.distance(this,monster)<=cfg.novaRange;},this);if(!targets.length)return false;targets.forEach(function(monster){monster.applySlow(.38,2.4);const before=typeof monster.effectiveHealth==='function'?monster.effectiveHealth():monster.health,killed=monster.takeDamage(cfg.novaDamage),after=typeof monster.effectiveHealth==='function'?monster.effectiveHealth():monster.health;if(onHit)onHit(monster,before-after,false,{color:'#70e7ff',owner:this});if(killed&&onKill)onKill(monster);},this);ns.systems.HeroSkillVFX.emit(this,'frost',{radius:cfg.novaRange,duration:.65});this.novaCooldown=cfg.novaCooldown;this.castTimer=.56;this.attackTimer=0;this.pendingTarget=null;this.setState('cast');return true;}
     draw(ctx,art){

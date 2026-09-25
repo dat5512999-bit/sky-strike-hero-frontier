@@ -68,6 +68,14 @@
   }
   function gear(ctx,x,y,r,t){ctx.save();ctx.translate(x,y);ctx.rotate(t);ctx.strokeStyle='#d5a45f';ctx.lineWidth=3;ctx.setLineDash([6,3]);ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#334146';ctx.beginPath();ctx.arc(0,0,r*.72,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#91e5d9';ctx.beginPath();ctx.arc(0,0,r*.27,0,Math.PI*2);ctx.fill();ctx.restore();}
   function signal(ctx,x,y,item){if(!item)return;ctx.save();const t=item.visualAge??item.frameClock??0;ctx.strokeStyle=item.networkCooling?'#abbfc4':item.networkOverloaded?'#ffbd70':'#82e8d9';ctx.globalAlpha=.65+.22*Math.sin(t*6);ctx.lineWidth=item.networkOverloaded?3:2;ctx.setLineDash(item.networkCooling?[4,5]:[]);ctx.beginPath();ctx.ellipse(x,y+3,30,11,0,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);if(item.networkCooling){for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(x-12+i*11,y-60);ctx.quadraticCurveTo(x-20+i*11,y-75,x-11+i*11,y-82);ctx.stroke();}}ctx.restore();}
+  // Clear, physical tier markers: bolts, powered collar, stabilisers and an endgame rotor.
+  // These sit outside the painted silhouette, so an upgrade is recognisable at gameplay scale.
+  function evolutionKit(ctx,x,y,level,color,building,clock){if(level<2)return;const t=clock||0,wide=building?1.35:1;ctx.save();ctx.translate(x,y);ctx.strokeStyle='#f3c976';ctx.fillStyle=color;ctx.shadowColor=color;ctx.lineWidth=2;ctx.globalAlpha=.92;
+    for(const side of [-1,1]){ctx.beginPath();ctx.arc(side*17*wide,-(building?43:31),3.4,0,Math.PI*2);ctx.fill();ctx.stroke();}
+    if(level>=3){ctx.globalAlpha=.55+.25*Math.sin(t*5);ctx.shadowBlur=8;ctx.beginPath();ctx.ellipse(0,building?-48:-35,23*wide,7,0,0,Math.PI*2);ctx.stroke();}
+    if(level>=4){ctx.shadowBlur=0;for(const side of [-1,1]){ctx.beginPath();ctx.moveTo(side*20*wide,-(building?56:42));ctx.lineTo(side*34*wide,-(building?48:34));ctx.lineTo(side*19*wide,-(building?36:27));ctx.closePath();ctx.fill();ctx.stroke();}}
+    if(level>=5){ctx.globalAlpha=.82;ctx.shadowBlur=10;ctx.translate(0,building?-72:-56);ctx.rotate(t*2);for(let i=0;i<4;i++){ctx.rotate(Math.PI/2);ctx.fillRect(-2,-13,4,12);}ctx.beginPath();ctx.arc(0,0,5,0,Math.PI*2);ctx.fill();}
+    ctx.restore();}
   art.drawBuilding=function(ctx,type,x,y,level,branch){
     if(!type.startsWith('goblin'))return priorTower.call(this,ctx,type,x,y,level,branch);
     const [set,columns,index,baseHeight]=buildingFrames[type]||[];
@@ -75,25 +83,25 @@
     const image=this.goblinBuildingImage(set);
     if(!image.ready)return false;
     const item=this.game?.build?.items?.find(o=>o.kind==='building'&&o.type===type&&o.x===x&&o.y===y);
-    const height=baseHeight*(1+.025*Math.min(4,(level||1)-1)),cell=image.width/columns,width=height*cell/image.height;
+    const height=baseHeight*(1+.05*Math.min(4,(level||1)-1)),cell=image.width/columns,width=height*cell/image.height;
     ctx.save();ctx.fillStyle='rgba(0,0,0,.2)';ctx.beginPath();ctx.ellipse(x,y+5,Math.min(38,width*.38),8,0,0,Math.PI*2);ctx.fill();
     ctx.drawImage(image,index*cell,0,cell,image.height,x-width/2,y-height+8,width,height);
-    signal(ctx,x,y,item);ctx.restore();this.drawRank?.(ctx,x,y,level||1,'#d9ad65',true,type);return true;
+    signal(ctx,x,y,item);ctx.restore();evolutionKit(ctx,x,y,level||1,'#d9ad65',true,item?.visualAge);this.drawRank?.(ctx,x,y,level||1,'#d9ad65',true,type);return true;
   };
   art.drawCombatUnit=function(ctx,unit){
     if(!unit?.type?.startsWith('goblin'))return priorUnit.call(this,ctx,unit);
     const actions=actionAtlas(this,'soldier');
     if(actions.ready&&soldierRows[unit.type]!==undefined){
-      const height=ns.systems.ArtSystem.UNIT_HEIGHTS[unit.type],column=ns.systems.GoblinAnimation.frame(unit),t=unit.frameClock||0;
+      const level=unit.level||1,height=ns.systems.ArtSystem.UNIT_HEIGHTS[unit.type]*(1+.05*Math.min(4,level-1)),column=ns.systems.GoblinAnimation.frame(unit),t=unit.frameClock||0;
       ctx.save();ctx.translate(unit.x,unit.y+8-(column===0?Math.sin(t*.9)*1.2:0));if(Math.cos(unit.facing||0)<0)ctx.scale(-1,1);
       ctx.fillStyle='rgba(0,0,0,.26)';ctx.beginPath();ctx.ellipse(0,3,unit.type==='goblinMech'?34:23,7,0,0,Math.PI*2);ctx.fill();
       actionFrame(ctx,actions,column,soldierRows[unit.type],height);
       if(unit.goblinAction&&column===2){ctx.globalAlpha=.55;ctx.fillStyle='#ffe0a0';ctx.shadowColor='#ff9f3b';ctx.shadowBlur=14;ctx.beginPath();ctx.arc(height*.42,-height*.47,unit.type==='goblinMech'?9:5,0,Math.PI*2);ctx.fill();}
-      ctx.restore();signal(ctx,unit.x,unit.y,unit);return true;
+      ctx.restore();signal(ctx,unit.x,unit.y,unit);const color=unit.config?.().color||ns.config.units[unit.type].color;evolutionKit(ctx,unit.x,unit.y,level,color,false,t);this.drawRank?.(ctx,unit.x,unit.y,level,color,false,unit.type);return true;
     }
     const atlas=soldierAtlas(this),frame=soldierFrames[unit.type];
     if(atlas.ready&&frame){
-      const height=ns.systems.ArtSystem.UNIT_HEIGHTS[unit.type],width=height*frame[2]/frame[3],clock=unit.frameClock||0;
+      const level=unit.level||1,height=ns.systems.ArtSystem.UNIT_HEIGHTS[unit.type]*(1+.05*Math.min(4,level-1)),width=height*frame[2]/frame[3],clock=unit.frameClock||0;
       const walking=unit.state==='walk',firing=unit.state==='attack'||unit.attackTimer>0;
       const bob=walking?Math.abs(Math.sin(clock*8))*3:0,recoil=firing?Math.sin(Math.min(1,(unit.attackTimer||.18)*5)*Math.PI)*3:0;
       ctx.save();ctx.translate(unit.x,unit.y-bob);if(Math.cos(unit.facing||0)<0)ctx.scale(-1,1);
@@ -101,7 +109,7 @@
       ctx.drawImage(atlas,...frame,-width/2-recoil,-height,width,height);
       if(firing){const muzzleX=width*(unit.type==='goblinMech'?.45:.48),muzzleY=-height*(unit.type==='goblinMech'?.55:.48);
         ctx.fillStyle='#ffedb5';ctx.shadowColor='#ff9f3b';ctx.shadowBlur=12;ctx.beginPath();ctx.moveTo(muzzleX+13,muzzleY);ctx.lineTo(muzzleX-3,muzzleY-6);ctx.lineTo(muzzleX-3,muzzleY+6);ctx.fill();}
-      ctx.restore();signal(ctx,unit.x,unit.y,unit);return true;
+      ctx.restore();signal(ctx,unit.x,unit.y,unit);const color=unit.config?.().color||ns.config.units[unit.type].color;evolutionKit(ctx,unit.x,unit.y,level,color,false,clock);this.drawRank?.(ctx,unit.x,unit.y,level,color,false,unit.type);return true;
     }
     const cfg=unit.config(),mech=unit.type==='goblinMech',s=mech?1.15:.84;ctx.save();ctx.translate(unit.x,unit.y);ctx.scale(s*(Math.cos(unit.facing||0)<0?-1:1),s);
     ctx.fillStyle='#10202477';ctx.beginPath();ctx.ellipse(0,5,mech?32:23,9,0,0,Math.PI*2);ctx.fill();

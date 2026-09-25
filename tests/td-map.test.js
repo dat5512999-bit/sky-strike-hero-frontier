@@ -15,8 +15,14 @@ test('正式地圖以 1536×1024 原圖作世界，不拉伸且資料化 U 型�
  assert.equal(asset.toString('ascii',1,4),'PNG');assert.equal(asset.readUInt32BE(16),1536);assert.equal(asset.readUInt32BE(20),1024);
  assert.equal(map.width,1536);assert.equal(map.height,1024);assert.equal(map.asset,'assets/td/beginner-valley-v2.png');assert.deepEqual(Array.from(map.path,p=>[p.x,p.y]),[[-28,370],[120,370],[240,378],[340,382],[400,380],[450,345],[480,290],[500,230],[545,190],[620,182],[690,194],[735,225],[765,285],[790,360],[795,440],[825,510],[900,550],[1000,555],[1100,560],[1200,555],[1280,575],[1350,620],[1430,650],[1564,650]]);
  assert.deepEqual({x:map.spawn.x,y:map.spawn.y},{x:36,y:370});assert.deepEqual({x:map.gate.x,y:map.gate.y},{x:1500,y:650});
- assert.equal(map.heroVulnerable,false);assert.equal(map.camera.maxZoom,1.65);
+ assert.equal(map.heroVulnerable,false);assert.equal(map.camera.maxZoom,2.25);assert.equal(map.camera.mobileInitialZoom,1.6);
  for(const file of ['src/td/systems/ArtSystem.js','sw.js'])assert.match(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),/beginner-valley-v2\.png/);
+});
+test('所有正式地圖在手機皆有較近的初始鏡頭與足夠的手動放大上限',()=>{
+ const ns=load();for(const map of ns.maps.publicMaps()){
+  assert.ok(map.camera.maxZoom>=2.15,map.id+' max zoom');
+  assert.ok(map.camera.mobileInitialZoom>=1.45,map.id+' initial zoom');
+ }
 });
 test('新手谷地關閉英雄受傷，舊回歸地圖仍可重用英雄戰鬥機制',()=>{
  const ns=load();ns.maps.apply('beginner');assert.equal(ns.config.heroVulnerable,false);ns.maps.apply('classic');assert.equal(ns.config.heroVulnerable,true);

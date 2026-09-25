@@ -49,7 +49,7 @@ VFX 上限集中在 CombatFeedback、BattleSynergy、TDGame 與 Summon 渲染入
 
 ## 0.61.0 觸控與評分設定
 
-正式新手地圖的 `mobileInitialZoom` 為 `1.5`，只影響手機初始 Camera，不改 World Coordinate 或建造判定。金幣／功勳固定匯率位於 `EconomySystem.MERIT_GOLD_RATE`。擊殺分值位於 `BattleReportSystem.KILL_SCORES`，難度倍率位於 `DIFFICULTY_MULTIPLIERS`；每波通關／無傷獎勵及漏怪／城門／英雄倒下扣分集中在 `finish()`。這些目前不是玩家設定，修改後需同步測試與文件。
+正式地圖的 `mobileInitialZoom` 最低為 `1.45`、`maxZoom` 最低為 `2.15`；新手谷地為 `1.6`／`2.25`。兩者只影響手機初始 Camera 與玩家手動鏡頭，不改 World Coordinate、道路或建造判定。金幣／功勳固定匯率位於 `EconomySystem.MERIT_GOLD_RATE`。擊殺分值位於 `BattleReportSystem.KILL_SCORES`，難度倍率位於 `DIFFICULTY_MULTIPLIERS`；每波通關／無傷獎勵及漏怪／城門／英雄倒下扣分集中在 `finish()`。這些目前不是玩家設定，修改後需同步測試與文件。
 
 ## 0.60.1 返回行為
 
