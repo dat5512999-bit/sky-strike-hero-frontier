@@ -59,10 +59,16 @@
     }}
     static drawField(ctx,field){
       const trap=field.type==='hunter',chief=field.type==='chief',naga=field.type==='naga',age=(trap?8:6)-field.time,fade=Math.min(1,field.time/.6),r=72;
-      ctx.save();ctx.translate(field.x,field.y);ctx.globalAlpha=.55*fade;ctx.strokeStyle=trap?'#c5ad75':chief?'#ff9c4a':naga?'#65f5ed':'#b07cda';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.stroke();
+      ctx.save();ctx.translate(field.x,field.y);ctx.globalAlpha=(naga?.32:.55)*fade;ctx.strokeStyle=trap?'#c5ad75':chief?'#ff9c4a':naga?'#65f5ed':'#b07cda';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.stroke();
       if(trap){ctx.strokeStyle='#66513a';ctx.lineWidth=5;ctx.beginPath();ctx.ellipse(0,0,28,15,0,0,Math.PI*2);ctx.stroke();ctx.strokeStyle='#dbcd9b';ctx.lineWidth=2;ctx.stroke();for(let i=0;i<10;i++){const a=i*Math.PI/5;ctx.save();ctx.translate(Math.cos(a)*27,Math.sin(a)*14);ctx.rotate(a);ctx.fillStyle='#bfb9a2';ctx.beginPath();ctx.moveTo(0,-4);ctx.lineTo(-8,0);ctx.lineTo(0,4);ctx.fill();ctx.restore();}ctx.strokeStyle='#a58c52';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-48,25);ctx.lineTo(40,-23);ctx.moveTo(-40,-23);ctx.lineTo(48,25);ctx.stroke();}
       else if(chief){ctx.strokeStyle='#ffc45f';for(let i=0;i<8;i++){const a=i*Math.PI/4+age*.4;ctx.lineWidth=i%2?1.5:3;ctx.beginPath();ctx.moveTo(Math.cos(a)*24,Math.sin(a)*24);ctx.lineTo(Math.cos(a)*66,Math.sin(a)*66);ctx.stroke();}ctx.fillStyle='#6eeeff';for(let i=0;i<6;i++){const a=i*Math.PI/3-age*.7;ctx.globalAlpha=fade*(.3+.3*Math.sin(age*5+i));ctx.beginPath();ctx.ellipse(Math.cos(a)*52,Math.sin(a)*30-10,5,16,a,0,Math.PI*2);ctx.fill();}}
-      else if(naga){for(let ring=0;ring<3;ring++){ctx.globalAlpha=fade*(.65-ring*.15);ctx.strokeStyle=ring===1?'#bbfff8':'#38cdd2';ctx.lineWidth=2.4-ring*.4;ctx.beginPath();ctx.ellipse(0,0,r-ring*17,(r-ring*17)*.44,age*(ring%2?-.8:.8),0,Math.PI*2);ctx.stroke();}for(let i=0;i<12;i++){const a=i*Math.PI/6-age*1.8,rr=22+(i%4)*10;ctx.globalAlpha=fade*(.35+.2*Math.sin(age*4+i));ctx.fillStyle=i%2?'#d2fffb':'#55dedb';ctx.beginPath();ctx.arc(Math.cos(a)*rr,Math.sin(a)*rr*.45-10,2.2,0,Math.PI*2);ctx.fill();}}
+      else if(naga){
+        // Keep the magic on the ground plane.  The previous three bright rings
+        // formed a cyan target around the hero and made the painted silhouette
+        // read like a flat card.
+        for(let ring=0;ring<2;ring++){const rr=r-ring*24;ctx.globalAlpha=fade*(.28-ring*.08);ctx.strokeStyle=ring?'#70d8d4':'#b5eee3';ctx.lineWidth=1.5;ctx.beginPath();ctx.ellipse(0,5,rr,rr*.30,age*(ring?-.52:.52),0,Math.PI*2);ctx.stroke();}
+        for(let i=0;i<8;i++){const a=i*Math.PI/4-age*1.15,rr=26+(i%3)*11;ctx.globalAlpha=fade*(.18+.10*Math.sin(age*3+i));ctx.fillStyle=i%2?'#caeee5':'#4baeb2';ctx.beginPath();ctx.ellipse(Math.cos(a)*rr,Math.sin(a)*rr*.28+5,3.4,1.4,a,0,Math.PI*2);ctx.fill();}
+      }
       else{for(let i=0;i<9;i++){const a=i*2.4+age*.25,x=Math.cos(a)*(18+i*4),y=Math.sin(a)*(15+i*3);ctx.globalAlpha=fade*(.10+.05*Math.sin(age*3+i));ctx.fillStyle=i%2?'#713784':'#b577cd';ctx.beginPath();ctx.ellipse(x,y-5-Math.sin(age+i)*6,25,15,.3,0,Math.PI*2);ctx.fill();}for(let i=0;i<7;i++){const t=(age*.35+i/7)%1;ctx.globalAlpha=fade*(1-t)*.55;ctx.fillStyle='#d1a6ea';ctx.beginPath();ctx.arc(Math.cos(i*2.4)*r*.75,Math.sin(i*2.4)*r*.55-t*20,1.8,0,Math.PI*2);ctx.fill();}}
       ctx.restore();
     }

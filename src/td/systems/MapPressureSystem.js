@@ -21,11 +21,34 @@
       this.gusts.forEach(gust=>{gust.time-=dt;});this.gusts=this.gusts.filter(gust=>gust.time>0);
     }
     summary(game,wave){const pressure=ns.config.mapPressure,target=wave||game?.waves?.wave||0;if(!pressure||target<pressure.startsAtWave)return null;return{id:pressure.id,name:pressure.name,short:pressure.short,detail:pressure.detail,startsNow:target===pressure.startsAtWave};}
+    drawMarker(ctx,pressure,active){
+      const marker=pressure.marker;if(!marker)return;
+      const ember=pressure.visual==='ember',pulse=active?(.78+Math.sin(this.visualTime*2.4)*.12):.34;
+      // The modifier is communicated in Wave HUD.  On the map it is a weathered
+      // road seal, not a flag or a second piece of HUD that obscures the playfield.
+      ctx.save();ctx.translate(marker.x,marker.y);ctx.globalAlpha=pulse;ctx.strokeStyle=ember?'#9a5637':'#b89159';ctx.lineWidth=1.5;ctx.beginPath();ctx.ellipse(0,4,18,7,0,0,Math.PI*2);ctx.stroke();
+      if(ember){ctx.strokeStyle='#d58448';ctx.lineWidth=1.15;for(let index=0;index<3;index++){ctx.beginPath();ctx.arc((index-1)*6,4,5,index*.8,index*.8+1.9);ctx.stroke();}}
+      else {ctx.strokeStyle='#e2c78c';ctx.lineWidth=1.2;for(let index=-1;index<=1;index++){ctx.beginPath();ctx.moveTo(-13,4+index*3);ctx.quadraticCurveTo(0,-2+index*3,13,4+index*3);ctx.stroke();}}
+      ctx.restore();
+    }
+    drawCorridor(ctx,pressure,game){
+      const path=ns.config.path||[],ember=pressure.visual==='ember',stride=game.feedback?.mobile||game.feedback?.reducedFx?2:1;
+      for(const segment of pressure.segments||[]){for(let index=segment.startIndex;index<segment.endIndex;index+=stride){const a=path[index],b=path[Math.min(segment.endIndex,index+stride)];if(!a||!b)continue;const dx=b.x-a.x,dy=b.y-a.y,length=Math.hypot(dx,dy)||1,nx=-dy/length,ny=dx/length,midX=(a.x+b.x)/2,midY=(a.y+b.y)/2;
+        ctx.save();ctx.lineCap='round';
+        if(ember){
+          ctx.globalAlpha=.14;ctx.fillStyle='#3d2a24';ctx.beginPath();ctx.ellipse(midX,midY,Math.min(38,length*.46),10,Math.atan2(dy,dx),0,Math.PI*2);ctx.fill();
+          ctx.globalAlpha=.28;ctx.strokeStyle='#bc7042';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(midX+nx*5,midY+ny*5,4+Math.sin(this.visualTime*3+index)*1.2,0,Math.PI*2);ctx.stroke();
+        }else{
+          ctx.globalAlpha=.20;ctx.strokeStyle='#ead29a';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(a.x+nx*7,a.y+ny*7);ctx.quadraticCurveTo(midX-nx*(7+Math.sin(index)*3),midY-ny*(7+Math.sin(index)*3),b.x+nx*7,b.y+ny*7);ctx.stroke();
+          ctx.globalAlpha=.12;ctx.strokeStyle='#a77746';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(a.x-nx*10,a.y-ny*10);ctx.quadraticCurveTo(midX+nx*9,midY+ny*9,b.x-nx*10,b.y-ny*10);ctx.stroke();
+        }
+        ctx.restore();
+      }}
+    }
     draw(ctx,game){
-      const pressure=ns.config.mapPressure,active=Boolean(this.summary(game)),marker=pressure?.marker,ember=pressure?.visual==='ember';if(!pressure)return;
-      if(marker){const flag=active?(ember?'#b84c2f':'#c77836'):(ember?'#754236':'#8d7044');ctx.save();ctx.translate(marker.x,marker.y);ctx.globalAlpha=active?1:.78;ctx.strokeStyle='#301d12';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(-17,18);ctx.lineTo(-17,-58);ctx.stroke();ctx.fillStyle=flag;ctx.strokeStyle='#2c1a11';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-16,-56);ctx.lineTo(42,-43);ctx.lineTo(19,-11);ctx.lineTo(-16,-22);ctx.closePath();ctx.fill();ctx.stroke();ctx.fillStyle='#fff0b7';ctx.font='900 14px Microsoft JhengHei, sans-serif';ctx.textAlign='center';ctx.fillText(ember?'♨':'≋',10,-29);ctx.fillStyle='#0b1615e8';ctx.fillRect(-57,25,114,38);ctx.strokeStyle=active?'#f6ca75':'#c6a76d';ctx.lineWidth=2;ctx.strokeRect(-57,25,114,38);ctx.fillStyle='#fff1bf';ctx.font='900 13px Microsoft JhengHei, sans-serif';ctx.fillText(pressure.name,0,41);ctx.fillStyle=active?'#ffd787':'#d7c49d';ctx.font='700 10px Microsoft JhengHei, sans-serif';ctx.fillText(active?(pressure.activeLabel||pressure.short):'第 '+pressure.startsAtWave+' 波起',0,56);ctx.restore();}
-      if(active){const path=ns.config.path||[];for(const segment of pressure.segments||[]){for(let index=segment.startIndex;index<segment.endIndex;index+=1){const a=path[index],b=path[index+1];if(!a||!b)continue;const length=Math.hypot(b.x-a.x,b.y-a.y)||1,dx=(b.x-a.x)/length,dy=(b.y-a.y)/length,steps=Math.max(1,Math.ceil(length/54));for(let step=0;step<steps;step+=1){const t=(step+.45)/steps,x=a.x+(b.x-a.x)*t,y=a.y+(b.y-a.y)*t;ctx.save();ctx.globalAlpha=ember?.32:.42;ctx.strokeStyle=ember?'#ffab5b':'#f7d78b';ctx.lineWidth=ember?2.5:3;ctx.lineCap='round';ctx.beginPath();if(ember){ctx.arc(x-dy*7,y+dx*7,4+Math.sin(this.visualTime*5+step)*1.5,0,Math.PI*2);}else{ctx.moveTo(x-dx*14,y-dy*14);ctx.lineTo(x+dx*13,y+dy*13);ctx.lineTo(x+dx*5-dy*6,y+dy*5+dx*6);ctx.moveTo(x+dx*13,y+dy*13);ctx.lineTo(x+dx*5+dy*6,y+dy*5-dx*6);}ctx.stroke();ctx.restore();}}}}
-      for(const gust of this.gusts){ctx.save();ctx.globalAlpha=Math.max(0,gust.time/gust.max)*.42;ctx.strokeStyle=gust.visual==='ember'?'#ffb35f':'#d7c38e';ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(gust.x,gust.y,30*(1-gust.time/gust.max)+8,0,Math.PI*2);ctx.stroke();ctx.restore();}
+      const pressure=ns.config.mapPressure,active=Boolean(this.summary(game));if(!pressure)return;
+      this.drawMarker(ctx,pressure,active);if(active)this.drawCorridor(ctx,pressure,game);
+      for(const gust of this.gusts){const progress=Math.max(0,gust.time/gust.max),ember=gust.visual==='ember';ctx.save();ctx.globalAlpha=progress*(ember?.22:.28);ctx.strokeStyle=ember?'#d7824d':'#ddc48f';ctx.lineWidth=ember?1.6:2;ctx.lineCap='round';ctx.beginPath();if(ember){ctx.arc(gust.x,gust.y,13+(1-progress)*12,0,Math.PI*2);}else{ctx.moveTo(gust.x-16,gust.y+4);ctx.quadraticCurveTo(gust.x,gust.y-8,gust.x+18,gust.y-2);}ctx.stroke();ctx.restore();}
     }
   }
   ns.systems.MapPressureSystem=MapPressureSystem;

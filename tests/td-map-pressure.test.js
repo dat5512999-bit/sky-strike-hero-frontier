@@ -4,6 +4,7 @@ const {load}=require('./helpers/td-runtime.cjs');
 
 function setup(map='westernsignal'){const {ns,context}=load();vm.runInContext(fs.readFileSync('src/td/maps.js','utf8'),context);ns.maps.apply(map);return ns;}
 function state(ns,wave,monster){return{waves:{wave},monsters:[monster]};}
+function canvas(){const calls=[];return{calls,ctx:new Proxy({},{get:(target,key)=>target[key]||((...args)=>calls.push([key,...args])),set:(target,key,value)=>{target[key]=value;return true;}})};}
 
 test('荒風隘道僅在第二波起的指定中段加速，且不改道路資料',()=>{
   const ns=setup(),pressure=new ns.systems.MapPressureSystem(),path=ns.config.path,monster=new ns.entities.Monster('grunt',2,path),segments=pressure.distances();
@@ -40,4 +41,17 @@ test('燼火煙障第三波起只增加局部護甲，控制能削弱但不能�
   const untouched=monster.health;monster.takeDamage(10);assert.equal(monster.health,untouched-8,'煙障內應只多 2 點護甲');
   monster.applySlow(.5,2);pressure.update(game,.1);assert.equal(monster.mapPressure.armorBonus,1);const controlled=monster.health;monster.takeDamage(10);assert.equal(monster.health,controlled-9,'控制後仍保留 1 點護甲');
   monster.setRouteDistance(segment.end+4);pressure.update(game,.1);assert.equal(monster.mapPressure,null,'離開煙障必須立即清除地圖護甲');
+});
+
+test('第二章壓力效果是低負擔地表線索，不再以旗桿、黑框標籤或箭頭覆蓋戰場',()=>{
+  for(const [map,wave] of [['westernsignal',2],['emberroad',3]]){
+    const ns=setup(map),pressure=new ns.systems.MapPressureSystem(),c=canvas();
+    pressure.draw(c.ctx,{waves:{wave},monsters:[],feedback:{mobile:false,reducedFx:false}});
+    const names=c.calls.map(call=>call[0]);
+    assert.ok(names.includes('ellipse'),map+' should have a terrain-integrated ground cue');
+    assert.ok(names.includes('quadraticCurveTo')||map==='emberroad',map+' should retain a quiet weather corridor');
+    assert.equal(names.includes('fillText'),false,map+' must keep its tactical copy in the HUD, not over the road');
+    assert.equal(names.includes('fillRect'),false,map+' must not draw the old black map label');
+    assert.equal(names.filter(name=>name==='save').length,names.filter(name=>name==='restore').length,map+' canvas state must stay balanced');
+  }
 });

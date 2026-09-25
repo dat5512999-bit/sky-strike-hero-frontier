@@ -29,6 +29,14 @@ test('frostland hero uses its approved animation atlas with measured source rect
   const call=calls.find(args=>args[0].assetSrc==='assets/td/frostland/hero-actions-v1.png');assert.ok(call);assert.deepEqual(call.slice(1,5),[662,909,264,325]);
 });
 
+test('霜牙・凜以接地陰影、冰痕與動態位移呈現，但保留核准的動作圖集',()=>{
+  const {ns}=load(),art=Object.create(ns.systems.ArtSystem.prototype),calls=[];
+  art.load=src=>({assetSrc:src,ready:true,width:1280,height:1280});
+  const ctx=new Proxy({}, {get:(_,key)=>key==='drawImage'?(...args)=>calls.push(['drawImage',...args]):(...args)=>calls.push([key,...args])});
+  const hero={classType:'frostland',state:'walk',frame:1,animationTime:.32,x:100,y:100,facing:0,equipment:{spear:0,rune:0,charm:0},gear:{}};
+  assert.equal(art.drawHero(ctx,hero),true);assert.ok(calls.filter(call=>call[0]==='ellipse').length>=3,'需包含陰影與兩道冰痕');assert.ok(calls.some(call=>call[0]==='drawImage'&&call[1].assetSrc==='assets/td/frostland/hero-actions-v1.png'));
+});
+
 test('all six evolved heroes receive a rank-specific production crest',()=>{
   const {ns}=load(),art={load:src=>({assetSrc:src,ready:true,width:1254,height:1254})},calls=[];
   const ctx=new Proxy({}, {get:(_,key)=>key==='drawImage'?(...args)=>calls.push(args):()=>{}});

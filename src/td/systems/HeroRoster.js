@@ -42,7 +42,10 @@
         hero.novaCooldown=9*(1-hero.equipment.rune*.1);
       }else{
         if(hero.classType==='naga'){
-          hero.fields.push({x:hero.x,y:hero.y,time:6,tick:0,type:'naga',power:power});
+          // A field is allowed one damage resolution per rendered update.  This
+          // prevents a background-tab frame from replaying many half-second ticks
+          // against every enemy when the browser resumes.
+          hero.fields.push({x:hero.x,y:hero.y,time:6,tick:0,type:'naga',power:power,maxTargets:18});
           ns.systems.HeroSkillVFX.emit(hero,'naga-maelstrom',{radius:76,duration:.82});
           hero.skillCooldowns.thunder=12*(1-hero.equipment.rune*.1);hero.beginCast();return true;
         }
@@ -61,7 +64,18 @@
     static updateFields(hero,dt,monsters,onKill,onHit){
       ns.systems.HeroSkillVFX.update(hero,dt);
       hero.skillTrails=(hero.skillTrails||[]).filter(trail=>{trail.time-=dt;return trail.time>0;});
-      hero.fields.forEach(field=>{const elapsed=Math.min(dt,field.time);field.time-=elapsed;field.tick+=elapsed;while(field.tick>=.5){field.tick-=.5;monsters.forEach(monster=>{if(!monster.active||ns.utils.distance(field,monster)>72)return;if(field.type==='hunter')monster.applySlow(.35,.7);else if(field.type==='naga'){monster.applySlow(.2,.72);new ns.entities.Projectile(hero,monster,{damage:16*field.power,color:'#6df5ef',attackType:'magic',slow:.2,slowTime:.72,style:'maelstrom'}).hit(monsters,onKill,onHit);}else new ns.entities.Projectile(hero,monster,{damage:9*field.power,color:'#c884df',attackType:'chaos'}).hit(monsters,onKill,onHit);});}});
+      hero.fields.forEach(field=>{const elapsed=Math.min(Math.max(0,Number(dt)||0),field.time);field.time-=elapsed;field.tick+=elapsed;
+        const resolve=targets=>targets.forEach(monster=>{if(field.type==='hunter')monster.applySlow(.35,.7);else if(field.type==='naga'){monster.applySlow(.2,.72);new ns.entities.Projectile(hero,monster,{damage:16*field.power,color:'#6df5ef',attackType:'magic',slow:.2,slowTime:.72,style:'maelstrom'}).hit(monsters,onKill,onHit);}else new ns.entities.Projectile(hero,monster,{damage:9*field.power,color:'#c884df',attackType:'chaos'}).hit(monsters,onKill,onHit);});
+        if(field.type==='naga'){
+          if(field.tick<.5)return;
+          // Do not catch up old pulses. A resumed tab receives at most one current
+          // pulse, then discards its stale accumulator. Naga also prioritizes the
+          // frontmost nearby enemies so a 50-wave swarm cannot fan out unbounded
+          // projectile work in a single frame.
+          field.tick=0;resolve(monsters.filter(monster=>monster.active&&ns.utils.distance(field,monster)<=72).sort((a,b)=>(b.progress?.()||0)-(a.progress?.()||0)).slice(0,field.maxTargets||18));return;
+        }
+        while(field.tick>=.5){field.tick-=.5;resolve(monsters.filter(monster=>monster.active&&ns.utils.distance(field,monster)<=72));}
+      });
       hero.fields=hero.fields.filter(field=>field.time>0);
     }
     static drawFields(ctx,hero){hero.fields.forEach(field=>ns.systems.HeroSkillVFX.drawField(ctx,field));}

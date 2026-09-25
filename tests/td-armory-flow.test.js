@@ -13,8 +13,9 @@ test('閒置裝備可半價販售，裝備中不可販售，卸下後可販售',
   assert.equal(economy.gold,gold+starting);assert.equal(armory.owned.length,0);
 });
 
-test('軍械庫與角色配裝各有獨立入口，手機離線版包含介面程式',()=>{
-  const html=fs.readFileSync('td.html','utf8'),worker=fs.readFileSync('sw.js','utf8');
-  for(const id of ['td-armory-screen','td-equip-screen','td-unit-equip','td-hero-equip'])assert.ok(html.includes('id="'+id+'"'));
+test('軍械庫與角色配裝各有獨立入口，販售在遊戲內確認，手機離線版包含介面程式',()=>{
+  const html=fs.readFileSync('td.html','utf8'),worker=fs.readFileSync('sw.js','utf8'),ui=fs.readFileSync('src/td/systems/ArmoryUI.js','utf8');
+  for(const id of ['td-armory-screen','td-armory-sell-screen','td-armory-sell-cancel','td-armory-sell-confirm','td-equip-screen','td-unit-equip','td-hero-equip'])assert.ok(html.includes('id="'+id+'"'));
   assert.ok(worker.includes("'./src/td/systems/ArmoryUI.js'"));
+  assert.doesNotMatch(ui,/\bconfirm\s*\(/,'販售不能使用瀏覽器原生確認視窗');assert.match(ui,/requestArmorySale/);assert.match(ui,/confirmArmorySale/);assert.match(ui,/closeArmorySale/);
 });

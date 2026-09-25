@@ -110,3 +110,20 @@ test('賽洛待機與施法不會輪播到倒地收勢格，避免英雄在戰�
  hero.beginCast();hero.update(.5,[],[]);assert.equal(hero.state,'cast');assert.ok(hero.frame<=2);
  hero.castTimer=0;hero.targetX=hero.x;hero.targetY=hero.y;hero.update(.9,[],[]);assert.equal(hero.state,'idle');assert.ok(hero.frame<=1);
 });
+
+test('旋潮領域在掉幀或回到前景時只結算一個目前脈衝，且單次目標數有上限',()=>{
+  const {ns}=load(),hero=new ns.entities.Hero(180,220);hero.chooseClass('naga');
+  const monsters=Array.from({length:54},(_,index)=>{const monster=new ns.entities.Monster('grunt',1,[{x:0,y:220},{x:2000,y:220}]);monster.x=190+(index%9)*4;monster.y=205+Math.floor(index/9)*5;monster.health=monster.maxHealth=5000;return monster;});
+  assert.equal(hero.castThunder(monsters,()=>{},[],()=>{}),true);let hits=0;
+  assert.doesNotThrow(()=>ns.systems.HeroRoster.updateFields(hero,20,monsters,()=>{},()=>{hits++;}));
+  assert.equal(hero.fields.length,0,'領域在長時間背景後應正常到期');assert.ok(hits<=18,'娜迦旋潮單次最多處理 18 名附近敵軍');
+});
+
+test('賽洛英雄渲染有獨立接地陰影與尾部水痕，不再走帶軍階標籤的通用士兵繪製器',()=>{
+  const {ns}=load(),art=Object.create(ns.systems.ArtSystem.prototype),calls=[];
+  art.load=src=>({assetSrc:src,ready:true,width:1254,height:1254});
+  const ctx=new Proxy({}, {get:(_,key)=>key==='drawImage'?(...args)=>calls.push(['drawImage',...args]):(...args)=>calls.push([key,...args])});
+  const hero={classType:'naga',state:'attack',frame:2,animationTime:.18,castTimer:.2,x:160,y:210,facing:0,equipment:{spear:0,rune:0,charm:0},gear:{}};
+  assert.equal(art.drawHero(ctx,hero),true);assert.ok(calls.some(call=>call[0]==='ellipse'),'娜迦必須有接地陰影與水痕');assert.ok(calls.some(call=>call[0]==='drawImage'&&call[1].assetSrc==='assets/td/naga/tidebreaker-hero-actions-v1.png'));
+  assert.equal(calls.some(call=>call[0]==='fillText'),false,'英雄不得由通用軍團階級標籤蓋住');
+});

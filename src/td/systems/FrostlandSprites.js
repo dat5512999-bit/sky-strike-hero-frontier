@@ -37,8 +37,12 @@
   art.drawHero=function(ctx,h){
     if(h.classType!=='frostland')return prior.hero.call(this,ctx,h);
     const img=atlas(this,'hero');if(!img.ready)return prior.hero.call(this,ctx,h);
-    const pose=ns.systems.FrostlandAnimation.pose(h,true);ctx.save();ctx.translate(h.x,h.y+12);shadow(ctx,31,.38);if(Math.cos(h.facing||0)<0)ctx.scale(-1,1);
-    frame(ctx,img,ns.systems.FrostlandAtlas.hero,pose.row*4+pose.frame,106);weapon(ctx,this,h,pose);ctx.restore();return true;
+    const pose=ns.systems.FrostlandAnimation.pose(h,true),clock=h.animationTime||h.frameClock||0,walking=h.state==='walk',attacking=h.state==='attack'||h.state==='cast',bob=walking?Math.sin(clock*12)*1.45:Math.sin(clock*2.1)*.45,lunge=attacking?Math.sin(Math.min(1,(h.castTimer||.34)/.34)*Math.PI)*5:0;
+    ctx.save();ctx.translate(h.x,h.y+12);shadow(ctx,31,.34);
+    // A subtle blue contact ring gives the ice hunter a ground plane without
+    // repainting the approved atlas or turning the spell into a bright halo.
+    ctx.globalAlpha=.16;ctx.strokeStyle='#8ad8dc';ctx.lineWidth=1.2;ctx.beginPath();ctx.ellipse(-4,7,25,5,0,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.ellipse(8,9,16,3,0,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
+    if(Math.cos(h.facing||0)<0)ctx.scale(-1,1);ctx.translate(lunge,-bob);frame(ctx,img,ns.systems.FrostlandAtlas.hero,pose.row*4+pose.frame,106);weapon(ctx,this,h,pose);ctx.restore();return true;
   };
   const oldRetry=art.retryFailed;art.retryFailed=function(){oldRetry.call(this);for(const image of Object.values(this.frostAtlases||{}))if(image.failed){image.failed=false;image.attempts=0;this.request(image);}};
   const oldStatus=art.coreStatus;art.coreStatus=function(type){const base=oldStatus.call(this,type);if(type!=='frostland')return base;const needed=['hero','weapons','soldiers'].map(k=>atlas(this,k));const loaded=needed.filter(i=>i.ready).length;return {loaded:base.loaded+loaded,total:base.total+needed.length,failed:base.failed||needed.some(i=>i.failed),ready:base.ready&&loaded===needed.length};};
