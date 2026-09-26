@@ -15,6 +15,15 @@ test('worker install bypasses stale HTTP cache and only activates after complete
   assert.deepEqual(sequence,['complete','activate']);
   cache.addAll=async()=>{throw Error('offline');};sequence.length=0;events.install({waitUntil:p=>pending=p});await assert.rejects(pending,/offline/);assert.deepEqual(sequence,[]);
 });
+
+test('worker precache contains no duplicate URLs that would reject browser cache.addAll',async()=>{
+  const {events,cache}=workerRuntime();let pending;
+  cache.addAll=async requests=>{
+    const urls=requests.map(request=>new URL(request.url,'https://example.test/game/').href);
+    assert.equal(new Set(urls).size,urls.length,'duplicate precache request prevents the new worker from installing');
+  };
+  events.install({waitUntil:p=>pending=p});await pending;
+});
 test('HTML and scripts revalidate HTTP cache; offline fallback uses only current release',async()=>{
   const {events,cache,opened,sandbox}=workerRuntime();let result,mode;
   const request={method:'GET',url:'https://example.test/game/td.html?release='+version,headers:{has:()=>false}};

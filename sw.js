@@ -68,7 +68,7 @@ const ASSETS = [
 ASSETS.push('./src/td/systems/MapPressureSystem.js');
 
 // 安裝時只預存遊戲殼；頁面直接載入完整美術，成功後由 fetch handler 快取，避免安裝流程同步等待約 90 MB。
-const PRECACHE = ASSETS.filter(function (asset) { return !asset.startsWith('./assets/td/'); });
+const PRECACHE = ASSETS.filter(function (asset) { return !asset.startsWith('./assets/td/'); }).filter(function (asset, index, assets) { return assets.indexOf(asset) === index; });
 self.addEventListener('install', function (event) {
   event.waitUntil(caches.open(CACHE_NAME).then(function (cache) { return cache.addAll(PRECACHE.map(function (asset) { return new Request(asset, { cache: 'reload' }); })); }).then(function () { return self.skipWaiting(); }));
 });

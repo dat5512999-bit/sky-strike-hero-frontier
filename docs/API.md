@@ -656,4 +656,4 @@ v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare�
 # v0.85.48 支援光環介面
 
 `BattleSynergySystem.applyHaste(target, rate, source)` 以最高值規則更新 `target.supportHaste`，並同步寫入 `target.supportHasteSource`。`TDGame` 讀取後在英雄／守軍選取卡顯示來源與百分比。沒有新增 HTTP API、帳號欄位或資料庫 migration。
-> **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；810 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。
+> **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；811 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。

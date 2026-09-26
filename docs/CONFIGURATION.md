@@ -284,4 +284,4 @@ Pages 首次啟用由 `.github/workflows/pages.yml` 的 `enablement: true` 控�
 # 地精 V1 配置
 
 士兵／塔價格、射程和攻擊在 `src/td/config.js`；網路半徑、容量、超載、冷卻及每波回收上限在 `src/td/systems/GoblinNetworkSystem.js` 的 `RULES`。正式故事解鎖點未設定；不要把 TESTABLE 當 CANON。詳見 [地精 V1](GOBLIN_FACTION_V1.md)。
-> **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；810 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。
+> **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；811 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。
