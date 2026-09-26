@@ -42,7 +42,7 @@ test('英雄塔防在主大廳初始化完成前遮住戰場，完成後才解�
   assert.match(app, /document\.body\.dataset\.appReady='true'/);
 });
 
-test('英雄塔防公開顯示目前程式與平衡資料版本',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8');assert.ok(html.includes('v'+JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8')).version));assert.match(html,/旋潮防當機修正/);assert.doesNotMatch(html,/SHARED UX/);});
+test('英雄塔防公開顯示目前程式與平衡資料版本',()=>{const html=fs.readFileSync(path.join(root,'td.html'),'utf8');assert.ok(html.includes('v'+JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8')).version));assert.match(html,/2-2 建造格校對工具/);assert.doesNotMatch(html,/SHARED UX/);});
 
 test('RTS HUD 保留必要控制並提供英雄狀態與快捷技能', () => {
   const html = fs.readFileSync(path.join(root, 'td.html'), 'utf8');

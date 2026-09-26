@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HERO FRONTIER · 2-2 建造格標註工具</title>
+  <style>
+    :root{color-scheme:dark;font-family:"Microsoft JhengHei",system-ui,sans-serif;background:#08110f;color:#eaf0e6}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#20342f,#08110f 62%);min-height:100vh}.page{max-width:1600px;margin:auto;padding:28px}.eyebrow{color:#e9bf68;letter-spacing:.16em;font-size:12px}h1{margin:.35rem 0;font-size:clamp(24px,4vw,42px)}.intro{max-width:900px;color:#b8c6bf;line-height:1.6}.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:22px 0 14px;padding:14px;background:#0b1815;border:1px solid #826b3b}.toolbar b{color:#8cf0a3;margin-right:auto}.toolbar button{border:1px solid #aa8a49;background:#172923;color:#f4e5b4;padding:9px 12px;border-radius:4px;font:inherit;cursor:pointer}.toolbar button:hover{background:#29463a}.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px}.map-wrap{overflow:auto;border:1px solid #9a8146;background:#050908;padding:8px}.grid-board{position:relative;display:grid;grid-template-columns:repeat(var(--columns),64px);grid-template-rows:repeat(var(--rows),64px);width:1536px;height:1024px;background-size:100% 100%;isolation:isolate}.grid-board::before{content:"";position:absolute;inset:0;background:#08100a44;z-index:-1}.grid-cell{appearance:none;padding:0;border:1px solid rgba(225,240,212,.22);background:transparent;cursor:pointer;transition:background .12s,box-shadow .12s}.grid-cell:hover:not(:disabled),.grid-cell:focus-visible{outline:2px solid #fff1ab;outline-offset:-3px;background:#fff1ab38}.grid-cell.gameLegal:not(.selected){box-shadow:inset 0 0 0 3px #e8bc56}.grid-cell.selected{background:rgba(61,220,106,.46);box-shadow:inset 0 0 0 2px #8dffab}.grid-cell.locked{cursor:not-allowed;background:repeating-linear-gradient(-45deg,rgba(112,19,19,.55) 0 7px,rgba(45,9,9,.45) 7px 14px);border-color:rgba(255,151,151,.34)}.legend{display:grid;gap:10px;align-content:start;background:#0b1815;border:1px solid #826b3b;padding:16px}.legend h2{font-size:18px;margin:0}.legend p,.legend small{line-height:1.55;color:#b8c6bf}.key{display:flex;align-items:center;gap:9px}.swatch{width:22px;height:22px;border:1px solid #d6c481}.swatch.green{background:#38c86688;border-color:#8dffab}.swatch.gold{box-shadow:inset 0 0 0 3px #e8bc56}.swatch.red{background:repeating-linear-gradient(-45deg,#741b1b 0 5px,#240909 5px 10px);border-color:#e78282}textarea{width:100%;min-height:205px;background:#050908;color:#bdf6ca;border:1px solid #51695b;padding:10px;font:11px ui-monospace,Consolas,monospace;resize:vertical}.notice{min-height:46px;color:#f3cf7d;line-height:1.45}.warning{border-left:3px solid #e8bc56;padding-left:10px}.actions{display:grid;gap:8px}.actions button{width:100%}@media(max-width:900px){.page{padding:16px}.layout{grid-template-columns:1fr}.legend{order:-1}.toolbar b{width:100%;margin-right:0}.map-wrap{margin-inline:-16px;border-inline:0}.grid-board{transform-origin:top left}}
+  </style>
+</head>
+<body>
+  <main class="page" data-grid-editor>
+    <div class="eyebrow">DEVELOPER MAP REVIEW · CHAPTER II / 2-2</div>
+    <h1>燼道相逢：建造格標註</h1>
+    <p class="intro">點擊格子即可切換綠色「可建」標註。這是校對工具，不會立即改動玩家地圖；完成後請下載或複製 JSON 回傳，我會先檢查道路距離、塔佔地與美術地形，再安全寫入正式規則。</p>
+    <div class="toolbar"><b data-grid-count>載入中…</b><button type="button" data-grid-reset>還原目前遊戲可建格</button><button type="button" data-grid-clear>清空所有綠格</button><button type="button" data-grid-copy>複製 JSON</button><button type="button" data-grid-download>下載 JSON</button></div>
+    <div class="layout">
+      <section class="map-wrap" aria-label="2-2 燼火商道 64 像素網格地圖"><div class="grid-board" data-grid-board></div></section>
+      <aside class="legend"><h2>怎麼標</h2><div class="key"><i class="swatch green"></i><span>綠色：你確認可建</span></div><div class="key"><i class="swatch gold"></i><span>金色角標：目前遊戲已允許</span></div><div class="key"><i class="swatch red"></i><span>紅色斜線：道路／障礙／邊界，鎖定不可選</span></div><p class="warning">暗色格可先標成綠色，代表你希望納入審核；它不會在未驗證前直接開放給玩家，避免塔蓋進道路、車隊或懸崖。</p><div class="notice" data-grid-notice aria-live="polite"></div><label><small>輸出資料（可複製或下載）</small><textarea data-grid-output readonly aria-label="建造格 JSON 輸出"></textarea></label></aside>
+    </div>
+  </main>
+  <script src="src/td/namespace.js"></script>
+  <script src="src/td/config.js"></script>
+  <script src="src/td/maps.js"></script>
+  <script src="src/td/map-tools/EmberroadGridModel.js"></script>
+  <script src="src/td/map-tools/EmberroadGridEditor.js"></script>
+</body>
+</html>
