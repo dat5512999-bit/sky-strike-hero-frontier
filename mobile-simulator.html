@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101715">
+  <meta name="robots" content="noindex">
+  <title>iPhone 15 Pro Max 手機預覽｜英雄邊境</title>
+  <link rel="stylesheet" href="mobile-simulator.css">
+</head>
+<body>
+  <main class="simulator" aria-labelledby="simulator-title">
+    <header class="simulator-toolbar">
+      <div>
+        <p>HERO FRONTIER · 介面驗收工具</p>
+        <h1 id="simulator-title">iPhone 15 Pro Max 預覽</h1>
+      </div>
+      <div class="simulator-actions" aria-label="預覽控制">
+        <div class="simulator-mode" role="group" aria-label="手機開啟方式">
+          <button type="button" data-simulator-mode="portrait" aria-pressed="true">直向開啟</button>
+          <button type="button" data-simulator-mode="landscape" aria-pressed="false">橫向戰場</button>
+        </div>
+        <span id="simulator-viewport-label" class="viewport-label" aria-label="模擬視窗大小">430 × 932 · 直向開啟</span>
+        <button id="simulator-reload" type="button">↻ 重新載入</button>
+        <button id="simulator-fullscreen" type="button">全螢幕</button>
+        <a href="td-mobile.html" target="_blank" rel="noopener">開啟實機入口 ↗</a>
+      </div>
+    </header>
+
+    <section id="simulator-stage" class="simulator-stage" aria-label="iPhone 15 Pro Max 遊戲畫面">
+      <div id="simulator-device" class="simulator-device" data-orientation="portrait" aria-label="iPhone 15 Pro Max 直向機身">
+        <span class="device-camera" aria-hidden="true"></span>
+        <div class="device-screen">
+          <iframe id="simulator-game" title="英雄邊境 iPhone 15 Pro Max 模擬畫面" allow="fullscreen" allowfullscreen></iframe>
+        </div>
+        <span class="device-home" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <p id="simulator-note" class="simulator-note">直向開啟會使用與手機相同的 <code>td-mobile.html</code> 入口，包含遊戲橫轉流程；「橫向戰場」則直接檢查戰鬥畫面。兩者都共用同一個遊戲與存檔。Safari 網址列、真實多指手勢與硬體效能仍應以真機驗收。</p>
+  </main>
+  <script src="src/td/mobile-simulator.js"></script>
+</body>
+</html>

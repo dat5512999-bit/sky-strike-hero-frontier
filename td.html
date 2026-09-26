@@ -72,7 +72,7 @@
 
       <div id="td-profession-screen" class="td-profession-screen" role="dialog" aria-modal="true" aria-labelledby="td-opening-title" hidden>
         <div class="profession-dialog">
-          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>英雄邊境 · v0.85.50 · 2-2 建造格校對工具</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
+          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>英雄邊境 · v0.85.59 · 七族塔兵特效／電腦效能更新</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
           <nav class="expedition-steps" aria-label="遠征配置步驟"><button type="button" data-opening-page="battlefield" aria-pressed="true"><b>01</b><span>選擇戰場</span></button><button type="button" data-opening-page="party"><b>02</b><span>組建隊伍</span></button></nav>
           <div class="opening-titlebar"><div class="opening-title-copy"><p>英雄邊境</p><h2 id="td-opening-title">選擇戰場</h2><span id="td-opening-subtitle">踏上新的戰場，書寫屬於你的傳奇。</span></div><select id="td-map-choice" class="opening-data-select" aria-label="選擇戰場"><option value="beginner">新手谷地</option><option value="twinpass">雙隘口要塞</option><option value="autumn">暮秋遺跡</option><option value="silverleaf">銀葉溪谷</option><option value="shadowfall">暮影舊城</option><option value="frostborn">冰原裂谷</option></select></div>
           <section class="expedition-page battlefield-page" data-expedition-page="battlefield">
@@ -148,7 +148,7 @@
         <button id="td-hero-select" aria-expanded="false" aria-controls="td-hero-more" class="td-hero-select" type="button" aria-pressed="false" disabled title="選取英雄（F1），再點地面移動"><span class="hero-face" aria-hidden="true"></span><span><strong>森語者・希爾芙</strong><small>點我控制英雄 · F1</small></span><span class="hero-select-state">選取</span></button>
         <div class="hero-rank"><span>等級</span><strong id="td-hero-level">1</strong></div>
         <div class="hero-vitals"><label class="hero-health-vital">生命 <span id="td-hero-hp-text">100 / 100</span><i><b id="td-hero-hp-fill"></b></i></label><label>能量 <span id="td-hero-mp-text">冷卻能量</span><i class="mana"><b id="td-hero-mp-fill"></b></i></label></div>
-        <details class="hero-more" id="td-hero-more"><summary>英雄資訊</summary><div class="hero-extra"><div class="hero-xp"><label>經驗 <span id="td-hero-xp-text">0 / 52</span><i class="experience"><b id="td-hero-xp-fill"></b></i></label></div><div class="hero-stats" aria-label="英雄能力"><span>⚔ 攻擊 <b id="td-stat-attack">18</b></span><span>◎ 射程 <b id="td-stat-range">152</b></span><span>✥ 攻速 <b id="td-stat-speed">0.58s</b></span><span>➤ 移速 <b id="td-stat-move">215</b></span></div><div id="td-hero-weapon" class="hero-equipment" data-rarity="base"><i aria-hidden="true"></i><span><small>目前武器</small><b>銀葉法杖</b></span><em>制式</em></div><button id="td-hero-evolve" class="hero-evolve" type="button" hidden>英雄進化</button><button id="td-hero-equip" type="button">英雄裝備</button></div></details>
+        <details class="hero-more" id="td-hero-more"><summary>英雄資訊</summary><div class="hero-extra"><div class="hero-xp"><label>經驗 <span id="td-hero-xp-text">0 / 52</span><i class="experience"><b id="td-hero-xp-fill"></b></i></label></div><div class="hero-stats" aria-label="英雄能力"><span>⚔ 攻擊 <b id="td-stat-attack">18</b></span><span>◎ 射程 <b id="td-stat-range">152</b></span><span>✥ 攻速 <b id="td-stat-speed">0.58s</b></span><span>➤ 移速 <b id="td-stat-move">215</b></span></div><div id="td-hero-weapon" class="hero-equipment" data-rarity="base"><i aria-hidden="true"></i><span><small>目前武器</small><b>銀葉法杖</b></span><em>制式</em></div><p id="td-hero-evolution-summary" hidden></p><button id="td-hero-evolve" class="hero-evolve" type="button" hidden>英雄進化</button><button id="td-hero-equip" type="button">英雄裝備</button></div></details>
       </div>
       <div class="panel-section-label"><span>技能</span><small>快捷鍵 · Q W E F</small></div>
       <div class="td-hero-dock"><button id="td-skill-button" class="skill-button" type="button"><kbd>Q</kbd><b>❄</b><span>霜環震擊</span></button><button id="td-thunder" class="skill-button" type="button" title="攻擊附近最多四個敵人，冷卻12秒"><kbd>W</kbd><b>ϟ</b><span>連鎖雷擊</span></button><button id="td-summon" class="skill-button" type="button" title="召喚兩名守衛協助攻擊，冷卻22秒"><kbd>E</kbd><b>✧</b><span>祖靈守衛</span></button><button id="td-ultimate" class="skill-button ultimate-button" type="button" aria-keyshortcuts="F" title="大絕：選擇英雄後查看效果"><kbd>F</kbd><b>✦</b><span>星墜寒潮</span><small class="skill-cooldown" aria-hidden="true"></small></button></div>
@@ -262,6 +262,7 @@
       <button type="button" data-shop-item="spear" class="shop-weapon-offer"><i class="shop-item-icon" aria-hidden="true"></i><b>職業武器鍛造</b><small>每級普攻與傷害技能 +20%</small><span>100G</span></button>
       <button type="button" data-shop-item="rune"><b>◈ 迅捷符文</b><small>每級新施放技能冷卻 -10%</small><span>120G</span></button>
       <button type="button" data-shop-item="charm"><b>✧ 祖靈契約</b><small>守衛／衝擊波強化，依英雄職業顯示效果</small><span>140G</span></button>
+      <button type="button" data-shop-item="sightstone"><b>◉ 隱形魔石</b><small>揭露英雄周圍有限範圍的隱形敵軍</small><span>95G</span></button>
       <button type="button" data-shop-item="evolution-stone" class="shop-evolution-offer"><b>✦ 英雄進化石</b><small>以首領勳章購買，通過專屬試煉後進化。</small><span>鎖定中</span></button>
     </div><h3>軍械商品 · 購買後收入軍械庫</h3><p>每種最多購買三件，先選英雄或士兵，再到軍械庫配置。</p><div class="shop-items gear-shop-items">
       <button type="button" data-shop-item="gear-lion-bow"><b>獅心王弓</b><small></small><span></span></button>
@@ -319,6 +320,8 @@
   <script src="src/td/config.js"></script>
   <script src="src/td/systems/SpriteFrameBounds.js"></script>
   <script src="src/td/systems/ArtSystem.js"></script>
+  <script src="src/td/systems/BossSpriteBounds.js"></script>
+  <script src="src/td/systems/BossVisualCatalog.js"></script>
   <script src="src/td/systems/EquipmentSystem.js"></script>
   <script src="src/td/systems/ArmorySystem.js"></script>
   <script src="src/td/systems/ProfessionSystem.js"></script>
@@ -336,9 +339,14 @@
   <script src="src/td/systems/EconomySystem.js"></script>
   <script src="src/td/systems/CombatFeedbackSystem.js"></script>
   <script src="src/td/systems/TowerEvolutionSystem.js"></script>
+  <script src="src/td/systems/TowerVFX.js"></script>
+  <script src="src/td/systems/PaintedTowerVFX.js"></script>
+  <script src="src/td/systems/UnitVFX.js"></script>
+  <script src="src/td/systems/CombatTextCache.js"></script>
   <script src="src/td/systems/TowerSkillSystem.js"></script>
   <script src="src/td/systems/ShopSystem.js"></script>
   <script src="src/td/entities/Summon.js"></script>
+  <script src="src/td/entities/EvolutionCompanion.js"></script>
   <script src="src/td/entities/FieldLoot.js"></script>
   <script src="src/td/entities/Monster.js"></script>
   <script src="src/td/systems/MapPressureSystem.js"></script>
@@ -349,6 +357,7 @@
   <script src="src/td/entities/Building.js"></script>
   <script src="src/td/systems/HeroSkillVFX.js"></script>
   <script src="src/td/systems/HeroRoster.js"></script>
+  <script src="src/td/systems/HeroEvolutionCombat.js"></script>
   <script src="src/td/systems/HeroEvolutionSystem.js"></script>
   <script src="src/td/systems/HeroEvolutionPresentation.js"></script>
   <script src="src/td/systems/ResultScreen.js"></script>
@@ -382,6 +391,10 @@
   <script src="src/td/systems/MiniMapView.js"></script>
   <script src="src/td/systems/HeroJoystick.js"></script>
   <script src="src/td/maps.js"></script>
+  <script src="src/td/map-tools/published-maps.js"></script>
+  <script src="src/td/map-tools/MapLayoutOverrides.js"></script>
+  <script src="src/td/map-tools/MapRouteModel.js"></script>
+  <script src="src/td/map-tools/MapRouteOverrides.js"></script>
   <script src="src/td/systems/FrontierTerrain.js"></script>
   <script src="src/td/main.js"></script>
   <script src="src/td/app/ProfileStore.js"></script>

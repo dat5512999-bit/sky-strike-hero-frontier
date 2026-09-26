@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HERO FRONTIER · 開發者工作台</title>
+  <style>:root{color-scheme:dark;font-family:"Microsoft JhengHei",system-ui,sans-serif;background:#08110f;color:#eef3ea}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at top,#253f38,#07100e 65%)}main{max-width:1050px;margin:auto;padding:8vh 28px}.eyebrow{color:#e4ba68;letter-spacing:.16em;font-size:12px}h1{font-size:clamp(30px,5vw,54px);margin:.35rem 0}p{color:#b6c5bd;line-height:1.65;max-width:780px}.panel{margin-top:28px;padding:24px;background:#0c1a16;border:1px solid #897343}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}.card{display:grid;gap:10px;padding:18px;border:1px solid #577163;background:#11241e;text-decoration:none;color:inherit}.card:hover{border-color:#e8bc56;background:#193328}.card small{color:#e4ba68}.card h2{margin:0}.card p{margin:0}.button{border:1px solid #b9954f;background:#253d32;color:#fff0c3;padding:10px 13px;font:inherit;cursor:pointer}.locked{border-left:4px solid #dd9a55}.status{color:#e9c46e;min-height:25px}</style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">LOCAL DEVELOPER STUDIO · NOT IN PLAYER UI</div><h1>開發者工作台</h1>
+    <p>這裡集中放置關卡、美術與系統校對工具；它不會出現在遊戲大廳、設定或玩家戰場。請啟動 start-developer-studio.cmd，從本機後台管理地圖與版本；舊離線頁的存檔可匯出後匯入。</p>
+    <section class="panel" data-studio-locked><h2>需要管理者檔案</h2><p>先在遊戲大廳的「設定與玩家資料」切換到「管理者遊玩」，再回到這一頁。</p><button class="button" type="button" data-studio-check>重新檢查管理者權限</button><div class="status" data-studio-status></div></section>
+    <section class="panel" data-studio-tools hidden><h2>目前工具</h2><div class="grid"><a class="card" href="map-grid-editor.html"><small>MAP LAYOUT</small><h2>地圖建造格編輯器</h2><p>切換所有正式地圖、滾輪縮放、標示綠格並儲存套用。紅格可標為待驗證候選。</p></a><a class="card" href="route-editor.html"><small>ROUTE EDITOR</small><h2>怪物路點編輯器</h2><p>拖曳路點、插入轉彎點，儲存前檢查道路、障礙與城門連通性；只在此工作台使用。</p></a></div></section>
+  </main>
+  <script src="src/td/namespace.js"></script><script src="src/td/config.js"></script><script src="src/td/maps.js"></script><script src="src/td/map-tools/published-maps.js"></script><script src="src/td/map-tools/MapPublisher.js"></script>
+  <script>(function(){const status=document.querySelector('[data-studio-status]'),locked=document.querySelector('[data-studio-locked]'),tools=document.querySelector('[data-studio-tools]');function check(){let allowed=false;try{const state=JSON.parse(localStorage.getItem('heroFrontierProfilesV1'));allowed=Boolean(state&&state.active==='admin'&&state.profiles&&state.profiles.admin&&state.profiles.admin.kind==='admin');}catch(error){}locked.hidden=allowed;tools.hidden=!allowed;status.textContent=allowed?'管理者權限已確認。':'尚未偵測到管理者檔案。';}document.querySelector('[data-studio-check]').addEventListener('click',check);check();})();</script>
+</body>
+</html>

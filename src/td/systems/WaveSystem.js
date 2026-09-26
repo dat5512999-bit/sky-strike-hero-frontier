@@ -21,7 +21,7 @@
     }
     update(dt,monsters){
       if(this.phase==='preparing'&&!this.preparationHeld){this.countdown=Math.max(0,this.countdown-dt);if(this.countdown<=0)this.start();}
-      if(this.phase==='spawning'){this.spawnTimer-=dt;if(this.queue.length&&this.spawnTimer<=0){const type=this.queue.shift(),modifiers=Object.assign({},this.modifiers,{bountyScale:type==='boss'?1:this.bountyScale});const routes=ns.config.routes||[ns.config.path],route=routes[this.spawnIndex++%routes.length];monsters.push(new ns.entities.Monster(type,this.wave,route,modifiers));this.spawnTimer=this.spawnInterval();}if(!this.queue.length)this.phase='clearing';}
+      if(this.phase==='spawning'){this.spawnTimer-=dt;if(this.queue.length&&this.spawnTimer<=0){const type=this.queue.shift(),modifiers=Object.assign({},this.modifiers,{bountyScale:type==='boss'?1:this.bountyScale});const routes=ns.config.routes||[ns.config.path],route=routes[this.spawnIndex++%routes.length],monster=new ns.entities.Monster(type,this.wave,route,modifiers);ns.systems.BossVisualCatalog?.apply(monster);monsters.push(monster);this.spawnTimer=this.spawnInterval();}if(!this.queue.length)this.phase='clearing';}
       if(this.phase==='clearing'&&!monsters.some(function(monster){return monster.active;})){this.active=false;this.phase='reward';this.pendingClear=this.catalog.get(this.wave);}
       if(this.phase==='reward'&&this.pendingClear){const event=this.pendingClear;this.pendingClear=null;return event;}
       return null;

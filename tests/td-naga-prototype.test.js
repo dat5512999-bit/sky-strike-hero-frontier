@@ -52,9 +52,9 @@ test('四座娜迦建築可部署、具不同實際戰術並有兩條進階分�
 
 test('娜迦的投射與連鎖使用潮汐視覺語彙，不回退成通用雷電',()=>{
   const {ns}=load(),buildings=ns.config.buildings;
-  assert.equal(buildings.nagaTidegate.style,'tidebolt');
-  assert.equal(buildings.nagaShellBastion.style,'tide-spear');
-  assert.equal(buildings.nagaMantaAerie.style,'tide-chain');
+  assert.equal(buildings.nagaTidegate.style,'tidegate-bolt');
+  assert.equal(buildings.nagaShellBastion.style,'tide-bastion-spear');
+  assert.equal(buildings.nagaMantaAerie.style,'tide-manta-chain');
   const hero=new ns.entities.Hero(100,100),target=new ns.entities.Monster('grunt',1);hero.chooseClass('naga');target.x=135;target.y=100;
   const shots=[];hero.update(.01,[target],shots);hero.update(.2,[target],shots);
   assert.equal(shots[0].style,'tidebolt');

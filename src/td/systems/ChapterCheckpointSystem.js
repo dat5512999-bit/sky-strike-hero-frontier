@@ -9,12 +9,12 @@
     clear(){if(!this.storage)return false;try{this.storage.removeItem(ChapterCheckpointSystem.STORAGE_KEY);return true;}catch(error){return false;}}
     describe(data){data=data||this.read();if(!data)return null;return(data.run.mapName||data.run.map||'未知地圖')+' · '+(data.run.difficultyName||data.run.difficulty)+' · 第 '+data.wave+' 波後';}
     capture(game){
-      if(!game||!ChapterCheckpointSystem.WAVES.includes(game.waves.wave)||game.waves.active||game.report.current)return null;
+      if(!game||!ChapterCheckpointSystem.WAVES.includes(game.waves.wave)||game.waves.active||game.report.current||game.hero.evolution?.trialStage||game.monsters?.some(m=>m.active&&!m.evolutionTraining))return null;
       const heroKeys=['classType','x','y','spawnX','spawnY','targetX','targetY','health','maxHealth','level','xp','gear','equipment','skillCooldowns','evolution','cooldown','novaCooldown','active','respawnTimer','invulnerable'];
       const unitKeys=['kind','type','x','y','guardX','guardY','targetStrategy','level','kills','strikes','gear','totalSpent','mercenary','unitId','health','maxHealth','active','cooldown','recycleTimer','engineerBoost'];
       const towerKeys=['kind','type','x','y','level','kills','shotsFired','branch','totalSpent','cooldown','retired','recycleTimer','engineerBoost'];
       const pick=(source,keys)=>keys.reduce((result,key)=>{if(source[key]!==undefined)result[key]=clone(source[key]);return result;},{});
-      const data={schema:ChapterCheckpointSystem.SCHEMA,savedAt:new Date().toISOString(),wave:game.waves.wave,run:clone(game.report.run),baseHealth:game.baseHealth,maxBaseHealth:game.maxBaseHealth,economy:pick(game.economy,['gold','lumber','merit','emblems','totalEarned','totalSpent','rewardRate']),hero:pick(game.hero,heroKeys),buildings:game.build.items.map(item=>pick(item,item.kind==='unit'?unitKeys:towerKeys)),nextUnitId:game.build.nextUnitId,faction:{selected:game.factions.selected,units:Array.from(game.factions.unlockedUnits),buildings:Array.from(game.factions.unlockedBuildings)},loot:{claimed:Array.from(game.loot.claimed),history:clone(game.loot.history)},armory:{owned:clone(game.armory.owned)},report:{run:clone(game.report.run),waves:clone(game.report.waves),telemetry:clone(game.report.telemetry)}};
+      const data={schema:ChapterCheckpointSystem.SCHEMA,savedAt:new Date().toISOString(),wave:game.waves.wave,evolutionCamp:Boolean(game.evolutionCamp),run:clone(game.report.run),baseHealth:game.baseHealth,maxBaseHealth:game.maxBaseHealth,economy:pick(game.economy,['gold','lumber','merit','emblems','totalEarned','totalSpent','rewardRate']),hero:pick(game.hero,heroKeys),buildings:game.build.items.map(item=>pick(item,item.kind==='unit'?unitKeys:towerKeys)),nextUnitId:game.build.nextUnitId,faction:{selected:game.factions.selected,units:Array.from(game.factions.unlockedUnits),buildings:Array.from(game.factions.unlockedBuildings)},loot:{claimed:Array.from(game.loot.claimed),history:clone(game.loot.history)},armory:{owned:clone(game.armory.owned)},report:{run:clone(game.report.run),waves:clone(game.report.waves),telemetry:clone(game.report.telemetry)}};
       if(game.goblinNetwork)data.goblinNetwork=game.goblinNetwork.snapshot();
       if(!this.storage)return data;try{this.storage.setItem(ChapterCheckpointSystem.STORAGE_KEY,JSON.stringify(data));return data;}catch(error){return null;}
     }
@@ -29,10 +29,10 @@
       game.loot.claimed=new Set(data.loot.claimed||[]);game.loot.pending=[];game.loot.history=clone(data.loot.history||[]);
       game.armory.owned=clone(data.armory.owned||[]);game.armory.assignments=new Map();[game.hero].concat(game.build.combatUnits()).forEach(target=>Object.values(target.gear||{}).forEach(id=>game.armory.assignments.set(id,target)));
       game.report.run=clone(data.report.run);game.report.waves=clone(data.report.waves);game.report.current=null;game.report.finalResult=null;game.report.telemetry=clone(data.report.telemetry);
-      game.waves.reset();game.waves.setModifiers(game.difficulty.modifiers());game.waves.wave=data.wave;game.waves.beginPreparation();
+      game.waves.reset();game.waves.setModifiers(game.difficulty.modifiers());game.waves.wave=data.wave;game.waves.beginPreparation();game.evolutionCamp=Boolean(data.wave>=50);if(game.evolutionCamp){game.waves.complete=true;game.waves.phase='complete';}if(game.hero.evolution)game.hero.evolution.trialStage=0;game.hero.evolutionPending=[];game.hero.evolutionAuraTime=0;game.hero.evolutionAvatarTime=0;game.hero.evolutionHasteTime=0;
       if(game.synergy){game.synergy.winter=null;game.synergy.frostVisuals=[];}game.hero.huntTime=0;game.hero.frostEfficiency=0;
       game.monsters=[];game.corpses=[];game.projectiles=[];game.summons=[];game.shockwaves=[];game.fieldLoot=[];game.build.applyTowerSupport();return true;
     }
   }
-  ChapterCheckpointSystem.STORAGE_KEY='heroFrontierChapterCheckpointV1';ChapterCheckpointSystem.SCHEMA=1;ChapterCheckpointSystem.WAVES=[10,20];ns.systems.ChapterCheckpointSystem=ChapterCheckpointSystem;
+  ChapterCheckpointSystem.STORAGE_KEY='heroFrontierChapterCheckpointV1';ChapterCheckpointSystem.SCHEMA=1;ChapterCheckpointSystem.WAVES=[10,20,50];ns.systems.ChapterCheckpointSystem=ChapterCheckpointSystem;
 })(globalThis.TowerFrontier);

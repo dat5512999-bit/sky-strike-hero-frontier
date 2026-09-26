@@ -1,8 +1,8 @@
 (function(ns){
   'use strict';
   class CombatFeedbackSystem{
-    constructor(){this.items=[];this.mobile=false;this.corrosion=new Map();this.roots=new Map();}
-    reset(){this.items=[];this.corrosion.clear();this.roots.clear();}
+    constructor(){this.textCache=ns.systems.CombatTextCache?new ns.systems.CombatTextCache():null;this.items=[];this.mobile=false;this.corrosion=new Map();this.roots=new Map();}
+    reset(){this.textCache?.clear();this.items=[];this.corrosion.clear();this.roots.clear();}
     updateRoots(dt,monsters){
       const present=new Set(monsters);
       for(const m of monsters){
@@ -133,9 +133,10 @@
       ctx.restore();
     }
     draw(ctx){
+      const textCache=this.textCache;
       this.items.forEach(function(item){const ratio=Math.max(0,item.time/item.max),age=1-ratio;ctx.save();ctx.globalAlpha=Math.min(1,ratio*2);
         if(item.type==='damage'||item.type==='gold'||item.type==='allyDamage'||item.type==='heal'){
-          ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='rgba(3,5,5,.9)';ctx.fillStyle=item.type==='gold'?'#f5c85b':item.type==='heal'?'#7df09b':item.type==='allyDamage'?'#ff7b69':item.critical?'#ff823d':'#fff1d2';ctx.font=(item.critical?'900 19px ':'800 14px ')+'Segoe UI';const label=item.type==='gold'?('+'+item.value+' Gold'):item.type==='heal'?('治療 +'+item.value):(item.critical?'暴擊 '+item.value:'-'+item.value);const y=item.y-age*(item.type==='gold'?30:22);ctx.strokeText(label,item.x,y);ctx.fillText(label,item.x,y);
+          ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='rgba(3,5,5,.9)';ctx.fillStyle=item.type==='gold'?'#f5c85b':item.type==='heal'?'#7df09b':item.type==='allyDamage'?'#ff7b69':item.critical?'#ff823d':'#fff1d2';ctx.font=(item.critical?'900 19px ':'800 14px ')+'Segoe UI';const label=item.type==='gold'?('+'+item.value+' Gold'):item.type==='heal'?('治療 +'+item.value):(item.critical?'暴擊 '+item.value:'-'+item.value);const y=item.y-age*(item.type==='gold'?30:22);if(!textCache?.draw(ctx,label,item.x,y)){ctx.strokeText(label,item.x,y);ctx.fillText(label,item.x,y);}
         }else if(item.type==='impact'){
           const angle=Math.atan2(item.incomingY||0,item.incomingX||1),rays=item.heavy?7:5,reach=age*(item.heavy?27:17);ctx.translate(item.x,item.y);ctx.strokeStyle=item.color;ctx.fillStyle='#fff7d6';ctx.shadowColor=item.color;ctx.shadowBlur=8;ctx.lineCap='round';ctx.lineWidth=item.heavy?3:2;
           // This short streak keeps the visual contact point readable after a projectile retires.

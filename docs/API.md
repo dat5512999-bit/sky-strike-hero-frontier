@@ -1,3 +1,29 @@
+> **v0.85.58 · 魚人王：** demonlord 外觀改用新圖集與逐格邊界；無新增戰鬥 API、HTTP API 或存檔 schema。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。
+
+> 電腦效能修正 PERF 1.0.0：被動介面 10 Hz、原解析度地圖濾鏡與高 DPI 浮字快取。測試、操作、API、安裝部署與備份回復見[效能修正紀錄](DESKTOP_PERFORMANCE_V1.md)。本機變更，未部署；不改戰鬥速度／數值或存檔。
+
+> 最新：Unit VFX 1.1.0 修正出手／衝鋒同步、命中預算與 Canvas 狀態還原；混戰測試、效能、API、部署回復及未完成的真機驗收見[戰鬥特效 QA](VFX_BATTLE_QA_V11.md)。尚未部署。
+
+> 士兵特效 VFX 1.0.0（未部署）：43 種攻擊兵與 2 種純支援兵已更新畫面；操作、架構／API、安裝部署、還原、FAQ 與測試限制見[交付紀錄](UNIT_VFX_V1.md)。不改戰鬥數值或存檔。
+
+> **v0.85.57 · 首領外觀：** 新增 BossVisualCatalog.get/apply、ArtSystem.bossImage 與 BossSpriteBounds；只處理顯示身分，不新增 HTTP API 或存檔欄位。 [交付與驗收](BOSS_VISUALS_V08557.md)。
+
+> **塔樓材質特效 VFX 2.0.0（未發佈）：** 新增 PaintedTowerVFX 視覺層；ArtSystem 維持 preload/coreStatus/failedAssets/retryFailed 契約，無新遠端 API 或存檔結構。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
+
+> 地圖後台 1.0.1：新增本機 `/api/studio/state`、`publish`、`restore`，寫入需同源與工作階段 token，並以 baseRevision 阻止過期覆蓋。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+
+> **目前進化規則 v0.85.56：** 新增內部 HeroEvolutionCombat、EvolutionCompanion 契約；completeTrial 必須驗證死亡、本人與 stage。Hero.evolution 增加可選 powerFloor／intervalFloor／energy；章節 schema1 支援 wave50，沒有新增網路 API。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
+
+> **塔樓特效 VFX 1.0.0（未發佈）：** 新增本機 TowerVFX.key/projectile/building/signal 介面與純視覺 towerVfx 欄位；原 style、HTTP API、傷害與存檔契約維持相容。 見 [五族塔樓特效交付](TOWER_VFX_V1.md)。
+
+> **v0.85.54：** `HeroSkillVFX.drawEffect(ctx, hero, effect)` 繪製單筆動畫；`draw` 隔離娜迦動畫錯誤並還原狀態。`hero.nagaVfxFault` 保存最近一次 `{type,message,stack}`，僅存在本局記憶體，沒有新增 HTTP API 或存檔欄位。 見 [娜迦技能 8D 分析與驗收](NAGA_SKILL_CRASH_8D_V08554.md)。
+
+> **v0.85.55：** 內部怪物契約新增 `isTargetableBy(source)` 與 `canBeDamagedBy(source, projectile)`；它們不屬網路 API。見 [規則契約](ENEMY_THREATS_V08555.md)。
+
+> **v0.85.53：** `WaveCatalog.get(wave)` 延用既有 `groups`／`spawnPace` 契約；31–50 的資料重新平衡。`EnemyCombatSystem` 內部依 Boss type 選擇二階增援，未新增網路 API、資料庫或玩家存檔欄位。見 [介面與責任](FIFTY_WAVE_BALANCE_V08553.md)。
+
+> **v0.85.53：** `td.html?preview=iphone15promax` 是僅供預覽器使用的本機路由參數；`LayoutSystem` 在該分頁以無儲存的 coarse viewport 解析為 `mobile`，沒有 HTTP API、資料庫或玩家存檔 schema 變更。見 [預覽器介面](MOBILE_SIMULATOR_V08551.md)。
+
 > **v0.85.50：** `mapTools.EmberroadGrid` 提供 `cells(map)`、`baseline(map)` 與 `selectionPayload(map, selected)`；輸出格式為 `hero-frontier-grid-v1`。這是開發工具內部介面，無 HTTP API、資料庫或玩家存檔 schema 變更。見 [格線介面](EMBERROAD_GRID_EDITOR_V08550.md)。
 
 > **v0.85.49：** `HeroRoster.nagaPulse(hero, field, monsters, onKill, onHit)` 是娜迦旋潮的內部有界處理器：選取範圍內最多 12 名有效敵軍、直接套用傷害與緩速；`updateFields()` 與 `drawFields()` 各自隔離例外。無 HTTP API、資料庫或存檔 schema 變更。見 [旋潮防護說明](NAGA_MAELSTROM_FAILSAFE_V08549.md)。
@@ -630,3 +656,4 @@ v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare�
 # v0.85.48 支援光環介面
 
 `BattleSynergySystem.applyHaste(target, rate, source)` 以最高值規則更新 `target.supportHaste`，並同步寫入 `target.supportHasteSource`。`TDGame` 讀取後在英雄／守軍選取卡顯示來源與百分比。沒有新增 HTTP API、帳號欄位或資料庫 migration。
+> **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；810 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。

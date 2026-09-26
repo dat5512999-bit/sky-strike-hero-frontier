@@ -43,7 +43,7 @@
     }
     pulse(x,y,color,radius){if(this.game.feedback?.reducedFx)return;this.visuals.push({x,y,color,radius:radius||35,time:.45});if(this.visuals.length>100)this.visuals.shift();}
     hit(monster,damage,source){
-      if(!source||damage<=0)return;const owner=source.owner;if(!source.vfxResolved){source.vfxResolved=true;if(source.splash&&this.game.feedback)this.game.feedback.explosion(source.target||monster,source.splash,source.color,source.style);}
+      if(!source||damage<=0)return;const owner=source.owner;if(!source.vfxResolved){source.vfxResolved=true;if(source.splash&&!source.towerVfx&&!(source.unitVfx&&ns.systems.UnitVFX?.ready(owner,source.unitVfx))&&this.game.feedback)this.game.feedback.explosion(source.target||monster,source.splash,source.color,source.style);}
       if(!source.secondary&&monster.active){
         if(source.arcaneMark)monster.arcaneMark=5;
         if(source.vulnerability)monster.vulnerability={time:4,rate:source.vulnerability,owner};
@@ -95,7 +95,7 @@
         if(cfg.rootPulse){source.rootCooldown=(source.rootCooldown||0)-dt;if(source.rootCooldown<=0){const targets=game.monsters.filter(m=>m.active&&ns.utils.distance(source,m)<=cfg.range);if(targets.length){const duration=1.1+source.level*.1;targets.forEach(m=>{m.rootTime=Math.max(m.rootTime||0,duration);});if(game.report)game.report.recordSupport(source,'controlSeconds',duration*targets.length);this.pulse(source.x,source.y,'#91e77b',cfg.range);source.rootCooldown=6;}}}
         if(source.type==='beastmaster'&&!game.summons.some(s=>s.active&&s.owner===source&&s.form==='bear'))game.summons.push(new ns.entities.Summon(source,{form:'bear',tags:['summon','nature'],duration:22,level:source.level,damage:20*(1+.3*(source.level-1)),range:48,speed:115,leash:cfg.range+100,offsetX:-62,offsetY:46,color:cfg.color}));
         if(source.type==='crypt')this.produceCrypt(source,cfg);
-        if(source.type==='bombWorkshop'){source.robotCooldown=(source.robotCooldown||0)-dt;if(source.robotCooldown<=0){for(let i=0;i<(cfg.robotCount||1);i++)game.summons.push(new ns.entities.Summon(source,{form:cfg.heavyRobot?'heavyBomb':'bomb',launchDelay:i*.16,tags:['summon','mechanical'],duration:18,damage:cfg.robotDamage*(1+.22*(source.level-1)),splash:cfg.robotSplash,range:23,leash:cfg.range+100,speed:cfg.heavyRobot?80:130,offsetX:0,level:source.level,color:'#ffb467'}));source.robotCooldown=cfg.summonInterval;this.pulse(source.x,source.y,'#ffba71',25);}}
+        if(source.type==='bombWorkshop'){source.robotCooldown=(source.robotCooldown||0)-dt;if(source.robotCooldown<=0){for(let i=0;i<(cfg.robotCount||1);i++)game.summons.push(new ns.entities.Summon(source,{form:cfg.heavyRobot?'heavyBomb':'bomb',launchDelay:i*.16,tags:['summon','mechanical'],duration:18,damage:cfg.robotDamage*(1+.22*(source.level-1)),splash:cfg.robotSplash,range:23,leash:cfg.range+100,speed:cfg.heavyRobot?80:130,offsetX:0,level:source.level,color:'#ffb467'}));source.robotCooldown=cfg.summonInterval;ns.systems.TowerVFX?.signal(source);this.pulse(source.x,source.y,'#ffba71',25);}}
       });
       game.summons.forEach(s=>{if(s.form==='bear'&&s.owner.level!==s.level){s.level=s.owner.level;s.damage=20*(1+.3*(s.level-1));}s.supportDamage=0;s.supportDamageSource=null;items.forEach(t=>{const cfg=t.config();if(cfg.summonAura&&s.tags.includes('summon')&&ns.utils.distance(t,s)<=cfg.range&&cfg.summonAura>=s.supportDamage){s.supportDamage=cfg.summonAura;s.supportDamageSource=t;if(game.report)game.report.recordSupport(t,'coverageSeconds',dt);}if(cfg.natureAura&&s.tags.includes('nature')&&ns.utils.distance(t,s)<=cfg.range&&cfg.natureAura>=s.supportDamage){s.supportDamage=cfg.natureAura;s.supportDamageSource=t;if(game.report)game.report.recordSupport(t,'coverageSeconds',dt);}});});
       if(Math.floor(this.clock/2)!==this.auraTick){this.auraTick=Math.floor(this.clock/2);if(game.feedback)items.concat(game.summons).filter(t=>t.supportDamage>0||t.supportHaste>0).slice(0,16).forEach(t=>game.feedback.aura(t,t.tags?'#bb9aec':'#e1d89a'));}
@@ -107,13 +107,13 @@
       if(source.summonCooldown>0||this.game.summons.filter(s=>s.active&&s.owner===source).length>=cap)return;
       const empowered=this.souls>0;if(empowered)this.souls--;
       this.game.summons.push(new ns.entities.Summon(source,{form:'crypt',tags:['summon','undead'],duration:cfg.summonDuration,damage:cfg.summonDamage*(1+.2*(source.level-1))*(empowered?1.5:1),range:cfg.summonRange,speed:cfg.summonSpeed,leash:cfg.range+cfg.summonLeashBonus,level:source.level,color:empowered?'#f2b1ff':cfg.color}));
-      source.summonCooldown=Math.max(6,cfg.summonInterval-rank)*(empowered?.65:1);source.skillPulse=.6;
+      source.summonCooldown=Math.max(6,cfg.summonInterval-rank)*(empowered?.65:1);source.skillPulse=.6;ns.systems.TowerVFX?.signal(source);
     }
     refract(){
       const game=this.game,towers=game.build.items.filter(t=>t.type==='moonwell'&&!t.retired);
       game.projectiles.slice().forEach(p=>{if(p.refractionChecked)return;p.refractionChecked=true;if(p.reflected||p.secondary||p.attackType!=='magic'||!p.owner||!p.target||!p.target.active)return;
         const tower=towers.find(t=>ns.utils.distance(t,p.owner)<=t.config().range);if(!tower||Math.random()>=tower.config().refractChance)return;
-        const clone=new ns.entities.Projectile(p.owner,p.target,Object.assign({},p,{x:tower.x,y:tower.y,reflected:true,refractionChecked:true,damage:p.damage*.65}));game.projectiles.push(clone);if(game.report)game.report.recordSupport(tower,'reflections',1);this.pulse(tower.x,tower.y,'#c2daff',23);
+        const clone=new ns.entities.Projectile(p.owner,p.target,Object.assign({},p,{x:tower.x,y:tower.y,reflected:true,refractionChecked:true,damage:p.damage*.65}));game.projectiles.push(clone);ns.systems.TowerVFX?.signal(tower);if(game.report)game.report.recordSupport(tower,'reflections',1);this.pulse(tower.x,tower.y,'#c2daff',23);
       });
     }
     static lineDistance(p,a,b){const dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy||1)));return Math.hypot(p.x-a.x-t*dx,p.y-a.y-t*dy);}

@@ -3,12 +3,22 @@
  // Static presentation only; BuildSystem draws feedback at the pointer.
  class FrontierTerrain {
   constructor(){this.cache=null;this.source=null;this.ground=null;}
+  filteredImage(image){
+   const width=image.naturalWidth||image.width,height=image.naturalHeight||image.height;
+   if(this.filteredSource===image&&this.filteredMap?.width===width&&this.filteredMap?.height===height)return this.filteredMap;
+   this.filteredSource=null;this.filteredMap=null;
+   // One map only, at original resolution. Bound memory for oversized maps.
+   if(!width||!height||width*height>8388608)return null;
+   try{const surface=ns.systems.CombatTextCache?.surface(width,height),ctx=surface?.getContext('2d');if(!ctx)return null;
+    ctx.filter='contrast(1.035) saturate(1.045)';ctx.drawImage(image,0,0);ctx.filter='none';this.filteredSource=image;this.filteredMap=surface;return surface;
+   }catch(_){return null;}
+  }
   draw(ctx,art,build){
    const map=ns.maps&&ns.maps.definitions[ns.config.mapId],direct=map&&map.asset&&(art.ensureMapAsset?art.ensureMapAsset(map.id):art.mapAssets?.[map.id]);
    if(direct){
     if(!direct.ready)return false;
     // Map pixels and world coordinates are 1:1. Camera handles every screen ratio.
-    this.cache=direct;this.source=direct;this.ground=null;ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.filter='contrast(1.035) saturate(1.045)';ctx.drawImage(direct,0,0);ctx.restore();
+    this.cache=direct;this.source=direct;this.ground=null;const baked=this.filteredImage(direct);ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';if(!baked)ctx.filter='contrast(1.035) saturate(1.045)';ctx.drawImage(baked||direct,0,0);ctx.restore();
     this.drawAmbience(ctx);
     return true;
    }

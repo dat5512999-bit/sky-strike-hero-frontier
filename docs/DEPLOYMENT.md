@@ -1,3 +1,29 @@
+> **v0.85.58 · 魚人王：** 同步部署 demonlord-actions-v2.png、首領目錄／邊界、預覽頁及版本快取檔；尚未遠端部署。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。
+
+> 電腦效能修正 PERF 1.0.0：被動介面 10 Hz、原解析度地圖濾鏡與高 DPI 浮字快取。測試、操作、API、安裝部署與備份回復見[效能修正紀錄](DESKTOP_PERFORMANCE_V1.md)。本機變更，未部署；不改戰鬥速度／數值或存檔。
+
+> 最新：Unit VFX 1.1.0 修正出手／衝鋒同步、命中預算與 Canvas 狀態還原；混戰測試、效能、API、部署回復及未完成的真機驗收見[戰鬥特效 QA](VFX_BATTLE_QA_V11.md)。尚未部署。
+
+> 士兵特效 VFX 1.0.0（未部署）：43 種攻擊兵與 2 種純支援兵已更新畫面；操作、架構／API、安裝部署、還原、FAQ 與測試限制見[交付紀錄](UNIT_VFX_V1.md)。不改戰鬥數值或存檔。
+
+> **v0.85.57 · 首領外觀：** 需同步部署首領素材、BossVisualCatalog、BossSpriteBounds、WaveSystem、WaveHUD、入口與 sw.js；目前只有本機修改，未部署遠端。 [交付與驗收](BOSS_VISUALS_V08557.md)。
+
+> **塔樓材質特效 VFX 2.0.0（未發佈）：** 尚未部署；下一次整包發行須含新模組、兩張圖集與 sw.js 清單，按既有流程统一版本和快取。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
+
+> 地圖後台 1.0.1：本機發佈會修改 published-maps.js；對外網站仍須走原部署流程。正式包需包含差異檔、讀取模組及新版 sw.js；後台與備份可排除於公開網站。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+
+> **目前進化規則 v0.85.56：** 整包同步部署 HeroEvolutionCombat.js、EvolutionCompanion.js、進化／戰鬥／存檔模組、td.html 與 sky-strike-v0.85.56 快取。驗證第 50 波超凡整備、讀檔與完成遠征。此次未執行遠端發布。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
+
+> **塔樓特效 VFX 1.0.0（未發佈）：** 本次仍是本機未發佈變更。交付時納入新模組與整組呼叫端，依既有流程統一主版本和快取；預覽頁不屬於離線必備資產。 見 [五族塔樓特效交付](TOWER_VFX_V1.md)。
+
+> **v0.85.54：** 同步發布 `HeroSkillVFX.js`、`HeroRoster.js`、`TDGame.js`、版本入口及 `sky-strike-v0.85.54`；先通過 `npm run check`、`npm test`，再以 `npm run qa:naga` 驗證真實 Canvas。此交付尚未部署正式站。 見 [娜迦技能 8D 分析與驗收](NAGA_SKILL_CRASH_8D_V08554.md)。
+
+> **v0.85.55：** 同版部署怪物、投射物、選標、商店、波表、入口與 `sky-strike-v0.85.55`；確認第 32／37／42／46 波提示和魔石商店項目。見 [發布清單](ENEMY_THREATS_V08555.md)。
+
+> **v0.85.53：** 同版部署 `WaveCatalog.js`、`WaveHUD.js`、`EnemyCombatSystem.js`、`scripts/qa-long-session.cjs`、測試、入口與 `sky-strike-v0.85.53`。部署後開啟自由遠征，確認第 31 波顯示「密集進軍」、第 50 波為濁潮小魔王與四族增援；無玩家資料遷移。見 [發布清單](FIFTY_WAVE_BALANCE_V08553.md)。
+
+> **v0.85.53：** 同版部署 `mobile-simulator.html`、`mobile-simulator.css`、`src/td/mobile-simulator.js`、`src/td/main.js` 及新版 Service Worker；部署後確認預覽 URL 載入 `td.html?preview=iphone15promax`，且正式遊戲版型偏好未變。見 [部署清單](MOBILE_SIMULATOR_V08551.md)。
+
 > **v0.85.50：** 同版發布 2-2 校對 HTML、模型、編輯器、地圖資料與 `sky-strike-v0.85.50`。校對頁不應掛進一般玩家入口；部署後直接開檔測試格線與 JSON 匯出。見 [部署清單](EMBERROAD_GRID_EDITOR_V08550.md)。
 
 > **v0.85.49：** `HeroRoster.js`、`TDGame.js`、入口版本、測試與 `sky-strike-v0.85.49` 必須同版發布；更新後先關閉舊分頁再開啟，於密集敵軍按娜迦 W，確認主畫面持續更新。見 [旋潮防護說明](NAGA_MAELSTROM_FAILSAFE_V08549.md)。
@@ -502,3 +528,4 @@ v0.85.0：同步部署 td.html、td-expedition.css、codex.css、src/td、Frostl
 # v0.85.48 部署補充
 
 部署必須同時帶上 `src/td/TDGame.js`、`src/td/systems/BattleSynergySystem.js`、`src/td/systems/HeroRoster.js`、`src/td/entities/Monster.js`、`td.html` 與 `sw.js`；不可使用新程式搭配舊 Service Worker。發布後確認快取鍵為 `sky-strike-v0.85.48`，並依 `NAGA_RUNTIME_RELIABILITY_V08548.md` 驗收。
+> **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；810 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。

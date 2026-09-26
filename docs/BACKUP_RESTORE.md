@@ -1,3 +1,29 @@
+> **v0.85.58 · 魚人王：** 舊魔王保留。可只回復第 50 波 path／original，再更新快取版號；不清存檔。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。
+
+> 電腦效能修正 PERF 1.0.0：被動介面 10 Hz、原解析度地圖濾鏡與高 DPI 浮字快取。測試、操作、API、安裝部署與備份回復見[效能修正紀錄](DESKTOP_PERFORMANCE_V1.md)。本機變更，未部署；不改戰鬥速度／數值或存檔。
+
+> 最新：Unit VFX 1.1.0 修正出手／衝鋒同步、命中預算與 Canvas 狀態還原；混戰測試、效能、API、部署回復及未完成的真機驗收見[戰鬥特效 QA](VFX_BATTLE_QA_V11.md)。尚未部署。
+
+> 士兵特效 VFX 1.0.0（未部署）：43 種攻擊兵與 2 種純支援兵已更新畫面；操作、架構／API、安裝部署、還原、FAQ 與測試限制見[交付紀錄](UNIT_VFX_V1.md)。不改戰鬥數值或存檔。
+
+> **v0.85.57 · 首領外觀：** 保留已驗證完整版本備份。僅回退首領外觀可將 BossVisualCatalog.enabled 設為 false，更新快取版號並開新局；不清除存檔。 [交付與驗收](BOSS_VISUALS_V08557.md)。
+
+> **塔樓材質特效 VFX 2.0.0（未發佈）：** 無資料遷移。保留完整發佈快照與玩家備份，整包回復渲染器／圖集／入口，勿混用版本。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
+
+> 地圖後台 1.0.1：備份 published-maps.js 與 artifacts/map-history；工作台可還原整份歷史地圖版本，還原亦建立新版本。清除 localStorage 無法還原正式地圖。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+
+> **目前進化規則 v0.85.56：** 章節存檔保留進化倍率、攻速底線和核心能量；第 50 波可回整備區。舊版可能拒絕 wave50。程式修改前快照在 artifacts/evolution-completion/before；rollback.cjs --check／--apply 有雜湊防覆蓋。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
+
+> **塔樓特效 VFX 1.0.0（未發佈）：** 沒有資料遷移。保留完整版本快照；還原需整組入口、腳本與快取清單同步，以新回退版本發佈，保留玩家存檔。 見 [五族塔樓特效交付](TOWER_VFX_V1.md)。
+
+> **v0.85.54：** 本次具 SHA-256 原始證據與限定範圍回退快照；執行 `node artifacts/naga-8d-v08554/restore.cjs --check` 檢查，`--apply` 才還原。若交付後又修改會拒絕覆蓋；不動玩家存檔。 見 [娜迦技能 8D 分析與驗收](NAGA_SKILL_CRASH_8D_V08554.md)。
+
+> **v0.85.55：** 不遷移玩家存檔。回復後段威脅時，怪物、投射物、選標、商店、波表、入口與 Service Worker 必須同版回復。見 [回復程序](ENEMY_THREATS_V08555.md)。
+
+> **v0.85.53：** 不遷移玩家存檔。回復時必須把 `WaveCatalog.js`、`WaveHUD.js`、`EnemyCombatSystem.js`、入口版本與 Service Worker 一起回復；不要只換單一波表，避免 HUD／Boss 增援與舊快取不一致。見 [回復程序](FIFTY_WAVE_BALANCE_V08553.md)。
+
+> **v0.85.53：** 手機預覽不會寫入玩家檔、版型偏好或新增資料庫；回復版本時以 `git revert` 一起回復預覽 HTML／CSS／腳本、`main.js`、離線快取與版本字串即可。見 [備份與回復](MOBILE_SIMULATOR_V08551.md)。
+
 > **v0.85.50：** 格線標註僅存在瀏覽器 `localStorage`；在清除瀏覽資料前先下載 JSON。回復程式時同步回復校對 HTML、兩個工具腳本、`maps.js` 和 Service Worker；玩家存檔無遷移。見 [備份與回復](EMBERROAD_GRID_EDITOR_V08550.md)。
 
 > **v0.85.49：** 無玩家資料遷移。若需回復，請將 `HeroRoster.js`、`TDGame.js`、入口 HTML 與 `sw.js` 回復至同一版本；不可只替換技能腳本，否則可能載到不相容快取。見 [旋潮防護說明](NAGA_MAELSTROM_FAILSAFE_V08549.md)。
@@ -484,3 +510,4 @@ v0.85.0：先匯出完整玩家備份。舊 schema 保持相容；冰原檢查�
 # v0.85.48 還原範圍
 
 本版沒有存檔結構或資料庫遷移。還原時應一起還原程式、`package.json` 與對應的 `sw.js` 快取鍵；不要只退回單一 `TDGame.js`，否則可能得到新 UI 搭配舊增益資料。玩家 Profile、軍械與戰報不需要清除。
+> **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；810 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。

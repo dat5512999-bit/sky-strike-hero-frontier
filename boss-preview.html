@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>固定首領外觀驗收 · HERO FRONTIER</title>
+<style>body{margin:0;background:#10221f;color:#f4e7c5;font:16px system-ui}main{max-width:1500px;margin:auto;padding:16px}h1{font-size:23px}button,select{padding:9px;margin:4px;background:#243c35;color:inherit;border:1px solid #8b9e73;border-radius:5px}canvas{width:100%;height:auto;border:1px solid #546954}p{color:#c2cbbc}label{white-space:nowrap}</style>
+<main><h1>第 5～50 波首領 · 正式渲染器比較</h1><p>左：原本造型　右：各波專屬造型。以戰場實際尺寸顯示；不寫入玩家存檔。</p>
+<label>動作 <select id="motion"><option value="idle">待機</option><option value="walk">行走</option><option value="attack">攻擊</option><option value="cast">施放</option><option value="death">倒下</option></select></label>
+<button id="pause">暫停</button><button id="step">下一格</button><button id="flip">轉向</button><button id="retry">重試載入</button>
+<p id="status" role="status">素材載入中…</p><canvas width="1500" height="620" aria-label="十位固定波次首領的舊新造型比較"></canvas>
+<h2>娜迦英雄與第 50 波魔王辨識比較</h2><p>同一正式渲染器、實際角色比例；英雄未改動。</p>
+<canvas id="boss-identity" width="900" height="270" style="max-width:900px" aria-label="娜迦英雄、舊魔王、新魚人王並排比較"></canvas></main>
+<script src="src/td/namespace.js"></script><script src="src/td/config.js"></script>
+<script src="src/td/systems/SpriteFrameBounds.js"></script><script src="src/td/systems/ArtSystem.js"></script>
+<script src="src/td/systems/BossSpriteBounds.js"></script><script src="src/td/systems/BossVisualCatalog.js"></script>
+<script src="src/td/entities/Monster.js"></script><script src="src/td/boss-preview.js"></script></html>

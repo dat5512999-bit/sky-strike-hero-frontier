@@ -3,10 +3,10 @@
   const STRATEGIES=Object.freeze({nearest:'距離最近',front:'最接近城門',lowestHealth:'血量最低',highestHealth:'血量最高',fastest:'速度最快'});
   class TargetSelector{
     static supports(strategy){return Object.prototype.hasOwnProperty.call(STRATEGIES,strategy);}
-    static valid(target){return Boolean(target&&target.active&&!target.leaked&&target.health>0);}
+    static valid(target,source){return Boolean(target&&target.active&&!target.leaked&&target.health>0&&(!target.isTargetableBy||target.isTargetableBy(source)));}
     static rank(origin,targets,strategy,filter){
       const mode=this.supports(strategy)?strategy:'front';
-      const eligible=(targets||[]).filter(target=>this.valid(target)&&(!filter||filter(target)));
+      const eligible=(targets||[]).filter(target=>this.valid(target,origin)&&(!filter||filter(target)));
       const progress=target=>typeof target.progress==='function'?target.progress():0;
       const health=target=>Number(target.health)||0;
       const speed=target=>(Number(target.speed)||0)*(target.slowFactor===undefined?1:target.slowFactor)*(target.moveAura===undefined?1:target.moveAura);

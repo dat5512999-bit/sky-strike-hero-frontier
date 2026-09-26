@@ -33,6 +33,13 @@
       glow.addColorStop(0,'rgba(218,255,255,'+(.16+pulse*.18+fire*.5)+')');glow.addColorStop(1,'rgba(70,220,255,0)');
       ctx.globalCompositeOperation='lighter';ctx.fillStyle=glow;ctx.fillRect(-60,-h,120,h);
       if(fire){ctx.strokeStyle='#d5ffff';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(0,-h*.65,10+(1-fire)*32,5+(1-fire)*14,0,0,Math.PI*2);ctx.stroke();}
+      if(type==='frostTotem'){
+        // The totem never fires. Its restrained, low-frequency rings make the
+        // Frost-generation aura readable without pretending it is a damage tower.
+        const aura=.5+.5*Math.sin(age*2.1);ctx.globalAlpha*=.3+.28*aura;ctx.globalCompositeOperation='lighter';ctx.strokeStyle='#b7f4ff';ctx.lineWidth=1.5;
+        for(let ring=0;ring<2;ring++){ctx.beginPath();ctx.ellipse(0,-7,22+ring*13+aura*5,7+ring*4+aura*2,0,0,Math.PI*2);ctx.stroke();}
+        for(let rune=0;rune<4;rune++){const a=age*1.1+rune*Math.PI/2;ctx.fillStyle='#dcffff';ctx.beginPath();ctx.arc(Math.cos(a)*(25+aura*4),-7+Math.sin(a)*(9+aura*2),1.8,0,Math.PI*2);ctx.fill();}
+      }
       if(built<1){ctx.globalAlpha*=1-built;ctx.strokeStyle='#a4f4ff';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(0,-3,48*built,18*built,0,0,Math.PI*2);ctx.stroke();for(let i=0;i<8;i++){const a=i*Math.PI/4;ctx.fillStyle='#d6ffff';ctx.fillRect(Math.cos(a)*38,-built*100+(i%3)*10,2,9);}}
     }
     ctx.restore();return true;

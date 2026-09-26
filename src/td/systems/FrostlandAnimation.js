@@ -22,7 +22,7 @@
     static pose(actor,hero=false){
       if(hero){const row={idle:0,walk:1,attack:2,cast:3}[actor.state]||0;return {row,frame:Math.max(0,Math.min(3,actor.frame||0)),phase:row>=2?Math.max(0,Math.min(1,actor.animationTime/(row===3?.56:.36))):0};}
       const action=actor.frostAction,phase=action?Math.min(1,action.age/action.duration):0;
-      return {row:Object.keys(DURATIONS).indexOf(actor.type),frame:action?Math.min(3,Math.floor(phase*4)):0,phase};
+      return {row:Object.keys(DURATIONS).indexOf(actor.type),frame:action?(action.released?(phase<.75?2:3):Math.min(1,Math.floor(phase/.225))):0,phase};
     }
   }
   FrostlandAnimation.DURATIONS=DURATIONS;ns.systems.FrostlandAnimation=FrostlandAnimation;

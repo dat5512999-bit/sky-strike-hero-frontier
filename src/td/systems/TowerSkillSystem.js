@@ -27,7 +27,7 @@
     }
     static fire(tower,targets,projectiles,summons){
       const cfg=tower.config(),rank=this.rank(tower.kills),empowered=tower.shotsFired%4===0;
-      let options={damage:cfg.damage,color:cfg.color,splash:cfg.splash,slow:cfg.slow,slowTime:cfg.slowTime,bonusVsSlowed:cfg.bonusVsSlowed,attackType:cfg.attackType,style:cfg.style,speed:tower.type==='cannon'?280:440};
+      let options={damage:cfg.damage,color:cfg.color,splash:cfg.splash,slow:cfg.slow,slowTime:cfg.slowTime,bonusVsSlowed:cfg.bonusVsSlowed,attackType:cfg.attackType,canHitAir:tower.canHitAir,style:cfg.style,speed:tower.type==='cannon'?280:440};
       let count=cfg.shots||1;
       if(tower.type==='arrow'&&empowered)count=rank+1;
       if(tower.type==='barracks'&&empowered)count=Math.max(count,rank+2);
@@ -41,6 +41,7 @@
       if(tower.type==='cannon')options.style='cannon';
       if(tower.type==='iceward'||tower.type==='frost')options.style='ice';
       if(tower.type==='plague')options.style='plague';
+      options.towerVfx=ns.systems.TowerVFX?.key(tower);
       targets.slice(0,count).forEach(function(target){projectiles.push(new ns.entities.Projectile(tower,target,options));});
       if(empowered||tower.type==='storm')tower.skillPulse=.35;
     }

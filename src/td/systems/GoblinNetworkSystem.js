@@ -78,7 +78,7 @@
           while(item.recycleTimer>=2&&this.waveGold<(cfg.recyclerCap||RULES.recyclerWaveCap)){
             item.recycleTimer-=2;const cap=cfg.recyclerCap||RULES.recyclerWaveCap,gold=Math.min(cfg.recyclerGold||RULES.recyclerGold,cap-this.waveGold);
             if(typeof economy.addGold==='function')economy.addGold(gold);else economy.gold+=gold;
-            this.waveGold+=gold;
+            this.waveGold+=gold;ns.systems.TowerVFX?.signal(item,gold);
           }
         }
       });

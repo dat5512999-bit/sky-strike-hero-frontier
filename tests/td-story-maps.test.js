@@ -2,7 +2,9 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const {load}=require('./helpers/td-runtime.cjs');
 
-function setup(){const {ns,context}=load();vm.runInContext(fs.readFileSync('src/td/maps.js','utf8'),context);return ns;}
+// These landmarks describe the original painted maps, not user-published grids.
+// Published layouts/routes have their own production-load-order integration test.
+function setup(){const {ns,context}=load();context.HeroFrontierPublishedMaps={schemaVersion:1,revision:0,maps:{}};vm.runInContext(fs.readFileSync('src/td/maps.js','utf8'),context);return ns;}
 function distanceToRoute(x,y,route){let nearest=Infinity;for(let i=1;i<route.length;i++){const a=route[i-1],b=route[i],dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((x-a.x)*dx+(y-a.y)*dy)/(dx*dx+dy*dy)));nearest=Math.min(nearest,Math.hypot(x-a.x-t*dx,y-a.y-t*dy));}return nearest;}
 
 test('chapter maps use production art, end at the visible keep, and offer useful tower sites',()=>{

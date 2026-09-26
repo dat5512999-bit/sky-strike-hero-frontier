@@ -16,6 +16,10 @@
     cancel(){this.pending=null;this.placement=null;}
     terrainIssue(x,y,kind){
       kind=kind||'building';
+      const layout=ns.systems.MapLayoutOverrides?.placement(ns.config.mapId,x,y);
+      // A saved developer layout deliberately replaces the painted-map terrain rule
+      // for this map. Unit collision remains checked by placementIssue below.
+      if(layout)return layout.enabled?null:'terrain';
       if(x<42||x>ns.config.width-42||y<62||y>ns.config.height-46)return 'boundary';
       if((kind==='building'||ns.config.roadUnits)&&(ns.config.routes||[ns.config.path]).some(route=>route.some((point,index,path)=>index&&pointSegmentDistance(x,y,path[index-1],point)<(ns.config.roadClearance||55))))return 'road';
       const footprint=ns.config.buildFootprint||0,scale=kind==='building'?1:.7;
@@ -33,8 +37,8 @@
     canConfirm(economy){return Boolean(this.pending&&this.placement&&this.canPlaceAt(this.placement.x,this.placement.y,this.pending.kind)&&canAfford(economy,this.pendingCost()));}
     confirmPlacement(economy){if(!this.canConfirm(economy))return false;return this.placeQueued(this.placement.x,this.placement.y,economy);}
     selectAt(x,y){const hit=this.items.slice().reverse().find(function(item){return item.active!==false&&ns.utils.distance(item,{x:x,y:y})<=(item.kind==='building'?34:27);})||null;if(hit)this.selected=hit;return hit;}
-    placeQueued(x,y,economy){const pending=this.pending;if(!pending)return false;const catalog=pending.kind==='building'?ns.config.buildings:ns.config.units;const cfg=catalog[pending.type];const cost=this.pendingCost({x:x,y:y});if(!cfg||!this.canPlaceAt(x,y,pending.kind)||!canAfford(economy,cost)||!spend(economy,cost))return false;const item=pending.kind==='building'?new ns.entities.Building(pending.type,x,y):new ns.entities.CombatUnit(pending.type,x,y);if(item.kind==='unit')item.unitId=this.nextUnitId++;item.mercenary=Boolean(pending.mercenary);item.totalSpent=cost.gold;this.items.push(item);this.selected=item;this.pending=null;this.placement=null;this.applyTowerSupport();if(typeof this.onTransaction==='function')this.onTransaction('deploy',item,cost);return true;}
-    upgrade(economy){if(!this.selected||this.selected.active===false)return false;const base=this.selected.upgradeCost(),cost=this.upgradeCost();if(!cost||!spend(economy,cost))return false;this.selected.upgrade();this.selected.totalSpent-=base.gold-cost.gold;this.applyTowerSupport();if(typeof this.onTransaction==='function')this.onTransaction('upgrade',this.selected,cost);return true;}
+    placeQueued(x,y,economy){const pending=this.pending;if(!pending)return false;const catalog=pending.kind==='building'?ns.config.buildings:ns.config.units;const cfg=catalog[pending.type];const cost=this.pendingCost({x:x,y:y});if(!cfg||!this.canPlaceAt(x,y,pending.kind)||!canAfford(economy,cost)||!spend(economy,cost))return false;const item=pending.kind==='building'?new ns.entities.Building(pending.type,x,y):new ns.entities.CombatUnit(pending.type,x,y);if(item.kind==='unit')item.unitId=this.nextUnitId++;item.mercenary=Boolean(pending.mercenary);item.totalSpent=cost.gold;this.items.push(item);this.selected=item;this.pending=null;this.placement=null;this.applyTowerSupport();if(cost.savedGold>0)ns.systems.TowerVFX?.signal(cost.discountSource,cost.savedGold);if(typeof this.onTransaction==='function')this.onTransaction('deploy',item,cost);return true;}
+    upgrade(economy){if(!this.selected||this.selected.active===false)return false;const base=this.selected.upgradeCost(),cost=this.upgradeCost();if(!cost||!spend(economy,cost))return false;this.selected.upgrade();this.selected.totalSpent-=base.gold-cost.gold;this.applyTowerSupport();if(cost.savedGold>0)ns.systems.TowerVFX?.signal(cost.discountSource,cost.savedGold);if(typeof this.onTransaction==='function')this.onTransaction('upgrade',this.selected,cost);return true;}
     sell(economy){if(!this.selected||this.selected.active===false)return false;const removed=this.selected;removed.retired=true;refund(economy,removed.sellValue());if(typeof this.onRemove==='function')this.onRemove(removed);this.items=this.items.filter(function(item){return item!==removed;});this.selected=null;this.applyTowerSupport();return true;}
     towers(){return this.items.slice();}
     combatUnits(){return this.items.filter(function(item){return item.kind==='unit'&&item.active;});}

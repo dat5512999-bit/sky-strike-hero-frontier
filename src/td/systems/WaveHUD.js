@@ -6,6 +6,7 @@
       const w=game.waves,preparing=w.canStart(),number=Math.min(w.catalog.total(),Math.max(1,w.wave+(preparing?1:0))),definition=preparing?w.preview():w.definition(number);
       const groups=definition?definition.groups:[],types=groups.map(g=>g.type),tags=[];
       const boss=types.some(t=>(ns.entities.Monster.TYPES[t]||{}).combatRole==='boss');
+      if(definition&&definition.spawnPace<1)tags.push('密集進軍');
       if(boss)tags.push('首領');
       if(types.includes('healer'))tags.push('治療');
       if(types.includes('commander'))tags.push('加速支援');
@@ -15,7 +16,7 @@
       const pressure=game.mapPressure&&game.mapPressure.summary(game,number);if(pressure)tags.unshift(pressure.short);
       if(!tags.length)tags.push(types.includes('shaman')||types.includes('revenant')?'秘法':'輕甲');
       const remaining=w.queue.length+game.monsters.filter(m=>m.active).length;
-      return {number,total:w.catalog.total(),definition,groups,tags,pressure,preparing,remaining,boss,status:game.status!=='playing'?(game.status==='victory'?'遠征完成':'遠征結束'):game.paused?'已暫停':w.complete?'全數守成':preparing?(w.phase==='preparing'?Math.ceil(w.countdown)+' 秒':'待命'):'剩餘 '+remaining};
+      return {number,total:w.catalog.total(),definition,groups,tags,pressure,preparing,remaining,boss,status:game.status!=='playing'?(game.status==='victory'?'遠征完成':'遠征結束'):game.paused?'已暫停':game.hero?.evolution?.trialStage?'進化試煉':game.evolutionCamp?'超凡整備 · 可試招':w.complete?'全數守成':preparing?(w.phase==='preparing'?Math.ceil(w.countdown)+' 秒':'待命'):'剩餘 '+remaining};
     }
     constructor(game,root){
       this.game=game;this.root=root;this.groupKey='';this.cards=[];this.toastUntil=0;this.lastUpdate=0;
@@ -27,7 +28,7 @@
     }
     setExpanded(expanded){this.root.dataset.expanded=String(expanded);this.toggle.setAttribute('aria-expanded',String(expanded));this.toggle.textContent=expanded?'收起':'預告';if(!expanded)this.detail.open=false;}
     announce(wave){
-      const model=WaveHUD.model(this.game);this.toast.textContent=model.pressure?.startsNow?model.pressure.name+'啟動 · '+model.pressure.detail:(model.boss?'⚔ 首領來襲':'第 '+wave+' 波開始')+' · '+model.tags.slice(0,2).join('／');
+      const model=WaveHUD.model(this.game),identity=model.groups.map(g=>ns.systems.BossVisualCatalog?.get(g.type,model.number)).find(Boolean);this.toast.textContent=model.pressure?.startsNow?model.pressure.name+'啟動 · '+model.pressure.detail:(model.boss?'⚔ '+(identity?.name||'首領')+'來襲':'第 '+wave+' 波開始')+' · '+model.tags.slice(0,2).join('／');
       this.toast.dataset.boss=String(model.boss);this.toastUntil=performance.now()+(model.boss?2500:1600);this.toast.hidden=false;this.detail.open=false;
     }
     update(now){
@@ -35,25 +36,25 @@
       const game=this.game,m=WaveHUD.model(game),visible=Boolean(game.profession.selected)&&game.status==='playing';
       if(!visible){this.toast.hidden=true;this.toastUntil=0;}
       else this.toast.hidden=now>=this.toastUntil;
-      this.root.dataset.phase=m.preparing?'preparing':'active';
+      this.root.dataset.phase=m.preparing||game.evolutionCamp?'preparing':'active';
       game.ui.waveNumber.textContent='第 '+m.number+'／'+m.total+' 波';game.ui.waveStatus.textContent=m.status;
-      game.ui.wave.textContent=m.preparing?'立即迎戰':game.waves.complete?'已守成':'戰鬥中';
-      game.ui.wave.disabled=!visible||!m.preparing||game.paused;
+      game.ui.wave.textContent=game.evolutionCamp?'完成遠征':game.hero?.evolution?.trialStage?'試煉進行中':m.preparing?'立即迎戰':game.waves.complete?'已守成':'戰鬥中';
+      game.ui.wave.disabled=!visible||(!m.preparing&&!game.evolutionCamp)||game.paused||Boolean(game.hero?.evolution?.trialStage);
       this.root.title='難度：'+game.difficulty.current().name;
       const key=JSON.stringify([m.number,m.preparing,m.groups]);
       if(key!==this.groupKey){
         this.groupKey=key;this.setExpanded(false);this.detail.open=false;this.groups.replaceChildren();this.cards=[];
         this.preview.textContent=(m.definition?m.definition.name+' · '+m.definition.hint:'遠征完成')+(m.pressure?'｜地圖壓力：'+m.pressure.name+' · '+m.pressure.detail:'')+'｜難度：'+game.difficulty.current().name;
         m.groups.forEach(group=>{
-          const cfg=ns.entities.Monster.TYPES[group.type]||{},button=document.createElement('button'),canvas=document.createElement('canvas'),count=document.createElement('span');
+          const identity=ns.systems.BossVisualCatalog?.get(group.type,m.number),cfg=Object.assign({},ns.entities.Monster.TYPES[group.type]||{},identity?{name:identity.name}:{}),button=document.createElement('button'),canvas=document.createElement('canvas'),count=document.createElement('span');
           button.type='button';button.className='wave-enemy';button.setAttribute('aria-label',(cfg.name||group.type)+' × '+group.count+'，查看情報');button.title=(cfg.name||group.type)+' × '+group.count;
           canvas.width=64;canvas.height=64;canvas.setAttribute('aria-hidden','true');count.textContent='×'+group.count;button.append(canvas,count);
           button.onclick=()=>{this.detail.open=true;this.preview.textContent=(cfg.name||group.type)+' × '+group.count+'｜'+({light:'輕甲',heavy:'重甲',arcane:'秘法護甲'}[cfg.armorType]||'')+'｜'+(m.definition?m.definition.hint:'');};
-          this.groups.append(button);this.cards.push({canvas,type:group.type,ready:false});
+          this.groups.append(button);this.cards.push({canvas,type:group.type,identity,ready:false});
         });
         this.tags.replaceChildren();m.tags.slice(0,3).forEach(tag=>{const span=document.createElement('span');span.textContent=tag;this.tags.append(span);});
       }
-      this.cards.forEach(card=>{if(card.ready)return;const image=game.art.enemyActions[card.type],ctx=card.canvas.getContext('2d');ctx.clearRect(0,0,64,64);if(image&&image.ready){const w=image.width/4,h=image.height/4;ctx.drawImage(image,0,0,w,h,0,0,64,64);card.ready=true;}else{ctx.fillStyle='#ebd995';ctx.font='bold 24px sans-serif';ctx.fillText('?',23,40);}});
+      this.cards.forEach(card=>{if(card.ready)return;const image=card.identity?game.art.bossImage(card.identity):game.art.enemyActions[card.type],ctx=card.canvas.getContext('2d');ctx.clearRect(0,0,64,64);if(image&&image.ready){const frame=ns.systems.BossSpriteBounds?.[card.identity?.id]?.frames[0];if(frame){const scale=58/Math.max(frame[2],frame[3]);ctx.drawImage(image,frame[0],frame[1],frame[2],frame[3],(64-frame[2]*scale)/2,(64-frame[3]*scale)/2,frame[2]*scale,frame[3]*scale);}else{const w=image.width/4,h=image.height/4;ctx.drawImage(image,0,0,w,h,0,0,64,64);}card.ready=true;}else{ctx.fillStyle='#ebd995';ctx.font='bold 24px sans-serif';ctx.fillText('?',23,40);}});
     }
     drawEntrance(ctx){
       const game=this.game;if(!game.profession.selected||game.status!=='playing'||game.waves.phase!=='preparing')return;

@@ -2,9 +2,16 @@
   'use strict';
   class EnemyTraitSystem{
     update(dt,monsters,hooks){
-      monsters.forEach(monster=>{monster.moveAura=1;monster.temporaryArmor=0;});
+      const hero=hooks&&hooks.hero,sightRadius=hero&&hero.equipment?[0,130,165,200][hero.equipment.sightstone||0]||0:0;
+      monsters.forEach(monster=>{monster.moveAura=1;monster.temporaryArmor=0;monster.controlResistance=monster.bossWardTime>0?.35:0;if(monster.concealed&&hero&&hero.active&&sightRadius>0&&ns.utils.distance(hero,monster)<=sightRadius)monster.reveal();});
       monsters.filter(monster=>monster.active&&monster.type==='commander').forEach(commander=>{
         monsters.forEach(monster=>{if(monster.active&&ns.utils.distance(commander,monster)<=118){monster.moveAura=Math.max(monster.moveAura,1.18);monster.temporaryArmor=Math.max(monster.temporaryArmor,1);}});
+      });
+      monsters.filter(monster=>monster.active&&monster.type==='orcBanner').forEach(banner=>{
+        monsters.forEach(monster=>{if(monster.active&&ns.utils.distance(banner,monster)<=112)monster.temporaryArmor=Math.max(monster.temporaryArmor,2);});
+      });
+      monsters.filter(monster=>monster.active&&monster.type==='frostRimePriest').forEach(priest=>{
+        monsters.forEach(monster=>{if(monster.active&&ns.utils.distance(priest,monster)<=108)monster.controlResistance=Math.max(monster.controlResistance,.32);});
       });
       monsters.filter(monster=>monster.active&&monster.type==='healer').forEach(healer=>{
         healer.traitCooldown=Math.max(0,(healer.traitCooldown||1.4)-dt);if(healer.traitCooldown>0)return;

@@ -1,3 +1,29 @@
+> **v0.85.58 · 魚人王：** 第 50 波透過既有 BossVisualCatalog 與 BossSpriteBounds 接入魚人王，不更動英雄渲染與戰鬥系統。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。
+
+> 電腦效能修正 PERF 1.0.0：被動介面 10 Hz、原解析度地圖濾鏡與高 DPI 浮字快取。測試、操作、API、安裝部署與備份回復見[效能修正紀錄](DESKTOP_PERFORMANCE_V1.md)。本機變更，未部署；不改戰鬥速度／數值或存檔。
+
+> 最新：Unit VFX 1.1.0 修正出手／衝鋒同步、命中預算與 Canvas 狀態還原；混戰測試、效能、API、部署回復及未完成的真機驗收見[戰鬥特效 QA](VFX_BATTLE_QA_V11.md)。尚未部署。
+
+> 士兵特效 VFX 1.0.0（未部署）：43 種攻擊兵與 2 種純支援兵已更新畫面；操作、架構／API、安裝部署、還原、FAQ 與測試限制見[交付紀錄](UNIT_VFX_V1.md)。不改戰鬥數值或存檔。
+
+> **v0.85.57 · 首領外觀：** WaveSystem → BossVisualCatalog → 外觀 ID；WaveHUD 與 ArtSystem 共用目錄，渲染依 BossSpriteBounds 裁切。戰鬥數值與外觀解耦。 [交付與驗收](BOSS_VISUALS_V08557.md)。
+
+> **塔樓材質特效 VFX 2.0.0（未發佈）：** TowerSkillSystem → TowerVFX → PaintedTowerVFX → ArtSystem；有素材時走材質繪製，降級層保留。傷害管線維持原契約。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
+
+> 地圖後台 1.0.1：編輯器 → 本機 API → 固定差異檔 published-maps.js → 遊戲塔位／路線系統；寫入前备份，單檔原子替換，架構圖與資料格式見專章。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+
+> **目前進化規則 v0.85.56：** HeroEvolutionSystem 管理進化流程；HeroEvolutionCombat 接既有 Projectile／Monster／HeroRoster；EvolutionCompanion 繼承 Summon；Presentation 獨立渲染，ChapterCheckpointSystem 保存安全整備狀態。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
+
+> **塔樓特效 VFX 1.0.0（未發佈）：** TowerSkillSystem 指派 towerVfx → Projectile 呼叫 TowerVFX；Building 繪製來源符號，交易／回收／折射事件觸發 signal。模組只負責呈現。 見 [五族塔樓特效交付](TOWER_VFX_V1.md)。
+
+> **v0.85.54：** 技能邏輯 → `HeroSkillVFX.emit` → 逐筆 `draw/drawEffect` → Canvas 狀態還原 → 後續 RAF；地面領域由 `HeroRoster` 獨立處理。完整模組關係與架構圖見下方 8D 文件。 見 [娜迦技能 8D 分析與驗收](NAGA_SKILL_CRASH_8D_V08554.md)。
+
+> **v0.85.55：** `Monster` 集中保存隱幕／飛行／傷害免疫／鏡甲狀態；`TargetSelector`、投射物與戰鬥單位共用目標與傷害契約，`EnemyTraitSystem` 處理揭露與光環，沒有新存檔 schema。見 [架構說明](ENEMY_THREATS_V08555.md)。
+
+> **v0.85.53：** `WaveCatalog` 是 1–50 波壓力與 `spawnPace` 的唯一資料來源；`WaveSystem` 套用難度數量與節奏，`WaveHUD` 唯讀顯示「密集進軍」，`EnemyCombatSystem` 依 Boss 種類選二階增援。此資料不寫入玩家存檔。見 [五十波平衡架構](FIFTY_WAVE_BALANCE_V08553.md)。
+
+> **v0.85.53：** `mobile-simulator.html` → `mobile-simulator.js` → iframe `td.html?preview=iphone15promax`；iframe 維持 932 × 430，而 `LayoutSystem` 僅在預覽時斷開 localStorage 並強制手機版型，正式入口與戰鬥模組不分支。見 [手機預覽架構](MOBILE_SIMULATOR_V08551.md)。
+
 > **v0.85.50：** `maps.js:emberroad` → `EmberroadGridModel`（格狀態與輸出）→ `EmberroadGridEditor`（選取、localStorage、JSON）形成只讀校對支線；遊戲 `BuildSystem` 未讀取使用者標註，避免未驗證資料進入戰鬥。見 [格線架構](EMBERROAD_GRID_EDITOR_V08550.md)。
 
 > **v0.85.49：** `TDGame.update()` → `HeroRoster.updateFields()` → `nagaPulse()` 直接處理有限目標；脈衝或 Canvas 發生例外時轉成英雄暫態故障訊號，由 `TDGame` 顯示提示，主迴圈不因單一技能停止。見 [旋潮防護架構](NAGA_MAELSTROM_FAILSAFE_V08549.md)。
@@ -834,3 +860,4 @@ v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 M
 # v0.85.48 資料流補充
 
 `config.buildings.*Haste → BattleSynergySystem.applyHaste → target.supportHaste + supportHasteSource → Hero/CombatUnit.combatConfig 與 TDGame 選取卡`。數值由戰鬥模型使用，來源只供 UI 可讀性；同類支援仍採最高值，不寫入存檔。
+> **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；810 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。

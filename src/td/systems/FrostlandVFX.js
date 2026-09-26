@@ -18,6 +18,7 @@
       for(const v of synergy.frostVisuals||[]){const t=v.age/v.duration,fade=1-t;ctx.globalAlpha=fade;ctx.strokeStyle=v.color;ctx.fillStyle=v.color;ctx.lineWidth=2.5*fade;
         if(ns.systems.FrostlandSpellArt?.draw(ctx,v,synergy))continue;
         if(v.type==='attack'){
+          if(ns.systems.UnitVFX?.ready({kind:'unit',type:v.unitType,synergy}))continue;
           const target=v.target||v,dx=target.x-v.x,dy=target.y-v.y;
           if(['frostBear','frostMammoth'].includes(v.unitType)){
             const r=(v.unitType==='frostMammoth'?56:34)*(.2+t);ctx.strokeStyle='#c1aa8c';ctx.beginPath();ctx.ellipse(v.x,v.y,r,r*.4,0,0,Math.PI*2);ctx.stroke();

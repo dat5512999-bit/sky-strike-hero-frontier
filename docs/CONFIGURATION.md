@@ -1,3 +1,11 @@
+> **v0.85.57 · 首領外觀：** 首領外觀自動依精確波次選擇，不需要玩家設定。維護者可用 BossVisualCatalog.enabled 回退呈現。 [交付與驗收](BOSS_VISUALS_V08557.md)。
+
+> 地圖後台 1.0.1：預設 127.0.0.1:4174，可用 TD_STUDIO_PORT 設定；固定正式資料檔 src/td/map-tools/published-maps.js，無資料庫。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+
+> **v0.85.55：** 後段威脅由怪物 type 的隱幕／飛行／免疫／鏡甲欄位與波表控制；隱形魔石沿用英雄既有三級商店欄位。見 [設定邊界](ENEMY_THREATS_V08555.md)。
+
+> **v0.85.53：** 31–50 波的數量、混編與 `spawnPace` 僅在 `src/td/systems/WaveCatalog.js` 設定；`spawnPace < 1` 代表較短出兵間隔。它不是玩家設定，也不改英雄、士兵承傷、金幣倍率或存檔格式。見 [數值邊界](FIFTY_WAVE_BALANCE_V08553.md)。
+
 > **v0.85.11（2026-09-23）：** 搖桿預設採 20% 死區與漸進速度；不需新增玩家設定。 詳見 [手機版修復說明](MOBILE_RANKING_INPUT_V08511.md)。
 
 > **v0.85.10（2026-09-23）：** 無新玩家設定；主入口立即註冊 worker，updateViaCache 為 none，更新頁最長等待 60 秒。 詳見 [更新修復說明](UPDATE_RECOVERY_V08510.md)。
@@ -276,3 +284,4 @@ Pages 首次啟用由 `.github/workflows/pages.yml` 的 `enablement: true` 控�
 # 地精 V1 配置
 
 士兵／塔價格、射程和攻擊在 `src/td/config.js`；網路半徑、容量、超載、冷卻及每波回收上限在 `src/td/systems/GoblinNetworkSystem.js` 的 `RULES`。正式故事解鎖點未設定；不要把 TESTABLE 當 CANON。詳見 [地精 V1](GOBLIN_FACTION_V1.md)。
+> **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；810 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。

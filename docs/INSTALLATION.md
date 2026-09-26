@@ -1,3 +1,29 @@
+> **v0.85.58 · 魚人王：** 無新增遊戲依賴；完整更新後確認版號，boss-preview.html 可直接預覽。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。
+
+> 電腦效能修正 PERF 1.0.0：被動介面 10 Hz、原解析度地圖濾鏡與高 DPI 浮字快取。測試、操作、API、安裝部署與備份回復見[效能修正紀錄](DESKTOP_PERFORMANCE_V1.md)。本機變更，未部署；不改戰鬥速度／數值或存檔。
+
+> 最新：Unit VFX 1.1.0 修正出手／衝鋒同步、命中預算與 Canvas 狀態還原；混戰測試、效能、API、部署回復及未完成的真機驗收見[戰鬥特效 QA](VFX_BATTLE_QA_V11.md)。尚未部署。
+
+> 士兵特效 VFX 1.0.0（未部署）：43 種攻擊兵與 2 種純支援兵已更新畫面；操作、架構／API、安裝部署、還原、FAQ 與測試限制見[交付紀錄](UNIT_VFX_V1.md)。不改戰鬥數值或存檔。
+
+> **v0.85.57 · 首領外觀：** 遊戲無新增安裝依賴或設定；開啟 td.html 遊玩，boss-preview.html 為不寫入存檔的比較頁。瀏覽器 QA 另需 Playwright 與 Edge。 [交付與驗收](BOSS_VISUALS_V08557.md)。
+
+> **塔樓材質特效 VFX 2.0.0（未發佈）：** 兩張 PNG 與 PaintedTowerVFX.js 都是本機資產；遊戲不需新增套件。離線 Canvas QA 腳本才需要 @napi-rs/canvas。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
+
+> 地圖後台 1.0.1：Node.js 18+，無額外安裝套件；雙擊 start-developer-studio.cmd 或執行 npm run studio，開啟 http://127.0.0.1:4174/developer-studio.html。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+
+> **目前進化規則 v0.85.56：** 安裝需求不變，Node 18+；npm run test:evolution 與 npm run check:evolution 可驗收。新增兩個模組已加入 td.html 與 Service Worker；瀏覽器 QA 另需 Playwright 與 Edge。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
+
+> **塔樓特效 VFX 1.0.0（未發佈）：** 不增加套件安裝。完整專案須包含 src/td/systems/TowerVFX.js；可直接開啟 tower-vfx-preview.html 檢視展示。 見 [五族塔樓特效交付](TOWER_VFX_V1.md)。
+
+> **v0.85.54：** 沿用 Node.js 18+ 與 `npm run serve:test`，無資料庫或額外遊戲設定。瀏覽器驗收另外需要 Playwright 與 Edge；執行 `npm run qa:naga`。 見 [娜迦技能 8D 分析與驗收](NAGA_SKILL_CRASH_8D_V08554.md)。
+
+> **v0.85.55：** 安裝需求不變；新增 `td-enemy-threats.test.js` 驗證後段威脅與魔石，離線包須和 `sky-strike-v0.85.55` 同步。見 [安裝與驗收](ENEMY_THREATS_V08555.md)。
+
+> **v0.85.53：** 安裝需求不變；取得完整靜態檔後執行 `npm run check`、`npm test`，另以 `npm run qa:long-session` 驗證 50 波探針。部署包須包含 `WaveCatalog.js`、`WaveHUD.js`、`EnemyCombatSystem.js`、`sw.js` 與同版入口。見 [安裝與驗收](FIFTY_WAVE_BALANCE_V08553.md)。
+
+> **v0.85.53：** 不需安裝套件；以 `npm run serve:test` 啟動後開啟 `http://127.0.0.1:4173/mobile-simulator.html` 即可使用手機預覽器。見 [安裝與操作](MOBILE_SIMULATOR_V08551.md)。
+
 > **v0.85.50：** 關卡校對包包含 `emberroad-grid-editor.html`、`src/td/map-tools/EmberroadGridModel.js`、`EmberroadGridEditor.js`、`maps.js` 與 2-2 PNG；無新套件。直接開啟 HTML 即可使用。見 [安裝與校對](EMBERROAD_GRID_EDITOR_V08550.md)。
 
 > **v0.85.49：** 安裝包需同版包含 `HeroRoster.js`、`TDGame.js`、`td.html` 與 `sw.js`；重新開啟後確認頁面顯示 0.85.49，再於密集敵軍測試娜迦 W。見 [旋潮防護說明](NAGA_MAELSTROM_FAILSAFE_V08549.md)。
@@ -489,3 +515,4 @@ v0.85.0：沿用 Node.js 18+，無新依賴。完整取得 assets/td/frostland �
 # v0.85.48 安裝驗收
 
 安裝後，以娜迦自由遠征在賽洛與一名娜迦守軍旁建造深淵祭壇。受益者選取卡應顯示來源攻速，祭壇卡應顯示受益人數；賽洛選取肖像須與正式立繪一致。PWA 顯示舊畫面時，關閉所有遊戲分頁再開啟，使快取更新成 `sky-strike-v0.85.48`。
+> **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；810 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。

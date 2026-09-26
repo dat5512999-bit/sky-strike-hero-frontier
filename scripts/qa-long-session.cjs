@@ -36,7 +36,7 @@ function simulate(faction,difficulty,policy){
   }
   for(let n=0;n<3;n++)if(!buy(n+1))break;
   const began=performance.now();
-  for(let wave=1;wave<=30&&g.baseHealth>0;wave++){
+  for(let wave=1;wave<=50&&g.baseHealth>0;wave++){
     if(wave>1)for(let n=0;n<2;n++)if(!buy(wave+n))break;
     waves.start();lastWave=wave;let cleared=false;
     for(let i=0;i<4000;i++){
@@ -49,11 +49,11 @@ function simulate(faction,difficulty,policy){
     }
     if(!cleared&&g.baseHealth>0){timeout=true;break;}
   }
-  return {faction,difficulty,policy,lastWave,completed:lastWave===30&&g.baseHealth>0&&!timeout,baseHealth:g.baseHealth,leaks:totalLeaks,gold:g.economy.gold,lumber:g.economy.lumber,army:g.build.items.length,maxMonsters,simulatedSeconds:+(steps*.1).toFixed(1),cpuMs:+(performance.now()-began).toFixed(1),timeout};
+  return {faction,difficulty,policy,lastWave,completed:lastWave===50&&g.baseHealth>0&&!timeout,baseHealth:g.baseHealth,leaks:totalLeaks,gold:g.economy.gold,lumber:g.economy.lumber,army:g.build.items.length,maxMonsters,simulatedSeconds:+(steps*.1).toFixed(1),cpuMs:+(performance.now()-began).toFixed(1),timeout};
 }
 const frameTiming=[60,30,20,15,10].flatMap(fps=>[timing(fps,1),timing(fps,3),timing(fps,3,true)]);
 const runs=[];
 for(const faction of ['hunter','arcanist','rogue','wild','frostland','goblin'])for(const policy of ['cheap','mixed','area'])runs.push(simulate(faction,'standard',policy));
-const result={scope:'Headless stress probe: 30-wave roster, economy, placement, movement and autonomous allied fire. Omits enemy trait/combat abilities, hero damage/skills, loot choices, shop, graphics and real device.',frameTiming,runs};
+const result={scope:'Headless stress probe: 50-wave roster, economy, placement, movement and autonomous allied fire. Omits enemy trait/combat abilities, hero damage/skills, loot choices, shop, graphics and real device.',frameTiming,runs};
 const output=path.resolve(__dirname,'../artifacts/qa-long-session/results.json');fs.mkdirSync(path.dirname(output),{recursive:true});fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));

@@ -81,7 +81,7 @@
     static updateFields(hero,dt,monsters,onKill,onHit){
       ns.systems.HeroSkillVFX.update(hero,dt);
       hero.skillTrails=(hero.skillTrails||[]).filter(trail=>{trail.time-=dt;return trail.time>0;});
-      hero.fields.forEach(field=>{const elapsed=Math.min(Math.max(0,Number(dt)||0),field.time);field.time-=elapsed;field.tick+=elapsed;
+      hero.fields.forEach(field=>{if(field.type.startsWith('evo-')){try{ns.systems.HeroEvolutionCombat.pulse(hero,field,dt,monsters,onKill,onHit);}catch(error){field.time=0;hero.evolutionFault=String(error?.message||error);}return;}const elapsed=Math.min(Math.max(0,Number(dt)||0),field.time);field.time-=elapsed;field.tick+=elapsed;
         const resolve=targets=>targets.forEach(monster=>{if(field.type==='hunter'){monster.applySlow(.35,.7);return;}new ns.entities.Projectile(hero,monster,{damage:9*field.power,color:'#c884df',attackType:'chaos'}).hit(monsters,onKill,onHit);});
         if(field.type==='naga'){
           if(field.tick<.5)return;
@@ -95,7 +95,16 @@
       });
       hero.fields=hero.fields.filter(field=>field.time>0);
     }
-    static drawFields(ctx,hero){try{hero.fields.forEach(field=>ns.systems.HeroSkillVFX.drawField(ctx,field));}catch(error){hero.fields=hero.fields.filter(field=>field.type!=='naga');hero.nagaFieldFault=String(error&&error.message||error||'draw failure');}}
+    static drawFields(ctx,hero){
+      for(const field of hero.fields){
+        try{ns.systems.HeroSkillVFX.drawField(ctx,field);}
+        catch(error){
+          if(field.type!=='naga'&&!field.type.startsWith('evo-'))throw error;
+          hero.fields=hero.fields.filter(item=>item!==field);
+          hero[field.type==='naga'?'nagaFieldFault':'evolutionFault']=String(error&&error.message||error||'draw failure');
+        }
+      }
+    }
   }
   HeroRoster.CLASSES=CLASSES;ns.systems.HeroRoster=HeroRoster;
 })(globalThis.TowerFrontier);

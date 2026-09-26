@@ -26,6 +26,8 @@ test('evolution uses a separate boss-emblem currency, preserves health floor, an
   const trial=system.startTrial(g);assert.equal(trial.ok,true);
   const boss=g.monsters[0],tower={};const before=boss.health;
   assert.equal(boss.takeDamage(999,{owner:tower}),false);assert.equal(boss.health,before);
+  assert.equal(system.completeTrial(g,boss),false,'living trial boss cannot grant evolution');
+  boss.takeDamage(100000,{owner:g.hero});
   assert.equal(system.completeTrial(g,boss),true);
   assert.equal(g.hero.evolution.rank,1);assert.equal(g.hero.level,1);assert.ok(g.hero.maxHealth>=220);
   assert.ok(g.hero.skillPower()>2,'Awakened Lv.1 remains stronger than its initial form');
