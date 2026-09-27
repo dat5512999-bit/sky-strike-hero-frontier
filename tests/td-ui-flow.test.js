@@ -26,6 +26,7 @@ test('開局、建造 Drawer 與統一選單保留同一套 UI 入口',()=>{
   assert.match(html,/id="td-result-next"/);
   assert.match(html,/id="td-result-report"/);
   assert.match(html,/id="td-selection-actions"/);
+  assert.match(html,/id="td-unit-equip-summary"/);
   assert.doesNotMatch(html,/id="td-move"|id="td-attack-move"|id="td-hold"|id="td-stop"/);
 });
 
@@ -141,6 +142,13 @@ test('電腦單擊直接建造，手機先預覽再按確認部署',()=>{
   assert.equal(game.confirmed,undefined);
   handlers.pointerdown({button:0,pointerType:'mouse',pointerId:2,clientX:480,clientY:250});
   assert.equal(game.confirmed,1);
+});
+
+test('手機選取重疊目標時採最近優先，士兵快捷列直接顯示裝備狀態',()=>{
+  const game=fs.readFileSync(path.join(root,'src/td/TDGame.js'),'utf8'),armoryUi=fs.readFileSync(path.join(root,'src/td/systems/ArmoryUI.js'),'utf8'),css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
+  assert.match(game,/selectAt\(p\.x,p\.y,\{preferNearest:touch\}\)/);
+  assert.match(armoryUi,/summary\.textContent=equipped\?equipped\.name:'未裝備'/);
+  assert.match(css,/\.unit-equip-summary/);
 });
 
 test('所有建造卡只顯示定位與價格，完整能力留在第二層',()=>{

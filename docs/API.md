@@ -1,3 +1,5 @@
+> **v0.85.62：** `BuildSystem.selectAt(x, y, {preferNearest:true})` 為可選的觸控選取偏好；不傳時維持最上層選取。沒有 HTTP API、資料庫或存檔 schema 變更。詳見 [交付文件](MOBILE_BUILD_CLARITY_V08562.md)。
+
 > **v0.85.60：** `LootSystem.milestone(wave, context)` 的參數與回傳型別不變；第 10／15 波改回傳 `frontier-supplies`，並以 `loot.claimed` 的里程碑標記阻止重複領取。`dragon-egg`、`bone-contract`、`royal-armory` 僅為可讀的 legacy item。沒有 HTTP API 或存檔 schema 變更。詳見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。
 
 > **v0.85.58 · 魚人王：** demonlord 外觀改用新圖集與逐格邊界；無新增戰鬥 API、HTTP API 或存檔 schema。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。

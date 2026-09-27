@@ -1,3 +1,5 @@
+> **v0.85.62：** 觸控事件僅經 `TDGame` 傳入 `BuildSystem.selectAt(..., {preferNearest:true})`；`BuildSystem.draw()` 的透明度只影響 Canvas 視覺；`ArmoryUI` 只投影已裝備名稱至既有按鈕。詳見 [交付文件](MOBILE_BUILD_CLARITY_V08562.md)。
+
 > **v0.85.60：** 固定里程碑改為 `WaveSystem` 結算 → `LootSystem.milestone()` → 中立補給 → `EconomySystem`；跨族解鎖卡只作歷史資料讀取，不再呼叫 `FactionSystem.unlock()`。模組關係與完整圖示見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。
 
 > **v0.85.58 · 魚人王：** 第 50 波透過既有 BossVisualCatalog 與 BossSpriteBounds 接入魚人王，不更動英雄渲染與戰鬥系統。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。

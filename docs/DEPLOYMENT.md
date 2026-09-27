@@ -1,3 +1,5 @@
+> **v0.85.62：** 發布時同步 `BuildSystem.js`、`TDGame.js`、`ArmoryUI.js`、`td.html`、`td-combat.css`、`sw.js` 與版本標記；不需資料庫遷移或權限設定。詳見 [交付文件](MOBILE_BUILD_CLARITY_V08562.md)。
+
 > **v0.85.60：** 發布時同步 `LootSystem.js`、`sw.js` 與版本號；不需資料庫遷移或權限設定。更新後驗收第 10／15 波中立補給及舊歷史可讀性。詳見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。
 
 > **v0.85.58 · 魚人王：** 同步部署 demonlord-actions-v2.png、首領目錄／邊界、預覽頁及版本快取檔；尚未遠端部署。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。
