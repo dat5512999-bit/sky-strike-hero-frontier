@@ -288,3 +288,5 @@ Pages 首次啟用由 `.github/workflows/pages.yml` 的 `enablement: true` 控�
 > **v0.85.61：** PWA manifest 的 orientation 改為 `any`，讓首頁可直向開啟；戰場方向由頁面提示處理，無後端設定或環境變數。詳見[交付文件](MOBILE_HOME_FLOW_V08561.md)。
 > **v0.85.63：** PWA manifest 的 `orientation` 恢復為 `landscape`；沒有後端設定、環境變數或資料庫設定。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
 > **v0.85.64：** 士兵／塔數值仍集中在 `src/td/config.js`、英雄在 `HeroRoster.js`；修改 roster 後同步更新 `FactionBalanceCatalog.js`，並跑 `npm run balance:audit`。詳見 [平衡交付](FACTION_BALANCE_RESET_V08564.md)。
+
+> **v0.85.65：** 怪物原始數值仍只在 `Monster.js`，波表仍只在 `WaveCatalog.js`；新增或變更怪物時同步更新 `EnemyBalanceCatalog.js`，並跑 `npm run enemy-balance:audit`。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。

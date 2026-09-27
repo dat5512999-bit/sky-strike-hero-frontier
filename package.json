@@ -1,11 +1,12 @@
 {
   "name": "sky-strike",
-  "version": "0.85.64",
+  "version": "0.85.65",
   "private": true,
   "description": "包含縱向射擊與英雄塔防模式的本機 HTML5 Canvas 遊戲",
   "scripts": {
     "verify:pages": "node scripts/verify-pages-release.cjs",
     "balance:audit": "node scripts/faction-balance-audit.cjs",
+    "enemy-balance:audit": "node scripts/enemy-balance-audit.cjs",
     "test:boss-visuals": "node --test tests/td-boss-visuals.test.js",
     "qa:boss-visuals": "node scripts/qa-boss-visuals.cjs",
     "check:boss-visuals": "node --check src/td/systems/BossVisualCatalog.js && node --check src/td/systems/BossSpriteBounds.js && node --check src/td/boss-preview.js",

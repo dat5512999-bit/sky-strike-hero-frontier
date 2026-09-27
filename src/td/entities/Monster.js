@@ -18,7 +18,7 @@
     boss:{name:'軍團戰將',color:'#ff416d',speed:33,health:790,reward:130,radius:30,baseDamage:5,armor:4,armorType:'heavy',combatRole:'boss',attackRange:88,attackDamage:14,attackInterval:1.7}
     ,nagaSiltImp:{name:'淤泥小妖',color:'#62cfc4',speed:88,health:72,reward:14,radius:14,baseDamage:1,armorType:'light',storyStatus:'CONCEPT'}
     ,nagaShellbreaker:{name:'鹽甲破殼者',color:'#5fcbc4',speed:42,health:242,reward:28,radius:24,baseDamage:2,armor:4,armorType:'heavy',combatRole:'siege',attackRange:46,attackDamage:11,attackInterval:1.85,storyStatus:'CONCEPT'}
-    ,nagaSiltwaterDemonlord:{name:'濁潮小魔王',color:'#2eb2bd',speed:35,health:860,reward:145,radius:30,baseDamage:5,armor:4,armorType:'arcane',combatRole:'boss',attackRange:90,attackDamage:15,attackInterval:1.7,storyStatus:'CONCEPT'}
+    ,nagaSiltwaterDemonlord:{name:'濁潮小魔王',color:'#2eb2bd',speed:35,health:980,reward:160,radius:30,baseDamage:5,armor:5,armorType:'arcane',combatRole:'boss',attackRange:90,attackDamage:15,attackInterval:1.7,storyStatus:'CONCEPT'}
     ,goblinScavenger:{name:'蒸汽拾荒地精',color:'#cf9c58',speed:102,health:88,reward:17,radius:14,baseDamage:1,armor:1,armorType:'light'}
     ,goblinSapper:{name:'爆罐地精工兵',color:'#e0ab5e',speed:58,health:126,reward:24,radius:17,baseDamage:1,armorType:'arcane',combatRole:'hunter',attackRange:138,attackDamage:8,attackInterval:2.3}
     ,goblinVeilrunner:{name:'隱幕地精斥候',color:'#879f90',speed:108,health:78,reward:22,radius:14,baseDamage:1,armorType:'light',concealed:true,visualBase:'goblinScavenger'}
