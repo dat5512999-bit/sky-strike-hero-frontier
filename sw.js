@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.60';
+const CACHE_NAME = 'sky-strike-v0.85.61';
 const ASSETS = [
  './assets/td/bosses/demonlord-actions-v2.png',
  './boss-preview.html', './src/td/boss-preview.js', './src/td/systems/BossVisualCatalog.js', './src/td/systems/BossSpriteBounds.js',

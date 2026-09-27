@@ -11,7 +11,7 @@ test('fresh touch-device layout matches simulator layout at the same game viewpo
   const vm=require('node:vm'),context=vm.createContext({});context.globalThis=context;context.TowerFrontier={systems:{}};
   vm.runInContext(fs.readFileSync(path.join(root,'src/td/systems/LayoutSystem.js'),'utf8'),context);
   const Layout=context.TowerFrontier.systems.LayoutSystem;
-  for(const size of [{width:932,height:430},{width:844,height:390}]){
+  for(const size of [{width:430,height:932},{width:932,height:430},{width:844,height:390}]){
     const phone={dataset:{}},simulator={dataset:{}};
     new Layout(phone,{getItem:()=>null},()=>({...size,coarse:true}));
     new Layout(simulator,null,()=>({...size,coarse:true}));
@@ -38,9 +38,30 @@ test('iPhone 15 Pro Max 模擬器提供與真實直向入口一致的檢視模�
   assert.match(script, /requestFullscreen/);
 });
 
+test('手機首頁保持直向，只有已進入戰場的直向手機才提示橫放',()=>{
+  const shell=fs.readFileSync(path.join(root,'td-mobile.html'),'utf8');
+  const main=fs.readFileSync(path.join(root,'src/td/main.js'),'utf8');
+  const combat=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
+  const lobby=fs.readFileSync(path.join(root,'td-lobby.css'),'utf8');
+  const pwa=fs.readFileSync(path.join(root,'src/td/mobile-pwa.js'),'utf8');
+  const manifest=JSON.parse(fs.readFileSync(path.join(root,'td.webmanifest'),'utf8'));
+  assert.match(shell,/searchParams\.set\('mobileShell','1'\)/);
+  assert.match(shell,/searchParams\.get\('preview'\)/);
+  assert.match(shell,/searchParams\.set\('preview',preview\)/);
+  assert.doesNotMatch(shell,/rotate\(90deg\)/);
+  assert.match(shell,/id="install-open"/);
+  assert.match(main,/mobileShell=params\.get\('mobileShell'\)==='1'/);
+  assert.match(main,/document\.body\.dataset\.mobilePreview='true'/);
+  assert.match(combat,/data-mobile-shell="true"[^\n]*data-game-screen="battle"[^\n]*\.orientation-gate\{display:grid/);
+  assert.match(lobby,/body\[data-mobile-preview="true"\] #frontier-app\[data-page=home\] \.lobby-content/);
+  assert.match(pwa,/document\.getElementById\('install-open'\)/);
+  assert.match(pwa,/const reveal=.*open\.hidden=false/);
+  assert.equal(manifest.orientation,'any');
+});
+
 test('手機預覽模式不會讀寫玩家的桌機版型偏好', () => {
   const main = fs.readFileSync(path.join(root, 'src/td/main.js'), 'utf8');
   assert.match(main, /previewMobile/);
-  assert.match(main, /layoutStorage=previewMobile\?null/);
-  assert.match(main, /coarse:previewMobile\|\|/);
+  assert.match(main, /layoutStorage=forceMobile\?null/);
+  assert.match(main, /coarse:forceMobile\|\|/);
 });

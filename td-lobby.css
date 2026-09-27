@@ -137,6 +137,42 @@
  #frontier-app .wallet-bar span{font-size:13px}
  #frontier-app .header-actions button{padding:5px 8px!important}
 }
+
+/* The simulator runs inside a desktop browser, whose pointer media query is fine.
+   Its game frame must nevertheless use the exact phone-home information hierarchy. */
+body[data-mobile-preview="true"] #frontier-app{grid-template-columns:1fr;padding-bottom:58px;background-position:35% center}
+body[data-mobile-preview="true"] #frontier-app .lobby-nav{position:absolute;bottom:0;left:0;right:0;height:58px;padding:3px 8px;border-top:1px solid #988355;background:#06101af2;z-index:2}
+body[data-mobile-preview="true"] #frontier-app .lobby-logo{display:none}
+body[data-mobile-preview="true"] #frontier-app .lobby-nav nav{display:flex;flex-direction:row;overflow-x:auto;height:100%}
+body[data-mobile-preview="true"] #frontier-app .lobby-nav nav button{flex:1;flex-direction:column;gap:1px;padding:2px 8px!important;min-height:48px!important;border:0!important;text-align:center}
+body[data-mobile-preview="true"] #frontier-app .lobby-nav nav button[data-action=home]{display:flex!important}
+body[data-mobile-preview="true"] #frontier-app .lobby-nav nav button[data-action=settings],body[data-mobile-preview="true"] #frontier-app .lobby-nav nav button small,body[data-mobile-preview="true"] #frontier-app .nav-motto{display:none!important}
+body[data-mobile-preview="true"] #frontier-app .lobby-nav nav button .frontier-icon{width:23px;height:23px}
+body[data-mobile-preview="true"] #frontier-app .lobby-nav nav button span{font-size:12px;line-height:18px}
+body[data-mobile-preview="true"] #frontier-app .lobby-top{height:auto;min-height:52px;gap:4px;padding:4px 6px;flex-wrap:wrap}
+body[data-mobile-preview="true"] #frontier-app .profile-badge{min-width:0;margin-right:auto;padding:3px 5px 3px 3px;gap:7px}
+body[data-mobile-preview="true"] #frontier-app .profile-badge img{width:26px;height:26px}
+body[data-mobile-preview="true"] #frontier-app .profile-badge span{max-width:76px;font-size:9px}
+body[data-mobile-preview="true"] #frontier-app .profile-badge small,body[data-mobile-preview="true"] #frontier-app .header-actions button span{display:none}
+body[data-mobile-preview="true"] #frontier-app .header-actions{gap:4px}
+body[data-mobile-preview="true"] #frontier-app .header-actions button{min-height:40px!important;padding:5px 8px!important}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .lobby-content{display:grid;grid-template-areas:'motto' 'modes' 'promo';grid-template-columns:1fr;grid-template-rows:42px minmax(220px,auto) minmax(240px,1fr);align-content:start;gap:10px;overflow:auto;padding:8px 12px 12px}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .home-motto{grid-area:motto;margin:0;padding:0;min-height:36px;height:auto;width:auto;text-align:left}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .home-motto h1{font-size:16px;margin:0 0 2px}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .home-motto em{font-size:11px}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .mode-cards{grid-area:modes;margin:0;height:auto;min-height:210px;grid-template-columns:1fr 1fr;gap:8px}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .mode-card{min-height:0}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .mode-card header{padding:10px;gap:6px}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .mode-card h2{font-size:20px}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .mode-card header .frontier-icon{width:24px;height:24px}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .mode-copy{padding:8px 10px}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .mode-copy .bevel{width:100%;min-height:44px!important;font-size:15px!important;padding:6px!important}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .home-bottom{grid-area:promo;position:relative;inset:auto;display:flex;width:auto;height:auto;min-height:240px;margin:0;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;align-items:stretch;padding-bottom:6px}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .home-bottom>article{display:block;flex:0 0 100%;height:auto;min-height:210px;scroll-snap-align:start;padding:16px;background-position:62% center}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .feature-panel h3{font-size:21px;line-height:1.4;margin:12px 0 6px}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .feature-panel p{display:block;font-size:13px;line-height:1.5}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .feature-panel button{display:block;left:16px;bottom:30px;min-height:44px!important;font-size:14px!important;padding:8px 16px!important}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .feature-panel::after{content:'左右滑動查看更多 ›';position:absolute;left:16px;bottom:7px;font:11px/1.3 system-ui;color:#e6d7b4;text-shadow:0 1px 3px #000}
 /* Player profile: the entire header badge opens this page. */
 #frontier-app .profile-badge{color:#f5e8d0;cursor:pointer;text-align:left;border:0;border-bottom:1px solid #ac9766;border-radius:0}#frontier-app .profile-badge:focus-visible{outline:2px solid #f4c776;outline-offset:2px}
 .player-profile{max-width:1350px;margin:auto;color:#f8f0dc}.profile-heading{display:flex;justify-content:space-between;align-items:center;gap:16px}.profile-heading small{color:#e5bd76;letter-spacing:.17em}.profile-heading h1{font-size:clamp(29px,3vw,48px);margin:3px 0}.profile-heading p{margin:0 0 12px;font-size:14px}.profile-heading button{min-width:90px}.profile-art-hero{height:clamp(190px,31vh,350px);background-size:cover;background-position:center 35%;border:2px solid #b99560;box-shadow:inset 0 0 0 5px #061321ad;display:flex;align-items:end;padding:20px}.profile-art-hero>div{display:flex;align-items:center;gap:16px;text-shadow:0 3px 7px #000}.profile-art-hero img{height:80px;width:80px;object-fit:cover;object-position:center 15%;border-radius:50%;border:2px solid #e5c17a}.profile-art-hero b{display:block;font-size:25px}.profile-art-hero small{display:block;font-size:14px}.profile-stats{display:flex;gap:10px;margin:12px 0}.profile-stats span{flex:1;border:1px solid #8c7958;background:#091923e6;padding:12px;font-size:14px}.profile-stats b{display:block;color:#ffdc94;font-size:23px}.player-profile h2{font-size:23px;margin:14px 0 10px}.profile-art-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.profile-art-options button{position:relative;min-height:145px;padding:0!important;overflow:hidden;display:flex;align-items:end;text-align:left;border:2px solid #7d725e!important;background:#07131d!important}.profile-art-options button[aria-pressed=true]{border-color:#ffd38b!important;box-shadow:0 0 12px #dfa352}.profile-art-options img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.profile-art-options button:after{content:'';position:absolute;inset:35% 0 0;background:linear-gradient(transparent,#031018)}.profile-art-options b,.profile-art-options small{position:relative;z-index:1;padding:7px}.profile-art-options b{font-size:17px}.profile-art-options small{margin-left:auto;color:#ffdf9d}.profile-note{font-size:12px;color:#c5cfd4}

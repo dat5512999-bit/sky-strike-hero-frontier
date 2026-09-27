@@ -497,6 +497,7 @@ body.edge-combat[data-layout="desktop"][data-combat-ui="edge"]:is([data-game-scr
 .orientation-gate p{margin:0 0 18px;color:#b9c5b9;font-size:13px;line-height:1.7;}
 .orientation-gate button{width:100%;border-color:#c4a45b;background:linear-gradient(#5c4826,#211a12);}
 body[data-layout="mobile"][data-combat-orientation="portrait"] .orientation-gate{display:none;}
+body[data-mobile-shell="true"][data-layout="mobile"][data-combat-orientation="portrait"][data-game-screen="battle"] .orientation-gate{display:grid;}
 
 .camera-controls{position:relative;}
 .camera-controls .camera-close{position:absolute;z-index:2;top:3px;right:3px;display:grid;place-items:center;width:28px;min-width:28px;height:28px;min-height:28px;padding:0;border-color:#836f42;background:#0b1211;color:#f2d991;font-size:18px;line-height:1;}
