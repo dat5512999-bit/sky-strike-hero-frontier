@@ -1,3 +1,5 @@
+> **v0.85.63：** PWA 以橫向啟動；從主畫面或手機入口使用既有寬畫面遊戲，不需新增安裝步驟或清除網站資料。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
+
 > **v0.85.62：** 無新增安裝需求；更新後確認 Service Worker 為 `sky-strike-v0.85.62`，不需清除網站資料。詳見 [交付文件](MOBILE_BUILD_CLARITY_V08562.md)。
 
 > **v0.85.60：** 無新增安裝需求。安裝／更新後確認 Service Worker 版本為 `sky-strike-v0.85.60`；戰利品退役規則見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。

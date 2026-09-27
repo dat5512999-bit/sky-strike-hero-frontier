@@ -1,3 +1,5 @@
+> **v0.85.63：** 沒有 HTTP API 或存檔 schema 改動；`td-mobile.html` 只調整同源 iframe 的顯示方向，`mobileShell=1`／`preview=iphone15promax` 仍只影響版型。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
+
 > **v0.85.62：** `BuildSystem.selectAt(x, y, {preferNearest:true})` 為可選的觸控選取偏好；不傳時維持最上層選取。沒有 HTTP API、資料庫或存檔 schema 變更。詳見 [交付文件](MOBILE_BUILD_CLARITY_V08562.md)。
 
 > **v0.85.60：** `LootSystem.milestone(wave, context)` 的參數與回傳型別不變；第 10／15 波改回傳 `frontier-supplies`，並以 `loot.claimed` 的里程碑標記阻止重複領取。`dragon-egg`、`bone-contract`、`royal-armory` 僅為可讀的 legacy item。沒有 HTTP API 或存檔 schema 變更。詳見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。

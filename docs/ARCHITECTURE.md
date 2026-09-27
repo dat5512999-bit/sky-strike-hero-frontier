@@ -1,3 +1,5 @@
+> **v0.85.63：** 觸控流程為 `td.html → td-mobile.html → 同源 td.html`；容器在直向交換 iframe 寬高並旋轉，橫向直接填滿，兩者均執行同一遊戲。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
+
 > **v0.85.62：** 觸控事件僅經 `TDGame` 傳入 `BuildSystem.selectAt(..., {preferNearest:true})`；`BuildSystem.draw()` 的透明度只影響 Canvas 視覺；`ArmoryUI` 只投影已裝備名稱至既有按鈕。詳見 [交付文件](MOBILE_BUILD_CLARITY_V08562.md)。
 
 > **v0.85.60：** 固定里程碑改為 `WaveSystem` 結算 → `LootSystem.milestone()` → 中立補給 → `EconomySystem`；跨族解鎖卡只作歷史資料讀取，不再呼叫 `FactionSystem.unlock()`。模組關係與完整圖示見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。

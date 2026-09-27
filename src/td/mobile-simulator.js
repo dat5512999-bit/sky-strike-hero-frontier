@@ -6,7 +6,7 @@
       entry: 'td-mobile.html',
       label: '430 × 932 · 直向開啟',
       deviceLabel: 'iPhone 15 Pro Max 直向機身',
-      note: '直向開啟會使用與手機相同的 td-mobile.html 入口，首頁保持直向；開始遠征後才會提示橫放手機。「橫向戰場」則直接檢查戰鬥畫面。兩者都共用同一個遊戲與存檔。Safari 網址列、真實多指手勢與硬體效能仍應以真機驗收。'
+      note: '直向開啟會使用正式 td-mobile.html 橫向容器；它會保留既有橫向首頁、選單與戰場，不會另做一套直向 UI。「橫向戰場」則直接檢查完整寬畫面。兩者都共用同一個遊戲與存檔。Safari 網址列、真實多指手勢與硬體效能仍應以真機驗收。'
     },
     landscape: {
       viewport: { width: 932, height: 430 },

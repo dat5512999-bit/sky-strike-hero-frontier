@@ -139,7 +139,7 @@
 }
 
 /* The simulator runs inside a desktop browser, whose pointer media query is fine.
-   Its game frame must nevertheless use the exact phone-home information hierarchy. */
+   Its game frame must nevertheless use the exact phone landscape hierarchy. */
 body[data-mobile-preview="true"] #frontier-app{grid-template-columns:1fr;padding-bottom:58px;background-position:35% center}
 body[data-mobile-preview="true"] #frontier-app .lobby-nav{position:absolute;bottom:0;left:0;right:0;height:58px;padding:3px 8px;border-top:1px solid #988355;background:#06101af2;z-index:2}
 body[data-mobile-preview="true"] #frontier-app .lobby-logo{display:none}
@@ -156,7 +156,7 @@ body[data-mobile-preview="true"] #frontier-app .profile-badge span{max-width:76p
 body[data-mobile-preview="true"] #frontier-app .profile-badge small,body[data-mobile-preview="true"] #frontier-app .header-actions button span{display:none}
 body[data-mobile-preview="true"] #frontier-app .header-actions{gap:4px}
 body[data-mobile-preview="true"] #frontier-app .header-actions button{min-height:40px!important;padding:5px 8px!important}
-body[data-mobile-preview="true"] #frontier-app[data-page=home] .lobby-content{display:grid;grid-template-areas:'motto' 'modes' 'promo';grid-template-columns:1fr;grid-template-rows:42px minmax(220px,auto) minmax(240px,1fr);align-content:start;gap:10px;overflow:auto;padding:8px 12px 12px}
+body[data-mobile-preview="true"] #frontier-app[data-page=home] .lobby-content{display:grid;grid-template-areas:'motto promo' 'modes promo';grid-template-columns:minmax(0,1.8fr) minmax(230px,1fr);grid-template-rows:38px minmax(210px,1fr);gap:10px;overflow:auto;padding:8px 12px 12px}
 body[data-mobile-preview="true"] #frontier-app[data-page=home] .home-motto{grid-area:motto;margin:0;padding:0;min-height:36px;height:auto;width:auto;text-align:left}
 body[data-mobile-preview="true"] #frontier-app[data-page=home] .home-motto h1{font-size:16px;margin:0 0 2px}
 body[data-mobile-preview="true"] #frontier-app[data-page=home] .home-motto em{font-size:11px}

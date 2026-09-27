@@ -1,3 +1,5 @@
+> **v0.85.63：** 驗收 430×932 直向入口旋轉同一份橫向遊戲、932×430 橫向首頁／戰場完整顯示、PWA `landscape` 與手動安裝提示；執行 `npm run check` 與 `npm test`。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
+
 > **v0.85.62：** 驗收手機建造預覽周圍淡化、重疊目標最近優先、裝備名稱／未裝備摘要、二段確認不誤扣資源；執行 `npm run check` 與 `npm test`。詳見 [交付文件](MOBILE_BUILD_CLARITY_V08562.md)。
 
 > **v0.85.60：** 驗收新局第 10／15 波各得一次 `frontier-supplies`、三張跨族解鎖卡不在任一戰利品池、未新增外族可建項目、舊歷史卡可讀。執行命令與回歸邊界見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。

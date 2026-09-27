@@ -1,3 +1,5 @@
+> **v0.85.63：** 發布時同步 `td-mobile.html`、PWA manifest、首頁／戰場 CSS、手機模擬器、`sw.js` 與版本標記；部署後驗收手機全程橫向畫面。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
+
 > **v0.85.62：** 發布時同步 `BuildSystem.js`、`TDGame.js`、`ArmoryUI.js`、`td.html`、`td-combat.css`、`sw.js` 與版本標記；不需資料庫遷移或權限設定。詳見 [交付文件](MOBILE_BUILD_CLARITY_V08562.md)。
 
 > **v0.85.60：** 發布時同步 `LootSystem.js`、`sw.js` 與版本號；不需資料庫遷移或權限設定。更新後驗收第 10／15 波中立補給及舊歷史可讀性。詳見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。
