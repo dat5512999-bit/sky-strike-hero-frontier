@@ -13,12 +13,12 @@
       frostShaman:{"name":"霜骨薩滿","icon":"骨","cost":165,"wood":2,"damage":5,"range":165,"interval":1.6,"frost":20,"freezeExtension":0.25,"frostAura":0.15,"color":"#bc9bc4","role":"中後期支援｜附近累寒 +15%（取最高）；命中延長窗口 .25 秒、每窗上限 .6 秒","health":100,"attackType":"chaos","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
       frostMammoth:{"name":"冰脊長毛巨獸","icon":"牙","cost":650,"wood":5,"damage":65,"range":160,"interval":2.4,"frost":4,"splash":35,"shatter":1.8,"shatterRadius":80,"color":"#b89a78","role":"後期終結｜35 範圍重踏、80 範圍碎冰；昂貴且慢，依賴寒冷鋪墊","health":100,"attackType":"chaos","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
 
-      goblinEngineer:{name:'地精工程師',faction:'地精',icon:'⚙',cost:75,wood:1,health:78,damage:11,range:145,interval:.9,color:'#d9ad65',attackType:'pierce',style:'bullet',networkCost:1,role:'前期基礎射手｜在機械網路內獲得供能增幅'},
+      goblinEngineer:{name:'地精工程師',faction:'地精',icon:'⚙',cost:75,wood:1,health:78,damage:16,range:145,interval:.9,color:'#d9ad65',attackType:'pierce',style:'bullet',networkCost:1,role:'前期基礎射手｜在機械網路內獲得供能增幅；無網路仍可穩定開局'},
       goblinGunner:{name:'連發火器手',faction:'地精',icon:'銃',cost:115,wood:2,health:80,damage:18,range:170,interval:.48,color:'#dfa35a',attackType:'pierce',style:'bullet',networkCost:1,role:'快速單體射擊｜重甲效率較低'},
       goblinRiveter:{name:'鉚釘重射手',faction:'地精',icon:'鉚',cost:150,wood:2,health:90,damage:43,range:215,interval:1.7,color:'#bfc8c4',attackType:'pierce',style:'bullet',armorPierce:7,bonusVsHeavy:1.25,networkCost:1,role:'遠距穿甲｜對重甲 +25%｜低攻速'},
       goblinRecycler:{name:'回收技師',faction:'地精',icon:'♻',cost:130,wood:2,health:85,damage:6,range:125,interval:1.1,color:'#a7d2a1',attackType:'chaos',networkCost:1,role:'低輸出｜供電時協助附近一座機械 +8% 傷害'},
       goblinMech:{name:'重型工程機偶',faction:'地精',icon:'▣',cost:550,wood:5,health:260,damage:84,range:175,interval:1.8,splash:55,color:'#d6a774',attackType:'chaos',style:'cannon',networkCost:2,role:'後期重砲｜需供電，超載後有冷卻窗口'},
-      nagaTideguard:{name:'潮汐衛士',faction:'娜迦',icon:'潮',cost:105,wood:2,health:178,armor:4,damage:20,range:94,interval:.9,speed:98,color:'#55d3d0',attackType:'chaos',naga:true,role:'前排守衛｜第四擊以殼盾衝擊短暫緩速；承受第一線壓力'},
+      nagaTideguard:{name:'潮汐衛士',faction:'娜迦',icon:'潮',cost:105,wood:2,health:178,armor:4,damage:23,range:94,interval:.9,speed:98,color:'#55d3d0',attackType:'chaos',naga:true,role:'前排守衛｜第四擊以殼盾衝擊短暫緩速；固定守軍以潮矛火力補償承傷屬性不參與戰鬥'},
       nagaShellbreaker:{name:'鹽甲破殼者',faction:'娜迦',icon:'殼',cost:175,wood:3,health:248,armor:6,damage:36,range:104,interval:1.35,speed:78,color:'#7ed8d1',attackType:'chaos',splash:24,naga:true,role:'重甲破陣｜殼盾突擊造成小範圍傷害；故事前期同類會以敵軍登場'},
       nagaDeepWargod:{name:'深潮戰神',faction:'娜迦',icon:'神',cost:720,wood:5,health:330,armor:5,damage:96,range:118,interval:1.55,speed:84,color:'#2ab9c6',attackType:'chaos',splash:66,ultimate:true,naga:true,role:'娜迦壓軸重兵｜雙刃震潮範圍攻擊；高造價、短射程'},
       nagaMantaRaider:{name:'魔鬼魚翼襲者',faction:'娜迦',icon:'翼',cost:155,wood:2,health:102,armor:1,damage:24,range:218,interval:1.05,speed:148,color:'#77e2e0',attackType:'pierce',chain:2,chainRange:82,style:'tide-glaive',naga:true,role:'空中遠射｜潮刃彈射兩個鄰近目標；機動高、生命低'},
@@ -48,7 +48,7 @@
       golem:{name:'魂鋼魔像',faction:'暗影',icon:'像',cost:148,wood:3,health:218,armor:5,damage:34,range:94,interval:1.12,speed:76,color:'#9f72df',attackType:'chaos',splash:36,bonusVsHeavy:1.3,role:'中價破陣｜震地範圍攻擊，對重甲傷害 +30%'},
       banshee:{name:'暮影女妖',faction:'暗影',icon:'魅',cost:137,wood:2,health:82,armor:0,damage:14,range:164,interval:.98,speed:121,color:'#be9eff',attackType:'magic',chain:2,chainRange:104,style:'spirit',vulnerability:.12,role:'詛咒輔助｜連鎖命中使其他來源傷害 +12%，持續 4 秒'},
       boneRider:{name:'幽騎骸將',faction:'暗影',icon:'騎',cost:158,wood:3,health:173,armor:3,damage:30,range:96,interval:.88,speed:153,color:'#b995ef',attackType:'chaos',splash:19,style:'spirit',executeThreshold:.3,executeMultiplier:1.45,role:'殘血收割｜目標低於 30% 生命時傷害 ×1.45'},
-      orc:{name:'赤牙狂戰士',faction:'荒野',icon:'斧',cost:125,wood:2,health:205,armor:4,damage:31,range:86,interval:.82,speed:106,color:'#e46c4d',attackType:'chaos',splash:24,berserk:true,role:'前期個體｜擊殺累積狂戰攻速；第四擊重斬｜缺點：短射程'},
+      orc:{name:'赤牙狂戰士',faction:'荒野',icon:'斧',cost:105,wood:2,health:205,armor:4,damage:21,range:86,interval:.82,speed:106,color:'#e46c4d',attackType:'chaos',splash:24,berserk:true,role:'前期爆發｜擊殺累積狂戰攻速；第四擊重斬｜短射程但可與祖靈柱同時開局'},
       centaur:{name:'人馬獵手',faction:'荒野',icon:'弓',cost:145,wood:2,health:118,armor:1,damage:27,range:238,interval:1.08,speed:142,color:'#d79458',attackType:'pierce',chain:2,chainRange:78,style:'arrow',role:'長線穿透｜箭矢沿敵群再穿一體｜缺點：轉角與重甲效率低'},
       boarRider:{name:'戰豬騎兵',faction:'荒野',icon:'豬',cost:170,wood:3,health:190,armor:3,damage:38,range:128,interval:2.8,speed:132,color:'#d85d42',attackType:'chaos',splash:30,charge:true,role:'短距衝鋒｜沿衝鋒線撞擊敵群｜缺點：攻擊空窗長'},
       minotaur:{name:'戰牛破陣者',faction:'荒野',icon:'牛',cost:720,wood:5,health:315,armor:5,damage:104,range:112,interval:1.75,speed:82,color:'#b94f39',attackType:'chaos',splash:78,tribalSlam:true,role:'荒野壓軸重兵｜重甲震地破陣｜高造價、短射程'},
@@ -63,13 +63,13 @@
       frostAurora:{"name":"極光獵台","icon":"光","cost":190,"wood":3,"damage":17,"range":220,"interval":1.1,"frost":15,"frozenBonus":1.8,"freezeExtension":0.2,"color":"#a0e3c0","role":"窗口維持｜命中延長 .2 秒、每窗共限 .6 秒；窗口傷害 ×1.8","attackType":"magic","style":"frost-aurora","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
       frostGlacier:{"name":"冰河核心","icon":"河","cost":420,"wood":5,"damage":18,"range":215,"interval":2.6,"frost":50,"splash":92,"color":"#82bdcd","role":"後期大範圍控制｜92 範圍 +50 Frost；造價高、攻擊空窗長","attackType":"magic","style":"frost-glacier","faction":"冰原","frostland":true,"storyStatus":"CONCEPT"},
 
-      nagaTidegate:{name:'潮門尖塔',faction:'娜迦',icon:'門',cost:115,wood:2,damage:22,range:174,interval:.92,color:'#55dbe2',attackType:'magic',style:'tidegate-bolt',vulnerability:.1,naga:true,role:'潮壓標記｜穩定潮箭；命中使其他來源傷害 +10%，適合建立首波節奏'},
+      nagaTidegate:{name:'潮門尖塔',faction:'娜迦',icon:'門',cost:115,wood:2,damage:23,range:174,interval:.92,shots:2,color:'#55dbe2',attackType:'magic',style:'tidegate-bolt',vulnerability:.1,naga:true,role:'雙潮箭標記｜同時標記兩名敵軍，使其他來源傷害 +10%；適合建立首波節奏'},
       nagaShellBastion:{name:'鹽甲棱堡',faction:'娜迦',icon:'盾',cost:165,wood:3,damage:38,range:148,interval:1.35,color:'#8fe7da',attackType:'pierce',style:'tide-bastion-spear',armorPierce:3,shots:2,naga:true,role:'雙叉拒馬｜雙發潮叉穿甲，優先處理重甲；射程較短'},
       nagaAbyssShrine:{name:'深淵祭壇',faction:'娜迦',icon:'淵',cost:175,wood:3,damage:0,range:178,interval:1,color:'#3dc6cf',attackType:'magic',supportOnly:true,nagaHaste:.18,naga:true,role:'潮衛共鳴｜附近娜迦士兵與英雄攻速 +18%，同類不疊加；本身不攻擊'},
       nagaMantaAerie:{name:'翼潮獵台',faction:'娜迦',icon:'翼',cost:235,wood:4,damage:31,range:218,interval:1.18,color:'#76e6e2',attackType:'magic',chain:3,chainRange:102,style:'tide-manta-chain',slow:.72,slowTime:1.1,naga:true,role:'翼潮連鎖｜三段潮線並緩速，擅長壓制分散敵群'},
 
       goblinGenerator:{name:'動力機座',faction:'地精',icon:'⚙',cost:95,wood:1,damage:0,range:175,interval:1,color:'#8edbd0',attackType:'magic',supportOnly:true,role:'機械網路核心｜半徑 175，容量 3 + 每級 1'},
-      goblinTurret:{name:'鉚釘武器台',faction:'地精',icon:'⌾',cost:110,wood:2,damage:26,range:165,interval:.85,color:'#e2be79',attackType:'pierce',style:'bullet',networkCost:1,role:'基本火力｜接入網路傷害 +22%'},
+      goblinTurret:{name:'鉚釘武器台',faction:'地精',icon:'⌾',cost:110,wood:2,damage:28,range:165,interval:.85,shots:2,color:'#e2be79',attackType:'pierce',style:'bullet',networkCost:1,role:'雙鉚釘齊射｜接入網路傷害 +22%；需先架設動力機座'},
       goblinMortar:{name:'蒸汽迫擊砲',faction:'地精',icon:'●',cost:190,wood:3,damage:53,range:145,interval:1.8,splash:60,color:'#e8a46e',attackType:'chaos',style:'cannon',networkCost:2,role:'範圍火力｜供電需求 2'},
       goblinSnare:{name:'絞索控制台',faction:'地精',icon:'⌗',cost:135,wood:2,damage:9,range:130,interval:1.25,slow:.55,slowTime:1.1,color:'#a4d3ce',attackType:'pierce',networkCost:1,role:'短射程控場｜供電需求 1'},
       goblinRecycler:{name:'工料回收站',faction:'地精',icon:'♻',cost:160,wood:3,damage:0,range:155,interval:1,color:'#b8d793',attackType:'pierce',supportOnly:true,networkCost:1,role:'每 2 秒作戰得 12G，每波上限 72G；必須供電'},
@@ -83,9 +83,9 @@
       arrow:{name:'林地弩塔',faction:'人族',icon:'♜',cost:100,wood:2,damage:25,range:172,interval:.82,color:'#d5bd63',attackType:'pierce',role:'廉價齊射｜輕甲防線'},
       iceward:{name:'寒鋼哨塔',faction:'王國',icon:'❄',cost:125,wood:2,damage:10,range:162,interval:1.28,color:'#a4dcff',attackType:'magic',slow:.62,slowTime:1.6,role:'定點強緩速｜火砲搭檔'},
       frost:{name:'寒霜水晶塔',faction:'秘法',icon:'❄',cost:120,wood:2,damage:18,range:150,interval:1.05,color:'#66ddff',attackType:'magic',slow:.58,slowTime:1.4,role:'單點強緩速｜週期冰爆'},
-      cannon:{name:'赤焰火砲塔',faction:'矮人',icon:'●',cost:145,wood:3,damage:42,range:142,interval:1.55,color:'#ff7045',attackType:'chaos',splash:54,bonusVsSlowed:1.25,role:'緩速後爆破｜群體收割'},
+      cannon:{name:'赤焰火砲塔',faction:'矮人',icon:'●',cost:145,wood:3,damage:27,range:142,interval:1.55,color:'#ff7045',attackType:'chaos',splash:54,bonusVsSlowed:1.25,role:'緩速後爆破｜群體收割；第四擊仍有擴大爆炸'},
       storm:{name:'星葉雷霆塔',faction:'精靈',icon:'ϟ',cost:165,wood:2,damage:19,range:165,interval:1.15,color:'#7ee9e5',attackType:'magic',bonusVsSlowed:1.2,role:'連鎖清群｜緩速追擊'},
-      totem:{name:'赤牙祖靈柱',faction:'獸族',icon:'✹',cost:150,wood:2,damage:28,range:125,interval:1.25,color:'#ffbe66',attackType:'chaos',splash:25,role:'近距震地｜突破口'},
+      totem:{name:'赤牙祖靈柱',faction:'獸族',icon:'✹',cost:135,wood:2,damage:20,range:125,interval:1.25,color:'#ffbe66',attackType:'chaos',splash:25,role:'近距震地｜第四擊擴散緩速；可與赤牙狂戰士同時開局'},
       crypt:{name:'幽骨召喚殿',faction:'亡靈',icon:'☽',cost:180,wood:3,damage:12,range:155,interval:1.3,color:'#bc9aff',attackType:'magic',summonInterval:11,summonCapBase:2,summonDuration:12,summonDamage:11,summonRange:68,summonSpeed:125,summonLeashBonus:55,role:'基礎召喚｜亡魂加速與強化'},
       soul:{name:'靈魂收割塔',faction:'暗影',icon:'魂',cost:155,wood:2,damage:24,range:158,interval:1.08,color:'#d283ff',attackType:'magic',soulHarvest:true,role:'死亡收魂｜消耗亡魂強化爆發'},
       barracks:{name:'王國戰鼓堡',faction:'王國',icon:'旗',cost:135,wood:2,damage:16,range:146,interval:.72,color:'#e7c76d',attackType:'pierce',shots:2,allyHaste:.08,allyHasteRadius:165,role:'守軍攻速支援｜近距齊射'},
@@ -97,7 +97,7 @@
       warDrum:{name:'部族戰鼓塔',faction:'荒野',icon:'鼓',cost:175,wood:3,damage:0,range:178,interval:1,color:'#e76845',attackType:'chaos',supportOnly:true,drumPulse:8,drumDuration:3,tribalHaste:.28,role:'每 8 秒重拍｜附近荒野士兵爆發 3 秒；各兵種戰技同步強化'},
       boulder:{name:'巨石投射塔',faction:'荒野',icon:'石',cost:210,wood:4,damage:68,range:168,interval:2.2,color:'#c88b55',attackType:'chaos',splash:78,style:'cannon',role:'慢速巨石｜專殺密集敵群｜缺點：單體與快怪效率低'},
       thunderTotem:{name:'雷霆圖騰',faction:'荒野',icon:'雷',cost:190,wood:3,damage:24,range:172,interval:1.3,color:'#65dcff',attackType:'magic',chain:4,chainRange:108,style:'lightning',role:'四段雷鏈｜分散敵群效率低'},
-      totem:{name:'赤牙祖靈柱',faction:'荒野',icon:'✹',cost:150,wood:2,damage:28,range:125,interval:1.25,color:'#ffbe66',attackType:'chaos',splash:25,role:'收編戰契塔｜近距震地封鎖突破口｜缺點：射程短'}
+      totem:{name:'赤牙祖靈柱',faction:'荒野',icon:'✹',cost:135,wood:2,damage:20,range:125,interval:1.25,color:'#ffbe66',attackType:'chaos',splash:25,role:'收編戰契塔｜近距震地封鎖突破口；第四擊擴散緩速｜缺點：射程短'}
     },
     hero:{maxHealth:100,speed:215,range:152,damage:18,interval:.58,novaDamage:30,novaRange:118,novaCooldown:9,respawnTime:8,respawnHealth:.65,invulnerability:2}
   });

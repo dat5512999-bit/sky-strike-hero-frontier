@@ -868,3 +868,4 @@ v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 M
 `config.buildings.*Haste → BattleSynergySystem.applyHaste → target.supportHaste + supportHasteSource → Hero/CombatUnit.combatConfig 與 TDGame 選取卡`。數值由戰鬥模型使用，來源只供 UI 可讀性；同類支援仍採最高值，不寫入存檔。
 > **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；811 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。
 > **v0.85.61：** 流程為觸控 `td.html` → `td-mobile.html` → `td.html?mobileShell=1`；首頁直向，直向戰場才顯示橫放提示。模擬器另加 preview 旗標以消除桌機滑鼠媒體查詢差異。詳見[交付文件](MOBILE_HOME_FLOW_V08561.md)。
+> **v0.85.64：** `FactionBalanceCatalog` 置於 `FactionSystem` 後、戰鬥模組前，將 roster、英雄和 `config.js` 數據接到可重跑稽核；不新增後端或另一套傷害系統。詳見 [平衡交付](FACTION_BALANCE_RESET_V08564.md)。

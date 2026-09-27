@@ -664,3 +664,4 @@ v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare�
 `BattleSynergySystem.applyHaste(target, rate, source)` 以最高值規則更新 `target.supportHaste`，並同步寫入 `target.supportHasteSource`。`TDGame` 讀取後在英雄／守軍選取卡顯示來源與百分比。沒有新增 HTTP API、帳號欄位或資料庫 migration。
 > **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；811 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。
 > **v0.85.61：** 無 HTTP API 或存檔 schema 改動；內嵌入口旗標 `mobileShell=1` 和模擬旗標 `preview=iphone15promax` 僅控制本頁版型，不寫入玩家資料。詳見[交付文件](MOBILE_HOME_FLOW_V08561.md)。
+> **v0.85.64：** 無新增 HTTP API、資料庫或存檔 schema；新增前端內部 `FactionBalanceCatalog`，提供 `profiles()`、`get(id)` 與 `audit()` 供平衡工具和測試讀取。詳見 [平衡交付](FACTION_BALANCE_RESET_V08564.md)。

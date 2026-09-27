@@ -287,3 +287,4 @@ Pages 首次啟用由 `.github/workflows/pages.yml` 的 `enablement: true` 控�
 > **v0.85.59 整合發佈：** 手機入口／模擬器、塔兵特效、電腦效能與已儲存地圖一起交付；811 項自動測試通過，新增線上檔案一致性閘門。安裝、更新、API、回復及驗收見[GitHub 發佈手冊](GITHUB_RELEASE_V08559.md)。下方「未部署」或舊測試失敗記錄為當時的歷史狀態；實際上線須以本版 Actions 和線上校驗通過為準。
 > **v0.85.61：** PWA manifest 的 orientation 改為 `any`，讓首頁可直向開啟；戰場方向由頁面提示處理，無後端設定或環境變數。詳見[交付文件](MOBILE_HOME_FLOW_V08561.md)。
 > **v0.85.63：** PWA manifest 的 `orientation` 恢復為 `landscape`；沒有後端設定、環境變數或資料庫設定。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
+> **v0.85.64：** 士兵／塔數值仍集中在 `src/td/config.js`、英雄在 `HeroRoster.js`；修改 roster 後同步更新 `FactionBalanceCatalog.js`，並跑 `npm run balance:audit`。詳見 [平衡交付](FACTION_BALANCE_RESET_V08564.md)。
