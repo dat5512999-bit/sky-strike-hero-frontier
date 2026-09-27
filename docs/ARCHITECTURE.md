@@ -1,3 +1,5 @@
+> **v0.85.60：** 固定里程碑改為 `WaveSystem` 結算 → `LootSystem.milestone()` → 中立補給 → `EconomySystem`；跨族解鎖卡只作歷史資料讀取，不再呼叫 `FactionSystem.unlock()`。模組關係與完整圖示見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。
+
 > **v0.85.58 · 魚人王：** 第 50 波透過既有 BossVisualCatalog 與 BossSpriteBounds 接入魚人王，不更動英雄渲染與戰鬥系統。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。
 
 > 電腦效能修正 PERF 1.0.0：被動介面 10 Hz、原解析度地圖濾鏡與高 DPI 浮字快取。測試、操作、API、安裝部署與備份回復見[效能修正紀錄](DESKTOP_PERFORMANCE_V1.md)。本機變更，未部署；不改戰鬥速度／數值或存檔。

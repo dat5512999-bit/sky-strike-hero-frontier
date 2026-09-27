@@ -1,3 +1,5 @@
+> **v0.85.60：** 無新增安裝需求。安裝／更新後確認 Service Worker 版本為 `sky-strike-v0.85.60`；戰利品退役規則見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。
+
 > **v0.85.58 · 魚人王：** 無新增遊戲依賴；完整更新後確認版號，boss-preview.html 可直接預覽。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。
 
 > 電腦效能修正 PERF 1.0.0：被動介面 10 Hz、原解析度地圖濾鏡與高 DPI 浮字快取。測試、操作、API、安裝部署與備份回復見[效能修正紀錄](DESKTOP_PERFORMANCE_V1.md)。本機變更，未部署；不改戰鬥速度／數值或存檔。

@@ -3,9 +3,9 @@
   const ITEMS={
     'orc-contract':{name:'赤牙舊戰契',rarity:'典藏',icon:'⚔',legacy:true,description:'已併入荒野部族；舊遠征紀錄仍可安全讀取。'},
     'wolf-core':{name:'狼王核心',rarity:'史詩',icon:'狼',description:'戰狼獲得裝甲進化，召喚數量與存續時間提升。',equipment:{charm:1}},
-    'dragon-egg':{name:'翡翠龍卵',rarity:'傳說',icon:'龍',description:'解鎖幼龍守衛；牠能飛行並造成範圍魔法傷害。',unlock:{units:['dragon']}},
-    'bone-contract':{name:'幽骨契約',rarity:'史詩',icon:'骷',description:'解鎖骷髏衛士與靈魂收割塔。',unlock:{units:['skeleton'],buildings:['soul']}},
-    'royal-armory':{name:'王國軍械箱',rarity:'精良',icon:'盾',description:'解鎖重裝盾衛，並立即獲得 90 金幣。',unlock:{units:['shield']},resources:{gold:90}},
+    'dragon-egg':{name:'翡翠龍卵',rarity:'傳說',icon:'龍',legacy:true,description:'已退役：舊遠征紀錄仍可安全讀取；新戰利品不再解鎖外族幼龍守衛。',unlock:{units:['dragon']}},
+    'bone-contract':{name:'幽骨契約',rarity:'史詩',icon:'骷',legacy:true,description:'已退役：舊遠征紀錄仍可安全讀取；新戰利品不再解鎖外族骷髏衛士或靈魂收割塔。',unlock:{units:['skeleton'],buildings:['soul']}},
+    'royal-armory':{name:'王國軍械箱',rarity:'精良',icon:'盾',legacy:true,description:'已退役：舊遠征紀錄仍可安全讀取；新戰利品不再解鎖外族重裝盾衛。',unlock:{units:['shield']},resources:{gold:90}},
     'frontier-supplies':{name:'邊境補給',rarity:'精良',icon:'箱',description:'立即取得 120 金幣與 2 木材。',resources:{gold:120,lumber:2}},
     'gear-lion-bow':{name:'獅心王弓',rarity:'史詩',icon:'弓',description:'取得可裝備的獅心王弓。',gear:'lion-bow'},
     'gear-lion-shield':{name:'不落獅盾',rarity:'傳說',icon:'盾',description:'取得為盾衛攻擊附加聖盾震波的傳說獅盾。',gear:'lion-shield'},
@@ -24,8 +24,6 @@
     usable(id,profession,faction){const gear=ITEMS[id]?.gear;if(!gear)return true;const item=ns.systems.ArmorySystem.item(gear),units=this.context?.factions?.available('unit')||ns.systems.FactionSystem.FACTIONS[faction]?.units||[];return Boolean(item&&((item.heroes||[]).includes(profession)||(item.types||[]).some(id=>units.includes(id))));}
     createOffers(wave,profession,faction){
       let pool=Object.keys(ITEMS).filter(id=>this.usable(id,profession,faction)&&!ITEMS[id].legacy&&(!this.claimed.has(id)||ITEMS[id].resources));
-      if(faction==='arcanist'||!faction&&profession==='hunter')pool=pool.filter(id=>id!=='dragon-egg');
-      if(faction==='rogue')pool=pool.filter(id=>id!=='bone-contract');
       const offers=[];
       if(wave%3===0){let gearPool=pool.filter(id=>ITEMS[id].gear);if(wave===3){const starter={hunter:'lion-bow',arcanist:'moon-staff',rogue:'soul-lantern'}[profession];gearPool=gearPool.filter(id=>ITEMS[id].gear===starter);}if(gearPool.length){const id=gearPool[Math.floor(this.random()*gearPool.length)];offers.push(id);pool=pool.filter(entry=>entry!==id);}}
       while(offers.length<3&&pool.length){const index=Math.floor(this.random()*pool.length),id=pool.splice(index,1)[0];if(offers.indexOf(id)<0)offers.push(id);}
@@ -43,13 +41,14 @@
       const special=['boss','commander','healer','warder'].includes(monster.type),chance=monster.type==='boss'?1:special?.16:.018;
       if((activeDrops||0)>=3||this.random()>chance)return null;
       let pool=Object.keys(ITEMS).filter(id=>ITEMS[id].gear&&this.usable(id,profession,faction)&&!this.claimed.has(id));
-      if(faction==='arcanist'||!faction&&profession==='hunter')pool=pool.filter(id=>id!=='dragon-egg');
       if(!pool.length)pool=['frontier-supplies'];
       const id=pool[Math.floor(this.random()*pool.length)];return Object.assign({id},ITEMS[id]);
     }
     milestone(wave,context){
-      const id={10:'dragon-egg',15:'bone-contract'}[wave];
-      if(!id||this.claimed.has(id))return null;return this.grant(id,context);
+      const id={10:'frontier-supplies',15:'frontier-supplies'}[wave],marker='milestone-'+wave;
+      if(!id||this.claimed.has(marker))return null;
+      this.claimed.add(marker);
+      return this.grant(id,context);
     }
   }
   LootSystem.ITEMS=ITEMS;ns.systems.LootSystem=LootSystem;

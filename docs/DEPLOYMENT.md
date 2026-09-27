@@ -1,3 +1,5 @@
+> **v0.85.60：** 發布時同步 `LootSystem.js`、`sw.js` 與版本號；不需資料庫遷移或權限設定。更新後驗收第 10／15 波中立補給及舊歷史可讀性。詳見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。
+
 > **v0.85.58 · 魚人王：** 同步部署 demonlord-actions-v2.png、首領目錄／邊界、預覽頁及版本快取檔；尚未遠端部署。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。
 
 > 電腦效能修正 PERF 1.0.0：被動介面 10 Hz、原解析度地圖濾鏡與高 DPI 浮字快取。測試、操作、API、安裝部署與備份回復見[效能修正紀錄](DESKTOP_PERFORMANCE_V1.md)。本機變更，未部署；不改戰鬥速度／數值或存檔。

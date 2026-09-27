@@ -1,3 +1,5 @@
+> **v0.85.60：** 驗收新局獎勵時，第 10／15 波只能發放 `frontier-supplies`，不可由 `LootSystem.createOffers()` 或 milestone 發出 `dragon-egg`、`bone-contract`、`royal-armory`。三張舊卡保留 `legacy:true`，用於舊紀錄讀取；不刪除玩家已存內容。詳見 [交付文件](CROSS_FACTION_LOOT_RETIREMENT_V08560.md)。
+
 > **v0.85.58 · 魚人王：** 檢查第 50 波預告、新魔王圖集與英雄並排辨識；圖片失敗時暫用舊圖。 [交付紀錄](DEMONLORD_FISH_KING_V08558.md)。
 
 > 電腦效能修正 PERF 1.0.0：被動介面 10 Hz、原解析度地圖濾鏡與高 DPI 浮字快取。測試、操作、API、安裝部署與備份回復見[效能修正紀錄](DESKTOP_PERFORMANCE_V1.md)。本機變更，未部署；不改戰鬥速度／數值或存檔。
