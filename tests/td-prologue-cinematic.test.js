@@ -174,6 +174,13 @@ test('optional video is absent from service-worker install, while player, key fr
   assert.ok(worker.includes('CinematicPlayer.js')); assert.ok(worker.includes('subtitles/zh-TW.vtt'));
   assert.match(worker, /headers\.has\('range'\)/);
 });
+test('phone shell story cards fill the rotated landscape frame and keep controls in safe space', () => {
+  const css = fs.readFileSync('td-lobby.css', 'utf8');
+  assert.match(css, /data-mobile-shell="true"[^\n]*story-cards/);
+  assert.match(css, /data-mobile-shell="true"[^\n]*\.lobby-top\{display:none\}/);
+  assert.match(css, /data-mobile-shell="true"[^\n]*\.story-card\{display:grid;grid-template-rows:minmax\(0,1fr\) auto;width:100%;height:100%/);
+  assert.match(css, /safe-area-inset-bottom/);
+});
 test('World Story Bible remains byte-identical to the approved version', () => {
   assert.equal(crypto.createHash('sha256').update(fs.readFileSync('docs/WORLD_STORY_BIBLE_V1.md')).digest('hex').toUpperCase(), 'E209A0BDA0E48AE7DBF92B030D242563503ED31928530BE51DB99D0CA665688C');
 });

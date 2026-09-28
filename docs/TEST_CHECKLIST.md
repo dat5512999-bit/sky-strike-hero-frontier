@@ -20,7 +20,7 @@
 
 > **塔樓材質特效 VFX 2.0.0（未發佈）：** 新增透明邊界、材質裁切、七族分支、資產重試、Canvas 異常還原，以及原生渲染分時點對照；完整實戰與手機幀率尚待驗收。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
 
-> 地圖後台 1.0.3：執行 npm run test:maps 驗證發佈、還原、服務中斷提示，以及赤土終站／石環盆地在原道路中插點仍可儲存、偏離道路仍拒絕。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+> 地圖後台 1.0.4：執行 npm run test:maps 驗證發佈、還原、服務中斷提示，以及赤土終站／石環盆地任意地形路線可儲存；起終點與無效座標仍有防呆。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **目前進化規則 v0.85.56：** 執行 npm run test:evolution、npm run check:evolution、npm run qa:evolution。驗收 7×2×4 技能實效和完整動畫、14 組 Lv.15 戰力繼承、試煉傷害隔離、失敗重試、購石存檔、50 波整備／讀檔／試招／結算。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
 
@@ -1004,4 +1004,6 @@ v0.85.0 冰原：npm run test:frostland 檢查狀態、兵塔、36 種 Hero×Fac
 >
 > **v0.85.69：** 驗證冰晶尖塔仍是 +25 Frost 的單體開窗；極凍鳥三連鎖各 +16 Frost、每個命中目標延後 1.2 秒衰減，且維持期後正常衰減、不延長凍結或恢復期。詳見 [霜原職責分流](FROSTLAND_ROLE_SEPARATION_V08569.md)。
 > 2026-09-28 · 霜原士兵 Motion 1.0.0：六兵種 96 格待機／攻擊、振翅與逐幀腳底定位；戰鬥數值不變。操作、API、安裝部署、備份還原與測試限制見[交付文件](FROSTLAND_MOTION_V1.md)。本機修改，未部署。
+
+> **v0.85.70：** 必跑 `npm run test:bull`：戰牛 Q／W／E／F 的嚴格 Canvas 完整生命週期、Q／E 的 30／60／120 FPS × 1／2／3 倍速 RAF、特效／震域故障隔離、既有規則與版本快取一致性，共 31 項；另執行 `npm run check` 與 `npm test`。詳見 [8D](BULL_WARGOD_SKILL_FREEZE_8D_V08569.md)。
 

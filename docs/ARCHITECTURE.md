@@ -20,7 +20,7 @@
 
 > **塔樓材質特效 VFX 2.0.0（未發佈）：** TowerSkillSystem → TowerVFX → PaintedTowerVFX → ArtSystem；有素材時走材質繪製，降級層保留。傷害管線維持原契約。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
 
-> 地圖後台 1.0.3：編輯器 → 路線驗證（原道路走廊＋禁區）→ 本機 API → 固定差異檔 published-maps.js → 遊戲塔位／路線系統；橋面與既有道路加點可通過，捷徑進禁區仍會拒絕。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+> 地圖後台 1.0.4：編輯器 → 路線格式驗證（固定起終點＋有效座標）→ 本機 API → 固定差異檔 published-maps.js → 遊戲塔位／路線系統；地形遮罩只影響建造，不再影響路線。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **目前進化規則 v0.85.56：** HeroEvolutionSystem 管理進化流程；HeroEvolutionCombat 接既有 Projectile／Monster／HeroRoster；EvolutionCompanion 繼承 Summon；Presentation 獨立渲染，ChapterCheckpointSystem 保存安全整備狀態。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
 
@@ -881,4 +881,6 @@ v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 M
 >
 > **v0.85.68：** `BullWargodArt` 同時管理 2×2 技能圖集的預載、核心載入狀態與重試；`td-combat.css`／`td-polish.css` 只負責將 Q／W／E／F 對應到固定格位。
 > 2026-09-28 · 霜原士兵 Motion 1.0.0：六兵種 96 格待機／攻擊、振翅與逐幀腳底定位；戰鬥數值不變。操作、API、安裝部署、備份還原與測試限制見[交付文件](FROSTLAND_MOTION_V1.md)。本機修改，未部署。
+
+> **v0.85.70：** 戰牛技能路徑為 `HeroRoster／Hero／HeroUltimateSystem → HeroSkillVFX.emit → HeroSkillVFX.draw`；每筆 VFX 的 Canvas 故障由展示層隔離並還原狀態，`TDGame.loop()` 因而能排入下一幀。震域由 `HeroRoster.drawFields` 以相同局部邊界處理。詳見 [8D](BULL_WARGOD_SKILL_FREEZE_8D_V08569.md)。
 

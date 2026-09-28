@@ -19,6 +19,15 @@ test('正式地圖的官方路線全數能通過路點驗證',()=>{
   for(const map of ns.maps.publicMaps()){const result=ns.mapTools.MapRoute.validate(map,ns.mapTools.MapRoute.routesOf(map));assert.equal(result.valid,true,map.id);assert.equal(result.problems.length,0,map.id);}
 });
 
+test('已發佈的赤土終站與石環盆地保留關卡設計者指定的自訂走線',()=>{
+  const {ns,context}=runtime();
+  vm.runInContext(fs.readFileSync(path.join(root,'src/td/map-tools/published-maps.js'),'utf8'),context,{filename:'published-maps.js'});
+  const published=context.HeroFrontierPublishedMaps;
+  assert.equal(published.maps.redmesa.routes[0].length,28);
+  assert.equal(published.maps.stonecircle.routes[0].length,24);
+  for(const id of ['redmesa','stonecircle'])assert.equal(ns.mapTools.MapRoute.validate(ns.maps.definitions[id],published.maps[id].routes).valid,true,id+' 的已發佈路線必須可載入');
+});
+
 test('路線只阻擋無效座標或移動起終點，不限制玩家設定的地形位置',()=>{
   const {ns}=runtime();
   const map=ns.maps.definitions.emberroad;

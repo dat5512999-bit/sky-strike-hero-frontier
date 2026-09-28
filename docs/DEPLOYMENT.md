@@ -20,7 +20,7 @@
 
 > **塔樓材質特效 VFX 2.0.0（未發佈）：** 尚未部署；下一次整包發行須含新模組、兩張圖集與 sw.js 清單，按既有流程统一版本和快取。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
 
-> 地圖後台 1.0.3：本機發佈會修改 published-maps.js；對外網站仍須走原部署流程。道路走廊驗證僅屬本機後台，公開遊戲不需管理服務；後台與備份可排除於公開網站。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+> 地圖後台 1.0.4：本機發佈會修改 published-maps.js；對外網站仍須走原部署流程。路線位置不受地形限制；公開遊戲不需管理服務，後台與備份可排除於公開網站。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **目前進化規則 v0.85.56：** 整包同步部署 HeroEvolutionCombat.js、EvolutionCompanion.js、進化／戰鬥／存檔模組、td.html 與 sky-strike-v0.85.56 快取。驗證第 50 波超凡整備、讀檔與完成遠征。此次未執行遠端發布。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
 
@@ -549,4 +549,6 @@ v0.85.0：同步部署 td.html、td-expedition.css、codex.css、src/td、Frostl
 >
 > **v0.85.68：** 額外發布 `assets/td/neutral/bull-wargod-skill-icons-v2.png`、`td-combat.css`、`td-polish.css` 與更新後的 Service Worker；確認快取名稱為 `sky-strike-v0.85.68`。
 > 2026-09-28 · 霜原士兵 Motion 1.0.0：六兵種 96 格待機／攻擊、振翅與逐幀腳底定位；戰鬥數值不變。操作、API、安裝部署、備份還原與測試限制見[交付文件](FROSTLAND_MOTION_V1.md)。本機修改，未部署。
+
+> **v0.85.70：** 同步部署 `HeroSkillVFX.js`、`HeroRoster.js`、`TDGame.js`、`Hero.js`、入口版號、`sw.js` 與測試；確認快取為 `sky-strike-v0.85.70`，選戰牛連續施放 Q／E，戰場必須持續更新。部署前執行 `npm run check`、`npm run test:bull` 與 `npm test`。詳見 [8D](BULL_WARGOD_SKILL_FREEZE_8D_V08569.md)。
 

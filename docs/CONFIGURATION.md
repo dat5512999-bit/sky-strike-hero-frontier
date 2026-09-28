@@ -2,7 +2,7 @@
 
 > **v0.85.57 · 首領外觀：** 首領外觀自動依精確波次選擇，不需要玩家設定。維護者可用 BossVisualCatalog.enabled 回退呈現。 [交付與驗收](BOSS_VISUALS_V08557.md)。
 
-> 地圖後台 1.0.3：預設 127.0.0.1:4174，可用 TD_STUDIO_PORT 設定；固定正式資料檔 src/td/map-tools/published-maps.js，無資料庫。道路走廊寬度使用既有地圖道路寬度，沒有新增可調設定。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+> 地圖後台 1.0.4：預設 127.0.0.1:4174，可用 TD_STUDIO_PORT 設定；固定正式資料檔 src/td/map-tools/published-maps.js，無資料庫。沒有道路走廊或障礙位置設定。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **v0.85.55：** 後段威脅由怪物 type 的隱幕／飛行／免疫／鏡甲欄位與波表控制；隱形魔石沿用英雄既有三級商店欄位。見 [設定邊界](ENEMY_THREATS_V08555.md)。
 
@@ -299,3 +299,4 @@ Pages 首次啟用由 `.github/workflows/pages.yml` 的 `enablement: true` 控�
 > **v0.85.68：** `HeroRoster.CLASSES.bull.skillArt` 指向戰牛 2×2 技能圖集；Q、W、E、F 的格位順序固定為左上、右上、左下、右下。
 >
 > **v0.85.69：** `config.units.frostBird` 以 `frost: 16`、`chain: 3` 和 `frostHold: 1.2` 定義群體鋪寒與維持；`frostHold` 僅延後既有 Frost 衰減，不能延長凍結窗口。詳見 [霜原職責分流](FROSTLAND_ROLE_SEPARATION_V08569.md)。
+> **v0.85.70：** 沒有新增玩家或管理設定。戰牛 Q／E 圓環的最小半徑是程式內部 Canvas 安全限制，不調整傷害、冷卻、範圍、軍團或存檔格式。詳見 [8D](BULL_WARGOD_SKILL_FREEZE_8D_V08569.md)。

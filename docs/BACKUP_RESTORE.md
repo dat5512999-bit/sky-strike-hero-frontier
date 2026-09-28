@@ -20,7 +20,7 @@
 
 > **塔樓材質特效 VFX 2.0.0（未發佈）：** 無資料遷移。保留完整發佈快照與玩家備份，整包回復渲染器／圖集／入口，勿混用版本。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
 
-> 地圖後台 1.0.3：備份 published-maps.js 與 artifacts/map-history；工作台可還原整份歷史地圖版本，還原亦建立新版本。道路走廊驗證只影響可否儲存，沒有資料遷移或備份格式改動。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+> 地圖後台 1.0.4：備份 published-maps.js 與 artifacts/map-history；工作台可還原整份歷史地圖版本，還原亦建立新版本。移除地形限制沒有資料遷移或備份格式改動。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **目前進化規則 v0.85.56：** 章節存檔保留進化倍率、攻速底線和核心能量；第 50 波可回整備區。舊版可能拒絕 wave50。程式修改前快照在 artifacts/evolution-completion/before；rollback.cjs --check／--apply 有雜湊防覆蓋。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
 
@@ -531,4 +531,6 @@ v0.85.0：先匯出完整玩家備份。舊 schema 保持相容；冰原檢查�
 >
 > **v0.85.68：** 若回退本版，需連同戰牛技能圖集、兩份技能圖示 CSS 和 `sky-strike-v0.85.68` 快取一起回退；玩家進度與核心購買資料不受此純呈現更新影響。
 > 2026-09-28 · 霜原士兵 Motion 1.0.0：六兵種 96 格待機／攻擊、振翅與逐幀腳底定位；戰鬥數值不變。操作、API、安裝部署、備份還原與測試限制見[交付文件](FROSTLAND_MOTION_V1.md)。本機修改，未部署。
+
+> **v0.85.70：** 不遷移玩家資料。若必要回退，程式、`tests/td-bull-skill-crash.test.js`、入口版本及 `sky-strike-v0.85.70` 必須一起回退；不可只換快取名稱。回退到 0.85.69 會恢復戰牛 Q／E 的已知凍結風險。
 

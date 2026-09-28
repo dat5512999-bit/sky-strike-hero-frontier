@@ -119,9 +119,9 @@
       for(const field of hero.fields){
         try{ns.systems.HeroSkillVFX.drawField(ctx,field);}
         catch(error){
-          if(field.type!=='naga'&&!field.type.startsWith('evo-'))throw error;
+          if(field.type!=='naga'&&field.type!=='bull'&&!field.type.startsWith('evo-'))throw error;
           hero.fields=hero.fields.filter(item=>item!==field);
-          hero[field.type==='naga'?'nagaFieldFault':'evolutionFault']=String(error&&error.message||error||'draw failure');
+          hero[field.type==='naga'?'nagaFieldFault':field.type==='bull'?'bullFieldFault':'evolutionFault']=String(error&&error.message||error||'draw failure');
         }
       }
     }

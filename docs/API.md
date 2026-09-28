@@ -20,7 +20,7 @@
 
 > **塔樓材質特效 VFX 2.0.0（未發佈）：** 新增 PaintedTowerVFX 視覺層；ArtSystem 維持 preload/coreStatus/failedAssets/retryFailed 契約，無新遠端 API 或存檔結構。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
 
-> 地圖後台 1.0.3：本機 `/api/studio/state`、`publish`、`restore` 寫入需同源與工作階段 token，並以 baseRevision 阻止過期覆蓋；路線驗證新增內部「原道路走廊」比對，不改 HTTP API 或資料格式。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+> 地圖後台 1.0.4：本機 `/api/studio/state`、`publish`、`restore` 寫入需同源與工作階段 token，並以 baseRevision 阻止過期覆蓋；路線驗證只保留起終點與有限數值檢查，不再檢查地形位置。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **目前進化規則 v0.85.56：** 新增內部 HeroEvolutionCombat、EvolutionCompanion 契約；completeTrial 必須驗證死亡、本人與 stage。Hero.evolution 增加可選 powerFloor／intervalFloor／energy；章節 schema1 支援 wave50，沒有新增網路 API。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
 
@@ -677,4 +677,6 @@ v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare�
 >
 > **v0.85.68：** 無新增 API；`HeroRoster.CLASSES.bull.skillArt` 提供戰神專屬 Q／W／E／F 圖集位置，僅作介面呈現，不改變技能傷害介面。
 > 2026-09-28 · 霜原士兵 Motion 1.0.0：六兵種 96 格待機／攻擊、振翅與逐幀腳底定位；戰鬥數值不變。操作、API、安裝部署、備份還原與測試限制見[交付文件](FROSTLAND_MOTION_V1.md)。本機修改，未部署。
+
+> **v0.85.70：** `bullVfxFault`／`bullFieldFault` 是單局記憶體中的展示層診斷資料，不新增 HTTP API、資料庫或存檔 schema。`HeroSkillVFX.draw` 只隔離戰牛單筆效果，`HeroRoster.drawFields` 只隔離戰牛單筆震域；傷害、冷卻與領域契約不變。詳見 [8D](BULL_WARGOD_SKILL_FREEZE_8D_V08569.md)。
 

@@ -187,3 +187,16 @@ body[data-mobile-preview="true"] #frontier-app[data-page=home] .feature-panel::a
 .campaign-missions .mission-selected{outline:2px solid #f3d699;outline-offset:2px}
 .campaign-missions .mission-locked{filter:grayscale(.8);opacity:.65}
 @media(max-width:850px){.campaign-missions{gap:6px;padding:4px}.campaign-missions .mission-node{min-height:105px;padding:5px!important}.campaign-missions .mission-node img{height:42px}.campaign-missions .mission-node b{font-size:11px}.campaign-missions .mission-node span,.campaign-missions .mission-node small{font-size:9px}}
+
+/* The phone shell rotates a landscape iframe. Story cards must use that full
+   landscape surface instead of retaining the desktop's narrow reading card. */
+body[data-mobile-shell="true"] #frontier-app[data-page="story-cards"],body[data-mobile-preview="true"] #frontier-app[data-page="story-cards"]{padding:0;background:#030912}
+body[data-mobile-shell="true"] #frontier-app[data-page="story-cards"] .lobby-top,body[data-mobile-preview="true"] #frontier-app[data-page="story-cards"] .lobby-top{display:none}
+body[data-mobile-shell="true"] #frontier-app[data-page="story-cards"] .lobby-content,body[data-mobile-preview="true"] #frontier-app[data-page="story-cards"] .lobby-content{display:block;overflow:hidden;padding:0}
+body[data-mobile-shell="true"] #frontier-app[data-page="story-cards"] .story-card,body[data-mobile-preview="true"] #frontier-app[data-page="story-cards"] .story-card{display:grid;grid-template-rows:minmax(0,1fr) auto;width:100%;height:100%;max-height:none;border:0;box-shadow:none;overflow:hidden}
+body[data-mobile-shell="true"] #frontier-app[data-page="story-cards"] .story-card-stage,body[data-mobile-preview="true"] #frontier-app[data-page="story-cards"] .story-card-stage{height:auto;min-height:0}
+body[data-mobile-shell="true"] #frontier-app[data-page="story-cards"] .story-card-copy,body[data-mobile-preview="true"] #frontier-app[data-page="story-cards"] .story-card-copy{left:max(28px,env(safe-area-inset-left));right:28%;bottom:clamp(28px,6vh,56px);max-width:860px}
+body[data-mobile-shell="true"] #frontier-app[data-page="story-cards"] .story-card-copy h1,body[data-mobile-preview="true"] #frontier-app[data-page="story-cards"] .story-card-copy h1{font-size:clamp(32px,4.2vw,60px)}
+body[data-mobile-shell="true"] #frontier-app[data-page="story-cards"] .story-card-copy p,body[data-mobile-preview="true"] #frontier-app[data-page="story-cards"] .story-card-copy p{font-size:clamp(18px,2.2vw,30px)}
+body[data-mobile-shell="true"] #frontier-app[data-page="story-cards"] .story-card-bar,body[data-mobile-preview="true"] #frontier-app[data-page="story-cards"] .story-card-bar{min-height:64px;padding:8px max(18px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));background:#07121bf2}
+body[data-mobile-shell="true"] #frontier-app[data-page="story-cards"] .story-card-actions button,body[data-mobile-preview="true"] #frontier-app[data-page="story-cards"] .story-card-actions button{min-height:44px;font-size:15px!important;padding:7px 15px!important}

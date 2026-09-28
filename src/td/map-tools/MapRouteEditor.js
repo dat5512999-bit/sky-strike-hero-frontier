@@ -14,7 +14,7 @@
     function persist(){try{localStorage.setItem(localKey(),JSON.stringify(routes));}catch{say('草稿無法儲存，請直接發佈或匯出。');}}
     function applyAccess(){access=admin();root.querySelectorAll('button,select').forEach(control=>{if(!control.matches('[data-route-access]')&&!control.closest('.map-publisher'))control.disabled=!access;});if(!access)say('請由本機後台開啟，或先切换管理者檔案。');}
     function point(event){const rect=svg.getBoundingClientRect();return {x:Math.round(Math.max(0,Math.min(map.width,(event.clientX-rect.left)*map.width/rect.width))),y:Math.round(Math.max(0,Math.min(map.height,(event.clientY-rect.top)*map.height/rect.height)))};}
-    function review(){const result=model.validate(map,routes);get('validation').textContent=result.valid?'✓ 可儲存：起終點、改動節點與障礙檢查通過。':'✕ 尚不可儲存：\n'+result.problems.join('\n');get('status').textContent='路線 '+(branch+1)+' · '+routes[branch].length+' 個節點';return result;}
+    function review(){const result=model.validate(map,routes);get('validation').textContent=result.valid?'✓ 可儲存：起終點與座標資料有效；地形不限制路線。':'✕ 尚不可儲存：\n'+result.problems.join('\n');get('status').textContent='路線 '+(branch+1)+' · '+routes[branch].length+' 個節點';return result;}
     function render(){
       svg.replaceChildren();svg.setAttribute('viewBox','0 0 '+map.width+' '+map.height);svg.setAttribute('width',map.width);svg.setAttribute('height',map.height);svg.style.touchAction='none';
       routes.forEach((route,index)=>{const line=document.createElementNS(svgNs,'polyline');line.setAttribute('points',route.map(node=>node.x+','+node.y).join(' '));line.classList.add('route-line');if(index!==branch)line.classList.add('ghost');svg.append(line);});
