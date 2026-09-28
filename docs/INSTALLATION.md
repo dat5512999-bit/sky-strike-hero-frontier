@@ -526,3 +526,5 @@ v0.85.0：沿用 Node.js 18+，無新依賴。完整取得 assets/td/frostland �
 > **v0.85.64：** 無新依賴或設定；完整更新後執行 `npm run balance:audit`、`npm run check`、`npm test`，並確認 Service Worker 為 `sky-strike-v0.85.64`。詳見 [平衡交付](FACTION_BALANCE_RESET_V08564.md)。
 
 > **v0.85.65：** 無新依賴或設定；完整更新後再執行 `npm run enemy-balance:audit`，並確認 Service Worker 為 `sky-strike-v0.85.65`。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。
+
+> **v0.85.66：** 無新依賴或設定；完整更新後執行 `node --test tests/td-armory-flow.test.js`、`npm run check`、`npm test`，並確認 Service Worker 為 `sky-strike-v0.85.66`。詳見 [軍械導引交付](UNIT_EQUIPMENT_GUIDANCE_V08566.md)。

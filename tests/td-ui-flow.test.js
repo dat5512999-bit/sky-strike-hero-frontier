@@ -144,10 +144,10 @@ test('電腦單擊直接建造，手機先預覽再按確認部署',()=>{
   assert.equal(game.confirmed,1);
 });
 
-test('手機選取重疊目標時採最近優先，士兵快捷列直接顯示裝備狀態',()=>{
+test('手機選取重疊目標時採最近優先，士兵快捷列直接顯示裝備狀態與相容數量',()=>{
   const game=fs.readFileSync(path.join(root,'src/td/TDGame.js'),'utf8'),armoryUi=fs.readFileSync(path.join(root,'src/td/systems/ArmoryUI.js'),'utf8'),css=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
   assert.match(game,/selectAt\(p\.x,p\.y,\{preferNearest:touch\}\)/);
-  assert.match(armoryUi,/summary\.textContent=equipped\?equipped\.name:'未裝備'/);
+  assert.match(armoryUi,/summary\.textContent=equipped\?equipped\.name:\(compatible\.length\?compatible\.length\+' 件可用':'無相容'\)/);
   assert.match(css,/\.unit-equip-summary/);
 });
 

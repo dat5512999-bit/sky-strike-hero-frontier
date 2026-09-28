@@ -530,3 +530,5 @@ v0.85.0：冰原僅為 TESTABLE，管理者可玩，新測試輪次故事鎖定�
 > **v0.85.64：** 發布前執行 `npm run balance:audit`、`node --test tests/td-grand-balance-audit.test.js`、`npm run check`、`npm test`；確認戰報平衡標記為 `faction-reset-v08564`，不可混用舊樣本。詳見 [平衡交付](FACTION_BALANCE_RESET_V08564.md)。
 
 > **v0.85.65：** 怪物數值、波表、支援光環或首領援軍變動後，另執行 `npm run enemy-balance:audit` 與 `node --test tests/td-enemy-balance-audit.test.js`；確認戰報為 `whole-game-reset-v08565`。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。
+
+> **v0.85.66：** 軍械相容性只改 `ArmorySystem.ITEMS`，不得在 UI 另造白名單；變更後驗證配裝導引與 `tests/td-armory-flow.test.js`。詳見 [軍械導引交付](UNIT_EQUIPMENT_GUIDANCE_V08566.md)。

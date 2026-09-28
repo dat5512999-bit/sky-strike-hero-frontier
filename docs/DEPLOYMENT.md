@@ -539,3 +539,5 @@ v0.85.0：同步部署 td.html、td-expedition.css、codex.css、src/td、Frostl
 > **v0.85.64：** 同步發布 `config.js`、`HeroRoster.js`、`FactionBalanceCatalog.js`、版本檔和 `sw.js`；部署後從版本化更新頁重新開局驗收，勿只更新單一 JS 檔。詳見 [平衡交付](FACTION_BALANCE_RESET_V08564.md)。
 
 > **v0.85.65：** 同步發布 `Monster.js`、`WaveCatalog.js`、`EnemyBalanceCatalog.js`、測試、版本檔和 `sw.js`；快取必為 `sky-strike-v0.85.65`，以版本化更新頁驗收第 31、41、50 波。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。
+
+> **v0.85.66：** 同步發布 `ArmorySystem.js`、`ArmoryUI.js`、`TDGame.js`、`td.css`、版本檔和 `sw.js`；快取必為 `sky-strike-v0.85.66`。詳見 [軍械導引交付](UNIT_EQUIPMENT_GUIDANCE_V08566.md)。

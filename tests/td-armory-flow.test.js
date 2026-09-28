@@ -19,3 +19,11 @@ test('軍械庫與角色配裝各有獨立入口，販售在遊戲內確認，�
   assert.ok(worker.includes("'./src/td/systems/ArmoryUI.js'"));
   assert.doesNotMatch(ui,/\bconfirm\s*\(/,'販售不能使用瀏覽器原生確認視窗');assert.match(ui,/requestArmorySale/);assert.match(ui,/confirmArmorySale/);assert.match(ui,/closeArmorySale/);
 });
+
+test('士兵配裝可列出相容軍械，未持有時仍能導向正確商店商品',()=>{
+  const {ns}=load(),armory=new ns.systems.ArmorySystem(),hunter=new ns.entities.CombatUnit('hunter',100,100),shield=new ns.entities.CombatUnit('shield',100,100),ui=fs.readFileSync('src/td/systems/ArmoryUI.js','utf8'),game=fs.readFileSync('src/td/TDGame.js','utf8');
+  assert.deepEqual(Array.from(armory.compatibleItems(hunter),item=>item.id).sort(),['lion-bow']);
+  assert.deepEqual(Array.from(armory.compatibleItems(shield),item=>item.id).sort(),['lion-shield','war-drum']);
+  assert.match(ui,/尚未取得可前往商店購買/);assert.match(ui,/openShopForEquipment/);assert.match(ui,/dataset\.shopGear/);
+  assert.match(game,/適用目前選取/);assert.match(game,/dataset\.compatible/);
+});

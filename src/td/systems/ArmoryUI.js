@@ -41,16 +41,21 @@
   proto.renderEquipmentPicker=function(){
     const target=this.equipTarget,list=document.getElementById('td-equip-items');if(!target||!list)return;
     document.getElementById('td-equip-title').textContent=this.armory.targetLabel(target)+' · 選擇裝備';
-    document.getElementById('td-equip-summary').textContent=target.kind==='unit'?'僅顯示這名士兵能用的裝備；每名士兵最多一件。':'僅顯示這位英雄能用的裝備；武器、護甲、戰器各一件。';
-    list.replaceChildren();let count=0;
+    document.getElementById('td-equip-summary').textContent=target.kind==='unit'?'以下只列這名士兵能用的裝備；已持有可直接穿上，尚未取得可前往商店購買。每名士兵最多一件。':'以下只列這位英雄能用的裝備；已持有可直接穿上，尚未取得可前往商店購買。武器、護甲、戰器各一件。';
+    list.replaceChildren();let count=0,ownedCount=0;
     for(const id of this.armory.owned){if(!this.armory.canEquip(id,target))continue;count++;const item=this.armory.get(id),wearer=this.armory.wearer(id),equipped=wearer===target,status=equipped?'目前裝備':wearer?'裝備中：'+this.armory.targetLabel(wearer):'可裝備';
       const {row,actions}=card(item,status),button=document.createElement('button');row.dataset.gearId=id;button.type='button';button.dataset.equipGear=id;button.textContent=equipped?'卸下':wearer?'轉裝':'裝上';button.onclick=()=>{
         const result=equipped?this.armory.unequip(item.slot,target):this.armory.equip(id,target);
         document.getElementById('td-equip-message').textContent=result.message;
         if(result.ok){this.renderEquipmentPicker();this.updateUi();}
-      };actions.append(button);if(equipped)row.dataset.equipped='true';list.append(row);
+      };actions.append(button);if(equipped)row.dataset.equipped='true';list.append(row);ownedCount++;
     }
-    if(!count){const empty=document.createElement('p');empty.className='armory-empty';empty.textContent='目前沒有適合這名角色的裝備。';list.append(empty);}
+    const compatible=this.armory.compatibleItems(target),shopOffers=Object.entries(ns.systems.ShopSystem.ITEMS||{}).filter(([,offer])=>offer.gear).reduce((map,[offerId,offer])=>{map.set(offer.gear,offerId);return map;},new Map());
+    compatible.forEach(item=>{const owned=this.armory.owned.filter(id=>String(id).replace(/#\d+$/,'')===item.id).length,offerId=shopOffers.get(item.id),offer=offerId&&this.shop.offer(offerId);if(!offer||owned>=offer.max)return;count++;const {row,actions}=card(item,'可購買 · '+offer.price+'G'),button=document.createElement('button');row.classList.add('armory-shop-guide');row.dataset.gearId=item.id;button.type='button';button.dataset.shopGear=offerId;button.textContent='前往商店';button.onclick=()=>this.openShopForEquipment(target,offerId);actions.append(button);list.append(row);});
+    if(!count){const empty=document.createElement('p');empty.className='armory-empty';empty.textContent='這名角色目前沒有可使用的軍械。';list.append(empty);}else document.getElementById('td-equip-message').textContent=ownedCount?'綠色標記為可立刻穿上的現有裝備；「可購買」為這名角色相容的軍械。':'尚未持有相容裝備；下方列出的每一件都可直接購買給這名角色。';
+  };
+  proto.openShopForEquipment=function(target,offerId){
+    this.closeEquipmentPicker();this.openShop();const button=Array.from(this.ui.shopItems||[]).find(node=>node.dataset.shopItem===offerId);if(button){button.dataset.recommendedFor=this.armory.targetLabel(target);button.focus();}return Boolean(button);
   };
   proto.attachArmoryUi=function(){originalAttach.call(this);const unit=document.getElementById('td-unit-equip'),hero=document.getElementById('td-hero-equip'),close=document.getElementById('td-equip-close'),screen=document.getElementById('td-equip-screen'),sellScreen=this.ui.armorySellScreen;
     unit.onclick=()=>this.openEquipmentPicker(this.build.selected);hero.onclick=()=>this.openEquipmentPicker(this.hero);
@@ -58,7 +63,7 @@
     document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!screen.hidden){this.closeEquipmentPicker();event.preventDefault();event.stopImmediatePropagation();}},true);
     if(sellScreen){this.ui.armorySellCancel.onclick=()=>this.closeArmorySale();this.ui.armorySellConfirm.onclick=()=>this.confirmArmorySale();sellScreen.addEventListener('click',event=>{if(event.target===sellScreen)this.closeArmorySale();});document.addEventListener('keydown',event=>{if(sellScreen.hidden)return;if(event.key==='Escape'){this.closeArmorySale();event.preventDefault();event.stopImmediatePropagation();return;}if(event.key==='Tab'){const buttons=Array.from(sellScreen.querySelectorAll('button:not(:disabled)')),first=buttons[0],last=buttons.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}},true);}
   };
-  proto.updateUi=function(){originalUpdate.call(this);const button=document.getElementById('td-unit-equip');if(button){const unit=this.build.selected,equipped=unit&&unit.kind==='unit'&&this.armory?this.armory.equipped(unit)[0]:null,summary=button.querySelector('.unit-equip-summary');button.hidden=!(unit&&unit.kind==='unit');button.disabled=this.status!=='playing';button.dataset.equipped=String(Boolean(equipped));if(summary)summary.textContent=equipped?equipped.name:'未裝備';button.title=equipped?'目前裝備：'+equipped.name+'；點選更換':'尚未裝備；點選配裝';button.setAttribute('aria-label',button.title);}const hero=document.getElementById('td-hero-equip');if(hero)hero.disabled=!this.profession.selected||this.status!=='playing';};
+  proto.updateUi=function(){originalUpdate.call(this);const button=document.getElementById('td-unit-equip');if(button){const unit=this.build.selected,equipped=unit&&unit.kind==='unit'&&this.armory?this.armory.equipped(unit)[0]:null,compatible=unit&&unit.kind==='unit'&&this.armory?this.armory.compatibleItems(unit):[],summary=button.querySelector('.unit-equip-summary');button.hidden=!(unit&&unit.kind==='unit');button.disabled=this.status!=='playing';button.dataset.equipped=String(Boolean(equipped));if(summary)summary.textContent=equipped?equipped.name:(compatible.length?compatible.length+' 件可用':'無相容');button.title=equipped?'目前裝備：'+equipped.name+'；點選更換':'可用軍械 '+compatible.map(item=>item.name).join('、')+'；點選查看與購買';button.setAttribute('aria-label',button.title);}const hero=document.getElementById('td-hero-equip');if(hero)hero.disabled=!this.profession.selected||this.status!=='playing';};
   proto.positionSelectionActions=function(){originalPosition.call(this);const panel=this.ui.selectionActions;if(panel&&!panel.hidden){const max=this.canvas.parentElement.clientWidth-panel.offsetWidth-6;panel.style.left=Math.max(6,Math.min(Number.parseFloat(panel.style.left)||6,max))+'px';}};
   proto.reset=function(){const picker=document.getElementById('td-equip-screen');if(picker)picker.hidden=true;this.closeArmorySale?.(false);this.equipTarget=null;return originalReset.call(this);};
 })(globalThis.TowerFrontier);

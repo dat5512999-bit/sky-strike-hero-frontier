@@ -667,3 +667,5 @@ v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare�
 > **v0.85.64：** 無新增 HTTP API、資料庫或存檔 schema；新增前端內部 `FactionBalanceCatalog`，提供 `profiles()`、`get(id)` 與 `audit()` 供平衡工具和測試讀取。詳見 [平衡交付](FACTION_BALANCE_RESET_V08564.md)。
 
 > **v0.85.65：** 無新增 HTTP API；前端內部 `EnemyBalanceCatalog` 提供 `get(type)`、`profiles()`、`pressureOf(monster)`、`waveAudit(wave, modifiers)` 和 `audit(modifiers)` 供平衡工具與測試讀取。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。
+
+> **v0.85.66：** 無新增 HTTP API；`ArmorySystem.compatibleItems(target)` 回傳目標實際可穿的軍械資料，供配裝與商店導引使用。詳見 [軍械導引交付](UNIT_EQUIPMENT_GUIDANCE_V08566.md)。

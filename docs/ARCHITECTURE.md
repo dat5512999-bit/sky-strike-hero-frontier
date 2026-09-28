@@ -871,3 +871,5 @@ v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 M
 > **v0.85.64：** `FactionBalanceCatalog` 置於 `FactionSystem` 後、戰鬥模組前，將 roster、英雄和 `config.js` 數據接到可重跑稽核；不新增後端或另一套傷害系統。詳見 [平衡交付](FACTION_BALANCE_RESET_V08564.md)。
 
 > **v0.85.65：** `EnemyBalanceCatalog` 在 `Monster.js` 後載入，讀取既有怪物、波表、支援和首領資料建立稽核指標，不新增遊戲內第二套傷害規則。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。
+
+> **v0.85.66：** 配裝導引由 `ArmorySystem` 提供相容清單，`ArmoryUI` 顯示與跳轉，`TDGame` 標示目前選取相容性；資料不寫入存檔。詳見 [軍械導引交付](UNIT_EQUIPMENT_GUIDANCE_V08566.md)。

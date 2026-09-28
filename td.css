@@ -1209,6 +1209,7 @@ body[data-hero-class="chief"] #td-summon b{background-image:url('assets/td/comba
 .gear-status{display:block;max-width:150px;color:#d9c58a;font-size:12px;line-height:1.4;text-align:right}
 .armory-card-actions button{min-height:36px;padding:6px 12px;border:1px solid #d5ad63;background:#302616;color:#ffe0a0;font-size:14px;cursor:pointer}
 .armory-item[data-equipped="true"] .gear-status{color:#83dfb1}
+.armory-shop-guide{border-color:#4f8cb0;background:linear-gradient(135deg,#10252b,#091116)}.armory-shop-guide .gear-status{border-color:#4d9dcc;color:#91d9ff}.armory-shop-guide .armory-card-actions button{border-color:#4f9dc8;background:linear-gradient(#1d526b,#102c3a);color:#d7f4ff}.gear-shop-items button[data-compatible="selected"]{border-color:#65c9a2;box-shadow:inset 0 0 18px #48cf9229,0 0 8px #4fb9851c}.gear-shop-items button[data-compatible="selected"] small{color:#99efc2}.gear-shop-items button[data-compatible="other"]{opacity:.68}
 .equip-dialog{width:min(680px,calc(100vw - 32px))}
 .equip-dialog .armory-items{grid-template-columns:1fr}
 #td-unit-equip[hidden],#td-equip-screen[hidden]{display:none!important}

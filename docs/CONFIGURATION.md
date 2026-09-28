@@ -290,3 +290,5 @@ Pages 首次啟用由 `.github/workflows/pages.yml` 的 `enablement: true` 控�
 > **v0.85.64：** 士兵／塔數值仍集中在 `src/td/config.js`、英雄在 `HeroRoster.js`；修改 roster 後同步更新 `FactionBalanceCatalog.js`，並跑 `npm run balance:audit`。詳見 [平衡交付](FACTION_BALANCE_RESET_V08564.md)。
 
 > **v0.85.65：** 怪物原始數值仍只在 `Monster.js`，波表仍只在 `WaveCatalog.js`；新增或變更怪物時同步更新 `EnemyBalanceCatalog.js`，並跑 `npm run enemy-balance:audit`。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。
+
+> **v0.85.66：** 士兵軍械相容性僅由 `ArmorySystem.ITEMS.types` 定義；商店與配裝畫面自動讀取，不在 HTML 或 CSS 重複設定。詳見 [軍械導引交付](UNIT_EQUIPMENT_GUIDANCE_V08566.md)。
