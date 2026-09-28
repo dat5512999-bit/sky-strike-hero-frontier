@@ -9,7 +9,7 @@ function distanceToRoute(x,y,route){let nearest=Infinity;for(let i=1;i<route.len
 
 test('chapter maps use production art, end at the visible keep, and offer useful tower sites',()=>{
   const ns=setup();
-  for(const id of ['silverleaf','shadowfall','frostborn','westernsignal','emberroad','stonecircle','redmesa','whitetrace','echoyard','crossmark','nightwatch']){
+  for(const id of ['silverleaf','shadowfall','frostborn','westernsignal','emberroad','stonecircle','redmesa','whitetrace','echoyard','crossmark','nightwatch','tidegateoutfall','brineway','reefconfluence','tideobservatory']){
     const map=ns.maps.definitions[id],png=fs.readFileSync(map.asset);assert.equal(png.readUInt32BE(16),1536);assert.equal(png.readUInt32BE(20),1024);
     ns.maps.apply(id);const routes=ns.config.routes,build=new ns.systems.BuildSystem();
     assert.ok(Math.hypot(routes[0][0].x-map.spawn.x,routes[0][0].y-map.spawn.y)<120);
@@ -48,7 +48,11 @@ test('chapter map deployment matches visible clearings and rejects painted obsta
     whitetrace:{open:[[1060,460],[260,480],[1080,480]],blocked:[[780,350],[1400,300],[260,800]]},
     echoyard:{open:[[600,300],[820,600],[1100,520],[1280,720]],blocked:[[850,260],[250,600],[1400,470]]},
     crossmark:{open:[[960,380],[350,480],[360,520],[1050,580]],blocked:[[660,330],[1360,250],[1380,700]]},
-    nightwatch:{open:[[700,460],[280,640],[1260,420]],blocked:[[930,480],[1350,240],[150,850]]}
+    nightwatch:{open:[[700,460],[280,640],[1260,420]],blocked:[[930,480],[1350,240],[150,850]]},
+    tidegateoutfall:{open:[[320,115],[640,380],[930,620],[1300,720]],blocked:[[850,480],[860,150],[1440,600]]},
+    brineway:{open:[[300,100],[520,430],[830,360],[1120,530],[1260,860]],blocked:[[740,170],[250,560],[1420,480]]},
+    reefconfluence:{open:[[350,100],[360,600],[1040,400],[690,650],[1100,380],[1140,600]],blocked:[[650,270],[1400,300],[1380,700]]},
+    tideobservatory:{open:[[300,100],[320,300],[660,380],[820,620],[1180,600],[1320,820]],blocked:[[900,210],[250,580],[1420,450]]}
   };
   for(const [id,sites] of Object.entries(landmarks)){
     ns.maps.apply(id);const build=new ns.systems.BuildSystem();
@@ -78,7 +82,7 @@ test('frostborn routes merge early and share exactly the same defensive tail',()
 
 test('chapter missions preserve unlock order, with Chapter III unlocking existing frostland and goblin allies only at its finale',()=>{
   const ns=setup(),missions=ns.systems.StoryCatalog.missions;
-  const chapter1=missions.filter(m=>m.chapter===1),chapter2=missions.filter(m=>m.chapter===2),chapter3=missions.filter(m=>m.chapter===3);
+  const chapter1=missions.filter(m=>m.chapter===1),chapter2=missions.filter(m=>m.chapter===2),chapter3=missions.filter(m=>m.chapter===3),chapter4=missions.filter(m=>m.chapter===4);
   assert.deepEqual(Array.from(chapter1,m=>m.map),['beginner','silverleaf','shadowfall','frostborn']);
   assert.deepEqual(Array.from(chapter1,m=>m.waves.length),[5,6,7,8],'第一章關卡波數必須逐關增加');
   assert.deepEqual(Array.from(chapter2,m=>[m.id,m.map,m.waves.length]),[['chapter2-western-signal','westernsignal',6],['chapter2-ember-road','emberroad',7],['chapter2-stone-circle','stonecircle',8],['chapter2-red-mesa','redmesa',9]]);
@@ -101,6 +105,11 @@ test('chapter missions preserve unlock order, with Chapter III unlocking existin
   store.complete(chapter3.at(-1));assert.equal(store.allows('maps','nightwatch'),true);assert.equal(store.allows('heroes','frostland'),true);assert.equal(store.allows('factions','frostland'),true);assert.equal(store.allows('heroes','goblin'),true);assert.equal(store.allows('factions','goblin'),true);
   for(const mission of chapter3)assert.equal(mission.storyCards.length,3,`${mission.id} needs replayable story cards`);
   assert.match(chapter3.at(-1).aftermath,/沒有留下能辨認來源的名字/,'終章必須保留疑點，不能宣告來源或真相');
+  assert.deepEqual(Array.from(chapter4,m=>[m.id,m.map,m.waves.length]),[['chapter4-tidegate-outfall','tidegateoutfall',8],['chapter4-brineway','brineway',9],['chapter4-reef-confluence','reefconfluence',10],['chapter4-tide-observatory','tideobservatory',11]]);
+  assert.equal(chapter4[0].requires,'chapter3-nightwatch');for(let i=1;i<chapter4.length;i++)assert.equal(chapter4[i].requires,chapter4[i-1].id);
+  assert.equal(store.allows('heroes','naga'),true,'娜迦保留既有自由遠征資格');assert.equal(store.allows('factions','naga'),true,'娜迦軍團不應被第四章重新鎖定');
+  for(const mission of chapter4){assert.equal(mission.hero,'naga');assert.equal(mission.faction,'naga');assert.equal(mission.storyCards.length,3);store.complete(mission);for(const id of mission.rewards.maps)assert.equal(store.allows('maps',id),true);}
+  assert.match(chapter4.at(-1).aftermath,/來源仍然未知/,'第四章必須保留來源未知');
   const result=ns.systems.ResultScreen.view({waves:3},{mode:'story',victory:true,saved:true,mission:chapter1.at(-1)});
   assert.match(result.intro,/已儲存/);assert.match(result.intro,/線索推進/);assert.equal(result.showUnlock,false);
 });
@@ -114,6 +123,18 @@ test('Chapter III roads, landmarks and the dual-route merge remain explicit game
     assert.ok(map.safeArea.width>1200&&map.safeArea.height>650);assert.ok(map.camera.mobileInitialZoom>=1.2);
   }
   const map=ns.maps.definitions.crossmark,[upper,lower]=map.routes,upMerge=upper.findIndex(p=>p.x===map.merge.x&&p.y===map.merge.y),lowMerge=lower.findIndex(p=>p.x===map.merge.x&&p.y===map.merge.y);
+  assert.ok(upMerge>0&&lowMerge>0);assert.deepEqual(JSON.parse(JSON.stringify(upper.slice(upMerge))),JSON.parse(JSON.stringify(lower.slice(lowMerge))));
+});
+
+test('Chapter IV roads keep tide landmarks explicit and reef routes merge into one shared tail',()=>{
+  const ns=setup();
+  for(const [id,blocked] of [['tidegateoutfall',[[860,150],[1440,600]]],['brineway',[[740,170],[1420,480]]],['reefconfluence',[[650,270],[1400,300],[1380,700]]],['tideobservatory',[[900,210],[250,580],[1420,450]]]]){
+    const map=ns.maps.definitions[id];ns.maps.apply(id);const build=new ns.systems.BuildSystem();assert.equal(map.visible,true);assert.ok(map.path.length>=14);
+    for(const route of map.routes||[map.path])for(const point of route.slice(1,-1))assert.equal(build.canPlaceAt(point.x,point.y,'building'),false,`${id} route must remain non-buildable`);
+    for(const point of blocked)assert.equal(build.canPlaceAt(...point,'building'),false,`${id} tide landmark must remain non-buildable`);
+    assert.ok(map.safeArea.width>1200&&map.safeArea.height>650);assert.ok(map.camera.mobileInitialZoom>=1.2);
+  }
+  const map=ns.maps.definitions.reefconfluence,[upper,lower]=map.routes,upMerge=upper.findIndex(p=>p.x===map.merge.x&&p.y===map.merge.y),lowMerge=lower.findIndex(p=>p.x===map.merge.x&&p.y===map.merge.y);
   assert.ok(upMerge>0&&lowMerge>0);assert.deepEqual(JSON.parse(JSON.stringify(upper.slice(upMerge))),JSON.parse(JSON.stringify(lower.slice(lowMerge))));
 });
 

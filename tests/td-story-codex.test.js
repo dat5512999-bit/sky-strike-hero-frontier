@@ -122,6 +122,16 @@ test('Chapter III unlocks existing frostland and goblin allies without publishin
   bridge.handleStoryEvent({ type: 'chapter-completed', id: 'chapter3' });
   assert.equal(store.current().unlocks.heroes.filter(id => id === 'frostland').length, 1, 'chapter reward remains idempotent');
 });
+test('Chapter IV gives Naga a formal story role without re-locking it or creating a Chronicle claim', () => {
+  const ns = load(), store = profilePort(), bridge = new ns.codex.StoryCodexBridge({ profileStore: store, storage: null, getMission: id => ns.systems.StoryCatalog.getMission(id) });
+  const missions = ns.systems.StoryCatalog.missions.filter(mission => mission.chapter === 4);
+  assert.deepEqual(clone(missions.map(mission => mission.id)), ['chapter4-tidegate-outfall', 'chapter4-brineway', 'chapter4-reef-confluence', 'chapter4-tide-observatory']);
+  store.change(state => { state.profiles.test.unlocks.heroes.push('naga'); state.profiles.test.unlocks.factions.push('naga'); });
+  for (const mission of missions) { store.change(state => state.profiles.test.completed.push(mission.id)); bridge.handleStoryEvent({ type: 'mission-completed', id: mission.id }); }
+  assert.doesNotThrow(() => bridge.handleStoryEvent({ type: 'chapter-completed', id: 'chapter4' }));
+  assert.equal(store.current().unlocks.heroes.filter(id => id === 'naga').length, 1);assert.equal(store.current().unlocks.factions.filter(id => id === 'naga').length, 1);
+  assert.equal(ns.codex.chronicleSeed.some(seed => seed.chapter === 4), false, '第四章不能把來源未知的觀測寫成正史編年');
+});
 test('legacy migration preserves rollback data; incompatible saves, quota and stale tabs cannot partially unlock', () => {
   const ns = load(), disk = storage();
   const legacy = JSON.stringify({ schema: 1, entries: { 'enemy:boss': { encountered: true, favorite: true } } });

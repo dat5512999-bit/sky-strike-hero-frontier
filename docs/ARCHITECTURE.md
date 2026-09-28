@@ -1,3 +1,5 @@
+> **v0.85.73：** Chapter IV 走既有 `StoryCatalog → FrontierApp → ProfileStore → StoryCodexBridge` 路徑；四張地圖的 `maps.js` 幾何與背景圖分離，`TDGame` 僅補自由遠征選項，沒有新增資料庫或並行戰鬥系統。詳見 [第四章架構](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
+
 > **v0.85.69：** `TDDifficultySystem.heroAssault` 與 `Map.heroVulnerable` 經 `heroDamageAllowed()` 匯成單一 `TDGame.heroDamageEnabled()`，同時供 EnemyCombat 與 HUD 使用；沒有複製敵軍 AI 或另建傷害系統。
 
 > **2026-09-28 容量整理：** 本機保留主開發目錄與五個功能分支，需要隔離開發時再由分支重建副本；地圖歷史仍由 artifacts 保存。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。

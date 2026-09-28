@@ -17,7 +17,10 @@
       'chapter2': { requiredMissionIds: ['chapter2-western-signal', 'chapter2-ember-road', 'chapter2-stone-circle', 'chapter2-red-mesa'], ready: true, rewards: [{ action: 'unlockFaction', entryId: 'faction:wild' }] },
       // The Chapter III outcome unlocks existing playable content only. It adds
       // no Chronicle claim about what caused the anomaly or who made it.
-      'chapter3': { requiredMissionIds: ['chapter3-white-trace', 'chapter3-echo-yard', 'chapter3-crossmark', 'chapter3-nightwatch'], ready: true, rewards: [{ action: 'unlockHero', entryId: 'hero:frostland' }, { action: 'unlockFaction', entryId: 'faction:frostland' }, { action: 'unlockHero', entryId: 'hero:goblin' }, { action: 'unlockFaction', entryId: 'faction:goblin' }] }
+      'chapter3': { requiredMissionIds: ['chapter3-white-trace', 'chapter3-echo-yard', 'chapter3-crossmark', 'chapter3-nightwatch'], ready: true, rewards: [{ action: 'unlockHero', entryId: 'hero:frostland' }, { action: 'unlockFaction', entryId: 'faction:frostland' }, { action: 'unlockHero', entryId: 'hero:goblin' }, { action: 'unlockFaction', entryId: 'faction:goblin' }] },
+      // Naga is deliberately already a free expedition choice. Chapter IV
+      // records its formal story role without re-locking it or adding lore claims.
+      'chapter4': { requiredMissionIds: ['chapter4-tidegate-outfall', 'chapter4-brineway', 'chapter4-reef-confluence', 'chapter4-tide-observatory'], ready: true, rewards: [] }
     }
   };
 })(globalThis.TowerFrontier);

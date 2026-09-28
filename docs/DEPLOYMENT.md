@@ -1,3 +1,5 @@
+> **v0.85.73：** 須同步部署 `StoryCatalog.js`、`maps.js`、`TDGame.js`、`StoryCodexMapping.js`、四張 `chapter4-*.png` 與 `sw.js`；新 Worker 快取鍵為 `sky-strike-v0.85.73`，不需資料庫遷移。詳見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
+
 > **v0.85.69：** 同步部署 `TDDifficultySystem.js`、`TDGame.js`、`td.html`、`sw.js`、文件與測試；確認快取 `sky-strike-v0.85.69`，以災厄開局驗證英雄會被攻城／遠程／Boss 攻擊，標準則不會。
 
 > **2026-09-28 容量整理：** 本次僅整理本機資料；正式發佈清單與既有部署流程沿用現況。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。

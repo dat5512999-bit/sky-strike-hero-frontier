@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.72';
+const CACHE_NAME = 'sky-strike-v0.85.73';
 const ASSETS = [
  './src/td/systems/FrostlandMotionAtlas.js', './frostland-soldier-preview.html', './src/td/frostland-soldier-preview.js',
  './assets/td/frostland/frostWolf-motion-v2.png', './assets/td/frostland/frostBear-motion-v2.png', './assets/td/frostland/frostBird-motion-v2.png',
@@ -50,7 +50,7 @@ const ASSETS = [
   './assets/td/opening/hero-hunter-selection-v1.png', './assets/td/opening/hero-arcanist-selection-v1.png', './assets/td/opening/hero-rogue-selection-v1.png', './assets/td/opening/difficulty-scenes-v1.png',
   './assets/td/opening/faction-kingdom-selection-v1.png', './assets/td/opening/faction-silverleaf-selection-v1.png', './assets/td/opening/faction-twilight-selection-v1.png',
  './assets/td/opening/chief-skill-icons-v1.png', './assets/td/opening/chief-shockwave-icon.svg', './assets/td/opening/faction-wild-selection-v1.png', './assets/td/opening/hero-chief-selection-v2.png', './assets/td/wild-chief-actions-v1.png', './assets/td/wild-centaur-actions-v1.png', './assets/td/wild-boar-rider-actions-v1.png', './assets/td/wild-minotaur-actions-v1.png', './assets/td/wild-shaman-actions-v1.png',
- './assets/td/autumn-ruins-v1.png', './assets/td/twin-pass-v1.png', './assets/td/beginner-valley-v2.png', './assets/td/silverleaf-valley-v4.png', './assets/td/shadowfall-ruins-v3.png', './assets/td/frostborn-chasm-v3.png', './assets/td/western-signal-v1.png', './assets/td/ember-road-encounter-v1.png', './assets/td/stone-ring-basin-v1.png', './assets/td/red-mesa-terminus-v1.png', './assets/td/chapter3-white-trace-pass-v1.png', './assets/td/chapter3-echo-engine-yard-v1.png', './assets/td/chapter3-crossmark-hollow-v1.png', './assets/td/chapter3-nightwatch-calibration-v1.png', './assets/td/story/chapter2-stone-circle-witness-v1.png', './assets/td/story/chapter2-red-mesa-dawn-v1.png', './assets/td/frontier-ground-v2.png', './assets/td/frontier-ground-v1.png', './assets/td/hero-skill-icons-v1.png',
+ './assets/td/autumn-ruins-v1.png', './assets/td/twin-pass-v1.png', './assets/td/beginner-valley-v2.png', './assets/td/silverleaf-valley-v4.png', './assets/td/shadowfall-ruins-v3.png', './assets/td/frostborn-chasm-v3.png', './assets/td/western-signal-v1.png', './assets/td/ember-road-encounter-v1.png', './assets/td/stone-ring-basin-v1.png', './assets/td/red-mesa-terminus-v1.png', './assets/td/chapter3-white-trace-pass-v1.png', './assets/td/chapter3-echo-engine-yard-v1.png', './assets/td/chapter3-crossmark-hollow-v1.png', './assets/td/chapter3-nightwatch-calibration-v1.png', './assets/td/chapter4-tidegate-outfall-v1.png', './assets/td/chapter4-brineway-v1.png', './assets/td/chapter4-reef-confluence-v1.png', './assets/td/chapter4-tide-observatory-v1.png', './assets/td/story/chapter2-stone-circle-witness-v1.png', './assets/td/story/chapter2-red-mesa-dawn-v1.png', './assets/td/frontier-ground-v2.png', './assets/td/frontier-ground-v1.png', './assets/td/hero-skill-icons-v1.png',
   './src/td/maps.js', './src/td/systems/FrontierTerrain.js',
   './src/td/systems/BattlefieldCamera.js',
   './src/td/systems/MiniMapView.js',

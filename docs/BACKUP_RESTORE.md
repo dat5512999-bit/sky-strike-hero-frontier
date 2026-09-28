@@ -1,3 +1,5 @@
+> **v0.85.73：** 第四章不改玩家資料 schema；更新前可照既有流程匯出 `hero-frontier-profiles.json`。需要回退程式時，回到上一個 Git commit 後匯回該備份即可，無須移除娜迦或劇情進度。詳見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
+
 > **v0.85.69：** 不遷移玩家資料。回退時完整回到 v0.85.68，並同步回退 `TDDifficultySystem.js`、`TDGame.js`、入口版本與 `sky-strike-v0.85.68`；不可只更換快取名稱。
 
 > **2026-09-28 容量整理：** 五個功能分支已保留並實際驗證可重建；繼續備份 .git、必要 artifacts 與 ignored 參考原稿。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。

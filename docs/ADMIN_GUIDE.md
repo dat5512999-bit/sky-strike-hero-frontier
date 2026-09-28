@@ -1,3 +1,5 @@
+> **v0.85.73：** 第四章只新增靜態劇情／地圖資料與圖片資產，沒有帳號、權限、資料庫或後端設定；部署與回復見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
+
 > **v0.85.69：** `TDDifficultySystem.heroAssault` 僅災厄為 true，並由 `heroDamageAllowed(map.heroVulnerable)` 合併地圖預設；勿把正式地圖的 `heroVulnerable:false` 全部改成 true。士兵不承傷規則不變。
 
 > **2026-09-28 容量整理：** 只按核對清單處理工作副本與純快取；artifacts 地圖歷史、回復工具和驗收證據必須保留。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。
