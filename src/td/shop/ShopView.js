@@ -22,7 +22,7 @@
       root.classList.add('hf-shop'); root.addEventListener('click', this.click); root.addEventListener('keydown', this.key); this.render();
     }
     button(action, text, value = '', extra = '') { return `<button data-shop-action="${action}" data-value="${escape(value)}" ${extra}>${text}</button>`; }
-    filtered() { const order = ['astral-oath', 'thunder-king', 'solar-lion', 'crimson-fox', 'bone-emperor', 'eclipse-court', 'silverleaf-oath', 'frontier-banner', 'guest-realm']; return [...this.store.catalog].sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id)).filter(s => s.category !== 'effect' && (this.category === 'all' || s.category === this.category) && (!this.ownedOnly || ['owned', 'equipped'].includes(this.store.status(s.id)))); }
+    filtered() { const order = ['north-rescue', 'abyss-response', 'steel-foreman', 'special-maintenance', 'astral-oath', 'thunder-king', 'solar-lion', 'crimson-fox', 'bone-emperor', 'eclipse-court', 'silverleaf-oath', 'frontier-banner', 'guest-realm']; return [...this.store.catalog].sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id)).filter(s => s.category !== 'effect' && (this.category === 'all' || s.category === this.category) && (!this.ownedOnly || ['owned', 'equipped'].includes(this.store.status(s.id)))); }
     render() {
       if (this.destroyed) return;
       const active = this.root.contains(document.activeElement) ? { action: document.activeElement.dataset.shopAction, value: document.activeElement.dataset.value } : null;

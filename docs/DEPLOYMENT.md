@@ -1,3 +1,5 @@
+> **v0.85.74：** 發布時同步八張 `assets/td/shop/*` 跨界造型素材、`CrossworldSkinArt.js`、商城目錄、`td.html`、`sw.js`、`update.html` 與版本號；確認 Worker 快取為 `sky-strike-v0.85.74`。不需資料庫遷移。見 [交付文件](CROSSWORLD_SKINS_SEASON_ONE_V08574.md)。
+
 > **v0.85.73：** 須同步部署 `StoryCatalog.js`、`maps.js`、`TDGame.js`、`StoryCodexMapping.js`、四張 `chapter4-*.png` 與 `sw.js`；新 Worker 快取鍵為 `sky-strike-v0.85.73`，不需資料庫遷移。詳見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
 
 > **v0.85.69：** 同步部署 `TDDifficultySystem.js`、`TDGame.js`、`td.html`、`sw.js`、文件與測試；確認快取 `sky-strike-v0.85.69`，以災厄開局驗證英雄會被攻城／遠程／Boss 攻擊，標準則不會。

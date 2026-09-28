@@ -3,6 +3,7 @@
   const schema = root.FrontierShop?.schema || require('./SkinSchema.js');
   const image = src => ({ type: 'image', src: 'assets/td/' + src + '.png' });
   const sprite = (src, type = 'sprite') => ({ type, src: 'assets/td/' + src + '.png', columns: 4, rows: 4, frames: 4 });
+  const bullSprite = (src, type = 'sprite') => ({ type, src: 'assets/td/' + src + '.png', columns: 5, rows: 5, frames: 5 });
   const mage = image('shop/frost-portrait-v2');
   const kingdom = image('opening/faction-kingdom-selection-v1');
   const forest = image('opening/faction-silverleaf-selection-v1');
@@ -13,6 +14,22 @@
   }
   const thunder = root.FrontierShop?.thunderKing || require('./ThunderKing.js');
   const catalog = schema.catalog([
+    skin('north-rescue', '北境搜救犬', '霜牙・凜 · 極地救援', 'hero', 'frostland', 'legendary', 1480, image('shop/north-rescue-portrait-v1'), {
+      portrait: image('shop/north-rescue-portrait-v1'), selectionArt: image('shop/north-rescue-portrait-v1'), battlefieldSprite: sprite('shop/north-rescue-actions-v1'), skillVfx: null,
+      summonAppearance: null, animation: sprite('shop/north-rescue-actions-v1', 'animation'), voice: null
+    }),
+    skin('abyss-response', '深淵應變員', '破潮者・賽洛 · 深海特勤', 'hero', 'naga', 'legendary', 1480, image('shop/abyss-response-portrait-v1'), {
+      portrait: image('shop/abyss-response-portrait-v1'), selectionArt: image('shop/abyss-response-portrait-v1'), battlefieldSprite: sprite('shop/abyss-response-actions-v1'), skillVfx: null,
+      summonAppearance: null, animation: sprite('shop/abyss-response-actions-v1', 'animation'), voice: null
+    }),
+    skin('steel-foreman', '鋼鐵工頭', '戰神・奧魯姆 · 工地戰神', 'hero', 'bull', 'legendary', 1680, image('shop/steel-foreman-portrait-v1'), {
+      portrait: image('shop/steel-foreman-portrait-v1'), selectionArt: image('shop/steel-foreman-portrait-v1'), battlefieldSprite: bullSprite('shop/steel-foreman-actions-v1'), skillVfx: null,
+      summonAppearance: null, animation: bullSprite('shop/steel-foreman-actions-v1', 'animation'), voice: null
+    }),
+    skin('special-maintenance', '特勤維修兵', '銅齒・奇克 · 戰地維保', 'hero', 'goblin', 'legendary', 1480, image('shop/special-maintenance-portrait-v1'), {
+      portrait: image('shop/special-maintenance-portrait-v1'), selectionArt: image('shop/special-maintenance-portrait-v1'), battlefieldSprite: sprite('shop/special-maintenance-actions-v1'), skillVfx: null,
+      summonAppearance: null, animation: sprite('shop/special-maintenance-actions-v1', 'animation'), voice: null
+    }),
     skin('astral-oath', '霜華之誓', '銀葉公主 · 霜雪典藏', 'hero', 'arcanist', 'legendary', 1280, mage, {
       portrait: mage, selectionArt: mage, battlefieldSprite: sprite('shop/frost-actions-prototype-v1'), skillVfx: null,
       summonAppearance: null, animation: sprite('shop/frost-actions-prototype-v1', 'animation'), voice: null

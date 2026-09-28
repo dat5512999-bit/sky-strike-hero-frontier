@@ -1,3 +1,5 @@
+> **v0.85.74：** `SkinCatalog` 新增四筆 `hero` 類目，target 分別為 `frostland`、`naga`、`bull`、`goblin`；`battlefieldSprite` 依序為 4×4、4×4、5×5、4×4。無 HTTP API、資料庫或戰鬥資料 schema 變更。見 [交付文件](CROSSWORLD_SKINS_SEASON_ONE_V08574.md)。
+
 > **v0.85.73：** `StoryCatalog.missions` 新增 chapter `4` 的四筆既有任務結構資料；`StoryCodexMapping.chapters.chapter4` 驗證四個任務完成，`rewards` 為空。無 HTTP API 或存檔 schema 改動。詳見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
 
 > **v0.85.69：** `TDDifficultySystem.heroDamageAllowed(mapHeroVulnerable)` 回傳該局是否容許敵軍攻擊英雄；災厄透過 `heroAssault:true` 覆蓋正式地圖的 false，其他難度沿用地圖值。無 HTTP API 或存檔 schema 改動。

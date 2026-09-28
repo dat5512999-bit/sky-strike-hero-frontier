@@ -16,7 +16,7 @@ const json = object => JSON.parse(JSON.stringify(object));
 test('frost prototype reuses the cosmetic schema and correct arcanist hero atlas', () => {
   const skin = lab.previewSkin({ schema, catalog });
   assert.equal(skin.targetId, 'arcanist'); assert.equal(skin.cosmeticOnly, true);
-  assert.equal(catalog[0].slots.battlefieldSprite.src, lab.frostPath);
+  assert.equal(catalog.find(item=>item.id==='astral-oath').slots.battlefieldSprite.src, lab.frostPath);
   assert.equal(skin.slots.battlefieldSprite.src, lab.frostPath);
   assert.ok(Object.isFrozen(skin.slots));
   assert.ok(fs.existsSync(path.join(__dirname, '..', lab.frostPath)));

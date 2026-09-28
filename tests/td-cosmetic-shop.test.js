@@ -5,11 +5,13 @@ const {SkinStore,MemorySkinAdapter}=require('../src/td/shop/SkinStore.js');
 const clone=value=>JSON.parse(JSON.stringify(value));
 const previewStore=async()=>new SkinStore(catalog,new MemorySkinAdapter()).init();
 
-test('shop releases four hero skins and the kingdom colorway while holding unfinished effects',async()=>{
+test('shop releases crossworld and legacy hero skins plus the kingdom colorway while holding unfinished effects',async()=>{
+  const crossworld=['north-rescue','abyss-response','steel-foreman','special-maintenance'];
+  assert.deepEqual(crossworld.map(id=>catalog.find(s=>s.id===id)?.targetId),['frostland','naga','bull','goblin']);
   assert.deepEqual(['astral-oath','solar-lion','crimson-fox','bone-emperor'].map(id=>catalog.find(s=>s.id===id)?.category),['hero','hero','hero','hero']);
   assert.equal(catalog.find(s=>s.id==='eclipse-court').targetId,'hunter');
   assert.equal(catalog.find(s=>s.id==='arcane-echo').availability.status,'locked');
-  const store=await previewStore();for(const skin of catalog)assert.equal(store.status(skin.id),['astral-oath','solar-lion','crimson-fox','bone-emperor','thunder-king','eclipse-court'].includes(skin.id)?'available':'locked');
+  const store=await previewStore();for(const skin of catalog)assert.equal(store.status(skin.id),[...crossworld,'astral-oath','solar-lion','crimson-fox','bone-emperor','thunder-king','eclipse-court'].includes(skin.id)?'available':'locked');
   assert.equal(catalog.find(s=>s.id==='bone-emperor').cover.src,'assets/td/shop/bone-chief-portrait-v1.png');
 });
 test('all referenced preview assets exist and cosmetic schema rejects gameplay fields',()=>{

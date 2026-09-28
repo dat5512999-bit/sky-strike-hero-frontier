@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.73';
+const CACHE_NAME = 'sky-strike-v0.85.74';
 const ASSETS = [
  './src/td/systems/FrostlandMotionAtlas.js', './frostland-soldier-preview.html', './src/td/frostland-soldier-preview.js',
  './assets/td/frostland/frostWolf-motion-v2.png', './assets/td/frostland/frostBear-motion-v2.png', './assets/td/frostland/frostBird-motion-v2.png',
@@ -17,7 +17,7 @@ const ASSETS = [
  './assets/td/tower-magic-effects-v2.png',
  './assets/td/goblin-steam-scavenger-actions-v1.png', './assets/td/goblin-bomb-sapper-actions-v1.png', './assets/td/orc-war-banner-actions-v1.png', './assets/td/orc-skullcrusher-actions-v1.png', './assets/td/frostland-rime-stalker-actions-v1.png', './assets/td/frostland-rime-priest-actions-v1.png',
  './assets/td/naga/siltwater-demonlord-actions-v1.png', './assets/td/naga/silt-imp-actions-v1.png', './assets/td/naga/brine-shellbreaker-actions-v1.png', './assets/td/naga/tidebreaker-hero-actions-v1.png', './assets/td/naga/tidebreaker-selection-v1.png', './assets/td/naga/faction-selection-v1.png', './assets/td/naga/tidebreaker-skill-icons-v1.png', './assets/td/naga/tideguard-actions-v1.png', './assets/td/naga/deep-tide-wargod-actions-v1.png', './assets/td/naga/manta-wing-raider-actions-v1.png', './assets/td/naga/venom-marsh-stalker-actions-v1.png', './assets/td/naga/naga-buildings-v1.png',
- './src/td/systems/BullWargodArt.js', './assets/td/neutral/bull-wargod-actions-5x5-v1.png', './assets/td/neutral/bull-wargod-selection-v1.png', './assets/td/neutral/bull-wargod-skill-icons-v2.png',
+ './src/td/systems/BullWargodArt.js', './assets/td/neutral/bull-wargod-actions-5x5-v1.png', './assets/td/neutral/bull-wargod-selection-v1.png', './assets/td/neutral/bull-wargod-skill-icons-v2.png', './assets/td/shop/steel-foreman-actions-v1.png', './assets/td/shop/steel-foreman-portrait-v1.png',
  './assets/td/enemy-grunt-directions-v1.png', './assets/td/enemy-brute-directions-v1.png',
  './update.html', './src/td/update-client.js',
  './goblin-polish-preview.html', './src/td/goblin-polish-preview.js', './src/td/systems/GoblinPresentation.js', './assets/td/goblin/skill-icons-v2.png', './assets/td/goblin/spell-effects-v1.png',
@@ -37,7 +37,7 @@ const ASSETS = [
  './assets/cinematics/prologue/subtitles/zh-TW.vtt',
  './td-result.css', './assets/td/lobby/victory-background-v1.png', './src/td/systems/ResultScreen.js',
  './assets/td/lobby/kingdom-lobby-v1.png', './assets/td/lobby/story-card-v1.png', './assets/td/lobby/expedition-card-v1.png', './assets/td/lobby/campaign-map-v1.png', './assets/td/shop/eclipse-court-concept-v1.png', './assets/td/goblin-soldiers-atlas-v2.png',
- './src/td/app/ProfileSkinAdapter.js', './src/td/systems/CosmeticArt.js', './src/td/skin-lab/ChiefPreview.js', './assets/td/shop/bone-chief-portrait-v1.png', './assets/td/shop/bone-chief-motion-v1.png', './assets/td/shop/bone-chief-attack-v1.png', './assets/td/shop/bone-chief-cast-v1.png', './assets/td/shop/chief-original-actions-v1.png', './assets/td/shop/chief-original-portrait-v1.png', './assets/td/shop/thunder-chief-portrait-v1.png', './assets/td/shop/thunder-chief-actions-v1.png',
+ './src/td/app/ProfileSkinAdapter.js', './src/td/systems/CosmeticArt.js', './src/td/systems/CrossworldSkinArt.js', './src/td/skin-lab/ChiefPreview.js', './assets/td/shop/north-rescue-actions-v1.png', './assets/td/shop/north-rescue-portrait-v1.png', './assets/td/shop/abyss-response-actions-v1.png', './assets/td/shop/abyss-response-portrait-v1.png', './assets/td/shop/special-maintenance-actions-v1.png', './assets/td/shop/special-maintenance-portrait-v1.png', './assets/td/shop/bone-chief-portrait-v1.png', './assets/td/shop/bone-chief-motion-v1.png', './assets/td/shop/bone-chief-attack-v1.png', './assets/td/shop/bone-chief-cast-v1.png', './assets/td/shop/chief-original-actions-v1.png', './assets/td/shop/chief-original-portrait-v1.png', './assets/td/shop/thunder-chief-portrait-v1.png', './assets/td/shop/thunder-chief-actions-v1.png',
  './td-expedition.css', './assets/td/lobby/skin-frost-v1.png', './assets/td/lobby/limited-orc-v1.png', './td-lobby.css', './td-ranking.css', './td-tutorial.css', './src/td/app/ProfileStore.js', './src/td/app/StoryCatalog.js', './src/td/ranking/RankingDataSource.js', './src/td/ranking/RankingView.js', './src/td/app/FrontierApp.js', './src/td/app/TutorialIntegration.js',
  './assets/td/bear-actions-v3.png', './assets/td/ultimate-dragon-actions-v3.png',
  './assets/td/kingdom-mage-actions-v2.png', './assets/td/alchemist-actions-v2.png', './assets/td/bounty-hunter-actions-v2.png', './assets/td/pirate-actions-v2.png', './assets/td/blacksmith-actions-v2.png', './assets/td/time-mage-actions-v2.png',
