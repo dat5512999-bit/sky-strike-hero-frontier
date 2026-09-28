@@ -543,3 +543,5 @@ v0.85.0：冰原僅為 TESTABLE，管理者可玩，新測試輪次故事鎖定�
 
 > **v0.85.70：** 戰牛 Q／E 的出生動畫已修正；驗收 `npm run test:bull` 必須通過 31 項。若有「動畫已略過」提示，取用本局 `hero.bullVfxFault` 或 `bullFieldFault` 定位；不要以停用英雄或吞掉整個主迴圈例外作為修復。詳見 [8D](BULL_WARGOD_SKILL_FREEZE_8D_V08569.md)。
 
+> **v0.85.71：** 手機 PWA 以 `fullscreen` 為優先；部署後確認 `td.webmanifest`、`td-mobile.html`、`src/td/main.js` 與 `sky-strike-v0.85.71` 同步。iOS 狀態列由系統控制，僅驗收其深色安全區不覆蓋操作區。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
+

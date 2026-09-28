@@ -534,3 +534,5 @@ v0.85.0：先匯出完整玩家備份。舊 schema 保持相容；冰原檢查�
 
 > **v0.85.70：** 不遷移玩家資料。若必要回退，程式、`tests/td-bull-skill-crash.test.js`、入口版本及 `sky-strike-v0.85.70` 必須一起回退；不可只換快取名稱。回退到 0.85.69 會恢復戰牛 Q／E 的已知凍結風險。
 
+> **v0.85.71：** 不遷移玩家資料。回退時將 manifest、手機殼、主程式、入口版號與 `sky-strike-v0.85.71` 一起回退；不可只改 Service Worker 名稱。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
+

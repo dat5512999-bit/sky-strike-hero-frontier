@@ -49,14 +49,18 @@ test('手機容器與模擬器都保留同一個橫向遊戲畫面',()=>{
   assert.match(shell,/searchParams\.get\('preview'\)/);
   assert.match(shell,/searchParams\.set\('preview',preview\)/);
   assert.match(shell,/rotate\(90deg\)/);
+  assert.match(shell,/safeTopProbe\.getBoundingClientRect\(\)\.height/);
+  assert.match(shell,/translateY\('\+safeTop\+'px\)/);
   assert.match(shell,/id="install-open"/);
   assert.match(main,/mobileShell=params\.get\('mobileShell'\)==='1'/);
   assert.match(main,/document\.body\.dataset\.mobilePreview='true'/);
+  assert.match(main,/requestFullscreen\(\{navigationUI:'hide'\}\)/);
   assert.doesNotMatch(combat,/data-mobile-shell="true"[^\n]*data-game-screen="battle"[^\n]*\.orientation-gate\{display:grid/);
   assert.match(lobby,/body\[data-mobile-preview="true"\] #frontier-app\[data-page=home\] \.lobby-content\{display:grid;grid-template-areas:'motto promo' 'modes promo'/);
   assert.match(pwa,/document\.getElementById\('install-open'\)/);
   assert.match(pwa,/const reveal=.*open\.hidden=false/);
   assert.equal(manifest.orientation,'landscape');
+  assert.equal(manifest.display,'fullscreen');
 });
 
 test('手機預覽模式不會讀寫玩家的桌機版型偏好', () => {

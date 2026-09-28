@@ -1007,3 +1007,5 @@ v0.85.0 冰原：npm run test:frostland 檢查狀態、兵塔、36 種 Hero×Fac
 
 > **v0.85.70：** 必跑 `npm run test:bull`：戰牛 Q／W／E／F 的嚴格 Canvas 完整生命週期、Q／E 的 30／60／120 FPS × 1／2／3 倍速 RAF、特效／震域故障隔離、既有規則與版本快取一致性，共 31 項；另執行 `npm run check` 與 `npm test`。詳見 [8D](BULL_WARGOD_SKILL_FREEZE_8D_V08569.md)。
 
+> **v0.85.71：** 執行 `npm run test:mobile`，驗收 manifest 的全螢幕優先順序、直向手機殼安全區與使用者手勢全螢幕請求；另跑 `npm run check`、`npm test`。實體 Android Chrome／iPhone Safari 的瀏覽器與主畫面入口仍待驗收。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
+

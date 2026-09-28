@@ -73,14 +73,14 @@ test('手機版提供可記憶的戰場優先指揮面板與安全區', () => {
 test('PWA manifest 與離線快取引用的遊戲檔案都存在', () => {
   ['manifest.webmanifest', 'td.webmanifest'].forEach((filename) => {
     const manifest = JSON.parse(fs.readFileSync(path.join(root, filename), 'utf8'));
-    assert.equal(manifest.display, 'standalone');
+    assert.equal(manifest.display, filename === 'td.webmanifest' ? 'fullscreen' : 'standalone');
     assert.equal(manifest.orientation, filename === 'td.webmanifest' ? 'landscape' : 'portrait');
     manifest.icons.forEach((icon) => assert.ok(fs.existsSync(path.join(root, icon.src)), `缺少圖示：${icon.src}`));
   });
   const tdManifest = JSON.parse(fs.readFileSync(path.join(root, 'td.webmanifest'), 'utf8'));
   assert.equal(tdManifest.start_url, './td-mobile.html');
   assert.equal(tdManifest.id, './td-mobile.html');
-  assert.deepEqual(tdManifest.display_override, ['standalone', 'fullscreen']);
+  assert.deepEqual(tdManifest.display_override, ['fullscreen', 'standalone']);
   const mobileShell=fs.readFileSync(path.join(root,'td-mobile.html'),'utf8');
   const mobilePwa=fs.readFileSync(path.join(root,'src/td/mobile-pwa.js'),'utf8');
   assert.match(mobileShell,/rel="manifest" href="td\.webmanifest"/);

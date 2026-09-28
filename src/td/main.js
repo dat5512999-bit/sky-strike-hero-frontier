@@ -96,8 +96,9 @@
   if(ns.systems.WaveHUD)globalThis.towerFrontierGame.waveHUD=new ns.systems.WaveHUD(globalThis.towerFrontierGame,document.getElementById('td-wave-hud'));
   globalThis.towerFrontierGame.attachBuildDetails();
   const requestLandscape=()=>{const orientation=globalThis.screen&&globalThis.screen.orientation;if(!orientation||typeof orientation.lock!=='function')return false;try{const result=orientation.lock('landscape');if(result&&typeof result.catch==='function')result.catch(()=>false);return true;}catch(error){return false;}};
-  if(ui.orientationLock)ui.orientationLock.onclick=requestLandscape;
-  if(ui.openingStart)ui.openingStart.addEventListener('click',requestLandscape);
+  const requestImmersive=()=>{const root=globalThis.document&&document.documentElement;if(root&&!document.fullscreenElement&&typeof root.requestFullscreen==='function')try{const result=root.requestFullscreen({navigationUI:'hide'});if(result&&typeof result.catch==='function')result.catch(()=>false);}catch(error){}return requestLandscape();};
+  if(ui.orientationLock)ui.orientationLock.onclick=requestImmersive;
+  if(ui.openingStart)ui.openingStart.addEventListener('click',requestImmersive);
   if(ui.placementConfirm)ui.placementConfirm.onclick=()=>globalThis.towerFrontierGame.confirmPlacement();
   // Commit intentional touch releases once, including browsers that suppress
   // compatibility clicks after dragging a placement preview.

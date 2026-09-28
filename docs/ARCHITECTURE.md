@@ -884,3 +884,5 @@ v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 M
 
 > **v0.85.70：** 戰牛技能路徑為 `HeroRoster／Hero／HeroUltimateSystem → HeroSkillVFX.emit → HeroSkillVFX.draw`；每筆 VFX 的 Canvas 故障由展示層隔離並還原狀態，`TDGame.loop()` 因而能排入下一幀。震域由 `HeroRoster.drawFields` 以相同局部邊界處理。詳見 [8D](BULL_WARGOD_SKILL_FREEZE_8D_V08569.md)。
 
+> **v0.85.71：** 手機流程為 `td.webmanifest → td-mobile.html 外殼／安全區 → td.html iframe → main.js 使用者手勢全螢幕與橫向鎖定`。外殼保留系統安全區，不重建遊戲或改寫座標模型。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
+
