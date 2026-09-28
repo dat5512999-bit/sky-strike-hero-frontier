@@ -541,3 +541,5 @@ v0.85.0：沿用 Node.js 18+，無新依賴。完整取得 assets/td/frostland �
 
 > **v0.85.71：** 無新增依賴。安裝／更新後確認 Service Worker 為 `sky-strike-v0.85.71`，關閉舊分頁並由主畫面重新開啟英雄塔防；Android 可獲得全螢幕，iOS 保留安全區相容行為。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
+> **v0.85.72：** 無新增依賴。確認 Service Worker 為 `sky-strike-v0.85.72` 後，iPhone 直向入口不應有上下黑邊。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+

@@ -536,3 +536,5 @@ v0.85.0：先匯出完整玩家備份。舊 schema 保持相容；冰原檢查�
 
 > **v0.85.71：** 不遷移玩家資料。回退時將 manifest、手機殼、主程式、入口版號與 `sky-strike-v0.85.71` 一起回退；不可只改 Service Worker 名稱。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
+> **v0.85.72：** 不遷移資料。若回退必須同時回退手機殼、`main.js`、`td.css` 和 `sky-strike-v0.85.72`；不可只替換快取鍵。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+

@@ -886,3 +886,5 @@ v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 M
 
 > **v0.85.71：** 手機流程為 `td.webmanifest → td-mobile.html 外殼／安全區 → td.html iframe → main.js 使用者手勢全螢幕與橫向鎖定`。外殼保留系統安全區，不重建遊戲或改寫座標模型。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
+> **v0.85.72：** 外殼保持滿版旋轉，讀取實體頂端安全區後以同源訊息傳入 iframe；`main.js` 寫入 CSS 變數，旋轉後由遊戲內邏輯左邊距消化。這不改變 Canvas 或世界座標。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+

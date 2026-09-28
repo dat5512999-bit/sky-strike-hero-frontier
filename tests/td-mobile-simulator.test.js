@@ -41,6 +41,7 @@ test('iPhone 15 Pro Max 模擬器提供與真實直向入口一致的檢視模�
 test('手機容器與模擬器都保留同一個橫向遊戲畫面',()=>{
   const shell=fs.readFileSync(path.join(root,'td-mobile.html'),'utf8');
   const main=fs.readFileSync(path.join(root,'src/td/main.js'),'utf8');
+  const css=fs.readFileSync(path.join(root,'td.css'),'utf8');
   const combat=fs.readFileSync(path.join(root,'td-combat.css'),'utf8');
   const lobby=fs.readFileSync(path.join(root,'td-lobby.css'),'utf8');
   const pwa=fs.readFileSync(path.join(root,'src/td/mobile-pwa.js'),'utf8');
@@ -50,11 +51,16 @@ test('手機容器與模擬器都保留同一個橫向遊戲畫面',()=>{
   assert.match(shell,/searchParams\.set\('preview',preview\)/);
   assert.match(shell,/rotate\(90deg\)/);
   assert.match(shell,/safeTopProbe\.getBoundingClientRect\(\)\.height/);
-  assert.match(shell,/translateY\('\+safeTop\+'px\)/);
+  assert.match(shell,/frame\.style\.width=\(portrait\?h:w\)\+'px'/);
+  assert.match(shell,/postMessage\(\{type:'tower-frontier-shell-inset'/);
+  assert.doesNotMatch(shell,/translateY\(/);
   assert.match(shell,/id="install-open"/);
   assert.match(main,/mobileShell=params\.get\('mobileShell'\)==='1'/);
   assert.match(main,/document\.body\.dataset\.mobilePreview='true'/);
+  assert.match(main,/shellSafeInset/);
+  assert.match(main,/tower-frontier-shell-inset/);
   assert.match(main,/requestFullscreen\(\{navigationUI:'hide'\}\)/);
+  assert.match(css,/--mobile-shell-system-inset/);
   assert.doesNotMatch(combat,/data-mobile-shell="true"[^\n]*data-game-screen="battle"[^\n]*\.orientation-gate\{display:grid/);
   assert.match(lobby,/body\[data-mobile-preview="true"\] #frontier-app\[data-page=home\] \.lobby-content\{display:grid;grid-template-areas:'motto promo' 'modes promo'/);
   assert.match(pwa,/document\.getElementById\('install-open'\)/);

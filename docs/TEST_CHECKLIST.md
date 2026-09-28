@@ -1009,3 +1009,5 @@ v0.85.0 冰原：npm run test:frostland 檢查狀態、兵塔、36 種 Hero×Fac
 
 > **v0.85.71：** 執行 `npm run test:mobile`，驗收 manifest 的全螢幕優先順序、直向手機殼安全區與使用者手勢全螢幕請求；另跑 `npm run check`、`npm test`。實體 Android Chrome／iPhone Safari 的瀏覽器與主畫面入口仍待驗收。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
+> **v0.85.72：** `npm run test:mobile` 必須驗證滿版 iframe、同源安全邊訊息與遊戲內左側 CSS 變數；實機 iPhone 驗收上下無黑邊、左側沒有控制被狀態列覆蓋。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+

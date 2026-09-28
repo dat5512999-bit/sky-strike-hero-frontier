@@ -545,3 +545,5 @@ v0.85.0：冰原僅為 TESTABLE，管理者可玩，新測試輪次故事鎖定�
 
 > **v0.85.71：** 手機 PWA 以 `fullscreen` 為優先；部署後確認 `td.webmanifest`、`td-mobile.html`、`src/td/main.js` 與 `sky-strike-v0.85.71` 同步。iOS 狀態列由系統控制，僅驗收其深色安全區不覆蓋操作區。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
+> **v0.85.72：** iPhone 熱修正不縮小 iframe；部署時確認 `td-mobile.html` 將安全區訊息傳給 `src/td/main.js`，且快取為 `sky-strike-v0.85.72`。驗收畫面沒有上下黑邊，狀態列只佔遊戲內左側安全邊。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+

@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.71';
+const CACHE_NAME = 'sky-strike-v0.85.72';
 const ASSETS = [
  './src/td/systems/FrostlandMotionAtlas.js', './frostland-soldier-preview.html', './src/td/frostland-soldier-preview.js',
  './assets/td/frostland/frostWolf-motion-v2.png', './assets/td/frostland/frostBear-motion-v2.png', './assets/td/frostland/frostBird-motion-v2.png',

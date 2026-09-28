@@ -301,3 +301,4 @@ Pages 首次啟用由 `.github/workflows/pages.yml` 的 `enablement: true` 控�
 > **v0.85.69：** `config.units.frostBird` 以 `frost: 16`、`chain: 3` 和 `frostHold: 1.2` 定義群體鋪寒與維持；`frostHold` 僅延後既有 Frost 衰減，不能延長凍結窗口。詳見 [霜原職責分流](FROSTLAND_ROLE_SEPARATION_V08569.md)。
 > **v0.85.70：** 沒有新增玩家或管理設定。戰牛 Q／E 圓環的最小半徑是程式內部 Canvas 安全限制，不調整傷害、冷卻、範圍、軍團或存檔格式。詳見 [8D](BULL_WARGOD_SKILL_FREEZE_8D_V08569.md)。
 > **v0.85.71：** 沒有可調整的玩家／管理員全螢幕開關。`td.webmanifest` 固定優先 `fullscreen`、回退 `standalone`；iOS 狀態列是否顯示仍由系統決定，安全區由 CSS 自動讀取。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
+> **v0.85.72：** 沒有新增設定。旋轉安全邊是外殼即時量測的唯讀視覺值，不能寫入玩家設定或存檔。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。

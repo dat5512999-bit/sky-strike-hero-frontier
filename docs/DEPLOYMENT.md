@@ -554,3 +554,5 @@ v0.85.0：同步部署 td.html、td-expedition.css、codex.css、src/td、Frostl
 
 > **v0.85.71：** 同步部署 manifest、手機殼、主程式、入口版號、`sw.js`、文件與測試；確認 `sky-strike-v0.85.71` 後，以 Android Chrome／iPhone Safari 的瀏覽器及主畫面入口驗收沉浸式顯示。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
+> **v0.85.72：** 同步部署 `td-mobile.html`、`td.html`、`td.css`、`main.js`、入口版號與 `sky-strike-v0.85.72`。在 iPhone 直向入口確認上下無黑邊，再檢查左側安全邊不含控制。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+
