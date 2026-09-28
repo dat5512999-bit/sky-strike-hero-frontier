@@ -1,3 +1,5 @@
+> **2026-09-28 容量整理：** 本機容量整理維護紀錄已新增；既有 API 與地圖還原資料位置沿用現況。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。
+
 > **v0.85.63：** 沒有 HTTP API 或存檔 schema 改動；`td-mobile.html` 只調整同源 iframe 的顯示方向，`mobileShell=1`／`preview=iphone15promax` 仍只影響版型。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
 
 > **v0.85.62：** `BuildSystem.selectAt(x, y, {preferNearest:true})` 為可選的觸控選取偏好；不傳時維持最上層選取。沒有 HTTP API、資料庫或存檔 schema 變更。詳見 [交付文件](MOBILE_BUILD_CLARITY_V08562.md)。

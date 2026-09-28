@@ -1,3 +1,5 @@
+> **2026-09-28 容量整理：** 本次僅整理本機資料；正式發佈清單與既有部署流程沿用現況。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。
+
 > **v0.85.63：** 發布時同步 `td-mobile.html`、PWA manifest、首頁／戰場 CSS、手機模擬器、`sw.js` 與版本標記；部署後驗收手機全程橫向畫面。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
 
 > **v0.85.62：** 發布時同步 `BuildSystem.js`、`TDGame.js`、`ArmoryUI.js`、`td.html`、`td-combat.css`、`sw.js` 與版本標記；不需資料庫遷移或權限設定。詳見 [交付文件](MOBILE_BUILD_CLARITY_V08562.md)。

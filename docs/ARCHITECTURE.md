@@ -1,3 +1,5 @@
+> **2026-09-28 容量整理：** 本機保留主開發目錄與五個功能分支，需要隔離開發時再由分支重建副本；地圖歷史仍由 artifacts 保存。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。
+
 > **v0.85.63：** 觸控流程為 `td.html → td-mobile.html → 同源 td.html`；容器在直向交換 iframe 寬高並旋轉，橫向直接填滿，兩者均執行同一遊戲。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
 
 > **v0.85.62：** 觸控事件僅經 `TDGame` 傳入 `BuildSystem.selectAt(..., {preferNearest:true})`；`BuildSystem.draw()` 的透明度只影響 Canvas 視覺；`ArmoryUI` 只投影已裝備名稱至既有按鈕。詳見 [交付文件](MOBILE_BUILD_CLARITY_V08562.md)。
