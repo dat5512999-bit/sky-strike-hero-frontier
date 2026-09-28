@@ -38,3 +38,13 @@ body[data-hero-class="goblin"] #td-skill-button b{background-position:0 0!import
 body[data-hero-class="goblin"] #td-thunder b{background-position:100% 0!important;}
 body[data-hero-class="goblin"] #td-summon b{background-position:0 100%!important;}
 body[data-hero-class="goblin"] #td-ultimate b{background-position:100% 100%!important;}
+/* 戰牛四技圖示：天墜、震域、戰意、裁決。選角頁保留前三招，戰場顯示完整 Q/W/E/F。 */
+body[data-hero-class="bull"] .td-hero-dock :is(#td-skill-button,#td-thunder,#td-summon,#td-ultimate) b,
+#td-profession-screen #td-hero-skills[data-hero="bull"] span::before{background-image:url('assets/td/neutral/bull-wargod-skill-icons-v2.png')!important;background-size:200% 200%!important;background-repeat:no-repeat!important;color:transparent!important;font-size:0!important;}
+body[data-hero-class="bull"] #td-skill-button b{background-position:0 0!important;}
+body[data-hero-class="bull"] #td-thunder b{background-position:100% 0!important;}
+body[data-hero-class="bull"] #td-summon b{background-position:0 100%!important;}
+body[data-hero-class="bull"] #td-ultimate b{background-position:100% 100%!important;}
+#td-profession-screen #td-hero-skills[data-hero="bull"] span[data-skill-index="0"]::before{background-position:0 0!important;}
+#td-profession-screen #td-hero-skills[data-hero="bull"] span[data-skill-index="1"]::before{background-position:100% 0!important;}
+#td-profession-screen #td-hero-skills[data-hero="bull"] span[data-skill-index="2"]::before{background-position:0 100%!important;}

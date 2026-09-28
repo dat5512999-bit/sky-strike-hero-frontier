@@ -96,6 +96,32 @@ test('chapter rewards use required mission IDs, do not turn the sample mission i
   bridge.progress.markRead('hero:arcanist'); bridge.completeChapter('first-arc'); assert.equal(bridge.progress.isUnread('hero:arcanist'), false);
   const pending = new ns.codex.StoryCodexBridge({ storage: storage() }); assert.throws(() => pending.completeChapter('chapter1'), /尚待/);
 });
+test('Chapter II records each verified milestone and unlocks the existing wild faction only after Red Mesa', () => {
+  const ns = load(), store = profilePort(), bridge = new ns.codex.StoryCodexBridge({ profileStore: store, storage: null, getMission: id => ns.systems.StoryCatalog.getMission(id) });
+  const missions = ns.systems.StoryCatalog.missions.filter(mission => mission.chapter === 2);
+  assert.deepEqual(clone(missions.map(mission => mission.id)), ['chapter2-western-signal', 'chapter2-ember-road', 'chapter2-stone-circle', 'chapter2-red-mesa']);
+  for (const mission of missions) {
+    store.change(state => state.profiles.test.completed.push(mission.id));
+    bridge.handleStoryEvent({ type: 'mission-completed', id: mission.id });
+  }
+  assert.equal(bridge.chronicleProgress.view(ns.codex.chronicleSeed.find(seed => seed.id === 'western-continent')).fragments.length, 1);
+  assert.equal(bridge.chronicleProgress.view(ns.codex.chronicleSeed.find(seed => seed.id === 'wild-tribes')).fragments.length, 1);
+  assert.equal(store.current().unlocks.factions.includes('wild'), true, '2-4 mission reward unlocks the playable existing faction');
+  bridge.handleStoryEvent({ type: 'chapter-completed', id: 'chapter2' });
+  assert.equal(store.current().unlocks.factions.filter(id => id === 'wild').length, 1, 'chapter completion is idempotent');
+});
+test('Chapter III unlocks existing frostland and goblin allies without publishing a new Chronicle claim', () => {
+  const ns = load(), store = profilePort(), bridge = new ns.codex.StoryCodexBridge({ profileStore: store, storage: null, getMission: id => ns.systems.StoryCatalog.getMission(id) });
+  const missions = ns.systems.StoryCatalog.missions.filter(mission => mission.chapter === 3);
+  assert.deepEqual(clone(missions.map(mission => mission.id)), ['chapter3-white-trace', 'chapter3-echo-yard', 'chapter3-crossmark', 'chapter3-nightwatch']);
+  assert.equal(store.current().unlocks.heroes.includes('frostland'), false);assert.equal(store.current().unlocks.factions.includes('goblin'), false);
+  for (const mission of missions) { store.change(state => state.profiles.test.completed.push(mission.id)); bridge.handleStoryEvent({ type: 'mission-completed', id: mission.id }); }
+  bridge.handleStoryEvent({ type: 'chapter-completed', id: 'chapter3' });
+  for(const id of ['frostland','goblin']){assert.equal(store.current().unlocks.heroes.includes(id),true,`hero ${id}`);assert.equal(store.current().unlocks.factions.includes(id),true,`faction ${id}`);}
+  assert.equal(ns.codex.chronicleSeed.some(seed => seed.chapter === 3),false,'本章不能把未確認的來源寫成正史編年');
+  bridge.handleStoryEvent({ type: 'chapter-completed', id: 'chapter3' });
+  assert.equal(store.current().unlocks.heroes.filter(id => id === 'frostland').length, 1, 'chapter reward remains idempotent');
+});
 test('legacy migration preserves rollback data; incompatible saves, quota and stale tabs cannot partially unlock', () => {
   const ns = load(), disk = storage();
   const legacy = JSON.stringify({ schema: 1, entries: { 'enemy:boss': { encountered: true, favorite: true } } });

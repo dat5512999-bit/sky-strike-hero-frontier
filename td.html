@@ -72,7 +72,7 @@
 
       <div id="td-profession-screen" class="td-profession-screen" role="dialog" aria-modal="true" aria-labelledby="td-opening-title" hidden>
         <div class="profession-dialog">
-          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>英雄邊境 · v0.85.66 · 士兵軍械導引</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
+          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>英雄邊境 · v0.85.69 · 第二章：荒野的回聲</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
           <nav class="expedition-steps" aria-label="遠征配置步驟"><button type="button" data-opening-page="battlefield" aria-pressed="true"><b>01</b><span>選擇戰場</span></button><button type="button" data-opening-page="party"><b>02</b><span>組建隊伍</span></button></nav>
           <div class="opening-titlebar"><div class="opening-title-copy"><p>英雄邊境</p><h2 id="td-opening-title">選擇戰場</h2><span id="td-opening-subtitle">踏上新的戰場，書寫屬於你的傳奇。</span></div><select id="td-map-choice" class="opening-data-select" aria-label="選擇戰場"><option value="beginner">新手谷地</option><option value="twinpass">雙隘口要塞</option><option value="autumn">暮秋遺跡</option><option value="silverleaf">銀葉溪谷</option><option value="shadowfall">暮影舊城</option><option value="frostborn">冰原裂谷</option></select></div>
           <section class="expedition-page battlefield-page" data-expedition-page="battlefield">
@@ -99,6 +99,7 @@
                 <button type="button" data-profession="frostland" aria-pressed="false"><b>霜牙・凜</b><strong>冰原獵首 · 寒冬合獵</strong><small>寒冷 / 狩獵 / 碎冰</small></button>
                 <button type="button" data-profession="goblin" aria-pressed="false"><b>銅齒・奇克</b><strong>首席工程師 · 網路超載</strong><small>改裝 / 洩壓 / 巡修機偶</small></button>
                 <button type="button" data-profession="naga" aria-pressed="false"><b>破潮者・賽洛</b><strong>潮壓突進 · 旋潮控場</strong><small>潮門突刺 / 旋潮領域 / 潮衛號令</small></button>
+                <button type="button" data-profession="bull" aria-pressed="false"><b>戰神・奧魯姆</b><strong>中立戰神 · 重槌破陣</strong><small>天墜 / 震域 / 戰意</small></button>
               </div><article id="td-hero-detail" class="choice-detail"><div id="td-hero-detail-art"></div><section><small>英雄定位</small><h4 id="td-hero-detail-name">選擇英雄</h4><b id="td-hero-identity">不同英雄會改變你的操作核心。</b><p id="td-hero-description"></p><h5>核心技能</h5><div id="td-hero-skills" class="expedition-tags hero-skill-list"></div><footer id="td-hero-phase"></footer></section></article>
             </section>
             <section class="opening-step opening-faction-step" aria-labelledby="td-faction-heading"><div class="opening-step-heading"><h3 id="td-faction-heading"><em>3</em> 選擇軍團</h3><span>決定可建造部隊</span></div>
@@ -271,7 +272,12 @@
       <button type="button" data-shop-item="gear-war-drum"><b>先鋒戰鼓</b><small></small><span></span></button>
       <button type="button" data-shop-item="gear-soul-lantern"><b>噬魂冥燈</b><small></small><span></span></button>
       <button type="button" data-shop-item="gear-bone-crown"><b>幽骨王冠</b><small></small><span></span></button>
-    </div><h3>傭兵館 · 跨族契約</h3><p>販售本軍團以外的士兵與特殊建築，圖片就是部署外觀。成功放置才扣款，部署點固定，可升至等級 5、回收70%；召喚物會自動追擊。</p><div class="shop-items mercenary-items">
+    </div><h3>戰神重槌 · 元素核心</h3><p>戰神・奧魯姆專用。火焰、冷凍、雷電、暗影核心會實際改變重槌的命中效果；同時只能啟用一枚，已購核心可免費切換。</p><div class="shop-items gear-shop-items bull-core-shop-items">
+      <button type="button" data-shop-item="core-fire"><b>火焰球</b><small></small><span></span></button>
+      <button type="button" data-shop-item="core-frost"><b>冷凍球</b><small></small><span></span></button>
+      <button type="button" data-shop-item="core-lightning"><b>雷球</b><small></small><span></span></button>
+      <button type="button" data-shop-item="core-shadow"><b>暗影球</b><small></small><span></span></button>
+    </div><h3>傭兵館 · 跨族契約</h3><p>販售本軍團以外的士兵與特殊建築，圖片就是部署外觀。成功放置才扣金幣，部署點固定，可升至等級 5、回收70%；召喚物會自動追擊。</p><div class="shop-items mercenary-items">
       <button type="button" data-mercenary="royalCommander"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="soulsteel"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="kingdomMage"><b></b><small></small><span></span></button>
@@ -320,6 +326,7 @@
   <script src="src/td/config.js"></script>
   <script src="src/td/systems/SpriteFrameBounds.js"></script>
   <script src="src/td/systems/ArtSystem.js"></script>
+  <script src="src/td/systems/BullWargodArt.js"></script>
   <script src="src/td/systems/BossSpriteBounds.js"></script>
   <script src="src/td/systems/BossVisualCatalog.js"></script>
   <script src="src/td/systems/EquipmentSystem.js"></script>
@@ -384,6 +391,7 @@
   <script src="src/td/systems/FrostlandHero.js"></script>
   <script src="src/td/systems/FrostlandArt.js"></script>
   <script src="src/td/systems/FrostlandAtlas.js"></script>
+  <script src="src/td/systems/FrostlandMotionAtlas.js"></script>
   <script src="src/td/systems/FrostlandSprites.js"></script>
   <script src="src/td/systems/FrostlandTowerArt.js"></script>
   <script src="src/td/systems/BattleSynergySystem.js"></script>

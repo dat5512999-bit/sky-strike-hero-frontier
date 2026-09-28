@@ -7,7 +7,8 @@
     rogue:{name:'血月獵殺',icon:'◆',cooldown:62,range:245,radius:90,color:'#e797e8',hint:'突入最高威脅目標旁，重創主目標並斬擊周圍敵人；冷卻 62 秒'},
     chief:{name:'萬獸戰吼',icon:'✹',cooldown:66,range:270,radius:125,color:'#ff764d',hint:'重擊前線敵群並引爆部族士氣，使附近荒野士兵進入狂潮；冷卻 66 秒'},
     goblin:{name:'全網超載',icon:'⚙',cooldown:68,range:720,radius:175,color:'#ffbd68',hint:'所有供電機械爆發 5 秒，隨後冷卻停機 7 秒；冷卻 68 秒'},
-    naga:{name:'萬潮裁決',icon:'♆',cooldown:66,range:285,radius:142,color:'#65f0ea',hint:'鎖定前線敵群，萬潮三叉戟落下；首要目標受 176 傷害，其餘受 98 魔法傷害並緩速，冷卻 66 秒'}
+    naga:{name:'萬潮裁決',icon:'♆',cooldown:66,range:285,radius:142,color:'#65f0ea',hint:'鎖定前線敵群，萬潮三叉戟落下；首要目標受 176 傷害，其餘受 98 魔法傷害並緩速，冷卻 66 秒'},
+    bull:{name:'戰神裁決',icon:'⚒',cooldown:66,range:250,radius:132,color:'#f0ad51',hint:'鎖定前線敵群，巨槌從天而落；首要目標受 170 傷害，其餘受 102 混沌傷害並強緩速，冷卻 66 秒'}
   };
   class HeroUltimateSystem{
     static get(type){return ULTIMATES[type]||ULTIMATES.arcanist;}
@@ -40,10 +41,10 @@
       }
       victims.forEach((monster,index)=>{
         if(!monster.active)return;
-        const damage=hero.classType==='hunter'?100*power:hero.classType==='arcanist'?115*power:hero.classType==='naga'?(index===0?176:98)*power:hero.classType==='chief'?(index===0?165:105)*power:(index===0?190:80)*power;
-        const slow=hero.classType==='arcanist'?.2:hero.classType==='naga'?.46:hero.classType==='hunter'?.5:.6;
-        const slowTime=hero.classType==='arcanist'?3.2:hero.classType==='naga'?2.4:hero.classType==='hunter'?2:1.2;
-        new ns.entities.Projectile(hero,monster,{damage:damage,color:color,attackType:hero.classType==='hunter'?'pierce':hero.classType==='arcanist'||hero.classType==='naga'?'magic':'chaos',slow:slow,slowTime:slowTime,style:hero.classType==='naga'?'tide-judgement':undefined}).hit(monsters,onKill,onHit);
+        const damage=hero.classType==='hunter'?100*power:hero.classType==='arcanist'?115*power:hero.classType==='naga'?(index===0?176:98)*power:hero.classType==='bull'?(index===0?170:102)*power:hero.classType==='chief'?(index===0?165:105)*power:(index===0?190:80)*power;
+        const slow=hero.classType==='arcanist'?.2:hero.classType==='naga'?.46:hero.classType==='bull'?.55:hero.classType==='hunter'?.5:.6;
+        const slowTime=hero.classType==='arcanist'?3.2:hero.classType==='naga'?2.4:hero.classType==='bull'?2.3:hero.classType==='hunter'?2:1.2;
+        new ns.entities.Projectile(hero,monster,{damage:damage,color:color,attackType:hero.classType==='hunter'?'pierce':hero.classType==='arcanist'||hero.classType==='naga'?'magic':'chaos',slow:slow,slowTime:slowTime,style:hero.classType==='naga'?'tide-judgement':hero.classType==='bull'?'bull-judgement':undefined}).hit(monsters,onKill,onHit);
       });
       if(hero.classType==='chief'&&hero.synergy)hero.synergy.game.build.combatUnits().filter(unit=>['orc','centaur','boarRider','minotaur','shaman'].includes(unit.type)&&ns.utils.distance(hero,unit)<=245).forEach(unit=>{unit.tribalFrenzy=Math.max(unit.tribalFrenzy||0,5);unit.drumEmpowered=true;});
       ns.systems.HeroSkillVFX.emit(hero,'ultimate-'+hero.classType,{x:center.x,y:center.y,radius:cfg.radius,targets:victims.map(m=>({x:m.x,y:m.y})),duration:.8});

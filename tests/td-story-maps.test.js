@@ -9,7 +9,7 @@ function distanceToRoute(x,y,route){let nearest=Infinity;for(let i=1;i<route.len
 
 test('chapter maps use production art, end at the visible keep, and offer useful tower sites',()=>{
   const ns=setup();
-  for(const id of ['silverleaf','shadowfall','frostborn','westernsignal','emberroad']){
+  for(const id of ['silverleaf','shadowfall','frostborn','westernsignal','emberroad','stonecircle','redmesa','whitetrace','echoyard','crossmark','nightwatch']){
     const map=ns.maps.definitions[id],png=fs.readFileSync(map.asset);assert.equal(png.readUInt32BE(16),1536);assert.equal(png.readUInt32BE(20),1024);
     ns.maps.apply(id);const routes=ns.config.routes,build=new ns.systems.BuildSystem();
     assert.ok(Math.hypot(routes[0][0].x-map.spawn.x,routes[0][0].y-map.spawn.y)<120);
@@ -42,7 +42,13 @@ test('chapter map deployment matches visible clearings and rejects painted obsta
     shadowfall:{open:[[700,400],[420,640]],blocked:[[800,480],[500,500]]},
     frostborn:{open:[[300,440],[900,720]],blocked:[[300,360],[520,500],[860,660]]},
     westernsignal:{open:[[500,220],[840,430],[700,650]],blocked:[[820,145],[1335,560],[1280,840]]},
-    emberroad:{open:[[520,120],[970,295],[625,705]],blocked:[[600,350],[250,480],[1370,720]]}
+    emberroad:{open:[[520,120],[970,295],[625,705]],blocked:[[600,350],[250,480],[1370,720]]},
+    stonecircle:{open:[[430,70],[900,320],[920,520],[300,700]],blocked:[[350,350],[1350,300],[1400,650]]},
+    redmesa:{open:[[410,110],[360,310],[280,530],[600,560],[1120,350],[1140,660]],blocked:[[720,150],[850,470],[1400,250]]},
+    whitetrace:{open:[[1060,460],[260,480],[1080,480]],blocked:[[780,350],[1400,300],[260,800]]},
+    echoyard:{open:[[600,300],[820,600],[1100,520],[1280,720]],blocked:[[850,260],[250,600],[1400,470]]},
+    crossmark:{open:[[960,380],[350,480],[360,520],[1050,580]],blocked:[[660,330],[1360,250],[1380,700]]},
+    nightwatch:{open:[[700,460],[280,640],[1260,420]],blocked:[[930,480],[1350,240],[150,850]]}
   };
   for(const [id,sites] of Object.entries(landmarks)){
     ns.maps.apply(id);const build=new ns.systems.BuildSystem();
@@ -70,13 +76,13 @@ test('frostborn routes merge early and share exactly the same defensive tail',()
   assert.ok(map.sharedLength>500);
 });
 
-test('chapter missions preserve first-chapter unlock order while Chapter II maps stay separately playable in free expedition',()=>{
+test('chapter missions preserve unlock order, with Chapter III unlocking existing frostland and goblin allies only at its finale',()=>{
   const ns=setup(),missions=ns.systems.StoryCatalog.missions;
-  const chapter1=missions.filter(m=>m.chapter===1),chapter2=missions.filter(m=>m.chapter===2);
+  const chapter1=missions.filter(m=>m.chapter===1),chapter2=missions.filter(m=>m.chapter===2),chapter3=missions.filter(m=>m.chapter===3);
   assert.deepEqual(Array.from(chapter1,m=>m.map),['beginner','silverleaf','shadowfall','frostborn']);
   assert.deepEqual(Array.from(chapter1,m=>m.waves.length),[5,6,7,8],'第一章關卡波數必須逐關增加');
-  assert.deepEqual(Array.from(chapter2,m=>[m.id,m.map,m.waves.length]),[['chapter2-western-signal','westernsignal',6],['chapter2-ember-road','emberroad',7]]);
-  assert.equal(chapter2[0].requires,'chapter1-frostborn');assert.equal(chapter2[1].requires,chapter2[0].id);assert.equal(chapter2[0].rewards.maps.length,0,'2-1 不應提前把西境圖給自由遠征');assert.equal(chapter2[1].rewards.maps.length,0,'2-2 不應提前把荒野內容給自由遠征');
+  assert.deepEqual(Array.from(chapter2,m=>[m.id,m.map,m.waves.length]),[['chapter2-western-signal','westernsignal',6],['chapter2-ember-road','emberroad',7],['chapter2-stone-circle','stonecircle',8],['chapter2-red-mesa','redmesa',9]]);
+  assert.equal(chapter2[0].requires,'chapter1-frostborn');for(let i=1;i<chapter2.length;i++)assert.equal(chapter2[i].requires,chapter2[i-1].id);assert.equal(chapter2[0].rewards.maps.length,0,'2-1 不應提前把西境圖給自由遠征');assert.equal(chapter2[1].rewards.maps.length,0,'2-2 不應提前把荒野內容給自由遠征');assert.deepEqual(Array.from(chapter2[2].rewards.maps),['stonecircle']);assert.deepEqual(Array.from(chapter2[3].rewards.maps),['redmesa']);assert.deepEqual(Array.from(chapter2[3].rewards.factions),['wild']);
   const totals=Array.from(chapter1,m=>m.waves.reduce((sum,wave)=>sum+wave.groups.reduce((n,group)=>n+group.count,0),0));
   for(let i=1;i<totals.length;i++)assert.ok(totals[i]>totals[i-1],`第 ${i+1} 關總敵量必須高於前關`);
   const data=new Map(),storage={getItem:k=>data.get(k)??null,setItem:(k,v)=>data.set(k,v)},store=new ns.systems.ProfileStore(storage);
@@ -87,9 +93,28 @@ test('chapter missions preserve first-chapter unlock order while Chapter II maps
     store.complete(mission);
     for(const id of mission.rewards.maps)assert.equal(store.allows('maps',id),true);
   }
-  assert.ok(store.current().completed.includes(chapter2[0].requires));assert.equal(new ns.systems.StoryCatalog.StoryWaves(chapter2[0]).total(),6);store.complete(chapter2[0]);assert.ok(store.current().completed.includes(chapter2[1].requires));assert.equal(new ns.systems.StoryCatalog.StoryWaves(chapter2[1]).total(),7);
+  assert.ok(store.current().completed.includes(chapter2[0].requires));for(const mission of chapter2){assert.ok(!mission.requires||store.current().completed.includes(mission.requires));assert.equal(new ns.systems.StoryCatalog.StoryWaves(mission).total(),mission.waves.length);store.complete(mission);}assert.ok(store.allows('maps','stonecircle'));assert.ok(store.allows('maps','redmesa'));assert.ok(store.allows('factions','wild'),'只在 2-4 勝利後解鎖既有荒野部族');
+  assert.deepEqual(Array.from(chapter3,m=>[m.id,m.map,m.waves.length]),[['chapter3-white-trace','whitetrace',8],['chapter3-echo-yard','echoyard',9],['chapter3-crossmark','crossmark',9],['chapter3-nightwatch','nightwatch',11]]);
+  assert.equal(chapter3[0].requires,'chapter2-red-mesa');for(let i=1;i<chapter3.length;i++)assert.equal(chapter3[i].requires,chapter3[i-1].id);
+  for(const mission of chapter3.slice(0,-1)){assert.ok(!mission.rewards.heroes?.length);assert.ok(!mission.rewards.factions?.length);store.complete(mission);for(const id of mission.rewards.maps)assert.equal(store.allows('maps',id),true);}
+  assert.equal(store.allows('heroes','frostland'),false);assert.equal(store.allows('factions','goblin'),false);
+  store.complete(chapter3.at(-1));assert.equal(store.allows('maps','nightwatch'),true);assert.equal(store.allows('heroes','frostland'),true);assert.equal(store.allows('factions','frostland'),true);assert.equal(store.allows('heroes','goblin'),true);assert.equal(store.allows('factions','goblin'),true);
+  for(const mission of chapter3)assert.equal(mission.storyCards.length,3,`${mission.id} needs replayable story cards`);
+  assert.match(chapter3.at(-1).aftermath,/沒有留下能辨認來源的名字/,'終章必須保留疑點，不能宣告來源或真相');
   const result=ns.systems.ResultScreen.view({waves:3},{mode:'story',victory:true,saved:true,mission:chapter1.at(-1)});
   assert.match(result.intro,/已儲存/);assert.match(result.intro,/線索推進/);assert.equal(result.showUnlock,false);
+});
+
+test('Chapter III roads, landmarks and the dual-route merge remain explicit gameplay geometry',()=>{
+  const ns=setup();
+  for(const [id,blocked] of [['whitetrace',[[780,350],[1400,300],[260,800]]],['echoyard',[[850,260],[250,600],[1400,470]]],['crossmark',[[660,330],[1360,250],[1380,700]]],['nightwatch',[[930,480],[1350,240],[150,850]]]]){
+    const map=ns.maps.definitions[id];ns.maps.apply(id);const build=new ns.systems.BuildSystem();assert.equal(map.visible,true);assert.ok(map.path.length>=14);
+    for(const route of map.routes||[map.path])for(const point of route.slice(1,-1))assert.equal(build.canPlaceAt(point.x,point.y,'building'),false,`${id} route must remain non-buildable`);
+    for(const point of blocked)assert.equal(build.canPlaceAt(...point,'building'),false,`${id} story landmark must remain non-buildable`);
+    assert.ok(map.safeArea.width>1200&&map.safeArea.height>650);assert.ok(map.camera.mobileInitialZoom>=1.2);
+  }
+  const map=ns.maps.definitions.crossmark,[upper,lower]=map.routes,upMerge=upper.findIndex(p=>p.x===map.merge.x&&p.y===map.merge.y),lowMerge=lower.findIndex(p=>p.x===map.merge.x&&p.y===map.merge.y);
+  assert.ok(upMerge>0&&lowMerge>0);assert.deepEqual(JSON.parse(JSON.stringify(upper.slice(upMerge))),JSON.parse(JSON.stringify(lower.slice(lowMerge))));
 });
 
 test('western signal keeps its logical road, obstacles and camera targets separate from painted art',()=>{
@@ -109,4 +134,15 @@ test('ember road keeps the burning caravan, rock shelf and escort gate out of de
   for(const point of map.path.slice(1,-1))assert.equal(build.canPlaceAt(point.x,point.y,'building'),false,'road must remain non-buildable');
   for(const [x,y] of [[600,350],[250,480],[1370,720]])assert.equal(build.canPlaceAt(x,y,'building'),false,'painted obstacle needs explicit collision');
   assert.ok(map.safeArea.width>1200&&map.safeArea.height>650);assert.ok(map.camera.mobileInitialZoom>=1.2);
+});
+
+test('stone ring basin and red mesa terminus expose only their deliberate defensive clearings',()=>{
+  const ns=setup();
+  for(const [id,blocked] of [['stonecircle',[[350,350],[1350,300],[1400,650]]],['redmesa',[[720,150],[850,470],[1400,250]]]]){
+    const map=ns.maps.definitions[id];ns.maps.apply(id);const build=new ns.systems.BuildSystem();
+    assert.equal(map.visible,true,`${id} must be available after its story reward`);assert.ok(map.path.length>=16,`${id} needs a legible single route`);
+    for(const point of map.path.slice(1,-1))assert.equal(build.canPlaceAt(point.x,point.y,'building'),false,`${id} road must remain non-buildable`);
+    for(const point of blocked)assert.equal(build.canPlaceAt(...point,'building'),false,`${id} painted obstacle needs explicit collision`);
+    assert.ok(map.safeArea.width>1200&&map.safeArea.height>650);assert.ok(map.camera.mobileInitialZoom>=1.2);
+  }
 });

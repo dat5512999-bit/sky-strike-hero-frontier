@@ -1,3 +1,5 @@
+> **v0.85.69：** 無新增依賴或安裝步驟。更新後確認 Service Worker 為 `sky-strike-v0.85.69`，再以災厄開局檢查英雄 HP 顯示與難度摘要。
+
 > **2026-09-28 容量整理：** 本次整理不增加安裝依賴；五份舊功能工作副本可依維護紀錄重建。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。
 
 > **v0.85.63：** PWA 以橫向啟動；從主畫面或手機入口使用既有寬畫面遊戲，不需新增安裝步驟或清除網站資料。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
@@ -18,7 +20,7 @@
 
 > **塔樓材質特效 VFX 2.0.0（未發佈）：** 兩張 PNG 與 PaintedTowerVFX.js 都是本機資產；遊戲不需新增套件。離線 Canvas QA 腳本才需要 @napi-rs/canvas。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
 
-> 地圖後台 1.0.1：Node.js 18+，無額外安裝套件；雙擊 start-developer-studio.cmd 或執行 npm run studio，開啟 http://127.0.0.1:4174/developer-studio.html。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+> 地圖後台 1.0.3：Node.js 18+，無額外安裝套件；雙擊 start-developer-studio.cmd 或執行 npm run studio，開啟 http://127.0.0.1:4174/developer-studio.html。更新後請重啟後台一次，讓它載入最新的道路走廊驗證規則。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **目前進化規則 v0.85.56：** 安裝需求不變，Node 18+；npm run test:evolution 與 npm run check:evolution 可驗收。新增兩個模組已加入 td.html 與 Service Worker；瀏覽器 QA 另需 Playwright 與 Edge。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
 
@@ -530,3 +532,8 @@ v0.85.0：沿用 Node.js 18+，無新依賴。完整取得 assets/td/frostland �
 > **v0.85.65：** 無新依賴或設定；完整更新後再執行 `npm run enemy-balance:audit`，並確認 Service Worker 為 `sky-strike-v0.85.65`。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。
 
 > **v0.85.66：** 無新依賴或設定；完整更新後執行 `node --test tests/td-armory-flow.test.js`、`npm run check`、`npm test`，並確認 Service Worker 為 `sky-strike-v0.85.66`。詳見 [軍械導引交付](UNIT_EQUIPMENT_GUIDANCE_V08566.md)。
+> **v0.85.67：** 無新依賴；更新後執行 `node --test tests/td-bull-wargod.test.js`、`npm run check`、`npm test`，並確認 Service Worker 為 `sky-strike-v0.85.67`。詳見 [戰神交付](BULL_WARGOD_V08567.md)。
+>
+> **v0.85.68：** 無新依賴；確認 `bull-wargod-skill-icons-v2.png` 已部署，且 Service Worker 為 `sky-strike-v0.85.68`。
+> 2026-09-28 · 霜原士兵 Motion 1.0.0：六兵種 96 格待機／攻擊、振翅與逐幀腳底定位；戰鬥數值不變。操作、API、安裝部署、備份還原與測試限制見[交付文件](FROSTLAND_MOTION_V1.md)。本機修改，未部署。
+

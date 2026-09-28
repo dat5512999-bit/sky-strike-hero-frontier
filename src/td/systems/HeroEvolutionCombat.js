@@ -47,13 +47,13 @@
       const elapsed=Math.min(Math.max(0,dt),Math.max(0,field.time));field.time-=elapsed;field.tick+=elapsed;
       if(field.tick<.5)return true;field.tick=0;
       // One present-time pulse per update, never replay a background backlog.
-      const targets=monsters.filter(m=>m.active&&ns.utils.distance(field,m)<=field.radius).sort((a,b)=>b.progress()-a.progress()).slice(0,12);
+      const targets=monsters.filter(m=>m.active&&ns.utils.distance(field,m)<=field.radius).sort((a,b)=>b.progress()-a.progress()).slice(0,Math.max(1,Math.min(16,field.maxTargets||12)));
       for(const m of targets){
         if(!m.active)continue;
-        if(['evo-hunter','evo-naga','evo-rogue'].includes(field.type))m.applySlow(field.type==='evo-naga'?.35:.5,.75);
+        if(['evo-hunter','evo-naga','evo-rogue','evo-bull'].includes(field.type))m.applySlow(field.type==='evo-naga'?.35:field.type==='evo-bull'?.46:.5,.75);
         if(field.type==='evo-hunter')this.weaken(m,3,.8);
         if(['evo-hunter','evo-naga','evo-rogue'].includes(field.type))this.mark(m,hero,4);
-        const shot=new ns.entities.Projectile(hero,m,{damage:12*field.power,attackType:field.type==='evo-hunter'?'pierce':'magic',color:ns.systems.HeroRoster.get(hero.classType).color,style:field.type==='evo-naga'?'maelstrom':'energy',canHitAir:true,evolutionSkill:true,frost:field.type==='evo-frostland'?24:0});
+        const shot=new ns.entities.Projectile(hero,m,{damage:12*field.power,attackType:field.type==='evo-hunter'?'pierce':'magic',color:ns.systems.HeroRoster.get(hero.classType).color,style:field.type==='evo-naga'?'maelstrom':field.type==='evo-bull'?'bull-hammer':'energy',canHitAir:true,evolutionSkill:true,frost:field.type==='evo-frostland'?24:0});
         shot.hit(monsters,onKill,onHit);
       }
       return true;

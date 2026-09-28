@@ -2,6 +2,13 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),vm=require('node:vm');
 const {createStudio}=require('../scripts/developer-server.cjs');
 const source=path.resolve(__dirname,'..');
+test('管理工作台把網路中斷轉為可操作的本機服務提示',()=>{
+  const publisher=fs.readFileSync(path.join(source,'src/td/map-tools/MapPublisher.js'),'utf8');
+  assert.match(publisher,/無法連線至本機地圖後台/);
+  assert.match(publisher,/start-developer-studio\.cmd/);
+  assert.match(publisher,/目前地圖與備份均未變更/);
+  assert.match(publisher,/catch\(error\)\{throw new Error\(localServiceUnavailable\(\)\);\}/);
+});
 async function fixture(t){
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'frontier-studio-'));
   for(const file of ['namespace.js','config.js','maps.js','map-tools/MapRouteModel.js','map-tools/MapRouteOverrides.js','map-tools/MapLayoutOverrides.js','map-tools/published-maps.js','systems/BuildSystem.js','systems/PathSystem.js','systems/WaveSystem.js','systems/WaveCatalog.js','entities/Monster.js']){const dest=path.join(root,'src/td',file);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.copyFileSync(path.join(source,'src/td',file),dest);}
@@ -28,6 +35,13 @@ test('新增格線不能抹去已發佈路線，過期編輯頁拒絕覆蓋',asy
   assert.equal((await f.post('publish',{baseRevision:0,changes:{emberroad:{routes}}})).status,200);
   assert.equal((await f.post('publish',{baseRevision:0,changes:{emberroad:{layout:{cellSize:64,buildable:[]}}}})).status,409);
   const result=await f.post('publish',{baseRevision:1,changes:{emberroad:{layout:{cellSize:64,buildable:[]}}}});assert.equal(result.status,200);const data=await result.json();assert.equal(data.state.maps.emberroad.routes[0].length,routes[0].length);
+});
+test('本機發佈接受原道路中的新增路點與跨越舊障礙設定的自訂路線',async t=>{
+  const f=await fixture(t),ns=f.game(),map=ns.maps.definitions.redmesa,routes=ns.mapTools.MapRoute.routesOf(map),route=routes[0],a=route[16],b=route[17];
+  route.splice(17,0,{x:Math.round((a.x+b.x)/2),y:Math.round((a.y+b.y)/2)});
+  assert.equal((await f.post('publish',{baseRevision:0,changes:{redmesa:{routes}}})).status,200);
+  const shortcut=ns.mapTools.MapRoute.routesOf(map);shortcut[0][15]={x:900,y:400};
+  assert.equal((await f.post('publish',{baseRevision:1,changes:{redmesa:{routes:shortcut}}})).status,200);
 });
 test('多地圖發佈驗證全部成功才写入；拒絕未知地圖、越界格、損壞路線',async t=>{
   const f=await fixture(t);

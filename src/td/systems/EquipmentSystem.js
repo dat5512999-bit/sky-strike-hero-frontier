@@ -43,21 +43,31 @@
       {id:'tidebreaker-spear-1',name:'珊瑚潮鋼戟',rarity:'common',color:'#9ce6df',visual:'trident',description:'普攻與傷害技能累計提高 20%；潮鋼刃留下青白水痕。'},
       {id:'tidebreaker-spear-2',name:'深淵潮印戟',rarity:'epic',color:'#4aaedb',visual:'trident',description:'普攻與傷害技能累計提高 40%；35% 機率觸發兩段潮線連鎖。',chainChance:.35,chain:2,chainRange:98,chainStyle:'tide-chain'},
       {id:'tidebreaker-spear-3',name:'萬潮王戟',rarity:'legendary',color:'#b7fff0',visual:'trident',description:'普攻與傷害技能累計提高 60%；保留潮線連鎖，並造成半徑 30 的破潮濺射。',chainChance:.35,chain:2,chainRange:98,chainStyle:'tide-chain',splash:30,style:'tide-splash'}
+    ],
+    bull:[
+      {id:'bull-hammer-0',name:'不屈戰鎚',rarity:'base',color:'#c98b45',visual:'warhammer',description:'戰神・奧魯姆的中立重槌。可在商城裝配一種元素核心。'},
+      {id:'bull-hammer-1',name:'燼紋巨槌',rarity:'common',color:'#e6b05e',visual:'warhammer',description:'普攻與傷害技能提高 20%；重槌的銘文開始發亮。'},
+      {id:'bull-hammer-2',name:'天鑄戰神槌',rarity:'epic',color:'#e5764a',visual:'warhammer',description:'普攻與傷害技能累計提高 40%；槌面展現熾金戰紋。'},
+      {id:'bull-hammer-3',name:'萬鈞裁決',rarity:'legendary',color:'#fff0a6',visual:'warhammer',description:'普攻與傷害技能累計提高 60%；揮擊會留下獨立的戰神金光。'}
     ]
   };
+  const CORES={fire:{name:'火焰球',color:'#ff7148',description:'重槌命中引爆半徑 32 的灼擊。',splash:32,style:'bull-fire'},frost:{name:'冷凍球',color:'#8de9ff',description:'重槌命中額外強緩速 1.8 秒。',slow:.42,slowTime:1.8,style:'bull-frost'},lightning:{name:'雷球',color:'#d9c4ff',description:'重槌命中會連鎖至另外兩名近敵。',chain:3,chainRange:92,style:'bull-lightning'},shadow:{name:'暗影球',color:'#d07aee',description:'重槌可處決低於 32% 生命的敵軍。',executeThreshold:.32,executeMultiplier:1.65,style:'bull-shadow'}};
   class EquipmentSystem{
     static weapon(hero,level){const list=WEAPONS[hero&&hero.classType]||WEAPONS.arcanist,index=Math.max(0,Math.min(3,level===undefined?(hero.equipment.spear||0):level));return Object.assign({},list[index],{level:index,rarityInfo:RARITIES[list[index].rarity]});}
     static nextWeapon(hero){const level=hero.equipment.spear||0;return level>=3?null:this.weapon(hero,level+1);}
-    static effectColor(hero,fallback){const weapon=this.weapon(hero);return weapon.level?weapon.color:fallback;}
-    static projectileOptions(hero,base,random){const options=Object.assign({},base),weapon=this.weapon(hero),roll=typeof random==='function'?random:Math.random;if(weapon.chainChance&&roll()<weapon.chainChance){options.chain=weapon.chain;options.chainRange=weapon.chainRange;options.style=weapon.chainStyle||'lightning';options.weaponProc='chain';}if(weapon.splash){options.splash=Math.max(options.splash||0,weapon.splash);options.style=weapon.style||options.style;options.weaponProc='splash';}return options;}
+    static core(hero){return hero?.classType==='bull'?CORES[hero.equipment?.core]||null:null;}
+    static effectColor(hero,fallback){const core=this.core(hero),weapon=this.weapon(hero);return core?core.color:weapon.level?weapon.color:fallback;}
+    static applyCore(hero,base){const core=this.core(hero);if(!core||base?.coreEligible===false)return Object.assign({},base);const options=Object.assign({},base,{color:core.color,style:core.style,weaponCore:hero.equipment.core});if(core.splash)options.splash=Math.max(options.splash||0,core.splash);if(core.slow){options.slow=Math.max(options.slow||0,core.slow);options.slowTime=Math.max(options.slowTime||0,core.slowTime);}if(core.chain){options.chain=Math.max(options.chain||0,core.chain);options.chainRange=Math.max(options.chainRange||0,core.chainRange);}if(core.executeThreshold){options.executeThreshold=core.executeThreshold;options.executeMultiplier=core.executeMultiplier;}return options;}
+    static projectileOptions(hero,base,random){const options=this.applyCore(hero,base),weapon=this.weapon(hero),roll=typeof random==='function'?random:Math.random;if(weapon.chainChance&&roll()<weapon.chainChance){options.chain=weapon.chain;options.chainRange=weapon.chainRange;options.style=weapon.chainStyle||'lightning';options.weaponProc='chain';}if(weapon.splash){options.splash=Math.max(options.splash||0,weapon.splash);options.style=weapon.style||options.style;options.weaponProc='splash';}return options;}
     static drawSignature(ctx,hero){const weapon=this.weapon(hero);if(!weapon.level||!hero.active)return;const pulse=.65+Math.sin(hero.animationTime*5)*.15,attack=hero.state==='attack';ctx.save();ctx.translate(hero.x,hero.y-17);ctx.rotate(hero.facing);ctx.globalCompositeOperation='screen';ctx.strokeStyle=weapon.color;ctx.fillStyle=weapon.color;ctx.shadowColor=weapon.color;ctx.shadowBlur=weapon.level>=3?15:8;ctx.globalAlpha=.35+.13*weapon.level;ctx.lineWidth=1.5+weapon.level*.65;
       if(hero.classType==='rogue'){if(!attack){ctx.restore();return;}ctx.globalAlpha=.1+.08*weapon.level;ctx.lineWidth=1+weapon.level*.45;const reach=12+weapon.level*2;for(let side=-1;side<=1;side+=2){ctx.beginPath();ctx.arc(13,side*4,reach,-.48,.48);ctx.stroke();}}
       else if(hero.classType==='hunter'){ctx.beginPath();ctx.arc(11,0,17+weapon.level*3,-1.05,1.05);ctx.stroke();ctx.beginPath();ctx.moveTo(19,-14);ctx.lineTo(19,14);ctx.stroke();}
       else if(weapon.visual==='trident'){const reach=24+weapon.level*4;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-7,6);ctx.lineTo(reach,0);ctx.stroke();for(const offset of [-7,0,7]){ctx.beginPath();ctx.moveTo(reach-9,offset*.34);ctx.lineTo(reach+5,offset);ctx.stroke();}if(weapon.level>=2){ctx.globalAlpha*=pulse;ctx.beginPath();ctx.arc(reach-4,0,10+weapon.level*2,0,Math.PI*2);ctx.stroke();}}
+      else if(weapon.visual==='warhammer'){const core=this.core(hero),reach=31+weapon.level*3;ctx.strokeStyle=core?.color||weapon.color;ctx.fillStyle=core?.color||weapon.color;ctx.lineWidth=3+weapon.level*.65;ctx.beginPath();ctx.moveTo(-5,7);ctx.lineTo(reach,0);ctx.stroke();ctx.globalAlpha*=pulse;ctx.beginPath();ctx.rect(reach-8,-11,21,22);ctx.stroke();if(core){ctx.globalAlpha*=.72;ctx.beginPath();ctx.arc(reach+2,0,12+weapon.level*2,0,Math.PI*2);ctx.stroke();}}
       else{ctx.beginPath();ctx.arc(21,-7,5+weapon.level*2,0,Math.PI*2);ctx.stroke();ctx.globalAlpha*=pulse;ctx.beginPath();ctx.arc(21,-7,11+weapon.level*2,0,Math.PI*2);ctx.stroke();}
       if(weapon.level>=3){for(let i=0;i<3;i++){const angle=hero.animationTime*2+i*Math.PI*2/3;ctx.globalAlpha=.65;ctx.beginPath();ctx.arc(Math.cos(angle)*31,Math.sin(angle)*13,2.2,0,Math.PI*2);ctx.fill();}}
       ctx.restore();
     }
   }
-  EquipmentSystem.WEAPONS=WEAPONS;EquipmentSystem.RARITIES=RARITIES;ns.systems.EquipmentSystem=EquipmentSystem;
+  EquipmentSystem.WEAPONS=WEAPONS;EquipmentSystem.CORES=CORES;EquipmentSystem.RARITIES=RARITIES;ns.systems.EquipmentSystem=EquipmentSystem;
 })(globalThis.TowerFrontier);

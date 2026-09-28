@@ -7,7 +7,8 @@
     rogue:{name:'影行者・維菈',faction:'暗影氏族 · 暗影行會',color:'#c884df',selectionArt:'assets/td/opening/hero-rogue-selection-v1.png',selectionFocus:'50% 19%',range:100,damage:13,interval:.45,attackType:'chaos',skills:['暗影閃擊','淬毒煙幕','暗影分身'],shortSkills:['閃擊','淬毒煙幕','暗影分身'],icons:['◆','☠','◐'],hints:['閃至附近目標旁並重擊，冷卻9秒','腳下生成6秒毒霧，持續傷害，冷卻12秒','召喚快速近戰分身，冷卻22秒']},
     chief:{name:'大酋長・戈爾',faction:'荒野部族 · 萬族戰團',color:'#df6548',selectionArt:'assets/td/opening/hero-chief-selection-v2.png',selectionFocus:'50% 18%',skillArt:'assets/td/opening/chief-skill-icons-v1.png',range:112,damage:21,interval:.7,attackType:'chaos',splash:26,skills:['萬族戰吼','先祖怒火','裂地衝擊波'],shortSkills:['萬族戰吼','先祖怒火','裂地波'],icons:['吼','雷','裂'],hints:['附近荒野士兵立刻進入4秒狂潮，冷卻9秒','腳下形成6秒祖靈怒火，冷卻12秒','向前發射穿透衝擊波，傷害並緩速直線敵人，冷卻22秒']},
     goblin:{name:'銅齒・奇克',faction:'地精工程團',color:'#d9ad65',selectionArt:'assets/td/goblin-chief-engineer-v1.png',selectionFocus:'50% 42%',range:145,damage:20,interval:.7,attackType:'pierce',skills:['臨場改裝','蒸汽洩壓','巡修機偶'],shortSkills:['改裝','洩壓','機偶'],icons:['⚙','◈','▣'],hints:['自身攻速 +30%，並改裝最近的供電攻擊機械：傷害 +42%、攻速 +20%，持續 5 秒；冷卻 9 秒','噴出蒸汽傷害並緩速近敵，額外縮短網路冷卻 3 秒；冷卻 12 秒','部署一台可移動的巡修機偶，發射穿刺鉚釘；冷卻 22 秒']}
-    ,naga:{name:'破潮者・賽洛',faction:'娜迦潮衛 · 自由遠征',color:'#55d3d0',selectionArt:'assets/td/naga/tidebreaker-selection-v1.png',selectionFocus:'52% 48%',skillArt:'assets/td/naga/tidebreaker-skill-icons-v1.png',range:142,damage:21,interval:.72,attackType:'chaos',skills:['潮門突刺','旋潮領域','潮衛號令'],shortSkills:['潮門','旋潮','潮衛'],icons:['≋','◉','♜'],hints:['突入目標身旁，以破潮矛造成 108 混沌傷害、緩速並留下潮痕，冷卻 9 秒','腳下形成 6 秒旋潮領域，每 0.5 秒傷害、緩速附近敵軍，冷卻 12 秒','附近娜迦守軍進入 5 秒潮衛號令：傷害 +18%、攻速 +18%；需至少一名守軍，冷卻 22 秒']}
+    ,naga:{name:'破潮者・賽洛',faction:'娜迦潮衛 · 自由遠征',color:'#55d3d0',selectionArt:'assets/td/naga/tidebreaker-selection-v1.png',selectionFocus:'52% 48%',skillArt:'assets/td/naga/tidebreaker-skill-icons-v1.png',range:142,damage:21,interval:.72,attackType:'chaos',skills:['潮門突刺','旋潮領域','潮衛號令'],shortSkills:['潮門','旋潮','潮衛'],icons:['≋','◉','♜'],hints:['突入目標身旁，以破潮矛造成 108 混沌傷害、緩速並留下潮痕，冷卻 9 秒','腳下形成 6 秒旋潮領域，每 0.5 秒傷害、緩速附近敵軍，冷卻 12 秒','附近娜迦守軍進入 5 秒潮衛號令：傷害 +18%、攻速 +18%；需至少一名守軍，冷卻 22 秒']},
+    bull:{name:'戰神・奧魯姆',faction:'中立英雄 · 可與所有軍團遠征',color:'#e4a452',selectionArt:'assets/td/neutral/bull-wargod-selection-v1.png',selectionFocus:'50% 32%',skillArt:'assets/td/neutral/bull-wargod-skill-icons-v2.png',range:108,damage:22,interval:.72,attackType:'chaos',splash:22,skills:['破陣天墜','戰神震域','不滅戰意'],shortSkills:['天墜','震域','戰意'],icons:['⬟','✹','♛'],hints:['躍向前線，以巨槌震擊半徑 72 的敵軍並造成強緩速，冷卻 9 秒','在腳下展開 6 秒震域，穩定傷害並拖慢接近的敵軍，冷卻 12 秒','進入 6 秒戰意：自身傷害 +20%、攻速 +18%；不影響任何軍團單位，冷卻 22 秒']}
   };
   class HeroRoster{
     static get(type){return CLASSES[type]||CLASSES.arcanist;}
@@ -32,6 +33,13 @@
       const targets=monsters.filter(m=>m.active&&ns.utils.distance(hero,m)<=cfg.range+35).sort((a,b)=>b.progress()-a.progress());
       const power=typeof hero.skillPower==='function'?hero.skillPower():1+hero.equipment.spear*.2,weaponColor=ns.systems.EquipmentSystem.effectColor(hero,cfg.color);
       if(slot===0){
+        if(hero.classType==='bull'){
+          if(!targets.length)return false;
+          const target=targets[0];hero.x=ns.utils.clamp(target.x-32,25,695);hero.y=ns.utils.clamp(target.y+20,55,695);hero.setTarget(hero.x,hero.y);
+          const impact={x:target.x,y:target.y};
+          monsters.filter(monster=>monster.active&&ns.utils.distance(impact,monster)<=72).sort((a,b)=>b.progress()-a.progress()).slice(0,10).forEach(monster=>new ns.entities.Projectile(hero,monster,{damage:68*power,color:weaponColor,attackType:'chaos',slow:.48,slowTime:1.55,style:'bull-hammer'}).hit(monsters,onKill,onHit));
+          ns.systems.HeroSkillVFX.emit(hero,'bull-hammerfall',{target:impact,radius:72,duration:.62});hero.novaCooldown=9*(1-hero.equipment.rune*.1);hero.beginCast();return true;
+        }
         if(hero.classType==='naga'){
           if(!targets.length)return false;
           const target=targets[0],from={x:hero.x,y:hero.y};
@@ -55,6 +63,11 @@
         else{const target=targets[0];hero.x=ns.utils.clamp(target.x-28,25,695);hero.y=ns.utils.clamp(target.y+22,55,695);hero.setTarget(hero.x,hero.y);new ns.entities.Projectile(hero,target,{damage:95*power,color:weaponColor,attackType:'chaos'}).hit(monsters,onKill,onHit);}
         hero.novaCooldown=9*(1-hero.equipment.rune*.1);
       }else{
+        if(hero.classType==='bull'){
+          if(hero.fields.some(field=>field.type==='bull'&&field.time>0))return false;
+          hero.fields.push({x:hero.x,y:hero.y,time:6,tick:0,type:'bull',power:power,pulses:0,maxPulses:10});
+          ns.systems.HeroSkillVFX.emit(hero,'bull-arena',{radius:88,duration:.85});hero.skillCooldowns.thunder=12*(1-hero.equipment.rune*.1);hero.beginCast();return true;
+        }
         if(hero.classType==='naga'){
           // A field is allowed one damage resolution per rendered update.  This
           // prevents a background-tab frame from replaying many half-second ticks
@@ -83,6 +96,13 @@
       hero.skillTrails=(hero.skillTrails||[]).filter(trail=>{trail.time-=dt;return trail.time>0;});
       hero.fields.forEach(field=>{if(field.type.startsWith('evo-')){try{ns.systems.HeroEvolutionCombat.pulse(hero,field,dt,monsters,onKill,onHit);}catch(error){field.time=0;hero.evolutionFault=String(error?.message||error);}return;}const elapsed=Math.min(Math.max(0,Number(dt)||0),field.time);field.time-=elapsed;field.tick+=elapsed;
         const resolve=targets=>targets.forEach(monster=>{if(field.type==='hunter'){monster.applySlow(.35,.7);return;}new ns.entities.Projectile(hero,monster,{damage:9*field.power,color:'#c884df',attackType:'chaos'}).hit(monsters,onKill,onHit);});
+        if(field.type==='bull'){
+          if(field.tick<.6)return;
+          field.tick=0;field.pulses=(field.pulses||0)+1;
+          const targets=monsters.filter(monster=>monster.active&&ns.utils.distance(field,monster)<=88).sort((a,b)=>b.progress()-a.progress()).slice(0,8);
+          for(const monster of targets)new ns.entities.Projectile(hero,monster,{damage:10*field.power,color:'#f2b45e',attackType:'chaos',slow:.28,slowTime:.7,style:'bull-arena'}).hit(monsters,onKill,onHit);
+          if(field.pulses>=field.maxPulses)field.time=0;return;
+        }
         if(field.type==='naga'){
           if(field.tick<.5)return;
           // Do not catch up old pulses. A resumed tab receives at most one current

@@ -1,3 +1,5 @@
+> **v0.85.69：** 不遷移玩家資料。回退時完整回到 v0.85.68，並同步回退 `TDDifficultySystem.js`、`TDGame.js`、入口版本與 `sky-strike-v0.85.68`；不可只更換快取名稱。
+
 > **2026-09-28 容量整理：** 五個功能分支已保留並實際驗證可重建；繼續備份 .git、必要 artifacts 與 ignored 參考原稿。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。
 
 > **v0.85.63：** 手機方向改回橫向容器，不讀寫進度、軍械、購買或任何存檔欄位；更新時關閉舊分頁重新開啟，勿以清除網站資料處理。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
@@ -18,7 +20,7 @@
 
 > **塔樓材質特效 VFX 2.0.0（未發佈）：** 無資料遷移。保留完整發佈快照與玩家備份，整包回復渲染器／圖集／入口，勿混用版本。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
 
-> 地圖後台 1.0.1：備份 published-maps.js 與 artifacts/map-history；工作台可還原整份歷史地圖版本，還原亦建立新版本。清除 localStorage 無法還原正式地圖。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+> 地圖後台 1.0.3：備份 published-maps.js 與 artifacts/map-history；工作台可還原整份歷史地圖版本，還原亦建立新版本。道路走廊驗證只影響可否儲存，沒有資料遷移或備份格式改動。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **目前進化規則 v0.85.56：** 章節存檔保留進化倍率、攻速底線和核心能量；第 50 波可回整備區。舊版可能拒絕 wave50。程式修改前快照在 artifacts/evolution-completion/before；rollback.cjs --check／--apply 有雜湊防覆蓋。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
 
@@ -525,3 +527,8 @@ v0.85.0：先匯出完整玩家備份。舊 schema 保持相容；冰原檢查�
 > **v0.85.65：** 本版仍不遷移玩家資料；若要回退，完整回到 v0.85.64 與 `sky-strike-v0.85.64`，同步回復 `Monster.js`、`WaveCatalog.js`、`EnemyBalanceCatalog.js` 和入口版號，不可混搭。
 
 > **v0.85.66：** 不遷移玩家資料；回退時完整回到 v0.85.65 與 `sky-strike-v0.85.65`，同步回復軍械介面、入口和快取，不可只替換 CSS 或單一腳本。
+> **v0.85.67：** 回退前先匯出玩家資料；完整回到 v0.85.66 與 `sky-strike-v0.85.66`，同步回退戰牛程式、兩張 PNG、商城核心與 `sw.js`，不可只刪除英雄按鈕。
+>
+> **v0.85.68：** 若回退本版，需連同戰牛技能圖集、兩份技能圖示 CSS 和 `sky-strike-v0.85.68` 快取一起回退；玩家進度與核心購買資料不受此純呈現更新影響。
+> 2026-09-28 · 霜原士兵 Motion 1.0.0：六兵種 96 格待機／攻擊、振翅與逐幀腳底定位；戰鬥數值不變。操作、API、安裝部署、備份還原與測試限制見[交付文件](FROSTLAND_MOTION_V1.md)。本機修改，未部署。
+

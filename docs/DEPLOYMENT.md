@@ -1,3 +1,5 @@
+> **v0.85.69：** 同步部署 `TDDifficultySystem.js`、`TDGame.js`、`td.html`、`sw.js`、文件與測試；確認快取 `sky-strike-v0.85.69`，以災厄開局驗證英雄會被攻城／遠程／Boss 攻擊，標準則不會。
+
 > **2026-09-28 容量整理：** 本次僅整理本機資料；正式發佈清單與既有部署流程沿用現況。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。
 
 > **v0.85.63：** 發布時同步 `td-mobile.html`、PWA manifest、首頁／戰場 CSS、手機模擬器、`sw.js` 與版本標記；部署後驗收手機全程橫向畫面。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
@@ -18,7 +20,7 @@
 
 > **塔樓材質特效 VFX 2.0.0（未發佈）：** 尚未部署；下一次整包發行須含新模組、兩張圖集與 sw.js 清單，按既有流程统一版本和快取。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
 
-> 地圖後台 1.0.1：本機發佈會修改 published-maps.js；對外網站仍須走原部署流程。正式包需包含差異檔、讀取模組及新版 sw.js；後台與備份可排除於公開網站。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+> 地圖後台 1.0.3：本機發佈會修改 published-maps.js；對外網站仍須走原部署流程。道路走廊驗證僅屬本機後台，公開遊戲不需管理服務；後台與備份可排除於公開網站。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **目前進化規則 v0.85.56：** 整包同步部署 HeroEvolutionCombat.js、EvolutionCompanion.js、進化／戰鬥／存檔模組、td.html 與 sky-strike-v0.85.56 快取。驗證第 50 波超凡整備、讀檔與完成遠征。此次未執行遠端發布。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
 
@@ -543,3 +545,8 @@ v0.85.0：同步部署 td.html、td-expedition.css、codex.css、src/td、Frostl
 > **v0.85.65：** 同步發布 `Monster.js`、`WaveCatalog.js`、`EnemyBalanceCatalog.js`、測試、版本檔和 `sw.js`；快取必為 `sky-strike-v0.85.65`，以版本化更新頁驗收第 31、41、50 波。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。
 
 > **v0.85.66：** 同步發布 `ArmorySystem.js`、`ArmoryUI.js`、`TDGame.js`、`td.css`、版本檔和 `sw.js`；快取必為 `sky-strike-v0.85.66`。詳見 [軍械導引交付](UNIT_EQUIPMENT_GUIDANCE_V08566.md)。
+> **v0.85.67：** 同步發布 `BullWargodArt.js`、英雄／商城／投射／特效程式、兩張戰牛 PNG、`td.html`、版本檔和 `sw.js`；快取必為 `sky-strike-v0.85.67`。詳見 [戰神交付](BULL_WARGOD_V08567.md)。
+>
+> **v0.85.68：** 額外發布 `assets/td/neutral/bull-wargod-skill-icons-v2.png`、`td-combat.css`、`td-polish.css` 與更新後的 Service Worker；確認快取名稱為 `sky-strike-v0.85.68`。
+> 2026-09-28 · 霜原士兵 Motion 1.0.0：六兵種 96 格待機／攻擊、振翅與逐幀腳底定位；戰鬥數值不變。操作、API、安裝部署、備份還原與測試限制見[交付文件](FROSTLAND_MOTION_V1.md)。本機修改，未部署。
+

@@ -7,9 +7,10 @@
     chief:[null,{name:'覺醒',passive:'荒野意志：附近沒有部隊時，自身仍獲完整戰域效果。',skills:['破陣衝鋒','戰旗裂土','祖靈投影','荒原裁決'],hints:['衝入敵群並震退前線。','展開戰域；可強化自己與附近戰士。','喚出祖靈重擊敵軍行進線。','以荒野怒火重擊最前方敵群。']},{name:'超凡',passive:'不屈戰域：低生命時戰域更強，不依賴部隊人數。',skills:['戰團裁決','不屈戰域','荒王降臨','萬獸終戰'],hints:['依敵人密度擴張斧擊範圍。','讓自身與附近戰團進入不屈戰域。','短暫化為首領克星的荒王姿態。','以萬獸衝擊粉碎前線。']}],
     goblin:[null,{name:'覺醒',passive:'工程核心：沒有機械網路時，技能也會以自身核心運作。',skills:['磁軌鉚釘','拆解無人機','鍊爐超載','核心爆發'],hints:['鉚釘在敵人之間彈射並穿甲。','拆解一群敵人的護甲與護盾。','啟動自身超載，並部署強化機偶。','釋放工程核心儲能，轟擊前線。']},{name:'超凡',passive:'連鎖節點：每次技能命中會累積可釋放的工程能量。',skills:['連鎖節點','重力扳手','全域熔爐','超載協議'],hints:['以節點電弧串連敵群。','拉回突破口敵人並打斷攻勢。','將累積能量轉成大範圍熔爐爆發。','全域超載：即使沒有裝置也可釋放核心。']}],
     frostland:[null,{name:'覺醒',passive:'霜原獵印：冰霜標記使碎冰傷害提高。',skills:['狼印獵步','冰層裂谷','霜魄誘餌','白霜狩獵'],hints:['追獵凍結或深寒目標並施加狼印。','劃出裂冰地帶，快速累積寒冷。','以冰狼幻影聚集敵群。','由獵群撕裂所有被狼印鎖定的敵人。']},{name:'超凡',passive:'白夜狩域：凍結目標死亡時會將寒冷傳給附近敵人。',skills:['白夜狩域','絕對零點','狼王追魂','永冬狩令'],hints:['展開白夜狩域，持續擴散深寒。','壓制最危險的精英與首領。','狼王殘影追獵所有凍結目標。','發動永冬狩令，讓全場寒冷爆發。']}],
-    naga:[null,{name:'覺醒',passive:'潮壓印記：被破潮矛命中的目標承受更強潮擊。',skills:['裂潮突刺','回流渦場','潮衛集結','海門決斷'],hints:['突進至前線，以多段潮壓刺擊命中目標。','展開回流渦場，拖慢並傷害附近敵軍。','召集潮衛幻影守住英雄周圍。','在最密集的戰線開啟海門衝擊。']},{name:'超凡',passive:'深海盟約：潮壓印記會在擊殺時向附近敵人傳遞。',skills:['深淵裂潮','靜海禁域','戰神潮衛','萬潮終章'],hints:['連續穿刺多名高威脅敵人。','以靜海禁域壓制前線敵軍。','讓潮衛幻影以更高頻率反擊。','釋放橫掃全線的萬潮終章。']}]
+    naga:[null,{name:'覺醒',passive:'潮壓印記：被破潮矛命中的目標承受更強潮擊。',skills:['裂潮突刺','回流渦場','潮衛集結','海門決斷'],hints:['突進至前線，以多段潮壓刺擊命中目標。','展開回流渦場，拖慢並傷害附近敵軍。','召集潮衛幻影守住英雄周圍。','在最密集的戰線開啟海門衝擊。']},{name:'超凡',passive:'深海盟約：潮壓印記會在擊殺時向附近敵人傳遞。',skills:['深淵裂潮','靜海禁域','戰神潮衛','萬潮終章'],hints:['連續穿刺多名高威脅敵人。','以靜海禁域壓制前線敵軍。','讓潮衛幻影以更高頻率反擊。','釋放橫掃全線的萬潮終章。']}],
+    bull:[null,{name:'覺醒',passive:'戰神意志：不依賴任何軍團，巨槌命中會留下短暫裂地。',skills:['撼地天墜','戰神震域','不滅戰意','裂世裁決'],hints:['躍入前線，震擊並拖慢周圍敵軍。','展開持續脈衝的震域，封住突破口。','以自身戰意提升輸出；不會改變任何軍團單位。','用巨槌裁決最密集的前線敵群。']},{name:'超凡',passive:'萬鈞神格：戰意持續期間，巨槌震擊範圍與壓制力提高。',skills:['雷霆破陣','萬鈞震域','不朽戰神','末日審判'],hints:['連續重擊前線，將敵人壓回戰線。','擴張震域，讓敵群無法快速穿越。','自身化作不朽戰神；依然不強化軍團。','降下末日巨槌，收束整段前線。']}]
   };
-  const GATES=[null,{wave:20,emblems:3,trialHealth:{hunter:1250,arcanist:1320,rogue:1180,chief:1270,goblin:1160,frostland:1210,naga:1280}},{wave:50,emblems:5,trialHealth:{hunter:2900,arcanist:3000,rogue:2750,chief:2960,goblin:2700,frostland:2820,naga:2940}}];
+  const GATES=[null,{wave:20,emblems:3,trialHealth:{hunter:1250,arcanist:1320,rogue:1180,chief:1270,goblin:1160,frostland:1210,naga:1280,bull:1260}},{wave:50,emblems:5,trialHealth:{hunter:2900,arcanist:3000,rogue:2750,chief:2960,goblin:2700,frostland:2820,naga:2940,bull:2920}}];
 
   const cooldown=(hero,base)=>base*(1-(hero.equipment.rune||0)*.1);
   const combat=()=>ns.systems.HeroEvolutionCombat;
@@ -72,7 +73,7 @@
     static cast(hero,slot,ctx){
       const stage=this.rank(hero);if(!stage)return null;if(!hero.active||!['q','w','e','f'].includes(slot))return false;
       const type=hero.classType,power=hero.skillPower(),factor=stage===1?1:1.45,C=combat(),targets=alive(ctx.monsters,hero,stage===2?290:230),primary=targets[0];
-      const selfCast=(type==='chief'&&['w','e'].includes(slot))||(['naga','frostland','goblin'].includes(type)&&slot==='e')||(['hunter','naga'].includes(type)&&slot==='w');
+      const selfCast=(type==='chief'&&['w','e'].includes(slot))||(['naga','frostland','goblin','bull'].includes(type)&&slot==='e')||(['hunter','naga','bull'].includes(type)&&slot==='w');
       const globalUltimate=slot==='f'&&['arcanist','naga','frostland'].includes(type)&&ctx.monsters.some(m=>m.active);if(!primary&&!selfCast&&!globalUltimate)return false;
       const key=slot==='q'?'novaCooldown':slot==='w'?'thunder':slot==='e'?'summon':'ultimate';if(key==='novaCooldown'?hero.novaCooldown>0:hero.skillCooldowns[key]>0)return false;
       const attack=(target,damage,options={})=>hit(hero,target,ctx,Object.assign({damage:damage*power*factor},options));
@@ -111,6 +112,12 @@
           hero.goblinOverclock=Math.max(hero.goblinOverclock||0,stage===1?6:9);return finish(25);
         }
         const energy=this.state(hero).energy||0;this.state(hero).energy=0;for(const m of targets.slice(0,stage===1?8:14))attack(m,108+energy,{evolutionDischarge:true,style:'goblin-rocket'});return finish(66);
+      }
+      if(type==='bull'){
+        if(slot==='q'){hero.x=ns.utils.clamp(primary.x-34,25,ns.config.width-25);hero.y=ns.utils.clamp(primary.y+20,55,ns.config.height-25);hero.setTarget(hero.x,hero.y);for(const m of alive(ctx.monsters,hero,stage===1?86:112).slice(0,stage===1?10:14)){m.applySlow(stage===1?.48:.42,stage===1?1.7:2.2);C.displace(m,stage===1?24:38);attack(m,stage===1?86:108,{style:'bull-hammer'});}return finish(8);}
+        if(slot==='w'){C.field(hero,'evo-bull',power*factor,{time:stage===1?7:9,radius:stage===1?104:132,maxTargets:stage===1?10:14});return finish(13);}
+        if(slot==='e'){hero.bullAvatarTime=stage===1?8:11;for(const m of targets.slice(0,stage===1?4:7))attack(m,stage===1?82:106,{slow:.42,slowTime:stage===1?1.5:2});return finish(23);}
+        for(const m of alive(ctx.monsters,hero,stage===1?148:188).slice(0,stage===1?14:20)){m.applySlow(stage===1?.54:.48,stage===1?2.1:2.6);C.displace(m,stage===1?30:48);attack(m,stage===1?132:165,{style:'bull-hammer'});}return finish(64);
       }
       if(type==='naga'){
         if(slot==='q'){hero.x=ns.utils.clamp(primary.x-34,25,ns.config.width-25);hero.y=ns.utils.clamp(primary.y+16,55,ns.config.height-25);hero.setTarget(hero.x,hero.y);for(const m of targets.slice(0,stage===1?3:5)){C.mark(m,hero,stage===1?6:9);attack(m,78,{armorPierce:2,slow:.58,slowTime:1.25,style:'tide-spear'});this.queue(hero,m,{damage:40*power*factor,armorPierce:2,style:'tide-spear'},.2);}return finish(8);}

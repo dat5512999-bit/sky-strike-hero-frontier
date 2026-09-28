@@ -25,6 +25,13 @@
       s.extended+=extra;s.window+=extra;s.recovery+=extra;
       if(!s.deep)enemy.rootTime=Math.max(enemy.rootTime||0,s.window);
     }
+    // A chain controller can protect partial Frost progress without extending a
+    // Frozen window.  It deliberately moves the existing idle timer instead of
+    // creating a second debuff, movement rule, or persistence field.
+    static hold(enemy,seconds){
+      const s=enemy.frostStatus;if(!s||s.window>0||s.recovery>0||s.amount<=0||!Number.isFinite(seconds)||seconds<=0)return;
+      s.idle=Math.min(s.idle,-seconds);
+    }
     static update(enemy,dt){
       const s=enemy.frostStatus;if(!s||!enemy.active)return;const r=this.rules();
       s.idle+=dt;s.recovery=Math.max(0,s.recovery-dt);
@@ -36,7 +43,7 @@
     static prepare(owner,cfg,options){
       options.frost=(cfg.frost||0)*(1+(owner.frostEfficiency||0));
       options.frozenBonus=cfg.frozenBonus||1;options.shatter=cfg.shatter||0;
-      options.shatterRadius=cfg.shatterRadius||this.rules().shatterRadius;options.freezeExtension=cfg.freezeExtension||0;
+      options.shatterRadius=cfg.shatterRadius||this.rules().shatterRadius;options.freezeExtension=cfg.freezeExtension||0;options.frostHold=cfg.frostHold||0;
       if(cfg.frost||cfg.shatter)options.style=cfg.style||'ice';
       if(owner.huntTime>0&&cfg.frostland){options.frost*=1.25;options.frozenBonus+=.25;}
       return options;
@@ -48,7 +55,7 @@
       return {rate:window?(source.frozenBonus||1):1,shatter,bonus:shatter?source.damage*source.shatter:0};
     }
     static afterHit(enemy,source,hit,monsters,onKill,onHit){
-      if(!source.secondary&&enemy.active){this.extend(enemy,source.freezeExtension||0);if(this.apply(enemy,source.frost||0))ns.systems.FrostlandVFX?.emit(source.owner?.synergy,'freeze',enemy);}
+      if(!source.secondary&&enemy.active){this.extend(enemy,source.freezeExtension||0);if(this.apply(enemy,source.frost||0))ns.systems.FrostlandVFX?.emit(source.owner?.synergy,'freeze',enemy);this.hold(enemy,source.frostHold||0);}
       if(!hit.shatter)return;
       const game=source.owner?.synergy?.game;
       ns.systems.FrostlandVFX?.emit(game?.synergy,'shatter',enemy,{radius:source.shatterRadius,color:'#c8ffea'});

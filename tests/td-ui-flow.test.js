@@ -43,7 +43,7 @@ test('開局選擇在單一桌面視窗並排英雄與軍團，手機共用相�
   assert.match(css,/data-game-screen="opening"[^}]*\.td-profession-screen\{overflow:hidden/);
   assert.match(css,/\.opening-choice-grid\{display:grid;grid-template-columns:minmax\(0,2fr\)/);
   assert.match(css,/data-layout="mobile"[^}]*data-game-screen="opening"[^}]*\.opening-choice-grid/);
-  assert.equal((html.match(/data-profession=/g)||[]).length,7);
+  assert.equal((html.match(/data-profession=/g)||[]).length,8);
   assert.equal((html.match(/data-faction=/g)||[]).length,7);
 });
 

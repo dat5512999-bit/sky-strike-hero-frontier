@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>霜原士兵動作驗收</title>
+<style>body{margin:0;background:#101a23;color:#e8e3d3;font:16px system-ui}main{max-width:1160px;margin:auto;padding:20px}h1{font-size:26px}p{color:#b1c5cc;line-height:1.6}nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0}button,select{font:inherit;background:#243b47;color:#fff;border:1px solid #68949d;border-radius:5px;padding:10px;min-height:44px}button[aria-pressed=true]{background:#397586}canvas{display:block;width:100%;background:#162a2e;border:1px solid #607b77}label{display:flex;gap:7px;align-items:center}#status{min-height:1.5em}</style></head>
+<body><main><p>HERO FRONTIER · FROST MOTION 1.0.0 · 開發驗收</p><h1>霜原六兵種：待機與攻擊</h1>
+<p>沿用遊戲的動畫與繪製程式。待機 8 格、攻擊 8 格；可放大、慢放及逐格檢查。此頁不修改存檔，也不提供遊戲內入口。</p>
+<nav><button id="idle" aria-pressed="true">待機循環</button><button id="attack" aria-pressed="false">攻擊循環</button><button id="pause">暫停</button><button id="step">前進一格</button>
+<label>速度<select id="speed"><option value="1">正常</option><option value="0.25">慢速 ¼</option></select></label>
+<label>大小<select id="zoom"><option value="1">實戰原尺寸</option><option value="1.6" selected>放大 1.6 倍</option></select></label>
+<button id="mirror" aria-pressed="false">左右翻面</button><button id="bounds" aria-pressed="false">顯示來源邊界</button><button id="retry">重試載入</button></nav>
+<canvas width="1140" height="690" aria-label="六種霜原士兵動態預覽"></canvas><p id="status" role="status">載入六份圖集…</p>
+</main>
+<script src="src/td/namespace.js"></script><script src="src/td/config.js"></script>
+<script src="src/td/systems/ArtSystem.js"></script><script src="src/td/systems/FrostlandAnimation.js"></script>
+<script src="src/td/systems/FrostlandArt.js"></script><script src="src/td/systems/FrostlandAtlas.js"></script>
+<script src="src/td/systems/FrostlandMotionAtlas.js"></script><script src="src/td/systems/FrostlandSprites.js"></script>
+<script src="src/td/frostland-soldier-preview.js"></script></body></html>

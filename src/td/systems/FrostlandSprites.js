@@ -7,6 +7,19 @@
     const img=system.frostAtlases[key]=system.load(ns.systems.FrostlandAtlas[key].path);
     img.addEventListener?.('load',()=>{for(const id of Object.keys(heights))system.previewCache?.delete('unit:'+id);if(typeof document!=='undefined')document.querySelectorAll('[data-roster-unit^="frost"],[data-build-type^="frost"],[data-mercenary^="frost"]').forEach(card=>delete card.dataset.previewReady);system.game?.refreshRosterPreviews?.();system.game?.updateUi?.();},{once:true});return img;
   }
+  function motionAtlas(system,type){
+    const meta=ns.systems.FrostlandMotionAtlas?.[type];if(!meta)return null;
+    system.frostAtlases||={};const key='motion:'+type;
+    if(!system.frostAtlases[key]){
+      const img=system.frostAtlases[key]=system.load(meta.path);
+      img.addEventListener?.('load',()=>{
+        system.previewCache?.delete('unit:'+type);
+        if(typeof document!=='undefined')document.querySelectorAll(`[data-roster-unit="${type}"],[data-build-type="${type}"],[data-mercenary="${type}"]`).forEach(card=>delete card.dataset.previewReady);
+        system.game?.refreshRosterPreviews?.();
+      },{once:true});
+    }
+    return system.frostAtlases[key];
+  }
   function frame(ctx,image,meta,index,height){
     const f=meta.frames[index],r=f.rect,scale=height/meta.maxHeight;
     ctx.save();if(f.cuts?.length){ctx.beginPath();ctx.rect((r[0]-f.anchorX)*scale,(r[1]-f.foot)*scale,r[2]*scale,r[3]*scale);for(const c of f.cuts)ctx.rect((c[0]-f.anchorX)*scale,(c[1]-f.foot)*scale,c[2]*scale,c[3]*scale);ctx.clip('evenodd');}
@@ -25,12 +38,15 @@
   }
   art.drawCombatUnit=function(ctx,u){
     if(!ns.config.units[u.type]?.frostland)return prior.unit.call(this,ctx,u);
-    const img=atlas(this,'soldiers');if(!img.ready)return prior.unit.call(this,ctx,u);
-    const pose=ns.systems.FrostlandAnimation.pose(u),meta=ns.systems.FrostlandAtlas.soldiers;
-    ctx.save();ctx.translate(u.x,u.y+12);shadow(ctx,u.type==='frostMammoth'?42:26,.38);
+    const upgraded=motionAtlas(this,u.type),legacy=upgraded?.ready?null:atlas(this,'soldiers');
+    const img=upgraded?.ready?upgraded:legacy;if(!img?.ready)return prior.unit.call(this,ctx,u);
+    const motion=ns.systems.FrostlandAnimation.motionPose(u);
+    const pose=upgraded?.ready?null:ns.systems.FrostlandAnimation.pose(u),meta=upgraded?.ready?ns.systems.FrostlandMotionAtlas[u.type]:ns.systems.FrostlandAtlas.soldiers;
+    ctx.save();ctx.translate(u.x,u.y+12);shadow(ctx,motion.shadowWidth,motion.shadowAlpha);
     if(Math.cos(u.facing||0)<0)ctx.scale(-1,1);
-    const flying=u.type==='frostBird';if(flying)ctx.translate(0,-9-Math.sin((u.frameClock||0)*.75)*2);
-    frame(ctx,img,meta,pose.row*4+pose.frame,heights[u.type]);
+    ctx.save();if(motion.flying)ctx.translate(0,-motion.lift);
+    frame(ctx,img,meta,upgraded?.ready?motion.index:pose.row*4+pose.frame,heights[u.type]);
+    ctx.restore();
     if(Object.keys(u.gear||{}).length){ctx.fillStyle='#e5c778';ctx.font='bold 12px sans-serif';ctx.fillText('◆',20,-8);}
     if(u.huntTime>0){ctx.strokeStyle='#bdddc0';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(0,3,30,10,0,0,Math.PI*2);ctx.stroke();}ctx.restore();return true;
   };
@@ -48,5 +64,5 @@
   const oldStatus=art.coreStatus;art.coreStatus=function(type){const base=oldStatus.call(this,type);if(type!=='frostland')return base;const needed=['hero','weapons','soldiers'].map(k=>atlas(this,k));const loaded=needed.filter(i=>i.ready).length;return {loaded:base.loaded+loaded,total:base.total+needed.length,failed:base.failed||needed.some(i=>i.failed),ready:base.ready&&loaded===needed.length};};
   const oldFailures=art.failedAssets;art.failedAssets=function(){return oldFailures.call(this).concat(Object.values(this.frostAtlases||{}).filter(i=>i.failed));};
   // Legacy atlas viewport helper; selection UI now uses dedicated portrait paintings.
-  ns.systems.FrostlandSprites={heights,frame,atlas};
+  ns.systems.FrostlandSprites={heights,frame,atlas,motionAtlas};
 })(globalThis.TowerFrontier);

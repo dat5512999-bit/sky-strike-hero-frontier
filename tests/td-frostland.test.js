@@ -59,6 +59,11 @@ test('Frost accumulates, slows through existing status API, decays and never lea
  const silver=new ns.entities.Building('frost',100,100),fresh=enemy(ns);g.monsters=[fresh];silver.cooldown=0;silver.update(.1,g.monsters,g.projectiles,[]);g.projectiles[0].hit(g.monsters,()=>{},()=>{});assert.equal(fresh.frostStatus,undefined);assert.ok(fresh.slowTimer>0);
  for(const bad of [NaN,Infinity,-1,0])F.apply(fresh,bad);assert.equal(fresh.frostStatus,undefined);
 });
+test('Frost Crystal is the fast single-target opener while Frost Bird spreads and preserves partial Frost',()=>{
+ const {ns,g,F}=setup(),crystal=ns.config.buildings.frostCrystal,bird=ns.config.units.frostBird,target=enemy(ns,140,100),second=enemy(ns,190,100),third=enemy(ns,240,100);assert.equal(crystal.frost,25);assert.equal(crystal.frostHold,undefined);assert.equal(bird.frost,16);assert.equal(bird.chain,3);assert.equal(bird.frostHold,1.2);
+ g.monsters=[target,second,third];const owner=new ns.entities.CombatUnit('frostBird',100,100);shot(ns,g,owner,target,{damage:bird.damage,attackType:bird.attackType,frost:bird.frost,frostHold:bird.frostHold,chain:bird.chain,chainRange:bird.chainRange});for(const victim of g.monsters){assert.equal(victim.frostStatus.amount,16);assert.equal(victim.frostStatus.idle,-1.2);}
+ F.update(target,3.1);assert.equal(target.frostStatus.amount,16,'bird holds a spread target past the normal two-second decay delay');F.update(target,.2);assert.ok(target.frostStatus.amount<16,'the hold delays decay instead of making Frost permanent');
+});
 test('Frozen stops movement and attacks, expires, and has an enforced recovery interval',()=>{
  const {ns,g,F}=setup(),m=enemy(ns,140,100,'brute');g.monsters=[m];F.apply(m,100);const x=m.x;m.update(.1,g.hero,[]);assert.equal(m.x,x);
  const combat=new ns.systems.EnemyCombatSystem();m.attackCooldown=0;combat.update(.1,[m],g.hero,[]);assert.equal(m.attackWindup,0);
@@ -116,10 +121,11 @@ test('Frost equipment uses one slot, transfers cleanly, alters attacks; shop/rew
 test('Old profiles roundtrip unchanged, new rounds remain story-locked, unlocks are independent',()=>{
  const {ns}=setup(),values=new Map(),storage={getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v)};const p=new ns.systems.ProfileStore(storage);p.switchTo('admin');assert.ok(p.allows('heroes','frostland'));p.switchTo('test');const old=p.export();const restored=new ns.systems.ProfileStore(storage);assert.equal(restored.export(),old);assert.equal(restored.allows('factions','frostland'),false);assert.equal(restored.allows('heroes','frostland'),false);restored.complete({id:'future-approved-milestone',rewards:{heroes:['frostland']}});assert.equal(restored.allows('heroes','frostland'),true);assert.equal(restored.allows('factions','frostland'),false);
 });
-test('Codex exposes actual Frost gameplay and UNKNOWN lore without adding Chronicle or Story milestones',()=>{
+test('Codex exposes actual Frost gameplay and UNKNOWN lore; Chapter III may unlock it without adding Chronicle claims',()=>{
  const {ns,context}=setup();vm.runInContext(fs.readFileSync('src/td/maps.js','utf8'),context);for(const p of ['CodexCatalog','GameplayIdentity'])vm.runInContext(fs.readFileSync('src/td/codex/'+p+'.js','utf8'),context);
  const entries=new ns.codex.CodexCatalog().all(),frost=entries.filter(e=>e.key==='frostland'||e.source.frostland);assert.equal(frost.length,15);for(const e of frost){assert.ok(e.lore.every(l=>l.sourceType==='UNKNOWN'));assert.equal(e.hiddenUntilEncountered,'hidden');assert.ok(e.gameplayInfo.length);assert.ok(fs.existsSync(e.thumbnail));}
- assert.ok(!ns.systems.StoryCatalog.missions.some(m=>Object.values(m.rewards||{}).flat().includes('frostland')));
+ const finale=ns.systems.StoryCatalog.getMission('chapter3-nightwatch');assert.ok(finale.rewards.heroes.includes('frostland'));assert.ok(finale.rewards.factions.includes('frostland'));
+ assert.ok(!(ns.codex.chronicleSeed||[]).some(entry=>entry.chapter===3),'解鎖既有內容不能把霜原來源寫入編年史');
 });
 test('Placeholder slots, all silhouettes, weapon stages and offline modules resolve locally',()=>{
  const slots=JSON.parse(fs.readFileSync('assets/td/frostland/slots.json'));for(const s of Object.values(slots.slots))assert.ok(fs.existsSync(s.path));for(const key of ['frost_wolf','frost_bear','frost_bird','frost_hunter','frost_shaman'])assert.ok(fs.existsSync('assets/td/frostland/'+key+'.svg'));

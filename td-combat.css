@@ -293,6 +293,12 @@ body[data-hero-class="naga"][data-skill-art="ready"] .td-hero-dock #td-skill b{b
 body[data-hero-class="naga"][data-skill-art="ready"] .td-hero-dock #td-thunder b{background-position:100% 0}
 body[data-hero-class="naga"][data-skill-art="ready"] .td-hero-dock #td-summon b{background-position:0 100%}
 body[data-hero-class="naga"][data-skill-art="ready"] .td-hero-dock #td-ultimate b{background-position:100% 100%}
+/* The neutral war god owns a dedicated atlas: Q impact, W arena, E battle will, F judgement. */
+body[data-hero-class="bull"][data-skill-art="ready"] .td-hero-dock .skill-button b{background-image:url('assets/td/neutral/bull-wargod-skill-icons-v2.png');background-size:200% 200%;background-repeat:no-repeat;color:transparent!important;font-size:0!important;filter:drop-shadow(0 1px 4px #2a1207)}
+body[data-hero-class="bull"][data-skill-art="ready"] .td-hero-dock #td-skill-button b{background-position:0 0}
+body[data-hero-class="bull"][data-skill-art="ready"] .td-hero-dock #td-thunder b{background-position:100% 0}
+body[data-hero-class="bull"][data-skill-art="ready"] .td-hero-dock #td-summon b{background-position:0 100%}
+body[data-hero-class="bull"][data-skill-art="ready"] .td-hero-dock #td-ultimate b{background-position:100% 100%}
 /* V0.53: a single visual resource/action strip, using the existing pause button. */
 body.edge-combat[data-combat-ui="edge"]:is([data-game-screen="battle"],[data-game-screen="result"]) .td-header{
  width:336px;height:38px;min-height:38px;display:grid;

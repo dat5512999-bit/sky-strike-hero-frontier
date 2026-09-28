@@ -1,3 +1,5 @@
+> **v0.85.69：** `TDDifficultySystem.heroAssault` 與 `Map.heroVulnerable` 經 `heroDamageAllowed()` 匯成單一 `TDGame.heroDamageEnabled()`，同時供 EnemyCombat 與 HUD 使用；沒有複製敵軍 AI 或另建傷害系統。
+
 > **2026-09-28 容量整理：** 本機保留主開發目錄與五個功能分支，需要隔離開發時再由分支重建副本；地圖歷史仍由 artifacts 保存。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。
 
 > **v0.85.63：** 觸控流程為 `td.html → td-mobile.html → 同源 td.html`；容器在直向交換 iframe 寬高並旋轉，橫向直接填滿，兩者均執行同一遊戲。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
@@ -18,7 +20,7 @@
 
 > **塔樓材質特效 VFX 2.0.0（未發佈）：** TowerSkillSystem → TowerVFX → PaintedTowerVFX → ArtSystem；有素材時走材質繪製，降級層保留。傷害管線維持原契約。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
 
-> 地圖後台 1.0.1：編輯器 → 本機 API → 固定差異檔 published-maps.js → 遊戲塔位／路線系統；寫入前备份，單檔原子替換，架構圖與資料格式見專章。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+> 地圖後台 1.0.3：編輯器 → 路線驗證（原道路走廊＋禁區）→ 本機 API → 固定差異檔 published-maps.js → 遊戲塔位／路線系統；橋面與既有道路加點可通過，捷徑進禁區仍會拒絕。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **目前進化規則 v0.85.56：** HeroEvolutionSystem 管理進化流程；HeroEvolutionCombat 接既有 Projectile／Monster／HeroRoster；EvolutionCompanion 繼承 Summon；Presentation 獨立渲染，ChapterCheckpointSystem 保存安全整備狀態。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
 
@@ -875,3 +877,8 @@ v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 M
 > **v0.85.65：** `EnemyBalanceCatalog` 在 `Monster.js` 後載入，讀取既有怪物、波表、支援和首領資料建立稽核指標，不新增遊戲內第二套傷害規則。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。
 
 > **v0.85.66：** 配裝導引由 `ArmorySystem` 提供相容清單，`ArmoryUI` 顯示與跳轉，`TDGame` 標示目前選取相容性；資料不寫入存檔。詳見 [軍械導引交付](UNIT_EQUIPMENT_GUIDANCE_V08566.md)。
+> **v0.85.67：** `BullWargodArt` 在 `ArtSystem` 後覆寫戰牛專用 5×5 圖集渲染；`HeroSkillVFX` 繪製世界座標特效，`Projectile` 沿用既有命中管線處理元素核心。詳見 [戰神交付](BULL_WARGOD_V08567.md)。
+>
+> **v0.85.68：** `BullWargodArt` 同時管理 2×2 技能圖集的預載、核心載入狀態與重試；`td-combat.css`／`td-polish.css` 只負責將 Q／W／E／F 對應到固定格位。
+> 2026-09-28 · 霜原士兵 Motion 1.0.0：六兵種 96 格待機／攻擊、振翅與逐幀腳底定位；戰鬥數值不變。操作、API、安裝部署、備份還原與測試限制見[交付文件](FROSTLAND_MOTION_V1.md)。本機修改，未部署。
+

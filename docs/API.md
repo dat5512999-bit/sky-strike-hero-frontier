@@ -1,3 +1,5 @@
+> **v0.85.69：** `TDDifficultySystem.heroDamageAllowed(mapHeroVulnerable)` 回傳該局是否容許敵軍攻擊英雄；災厄透過 `heroAssault:true` 覆蓋正式地圖的 false，其他難度沿用地圖值。無 HTTP API 或存檔 schema 改動。
+
 > **2026-09-28 容量整理：** 本機容量整理維護紀錄已新增；既有 API 與地圖還原資料位置沿用現況。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。
 
 > **v0.85.63：** 沒有 HTTP API 或存檔 schema 改動；`td-mobile.html` 只調整同源 iframe 的顯示方向，`mobileShell=1`／`preview=iphone15promax` 仍只影響版型。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
@@ -18,7 +20,7 @@
 
 > **塔樓材質特效 VFX 2.0.0（未發佈）：** 新增 PaintedTowerVFX 視覺層；ArtSystem 維持 preload/coreStatus/failedAssets/retryFailed 契約，無新遠端 API 或存檔結構。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
 
-> 地圖後台 1.0.1：新增本機 `/api/studio/state`、`publish`、`restore`，寫入需同源與工作階段 token，並以 baseRevision 阻止過期覆蓋。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
+> 地圖後台 1.0.3：本機 `/api/studio/state`、`publish`、`restore` 寫入需同源與工作階段 token，並以 baseRevision 阻止過期覆蓋；路線驗證新增內部「原道路走廊」比對，不改 HTTP API 或資料格式。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **目前進化規則 v0.85.56：** 新增內部 HeroEvolutionCombat、EvolutionCompanion 契約；completeTrial 必須驗證死亡、本人與 stage。Hero.evolution 增加可選 powerFloor／intervalFloor／energy；章節 schema1 支援 wave50，沒有新增網路 API。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
 
@@ -671,3 +673,8 @@ v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare�
 > **v0.85.65：** 無新增 HTTP API；前端內部 `EnemyBalanceCatalog` 提供 `get(type)`、`profiles()`、`pressureOf(monster)`、`waveAudit(wave, modifiers)` 和 `audit(modifiers)` 供平衡工具與測試讀取。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。
 
 > **v0.85.66：** 無新增 HTTP API；`ArmorySystem.compatibleItems(target)` 回傳目標實際可穿的軍械資料，供配裝與商店導引使用。詳見 [軍械導引交付](UNIT_EQUIPMENT_GUIDANCE_V08566.md)。
+> **v0.85.67：** 無新增 HTTP API；`EquipmentSystem.CORES` 定義戰牛核心，`EquipmentSystem.core(hero)` 與 `applyCore(hero, options)` 將目前核心套進既有投射傷害流程。詳見 [戰神交付](BULL_WARGOD_V08567.md)。
+>
+> **v0.85.68：** 無新增 API；`HeroRoster.CLASSES.bull.skillArt` 提供戰神專屬 Q／W／E／F 圖集位置，僅作介面呈現，不改變技能傷害介面。
+> 2026-09-28 · 霜原士兵 Motion 1.0.0：六兵種 96 格待機／攻擊、振翅與逐幀腳底定位；戰鬥數值不變。操作、API、安裝部署、備份還原與測試限制見[交付文件](FROSTLAND_MOTION_V1.md)。本機修改，未部署。
+

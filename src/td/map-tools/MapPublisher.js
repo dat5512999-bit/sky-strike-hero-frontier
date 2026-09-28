@@ -4,11 +4,21 @@
   const keys={layout:'heroFrontierMapLayoutOverridesV1',routes:'heroFrontierMapRouteOverridesV1'};
   ns.mapTools=ns.mapTools||{};ns.mapTools.isEditor=true;
   let session=null,pending=null;
+  function localServiceUnavailable(){return '無法連線至本機地圖後台。請確認 start-developer-studio.cmd 視窗仍開啟，再重新整理此頁後重試；目前地圖與備份均未變更。';}
   function stored(key){try{return JSON.parse(localStorage.getItem(key))?.maps||{};}catch{return {};}}
   function bundle(){const changes={};for(const [kind,key] of Object.entries(keys))for(const [id,value] of Object.entries(stored(key))){changes[id]=changes[id]||{};changes[id][kind]=kind==='routes'?value.routes:value;}return {format:FORMAT,changes};}
   function exportSaved(){const data=bundle();download(data,'hero-frontier-saved-maps.json');return Object.keys(data.changes).length;}
   function download(data,name){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-  async function request(endpoint,input){const response=await fetch('/api/studio/'+endpoint,{method:input?'POST':'GET',cache:'no-store',headers:input?{'Content-Type':'application/json','X-Studio-Token':session.token}:{},body:input?JSON.stringify(input):undefined});const data=await response.json();if(!response.ok)throw new Error(data.error||'後台讀寫失敗。');return data;}
+  async function request(endpoint,input){
+    let response;
+    try{response=await fetch('/api/studio/'+endpoint,{method:input?'POST':'GET',cache:'no-store',headers:input?{'Content-Type':'application/json','X-Studio-Token':session.token}:{},body:input?JSON.stringify(input):undefined});}
+    catch(error){throw new Error(localServiceUnavailable());}
+    let data=null;
+    try{data=JSON.parse(await response.text());}catch{throw new Error(response.ok?'本機後台回應格式異常。請重新啟動 start-developer-studio.cmd 後重新整理此頁。':'本機後台回應無法辨識（HTTP '+response.status+'）。請重新啟動後台後重試。');}
+    if(!response.ok)throw new Error(data?.error||'後台讀寫失敗（HTTP '+response.status+'）。');
+    if(!data||typeof data!=='object')throw new Error('本機後台回應格式異常。請重新啟動 start-developer-studio.cmd 後重新整理此頁。');
+    return data;
+  }
   async function connect(){if(location.protocol!=='http:'||location.hostname!=='127.0.0.1')return false;try{session=await request('state');globalThis.HeroFrontierPublishedMaps=session.state;return true;}catch{return false;}}
   const api={connected:false,ready:null,exportSaved,save:async function(id,change){
     if(!api.connected)throw new Error('目前是離線編輯頁。請先匯出已存設定，再由本機管理後台匯入發佈。');

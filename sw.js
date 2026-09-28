@@ -1,7 +1,10 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.66';
+const CACHE_NAME = 'sky-strike-v0.85.69';
 const ASSETS = [
+ './src/td/systems/FrostlandMotionAtlas.js', './frostland-soldier-preview.html', './src/td/frostland-soldier-preview.js',
+ './assets/td/frostland/frostWolf-motion-v2.png', './assets/td/frostland/frostBear-motion-v2.png', './assets/td/frostland/frostBird-motion-v2.png',
+ './assets/td/frostland/frostHunter-motion-v2.png', './assets/td/frostland/frostShaman-motion-v2.png', './assets/td/frostland/frostMammoth-motion-v2.png',
  './assets/td/bosses/demonlord-actions-v2.png',
  './boss-preview.html', './src/td/boss-preview.js', './src/td/systems/BossVisualCatalog.js', './src/td/systems/BossSpriteBounds.js',
  './assets/td/bosses/frontline-actions-v2.png', './assets/td/bosses/bulwark-actions-v1.png', './assets/td/bosses/banner-actions-v1.png', './assets/td/bosses/earthbreaker-actions-v1.png', './assets/td/bosses/redtusk-actions-v1.png', './assets/td/bosses/saltguard-actions-v1.png', './assets/td/bosses/siegebreaker-actions-v1.png', './assets/td/bosses/frostcrown-actions-v2.png',
@@ -14,6 +17,7 @@ const ASSETS = [
  './assets/td/tower-magic-effects-v2.png',
  './assets/td/goblin-steam-scavenger-actions-v1.png', './assets/td/goblin-bomb-sapper-actions-v1.png', './assets/td/orc-war-banner-actions-v1.png', './assets/td/orc-skullcrusher-actions-v1.png', './assets/td/frostland-rime-stalker-actions-v1.png', './assets/td/frostland-rime-priest-actions-v1.png',
  './assets/td/naga/siltwater-demonlord-actions-v1.png', './assets/td/naga/silt-imp-actions-v1.png', './assets/td/naga/brine-shellbreaker-actions-v1.png', './assets/td/naga/tidebreaker-hero-actions-v1.png', './assets/td/naga/tidebreaker-selection-v1.png', './assets/td/naga/faction-selection-v1.png', './assets/td/naga/tidebreaker-skill-icons-v1.png', './assets/td/naga/tideguard-actions-v1.png', './assets/td/naga/deep-tide-wargod-actions-v1.png', './assets/td/naga/manta-wing-raider-actions-v1.png', './assets/td/naga/venom-marsh-stalker-actions-v1.png', './assets/td/naga/naga-buildings-v1.png',
+ './src/td/systems/BullWargodArt.js', './assets/td/neutral/bull-wargod-actions-5x5-v1.png', './assets/td/neutral/bull-wargod-selection-v1.png', './assets/td/neutral/bull-wargod-skill-icons-v2.png',
  './assets/td/enemy-grunt-directions-v1.png', './assets/td/enemy-brute-directions-v1.png',
  './update.html', './src/td/update-client.js',
  './goblin-polish-preview.html', './src/td/goblin-polish-preview.js', './src/td/systems/GoblinPresentation.js', './assets/td/goblin/skill-icons-v2.png', './assets/td/goblin/spell-effects-v1.png',
@@ -46,7 +50,7 @@ const ASSETS = [
   './assets/td/opening/hero-hunter-selection-v1.png', './assets/td/opening/hero-arcanist-selection-v1.png', './assets/td/opening/hero-rogue-selection-v1.png', './assets/td/opening/difficulty-scenes-v1.png',
   './assets/td/opening/faction-kingdom-selection-v1.png', './assets/td/opening/faction-silverleaf-selection-v1.png', './assets/td/opening/faction-twilight-selection-v1.png',
  './assets/td/opening/chief-skill-icons-v1.png', './assets/td/opening/chief-shockwave-icon.svg', './assets/td/opening/faction-wild-selection-v1.png', './assets/td/opening/hero-chief-selection-v2.png', './assets/td/wild-chief-actions-v1.png', './assets/td/wild-centaur-actions-v1.png', './assets/td/wild-boar-rider-actions-v1.png', './assets/td/wild-minotaur-actions-v1.png', './assets/td/wild-shaman-actions-v1.png',
- './assets/td/autumn-ruins-v1.png', './assets/td/twin-pass-v1.png', './assets/td/beginner-valley-v2.png', './assets/td/silverleaf-valley-v4.png', './assets/td/shadowfall-ruins-v3.png', './assets/td/frostborn-chasm-v3.png', './assets/td/western-signal-v1.png', './assets/td/ember-road-encounter-v1.png', './assets/td/frontier-ground-v2.png', './assets/td/frontier-ground-v1.png', './assets/td/hero-skill-icons-v1.png',
+ './assets/td/autumn-ruins-v1.png', './assets/td/twin-pass-v1.png', './assets/td/beginner-valley-v2.png', './assets/td/silverleaf-valley-v4.png', './assets/td/shadowfall-ruins-v3.png', './assets/td/frostborn-chasm-v3.png', './assets/td/western-signal-v1.png', './assets/td/ember-road-encounter-v1.png', './assets/td/stone-ring-basin-v1.png', './assets/td/red-mesa-terminus-v1.png', './assets/td/chapter3-white-trace-pass-v1.png', './assets/td/chapter3-echo-engine-yard-v1.png', './assets/td/chapter3-crossmark-hollow-v1.png', './assets/td/chapter3-nightwatch-calibration-v1.png', './assets/td/story/chapter2-stone-circle-witness-v1.png', './assets/td/story/chapter2-red-mesa-dawn-v1.png', './assets/td/frontier-ground-v2.png', './assets/td/frontier-ground-v1.png', './assets/td/hero-skill-icons-v1.png',
   './src/td/maps.js', './src/td/systems/FrontierTerrain.js',
   './src/td/systems/BattlefieldCamera.js',
   './src/td/systems/MiniMapView.js',

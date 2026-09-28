@@ -1,3 +1,5 @@
+> **v0.85.69：** `TDDifficultySystem.heroAssault` 僅災厄為 true，並由 `heroDamageAllowed(map.heroVulnerable)` 合併地圖預設；勿把正式地圖的 `heroVulnerable:false` 全部改成 true。士兵不承傷規則不變。
+
 > **2026-09-28 容量整理：** 只按核對清單處理工作副本與純快取；artifacts 地圖歷史、回復工具和驗收證據必須保留。 [處理清單、驗證與還原](PROJECT_STORAGE_CLEANUP_20260928.md)。
 
 > **v0.85.63：** 部署後以 iPhone 直向與橫向驗收同一個橫向容器、PWA `landscape` 宣告及不遮擋內容的手動安裝按鈕。詳見 [手機全程橫向流程](MOBILE_LANDSCAPE_FLOW_V08563.md)。
@@ -18,7 +20,7 @@
 
 > **塔樓材質特效 VFX 2.0.0（未發佈）：** 新增两張特效圖集載入、失敗與重試追蹤；請先查素材狀態，再查發行版快取。 見 [材質特效與畫面驗證](TOWER_VFX_V2.md)。
 
-> 地圖後台 1.0.1：管理者啟動本機服務，按一次儲存即直接寫入格線與路線。支援整版還原、過期頁面衝突保護；私人瀏覽器草稿不再自動蓋過正式地圖。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。 新增點模式可持續連點；格線／路線均為一鍵儲存並自動備份。
+> 地圖後台 1.0.3：管理者啟動本機服務，按一次儲存即直接寫入格線與路線。支援整版還原、過期頁面衝突保護；沿原路加點保有道路通行權，偏離道路切進禁區才會拒絕。 [完整操作與交付說明](DEVELOPER_STUDIO_MAP_LAYOUT.md)。
 
 > **目前進化規則 v0.85.56：** 進化參數集中 HeroEvolutionSystem；印記、能量與領域由 HeroEvolutionCombat 共用。進化領域每次至多 12 目標，延遲攻擊每幀至多 6 次。保留錯誤證據 hero.evolutionFault，檢查離線包一致性。 見 [完整規格、8D 與驗收](HERO_EVOLUTION_COMPLETION_V08556.md)。以下舊版章節保留版本歷史；進化與檢查點以本節為準。
 
@@ -534,3 +536,8 @@ v0.85.0：冰原僅為 TESTABLE，管理者可玩，新測試輪次故事鎖定�
 > **v0.85.65：** 怪物數值、波表、支援光環或首領援軍變動後，另執行 `npm run enemy-balance:audit` 與 `node --test tests/td-enemy-balance-audit.test.js`；確認戰報為 `whole-game-reset-v08565`。詳見 [怪物平衡交付](ENEMY_BALANCE_RESET_V08565.md)。
 
 > **v0.85.66：** 軍械相容性只改 `ArmorySystem.ITEMS`，不得在 UI 另造白名單；變更後驗證配裝導引與 `tests/td-armory-flow.test.js`。詳見 [軍械導引交付](UNIT_EQUIPMENT_GUIDANCE_V08566.md)。
+> **v0.85.67：** 戰牛為英雄而非軍團；保持英雄與軍團選擇獨立。核心僅透過 `EquipmentSystem.CORES` 與 `ShopSystem` 對 `bull` 生效，不得複製到其他英雄或建立第二套背包。詳見 [戰神交付](BULL_WARGOD_V08567.md)。
+>
+> **v0.85.68：** 發佈戰牛時必須一併交付 `bull-wargod-skill-icons-v2.png`；由 `BullWargodArt` 預載、失敗重試，勿只更新 CSS 或只換圖示。
+> 2026-09-28 · 霜原士兵 Motion 1.0.0：六兵種 96 格待機／攻擊、振翅與逐幀腳底定位；戰鬥數值不變。操作、API、安裝部署、備份還原與測試限制見[交付文件](FROSTLAND_MOTION_V1.md)。本機修改，未部署。
+
