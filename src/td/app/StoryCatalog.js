@@ -119,28 +119,30 @@
     'chapter1-shadowfall':{cast:['hunter','rogue'],goal:'保住證人與遺物，讓調查不在舊城斷掉。',outcome:'證言留下了，卻也顯示有人希望調查在這裡停止。'},
     'chapter1-frostborn':{cast:['hunter'],goal:'穿過雙路裂谷，護送調度紀錄抵達安全處。',outcome:'紀錄指出王城另有命令系統；下一步必須離開既有疆界。'},
     'chapter2-western-signal':{cast:['hunter','chief'],goal:'護送信使與舊印穿過西境，換取戈爾繼續對話的條件。',outcome:'戈爾同意帶來見證者；這是對話的開始，不是結論。'},
-    'chapter2-ember-road':{cast:['hunter','chief'],goal:'救出荒野小隊、傷者與補給車，先用行動建立信任。',outcome:'小隊交出被燒毀的路名，但遷徙的原因仍必須由他們自己說明。'},
-    'chapter2-stone-circle':{cast:['hunter','chief'],sceneImage:'assets/td/stone-ring-basin-v1.png',goal:'守住石環外路，讓匿名見證者與紀錄安全離開。',outcome:'見證確認那是一場被迫遷徙，下一段可驗證的路名指向赤岩峽橋。'},
-    'chapter2-red-mesa':{cast:['hunter','chief'],sceneImage:'assets/td/red-mesa-terminus-v1.png',goal:'護送見證、傷者與紀錄通過最後中繼站。',outcome:'荒野部族選擇以自己的身分同行；南方的真相仍待共同查證。'},
-    'chapter3-white-trace':{cast:['hunter','frostland','goblin'],goal:'讓凜的霜痕與奇克的測量各自離開現場，保留兩份原始記錄。',outcome:'兩份記錄都留下了；它們描述同一件事，卻還無法互相解釋。'},
-    'chapter3-echo-yard':{cast:['hunter','frostland','goblin'],goal:'保住回聲裝置與腳印樣本，讓兩種方法都能被重測。',outcome:'裝置回覆得比提問更早；凜與奇克同意不刪除彼此的證據。'},
-    'chapter3-crossmark':{cast:['hunter','frostland','goblin'],goal:'護送兩份彼此矛盾的資料到交會點，完成第一次共同校驗。',outcome:'矛盾沒有被抹掉，反而成為下一次校準必須保留的線索。'},
-    'chapter3-nightwatch':{cast:['hunter','frostland','goblin'],goal:'守住校準台，讓凜與奇克完成最後一次交叉觀測。',outcome:'兩人以調查夥伴身分加入遠征；回應仍沒有可辨認的來源。'},
-    'chapter4-tidegate-outfall':{cast:['naga'],goal:'協助賽洛完成第一輪讀值，並把觀測記錄帶離礁岸。',outcome:'回折可被記下，但賽洛拒絕把未知誤寫成來源。'},
-    'chapter4-brineway':{cast:['naga'],goal:'護住潮衛與工程團，讓壓力與潮向的第二次重測能完成。',outcome:'兩種量測相符，卻都還不能說明另一端是誰。'},
-    'chapter4-reef-confluence':{cast:['naga'],goal:'讓兩岸獨立取得的讀值在橋頭完成交叉比對。',outcome:'同步被確認；來源依然沒有名字，還需要長時觀測。'},
-    'chapter4-tide-observatory':{cast:['naga'],goal:'守住潮儀台，封存所有原始讀值，讓下一位觀測者能重查。',outcome:'潮衛持續同行；可以證實的是回應仍在重複，不能證實的是來源。'}
+    'chapter2-ember-road':{cast:['hunter','chief'],cardImages:['assets/td/story/chapter2-ember-road-escort-v2.png',null,'assets/td/story/chapter2-ember-road-escort-v2.png',null,'assets/td/story/chapter2-ember-road-escort-v2.png'],lines:['補給車被燒毀，傷者困在火線中央；蘭恩與戈爾必須先把人帶離商道。','戈爾說得很清楚：先救人，再談部落為什麼離開南方。','敵人正沿著商道逼近；護送隊不能在煙障裡停下。'],goal:'救出荒野小隊、傷者與補給車，先用行動建立信任。',outcome:'小隊交出被燒毀的路名；下一個能查證的地點是石環。'},
+    'chapter2-stone-circle':{cast:['hunter','chief'],cardImages:['assets/td/story/chapter2-stone-circle-parley-v2.png',null,'assets/td/story/chapter2-stone-circle-parley-v2.png',null,'assets/td/story/chapter2-stone-circle-parley-v2.png'],lines:['護送隊抵達石環。見證者願意開口，但要先安全離開這裡。','戈爾不替見證者說話；蘭恩也不能替任何人決定答案。','敵人封鎖石環外路，紀錄和見證者只能一起穿過包圍。'],goal:'守住石環外路，讓見證者與遷徙紀錄安全離開。',outcome:'見證者確認部落是被迫遷徙；下一段可驗證的路名指向赤岩峽橋。'},
+    'chapter2-red-mesa':{cast:['hunter','chief'],cardImages:['assets/td/story/chapter2-red-mesa-escort-v2.png',null,'assets/td/story/chapter2-red-mesa-escort-v2.png',null,'assets/td/story/chapter2-bull-parting-v1.png'],lines:['傷者、見證者和紀錄都在車上；隊伍必須通過赤岩峽橋。','關口不是結盟儀式。這一戰只決定護送隊能不能活著抵達。','封鎖者已經守住橋頭；車隊一停下，所有證據都會被奪走。'],goal:'護送見證、傷者與紀錄通過最後中繼站。',outcome:'護送隊打開關口。荒野部族選擇以自己的身分繼續調查，而不是向任何旗幟效忠。',epilogue:{title:'奧魯姆的選擇',label:'戰牛・奧魯姆',line:'奧魯姆早已離開獸人部落。他不是來救部落，也不是來幫王國；封鎖擋住了他自己的路，所以他出手。',image:'assets/td/story/chapter2-bull-parting-v1.png',focus:'center',cast:['bull','chief'],visualPolicy:'cast-bound',beat:'orum'}},
+    'chapter3-white-trace':{cast:['hunter','frostland','goblin'],cardImages:['assets/td/story/chapter3-white-trace-investigation-v2.png',null,'assets/td/story/chapter3-white-trace-investigation-v2.png',null,'assets/td/story/chapter3-white-trace-investigation-v2.png'],lines:['白痕隘口出現逆風延伸的霜痕。凜認為這不是自然天候。','凜負責追蹤霜痕；奇克帶著儀器記錄它的方向。兩人看到同一個異常。','敵軍正逼近採樣點；樣本和原始讀值必須同時帶走。'],goal:'讓凜的霜痕樣本與奇克的讀值離開現場，保留兩份原始記錄。',outcome:'霜痕沒有融化，讀值也指向同一個方向；兩人暫時無法解釋原因。'},
+    'chapter3-echo-yard':{cast:['hunter','frostland','goblin'],cardImages:['assets/td/story/chapter3-echo-yard-study-v2.png',null,'assets/td/story/chapter3-echo-yard-study-v2.png',null,'assets/td/story/chapter3-echo-yard-study-v2.png'],lines:['奇克的校準機收到回聲，而且回聲比訊號更早抵達。','凜把霜痕方向交給奇克比對；兩份資料都指向同一個位置。','工程團必須修好機器並保存原始讀值，否則沒有人能重做測試。'],goal:'保住回聲裝置與腳印樣本，讓兩種方法都能被重測。',outcome:'裝置確實先收到回覆；凜與奇克保留彼此的證據，前往交會點比對。'},
+    'chapter3-crossmark':{cast:['hunter','frostland','goblin'],cardImages:['assets/td/story/chapter3-crossmark-compare-v2.png',null,'assets/td/story/chapter3-crossmark-compare-v2.png',null,'assets/td/story/chapter3-crossmark-compare-v2.png'],lines:['霜痕與儀器讀值在交會點重疊，但兩者描述的時間不同。','凜與奇克同意不挑選對自己有利的結果；兩份記錄都要送到橋頭。','橋頭被截斷，資料一旦分開，就再也無法確認它們是否來自同一件事。'],goal:'護送兩份彼此矛盾的資料到交會點，完成第一次共同校驗。',outcome:'矛盾被完整保留，反而成為下一次校準不可缺少的線索。'},
+    'chapter3-nightwatch':{cast:['hunter','frostland','goblin'],cardImages:['assets/td/story/chapter3-nightwatch-calibration-v2.png',null,'assets/td/story/chapter3-nightwatch-calibration-v2.png',null,'assets/td/story/chapter3-nightwatch-calibration-v2.png'],lines:['夜守站只剩最後一次校準機會；凜看守霜痕，奇克看守儀器。','兩人的觀測方式不同，但都同意先封存資料，再討論結論。','敵軍正在衝向校準台；這次測試失敗，就得從頭再來。'],goal:'守住校準台，讓凜與奇克完成最後一次交叉觀測。',outcome:'校準完成。凜與奇克以調查夥伴身分加入遠征，但回應的來源仍未知。'},
+    'chapter4-tidegate-outfall':{cast:['naga'],cardImages:['assets/td/story/chapter4-tidegate-outfall-v2.png',null,'assets/td/story/chapter4-tidegate-outfall-v2.png',null,'assets/td/story/chapter4-tidegate-outfall-v2.png'],lines:['潮門外的海水正在逆流。賽洛要先測出它回折的時間。','賽洛不猜來源；他只記錄潮位、方向與每一次回折。','敵人沿礁岸逼近，觀測本和量具必須一起離開潮門。'],goal:'協助賽洛完成第一輪讀值，並把觀測記錄帶離礁岸。',outcome:'回折被完整記下。賽洛確認它不是普通潮汐，但拒絕把未知寫成答案。'},
+    'chapter4-brineway':{cast:['naga'],cardImages:['assets/td/story/chapter4-brineway-rescue-v2.png',null,'assets/td/story/chapter4-brineway-rescue-v2.png',null,'assets/td/story/chapter4-brineway-rescue-v2.png'],lines:['風暴壓住海堤，潮衛和工程團要在堤道上做第二次重測。','工程團測壓力，賽洛測潮向；兩組數字再次同時偏離。','堤道一旦失守，量具會被海水捲走，第二次測試也無法完成。'],goal:'護住潮衛與工程團，讓壓力與潮向的第二次重測能完成。',outcome:'兩種量測相符，卻仍不能說明另一端是誰；賽洛帶著紀錄前往暗礁交會處。'},
+    'chapter4-reef-confluence':{cast:['naga'],cardImages:['assets/td/story/chapter4-reef-confluence-v2.png',null,'assets/td/story/chapter4-reef-confluence-v2.png',null,'assets/td/story/chapter4-reef-confluence-v2.png'],lines:['兩岸測得的潮流在暗礁交會處碰撞，賽洛要比對兩份獨立紀錄。','兩個潮位計顯示同一個節奏；這證明異常會重複，還不能證明原因。','橋頭被切斷前，兩份資料必須在同一處完成交叉比對。'],goal:'讓兩岸獨立取得的讀值在橋頭完成交叉比對。',outcome:'同步被確認。來源依然沒有名字，下一步只能延長觀測時間。'},
+    'chapter4-tide-observatory':{cast:['naga'],cardImages:['assets/td/story/chapter4-tide-observatory-v2.png',null,'assets/td/story/chapter4-tide-observatory-v2.png',null,'assets/td/story/chapter4-tide-observatory-v2.png'],lines:['潮儀台在夜裡重現相同回折。賽洛要封存所有原始讀值。','他把時間、潮位與方位分開記錄，讓下一個人也能重新驗算。','敵軍已經接近觀測站；紀錄若在今晚遺失，整條線索就必須重查。'],goal:'守住潮儀台，封存所有原始讀值，讓下一位觀測者能重查。',outcome:'潮衛持續同行。可以證實的是回應仍在重複；不能證實的來源，仍不能被編成結論。'}
   };
   const decorateStoryCards=mission=>{
     const plan=storyBeatPlans[mission.id];
     if(!plan)return;
-    const scene=plan.sceneImage||mission.storyCards[0].image;
-    const original=mission.storyCards.map(card=>({...card,image:plan.sceneImage||card.image,cast:[...plan.cast],visualPolicy:'cast-bound'}));
-    const concreteGoal={title:'本關目標',label:'現在要做什麼',line:plan.goal,image:scene,focus:'center',cast:[...plan.cast],visualPolicy:'cast-bound',beat:'objective'};
-    const outcome={title:'守住之後',label:'這一戰改變了什麼',line:plan.outcome,image:scene,focus:'center',cast:[...plan.cast],visualPolicy:'cast-bound',beat:'outcome'};
+    // A location image can orient one beat, but a character-bound mission must
+    // never fall back to a retired generic portrait or a map-only card.
+    const artAt=(index,fallback)=>plan.cardImages?.[index]||plan.sceneImage||plan.cardImages?.find(Boolean)||fallback;
+    const original=mission.storyCards.map((card,index)=>({...card,line:plan.lines?.[index]||card.line,image:artAt(index,card.image),cast:[...plan.cast],visualPolicy:'cast-bound'}));
+    const concreteGoal={title:'本關目標',label:'現在要做什麼',line:plan.goal,image:artAt(2,mission.storyCards[0].image),focus:'center',cast:[...plan.cast],visualPolicy:'cast-bound',beat:'objective'};
+    const outcome={title:'守住之後',label:'這一戰改變了什麼',line:plan.outcome,image:artAt(4,mission.storyCards[0].image),focus:'center',cast:[...plan.cast],visualPolicy:'cast-bound',beat:'outcome'};
     // Five beats make every battle understandable without revealing later truth:
     // arrival → people/position → concrete objective → immediate choice → result.
-    mission.storyCards=[original[0],original[1],concreteGoal,original[2],outcome];
+    mission.storyCards=[original[0],original[1],concreteGoal,original[2],...(plan.epilogue?[plan.epilogue]:[]),outcome];
   };
   storyBeatPlans[chapter2Preview.id]={cast:['hunter','chief'],goal:'護送信使與舊印穿過西境，換取戈爾繼續對話的條件。',outcome:'戈爾同意帶來見證者；這是對話的開始，不是結論。'};
   decorateStoryCards(chapter2Preview);

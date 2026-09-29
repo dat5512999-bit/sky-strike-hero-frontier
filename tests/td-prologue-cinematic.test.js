@@ -173,7 +173,7 @@ test('all playable story cards resolve people through the same approved hero ref
     'assets/td/story/chapter2-red-mesa-dawn-v1.png'
   ]);
   for (const mission of [...ns.systems.StoryCatalog.missions, ns.systems.StoryCatalog.chapter2Preview]) {
-    assert.equal(mission.storyCards.length, 5, mission.id);
+    assert.equal(mission.storyCards.length, mission.id === 'chapter2-red-mesa' ? 6 : 5, mission.id);
     for (const card of mission.storyCards) {
       assert.equal(card.visualPolicy, 'cast-bound', mission.id + ' must declare its visual policy');
       assert.ok(Array.isArray(card.cast) && card.cast.length, mission.id + ' must name its canonical cast');
@@ -185,6 +185,17 @@ test('all playable story cards resolve people through the same approved hero ref
       }
     }
   }
+});
+test('red mesa introduces Orum as an independent traveler, not a faction allegiance', () => {
+  const { ns } = setup();
+  const mission = ns.systems.StoryCatalog.getMission('chapter2-red-mesa');
+  const orum = mission.storyCards.find(card => card.beat === 'orum');
+  assert.ok(orum);
+  assert.deepEqual(Array.from(orum.cast), ['bull', 'chief']);
+  assert.match(orum.line, /不是來救部落/);
+  assert.match(orum.line, /自己的路/);
+  assert.equal(orum.image, 'assets/td/story/chapter2-bull-parting-v1.png');
+  assert.ok(fs.existsSync(orum.image));
 });
 test('Story adapter resolves missing/failed playback without multiple completion callbacks', async () => {
   const { api } = setup(); let completed = 0;
