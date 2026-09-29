@@ -44,6 +44,24 @@
       {id:'tidebreaker-spear-2',name:'深淵潮印戟',rarity:'epic',color:'#4aaedb',visual:'trident',description:'普攻與傷害技能累計提高 40%；35% 機率觸發兩段潮線連鎖。',chainChance:.35,chain:2,chainRange:98,chainStyle:'tide-chain'},
       {id:'tidebreaker-spear-3',name:'萬潮王戟',rarity:'legendary',color:'#b7fff0',visual:'trident',description:'普攻與傷害技能累計提高 60%；保留潮線連鎖，並造成半徑 30 的破潮濺射。',chainChance:.35,chain:2,chainRange:98,chainStyle:'tide-chain',splash:30,style:'tide-splash'}
     ],
+    dwarf:[
+      {id:'dwarf-hammer-0',name:'符石重槌',rarity:'base',color:'#61d6d0',visual:'dwarf-hammer',atlas:'assets/td/dwarf/weapons-v1.png',description:'符石監軍的初始重槌。'},
+      {id:'dwarf-hammer-1',name:'淬銀符錘',rarity:'common',color:'#b9e5df',visual:'dwarf-hammer',atlas:'assets/td/dwarf/weapons-v1.png',description:'普攻與傷害技能提高 20%；重槌改為淬銀符文。'},
+      {id:'dwarf-hammer-2',name:'蒼紋震錘',rarity:'epic',color:'#58e2d8',visual:'dwarf-hammer',atlas:'assets/td/dwarf/weapons-v1.png',description:'累計提高 40% 傷害；重槌綻放蒼藍符光。'},
+      {id:'dwarf-hammer-3',name:'山心王錘',rarity:'legendary',color:'#f0d17a',visual:'dwarf-hammer',atlas:'assets/td/dwarf/weapons-v1.png',description:'累計提高 60% 傷害；保留符文震盪。'}
+    ],
+    dragonkin:[
+      {id:'dragonkin-spear-0',name:'蒼穹雷槍',rarity:'base',color:'#73c9ea',visual:'dragon-spear',atlas:'assets/td/dragonkin/weapons-v1.png',description:'蒼穹使者的初始雷槍。'},
+      {id:'dragonkin-spear-1',name:'藍鋼雲槍',rarity:'common',color:'#c7e8f6',visual:'dragon-spear',atlas:'assets/td/dragonkin/weapons-v1.png',description:'普攻與傷害技能提高 20%；雷槍留下雲藍光痕。'},
+      {id:'dragonkin-spear-2',name:'風暴龍脈槍',rarity:'epic',color:'#63bbff',visual:'dragon-spear',atlas:'assets/td/dragonkin/weapons-v1.png',description:'累計提高 40% 傷害；35% 機率觸發兩段雷鏈。',chainChance:.35,chain:2,chainRange:96,chainStyle:'lightning'},
+      {id:'dragonkin-spear-3',name:'天穹王槍',rarity:'legendary',color:'#f0d27b',visual:'dragon-spear',atlas:'assets/td/dragonkin/weapons-v1.png',description:'累計提高 60% 傷害；保留雷鏈並追加半徑 28 的震擊。',chainChance:.35,chain:2,chainRange:96,chainStyle:'lightning',splash:28}
+    ],
+    egypt:[
+      {id:'egypt-khopesh-0',name:'曦陽彎刀',rarity:'base',color:'#e7be62',visual:'egypt-khopesh',atlas:'assets/td/egypt/weapons-v1.png',description:'埃及島守衛的初始曦陽彎刀。'},
+      {id:'egypt-khopesh-1',name:'鎏金日輪刃',rarity:'common',color:'#f4d882',visual:'egypt-khopesh',atlas:'assets/td/egypt/weapons-v1.png',description:'普攻與傷害技能提高 20%。'},
+      {id:'egypt-khopesh-2',name:'青金日耀刃',rarity:'epic',color:'#69bfe6',visual:'egypt-khopesh',atlas:'assets/td/egypt/weapons-v1.png',description:'累計提高 40% 傷害。'},
+      {id:'egypt-khopesh-3',name:'永晝王刃',rarity:'legendary',color:'#ffe28b',visual:'egypt-khopesh',atlas:'assets/td/egypt/weapons-v1.png',description:'累計提高 60% 傷害。'}
+    ],
     bull:[
       {id:'bull-hammer-0',name:'不屈戰鎚',rarity:'base',color:'#c98b45',visual:'warhammer',description:'戰神・奧魯姆的中立重槌。可在商城裝配一種元素核心。'},
       {id:'bull-hammer-1',name:'燼紋巨槌',rarity:'common',color:'#e6b05e',visual:'warhammer',description:'普攻與傷害技能提高 20%；重槌的銘文開始發亮。'},

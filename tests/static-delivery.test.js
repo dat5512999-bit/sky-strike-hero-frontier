@@ -179,7 +179,7 @@ test('跨族傭兵名冊與召喚／換裝圖集完整加入離線版本', () =>
   const worker = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
   const game = fs.readFileSync(path.join(root, 'src/td/TDGame.js'), 'utf8');
   const mercenaries = Array.from(html.matchAll(/data-mercenary="([^"]+)"/g), (match) => match[1]);
-  assert.deepEqual(mercenaries, ['royalCommander','soulsteel','kingdomMage','alchemist','beastmaster','bountyHunter','pirate','blacksmith','timeMage','bombWorkshop','frostWolf','frostBird','goblinGunner','goblinRiveter','hunter','shield','knight','musketeer','halberdier','arcanist','dragon','treant','dryad','moonblade','rogue','skeleton','golem','banshee','boneRider']);
+  assert.deepEqual(mercenaries, ['fireDemon','frostWyrm','powderThrower','bountyHunter','royalCommander','soulsteel','kingdomMage','alchemist','beastmaster','pirate','blacksmith','timeMage','bombWorkshop','frostWolf','frostBird','goblinGunner','goblinRiveter','hunter','shield','knight','musketeer','halberdier','arcanist','dragon','treant','dryad','moonblade','rogue','skeleton','golem','banshee','boneRider']);
   assert.equal(mercenaries.includes('orc'), false, '戰利解鎖的半獸人不應重複放入商店');
   assert.equal(mercenaries.includes('goblinMech'), false, '需完整供電網才可作戰的機偶不應作為獨立傭兵販售');
   assert.match(game, /if\(!self\.factions\.canHire\(type,kind\)\)return/, '隱藏按鈕之外仍需阻擋本族傭兵購買');

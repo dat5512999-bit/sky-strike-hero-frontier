@@ -1,3 +1,5 @@
+> **v0.85.81：** config → FactionSystem.canHire + Difficulty → 商店 → BuildSystem → CombatUnit → Projectile；ArtSystem → NeutralMercenaryArt（4×4、逐格腳底、預量裁切）；Armory／Shop／Loot 共用相容類型。沒有額外動畫迴圈、計時器或後端。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
+
 > **v0.85.73：** Chapter IV 走既有 `StoryCatalog → FrontierApp → ProfileStore → StoryCodexBridge` 路徑；四張地圖的 `maps.js` 幾何與背景圖分離，`TDGame` 僅補自由遠征選項，沒有新增資料庫或並行戰鬥系統。詳見 [第四章架構](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
 
 > **v0.85.69：** `TDDifficultySystem.heroAssault` 與 `Map.heroVulnerable` 經 `heroDamageAllowed()` 匯成單一 `TDGame.heroDamageEnabled()`，同時供 EnemyCombat 與 HUD 使用；沒有複製敵軍 AI 或另建傷害系統。
@@ -889,4 +891,8 @@ v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 M
 > **v0.85.71：** 手機流程為 `td.webmanifest → td-mobile.html 外殼／安全區 → td.html iframe → main.js 使用者手勢全螢幕與橫向鎖定`。外殼保留系統安全區，不重建遊戲或改寫座標模型。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
 > **v0.85.72：** 外殼保持滿版旋轉，讀取實體頂端安全區後以同源訊息傳入 iframe；`main.js` 寫入 CSS 變數，旋轉後由遊戲內邏輯左邊距消化。這不改變 Canvas 或世界座標。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+
+> **v0.85.80：** 熱路徑：`TDGame.updateUi → FrontierApp.isAdmin / allows → ProfileStore` 僅讀身份／解鎖欄位並回傳布林；低頻存檔操作仍走 `change → clone → persist`，外部快照仍走 `current → clone`。沒有第二套身份快取，切換／匯入立即生效。見 [量測架構](PERFORMANCE_PROFILE_8D_V08580.md)。
+
+> **v0.85.82：** 進化由 HeroEvolutionSystem → HeroEvolutionCombat → Projectile／Monster 結算，Presentation 只繪短暫效果；軍團由 config.ranks／TowerEvolutionSystem → CombatUnit／Building → 既有軍械及支援系統。無新更新迴圈或資料庫。詳見 [本版架構圖](SOUTHERN_COMPLETION_V08582.md)。
 

@@ -8,6 +8,9 @@
     chief:{name:'大酋長・戈爾',title:'英雄 · 戰團爆發',description:'戰吼引爆荒野狂潮，以近戰重斧帶領戰團。',color:'#df6548'},
     goblin:{name:'銅齒・奇克',title:'首席工程師 · 機械調度',description:'臨場改裝、蒸汽洩壓、巡修機偶與全網超載。',color:'#d9ad65'},
     naga:{name:'破潮者・賽洛',title:'英雄 · 潮門突進',description:'以三叉戟切開防線，靠潮壓標記與旋潮領域穩住破口。',color:'#55d3d0'},
+    dwarf:{name:'符石監軍・巴隆',title:'英雄 · 符文工事',description:'以符石重槌支援矮人砲線；人物史實尚未設定。',color:'#61d6d0'},
+    dragonkin:{name:'蒼穹使者・賽爾',title:'英雄 · 龍脈雷擊',description:'以雷槍與元素鏈維持龍族的中距火網；人物史實尚未設定。',color:'#73c9ea'},
+    egypt:{name:'曦陽守衛・納芙拉',title:'英雄 · 埃及島伏筆',description:'埃及島的可測試英雄；軍團、地理與劇情皆保留待定。',color:'#e7be62'},
     bull:{name:'戰神・奧魯姆',title:'中立英雄 · 重槌破陣',description:'不隸屬任何軍團；以巨槌壓制前線，並能裝配元素核心改變武器效果。',color:'#e4a452'}
   };
   class ProfessionSystem{

@@ -14,16 +14,25 @@
         catch(error){
           // Only presentation is discarded. Damage, cooldowns and the six-second
           // field remain intact. Keep the original error for diagnosis.
-          const naga=v.type.startsWith('naga-')||v.type==='ultimate-naga',bull=v.type.startsWith('bull-')||v.type==='ultimate-bull';
-          if(!naga&&!bull)throw error;
+          const naga=v.type.startsWith('naga-')||v.type==='ultimate-naga',bull=v.type.startsWith('bull-')||v.type==='ultimate-bull',southern=v.type.startsWith('dwarf-')||v.type.startsWith('dragonkin-')||v.type.startsWith('egypt-')||['ultimate-dwarf','ultimate-dragonkin','ultimate-egypt'].includes(v.type);
+          if(!naga&&!bull&&!southern)throw error;
           hero.skillVfx=hero.skillVfx.filter(effect=>effect!==v);
-          hero[naga?'nagaVfxFault':'bullVfxFault']={type:v.type,message:String(error?.message||error),stack:String(error?.stack||'')};
+          hero[naga?'nagaVfxFault':bull?'bullVfxFault':'southernVfxFault']={type:v.type,message:String(error?.message||error),stack:String(error?.stack||'')};
           console.error('[HeroSkillVFX] '+v.type,error);
         }finally{ctx.restore();}
       }
     }
     static drawEffect(ctx,hero,v){if(ns.systems.GoblinPresentation?.draw(ctx,v,hero))return;const t=v.age/v.duration,fade=1-t;ctx.globalAlpha=fade;ctx.lineCap='round';
-      if(v.type==='bull-hammerfall'){
+      if(v.type==='dwarf-hammer'||v.type==='dragonkin-lance'||v.type==='egypt-sunblade'){
+        const target=v.target||v,color=v.type==='dwarf-hammer'?'#67e7df':v.type==='dragonkin-lance'?'#8ed9ff':'#ffe19a',shadow=v.type==='dwarf-hammer'?'#2a9a93':v.type==='dragonkin-lance'?'#437fc2':'#d48d36';
+        this.glow(ctx,target.x,target.y-22,52,'#ffffff33');ctx.strokeStyle=color;ctx.shadowColor=shadow;ctx.shadowBlur=10;ctx.lineWidth=4*fade;ctx.beginPath();ctx.moveTo(v.x,v.y-30);ctx.lineTo(target.x,target.y-20);ctx.stroke();this.slash(ctx,target.x,target.y-20,28+17*t,-.8,color);
+      }else if(v.type==='dwarf-command'||v.type==='dragonkin-command'){
+        const r=Math.max(1,(Number(v.radius)||220)*(.15+.85*t)),color=v.type==='dwarf-command'?'#72f0e1':'#9ee4ff';this.glow(ctx,v.x,v.y-18,Math.min(120,r),'#4ad9d466');ctx.strokeStyle=color;ctx.lineWidth=2.5*fade;ctx.beginPath();ctx.ellipse(v.x,v.y+6,r,r*.35,0,0,Math.PI*2);ctx.stroke();for(const target of v.targets||[]){ctx.globalAlpha=fade*.75;ctx.beginPath();ctx.moveTo(v.x,v.y-28);ctx.lineTo(target.x,target.y-18);ctx.stroke();ctx.beginPath();ctx.arc(target.x,target.y-18,7+8*t,0,Math.PI*2);ctx.stroke();}ctx.globalAlpha=fade;
+      }else if(v.type==='egypt-sunwatch'){
+        const r=Math.max(1,(Number(v.radius)||92)*(.2+.8*t));this.glow(ctx,v.x,v.y-26,r,'#f6bc556f');ctx.strokeStyle='#ffe7a2';ctx.shadowColor='#e49a38';ctx.shadowBlur=12;ctx.lineWidth=3*fade;for(let ring=0;ring<3;ring++){const rr=Math.max(1,r-ring*16);ctx.beginPath();ctx.ellipse(v.x,v.y+4-ring*8,rr,rr*.32,0,0,Math.PI*2);ctx.stroke();}for(let i=0;i<10;i++){const a=i*Math.PI/5-t*3;ctx.beginPath();ctx.moveTo(v.x+Math.cos(a)*r*.3,v.y-22+Math.sin(a)*r*.12);ctx.lineTo(v.x+Math.cos(a)*r,v.y-22+Math.sin(a)*r*.4);ctx.stroke();}
+      }else if(v.type==='ultimate-dwarf'||v.type==='ultimate-dragonkin'||v.type==='ultimate-egypt'){
+        const r=Math.max(1,(Number(v.radius)||128)*(.28+.72*t)),color=v.type==='ultimate-dwarf'?'#72eee1':v.type==='ultimate-dragonkin'?'#9bddff':'#ffe1a0',shadow=v.type==='ultimate-dwarf'?'#268e88':v.type==='ultimate-dragonkin'?'#3e7cc2':'#d88d34';this.glow(ctx,v.x,v.y-18,r*1.2,shadow+'77');ctx.strokeStyle=color;ctx.shadowColor=shadow;ctx.shadowBlur=14;ctx.lineWidth=5*fade;ctx.beginPath();ctx.ellipse(v.x,v.y+5,r,r*.42,0,0,Math.PI*2);ctx.stroke();ctx.lineWidth=3*fade;ctx.beginPath();ctx.moveTo(v.x,v.y-132*(1-t));ctx.lineTo(v.x,v.y-20);ctx.stroke();for(let i=0;i<12;i++){const a=i*Math.PI/6+t*2;ctx.lineWidth=2*fade;ctx.beginPath();ctx.moveTo(v.x+Math.cos(a)*r*.35,v.y+Math.sin(a)*r*.15);ctx.lineTo(v.x+Math.cos(a)*r*1.05,v.y+Math.sin(a)*r*.5);ctx.stroke();}
+      }else if(v.type==='bull-hammerfall'){
         const target=v.target||v,r=v.radius*(.25+.75*t);this.glow(ctx,target.x,target.y-10,r*1.2,'#f5a44966');ctx.strokeStyle='#ffc66d';ctx.shadowColor='#e17336';ctx.shadowBlur=12;ctx.lineWidth=5*fade;for(let ring=0;ring<3;ring++){const rr=Math.max(1,r-ring*16);ctx.beginPath();ctx.ellipse(target.x,target.y+4,rr,rr*.38,0,0,Math.PI*2);ctx.stroke();}for(let i=0;i<12;i++){const a=i*Math.PI/6;ctx.strokeStyle=i%2?'#ffe2a0':'#97421f';ctx.lineWidth=i%2?2:4;ctx.beginPath();ctx.moveTo(target.x+Math.cos(a)*12,target.y+Math.sin(a)*5);ctx.lineTo(target.x+Math.cos(a)*(r+16),target.y+Math.sin(a)*(r*.4+7));ctx.stroke();}
       }else if(v.type==='bull-arena'){
         const r=v.radius*(.3+.7*t);this.glow(ctx,v.x,v.y-8,r,'#d67a4260');ctx.strokeStyle='#f1b45b';ctx.lineWidth=3*fade;for(let ring=0;ring<2;ring++){ctx.beginPath();ctx.ellipse(v.x,v.y+6,r-ring*19,(r-ring*19)*.36,0,0,Math.PI*2);ctx.stroke();}for(let i=0;i<8;i++){const a=i*Math.PI/4+t*2;ctx.fillStyle=i%2?'#ffd28a':'#ba613a';ctx.beginPath();ctx.arc(v.x+Math.cos(a)*r*.72,v.y+Math.sin(a)*r*.28,3+3*fade,0,Math.PI*2);ctx.fill();}
@@ -81,7 +90,7 @@
     }
     static drawField(ctx,field){
       if(field.type.startsWith('evo-')){
-        const colors={'evo-hunter':'#e6d18a','evo-naga':'#6ff6e5','evo-rogue':'#ed95d3','evo-frostland':'#b9edff','evo-bull':'#f2ae54'},color=colors[field.type]||'#ffe2a0';
+        const colors={'evo-hunter':'#e6d18a','evo-naga':'#6ff6e5','evo-rogue':'#ed95d3','evo-frostland':'#b9edff','evo-bull':'#f2ae54','evo-dwarf':'#67e7df','evo-dragonkin':'#8ed9ff','evo-egypt':'#ffe19a'},color=colors[field.type]||'#ffe2a0';
         ctx.save();try{ctx.globalAlpha=Math.min(1,field.time/.6)*.42;ctx.strokeStyle=color;ctx.lineWidth=2;const radius=Math.max(1,field.radius||100);ctx.beginPath();ctx.ellipse(field.x,field.y,radius,radius*.4,0,0,Math.PI*2);ctx.stroke();for(let i=0;i<6;i++){const a=i*Math.PI/3+field.time*.6;ctx.beginPath();ctx.arc(field.x+Math.cos(a)*radius*.72,field.y+Math.sin(a)*radius*.28,3,0,Math.PI*2);ctx.stroke();}}finally{ctx.restore();}return;
       }
       const trap=field.type==='hunter',chief=field.type==='chief',naga=field.type==='naga',bull=field.type==='bull',age=(trap?8:6)-field.time,fade=Math.min(1,field.time/.6),r=bull?88:72;

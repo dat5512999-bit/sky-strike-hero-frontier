@@ -1,4 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
+const {load}=require('./helpers/td-runtime.cjs');
 const html=fs.readFileSync('td.html','utf8'),css=fs.readFileSync('td.css','utf8'),game=fs.readFileSync('src/td/TDGame.js','utf8'),main=fs.readFileSync('src/td/main.js','utf8');
 
 test('遠征配置固定為選擇戰場與組建遠征隊兩頁',()=>{
@@ -16,8 +17,11 @@ test('PAGE 1 使用可擴充地圖瀏覽列並保留四種難度',()=>{
 });
 
 test('PAGE 2 保持英雄軍團獨立選擇並即時組合摘要',()=>{
-  assert.equal((html.match(/data-profession=/g)||[]).length,8);
-  assert.equal((html.match(/data-faction=/g)||[]).length,7);
+  const {ns}=load(),heroes=['hunter','arcanist','rogue','chief','frostland','goblin','naga','dwarf','dragonkin','egypt','bull'].sort(),factions=['hunter','arcanist','rogue','wild','frostland','goblin','naga','dwarf','dragonkin'].sort();
+  assert.deepEqual([...html.matchAll(/data-profession="([^"]+)"/g)].map(match=>match[1]).sort(),heroes);
+  assert.deepEqual([...html.matchAll(/data-faction="([^"]+)"/g)].map(match=>match[1]).sort(),factions);
+  assert.deepEqual(Object.keys(ns.systems.HeroRoster.CLASSES).sort(),heroes);
+  assert.deepEqual(Object.keys(ns.systems.FactionSystem.FACTIONS).sort(),factions);
   for(const id of ['td-hero-detail','td-faction-detail','td-summary-map','td-summary-difficulty','td-summary-hero','td-summary-faction','td-combination-hint'])assert.ok(html.includes('id="'+id+'"'));
   assert.match(game,/hero\.name\+' × '\+faction\.name/);assert.match(game,/chooseProfession\(this\.selectedProfession,this\.selectedFaction\)/);
 });

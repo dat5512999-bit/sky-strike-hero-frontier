@@ -1,3 +1,5 @@
+> **v0.85.81：** 執行 npm run test:neutral；另跑 static-delivery、td-missing-actions 與 npm run check。核對 4×4 64 格、左右面向／Lv.1&5、商店預覽、難度與餘額、部署取消、五級升級、回收、軍械转移及掉落、對地／對空與緩速到期、長時間投射物有界。完整結果及未通過項目見交付紀錄。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
+
 > **v0.85.74：** 驗收四張商城立繪與四張動作圖均可載入；霜原／娜迦／地精各在 4×4 的 idle、walk、attack、cast 換格，戰牛在 5×5 換格；未裝備時回到原渲染器；PWA 快取包含八張素材。執行 `node --test tests/td-crossworld-skins.test.js tests/td-cosmetic-shop.test.js tests/td-bull-wargod.test.js` 與 `npm run check`。見 [交付文件](CROSSWORLD_SKINS_SEASON_ONE_V08574.md)。
 
 > **v0.85.73：** 驗收第四章：完成 3-4 後依序開放 4-1 至 4-4；每關地圖可進自由遠征；娜迦在未完成第四章時仍可用；潮門、堤道、礁池、觀測台及道路不可建造，指定平台可建造；4-3 雙路只在合流後共用尾段。執行 `npm run check`、`npm run test:naga`、`npm run test:mobile`、`npm test`。詳見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
@@ -1014,4 +1016,8 @@ v0.85.0 冰原：npm run test:frostland 檢查狀態、兵塔、36 種 Hero×Fac
 > **v0.85.71：** 執行 `npm run test:mobile`，驗收 manifest 的全螢幕優先順序、直向手機殼安全區與使用者手勢全螢幕請求；另跑 `npm run check`、`npm test`。實體 Android Chrome／iPhone Safari 的瀏覽器與主畫面入口仍待驗收。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
 > **v0.85.72：** `npm run test:mobile` 必須驗證滿版 iframe、同源安全邊訊息與遊戲內左側 CSS 變數；實機 iPhone 驗收上下無黑邊、左側沒有控制被狀態列覆蓋。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+
+> **v0.85.80：** 執行 `node --test tests/td-profile-hotpath.test.js tests/td-profiles-story.test.js tests/td-desktop-performance.test.js tests/td-frame-pacing.test.js`、`npm run check`、`npm test`。另外在獨立 origin 執行 `scripts/performance-ui-lab.html`，驗證 0／256 KB／1 MB 存檔的 HUD 複製次數均為零，以及矮人 ×1／×2／×3 和跨軍團取樣。完整限制及結果見 [8D](PERFORMANCE_PROFILE_8D_V08580.md)。
+
+> **v0.85.82：** 已有分組 114／114、19／19、179／179 通過記錄（可能重疊，不相加算全套），三英雄進化專項最後為 45 項；150 敵人 × 三英雄 × 三倍速的 Node 長測有明確限制。使用者要求停止追加測試，最終提交快照全套及真機完整戰局未再驗收。詳見 [測試證據與待驗清單](SOUTHERN_COMPLETION_V08582.md)。
 

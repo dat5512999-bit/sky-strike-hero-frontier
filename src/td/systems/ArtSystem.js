@@ -117,6 +117,7 @@
     }
     drawActionUnit(ctx,unit,image){
       if(!image||!image.ready)return false;
+      if(ns.systems.NeutralMercenaryArt?.has(unit.type))return ns.systems.NeutralMercenaryArt.draw(this,ctx,unit,image);
       const cfg=unit.config(),support=Boolean(cfg.supportOnly),cycle=(unit.frameClock||0)%8;
       const state=support&&cycle>5.5?'attack':unit.state,row={idle:0,walk:1,attack:2,hit:3,death:3}[state]||0;
       const frame=support&&state==='attack'?Math.min(3,Math.floor((cycle-5.5)*3)):Math.max(0,Math.min(3,unit.frame||0));
@@ -209,7 +210,8 @@
   ArtSystem.SOLDIER_SCALE=1.12;
   ArtSystem.ACTION_PATHS=Object.freeze({
     kingdomMage:'assets/td/kingdom-mage-actions-v2.png',alchemist:'assets/td/alchemist-actions-v2.png',
-    bountyHunter:'assets/td/bounty-hunter-actions-v2.png',pirate:'assets/td/pirate-actions-v2.png',
+    bountyHunter:'assets/td/neutral/bounty-hunter-actions-v4.png',pirate:'assets/td/pirate-actions-v2.png',
+    powderThrower:'assets/td/neutral/powder-thrower-actions-v2.png',fireDemon:'assets/td/neutral/fire-demon-actions-v1.png',frostWyrm:'assets/td/neutral/frost-wyrm-actions-v1.png',
     blacksmith:'assets/td/blacksmith-actions-v2.png',timeMage:'assets/td/time-mage-actions-v2.png',
     bomb:'assets/td/bomb-robot-actions-v2.png',heavyBomb:'assets/td/heavy-bomb-robot-actions-v2.png',
     dragon:'assets/td/ultimate-dragon-actions-v3.png',royalCommander:'assets/td/ultimate-commander-actions-v2.png',

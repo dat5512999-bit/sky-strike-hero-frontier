@@ -51,6 +51,8 @@
   // 王國長戟兵沿用早期配置，但也必須有完整、可讀的五階進化線。
   const baseEvolutionName=CombatUnit.prototype.evolutionName;
   CombatUnit.prototype.evolutionName=function(){
+   const ranks=ns.config.units[this.type]?.ranks;
+   if(ranks){const name=ranks[this.level-1]||ranks[0];return ns.systems.ArmorySystem?ns.systems.ArmorySystem.title(this,name):name;}
    if(this.type!=='halberdier')return baseEvolutionName.call(this);
    const base=['王國槍兵','獅徽長戟衛','鐵陣衛士','獅心戟將','不破長城'][this.level-1];
    return ns.systems.ArmorySystem?ns.systems.ArmorySystem.title(this,base):base;

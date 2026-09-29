@@ -17,10 +17,12 @@
     'paint-frostCrystal':[1,9,54,83,'#acffff'], 'paint-frostBlizzard':[9,9,58,122,'#c4f4ff'],
     'paint-frostBallista':[1,9,77,106,'#ddfbff'], 'paint-frostObelisk':[1,9,56,94,'#c6bbff'],
     'paint-frostAurora':[1,9,66,88,'#b4ffe3'], 'paint-frostGlacier':[9,9,75,155,'#b2efff'],
-    'paint-nagaTidegate':[15,15,58,88,'#97fff2'], 'paint-nagaShellBastion':[15,15,78,106,'#b6fff5'], 'paint-nagaMantaAerie':[15,15,68,98,'#9affed']
+    'paint-nagaTidegate':[15,15,58,88,'#97fff2'], 'paint-nagaShellBastion':[15,15,78,106,'#b6fff5'], 'paint-nagaMantaAerie':[15,15,68,98,'#9affed'],
+    'paint-dwarfBoltTower':[6,8,48,68,'#6adbd4'], 'paint-dwarfMortarTower':[6,11,63,126,'#e69b62'], 'paint-dwarfCitadel':[6,10,53,98,'#c6a36f'],
+    'paint-dragonkinFlameSpire':[7,11,57,85,'#eb7e52'], 'paint-dragonkinStormObelisk':[0,1,66,94,'#7ac9ef',true], 'paint-dragonkinWyrmNest':[7,11,80,134,'#e6aa66']
   };
-  const extra=['frostCrystal','frostBlizzard','frostBallista','frostObelisk','frostAurora','frostGlacier','nagaTidegate','nagaShellBastion','nagaMantaAerie'];
-  const supports={supply:[8,'#ffe7ad'],battleflag:[8,'#ffdc95'],armoryForge:[8,'#ffc579'],barracks:[8,'#ffe4a6'],grove:[12,'#bce58b'],crypt:[13,'#ceb3ff'],graveyard:[13,'#cbb1ff'],moonwell:[9,'#bfdfff'],warDrum:[10,'#edb983'],goblinGenerator:[14,'#aeffed'],goblinRecycler:[8,'#ebd698'],goblinCooler:[1,'#b5fffb'],bombWorkshop:[11,'#ffc489'],frostTotem:[9,'#c0f5ff'],nagaAbyssShrine:[15,'#aafff0']};
+  const extra=['frostCrystal','frostBlizzard','frostBallista','frostObelisk','frostAurora','frostGlacier','nagaTidegate','nagaShellBastion','nagaMantaAerie','dwarfBoltTower','dwarfMortarTower','dwarfCitadel','dragonkinFlameSpire','dragonkinStormObelisk','dragonkinWyrmNest'];
+  const supports={supply:[8,'#ffe7ad'],battleflag:[8,'#ffdc95'],armoryForge:[8,'#ffc579'],barracks:[8,'#ffe4a6'],grove:[12,'#bce58b'],crypt:[13,'#ceb3ff'],graveyard:[13,'#cbb1ff'],moonwell:[9,'#bfdfff'],warDrum:[10,'#edb983'],goblinGenerator:[14,'#aeffed'],goblinRecycler:[8,'#ebd698'],goblinCooler:[1,'#b5fffb'],bombWorkshop:[11,'#ffc489'],frostTotem:[9,'#c0f5ff'],nagaAbyssShrine:[15,'#aafff0'],dwarfRuneForge:[14,'#54d6cf'],dragonkinRoost:[15,'#82c9e6']};
   function scope(ctx,draw){ctx.save();try{draw();}finally{ctx.restore();}}
   class PaintedTowerVFX{
     static key(tower){return extra.includes(tower.type)?'paint-'+tower.type:null;}
@@ -75,7 +77,11 @@
           return;
         }
         const dx=(p.target?.x??p.x)-p.startX,dy=(p.target?.y??p.y)-p.startY,len=Math.hypot(dx,dy)||1,angle=Math.atan2(dy,dx),progress=clamp(Math.hypot(p.x-p.startX,p.y-p.startY)/len);
-        const lob=['boulder','steam-shell','siege-shell','ember-shell','paint-frostGlacier'].includes(p.towerVfx),lift=lob?Math.sin(progress*Math.PI)*Math.min(64,len*.25):0,x=p.x,y=p.y-20-lift;
+        if(p.towerVfx==='paint-dragonkinWyrmNest'){
+          const distance=Math.min(len,Math.max(24,Math.hypot(p.x-p.startX,p.y-p.startY)+18));
+          this.sprite(ctx,image,profile[0],p.startX+Math.cos(angle)*distance*.5,p.startY-27+Math.sin(angle)*distance*.5,distance,Math.min(62,26+distance*.15),.9,angle);return;
+        }
+        const lob=['boulder','steam-shell','siege-shell','ember-shell','paint-frostGlacier','paint-dwarfMortarTower','paint-dwarfCitadel'].includes(p.towerVfx),lift=lob?Math.sin(progress*Math.PI)*Math.min(64,len*.25):0,x=p.x,y=p.y-20-lift;
         const size=profile[2],tall=[4,9,14,15].includes(profile[0]),h=tall?size*.8:size*.66;
         if(!reduced)this.sprite(ctx,image,profile[0],x-Math.cos(angle)*11,y-Math.sin(angle)*11,size*1.15,h*.8,.17,angle);
         this.sprite(ctx,image,profile[0],x,y,size,h,1,angle);

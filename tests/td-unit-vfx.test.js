@@ -14,7 +14,7 @@ test('every configured attacking soldier uses an explicit presentation; support,
   for(const t of [0,.08,.2,.319]){p.trail=.32-t;ns.entities.Projectile.beginFrame(96);const c=strictCanvas();p.draw(c.ctx);assert.ok(c.calls.some(a=>a[0]==='drawImage'),type+' hit');assert.equal(c.depth,0);assert.equal(c.ctx.globalAlpha,1);for(const call of c.calls.filter(a=>a[0]==='drawImage')){const [,image,x,y,w,h]=call;assert.ok(Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x+w<=image.width&&y+h<=image.height);}}
   assert.deepEqual(targets.map(t=>t.health),health);p.update(.5,targets);assert.equal(p.active,false);
  }
- assert.equal(covered,43);
+ assert.equal(covered,Object.values(ns.config.units).filter(cfg=>!cfg.supportOnly).length);
  for(const kind of ['hero','summon','building'])assert.equal(ns.systems.UnitVFX.key({kind,type:'dragon'}),null);
 });
 test('presentation does not alter targeting, damage, statuses or original style',()=>{

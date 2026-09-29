@@ -25,7 +25,7 @@
       addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
       addEventListener('pagehide',event=>{if(!event.persisted)this.settleRetreat();});
     }
-    isAdmin(){return this.store.current().kind==='admin';}
+    isAdmin(){return this.store.isAdmin();}
     allows(kind,id){return this.store.allows(kind,id);}
     canLaunch(hero,faction){return this.allows('heroes',hero)&&this.allows('factions',faction)&&this.allows('maps',ns.config.mapId)&&this.allows('difficulties',this.game.difficulty.selected);}
     bindStorage(mode){this.game.report=new ns.systems.BattleReportSystem(this.store.adapter(mode));this.game.checkpoints=new ns.systems.ChapterCheckpointSystem(this.store.adapter(mode));this.bindCodex();}
@@ -203,6 +203,6 @@
     return '<div class="campaign"><aside class="chapter-list"><h2>劇情模式</h2>'+chapters+'<p>'+campaignNote+'</p>'+b('story-card-replay','回顧第二章前導劇情','chapter2-western-signal-preview')+'</aside><section class="campaign-world"><div><small>CHAPTER '+chapter+(admin?' · ADMIN PREVIEW':'')+'</small><h1>第'+chapter+'章　'+(ns.systems.StoryCatalog.chapters.find(c=>c.id===chapter)?.name||'未知章節')+'</h1><p>'+escape(ns.systems.StoryCatalog.chapters.find(c=>c.id===chapter)?.note||'')+'</p></div><div class="mission-route campaign-missions">'+nodes+'</div><footer>本章任務　'+completedInChapter+' / '+missions.length+'<br><small>'+routeNote+'</small></footer></section><article class="mission-intel"><h2>'+chapter+'-'+(index+1)+'　'+selected.name+'</h2><img src="'+map.asset+'" alt="'+map.name+'地圖"><blockquote>「'+escape(selected.cinematic[0])+'」</blockquote><h3>關卡資訊</h3><p>'+escape(selected.objective)+'</p><p>'+escape(map.name)+'<br>遠征見習 · '+selected.waves.length+' 波</p><h3>通關結果</h3><p>'+(selected.rewards.maps?.length?'解鎖自由遠征地圖。':'推進故事線索與下一個任務。')+'</p><div class="mission-actions">'+actions+'</div></article></div>';
   };
   const renderWithRelease=FrontierApp.prototype.render;
-  FrontierApp.prototype.render=function(){renderWithRelease.call(this);const release=this.root.querySelector('.profile-badge small');if(release)release.textContent='HERO FRONTIER · v0.85.74';};
+  FrontierApp.prototype.render=function(){renderWithRelease.call(this);const release=this.root.querySelector('.profile-badge small');if(release)release.textContent='HERO FRONTIER · v0.85.82';};
   ns.systems.FrontierApp=FrontierApp;if(globalThis.document&&globalThis.towerFrontierGame)globalThis.frontierApp=new FrontierApp(globalThis.towerFrontierGame);
 })(globalThis.TowerFrontier);

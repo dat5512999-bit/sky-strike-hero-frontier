@@ -11,7 +11,7 @@ test('painted atlas has real alpha and sixteen separated, nonempty material cell
   }
   assert.ok(fs.readFileSync('sw.js','utf8').includes(ns.systems.PaintedTowerVFX.PATH));
 });
-test('all seven factions use painted flight and contact when assets are ready; every branch stays within its atlas cells',()=>{
+test('all configured factions use painted flight and contact when assets are ready; every branch stays within its atlas cells',()=>{
   const {ns}=load(),g=game(ns);g.art={towerPaintedAtlas:ready,towerMagicAtlas:magicReady};let covered=0;
   for(const faction of Object.values(ns.systems.FactionSystem.FACTIONS))for(const type of faction.buildings){
     for(const branch of [null,...ns.systems.TowerEvolutionSystem.branches(type).map(b=>b.id)]){
@@ -25,7 +25,7 @@ test('all seven factions use painted flight and contact when assets are ready; e
         }assert.deepEqual(monsters.map(m=>m.health),health);
       }
     }
-  }assert.equal(covered,27);
+  }assert.equal(covered,Object.values(ns.systems.FactionSystem.FACTIONS).flatMap(f=>f.buildings).filter(type=>!ns.config.buildings[type].supportOnly).length);
 });
 test('painted rendering handles zero budgets, reduced effects, asset failure and draw faults without leaking Canvas state',()=>{
   const {ns}=load(),g=game(ns);g.art={towerPaintedAtlas:ready,towerMagicAtlas:magicReady};const tower=new ns.entities.Building('boulder',100,100);tower.synergy=g.synergy;tower.cooldown=0;const monsters=[enemy(ns,150)],shots=[];tower.update(.01,monsters,shots,[]);const p=shots[0];

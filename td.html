@@ -72,7 +72,7 @@
 
       <div id="td-profession-screen" class="td-profession-screen" role="dialog" aria-modal="true" aria-labelledby="td-opening-title" hidden>
         <div class="profession-dialog">
-          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>英雄邊境 · v0.85.74 · 跨界造型第一季</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
+          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>英雄邊境 · v0.85.82 · 南方進化與軍團補齊</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
           <nav class="expedition-steps" aria-label="遠征配置步驟"><button type="button" data-opening-page="battlefield" aria-pressed="true"><b>01</b><span>選擇戰場</span></button><button type="button" data-opening-page="party"><b>02</b><span>組建隊伍</span></button></nav>
           <div class="opening-titlebar"><div class="opening-title-copy"><p>英雄邊境</p><h2 id="td-opening-title">選擇戰場</h2><span id="td-opening-subtitle">踏上新的戰場，書寫屬於你的傳奇。</span></div><select id="td-map-choice" class="opening-data-select" aria-label="選擇戰場"><option value="beginner">新手谷地</option><option value="twinpass">雙隘口要塞</option><option value="autumn">暮秋遺跡</option><option value="silverleaf">銀葉溪谷</option><option value="shadowfall">暮影舊城</option><option value="frostborn">冰原裂谷</option></select></div>
           <section class="expedition-page battlefield-page" data-expedition-page="battlefield">
@@ -99,6 +99,9 @@
                 <button type="button" data-profession="frostland" aria-pressed="false"><b>霜牙・凜</b><strong>冰原獵首 · 寒冬合獵</strong><small>寒冷 / 狩獵 / 碎冰</small></button>
                 <button type="button" data-profession="goblin" aria-pressed="false"><b>銅齒・奇克</b><strong>首席工程師 · 網路超載</strong><small>改裝 / 洩壓 / 巡修機偶</small></button>
                 <button type="button" data-profession="naga" aria-pressed="false"><b>破潮者・賽洛</b><strong>潮壓突進 · 旋潮控場</strong><small>潮門突刺 / 旋潮領域 / 潮衛號令</small></button>
+                <button type="button" data-profession="dwarf" aria-pressed="false"><b>符石監軍・巴隆</b><strong>矮人英雄 · 符文工事</strong><small>符錘 / 熔岩 / 堡壘號令</small></button>
+                <button type="button" data-profession="dragonkin" aria-pressed="false"><b>蒼穹使者・賽爾</b><strong>龍族英雄 · 龍脈雷擊</strong><small>雷槍 / 龍息 / 龍脈號令</small></button>
+                <button type="button" data-profession="egypt" aria-pressed="false"><b>曦陽守衛・納芙拉</b><strong>埃及島伏筆 · 可測試英雄</strong><small>日輪 / 沙金 / 曦陽守望</small></button>
                 <button type="button" data-profession="bull" aria-pressed="false"><b>戰神・奧魯姆</b><strong>中立戰神 · 重槌破陣</strong><small>天墜 / 震域 / 戰意</small></button>
               </div><article id="td-hero-detail" class="choice-detail"><div id="td-hero-detail-art"></div><section><small>英雄定位</small><h4 id="td-hero-detail-name">選擇英雄</h4><b id="td-hero-identity">不同英雄會改變你的操作核心。</b><p id="td-hero-description"></p><h5>核心技能</h5><div id="td-hero-skills" class="expedition-tags hero-skill-list"></div><footer id="td-hero-phase"></footer></section></article>
             </section>
@@ -111,6 +114,8 @@
                 <button type="button" data-faction="frostland" aria-pressed="false"><b>霜原盟族</b><strong>先累寒 → 再凍結 → 碎冰獵殺</strong><small>6 兵・7 塔</small></button>
                 <button type="button" data-faction="goblin" aria-pressed="false"><b>地精工程團</b><strong>機械網路 · 投資回收 · 超載</strong><small>工程布局｜5 兵・7 裝置</small></button>
                 <button type="button" data-faction="naga" aria-pressed="false"><b>娜迦潮衛</b><strong>潮壓標記 · 重甲叉陣 · 翼潮連鎖</strong><small>潮門軍勢｜5 兵・4 建築</small></button>
+                <button type="button" data-faction="dwarf" aria-pressed="false"><b>矮人符文堡壘</b><strong>符文工事 · 穿甲砲擊 · 熔爐增幅</strong><small>測試內容｜4 兵・4 塔</small></button>
+                <button type="button" data-faction="dragonkin" aria-pressed="false"><b>龍脈議庭</b><strong>元素連鎖 · 龍焰吐息 · 龍巢共鳴</strong><small>測試內容｜4 兵・4 塔</small></button>
               </div><article id="td-faction-detail" class="choice-detail faction-detail"><div id="td-faction-detail-art"></div><section><small>軍團定位</small><h4 id="td-faction-detail-name">選擇軍團</h4><b id="td-faction-identity">軍團決定整場可使用的守軍與建築。</b><p id="td-faction-description"></p><div id="td-faction-phases" class="phase-strip"></div><h5>代表軍隊</h5><footer id="td-faction-roster" class="faction-roster-list"></footer></section></article>
             </section>
             <aside class="expedition-summary"><small>本次遠征</small><div id="td-summary-map" class="summary-map"></div><dl><div><dt>難度</dt><dd id="td-summary-difficulty">邊境守衛</dd></div><div><dt>英雄</dt><dd id="td-summary-hero">尚未選擇</dd></div><div class="summary-times"><dt>組合</dt><dd><span id="td-summary-hero-short">英雄</span><b>×</b><span id="td-summary-faction">軍團</span></dd></div></dl><p id="td-combination-hint">選擇英雄與軍團，建立本次出征配置。</p><div class="opening-actions"><div id="td-art-loading" class="art-loading" role="status" aria-live="polite"><span id="td-art-status">正在載入戰場美術…</span><button id="td-art-retry" type="button" hidden>重新載入圖片</button></div><button id="td-continue-expedition" type="button" hidden>繼續遠征</button><button id="td-start-expedition" type="button" disabled>開始遠征</button></div></aside>
@@ -232,6 +237,22 @@
         <button type="button" data-build-kind="building" data-build-type="nagaShellBastion" hidden><b>盾</b><span>鹽甲棱堡</span><small></small></button>
         <button type="button" data-build-kind="building" data-build-type="nagaAbyssShrine" hidden><b>淵</b><span>深淵祭壇</span><small></small></button>
         <button type="button" data-build-kind="building" data-build-type="nagaMantaAerie" hidden><b>翼</b><span>翼潮獵台</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="dwarfRifle" hidden><b>銃</b><span>符文火銃手</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="dwarfShield" hidden><b>盾</b><span>山鎧盾衛</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="dwarfRunesmith" hidden><b>符</b><span>熔爐符文師</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="dwarfMortar" hidden><b>砲</b><span>山腹迫擊手</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="dwarfBoltTower" hidden><b>弩</b><span>符文穿甲塔</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="dwarfRuneForge" hidden><b>爐</b><span>符文熔爐</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="dwarfMortarTower" hidden><b>砲</b><span>山腹迫擊塔</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="dwarfCitadel" hidden><b>堡</b><span>山心堡壘</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="dragonkinEmberwing" hidden><b>翼</b><span>燼翼游擊者</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="dragonkinLancer" hidden><b>槍</b><span>雷鱗槍衛</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="dragonkinOracle" hidden><b>靈</b><span>天穹祈言者</span><small></small></button>
+        <button type="button" data-build-kind="unit" data-build-type="dragonkinElder" hidden><b>龍</b><span>古翼守護者</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="dragonkinFlameSpire" hidden><b>焰</b><span>燼翼尖塔</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="dragonkinStormObelisk" hidden><b>雷</b><span>風暴方尖碑</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="dragonkinRoost" hidden><b>巢</b><span>龍脈巢台</span><small></small></button>
+        <button type="button" data-build-kind="building" data-build-type="dragonkinWyrmNest" hidden><b>巢</b><span>古龍巢穴</span><small></small></button>
         <button type="button" data-build-kind="building" data-build-type="arrow"><b>♜</b><span>林地弩塔</span><small></small></button>
         <button type="button" data-build-kind="building" data-build-type="iceward"><b>❄</b><span>寒鋼哨塔</span><small></small></button>
         <button type="button" data-build-kind="building" data-build-type="frost"><b>❄</b><span>寒霜塔</span><small></small></button>
@@ -277,13 +298,17 @@
       <button type="button" data-shop-item="core-frost"><b>冷凍球</b><small></small><span></span></button>
       <button type="button" data-shop-item="core-lightning"><b>雷球</b><small></small><span></span></button>
       <button type="button" data-shop-item="core-shadow"><b>暗影球</b><small></small><span></span></button>
+    </div><h3>傭兵館 · 中立契約</h3><p>所有軍團皆可招募。成功放置才扣金幣、不耗木材；定點作戰，可升至 Lv.5、回收 70%。BOSS 契約於「軍團老兵／災厄遠征」開放，管理者可直接測試；寒冰惡龍只緩速、不凍結。</p><div class="shop-items mercenary-items neutral-mercenaries">
+      <button type="button" data-mercenary="fireDemon" data-contract-tier="boss"><b></b><small></small><span></span></button>
+      <button type="button" data-mercenary="frostWyrm" data-contract-tier="boss"><b></b><small></small><span></span></button>
+      <button type="button" data-mercenary="powderThrower"><b></b><small></small><span></span></button>
+      <button type="button" data-mercenary="bountyHunter"><b></b><small></small><span></span></button>
     </div><h3>傭兵館 · 跨族契約</h3><p>販售本軍團以外的士兵與特殊建築，圖片就是部署外觀。成功放置才扣金幣，部署點固定，可升至等級 5、回收70%；召喚物會自動追擊。</p><div class="shop-items mercenary-items">
       <button type="button" data-mercenary="royalCommander"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="soulsteel"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="kingdomMage"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="alchemist"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="beastmaster"><b></b><small></small><span></span></button>
-      <button type="button" data-mercenary="bountyHunter"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="pirate"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="blacksmith"><b></b><small></small><span></span></button>
       <button type="button" data-mercenary="timeMage"><b></b><small></small><span></span></button>
@@ -326,6 +351,8 @@
   <script src="src/td/config.js"></script>
   <script src="src/td/systems/SpriteFrameBounds.js"></script>
   <script src="src/td/systems/ArtSystem.js"></script>
+  <script src="src/td/systems/NeutralMercenaryArt.js"></script>
+  <script src="src/td/systems/ImperialFactionArt.js"></script>
   <script src="src/td/systems/BullWargodArt.js"></script>
   <script src="src/td/systems/BossSpriteBounds.js"></script>
   <script src="src/td/systems/BossVisualCatalog.js"></script>
@@ -396,6 +423,8 @@
   <script src="src/td/systems/FrostlandTowerArt.js"></script>
   <script src="src/td/systems/BattleSynergySystem.js"></script>
   <script src="src/td/TDGame.js"></script>
+  <script src="src/td/systems/HeroSkillPresentation.js"></script>
+  <script src="src/td/systems/Performance8DOptimizer.js"></script>
   <script src="src/td/systems/ArmoryUI.js"></script>
   <script src="src/td/systems/BattlefieldCamera.js"></script>
   <script src="src/td/systems/MiniMapView.js"></script>

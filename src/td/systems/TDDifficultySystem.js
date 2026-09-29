@@ -6,7 +6,7 @@
     veteran:{name:'軍團老兵',description:'完整軍備開放；更密集且後段成長更快。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'0% 100%',enemyHealth:1.65,healthGrowth:.03,enemySpeed:1.09,enemyDamage:1.45,enemyCount:1.35,reward:.45,baseHealth:18,preparation:.85,spawnRate:.78,heroAssault:false,content:'全部軍備'},
     calamity:{name:'災厄遠征',description:'完整軍備開放；最高密度、致命 Boss 壓力，攻城與遠程敵軍會襲擊英雄。',selectionArt:'assets/td/opening/difficulty-scenes-v1.png',selectionPosition:'100% 100%',enemyHealth:2.25,healthGrowth:.045,enemySpeed:1.16,enemyDamage:2,enemyCount:1.6,reward:.38,baseHealth:15,preparation:.7,spawnRate:.65,heroAssault:true,content:'全部軍備'}
   };
-  const ULTIMATE_UNITS=['royalCommander','dragon','soulsteel'];
+  const ULTIMATE_UNITS=['royalCommander','dragon','soulsteel','fireDemon','frostWyrm'];
   const STORY_TOWERS=['armoryForge','ballista','moonwell','graveyard','boulder','thunderTotem'];
   class TDDifficultySystem{
     constructor(){this.reset();}

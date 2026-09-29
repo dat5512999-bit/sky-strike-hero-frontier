@@ -1,10 +1,11 @@
 {
   "name": "sky-strike",
-  "version": "0.85.74",
+  "version": "0.85.82",
   "private": true,
   "frostlandMotionVersion": "1.0.0",
   "description": "包含縱向射擊與英雄塔防模式的本機 HTML5 Canvas 遊戲",
   "scripts": {
+    "test:neutral": "node --test tests/td-neutral-contracts.test.js",
     "test:frostland-motion": "node --test tests/td-frostland-motion.test.js tests/td-unit-vfx.test.js tests/td-faction-motion.test.js",
     "measure:frostland-motion": "node scripts/measure-frostland-motion.cjs --write",
     "verify:pages": "node scripts/verify-pages-release.cjs",
@@ -35,6 +36,7 @@
     "benchmark:frostland": "node scripts/benchmark-frostland.cjs",
     "qa:long-session": "node scripts/qa-long-session.cjs",
     "test:naga": "node --test tests/td-naga-skill-crash.test.js tests/td-naga-prototype.test.js",
+    "test:southern": "node --test tests/td-southern-factions.test.js tests/td-southern-skill-8d.test.js tests/td-visual-performance-8d.test.js",
     "test:bull": "node --test tests/td-bull-wargod.test.js tests/td-bull-skill-crash.test.js",
     "test:mobile": "node --test tests/static-delivery.test.js tests/td-mobile-simulator.test.js",
     "qa:naga": "node scripts/qa-naga-skill-crash.cjs",

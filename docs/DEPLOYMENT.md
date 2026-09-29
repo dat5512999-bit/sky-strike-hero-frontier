@@ -1,3 +1,5 @@
+> **v0.85.81：** 同步發布本版 JS、td.html／td.css、四張 assets/td/neutral 圖集、NeutralMercenaryArt.js 與七處版本入口；Worker 為 sky-strike-v0.85.81。舊 bounty-hunter-actions-v2.png 保留以供回退。尚未執行遠端發布。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
+
 > **v0.85.74：** 發布時同步八張 `assets/td/shop/*` 跨界造型素材、`CrossworldSkinArt.js`、商城目錄、`td.html`、`sw.js`、`update.html` 與版本號；確認 Worker 快取為 `sky-strike-v0.85.74`。不需資料庫遷移。見 [交付文件](CROSSWORLD_SKINS_SEASON_ONE_V08574.md)。
 
 > **v0.85.73：** 須同步部署 `StoryCatalog.js`、`maps.js`、`TDGame.js`、`StoryCodexMapping.js`、四張 `chapter4-*.png` 與 `sw.js`；新 Worker 快取鍵為 `sky-strike-v0.85.73`，不需資料庫遷移。詳見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
@@ -559,4 +561,8 @@ v0.85.0：同步部署 td.html、td-expedition.css、codex.css、src/td、Frostl
 > **v0.85.71：** 同步部署 manifest、手機殼、主程式、入口版號、`sw.js`、文件與測試；確認 `sky-strike-v0.85.71` 後，以 Android Chrome／iPhone Safari 的瀏覽器及主畫面入口驗收沉浸式顯示。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
 > **v0.85.72：** 同步部署 `td-mobile.html`、`td.html`、`td.css`、`main.js`、入口版號與 `sky-strike-v0.85.72`。在 iPhone 直向入口確認上下無黑邊，再檢查左側安全邊不含控制。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+
+> **v0.85.80：** 同步發布 ProfileStore、FrontierApp、TDGame、PerformanceMonitor、BattleReportSystem、td.html、update.html、sw.js 與 package.json；確認大廳與快取均為 0.85.80。無資料遷移。`scripts/performance-ui-lab.*` 是開發測試頁，不加入 PWA 離線快取。見 [8D](PERFORMANCE_PROFILE_8D_V08580.md)。
+
+> **v0.85.82：** 同步發布英雄進化、南方兵塔／美術接線、素材與七處版本入口，Worker 為 sky-strike-v0.85.82。依使用者要求本次不再跑追加驗收；推送成功不等於 Pages 已更新，須分別看實際遠端狀態。詳見 [發布範圍與未驗項](SOUTHERN_COMPLETION_V08582.md)。
 

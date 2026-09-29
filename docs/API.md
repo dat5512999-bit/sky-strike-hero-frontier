@@ -1,3 +1,5 @@
+> **v0.85.81：** 沿用 BuildSystem.queueMercenary／confirmPlacement、CombatUnit、Projectile 與 ArmorySystem。新設定 ranks 為五階名稱陣列；NeutralMercenaryArt.has／pose／draw 處理逐格腳底。LootSystem.usable 加入 build.combatUnits()；沒有 HTTP API、資料庫或存檔 schema 變更。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
+
 > **v0.85.74：** `SkinCatalog` 新增四筆 `hero` 類目，target 分別為 `frostland`、`naga`、`bull`、`goblin`；`battlefieldSprite` 依序為 4×4、4×4、5×5、4×4。無 HTTP API、資料庫或戰鬥資料 schema 變更。見 [交付文件](CROSSWORLD_SKINS_SEASON_ONE_V08574.md)。
 
 > **v0.85.73：** `StoryCatalog.missions` 新增 chapter `4` 的四筆既有任務結構資料；`StoryCodexMapping.chapters.chapter4` 驗證四個任務完成，`rewards` 為空。無 HTTP API 或存檔 schema 改動。詳見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
@@ -687,4 +689,8 @@ v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare�
 > **v0.85.71：** 沒有新增 HTTP API、資料庫、權限或存檔 schema。全螢幕請求只由既有使用者點擊觸發，`display`／`display_override` 只影響 PWA 顯示模式。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
 > **v0.85.72：** 外殼僅以同源 `postMessage` 傳遞 `tower-frontier-shell-inset` 視覺安全邊；不新增 HTTP API、持久化資料或權限。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+
+> **v0.85.80：** 新增 `ProfileStore.isAdmin(): boolean`，`allows(kind,id): boolean` 不複製或暴露資料；`current()` 仍回傳完整防禦複本。`PerformanceMonitor.record` 新增 `uiMs`／`simulationMs`，皆為毫秒；總更新包含介面，不能再相加。無 HTTP API、資料庫或存檔 schema 變更。
+
+> **v0.85.82：** HeroEvolutionSystem 增加 dwarf／dragonkin／egypt 的兩階技能與試煉資料；cast 冷卻先行返回，場域／延遲攻擊有數量上限。兵種 ranks 與 TowerEvolutionSystem 分支沿用原 API，無 HTTP API、資料庫或 schema 變更。詳見 [架構與 API](SOUTHERN_COMPLETION_V08582.md)。
 

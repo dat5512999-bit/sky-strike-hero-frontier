@@ -21,7 +21,7 @@
     constructor(random){this.random=random||Math.random;this.reset();}
     reset(){this.claimed=new Set();this.pending=[];this.history=[];}
     get(id){return ITEMS[id]||null;}
-    usable(id,profession,faction){const gear=ITEMS[id]?.gear;if(!gear)return true;const item=ns.systems.ArmorySystem.item(gear),units=this.context?.factions?.available('unit')||ns.systems.FactionSystem.FACTIONS[faction]?.units||[];return Boolean(item&&((item.heroes||[]).includes(profession)||(item.types||[]).some(id=>units.includes(id))));}
+    usable(id,profession,faction){const gear=ITEMS[id]?.gear;if(!gear)return true;const item=ns.systems.ArmorySystem.item(gear),base=this.context?.factions?.available('unit')||ns.systems.FactionSystem.FACTIONS[faction]?.units||[],deployed=this.context?.build?.combatUnits?.().map(unit=>unit.type)||[],units=base.concat(deployed);return Boolean(item&&((item.heroes||[]).includes(profession)||(item.types||[]).some(id=>units.includes(id))));}
     createOffers(wave,profession,faction){
       let pool=Object.keys(ITEMS).filter(id=>this.usable(id,profession,faction)&&!ITEMS[id].legacy&&(!this.claimed.has(id)||ITEMS[id].resources));
       const offers=[];

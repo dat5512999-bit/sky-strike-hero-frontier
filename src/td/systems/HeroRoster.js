@@ -8,7 +8,10 @@
     chief:{name:'大酋長・戈爾',faction:'荒野部族 · 萬族戰團',color:'#df6548',selectionArt:'assets/td/opening/hero-chief-selection-v2.png',selectionFocus:'50% 18%',skillArt:'assets/td/opening/chief-skill-icons-v1.png',range:112,damage:21,interval:.7,attackType:'chaos',splash:26,skills:['萬族戰吼','先祖怒火','裂地衝擊波'],shortSkills:['萬族戰吼','先祖怒火','裂地波'],icons:['吼','雷','裂'],hints:['附近荒野士兵立刻進入4秒狂潮，冷卻9秒','腳下形成6秒祖靈怒火，冷卻12秒','向前發射穿透衝擊波，傷害並緩速直線敵人，冷卻22秒']},
     goblin:{name:'銅齒・奇克',faction:'地精工程團',color:'#d9ad65',selectionArt:'assets/td/goblin-chief-engineer-v1.png',selectionFocus:'50% 42%',range:145,damage:20,interval:.7,attackType:'pierce',skills:['臨場改裝','蒸汽洩壓','巡修機偶'],shortSkills:['改裝','洩壓','機偶'],icons:['⚙','◈','▣'],hints:['自身攻速 +30%，並改裝最近的供電攻擊機械：傷害 +42%、攻速 +20%，持續 5 秒；冷卻 9 秒','噴出蒸汽傷害並緩速近敵，額外縮短網路冷卻 3 秒；冷卻 12 秒','部署一台可移動的巡修機偶，發射穿刺鉚釘；冷卻 22 秒']}
     ,naga:{name:'破潮者・賽洛',faction:'娜迦潮衛 · 自由遠征',color:'#55d3d0',selectionArt:'assets/td/naga/tidebreaker-selection-v1.png',selectionFocus:'52% 48%',skillArt:'assets/td/naga/tidebreaker-skill-icons-v1.png',range:142,damage:21,interval:.72,attackType:'chaos',skills:['潮門突刺','旋潮領域','潮衛號令'],shortSkills:['潮門','旋潮','潮衛'],icons:['≋','◉','♜'],hints:['突入目標身旁，以破潮矛造成 108 混沌傷害、緩速並留下潮痕，冷卻 9 秒','腳下形成 6 秒旋潮領域，每 0.5 秒傷害、緩速附近敵軍，冷卻 12 秒','附近娜迦守軍進入 5 秒潮衛號令：傷害 +18%、攻速 +18%；需至少一名守軍，冷卻 22 秒']},
-    bull:{name:'戰神・奧魯姆',faction:'中立英雄 · 可與所有軍團遠征',color:'#e4a452',selectionArt:'assets/td/neutral/bull-wargod-selection-v1.png',selectionFocus:'50% 32%',skillArt:'assets/td/neutral/bull-wargod-skill-icons-v2.png',range:108,damage:22,interval:.72,attackType:'chaos',splash:22,skills:['破陣天墜','戰神震域','不滅戰意'],shortSkills:['天墜','震域','戰意'],icons:['⬟','✹','♛'],hints:['躍向前線，以巨槌震擊半徑 72 的敵軍並造成強緩速，冷卻 9 秒','在腳下展開 6 秒震域，穩定傷害並拖慢接近的敵軍，冷卻 12 秒','進入 6 秒戰意：自身傷害 +20%、攻速 +18%；不影響任何軍團單位，冷卻 22 秒']}
+    dwarf:{name:'符石監軍・巴隆',faction:'矮人符文堡壘 · CONCEPT',color:'#61d6d0',selectionArt:'assets/td/dwarf/hero-selection-v1.png',selectionFocus:'50% 14%',skillArt:'assets/td/dwarf/skill-icons-v1.png',range:128,damage:24.5,interval:.78,attackType:'chaos',skills:['符錘震擊','熔岩封鎖','堡壘號令'],shortSkills:['符錘','熔岩','堡壘'],icons:['⚒','◇','⚑'],hints:['衝向前線，以符文重槌重擊目標，冷卻 9 秒','在腳下展開 6 秒符文領域，冷卻 12 秒','附近矮人士兵進入 5 秒堡壘號令，冷卻 22 秒']},
+    dragonkin:{name:'蒼穹使者・賽爾',faction:'龍脈議庭 · CONCEPT',color:'#73c9ea',selectionArt:'assets/td/dragonkin/hero-selection-v1.png',selectionFocus:'50% 14%',skillArt:'assets/td/dragonkin/skill-icons-v1.png',range:164,damage:22,interval:.7,attackType:'magic',skills:['雷槍穿雲','龍息風暴','龍脈號令'],shortSkills:['雷槍','龍息','龍脈'],icons:['ϟ','♨','◇'],hints:['雷槍穿刺前線目標，冷卻 9 秒','在腳下展開 6 秒龍息領域，冷卻 12 秒','附近龍族士兵進入 5 秒龍脈號令，冷卻 22 秒']},
+    egypt:{name:'曦陽守衛・納芙拉',faction:'埃及島 · CONCEPT',color:'#e7be62',selectionArt:'assets/td/egypt/hero-selection-v2.png',selectionFocus:'50% 14%',skillArt:'assets/td/egypt/skill-icons-v1.png',range:138,damage:21,interval:.68,attackType:'magic',skills:['日輪斬','沙金領域','曦陽守望'],shortSkills:['日輪','沙金','曦陽'],icons:['☀','◇','𓂀'],hints:['以彎刀突進重擊，冷卻 9 秒','在腳下展開 6 秒日輪領域，冷卻 12 秒','保留中的埃及島英雄技能，冷卻 22 秒']},
+    bull:{name:'戰神・奧魯姆',faction:'中立英雄 · 可與所有軍團遠征',color:'#e4a452',selectionArt:'assets/td/neutral/bull-wargod-selection-v1.png',selectionFocus:'50% 0%',skillArt:'assets/td/neutral/bull-wargod-skill-icons-v2.png',range:108,damage:22,interval:.72,attackType:'chaos',splash:22,skills:['破陣天墜','戰神震域','不滅戰意'],shortSkills:['天墜','震域','戰意'],icons:['⬟','✹','♛'],hints:['躍向前線，以巨槌震擊半徑 72 的敵軍並造成強緩速，冷卻 9 秒','在腳下展開 6 秒震域，穩定傷害並拖慢接近的敵軍，冷卻 12 秒','進入 6 秒戰意：自身傷害 +20%、攻速 +18%；不影響任何軍團單位，冷卻 22 秒']}
   };
   class HeroRoster{
     static get(type){return CLASSES[type]||CLASSES.arcanist;}
@@ -58,9 +61,10 @@
         if(hero.classType==='chief'){const allies=hero.synergy?hero.synergy.game.build.combatUnits().filter(unit=>['orc','centaur','boarRider','minotaur','shaman'].includes(unit.type)&&ns.utils.distance(hero,unit)<=210):[];allies.forEach(unit=>{unit.tribalFrenzy=Math.max(unit.tribalFrenzy||0,4);unit.commandPulse=4;});ns.systems.HeroSkillVFX.emit(hero,'chief-warcry',{radius:210,duration:.72});hero.novaCooldown=9*(1-hero.equipment.rune*.1);hero.beginCast();return true;}
         if(!targets.length)return false;
         hero.skillTrails=targets.slice(0,hero.classType==='hunter'?3:1).map(target=>({x:hero.x,y:hero.y,tx:target.x,ty:target.y,time:.3,color:weaponColor}));
-        ns.systems.HeroSkillVFX.emit(hero,hero.classType==='hunter'?'arrows':'blink',{targets:targets.slice(0,3).map(m=>({x:m.x,y:m.y})),target:{x:targets[0].x,y:targets[0].y},duration:.45});
+        const heroEffect={dwarf:'dwarf-hammer',dragonkin:'dragonkin-lance',egypt:'egypt-sunblade'}[hero.classType]||'blink';
+        ns.systems.HeroSkillVFX.emit(hero,hero.classType==='hunter'?'arrows':heroEffect,{targets:targets.slice(0,3).map(m=>({x:m.x,y:m.y})),target:{x:targets[0].x,y:targets[0].y},duration:.45});
         if(hero.classType==='hunter')targets.slice(0,3).forEach(target=>new ns.entities.Projectile(hero,target,{damage:48*power,color:weaponColor,attackType:'pierce'}).hit(monsters,onKill,onHit));
-        else{const target=targets[0];hero.x=ns.utils.clamp(target.x-28,25,695);hero.y=ns.utils.clamp(target.y+22,55,695);hero.setTarget(hero.x,hero.y);new ns.entities.Projectile(hero,target,{damage:95*power,color:weaponColor,attackType:'chaos'}).hit(monsters,onKill,onHit);}
+        else{const target=targets[0];hero.x=ns.utils.clamp(target.x-28,25,695);hero.y=ns.utils.clamp(target.y+22,55,695);hero.setTarget(hero.x,hero.y);new ns.entities.Projectile(hero,target,{damage:95*power,color:weaponColor,attackType:cfg.attackType}).hit(monsters,onKill,onHit);}
         hero.novaCooldown=9*(1-hero.equipment.rune*.1);
       }else{
         if(hero.classType==='bull'){
@@ -111,7 +115,10 @@
           // projectile work in a single frame.
           field.tick=0;field.pulses=(field.pulses||0)+1;try{this.nagaPulse(hero,field,monsters,onKill,onHit);}catch(error){field.time=0;hero.nagaFieldFault=String(error&&error.message||error||'unknown');}if(field.pulses>=field.maxPulses)field.time=0;return;
         }
-        while(field.tick>=.5){field.tick-=.5;resolve(monsters.filter(monster=>monster.active&&ns.utils.distance(field,monster)<=72));}
+        // Generic legacy fields used to replay every missed half-second when a
+        // background tab resumed. Keep one current pulse, matching the bounded
+        // Naga/Bull policy and preventing an unbounded projectile burst.
+        if(field.tick>=.5){field.tick=0;resolve(monsters.filter(monster=>monster.active&&ns.utils.distance(field,monster)<=72));}
       });
       hero.fields=hero.fields.filter(field=>field.time>0);
     }

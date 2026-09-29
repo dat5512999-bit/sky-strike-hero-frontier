@@ -1,3 +1,5 @@
+> **v0.85.81：** 新增三個中立單位 ID：powderThrower、fireDemon、frostWyrm；bountyHunter 沿用原 ID。管理者可繞過 BOSS 難度門檻測試；不要替一般玩家變更解鎖進度。驗收頁僅允許獨立 4174 origin，使用記憶體帳號。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
+
 > **v0.85.73：** 第四章只新增靜態劇情／地圖資料與圖片資產，沒有帳號、權限、資料庫或後端設定；部署與回復見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
 
 > **v0.85.69：** `TDDifficultySystem.heroAssault` 僅災厄為 true，並由 `heroDamageAllowed(map.heroVulnerable)` 合併地圖預設；勿把正式地圖的 `heroVulnerable:false` 全部改成 true。士兵不承傷規則不變。
@@ -548,4 +550,8 @@ v0.85.0：冰原僅為 TESTABLE，管理者可玩，新測試輪次故事鎖定�
 > **v0.85.71：** 手機 PWA 以 `fullscreen` 為優先；部署後確認 `td.webmanifest`、`td-mobile.html`、`src/td/main.js` 與 `sky-strike-v0.85.71` 同步。iOS 狀態列由系統控制，僅驗收其深色安全區不覆蓋操作區。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
 > **v0.85.72：** iPhone 熱修正不縮小 iframe；部署時確認 `td-mobile.html` 將安全區訊息傳給 `src/td/main.js`，且快取為 `sky-strike-v0.85.72`。驗收畫面沒有上下黑邊，狀態列只佔遊戲內左側安全邊。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+
+> **v0.85.80：** 權限熱路徑改為純布林查詢，未放寬管理者或一般玩家權限。不要在戰鬥循環呼叫 `ProfileStore.current()` 只為取得身份。實驗頁只在獨立測試 port 執行，不能在玩家正式 origin 測試。見 [8D](PERFORMANCE_PROFILE_8D_V08580.md)。
+
+> **v0.85.82：** 三英雄進化及南方軍團進階沿用既有權限與存檔，不替玩家修改解鎖。既有分組驗收已記錄；使用者要求停止追加測試，最終整版尚未重跑，發布狀態請獨立確認 Actions／Pages。詳見 [維護交付](SOUTHERN_COMPLETION_V08582.md)。
 

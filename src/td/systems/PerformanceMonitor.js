@@ -9,7 +9,7 @@
       if(sample.timestamp-this.lastDisplay<500)return;this.lastDisplay=sample.timestamp;
       const frames=this.samples.filter(item=>item.realMs>0),mean=frames.reduce((sum,item)=>sum+item.realMs,0)/(frames.length||1),peak=(key)=>{const values=this.samples.map(item=>item[key]).sort((a,b)=>a-b);return values[Math.floor((values.length-1)*.95)]||0;};
       const fps=mean?Math.round(1000/mean):0,update=peak('updateMs'),draw=peak('drawMs'),lag=Math.round(sample.backlogMs),discarded=Math.round(sample.discardedMs);
-      this.panel.textContent='FPS '+fps+' · 影格 P95 '+peak('realMs').toFixed(1)+'ms\n更新 P95 '+update.toFixed(1)+'ms · 繪圖呼叫 P95 '+draw.toFixed(1)+'ms\n怪物 '+sample.monsters+' · 冰霜特效 '+sample.frostVfx+' · ×'+sample.speed+'\n追趕中 '+lag+'ms · 略過 '+discarded+'ms';
+      this.panel.textContent='FPS '+fps+' · 影格 P95 '+peak('realMs').toFixed(1)+'ms\n更新 P95 '+update.toFixed(1)+'ms · 繪圖呼叫 P95 '+draw.toFixed(1)+'ms\n戰鬥運算 P95 '+peak('simulationMs').toFixed(1)+'ms · 介面 P95 '+peak('uiMs').toFixed(1)+'ms\n怪物 '+sample.monsters+' · 冰霜特效 '+sample.frostVfx+' · ×'+sample.speed+'\n追趕中 '+lag+'ms · 略過 '+discarded+'ms';
       this.panel.dataset.health=lag>33||fps<30?'slow':'normal';
     }
   }

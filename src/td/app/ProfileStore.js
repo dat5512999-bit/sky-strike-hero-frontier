@@ -1,6 +1,6 @@
 (function(ns){
   'use strict';
-  const KEY='heroFrontierProfilesV1', VERSION='0.85.74';
+  const KEY='heroFrontierProfilesV1', VERSION='0.85.82';
   const clone=value=>JSON.parse(JSON.stringify(value));
   function profile(id,kind,round){return {id,kind,round,startedAt:new Date().toISOString(),startedVersion:VERSION,completed:[],encountered:[],discovered:[],cinematics:[],unlocks:{heroes:['hunter','naga','bull'],factions:['hunter','naga'],maps:['beginner','westernsignal','emberroad'],difficulties:['story','standard']},wallet:{gold:0,diamonds:0},data:{},lastRun:null};}
   class ProfileStore{
@@ -9,10 +9,12 @@
     persist(next){try{if(this.storage.getItem(KEY)!==this.serialized)throw new Error('另一個分頁已更新玩家資料，請重新整理後繼續');const raw=JSON.stringify(next);this.storage.setItem(KEY,raw);this.serialized=raw;this.state=next;}catch(error){if(this.onError)this.onError(error);throw error;}}
     change(edit){const next=clone(this.state);edit(next);this.persist(next);return this.current();}
     current(){return clone(this.state.profiles[this.state.active]);}
+    // Hot-path queries return primitives, never clone or expose the save payload.
+    isAdmin(){return this.state.profiles[this.state.active].kind==='admin';}
     switchTo(id){if(!this.state.profiles[id])throw new Error('找不到玩家檔案');return this.change(s=>{s.active=id;});}
     newRound(){return this.change(s=>{if(s.profiles.test){s.archives=s.archives.filter(a=>a.round!==s.profiles.test.round);s.archives.push(clone(s.profiles.test));}const round=s.nextRound++;s.profiles.test=profile('test','test',round);s.active='test';});}
     restoreRound(round){const saved=this.state.archives.find(p=>p.round===round);if(!saved)throw new Error('找不到封存輪次');return this.change(s=>{if(s.profiles.test)s.archives.push(clone(s.profiles.test));s.archives=s.archives.filter(p=>p!==undefined&&p.round!==round);s.profiles.test=clone(saved);s.active='test';});}
-    allows(kind,id){const p=this.current();return p.kind==='admin'||Boolean(p.unlocks[kind]&&p.unlocks[kind].includes(id));}
+    allows(kind,id){const p=this.state.profiles[this.state.active];return p.kind==='admin'||Boolean(p.unlocks[kind]&&p.unlocks[kind].includes(id));}
     adapter(mode){const id=this.state.active;return {getItem:key=>this.state.profiles[id].data[mode+':'+key]??null,setItem:(key,value)=>this.change(s=>{s.profiles[id].data[mode+':'+key]=String(value);}),removeItem:key=>this.change(s=>{delete s.profiles[id].data[mode+':'+key];})};}
     seenCinematic(id){this.change(s=>{const p=s.profiles[s.active];if(!p.cinematics.includes(id))p.cinematics.push(id);});}
     encounter(types){this.change(s=>{const p=s.profiles[s.active];p.encountered=Array.from(new Set(p.encountered.concat(types)));});}

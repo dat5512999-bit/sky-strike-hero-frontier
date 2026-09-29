@@ -4,11 +4,11 @@
   // Presentation keys never replace damage styles, targeting, or equipment procs.
   const groups={
     slash:['rogue','skeleton','boneRider','orc','frostWolf'],
-    thrust:['halberdier','nagaTideguard'], shield:['shield','nagaShellbreaker'],
-    slam:['golem','soulsteel','minotaur','frostBear','frostMammoth','royalCommander'],
+    thrust:['halberdier','nagaTideguard','dragonkinLancer'], shield:['shield','nagaShellbreaker'],
+    slam:['golem','soulsteel','minotaur','frostBear','frostMammoth','royalCommander','dwarfShield'],
     tideSlash:['nagaDeepWargod'], charge:['knight','boarRider'], breath:['dragon'],
-    arrow:['hunter','centaur','frostHunter'], bullet:['musketeer','bountyHunter','goblinEngineer','goblinGunner','goblinRiveter','goblinRecycler'],
-    cannon:['pirate','goblinMech'], lightning:['kingdomMage','shaman'], poison:['alchemist','nagaVenomStalker'],
+    arrow:['hunter','centaur','frostHunter'], bullet:['musketeer','bountyHunter','goblinEngineer','goblinGunner','goblinRiveter','goblinRecycler','dwarfRifle'],
+    cannon:['pirate','goblinMech','powderThrower','dwarfMortar'], inferno:['fireDemon','dragonkinEmberwing'], emberBreath:['dragonkinElder'], frostBreath:['frostWyrm'], lightning:['kingdomMage','shaman','dwarfRunesmith','dragonkinOracle'], poison:['alchemist','nagaVenomStalker'],
     nature:['dryad','treant','beastmaster'], moon:['moonblade'], spirit:['banshee'],
     ice:['frostBird','frostShaman'], arcane:['arcanist'], tide:['nagaMantaRaider']
   };
@@ -18,7 +18,7 @@
     slash:['unit',0,'unit',1,65,52,'#e9e4d6'],thrust:['main',0,'unit',1,58,48,'#ffe5b6'],
     shield:['unit',1,'unit',1,54,65,'#ffe3a0'],slam:['unit',3,'unit',3,64,88,'#d4b083'],
     tideSlash:['main',15,'main',15,82,105,'#80ffeb'],charge:['unit',3,'unit',3,62,72,'#e9c08a'],
-    breath:['unit',2,'unit',2,100,103,'#7bffbf'],arrow:['main',0,'unit',1,38,38,'#f8dca0'],
+    breath:['unit',2,'unit',2,100,103,'#7bffbf'],inferno:['main',7,'main',11,66,110,'#ff803d'],emberBreath:['main',7,'main',11,84,110,'#ffb06a'],frostBreath:['main',1,'main',9,76,102,'#9beaff'],arrow:['main',0,'unit',1,38,38,'#f8dca0'],
     bullet:['main',6,'unit',1,30,40,'#ffc67b'],cannon:['main',7,'main',11,47,87,'#ffb06a'],
     lightning:['magic',0,'magic',1,46,60,'#a5efff'],poison:['magic',2,'magic',3,37,58,'#c4eb76'],
     nature:['main',2,'main',12,38,58,'#a4e393'],moon:['unit',0,'unit',1,43,49,'#c9d9ff'],
@@ -95,6 +95,10 @@
             const reach=Math.min(len*.5,32),x=p.startX+Math.cos(angle)*reach,y=p.startY-22+Math.sin(angle)*reach;
             this.sprite(ctx,art,profile[0],profile[1],x,y,profile[4],profile[4]*.8,1-age/.17,angle-.4+age*3);
           }return;
+        }
+        if(p.unitVfx==='frostBreath'||p.unitVfx==='emberBreath'){
+          const distance=Math.min(len,Math.max(24,Math.hypot(p.x-p.startX,p.y-p.startY)+18));
+          this.sprite(ctx,art,profile[0],profile[1],p.startX+Math.cos(angle)*distance*.5,p.startY-27+Math.sin(angle)*distance*.5,distance,Math.min(58,24+distance*.15),.9,angle);return;
         }
         if(p.unitVfx==='breath'){
           const distance=Math.min(len,Math.max(30,Math.hypot(p.x-p.startX,p.y-p.startY)+22));

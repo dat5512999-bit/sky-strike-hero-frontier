@@ -4,6 +4,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
+const {load}=require('./helpers/td-runtime.cjs');
 const root=path.resolve(__dirname,'..');
 function prototype(){
   const context=vm.createContext({console,document:{body:{dataset:{layout:'desktop'}}}});
@@ -43,8 +44,11 @@ test('開局選擇在單一桌面視窗並排英雄與軍團，手機共用相�
   assert.match(css,/data-game-screen="opening"[^}]*\.td-profession-screen\{overflow:hidden/);
   assert.match(css,/\.opening-choice-grid\{display:grid;grid-template-columns:minmax\(0,2fr\)/);
   assert.match(css,/data-layout="mobile"[^}]*data-game-screen="opening"[^}]*\.opening-choice-grid/);
-  assert.equal((html.match(/data-profession=/g)||[]).length,8);
-  assert.equal((html.match(/data-faction=/g)||[]).length,7);
+  const {ns}=load(),heroes=['hunter','arcanist','rogue','chief','frostland','goblin','naga','dwarf','dragonkin','egypt','bull'].sort(),factions=['hunter','arcanist','rogue','wild','frostland','goblin','naga','dwarf','dragonkin'].sort();
+  assert.deepEqual([...html.matchAll(/data-profession="([^"]+)"/g)].map(match=>match[1]).sort(),heroes);
+  assert.deepEqual([...html.matchAll(/data-faction="([^"]+)"/g)].map(match=>match[1]).sort(),factions);
+  assert.deepEqual(Object.keys(ns.systems.HeroRoster.CLASSES).sort(),heroes);
+  assert.deepEqual(Object.keys(ns.systems.FactionSystem.FACTIONS).sort(),factions);
 });
 
 test('開局英雄卡只更新選擇，開始鈕才會以完整英雄×軍團組合開局',()=>{
@@ -154,7 +158,15 @@ test('手機選取重疊目標時採最近優先，士兵快捷列直接顯示�
 test('所有建造卡只顯示定位與價格，完整能力留在第二層',()=>{
   const html=fs.readFileSync(path.join(root,'td.html'),'utf8');
   const cards=[...html.matchAll(/data-build-kind="(unit|building)" data-build-type="([^"]+)"[^>]*><b>[^<]+<\/b><span>[^<]+<\/span><small><\/small><\/button>/g)];
-  assert.equal(cards.length,71);
+  const expected={
+    unit:['hunter','arcanist','rogue','shield','knight','musketeer','halberdier','skeleton','dragon','treant','dryad','moonblade','golem','banshee','boneRider','orc','centaur','boarRider','minotaur','shaman','goblinEngineer','goblinGunner','goblinRiveter','goblinRecycler','goblinMech','frostWolf','frostBear','frostBird','frostHunter','frostShaman','frostMammoth','nagaTideguard','nagaShellbreaker','nagaDeepWargod','nagaMantaRaider','nagaVenomStalker','dwarfRifle','dwarfShield','dwarfRunesmith','dwarfMortar','dragonkinEmberwing','dragonkinLancer','dragonkinOracle','dragonkinElder'],
+    building:['goblinGenerator','goblinTurret','goblinMortar','goblinSnare','goblinRecycler','goblinCooler','goblinSiege','frostCrystal','frostBlizzard','frostBallista','frostTotem','frostObelisk','frostAurora','frostGlacier','nagaTidegate','nagaShellBastion','nagaAbyssShrine','nagaMantaAerie','dwarfBoltTower','dwarfRuneForge','dwarfMortarTower','dwarfCitadel','dragonkinFlameSpire','dragonkinStormObelisk','dragonkinRoost','dragonkinWyrmNest','arrow','iceward','frost','cannon','storm','totem','warDrum','boulder','thunderTotem','crypt','soul','barracks','grove','graveyard','ballista','moonwell','plague']
+  };
+  assert.equal(cards.length,87);
+  assert.deepEqual(cards.map(([,kind,type])=>kind+':'+type).sort(),Object.entries(expected).flatMap(([kind,ids])=>ids.map(id=>kind+':'+id)).sort());
+  const {ns}=load(),allCards=[...html.matchAll(/data-build-kind="(unit|building)" data-build-type="([^"]+)"/g)].map(([,kind,type])=>kind+':'+type).sort();
+  const shopOnly=new Set(['powderThrower','fireDemon','frostWyrm']);
+  assert.deepEqual(allCards,Object.keys(ns.config.units).filter(id=>!shopOnly.has(id)).map(id=>'unit:'+id).concat(Object.keys(ns.config.buildings).map(id=>'building:'+id)).sort(),'all build entries must resolve exactly once; new neutral contracts stay in the mercenary shop');
   const game=Object.create(prototype());
   for(const [,kind,type] of cards){const detail=game.buildDetailDescription(kind,type);assert.ok(!detail.includes('基礎作戰'),type+' 缺少定位');assert.match(detail,/攻擊 \d+ · 射程 \d+/);assert.match(detail,/G／\d+木/);}
   const ui={buildDetail:{hidden:true},buildDetailName:{textContent:''},buildDetailText:{textContent:''}};

@@ -1,3 +1,5 @@
+> **v0.85.81：** 更新前匯出玩家 JSON 並保存完整部署副本。新中立單位無存檔 schema 遷移；回退必須成套回復上一版本 JS／HTML／資產／Worker，不能只改版本號。既有未提交工作保留，本次未建立 Git 提交；不要使用破壞性 reset。舊版不支援的新單位戰鬥快照不應帶回舊版。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
+
 > **v0.85.73：** 第四章不改玩家資料 schema；更新前可照既有流程匯出 `hero-frontier-profiles.json`。需要回退程式時，回到上一個 Git commit 後匯回該備份即可，無須移除娜迦或劇情進度。詳見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
 
 > **v0.85.69：** 不遷移玩家資料。回退時完整回到 v0.85.68，並同步回退 `TDDifficultySystem.js`、`TDGame.js`、入口版本與 `sky-strike-v0.85.68`；不可只更換快取名稱。
@@ -539,4 +541,8 @@ v0.85.0：先匯出完整玩家備份。舊 schema 保持相容；冰原檢查�
 > **v0.85.71：** 不遷移玩家資料。回退時將 manifest、手機殼、主程式、入口版號與 `sky-strike-v0.85.71` 一起回退；不可只改 Service Worker 名稱。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
 > **v0.85.72：** 不遷移資料。若回退必須同時回退手機殼、`main.js`、`td.css` 和 `sky-strike-v0.85.72`；不可只替換快取鍵。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+
+> **v0.85.80：** 更新前匯出玩家 JSON 並保留上一版程式部署備份。此版不變更存檔 schema；回復時成套恢復上一版程式與快取版本，不必清除 localStorage。工作目錄包含其他尚未提交變更，禁止以 `git reset --hard` 回退。見 [8D](PERFORMANCE_PROFILE_8D_V08580.md)。
+
+> **v0.85.82：** 玩家與章節 schema 沿用原版；更新前匯出玩家 JSON 並保存完整部署副本。回退時成套回復程式、HTML、素材與 Worker；舊版未支援的新塔分支／英雄進化請改用更新前備份，不強行載入新版戰鬥快照。詳見 [還原流程](SOUTHERN_COMPLETION_V08582.md)。
 

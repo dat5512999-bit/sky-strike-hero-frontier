@@ -1,3 +1,5 @@
+> **v0.85.81：** 無新套件或環境變數，沿用 Node.js 18+ 與 npm run serve:test，開啟 /td.html。確認版本 0.85.81；四張新 PNG 隨專案提供，不需外網服務。驗收用 npm run test:neutral。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
+
 > **v0.85.73：** 無新增相依套件或環境變數。部署後確認 Service Worker 為 `sky-strike-v0.85.73`，再開啟劇情模式確認第四章四張背景可載入。詳見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
 
 > **v0.85.69：** 無新增依賴或安裝步驟。更新後確認 Service Worker 為 `sky-strike-v0.85.69`，再以災厄開局檢查英雄 HP 顯示與難度摘要。
@@ -544,4 +546,8 @@ v0.85.0：沿用 Node.js 18+，無新依賴。完整取得 assets/td/frostland �
 > **v0.85.71：** 無新增依賴。安裝／更新後確認 Service Worker 為 `sky-strike-v0.85.71`，關閉舊分頁並由主畫面重新開啟英雄塔防；Android 可獲得全螢幕，iOS 保留安全區相容行為。詳見 [手機沉浸式全螢幕](MOBILE_IMMERSIVE_FULLSCREEN_V08571.md)。
 
 > **v0.85.72：** 無新增依賴。確認 Service Worker 為 `sky-strike-v0.85.72` 後，iPhone 直向入口不應有上下黑邊。詳見 [熱修正](MOBILE_SAFE_AREA_HOTFIX_V08572.md)。
+
+> **v0.85.80：** 無新增相依套件；既有 Node ≥18 即可執行 `npm run serve:test`。效能實驗使用獨立 port：PowerShell 執行 `$env:TD_TEST_PORT='4174'; npm run serve:test`，開啟 `/scripts/performance-ui-lab.html`。不要在正式遊玩 origin 執行實驗。
+
+> **v0.85.82：** 無新依賴、帳號或環境變數；沿用 Node.js 18+、npm run serve:test 與 /td.html。更新後識別為 0.85.82；若仍顯示舊版，開啟 /update.html，保留玩家存檔。詳見 [安裝與更新](SOUTHERN_COMPLETION_V08582.md)。
 

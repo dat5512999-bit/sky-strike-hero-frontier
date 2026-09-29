@@ -2,10 +2,11 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
 const {load}=require('./helpers/td-runtime.cjs');
 
-test('all seven faction cards use their own painted group portraits instead of legacy emblems',()=>{
+test('all nine faction cards use their own painted group portraits instead of legacy emblems',()=>{
   const {ns}=load(),css=fs.readFileSync('td-polish.css','utf8');
   const factions=ns.systems.FactionSystem.FACTIONS;
-  assert.equal(Object.keys(factions).length,7);
+  assert.deepEqual(Object.keys(factions).sort(),['arcanist','dragonkin','dwarf','frostland','goblin','hunter','naga','rogue','wild']);
+  assert.equal(new Set(Object.values(factions).map(faction=>faction.selectionArt)).size,9,'every faction needs its own portrait');
   for(const [id,faction] of Object.entries(factions)){
     assert.ok(faction.selectionArt,id+' needs selectionArt');
     assert.ok(fs.existsSync(faction.selectionArt),id+' painted faction art is missing');

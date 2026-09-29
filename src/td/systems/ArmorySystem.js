@@ -12,6 +12,9 @@
     'soul-lantern':{name:'噬魂冥燈',rarity:'史詩',slot:'relic',column:2,row:2,types:['rogue','skeleton'],heroes:['rogue'],description:'攻擊附帶靈魂連鎖，擊殺賞金再提高。',mods:{chain:2,bountyBonus:.2},title:'噬魂行者'}
   };
   ITEMS['lion-bow'].types.push('frostHunter');
+  ITEMS['war-drum'].types.push('powderThrower','fireDemon');
+  ITEMS['dragon-heart'].types.push('frostWyrm');
+  ITEMS['vine-crown'].types.push('frostWyrm');
   ITEMS['war-drum'].types.push('frostWolf','frostBear','frostMammoth');
   ITEMS['moon-staff'].types.push('frostBird','frostShaman');
   ITEMS['vine-crown'].types.push('frostBird','frostShaman');
@@ -29,6 +32,10 @@
   ITEMS['vine-crown'].heroes=['goblin'];
   ITEMS['lion-bow'].types.push('goblinEngineer','goblinGunner','goblinRiveter');
   ITEMS['war-drum'].types.push('goblinRecycler');
+  ITEMS['lion-bow'].types.push('dwarfRifle','dragonkinEmberwing');
+  ITEMS['lion-shield'].types.push('dwarfShield','dragonkinLancer');
+  ITEMS['moon-staff'].types.push('dwarfRunesmith','dragonkinOracle');
+  ITEMS['war-drum'].types.push('dwarfMortar','dragonkinElder');
   class ArmorySystem{
     constructor(){this.reset();}
     reset(){this.owned=[];this.assignments=new Map();}
