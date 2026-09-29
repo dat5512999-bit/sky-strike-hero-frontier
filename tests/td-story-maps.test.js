@@ -103,12 +103,12 @@ test('chapter missions preserve unlock order, with Chapter III unlocking existin
   for(const mission of chapter3.slice(0,-1)){assert.ok(!mission.rewards.heroes?.length);assert.ok(!mission.rewards.factions?.length);store.complete(mission);for(const id of mission.rewards.maps)assert.equal(store.allows('maps',id),true);}
   assert.equal(store.allows('heroes','frostland'),false);assert.equal(store.allows('factions','goblin'),false);
   store.complete(chapter3.at(-1));assert.equal(store.allows('maps','nightwatch'),true);assert.equal(store.allows('heroes','frostland'),true);assert.equal(store.allows('factions','frostland'),true);assert.equal(store.allows('heroes','goblin'),true);assert.equal(store.allows('factions','goblin'),true);
-  for(const mission of chapter3)assert.equal(mission.storyCards.length,3,`${mission.id} needs replayable story cards`);
+  for(const mission of chapter3)assert.equal(mission.storyCards.length,5,`${mission.id} needs five replayable story beats`);
   assert.match(chapter3.at(-1).aftermath,/沒有留下能辨認來源的名字/,'終章必須保留疑點，不能宣告來源或真相');
   assert.deepEqual(Array.from(chapter4,m=>[m.id,m.map,m.waves.length]),[['chapter4-tidegate-outfall','tidegateoutfall',8],['chapter4-brineway','brineway',9],['chapter4-reef-confluence','reefconfluence',10],['chapter4-tide-observatory','tideobservatory',11]]);
   assert.equal(chapter4[0].requires,'chapter3-nightwatch');for(let i=1;i<chapter4.length;i++)assert.equal(chapter4[i].requires,chapter4[i-1].id);
   assert.equal(store.allows('heroes','naga'),true,'娜迦保留既有自由遠征資格');assert.equal(store.allows('factions','naga'),true,'娜迦軍團不應被第四章重新鎖定');
-  for(const mission of chapter4){assert.equal(mission.hero,'naga');assert.equal(mission.faction,'naga');assert.equal(mission.storyCards.length,3);store.complete(mission);for(const id of mission.rewards.maps)assert.equal(store.allows('maps',id),true);}
+  for(const mission of chapter4){assert.equal(mission.hero,'naga');assert.equal(mission.faction,'naga');assert.equal(mission.storyCards.length,5);store.complete(mission);for(const id of mission.rewards.maps)assert.equal(store.allows('maps',id),true);}
   assert.match(chapter4.at(-1).aftermath,/來源仍然未知/,'第四章必須保留來源未知');
   const result=ns.systems.ResultScreen.view({waves:3},{mode:'story',victory:true,saved:true,mission:chapter1.at(-1)});
   assert.match(result.intro,/已儲存/);assert.match(result.intro,/線索推進/);assert.equal(result.showUnlock,false);

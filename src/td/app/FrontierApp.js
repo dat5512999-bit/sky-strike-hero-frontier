@@ -94,7 +94,7 @@
       if(typeof selected==='boolean'){replay=selected;selected=null;}
       this.storyCardMission=selected||ns.systems.StoryCatalog.getMission(this.selectedStoryMission)||ns.systems.StoryCatalog.mission;
       this.storyCardIndex=0;
-      this.storyCardReplay=Boolean(replay||this.storyCardMission.previewOnly);
+      this.storyCardReplay=Boolean(replay||this.storyCardMission.previewOnly||this.isAdmin());
       this.show('story-cards');
       this.root.querySelector('.story-card h1')?.focus();
       return true;
@@ -105,7 +105,12 @@
     }
     renderStoryCards(){
       const mission=this.storyCardMission||ns.systems.StoryCatalog.mission,cards=mission.storyCards||[],card=cards[this.storyCardIndex]||cards[0],b=this.button.bind(this),last=this.storyCardIndex===cards.length-1;
-      return '<article class="story-card" aria-label="'+escape(mission.name)+'戰前劇情"><div class="story-card-stage story-card-stage-'+this.storyCardIndex+'"><img src="'+escape(card.image)+'" alt="" style="object-position:'+escape(card.focus)+'"><div class="story-card-shade"></div><div class="story-card-copy"><small>CHAPTER '+(mission.chapter||1)+' · '+escape(card.label)+'</small><h1>'+escape(card.title)+'</h1><p>'+escape(card.line)+'</p></div></div><div class="story-card-bar"><span aria-label="第 '+(this.storyCardIndex+1)+' 張，共 '+cards.length+' 張">'+(this.storyCardIndex+1)+' / '+cards.length+'</span><div class="story-card-dots" aria-hidden="true">'+cards.map((_,i)=>'<i'+(i===this.storyCardIndex?' class="active"':'')+'></i>').join('')+'</div><div class="story-card-actions">'+b('story-card-skip',this.storyCardReplay?'返回章節':'跳過並出征')+b('story-card-next',last?(this.storyCardReplay?'結束回顧':'開始戰鬥 →'):'下一幕 →',null,'gold')+'</div></div></article>';
+      const cast=(card.cast||[]).map(id=>{
+        const hero=ns.systems.HeroRoster?.CLASSES?.[id];
+        return hero&&hero.selectionArt?'<li><img src="'+escape(hero.selectionArt)+'" alt="'+escape(hero.name)+'"><span>'+escape(hero.name)+'</span></li>':'';
+      }).join('');
+      const castMarkup=cast?'<ul class="story-card-cast" aria-label="本幕正式登場人物"><small>本幕人物</small>'+cast+'</ul>':'';
+      return '<article class="story-card" aria-label="'+escape(mission.name)+'戰前劇情"><div class="story-card-stage story-card-stage-'+this.storyCardIndex+'"><img src="'+escape(card.image)+'" alt="" style="object-position:'+escape(card.focus)+'"><div class="story-card-shade"></div>'+castMarkup+'<div class="story-card-copy"><small>CHAPTER '+(mission.chapter||1)+' · '+escape(card.label)+'</small><h1>'+escape(card.title)+'</h1><p>'+escape(card.line)+'</p></div></div><div class="story-card-bar"><span aria-label="第 '+(this.storyCardIndex+1)+' 張，共 '+cards.length+' 張">'+(this.storyCardIndex+1)+' / '+cards.length+'</span><div class="story-card-dots" aria-hidden="true">'+cards.map((_,i)=>'<i'+(i===this.storyCardIndex?' class="active"':'')+'></i>').join('')+'</div><div class="story-card-actions">'+b('story-card-skip',this.storyCardReplay?'返回章節':'跳過並出征')+b('story-card-next',last?(this.storyCardReplay?'結束回顧':'開始戰鬥 →'):'下一幕 →',null,'gold')+'</div></div></article>';
     }
     renderCinematicCollection(){
       const api=ns.cinematic,seen=new api.PrologueProgress(this.store).prologueSeen,b=this.button.bind(this);
@@ -185,14 +190,17 @@
   // than by a second, disconnected lobby. Locked missions remain visible but
   // cannot be launched, so story progression is never mistaken for free-map unlocks.
   FrontierApp.prototype.renderStory=function(p){
-    const b=this.button.bind(this),all=ns.systems.StoryCatalog.missions;
+    const b=this.button.bind(this),all=ns.systems.StoryCatalog.missions,admin=p.kind==='admin';
     const selected=ns.systems.StoryCatalog.getMission(this.selectedStoryMission)||all.find(m=>!p.completed.includes(m.id)&&(!m.requires||p.completed.includes(m.requires)))||all[0];
     const chapter=selected.chapter||1,missions=all.filter(m=>m.chapter===chapter),index=missions.indexOf(selected),map=ns.maps.definitions[selected.map];
-    const locked=Boolean(selected.requires&&!p.completed.includes(selected.requires)),complete=p.completed.includes(selected.id);
-    const chapters=ns.systems.StoryCatalog.chapters.map(item=>b('story-chapter','<b>第'+item.id+'章</b><span>'+item.name+'</span>'+((item.id===2&&locked)?'<small>尚未解鎖</small>':'<em>›</em>'),String(item.id),'chapter'+(item.id===chapter?' selected':''))).join('');
-    const nodes=missions.map((m,i)=>{const available=!m.requires||p.completed.includes(m.requires),status=p.completed.includes(m.id)?'已通關':available?'可挑戰':'尚未解鎖';return b('story-select','<small>'+m.chapter+'-'+(i+1)+'</small><img src="'+ns.maps.definitions[m.map].asset+'" alt=""><b>'+m.name+'</b><span>'+status+'</span>',m.id,'mission-node'+(available?'':' mission-locked')+(m===selected?' mission-selected':''));}).join('');
+    const locked=!admin&&Boolean(selected.requires&&!p.completed.includes(selected.requires)),complete=p.completed.includes(selected.id);
+    const chapters=ns.systems.StoryCatalog.chapters.map(item=>b('story-chapter','<b>第'+item.id+'章</b><span>'+item.name+'</span>'+((!admin&&item.id===2&&locked)?'<small>尚未解鎖</small>':'<em>›</em>'),String(item.id),'chapter'+(item.id===chapter?' selected':''))).join('');
+    const nodes=missions.map((m,i)=>{const available=admin||!m.requires||p.completed.includes(m.requires),status=admin?'管理者預覽':p.completed.includes(m.id)?'已通關':available?'可挑戰':'尚未解鎖';return b('story-select','<small>'+m.chapter+'-'+(i+1)+'</small><img src="'+ns.maps.definitions[m.map].asset+'" alt=""><b>'+m.name+'</b><span>'+status+'</span>',m.id,'mission-node'+(available?'':' mission-locked')+(m===selected?' mission-selected':''));}).join('');
     const prior=all.filter(m=>m.chapter<chapter),completedInChapter=missions.filter(m=>p.completed.includes(m.id)).length;
-    return '<div class="campaign"><aside class="chapter-list"><h2>劇情模式</h2>'+chapters+'<p>依序完成任務解鎖下一段旅程；已知線索不等於完整真相。</p>'+b('story-card-replay','回顧第二章前導劇情','chapter2-western-signal-preview')+'</aside><section class="campaign-world"><div><small>CHAPTER '+chapter+'</small><h1>第'+chapter+'章　'+(ns.systems.StoryCatalog.chapters.find(c=>c.id===chapter)?.name||'未知章節')+'</h1><p>'+escape(ns.systems.StoryCatalog.chapters.find(c=>c.id===chapter)?.note||'')+'</p></div><div class="mission-route campaign-missions">'+nodes+'</div><footer>本章任務　'+completedInChapter+' / '+missions.length+'<br><small>'+((chapter===2&&prior.some(m=>!p.completed.includes(m.id)))?'先完成第一章，西行路線才會開放。':'每次勝利只推進可驗證的一段線索。')+'</small></footer></section><article class="mission-intel"><h2>'+chapter+'-'+(index+1)+'　'+selected.name+'</h2><img src="'+map.asset+'" alt="'+map.name+'地圖"><blockquote>「'+escape(selected.cinematic[0])+'」</blockquote><h3>關卡資訊</h3><p>'+escape(selected.objective)+'</p><p>'+escape(map.name)+'<br>遠征見習 · '+selected.waves.length+' 波</p><h3>通關結果</h3><p>'+(selected.rewards.maps?.length?'解鎖自由遠征地圖。':'推進故事線索與下一個任務。')+'</p><div class="mission-actions">'+(locked?'<button type="button" disabled>先完成前一個任務</button>':b('story-battle',complete?'重玩任務 →':'開始挑戰 →',selected.id,'blue bevel'))+b('story-card-replay','回顧本關劇情',selected.id)+'</div></article></div>';
+    const campaignNote=admin?'管理者可預覽全部關卡劇情；不會寫入通關進度。':'依序完成任務解鎖下一段旅程；已知線索不等於完整真相。';
+    const routeNote=admin?'可直接點選任何節點觀看三張故事卡。':((chapter===2&&prior.some(m=>!p.completed.includes(m.id)))?'先完成第一章，西行路線才會開放。':'每次勝利只推進可驗證的一段線索。');
+    const actions=admin?b('story-card-replay','觀看本關劇情 →',selected.id,'blue bevel'):(locked?'<button type="button" disabled>先完成前一個任務</button>':b('story-battle',complete?'重玩任務 →':'開始挑戰 →',selected.id,'blue bevel'))+b('story-card-replay','回顧本關劇情',selected.id);
+    return '<div class="campaign"><aside class="chapter-list"><h2>劇情模式</h2>'+chapters+'<p>'+campaignNote+'</p>'+b('story-card-replay','回顧第二章前導劇情','chapter2-western-signal-preview')+'</aside><section class="campaign-world"><div><small>CHAPTER '+chapter+(admin?' · ADMIN PREVIEW':'')+'</small><h1>第'+chapter+'章　'+(ns.systems.StoryCatalog.chapters.find(c=>c.id===chapter)?.name||'未知章節')+'</h1><p>'+escape(ns.systems.StoryCatalog.chapters.find(c=>c.id===chapter)?.note||'')+'</p></div><div class="mission-route campaign-missions">'+nodes+'</div><footer>本章任務　'+completedInChapter+' / '+missions.length+'<br><small>'+routeNote+'</small></footer></section><article class="mission-intel"><h2>'+chapter+'-'+(index+1)+'　'+selected.name+'</h2><img src="'+map.asset+'" alt="'+map.name+'地圖"><blockquote>「'+escape(selected.cinematic[0])+'」</blockquote><h3>關卡資訊</h3><p>'+escape(selected.objective)+'</p><p>'+escape(map.name)+'<br>遠征見習 · '+selected.waves.length+' 波</p><h3>通關結果</h3><p>'+(selected.rewards.maps?.length?'解鎖自由遠征地圖。':'推進故事線索與下一個任務。')+'</p><div class="mission-actions">'+actions+'</div></article></div>';
   };
   const renderWithRelease=FrontierApp.prototype.render;
   FrontierApp.prototype.render=function(){renderWithRelease.call(this);const release=this.root.querySelector('.profile-badge small');if(release)release.textContent='HERO FRONTIER · v0.85.74';};

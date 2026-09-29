@@ -108,7 +108,44 @@
     {title:'不急著相信',label:'第一次對話',line:'戈爾認得這枚舊印，卻不欠我們答案。先聽完他的條件。',image:'assets/td/story/chapter2-western-parley-v1.png',focus:'center'},
     {title:'護送這條路',label:'西行選擇',line:'讓信使與記錄安全通過，對話才有下一步。',image:'assets/td/story/chapter2-western-passage-v1.png',focus:'center'}
   ],aftermath:'西方的記憶不會替任何人定罪；它只證明，調查必須跨過舊有的疆界。'};
+  // Story cards use only two visual modes.  A cast-bound card must resolve every
+  // person to the actual playable hero reference; a scene-only card must not
+  // pretend an unapproved face is a named person.  This is deliberately data,
+  // rather than a prompt convention, so a future chapter cannot silently swap
+  // a character's appearance while adding art.
+  const storyBeatPlans={
+    'chapter1-border':{cast:['hunter'],goal:'守住谷地城門，讓殘缺命令能被帶回查驗。',outcome:'城門守住後，調查才有一個可以追查的起點。'},
+    'chapter1-silverleaf':{cast:['hunter','arcanist'],goal:'守住橋樑，讓舊盟約與調查隊一起離開溪谷。',outcome:'記錄被保存，但它只證明曾有合作，沒有替任何人定罪。'},
+    'chapter1-shadowfall':{cast:['hunter','rogue'],goal:'保住證人與遺物，讓調查不在舊城斷掉。',outcome:'證言留下了，卻也顯示有人希望調查在這裡停止。'},
+    'chapter1-frostborn':{cast:['hunter'],goal:'穿過雙路裂谷，護送調度紀錄抵達安全處。',outcome:'紀錄指出王城另有命令系統；下一步必須離開既有疆界。'},
+    'chapter2-western-signal':{cast:['hunter','chief'],goal:'護送信使與舊印穿過西境，換取戈爾繼續對話的條件。',outcome:'戈爾同意帶來見證者；這是對話的開始，不是結論。'},
+    'chapter2-ember-road':{cast:['hunter','chief'],goal:'救出荒野小隊、傷者與補給車，先用行動建立信任。',outcome:'小隊交出被燒毀的路名，但遷徙的原因仍必須由他們自己說明。'},
+    'chapter2-stone-circle':{cast:['hunter','chief'],sceneImage:'assets/td/stone-ring-basin-v1.png',goal:'守住石環外路，讓匿名見證者與紀錄安全離開。',outcome:'見證確認那是一場被迫遷徙，下一段可驗證的路名指向赤岩峽橋。'},
+    'chapter2-red-mesa':{cast:['hunter','chief'],sceneImage:'assets/td/red-mesa-terminus-v1.png',goal:'護送見證、傷者與紀錄通過最後中繼站。',outcome:'荒野部族選擇以自己的身分同行；南方的真相仍待共同查證。'},
+    'chapter3-white-trace':{cast:['hunter','frostland','goblin'],goal:'讓凜的霜痕與奇克的測量各自離開現場，保留兩份原始記錄。',outcome:'兩份記錄都留下了；它們描述同一件事，卻還無法互相解釋。'},
+    'chapter3-echo-yard':{cast:['hunter','frostland','goblin'],goal:'保住回聲裝置與腳印樣本，讓兩種方法都能被重測。',outcome:'裝置回覆得比提問更早；凜與奇克同意不刪除彼此的證據。'},
+    'chapter3-crossmark':{cast:['hunter','frostland','goblin'],goal:'護送兩份彼此矛盾的資料到交會點，完成第一次共同校驗。',outcome:'矛盾沒有被抹掉，反而成為下一次校準必須保留的線索。'},
+    'chapter3-nightwatch':{cast:['hunter','frostland','goblin'],goal:'守住校準台，讓凜與奇克完成最後一次交叉觀測。',outcome:'兩人以調查夥伴身分加入遠征；回應仍沒有可辨認的來源。'},
+    'chapter4-tidegate-outfall':{cast:['naga'],goal:'協助賽洛完成第一輪讀值，並把觀測記錄帶離礁岸。',outcome:'回折可被記下，但賽洛拒絕把未知誤寫成來源。'},
+    'chapter4-brineway':{cast:['naga'],goal:'護住潮衛與工程團，讓壓力與潮向的第二次重測能完成。',outcome:'兩種量測相符，卻都還不能說明另一端是誰。'},
+    'chapter4-reef-confluence':{cast:['naga'],goal:'讓兩岸獨立取得的讀值在橋頭完成交叉比對。',outcome:'同步被確認；來源依然沒有名字，還需要長時觀測。'},
+    'chapter4-tide-observatory':{cast:['naga'],goal:'守住潮儀台，封存所有原始讀值，讓下一位觀測者能重查。',outcome:'潮衛持續同行；可以證實的是回應仍在重複，不能證實的是來源。'}
+  };
+  const decorateStoryCards=mission=>{
+    const plan=storyBeatPlans[mission.id];
+    if(!plan)return;
+    const scene=plan.sceneImage||mission.storyCards[0].image;
+    const original=mission.storyCards.map(card=>({...card,image:plan.sceneImage||card.image,cast:[...plan.cast],visualPolicy:'cast-bound'}));
+    const concreteGoal={title:'本關目標',label:'現在要做什麼',line:plan.goal,image:scene,focus:'center',cast:[...plan.cast],visualPolicy:'cast-bound',beat:'objective'};
+    const outcome={title:'守住之後',label:'這一戰改變了什麼',line:plan.outcome,image:scene,focus:'center',cast:[...plan.cast],visualPolicy:'cast-bound',beat:'outcome'};
+    // Five beats make every battle understandable without revealing later truth:
+    // arrival → people/position → concrete objective → immediate choice → result.
+    mission.storyCards=[original[0],original[1],concreteGoal,original[2],outcome];
+  };
+  storyBeatPlans[chapter2Preview.id]={cast:['hunter','chief'],goal:'護送信使與舊印穿過西境，換取戈爾繼續對話的條件。',outcome:'戈爾同意帶來見證者；這是對話的開始，不是結論。'};
+  decorateStoryCards(chapter2Preview);
   const missions=[mission,silverleaf,shadowfall,frostborn,westernsignal,emberroad,stonecircle,redmesa,whitetrace,echoyard,crossmark,nightwatch,tidegateoutfall,brineway,reefconfluence,tideobservatory];
+  missions.forEach(decorateStoryCards);
   mission.waves=waves;
   class StoryWaves{constructor(selected=mission){this.mission=selected;}total(){return this.mission.waves.length;}get(wave){const source=this.mission.waves[wave-1];return source?{wave,name:source.name,hint:source.hint,threat:wave,spawnPace:source.spawnPace||1,groups:source.groups.map(g=>({...g})),reward:{gold:65+wave*15,lumber:2}}:null;}}
   ns.systems.StoryCatalog={mission,missions,chapter2Preview,getMission:id=>[...missions,chapter2Preview].find(m=>m.id===id)||null,StoryWaves,chapters:[{id:1,cinematicOnChapterStart:'prologue_before_shattered_peace',name:'破碎的和平',note:'四個故事任務逐步開放三張戰場；不宣告第一章真相已揭曉。'},{id:2,name:'荒野的回聲',note:'四個任務從西境古道走到赤岩終站；完成終章解鎖既有荒野部族，並保留南方歷史仍待查證的界線。'},{id:3,name:'霜線與齒輪',note:'四個任務從逆風霜痕走向共同校準；霜原與地精提供不同觀點，答案仍需被驗證。'},{id:4,name:'潮門回聲',note:'四個任務讓娜迦潮衛以觀測夥伴身分加入調查；潮流回應可被重測，但來源仍未命名。'}]};
