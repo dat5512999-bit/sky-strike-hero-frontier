@@ -1,3 +1,7 @@
+> **v0.85.83 待發布：** 發佈時須同批上傳埃及與南方個別 4×4 PNG、各 JS、`td.html`、`update.html`、文件及 `sw.js`；Worker 快取鍵為 `sky-strike-v0.85.83`。部署後核對選角女性肖像、八張卡與戰場圖，不只看版號。見 [完整部署檢查](EGYPT_FACTION_V08583.md)。
+
+> **潮門外流本機校正（未發布）：** 本輪只改 `src/td/maps.js` 地圖幾何及本機 QA／文件；GitHub `main` 於 2026-10-06 查得 `package.json`／`sw.js` 均為 0.85.82，`maps.js` 仍是舊道路／塔位，本輪尚未推送，Pages 實際載入版本也尚未確認。未來發布須把地圖 JS 與正式版本入口、Service Worker 快取鍵作同一提交並驗證部署後頁面版本及背景、塔位；不能只看本機截圖就宣稱線上已更新。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
+
 > **v0.85.81：** 同步發布本版 JS、td.html／td.css、四張 assets/td/neutral 圖集、NeutralMercenaryArt.js 與七處版本入口；Worker 為 sky-strike-v0.85.81。舊 bounty-hunter-actions-v2.png 保留以供回退。尚未執行遠端發布。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
 
 > **v0.85.74：** 發布時同步八張 `assets/td/shop/*` 跨界造型素材、`CrossworldSkinArt.js`、商城目錄、`td.html`、`sw.js`、`update.html` 與版本號；確認 Worker 快取為 `sky-strike-v0.85.74`。不需資料庫遷移。見 [交付文件](CROSSWORLD_SKINS_SEASON_ONE_V08574.md)。
@@ -565,4 +569,6 @@ v0.85.0：同步部署 td.html、td-expedition.css、codex.css、src/td、Frostl
 > **v0.85.80：** 同步發布 ProfileStore、FrontierApp、TDGame、PerformanceMonitor、BattleReportSystem、td.html、update.html、sw.js 與 package.json；確認大廳與快取均為 0.85.80。無資料遷移。`scripts/performance-ui-lab.*` 是開發測試頁，不加入 PWA 離線快取。見 [8D](PERFORMANCE_PROFILE_8D_V08580.md)。
 
 > **v0.85.82：** 同步發布英雄進化、南方兵塔／美術接線、素材與七處版本入口，Worker 為 sky-strike-v0.85.82。依使用者要求本次不再跑追加驗收；推送成功不等於 Pages 已更新，須分別看實際遠端狀態。詳見 [發布範圍與未驗項](SOUTHERN_COMPLETION_V08582.md)。
+
+> **戰場驗收 v1.0.0：** 本次僅新增本機 QA 工具、測試與文件；沒有正式遊戲版本、Service Worker 快取或玩家資料變更，也未部署到 GitHub。後續發佈新美術前要人工簽核卡片／戰場截圖並做玩家前景長局測試；不要把 `artifacts/` 當成發佈資產。見 [標準](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
 

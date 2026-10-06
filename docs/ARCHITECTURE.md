@@ -1,3 +1,7 @@
+> **v0.85.83 架構：** `FactionSystem.egypt` → `config`／`BuildSystem` → `CombatUnit`／`Building`；`BattleSynergySystem` 限制祭壇同族加速，`ImperialFactionArt`／`PaintedTowerVFX` 管卡片、戰場與特效。未增加後端或資料表。見 [資料流與擴充點](EGYPT_FACTION_V08583.md)。
+
+> **潮門外流本機校正（未發布）：** `maps.js` 背景座標 → 路徑／城門與五塊草地 `buildAreas` → `BuildSystem.canPlaceAt`／怪物行進 → `ArtSystem` 與戰場相機。QA 疊線圖核對像素座標，`PerformanceMonitor` 樣本由桌面長測分桶讀取。無新後端、資料庫或持久化欄位。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
+
 > **v0.85.81：** config → FactionSystem.canHire + Difficulty → 商店 → BuildSystem → CombatUnit → Projectile；ArtSystem → NeutralMercenaryArt（4×4、逐格腳底、預量裁切）；Armory／Shop／Loot 共用相容類型。沒有額外動畫迴圈、計時器或後端。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
 
 > **v0.85.73：** Chapter IV 走既有 `StoryCatalog → FrontierApp → ProfileStore → StoryCodexBridge` 路徑；四張地圖的 `maps.js` 幾何與背景圖分離，`TDGame` 僅補自由遠征選項，沒有新增資料庫或並行戰鬥系統。詳見 [第四章架構](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
@@ -895,4 +899,6 @@ v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 M
 > **v0.85.80：** 熱路徑：`TDGame.updateUi → FrontierApp.isAdmin / allows → ProfileStore` 僅讀身份／解鎖欄位並回傳布林；低頻存檔操作仍走 `change → clone → persist`，外部快照仍走 `current → clone`。沒有第二套身份快取，切換／匯入立即生效。見 [量測架構](PERFORMANCE_PROFILE_8D_V08580.md)。
 
 > **v0.85.82：** 進化由 HeroEvolutionSystem → HeroEvolutionCombat → Projectile／Monster 結算，Presentation 只繪短暫效果；軍團由 config.ranks／TowerEvolutionSystem → CombatUnit／Building → 既有軍械及支援系統。無新更新迴圈或資料庫。詳見 [本版架構圖](SOUTHERN_COMPLETION_V08582.md)。
+
+> **戰場驗收 v1.0.0：** `FactionSystem → ArtSystem.preview／Building.draw → BattlefieldCamera` 檢查同一塔的卡片與實戰；`PerformanceMonitor → scripts/qa-battlefield-acceptance.cjs → artifacts/` 記錄本機對照。正式遊戲渲染管線、資料庫、API 與權限均未改。見 [流程圖與標準](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
 

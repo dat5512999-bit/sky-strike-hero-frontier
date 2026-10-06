@@ -2,11 +2,12 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
 const {load}=require('./helpers/td-runtime.cjs');const {strictCanvas}=require('./helpers/strict-canvas.cjs');
 
-test('埃及選角使用男性 v2 肖像，三名南方英雄以實體 DOM 呈現技能圖示',()=>{
+test('埃及女英雄選角肖像與實戰角色一致，三名南方英雄以實體 DOM 呈現技能圖示',()=>{
   const {ns}=load(),skills={dataset:{},innerHTML:''},g=Object.create(ns.TDGame.prototype);
   Object.assign(g,{selectedProfession:'egypt',selectedFaction:'wild',difficulty:{current:()=>({name:'測試'})},art:{cosmeticEquipped:{}},ui:{heroSkills:skills},report:null});
   g.updateOpeningPresentation();
-  assert.match(ns.systems.HeroRoster.get('egypt').selectionArt,/hero-selection-v2\.png$/);
+  assert.match(ns.systems.HeroRoster.get('egypt').selectionArt,/hero-selection-v1\.png$/);
+  assert.match(ns.systems.ImperialFactionArt.HERO.egypt,/hero-actions-v3\.png$/);
   assert.match(skills.innerHTML,/class="hero-skill-icon"/);assert.match(skills.innerHTML,/skill-icons-v1\.png/);assert.equal(skills.dataset.iconArt,'true');
   g.selectedProfession='hunter';g.updateOpeningPresentation();assert.equal(skills.dataset.iconArt,undefined);
 });

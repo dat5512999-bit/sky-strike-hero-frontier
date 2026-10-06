@@ -106,8 +106,8 @@ test('southern unit ranks and tower branches survive the existing chapter-save s
   restored.build.items.forEach((item,i)=>{assert.equal(item.type,source.build.items[i].type);assert.equal(item.level,5);if(item.kind==='unit')assert.equal(item.evolutionName(),source.build.items[i].evolutionName());else{assert.equal(item.branch,source.build.items[i].branch);assert.equal(item.config().branchName,source.build.items[i].config().branchName);}});
 });
 
-test('nine faction openings pass unchanged real-combat thresholds; dwarf recommendation fixes double-single-target mismatch',()=>{
-  const {ns}=load(),report=runAudit();assert.equal(report.rows.length,9);
+test('ten faction openings pass unchanged real-combat thresholds; dwarf recommendation fixes double-single-target mismatch',()=>{
+  const {ns}=load(),report=runAudit();assert.equal(report.rows.length,10);
   for(const row of report.rows){assert.ok(row.denseScore>=200&&row.denseScore<=650,row.id+': '+row.denseScore);assert.ok(row.openingResource<=415);assert.ok(row.openingPower>=55&&row.openingPower<=95);}
   const scores=report.rows.map(r=>r.denseScore);assert.ok(Math.max(...scores)/Math.min(...scores)<=3);
   const before=denseOpening(ns,'dwarf',[['unit','dwarfRifle'],['building','dwarfBoltTower']]);

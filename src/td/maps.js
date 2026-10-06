@@ -89,10 +89,12 @@
   // Chapter IV. The tide structures are painted landmarks; routing, build
   // ground and exclusions remain explicit gameplay geometry.
   tidegateoutfall:Object.freeze({id:'tidegateoutfall',name:'潮門外流',note:'濱岸轉折古道｜潮門與礁灘禁建｜分段守住觀測隊',visible:true,width:1536,height:1024,asset:'assets/td/chapter4-tidegate-outfall-v1.png',
-   path:points([[-28,60],[80,115],[180,180],[315,220],[430,250],[500,330],[505,420],[590,460],[720,470],[850,480],[990,530],[1100,600],[1180,705],[1260,790],[1415,835],[1564,850]]),
-   spawn:{x:18,y:82},gate:{x:1564,y:850},heroSpawn:{x:880,y:520},roadClearance:62,buildFootprint:{x:22,y:12},roadUnits:true,heroVulnerable:false,openingFocus:{x:810,y:485},safeArea:{x:48,y:55,width:1425,height:880},camera:{minUnitPixels:42,referenceUnitSize:112,maxZoom:2.15,mobileInitialZoom:1.45},
-   buildAreas:[points([[190,80],[430,75],[520,145],[480,205],[300,190],[185,145]]),points([[570,345],[690,330],[760,395],[735,485],[625,505],[550,430]]),points([[800,540],[950,520],[1080,580],[1060,660],[940,690],[820,630]]),points([[1130,650],[1285,650],[1420,750],[1370,820],[1230,790],[1135,715]])],
-   blockedAreas:[points([[690,65],[1040,55],[1110,240],[930,290],[735,235]]),points([[270,530],[650,500],[735,710],[590,820],[310,760]]),points([[1330,390],[1535,370],[1535,760],[1435,790]])],zones:[]}),
+   // Traced against chapter4-tidegate-outfall-v1.png: the former path and
+   // deploy polygons drifted into the water/bridge although placement passed.
+   path:points([[-28,20],[54,58],[90,108],[130,165],[166,201],[220,210],[300,195],[382,179],[455,181],[510,202],[535,245],[515,280],[525,311],[575,340],[660,358],[760,377],[865,395],[960,411],[1050,433],[1135,454],[1195,492],[1225,545],[1233,596],[1260,647],[1315,682],[1390,697],[1460,699]]),
+   spawn:{x:54,y:58},gate:{x:1460,y:699},heroSpawn:{x:850,y:390},roadClearance:44,buildFootprint:{x:16,y:10},roadUnits:true,heroVulnerable:false,openingFocus:{x:775,y:385},safeArea:{x:45,y:30,width:1425,height:875},camera:{minUnitPixels:42,referenceUnitSize:112,maxZoom:2.15,mobileInitialZoom:1.45},
+   buildAreas:[points([[225,106],[372,100],[425,130],[407,160],[270,166],[215,142]]),points([[295,232],[420,215],[480,240],[480,302],[360,310],[292,280]]),points([[555,240],[680,235],[715,260],[705,315],[595,320],[548,286]]),points([[945,347],[1040,327],[1125,345],[1145,393],[1080,425],[963,405]]),points([[980,499],[1049,475],[1118,495],[1145,538],[1112,588],[1008,590],[970,548]])],
+   blockedAreas:[],zones:[]}),
   brineway:Object.freeze({id:'brineway',name:'鹽潮航道',note:'風暴堤道｜鹽脊遺構與潮閘禁建｜彎道接力防守',visible:true,width:1536,height:1024,asset:'assets/td/chapter4-brineway-v1.png',
    path:points([[-28,55],[90,95],[260,160],[390,250],[470,330],[595,400],[735,435],[885,490],[1040,560],[1160,630],[1240,710],[1350,760],[1500,760],[1564,765]]),
    spawn:{x:18,y:72},gate:{x:1564,y:765},heroSpawn:{x:915,y:505},roadClearance:62,buildFootprint:{x:22,y:12},roadUnits:true,heroVulnerable:false,openingFocus:{x:805,y:455},safeArea:{x:46,y:55,width:1430,height:850},camera:{minUnitPixels:42,referenceUnitSize:112,maxZoom:2.15,mobileInitialZoom:1.45},

@@ -3,12 +3,12 @@
   const PATH='assets/td/soldier-effects-v1.png',clamp=t=>Math.max(0,Math.min(1,t));
   // Presentation keys never replace damage styles, targeting, or equipment procs.
   const groups={
-    slash:['rogue','skeleton','boneRider','orc','frostWolf'],
+    slash:['rogue','skeleton','boneRider','orc','frostWolf','egyptSunGuard'],
     thrust:['halberdier','nagaTideguard','dragonkinLancer'], shield:['shield','nagaShellbreaker'],
     slam:['golem','soulsteel','minotaur','frostBear','frostMammoth','royalCommander','dwarfShield'],
     tideSlash:['nagaDeepWargod'], charge:['knight','boarRider'], breath:['dragon'],
-    arrow:['hunter','centaur','frostHunter'], bullet:['musketeer','bountyHunter','goblinEngineer','goblinGunner','goblinRiveter','goblinRecycler','dwarfRifle'],
-    cannon:['pirate','goblinMech','powderThrower','dwarfMortar'], inferno:['fireDemon','dragonkinEmberwing'], emberBreath:['dragonkinElder'], frostBreath:['frostWyrm'], lightning:['kingdomMage','shaman','dwarfRunesmith','dragonkinOracle'], poison:['alchemist','nagaVenomStalker'],
+    arrow:['hunter','centaur','frostHunter','egyptArcher'], bullet:['musketeer','bountyHunter','goblinEngineer','goblinGunner','goblinRiveter','goblinRecycler','dwarfRifle'],
+    cannon:['pirate','goblinMech','powderThrower','dwarfMortar','egyptScarab'], inferno:['fireDemon','dragonkinEmberwing'], emberBreath:['dragonkinElder'], frostBreath:['frostWyrm'], lightning:['kingdomMage','shaman','dwarfRunesmith','dragonkinOracle','egyptPriest'], poison:['alchemist','nagaVenomStalker'],
     nature:['dryad','treant','beastmaster'], moon:['moonblade'], spirit:['banshee'],
     ice:['frostBird','frostShaman'], arcane:['arcanist'], tide:['nagaMantaRaider']
   };

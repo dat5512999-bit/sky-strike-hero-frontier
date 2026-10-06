@@ -1,3 +1,5 @@
+> **v0.85.83：** 管理者可用 `npm run test:southern`、`npm run balance:audit` 及 `qa-battlefield-acceptance.cjs --faction egypt` 驗收埃及軍團；可選用 `qa-desktop-soak.cjs --faction egypt` 做隔離長測。不要把劇情伏筆標成正式章節。見 [軍團交付](EGYPT_FACTION_V08583.md)。
+
 > **v0.85.81：** 新增三個中立單位 ID：powderThrower、fireDemon、frostWyrm；bountyHunter 沿用原 ID。管理者可繞過 BOSS 難度門檻測試；不要替一般玩家變更解鎖進度。驗收頁僅允許獨立 4174 origin，使用記憶體帳號。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
 
 > **v0.85.73：** 第四章只新增靜態劇情／地圖資料與圖片資產，沒有帳號、權限、資料庫或後端設定；部署與回復見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
@@ -554,4 +556,3 @@ v0.85.0：冰原僅為 TESTABLE，管理者可玩，新測試輪次故事鎖定�
 > **v0.85.80：** 權限熱路徑改為純布林查詢，未放寬管理者或一般玩家權限。不要在戰鬥循環呼叫 `ProfileStore.current()` 只為取得身份。實驗頁只在獨立測試 port 執行，不能在玩家正式 origin 測試。見 [8D](PERFORMANCE_PROFILE_8D_V08580.md)。
 
 > **v0.85.82：** 三英雄進化及南方軍團進階沿用既有權限與存檔，不替玩家修改解鎖。既有分組驗收已記錄；使用者要求停止追加測試，最終整版尚未重跑，發布狀態請獨立確認 Actions／Pages。詳見 [維護交付](SOUTHERN_COMPLETION_V08582.md)。
-

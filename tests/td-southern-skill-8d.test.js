@@ -58,6 +58,6 @@ test('new heroes and factions select in the opening screen without missing-prese
 
 test('balance audit covers every testable faction and keeps targets in its approved bands',()=>{
   const {runAudit}=require('../scripts/faction-balance-audit.cjs'),report=runAudit();
-  assert.deepEqual(Array.from(report.rows,row=>row.id),['frostland','hunter','arcanist','rogue','wild','goblin','naga','dwarf','dragonkin']);
+  assert.deepEqual(Array.from(report.rows,row=>row.id),['frostland','hunter','arcanist','rogue','wild','goblin','naga','dwarf','dragonkin','egypt']);
   for(const row of report.rows){assert.ok(row.heroDps>=report.heroBand[0]&&row.heroDps<=report.heroBand[1],row.faction+' hero DPS');assert.ok(row.openingPower>=report.openingPowerBand[0]&&row.openingPower<=report.openingPowerBand[1],row.faction+' opening pressure');}
 });

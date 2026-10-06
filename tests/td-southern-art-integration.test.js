@@ -7,18 +7,18 @@ function artFixture(ns){
   art.load=path=>{const png=fs.readFileSync(path);return{ready:true,width:png.readUInt32BE(16),height:png.readUInt32BE(20),assetSrc:path};};
   return art;
 }
-test('southern soldier atlases contain all 32 poses with real alpha gutters, matching measured idle body scale',()=>{
+test('every southern soldier owns 16 nonempty poses with alpha gutters and measured idle scale',()=>{
   const {ns}=load(),art=ns.systems.ImperialFactionArt,cache=fs.readFileSync('sw.js','utf8');
-  for(const [group,path] of Object.entries(art.SOLDIERS)){
+  for(const [type,path] of Object.entries(art.SOLDIERS)){
     const png=rgba(path);assert.equal(png.width,1254);assert.equal(png.height,1254);assert.ok(cache.includes('./'+path));
     for(let row=0;row<4;row++)for(let col=0;col<4;col++){
       const x0=Math.round(col*png.width/4),x1=Math.round((col+1)*png.width/4),y0=Math.round(row*png.height/4),y1=Math.round((row+1)*png.height/4);let body=0,clear=0,edge=0,top=y1,bottom=y0;
       for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){
-        const alpha=png.pixels[(y*png.width+x)*4+3];if(alpha<16)clear++;if(alpha>50){body++;top=Math.min(top,y);bottom=Math.max(bottom,y);}
+        const alpha=png.pixels[(y*png.width+x)*4+3];if(alpha<16)clear++;if(alpha>80){body++;top=Math.min(top,y);bottom=Math.max(bottom,y);}
         if(alpha>=16&&(x-x0<4||x1-x<5||y-y0<4||y1-y<5))edge++;
       }
-      assert.ok(body>3000,group+' nonempty pose '+row+','+col);assert.ok(clear>30000,group+' transparent space');assert.equal(edge,0,group+' full weapons/effects stay in pose '+row+','+col);
-      if(col===0){const type=Object.keys(art.UNIT_ROWS).find(type=>ns.config.units[type][group]&&art.UNIT_ROWS[type]===row),profile=art.SOLDIER_PROFILES[type];assert.equal(bottom-top+1,profile.bodyHeight,type+' calibrated world scale');assert.equal(bottom-y0+1,profile.feet[0],type+' measured idle foot');}
+      assert.ok(body>2500,type+' nonempty pose '+row+','+col);assert.ok(clear>30000,type+' transparent space');assert.equal(edge,0,type+' full weapons/effects stay in pose '+row+','+col);
+      if(row===0&&col===0){const profile=art.SOLDIER_PROFILES[type];assert.equal(bottom-top+1,profile.bodyHeight,type+' calibrated world scale');assert.equal(bottom-y0+1,profile.feet[0],type+' measured idle foot');}
     }
   }
 });
@@ -35,7 +35,7 @@ test('southern building source rectangles have transparent borders and contain f
 });
 test('southern soldiers have real flight/contact textures without changing damage or element',()=>{
   const {ns}=load(),g=game(ns);g.art={towerPaintedAtlas:{ready:true,width:1254,height:1254},towerMagicAtlas:{ready:true,width:1254,height:1254},soldierAtlas:{ready:true,width:1254,height:1254}};
-  for(const faction of ['dwarf','dragonkin'])for(const type of ns.systems.FactionSystem.FACTIONS[faction].units)for(const level of [1,5]){
+  for(const faction of ['dwarf','dragonkin','egypt'])for(const type of ns.systems.FactionSystem.FACTIONS[faction].units)for(const level of [1,5]){
     const unit=new ns.entities.CombatUnit(type,100,100);unit.level=level;unit.synergy=g.synergy;unit.cooldown=0;
     const targets=[enemy(ns,145),enemy(ns,166)],shots=[];unit.attack(targets[0],unit.config(),shots,targets);const shot=shots[0];
     assert.ok(shot&&ns.systems.UnitVFX.PROFILES[shot.unitVfx],type);assert.equal(shot.damage,unit.config().damage);
@@ -59,29 +59,28 @@ test('southern support towers emit no fake attacks and only highlight real eligi
 });
 test('southern body scale, ground anchors and preview metadata stay stable at levels 1 and 5 in both directions',()=>{
   const {ns}=load(),art=artFixture(ns),imperial=ns.systems.ImperialFactionArt,A=ns.systems.ArtSystem;
-  for(const [type,row] of Object.entries(imperial.UNIT_ROWS)){
+  for(const [type,path] of Object.entries(imperial.SOLDIERS)){
     const unit=new ns.entities.CombatUnit(type,100,200),scales=new Set();
     for(const state of ['idle','walk','attack','hit'])for(const level of [1,5])for(const facing of [0,Math.PI])for(const frame of [0,3]){
       Object.assign(unit,{state,level,facing,frame});const c=strictCanvas();assert.equal(art.drawCombatUnit(c.ctx,unit),true,type);
-      const drawn=c.calls.find(call=>call[0]==='drawImage'&&call[1].assetSrc.includes('/soldiers-actions-'));assert.ok(drawn,type);
+      const drawn=c.calls.find(call=>call[0]==='drawImage'&&call[1].assetSrc===path);assert.ok(drawn,type);
       const [,atlas,sx,sy,sw,sh,dx,dy,dw,dh]=drawn;assert.ok(sx>=0&&sy>=0&&sx+sw<=atlas.width&&sy+sh<=atlas.height,type+' source bounds');
       assert.ok(Math.abs(dw/sw-dh/sh)<1e-9,type+' aspect ratio');scales.add((dw/sw).toFixed(8));
-      let column={idle:0,walk:1,attack:2,hit:3}[state];if(type==='dwarfMortar'&&state==='attack'&&frame>=2)column=3;
-      const profile=imperial.SOLDIER_PROFILES[type],scale=A.UNIT_HEIGHTS[type]/profile.bodyHeight,sourceTop=sy/atlas.height*1254-row*1254/4;
-      assert.ok(Math.abs(dy+(profile.feet[column]-sourceTop)*scale-12)<1e-8,type+' exact ground anchor');
+      const row={idle:0,walk:1,attack:2,hit:3}[state],profile=imperial.SOLDIER_PROFILES[type],scale=A.UNIT_HEIGHTS[type]/profile.bodyHeight,sourceTop=sy/atlas.height*1254-row*1254/4;
+      assert.ok(Math.abs(dy+(profile.feet[row*4+frame]-sourceTop)*scale-12)<1e-8,type+' exact ground anchor');
       assert.equal(c.depth,0);assert.equal(unit.x,100);assert.equal(unit.y,200);
       if(facing)assert.ok(c.calls.some(v=>v[0]==='scale'&&v[1]===-1&&v[2]===1),type+' mirror');
     }
     assert.equal(scales.size,1,type+' no level/frame stretch');assert.ok(A.UNIT_HEIGHTS[type]>0);const bounds=A.previewBounds('unit',type);assert.ok(bounds.width>0&&bounds.left>=0&&bounds.left+bounds.width<=384);
-    const cfg=ns.config.units[type],group=cfg.dwarf?'dwarf':'dragonkin';art.imperialImages['soldier:'+group].ready=false;
-    assert.equal(art.drawCombatUnit(strictCanvas().ctx,unit),false,type+' delegates missing sprite to entity fallback');art.imperialImages['soldier:'+group].ready=true;
+    art.imperialImages['soldier:'+type].ready=false;
+    assert.equal(art.drawCombatUnit(strictCanvas().ctx,unit),false,type+' delegates missing sprite to entity fallback');art.imperialImages['soldier:'+type].ready=true;
     const broken=strictCanvas();broken.ctx.drawImage=()=>{throw Error('canvas fault');};assert.throws(()=>art.drawCombatUnit(broken.ctx,unit),/canvas fault/);assert.equal(broken.depth,0);
   }
   assert.doesNotMatch(fs.readFileSync('src/td/systems/ImperialFactionArt.js','utf8'),/getImageData|toDataURL|toBlob/);
 });
 test('southern towers keep painted previews and a functional missing-asset fallback without Canvas leakage',()=>{
   const {ns}=load(),art=artFixture(ns);
-  for(const faction of ['dwarf','dragonkin'])for(const type of ns.systems.FactionSystem.FACTIONS[faction].buildings){
+  for(const faction of ['dwarf','dragonkin','egypt'])for(const type of ns.systems.FactionSystem.FACTIONS[faction].buildings){
     for(const level of [1,5]){const c=strictCanvas();assert.equal(art.drawBuilding(c.ctx,type,100,180,level),true);assert.ok(c.calls.some(v=>v[0]==='drawImage'));assert.equal(c.depth,0);}
     art.imperialImages['building:'+faction].ready=false;const fallback=strictCanvas();assert.equal(art.drawBuilding(fallback.ctx,type,100,180,5),true);assert.equal(fallback.calls.filter(v=>v[0]==='drawImage').length,0);assert.equal(fallback.depth,0);
     art.imperialImages['building:'+faction].ready=true;const fault=strictCanvas();fault.ctx.drawImage=()=>{throw Error('paint fault');};assert.throws(()=>art.drawBuilding(fault.ctx,type,100,180,1),/paint fault/);assert.equal(fault.depth,0);
@@ -109,7 +108,7 @@ test('southern hero and deployment atlases participate in loading, error reporti
   vm.runInContext(fs.readFileSync('src/td/systems/ImperialFactionArt.js','utf8'),sandbox);
   const art=new Art();assert.equal(art.coreStatus('dwarf').ready,false);art.preloadDeploy('unit','dragonkinLancer');art.preloadDeploy('building','dwarfRuneForge');
   const profiles=sandbox.TowerFrontier.systems.ImperialFactionArt;
-  assert.deepEqual(requests.map(i=>i.assetSrc),[profiles.SOLDIERS.dragonkin,profiles.BUILDINGS.dwarf]);
+  assert.deepEqual(requests.map(i=>i.assetSrc),[profiles.SOLDIERS.dragonkinLancer,profiles.BUILDINGS.dwarf]);
   for(const image of Object.values(art.imperialImages))image.failed=true;assert.equal(art.failedAssets().length,3);assert.equal(art.coreStatus('dwarf').failed,true);
   requests.length=0;art.retryFailed();assert.equal(requests.length,3);assert.ok(requests.every(image=>!image.failed&&image.attempts===0));
   art.imperialImages['hero:dwarf'].ready=true;assert.equal(art.coreStatus('dwarf').ready,true);

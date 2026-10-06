@@ -36,6 +36,11 @@
   ITEMS['lion-shield'].types.push('dwarfShield','dragonkinLancer');
   ITEMS['moon-staff'].types.push('dwarfRunesmith','dragonkinOracle');
   ITEMS['war-drum'].types.push('dwarfMortar','dragonkinElder');
+  ITEMS['lion-shield'].types.push('egyptSunGuard');
+  ITEMS['lion-bow'].types.push('egyptArcher');
+  ITEMS['moon-staff'].types.push('egyptPriest');
+  ITEMS['war-drum'].types.push('egyptScarab');
+  ITEMS['vine-crown'].heroes.push('egypt');
   class ArmorySystem{
     constructor(){this.reset();}
     reset(){this.owned=[];this.assignments=new Map();}

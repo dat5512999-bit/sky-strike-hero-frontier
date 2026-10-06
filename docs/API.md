@@ -1,3 +1,7 @@
+> **v0.85.83：** 新增 `FactionSystem.FACTIONS.egypt` 及 `config.units/buildings` 的四兵四塔 ID；`TowerEvolutionSystem`、`BattleSynergySystem`、`ArmorySystem` 與 `ImperialFactionArt` 沿用既有模組介面。沒有 HTTP API、資料庫或存檔 schema 變更。見 [資料流](EGYPT_FACTION_V08583.md)。
+
+> **潮門外流本機校正（未發布）：** `maps.definitions.tidegateoutfall` 的道路、城門、英雄出生點及五塊 `buildAreas` 與背景原畫對齊；`BuildSystem.canPlaceAt` 和道路／塔射程消費同一地圖幾何。QA 工具讀取 `PerformanceMonitor.record` 的既有影格樣本；不新增 HTTP API、資料庫或存檔欄位。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
+
 > **v0.85.81：** 沿用 BuildSystem.queueMercenary／confirmPlacement、CombatUnit、Projectile 與 ArmorySystem。新設定 ranks 為五階名稱陣列；NeutralMercenaryArt.has／pose／draw 處理逐格腳底。LootSystem.usable 加入 build.combatUnits()；沒有 HTTP API、資料庫或存檔 schema 變更。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
 
 > **v0.85.74：** `SkinCatalog` 新增四筆 `hero` 類目，target 分別為 `frostland`、`naga`、`bull`、`goblin`；`battlefieldSprite` 依序為 4×4、4×4、5×5、4×4。無 HTTP API、資料庫或戰鬥資料 schema 變更。見 [交付文件](CROSSWORLD_SKINS_SEASON_ONE_V08574.md)。
@@ -693,4 +697,6 @@ v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare�
 > **v0.85.80：** 新增 `ProfileStore.isAdmin(): boolean`，`allows(kind,id): boolean` 不複製或暴露資料；`current()` 仍回傳完整防禦複本。`PerformanceMonitor.record` 新增 `uiMs`／`simulationMs`，皆為毫秒；總更新包含介面，不能再相加。無 HTTP API、資料庫或存檔 schema 變更。
 
 > **v0.85.82：** HeroEvolutionSystem 增加 dwarf／dragonkin／egypt 的兩階技能與試煉資料；cast 冷卻先行返回，場域／延遲攻擊有數量上限。兵種 ranks 與 TowerEvolutionSystem 分支沿用原 API，無 HTTP API、資料庫或 schema 變更。詳見 [架構與 API](SOUTHERN_COMPLETION_V08582.md)。
+
+> **戰場驗收規格 v1.0.0：** 本機 QA 程式讀取 `FactionSystem.FACTIONS[faction].buildings`、`ArtSystem` 建造卡 Canvas、`BuildSystem.canPlaceAt()`、`BattlefieldCamera.scale()` 與 `PerformanceMonitor.samples`；產出本機 JSON／PNG，沒有新增 HTTP API、資料庫或存檔 schema。詳見 [架構與限制](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
 

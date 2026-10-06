@@ -17,7 +17,7 @@ test('PAGE 1 使用可擴充地圖瀏覽列並保留四種難度',()=>{
 });
 
 test('PAGE 2 保持英雄軍團獨立選擇並即時組合摘要',()=>{
-  const {ns}=load(),heroes=['hunter','arcanist','rogue','chief','frostland','goblin','naga','dwarf','dragonkin','egypt','bull'].sort(),factions=['hunter','arcanist','rogue','wild','frostland','goblin','naga','dwarf','dragonkin'].sort();
+  const {ns}=load(),heroes=['hunter','arcanist','rogue','chief','frostland','goblin','naga','dwarf','dragonkin','egypt','bull'].sort(),factions=['hunter','arcanist','rogue','wild','frostland','goblin','naga','dwarf','dragonkin','egypt'].sort();
   assert.deepEqual([...html.matchAll(/data-profession="([^"]+)"/g)].map(match=>match[1]).sort(),heroes);
   assert.deepEqual([...html.matchAll(/data-faction="([^"]+)"/g)].map(match=>match[1]).sort(),factions);
   assert.deepEqual(Object.keys(ns.systems.HeroRoster.CLASSES).sort(),heroes);

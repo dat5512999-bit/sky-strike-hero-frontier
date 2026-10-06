@@ -1,3 +1,7 @@
+> **v0.85.83：** 無新增正式執行依賴；沿用 Node.js ≥18，`npm run serve:test` 後開啟 `http://127.0.0.1:4173/td.html`，頁面應顯示 0.85.83。埃及選角、軍團與八張卡須可見；可選的本機視覺 QA 需 Edge／Playwright。見 [驗收及回復](EGYPT_FACTION_V08583.md)。
+
+> **潮門外流本機校正（未發布）：** 沿用既有 Node.js 18+ 安裝與 `npm run serve:test`；正式遊戲沒有新增依賴。可選的視覺／效能驗收需本機 Edge 與 Playwright，另開終端跑 `node scripts/qa-battlefield-acceptance.cjs --faction naga` 或 `node scripts/qa-desktop-soak.cjs --faction naga --seconds 60 --headed`。測試埠預設 4173，需改埠時兩個終端同設 `TD_TEST_PORT`。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
+
 > **v0.85.81：** 無新套件或環境變數，沿用 Node.js 18+ 與 npm run serve:test，開啟 /td.html。確認版本 0.85.81；四張新 PNG 隨專案提供，不需外網服務。驗收用 npm run test:neutral。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
 
 > **v0.85.73：** 無新增相依套件或環境變數。部署後確認 Service Worker 為 `sky-strike-v0.85.73`，再開啟劇情模式確認第四章四張背景可載入。詳見 [第四章交付](CHAPTER4_TIDEGATE_ECHO_V08573.md)。
@@ -550,4 +554,6 @@ v0.85.0：沿用 Node.js 18+，無新依賴。完整取得 assets/td/frostland �
 > **v0.85.80：** 無新增相依套件；既有 Node ≥18 即可執行 `npm run serve:test`。效能實驗使用獨立 port：PowerShell 執行 `$env:TD_TEST_PORT='4174'; npm run serve:test`，開啟 `/scripts/performance-ui-lab.html`。不要在正式遊玩 origin 執行實驗。
 
 > **v0.85.82：** 無新依賴、帳號或環境變數；沿用 Node.js 18+、npm run serve:test 與 /td.html。更新後識別為 0.85.82；若仍顯示舊版，開啟 /update.html，保留玩家存檔。詳見 [安裝與更新](SOUTHERN_COMPLETION_V08582.md)。
+
+> **戰場驗收 v1.0.0：** 遊戲安裝方式不變。開發者若要跑視覺／效能 QA，需 Node ≥18、Edge 與 Playwright，先 `npm run serve:test`，再 `node scripts/qa-battlefield-acceptance.cjs --faction naga`；缺 Playwright 可用既有工作區套件設定 `NODE_PATH`。見 [規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
 

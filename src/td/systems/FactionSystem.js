@@ -10,6 +10,7 @@
     ,naga:{id:'naga',name:'娜迦潮衛',theme:'潮門 · 潮壓 · 陣線',color:'#55d3d0',status:'AVAILABLE',storyStatus:'FREE_EXPEDITION',selectionArt:'assets/td/naga/faction-selection-v1.png',selectionFocus:'50% 50%',units:['nagaTideguard','nagaShellbreaker','nagaDeepWargod','nagaMantaRaider','nagaVenomStalker'],buildings:['nagaTidegate','nagaShellBastion','nagaAbyssShrine','nagaMantaAerie']}
     ,dwarf:{id:'dwarf',name:'矮人符文堡壘',theme:'符文工事 · 穿甲砲擊 · 熔爐增幅',color:'#61d6d0',status:'TESTABLE',storyStatus:'CONCEPT',selectionArt:'assets/td/dwarf/faction-selection-v1.png',selectionFocus:'50% 50%',units:['dwarfRifle','dwarfShield','dwarfRunesmith','dwarfMortar'],buildings:['dwarfBoltTower','dwarfRuneForge','dwarfMortarTower','dwarfCitadel']}
     ,dragonkin:{id:'dragonkin',name:'龍脈議庭',theme:'元素連鎖 · 龍焰吐息 · 龍巢共鳴',color:'#73c9ea',status:'TESTABLE',storyStatus:'CONCEPT',selectionArt:'assets/td/dragonkin/faction-selection-v1.png',selectionFocus:'50% 50%',units:['dragonkinEmberwing','dragonkinLancer','dragonkinOracle','dragonkinElder'],buildings:['dragonkinFlameSpire','dragonkinStormObelisk','dragonkinRoost','dragonkinWyrmNest']}
+    ,egypt:{id:'egypt',name:'埃及島曦陽衛團',theme:'日輪陣線 · 青金遠射 · 沙幕控場',color:'#e7be62',status:'TESTABLE',storyStatus:'FORESHADOW',selectionArt:'assets/td/egypt/faction-selection-v1.png',selectionFocus:'50% 48%',units:['egyptSunGuard','egyptArcher','egyptPriest','egyptScarab'],buildings:['egyptSunWatch','egyptSunAltar','egyptSandObelisk','egyptScarabBastion']}
   };
   class FactionSystem{
     constructor(){this.reset();}

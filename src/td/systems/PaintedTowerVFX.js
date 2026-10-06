@@ -19,10 +19,11 @@
     'paint-frostAurora':[1,9,66,88,'#b4ffe3'], 'paint-frostGlacier':[9,9,75,155,'#b2efff'],
     'paint-nagaTidegate':[15,15,58,88,'#97fff2'], 'paint-nagaShellBastion':[15,15,78,106,'#b6fff5'], 'paint-nagaMantaAerie':[15,15,68,98,'#9affed'],
     'paint-dwarfBoltTower':[6,8,48,68,'#6adbd4'], 'paint-dwarfMortarTower':[6,11,63,126,'#e69b62'], 'paint-dwarfCitadel':[6,10,53,98,'#c6a36f'],
-    'paint-dragonkinFlameSpire':[7,11,57,85,'#eb7e52'], 'paint-dragonkinStormObelisk':[0,1,66,94,'#7ac9ef',true], 'paint-dragonkinWyrmNest':[7,11,80,134,'#e6aa66']
+    'paint-dragonkinFlameSpire':[7,11,57,85,'#eb7e52'], 'paint-dragonkinStormObelisk':[0,1,66,94,'#7ac9ef',true], 'paint-dragonkinWyrmNest':[7,11,80,134,'#e6aa66'],
+    'paint-egyptSunWatch':[0,8,47,68,'#f2d58b'], 'paint-egyptSandObelisk':[5,10,55,92,'#e4c483'], 'paint-egyptScarabBastion':[6,11,70,120,'#e9bf6c']
   };
-  const extra=['frostCrystal','frostBlizzard','frostBallista','frostObelisk','frostAurora','frostGlacier','nagaTidegate','nagaShellBastion','nagaMantaAerie','dwarfBoltTower','dwarfMortarTower','dwarfCitadel','dragonkinFlameSpire','dragonkinStormObelisk','dragonkinWyrmNest'];
-  const supports={supply:[8,'#ffe7ad'],battleflag:[8,'#ffdc95'],armoryForge:[8,'#ffc579'],barracks:[8,'#ffe4a6'],grove:[12,'#bce58b'],crypt:[13,'#ceb3ff'],graveyard:[13,'#cbb1ff'],moonwell:[9,'#bfdfff'],warDrum:[10,'#edb983'],goblinGenerator:[14,'#aeffed'],goblinRecycler:[8,'#ebd698'],goblinCooler:[1,'#b5fffb'],bombWorkshop:[11,'#ffc489'],frostTotem:[9,'#c0f5ff'],nagaAbyssShrine:[15,'#aafff0'],dwarfRuneForge:[14,'#54d6cf'],dragonkinRoost:[15,'#82c9e6']};
+  const extra=['frostCrystal','frostBlizzard','frostBallista','frostObelisk','frostAurora','frostGlacier','nagaTidegate','nagaShellBastion','nagaMantaAerie','dwarfBoltTower','dwarfMortarTower','dwarfCitadel','dragonkinFlameSpire','dragonkinStormObelisk','dragonkinWyrmNest','egyptSunWatch','egyptSandObelisk','egyptScarabBastion'];
+  const supports={supply:[8,'#ffe7ad'],battleflag:[8,'#ffdc95'],armoryForge:[8,'#ffc579'],barracks:[8,'#ffe4a6'],grove:[12,'#bce58b'],crypt:[13,'#ceb3ff'],graveyard:[13,'#cbb1ff'],moonwell:[9,'#bfdfff'],warDrum:[10,'#edb983'],goblinGenerator:[14,'#aeffed'],goblinRecycler:[8,'#ebd698'],goblinCooler:[1,'#b5fffb'],bombWorkshop:[11,'#ffc489'],frostTotem:[9,'#c0f5ff'],nagaAbyssShrine:[15,'#aafff0'],dwarfRuneForge:[14,'#54d6cf'],dragonkinRoost:[15,'#82c9e6'],egyptSunAltar:[8,'#f1d685']};
   function scope(ctx,draw){ctx.save();try{draw();}finally{ctx.restore();}}
   class PaintedTowerVFX{
     static key(tower){return extra.includes(tower.type)?'paint-'+tower.type:null;}

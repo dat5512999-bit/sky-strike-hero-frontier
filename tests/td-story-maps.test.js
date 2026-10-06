@@ -7,6 +7,18 @@ const {load}=require('./helpers/td-runtime.cjs');
 function setup(){const {ns,context}=load();context.HeroFrontierPublishedMaps={schemaVersion:1,revision:0,maps:{}};vm.runInContext(fs.readFileSync('src/td/maps.js','utf8'),context);return ns;}
 function distanceToRoute(x,y,route){let nearest=Infinity;for(let i=1;i<route.length;i++){const a=route[i-1],b=route[i],dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((x-a.x)*dx+(y-a.y)*dy)/(dx*dx+dy*dy)));nearest=Math.min(nearest,Math.hypot(x-a.x-t*dx,y-a.y-t*dy));}return nearest;}
 
+test('潮門外流的路線與塔位落在背景圖所畫的石路及五塊草地',()=>{
+  const ns=setup(),map=ns.maps.definitions.tidegateoutfall;
+  // World-pixel anchors traced from the unchanged 1536×1024 production painting.
+  for(const [x,y] of [[90,108],[382,179],[575,340],[960,411],[1225,545],[1390,697]])
+    assert.ok(distanceToRoute(x,y,map.path)<16,`道路偏離畫面 (${x},${y})`);
+  ns.maps.apply(map.id);const build=new ns.systems.BuildSystem();
+  for(const [x,y] of [[315,130],[383,260],[633,275],[1045,375],[1060,535]])
+    assert.equal(build.canPlaceAt(x,y,'building'),true,`草地不可建 (${x},${y})`);
+  for(const [x,y] of [[640,380],[930,620],[1300,720]])
+    assert.equal(build.canPlaceAt(x,y,'building'),false,`橋／水／城門誤判可建 (${x},${y})`);
+});
+
 test('chapter maps use production art, end at the visible keep, and offer useful tower sites',()=>{
   const ns=setup();
   for(const id of ['silverleaf','shadowfall','frostborn','westernsignal','emberroad','stonecircle','redmesa','whitetrace','echoyard','crossmark','nightwatch','tidegateoutfall','brineway','reefconfluence','tideobservatory']){
@@ -49,7 +61,7 @@ test('chapter map deployment matches visible clearings and rejects painted obsta
     echoyard:{open:[[600,300],[820,600],[1100,520],[1280,720]],blocked:[[850,260],[250,600],[1400,470]]},
     crossmark:{open:[[960,380],[350,480],[360,520],[1050,580]],blocked:[[660,330],[1360,250],[1380,700]]},
     nightwatch:{open:[[700,460],[280,640],[1260,420]],blocked:[[930,480],[1350,240],[150,850]]},
-    tidegateoutfall:{open:[[320,115],[640,380],[930,620],[1300,720]],blocked:[[850,480],[860,150],[1440,600]]},
+    tidegateoutfall:{open:[[315,130],[383,260],[633,275],[1045,375],[1060,535]],blocked:[[640,380],[930,620],[1300,720],[850,480],[860,150],[1440,600]]},
     brineway:{open:[[300,100],[520,430],[830,360],[1120,530],[1260,860]],blocked:[[740,170],[250,560],[1420,480]]},
     reefconfluence:{open:[[350,100],[360,600],[1040,400],[690,650],[1100,380],[1140,600]],blocked:[[650,270],[1400,300],[1380,700]]},
     tideobservatory:{open:[[300,100],[320,300],[660,380],[820,620],[1180,600],[1320,820]],blocked:[[900,210],[250,580],[1420,450]]}

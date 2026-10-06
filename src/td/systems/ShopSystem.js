@@ -6,6 +6,7 @@
     charm:{name:'祖靈契約',cost:140,description:'每級英雄守衛持續 +3 秒、傷害 +20%'},
     sightstone:{name:'隱形魔石',cost:95,description:'英雄周圍揭露隱形敵軍：Lv.1 130、Lv.2 165、Lv.3 200；不會照亮整張地圖。'},
     'gear-lion-bow':{name:'獅心王弓',cost:260,gear:'lion-bow',description:'遠程物理裝備：傷害、射程與目標數提升。'},
+    'gear-lion-shield':{name:'不落獅盾',cost:300,gear:'lion-shield',description:'前線護甲：攻擊擴大近距範圍並縮短間隔。'},
     'gear-moon-staff':{name:'月銀古杖',cost:270,gear:'moon-staff',description:'魔法裝備：提高傷害並增加連鎖。'},
     'gear-vine-crown':{name:'常青冠冕',cost:220,gear:'vine-crown',description:'通用法系護甲：提高攻速與射程。'},
     'gear-war-drum':{name:'先鋒戰鼓',cost:250,gear:'war-drum',description:'前排戰器：提高傷害、攻速與範圍。'},

@@ -44,7 +44,7 @@ test('開局選擇在單一桌面視窗並排英雄與軍團，手機共用相�
   assert.match(css,/data-game-screen="opening"[^}]*\.td-profession-screen\{overflow:hidden/);
   assert.match(css,/\.opening-choice-grid\{display:grid;grid-template-columns:minmax\(0,2fr\)/);
   assert.match(css,/data-layout="mobile"[^}]*data-game-screen="opening"[^}]*\.opening-choice-grid/);
-  const {ns}=load(),heroes=['hunter','arcanist','rogue','chief','frostland','goblin','naga','dwarf','dragonkin','egypt','bull'].sort(),factions=['hunter','arcanist','rogue','wild','frostland','goblin','naga','dwarf','dragonkin'].sort();
+  const {ns}=load(),heroes=['hunter','arcanist','rogue','chief','frostland','goblin','naga','dwarf','dragonkin','egypt','bull'].sort(),factions=['hunter','arcanist','rogue','wild','frostland','goblin','naga','dwarf','dragonkin','egypt'].sort();
   assert.deepEqual([...html.matchAll(/data-profession="([^"]+)"/g)].map(match=>match[1]).sort(),heroes);
   assert.deepEqual([...html.matchAll(/data-faction="([^"]+)"/g)].map(match=>match[1]).sort(),factions);
   assert.deepEqual(Object.keys(ns.systems.HeroRoster.CLASSES).sort(),heroes);
@@ -159,10 +159,10 @@ test('所有建造卡只顯示定位與價格，完整能力留在第二層',()=
   const html=fs.readFileSync(path.join(root,'td.html'),'utf8');
   const cards=[...html.matchAll(/data-build-kind="(unit|building)" data-build-type="([^"]+)"[^>]*><b>[^<]+<\/b><span>[^<]+<\/span><small><\/small><\/button>/g)];
   const expected={
-    unit:['hunter','arcanist','rogue','shield','knight','musketeer','halberdier','skeleton','dragon','treant','dryad','moonblade','golem','banshee','boneRider','orc','centaur','boarRider','minotaur','shaman','goblinEngineer','goblinGunner','goblinRiveter','goblinRecycler','goblinMech','frostWolf','frostBear','frostBird','frostHunter','frostShaman','frostMammoth','nagaTideguard','nagaShellbreaker','nagaDeepWargod','nagaMantaRaider','nagaVenomStalker','dwarfRifle','dwarfShield','dwarfRunesmith','dwarfMortar','dragonkinEmberwing','dragonkinLancer','dragonkinOracle','dragonkinElder'],
-    building:['goblinGenerator','goblinTurret','goblinMortar','goblinSnare','goblinRecycler','goblinCooler','goblinSiege','frostCrystal','frostBlizzard','frostBallista','frostTotem','frostObelisk','frostAurora','frostGlacier','nagaTidegate','nagaShellBastion','nagaAbyssShrine','nagaMantaAerie','dwarfBoltTower','dwarfRuneForge','dwarfMortarTower','dwarfCitadel','dragonkinFlameSpire','dragonkinStormObelisk','dragonkinRoost','dragonkinWyrmNest','arrow','iceward','frost','cannon','storm','totem','warDrum','boulder','thunderTotem','crypt','soul','barracks','grove','graveyard','ballista','moonwell','plague']
+    unit:['hunter','arcanist','rogue','shield','knight','musketeer','halberdier','skeleton','dragon','treant','dryad','moonblade','golem','banshee','boneRider','orc','centaur','boarRider','minotaur','shaman','goblinEngineer','goblinGunner','goblinRiveter','goblinRecycler','goblinMech','frostWolf','frostBear','frostBird','frostHunter','frostShaman','frostMammoth','nagaTideguard','nagaShellbreaker','nagaDeepWargod','nagaMantaRaider','nagaVenomStalker','dwarfRifle','dwarfShield','dwarfRunesmith','dwarfMortar','dragonkinEmberwing','dragonkinLancer','dragonkinOracle','dragonkinElder','egyptSunGuard','egyptArcher','egyptPriest','egyptScarab'],
+    building:['goblinGenerator','goblinTurret','goblinMortar','goblinSnare','goblinRecycler','goblinCooler','goblinSiege','frostCrystal','frostBlizzard','frostBallista','frostTotem','frostObelisk','frostAurora','frostGlacier','nagaTidegate','nagaShellBastion','nagaAbyssShrine','nagaMantaAerie','dwarfBoltTower','dwarfRuneForge','dwarfMortarTower','dwarfCitadel','dragonkinFlameSpire','dragonkinStormObelisk','dragonkinRoost','dragonkinWyrmNest','egyptSunWatch','egyptSunAltar','egyptSandObelisk','egyptScarabBastion','arrow','iceward','frost','cannon','storm','totem','warDrum','boulder','thunderTotem','crypt','soul','barracks','grove','graveyard','ballista','moonwell','plague']
   };
-  assert.equal(cards.length,87);
+  assert.equal(cards.length,95);
   assert.deepEqual(cards.map(([,kind,type])=>kind+':'+type).sort(),Object.entries(expected).flatMap(([kind,ids])=>ids.map(id=>kind+':'+id)).sort());
   const {ns}=load(),allCards=[...html.matchAll(/data-build-kind="(unit|building)" data-build-type="([^"]+)"/g)].map(([,kind,type])=>kind+':'+type).sort();
   const shopOnly=new Set(['powderThrower','fireDemon','frostWyrm']);
