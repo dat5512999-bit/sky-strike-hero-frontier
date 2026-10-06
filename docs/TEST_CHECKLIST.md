@@ -1,6 +1,6 @@
-> **v0.85.83：** 驗收埃及女英雄選角／技能／戰場身份一致、四兵與四塔可合法部署／取消／升級／回收、同族祭壇／短緩方尖碑、武器三階升級及可用掉落；矮人／龍族／埃及 12 名士兵每人 4×4、16 格均非空。執行 `npm test`、`npm run check`、`npm run balance:audit`、埃及戰場圖 QA 與隔離長測；玩家前景自然 50 波卡頓仍須另驗。見 [完整清單](EGYPT_FACTION_V08583.md)。
+> **v0.85.83：** 埃及女英雄選角／技能／戰場身份一致、四兵與四塔合法部署、同族祭壇／短緩方尖碑、武器三階升級及可用掉落；矮人／龍族／埃及 12 名士兵每人 4×4、16 格均非空。`npm test` 989/989、`npm run check`、`npm run balance:audit`、埃及戰場圖 QA 與 60 秒固定怪前景長測通過；GitHub Pages 部署與線上檔案比對成功。玩家裝置自然 50 波卡頓仍須另驗。見 [完整清單](EGYPT_FACTION_V08583.md)。
 
-> **潮門外流本機校正（未發布）：** 執行 `node --test tests/td-story-maps.test.js tests/qa-battlefield-acceptance.test.js tests/qa-desktop-soak.test.js`、`npm test`、`npm run check`；人工對照 `map-geometry.png`、`build-drawer.png`、各塔卡與 100%／50% 戰場截圖。現有本機結果：聚焦 15/15、全套 987/987、語法通過；娜迦與矮人各 60 秒桌面長測未重現持續卡頓，仍需玩家實際線上版本與自然波次前景複驗。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
+> **潮門外流校正（發布前紀錄，已併入 v0.85.83）：** 當時聚焦 15/15、全套 987/987、語法通過；娜迦與矮人各 60 秒桌面長測未重現持續卡頓。地圖與 QA 已發布，但仍需玩家實際裝置和自然波次前景複驗。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
 
 > **v0.85.81：** 執行 npm run test:neutral；另跑 static-delivery、td-missing-actions 與 npm run check。核對 4×4 64 格、左右面向／Lv.1&5、商店預覽、難度與餘額、部署取消、五級升級、回收、軍械转移及掉落、對地／對空與緩速到期、長時間投射物有界。完整結果及未通過項目見交付紀錄。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
 

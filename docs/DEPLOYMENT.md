@@ -1,6 +1,6 @@
-> **v0.85.83 待發布：** 發佈時須同批上傳埃及與南方個別 4×4 PNG、各 JS、`td.html`、`update.html`、文件及 `sw.js`；Worker 快取鍵為 `sky-strike-v0.85.83`。部署後核對選角女性肖像、八張卡與戰場圖，不只看版號。見 [完整部署檢查](EGYPT_FACTION_V08583.md)。
+> **v0.85.83 已發布：** 埃及與南方個別 4×4 PNG、各 JS、`td.html`、`update.html`、文件及 `sw.js` 已隨 GitHub `main` 提交 `79d0a1e` 部署；Worker 快取鍵為 `sky-strike-v0.85.83`。Pages 工作流程的線上檔案比對成功；玩家裝置仍應清除舊快取，核對選角女性肖像、八張卡與戰場圖，不只看版號。見 [完整部署檢查](EGYPT_FACTION_V08583.md)。
 
-> **潮門外流本機校正（未發布）：** 本輪只改 `src/td/maps.js` 地圖幾何及本機 QA／文件；GitHub `main` 於 2026-10-06 查得 `package.json`／`sw.js` 均為 0.85.82，`maps.js` 仍是舊道路／塔位，本輪尚未推送，Pages 實際載入版本也尚未確認。未來發布須把地圖 JS 與正式版本入口、Service Worker 快取鍵作同一提交並驗證部署後頁面版本及背景、塔位；不能只看本機截圖就宣稱線上已更新。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
+> **潮門外流校正（發布前紀錄）：** 原先 GitHub `main` 仍為 0.85.82、舊道路／塔位；地圖幾何及本機 QA 後續已併入 v0.85.83，與正式版本入口、Service Worker 快取鍵同批部署。Pages 檔案比對已通過，但玩家裝置的背景／塔位及通關難度仍須實測。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
 
 > **v0.85.81：** 同步發布本版 JS、td.html／td.css、四張 assets/td/neutral 圖集、NeutralMercenaryArt.js 與七處版本入口；Worker 為 sky-strike-v0.85.81。舊 bounty-hunter-actions-v2.png 保留以供回退。尚未執行遠端發布。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
 

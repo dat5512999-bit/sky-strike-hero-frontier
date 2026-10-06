@@ -25,4 +25,6 @@
 
 自動檢查：`npm run check`、`npm test`、`npm run balance:audit`、`node scripts/qa-battlefield-acceptance.cjs --faction egypt`，以及同設備對照的 `node scripts/qa-desktop-soak.cjs --faction egypt --seconds 60 --headed`。先在 128×128 卡、正常戰場與半尺寸診斷圖人工檢查剪影、腳點、裁切、塔位與角色性別。無頭短測和固定怪長測不代表自然 50 波或玩家前景裝置；若玩家仍覺得卡，記錄版本、地圖、波次、倍速與效能面板的影格／更新／繪圖 P95、追趕與略過數值。詳細標準見 `BATTLEFIELD_ACCEPTANCE_STANDARD.md`。
 
+發布結果（2026-10-06）：GitHub `main` 提交 `79d0a1e` 的 Pages 部署工作流程與其中線上檔案比對成功。本機 `npm test` 989/989、`npm run check`、十軍團平衡稽核及埃及戰場圖 QA 通過；60 秒固定 120 怪前景長測未見持續掉幀或追趕積壓。本機網路無法自行連接 Pages，因此不宣稱已在玩家裝置核對 Service Worker 快取或自然 50 波實戰。
+
 更新前依 `BACKUP_RESTORE.md` 匯出玩家資料並保留上一 Git 提交和部署副本。若回退，應整套回復程式、PNG 引用、版本入口與 Service Worker 快取鍵；不要只刪除埃及卡或改版號。已購買／裝備的新 ID 在舊版可能無法顯示，先保留資料備份，不做破壞性清除。
