@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.84';
+const CACHE_NAME = 'sky-strike-v0.85.85';
 const ASSETS = [
  './src/td/systems/FrostlandMotionAtlas.js', './frostland-soldier-preview.html', './src/td/frostland-soldier-preview.js',
  './assets/td/frostland/frostWolf-motion-v2.png', './assets/td/frostland/frostBear-motion-v2.png', './assets/td/frostland/frostBird-motion-v2.png',
@@ -40,8 +40,9 @@ const ASSETS = [
  './assets/cinematics/prologue/subtitles/zh-TW.vtt',
  './td-result.css', './assets/td/lobby/victory-background-v1.png', './src/td/systems/ResultScreen.js',
  './assets/td/lobby/kingdom-lobby-v1.png', './assets/td/lobby/story-card-v1.png', './assets/td/lobby/expedition-card-v1.png', './assets/td/lobby/campaign-map-v1.png', './assets/td/shop/eclipse-court-concept-v1.png', './assets/td/goblin-soldiers-atlas-v2.png',
- './src/td/app/ProfileSkinAdapter.js', './src/td/systems/CosmeticArt.js', './src/td/systems/CrossworldSkinArt.js', './src/td/skin-lab/ChiefPreview.js', './assets/td/shop/north-rescue-actions-v1.png', './assets/td/shop/north-rescue-portrait-v1.png', './assets/td/shop/abyss-response-actions-v1.png', './assets/td/shop/abyss-response-portrait-v1.png', './assets/td/shop/special-maintenance-actions-v1.png', './assets/td/shop/special-maintenance-portrait-v1.png', './assets/td/shop/bone-chief-portrait-v1.png', './assets/td/shop/bone-chief-motion-v1.png', './assets/td/shop/bone-chief-attack-v1.png', './assets/td/shop/bone-chief-cast-v1.png', './assets/td/shop/chief-original-actions-v1.png', './assets/td/shop/chief-original-portrait-v1.png', './assets/td/shop/thunder-chief-portrait-v1.png', './assets/td/shop/thunder-chief-actions-v1.png',
- './td-expedition.css', './assets/td/lobby/skin-frost-v1.png', './assets/td/lobby/limited-orc-v1.png', './td-lobby.css', './td-ranking.css', './td-tutorial.css', './src/td/app/ProfileStore.js', './src/td/app/StoryCatalog.js', './src/td/ranking/RankingDataSource.js', './src/td/ranking/RankingView.js', './src/td/app/FrontierApp.js', './src/td/app/TutorialIntegration.js',
+ './src/td/app/ProfileSkinAdapter.js', './src/td/systems/CosmeticArt.js', './src/td/systems/CrossworldSkinArt.js', './src/td/skin-lab/ChiefPreview.js', './assets/td/shop/starshield-patrol-actions-v1.png', './assets/td/shop/starshield-patrol-portrait-v1.png', './assets/td/shop/tigerstripe-vanguard-actions-v1.png', './assets/td/shop/tigerstripe-vanguard-portrait-v1.png', './assets/td/shop/neon-webrunner-actions-v1.png', './assets/td/shop/neon-webrunner-portrait-v1.png', './assets/td/shop/night-owl-warden-actions-v1.png', './assets/td/shop/night-owl-warden-portrait-v1.png', './assets/td/shop/north-rescue-actions-v1.png', './assets/td/shop/north-rescue-portrait-v1.png', './assets/td/shop/abyss-response-actions-v1.png', './assets/td/shop/abyss-response-portrait-v1.png', './assets/td/shop/special-maintenance-actions-v1.png', './assets/td/shop/special-maintenance-portrait-v1.png', './assets/td/shop/bone-chief-portrait-v1.png', './assets/td/shop/bone-chief-motion-v1.png', './assets/td/shop/bone-chief-attack-v1.png', './assets/td/shop/bone-chief-cast-v1.png', './assets/td/shop/chief-original-actions-v1.png', './assets/td/shop/chief-original-portrait-v1.png', './assets/td/shop/thunder-chief-portrait-v1.png', './assets/td/shop/thunder-chief-actions-v1.png',
+ './src/td/systems/FactionSkinArt.js', './assets/td/shop/goblin-contractors-concept-v1.png', './assets/td/shop/goblin-contractors-units-v1.png', './assets/td/shop/goblin-contractors-buildings-a-v1.png', './assets/td/shop/goblin-contractors-buildings-b-v1.png',
+ './td-expedition.css', './assets/td/lobby/skin-frost-v1.png', './assets/td/lobby/limited-orc-v1.png', './td-lobby.css', './td-ranking.css', './td-tutorial.css', './src/td/app/ProfileStore.js', './src/td/app/StoryCatalog.js', './src/td/ranking/RankingDataSource.js', './src/td/ranking/RankingView.js', './src/td/app/StoryMusic.js', './src/td/app/FrontierApp.js', './src/td/app/TutorialIntegration.js',
  './assets/td/bear-actions-v3.png', './assets/td/ultimate-dragon-actions-v3.png',
  './assets/td/kingdom-mage-actions-v2.png', './assets/td/alchemist-actions-v2.png', './assets/td/bounty-hunter-actions-v2.png', './assets/td/pirate-actions-v2.png', './assets/td/blacksmith-actions-v2.png', './assets/td/time-mage-actions-v2.png',
  './assets/td/bomb-robot-actions-v2.png', './assets/td/heavy-bomb-robot-actions-v2.png', './assets/td/ultimate-dragon-actions-v2.png', './assets/td/ultimate-commander-actions-v2.png', './assets/td/ultimate-soulsteel-actions-v2.png',
@@ -77,6 +78,14 @@ ASSETS.push(...[
  './assets/td/dwarf/dwarfRifle-actions-v4.png','./assets/td/dwarf/dwarfShield-actions-v3.png','./assets/td/dwarf/dwarfRunesmith-actions-v4.png','./assets/td/dwarf/dwarfMortar-actions-v3.png',
  './assets/td/dragonkin/dragonkinEmberwing-actions-v3.png','./assets/td/dragonkin/dragonkinLancer-actions-v5.png','./assets/td/dragonkin/dragonkinOracle-actions-v4.png','./assets/td/dragonkin/dragonkinElder-actions-v4.png',
  './assets/td/egypt/faction-selection-v1.png','./assets/td/egypt/buildings-atlas-v2.png','./assets/td/egypt/egyptSunGuard-actions-v2.png','./assets/td/egypt/egyptArcher-actions-v3.png','./assets/td/egypt/egyptPriest-actions-v2.png','./assets/td/egypt/egyptScarab-actions-v2.png'
+]);
+ASSETS.push(...[
+ './assets/td/story/chapter2-ember-road-rescue-v1.png',
+ './assets/td/story/chapter2-stone-circle-escort-v1.png','./assets/td/story/chapter2-red-mesa-convoy-v1.png',
+ './assets/td/story/chapter3-white-trace-sample-v1.png','./assets/td/story/chapter3-echo-yard-receiver-v1.png',
+ './assets/td/story/chapter3-crossmark-records-v1.png','./assets/td/story/chapter3-nightwatch-defense-v1.png',
+ './assets/td/story/chapter4-tidegate-readings-v1.png','./assets/td/story/chapter4-brineway-measurements-v1.png',
+ './assets/td/story/chapter4-reef-records-v1.png','./assets/td/story/chapter4-observatory-archive-v1.png'
 ]);
 
 // 安裝時只預存遊戲殼；頁面直接載入完整美術，成功後由 fetch handler 快取，避免安裝流程同步等待約 90 MB。

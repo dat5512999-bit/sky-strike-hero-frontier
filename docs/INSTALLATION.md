@@ -1,4 +1,10 @@
+> **v0.85.85 安裝：** Node.js ≥18，執行 `npm run serve:test` 開啟 `/td.html`；無新套件或後端，檢查項目見 [安裝與驗收](FULL_RELEASE_V08585.md)。
+
+> **劇情配樂本機安裝：** 沿用 Node.js ≥18、`npm run serve:test` 與 `/td.html`，無須下載音樂套件或外部歌曲。開劇情後點音樂開關即可驗聲；瀏覽器需支援 Web Audio，且可能要求使用者先點擊。見 [本機驗收](STORY_MUSIC_V1.md)。
+
 > **英雄品質安裝檢查：** Node.js ≥18、`npm run serve:test` 後開啟 `/td.html`，確認商店英雄武器圖與遊戲設定音效；無新依賴。見 [安裝及 QA](HERO_PRESENTATION_V08584.md)。
+
+> **劇情配圖本機檢查：** 沿用 Node.js ≥18、既有安裝與 `npm run serve:test`；開啟 `/td.html` 進入劇情，依序切換「夜守校準」五幕應看到五張不同圖。11 張 PNG 已隨本機原始碼提供，無新套件；首次開啟圖片需載入。見 [完整檢查](STORY_CARD_VISUAL_DIVERSITY_V1.md)。
 
 > **v0.85.83：** 無新增正式執行依賴；沿用 Node.js ≥18，`npm run serve:test` 後開啟 `http://127.0.0.1:4173/td.html`，頁面應顯示 0.85.83。埃及選角、軍團與八張卡須可見；可選的本機視覺 QA 需 Edge／Playwright。見 [驗收及回復](EGYPT_FACTION_V08583.md)。
 

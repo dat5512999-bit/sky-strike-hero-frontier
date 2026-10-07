@@ -145,6 +145,34 @@ test('every playable Chapter I mission has five understandable, spoiler-safe sto
   assert.match(missions[2].aftermath, /沒有證明現代暮影/);
   assert.match(missions[3].aftermath, /不受禁衛軍管轄/);
 });
+test('every story beat has its own existing image instead of repeating one key art', () => {
+  const catalog = setup().ns.systems.StoryCatalog;
+  for (const mission of [...catalog.missions, catalog.chapter2Preview]) {
+    const images = mission.storyCards.map(card => card.image);
+    assert.equal(new Set(images).size, images.length, `${mission.id} repeats a story image`);
+    for (const image of images) {
+      assert.ok(fs.existsSync(image), `${mission.id} missing ${image}`);
+      assert.ok(fs.statSync(image).size > 100000, `${mission.id} has an empty or placeholder image: ${image}`);
+    }
+  }
+  assert.match(catalog.getMission('chapter3-nightwatch').storyCards[2].image, /nightwatch-defense-v1/);
+  assert.match(catalog.getMission('chapter4-tide-observatory').storyCards[2].image, /observatory-archive-v1/);
+});
+test('new action shots are wide nonempty PNGs suitable for the horizontal story stage', () => {
+  const shots = ['chapter2-ember-road-rescue','chapter2-stone-circle-escort','chapter2-red-mesa-convoy',
+    'chapter3-white-trace-sample','chapter3-echo-yard-receiver',
+    'chapter3-crossmark-records','chapter3-nightwatch-defense','chapter4-tidegate-readings',
+    'chapter4-brineway-measurements','chapter4-reef-records','chapter4-observatory-archive'];
+  const worker = fs.readFileSync('sw.js', 'utf8');
+  for (const name of shots) {
+    const file = `assets/td/story/${name}-v1.png`, png = fs.readFileSync(file);
+    assert.equal(png.subarray(1, 4).toString(), 'PNG', file);
+    const width = png.readUInt32BE(16), height = png.readUInt32BE(20);
+    assert.ok(width >= 1400 && height >= 800 && width / height >= 1.5, `${file}: ${width}x${height}`);
+    assert.ok(png.length > 500000, `${file} is too small to be a final scene`);
+    assert.ok(worker.includes(`./${file}`), `${file} missing from worker asset inventory`);
+  }
+});
 test('story cards launch and replay the selected mission rather than always returning to the first mission', () => {
   const { ns, store } = setup(), app = Object.create(ns.systems.FrontierApp.prototype), selected = ns.systems.StoryCatalog.getMission('chapter1-shadowfall');
   Object.assign(app, { store, root: { querySelector(){ return null; } }, show(page){ this.page = page; }, render(){}, launchStory(mission){ this.launched = mission; return true; } });

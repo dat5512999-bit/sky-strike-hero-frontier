@@ -1,4 +1,10 @@
+> **v0.85.85 架構：** 劇情資料、配樂、商城與外觀渲染器仍分模組；資料流及擴充界線見 [整合架構](FULL_RELEASE_V08585.md)。
+
+> **劇情配樂架構 v1.0.0：** `storyBeatScores` → `storyCards[].musicMood` → `FrontierApp` 劇情頁生命週期 → `StoryMusic` Web Audio 合成器。單一劇情排程、24 聲部上限、切幕交叉淡入淡出；戰鬥與背景分頁不持續排程。無後端、資料表或新執行依賴。見 [完整架構](STORY_MUSIC_V1.md)。
+
 > **英雄視覺／音訊架構 v0.85.84：** 英雄類型與武器等級流向 `EquipmentSystem` 圖格、商店及購買展示；真正開火才流向有聲道上限的音效系統。無新後端或存檔 schema。見 [架構圖](HERO_PRESENTATION_V08584.md)。
+
+> **劇情配圖架構 v1.0.0：** `storyBeatShots` → `decorateStoryCards` → `StoryCatalog.storyCards[].image` → 既有橫向劇情舞台；`sw.js` 列出 11 張新素材、按需載入。未新增後端、資料表、計時器或玩家資料欄位。見 [設計與風險](STORY_CARD_VISUAL_DIVERSITY_V1.md)。
 
 > **v0.85.83 架構：** `FactionSystem.egypt` → `config`／`BuildSystem` → `CombatUnit`／`Building`；`BattleSynergySystem` 限制祭壇同族加速，`ImperialFactionArt`／`PaintedTowerVFX` 管卡片、戰場與特效。未增加後端或資料表。見 [資料流與擴充點](EGYPT_FACTION_V08583.md)。
 

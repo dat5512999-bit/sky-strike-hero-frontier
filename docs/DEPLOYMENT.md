@@ -1,4 +1,10 @@
+> **v0.85.85 部署：** 程式、劇情圖、外觀圖、入口與 `sw.js` 必須同版發布；使用 `npm run verify:pages` 逐檔比對。見 [部署與回退清單](FULL_RELEASE_V08585.md)。
+
+> **劇情配樂發布：** 須同版部署 `StoryMusic.js`、`StoryCatalog.js`、`FrontierApp.js`、`td.html`、`td-lobby.css` 與 `sw.js`，提升應用／Worker 版本後核對 Pages 線上有聲，並以手機橫向測試首次播放。不可只更新程式入口而漏掉離線殼。見 [發布清單](STORY_MUSIC_V1.md)。
+
 > **英雄品質 v0.85.84 發布：** 兩張新武器 PNG、相關 JS、入口版號及 Worker 快取鍵須同版；發布後抽驗商店武器卡、技能圖及音效切換。見 [發布清單](HERO_PRESENTATION_V08584.md)。
+
+> **劇情配圖發布：** 11 張 PNG、`StoryCatalog.js`、`sw.js` 及文件須同版提交，確認 Pages 線上 86 幕圖片載入，再以橫向手機實測；不可只部署 JS 而遺漏圖片。見 [發布清單](STORY_CARD_VISUAL_DIVERSITY_V1.md)。
 
 > **v0.85.83 已發布：** 埃及與南方個別 4×4 PNG、各 JS、`td.html`、`update.html`、文件及 `sw.js` 已隨 GitHub `main` 提交 `79d0a1e` 部署；Worker 快取鍵為 `sky-strike-v0.85.83`。Pages 工作流程的線上檔案比對成功；玩家裝置仍應清除舊快取，核對選角女性肖像、八張卡與戰場圖，不只看版號。見 [完整部署檢查](EGYPT_FACTION_V08583.md)。
 

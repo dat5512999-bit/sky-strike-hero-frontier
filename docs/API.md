@@ -1,4 +1,10 @@
+> **v0.85.85 資料契約：** 逐幕 `image/musicMood`、商城外觀 ID 與一次性管理者旗標沿用本機架構；無新 HTTP API。見 [整合資料流](FULL_RELEASE_V08585.md)。
+
+> **劇情音樂資料契約 v1.0.0：** `StoryCatalog.storyCards[].musicMood` 為九種本機主題 ID 之一，`StoryMusic.play/stop/setEnabled` 管頁面播放生命週期；裝置偏好 key 為 `heroFrontierStoryMusic`。無 HTTP API、資料庫或玩家存檔 schema 變更。見 [資料流](STORY_MUSIC_V1.md)。
+
 > **英雄呈現介面 v0.85.84：** `EquipmentSystem.weapon/iconStyle` 提供圖格，`FrostlandAudio.playAttack` 於實際開火時呼叫；不新增 HTTP API、資料庫或存檔欄位。見 [資料流](HERO_PRESENTATION_V08584.md)。
+
+> **劇情配圖資料契約 v1.0.0：** `StoryCatalog.missions[].storyCards[].image` 由 `storyBeatShots` 逐幕指定；缺圖或關內重複圖在目錄建立時報錯。舊 `storyBeatPlans.cardImages` 不再用作回退。無 HTTP API、資料庫或存檔 schema 變更。見 [資料流](STORY_CARD_VISUAL_DIVERSITY_V1.md)。
 
 > **v0.85.83：** 新增 `FactionSystem.FACTIONS.egypt` 及 `config.units/buildings` 的四兵四塔 ID；`TowerEvolutionSystem`、`BattleSynergySystem`、`ArmorySystem` 與 `ImperialFactionArt` 沿用既有模組介面。沒有 HTTP API、資料庫或存檔 schema 變更。見 [資料流](EGYPT_FACTION_V08583.md)。
 

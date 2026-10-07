@@ -1,6 +1,14 @@
+> **v0.85.85 管理者驗收：** 核對逐幕配圖／配樂、五款新外觀及一次性管理者試用資源；測試、備份與限制見 [交付總覽](FULL_RELEASE_V08585.md)。
+
+> **劇情配樂管理：** 新增關卡時在 `storyBeatScores[mission.id]` 為每幕指定支援的情緒；5 幕填 5 筆，含尾聲的赤岩填 6 筆。執行 `tests/td-story-music.test.js`，檢查切幕、靜音持久化與離開劇情停止；不涉及管理者權限或玩家解鎖。見 [規格](STORY_MUSIC_V1.md)。
+
 > **英雄品質管理 v0.85.84：** 驗收 11 位英雄 × 三階武器圖、購買展示、攻擊音效及 Q／W／E／F；部署須同步兩張新武器圖與 Worker。見 [管理與驗收](HERO_PRESENTATION_V08584.md)。
 
+> **劇情配圖管理：** 新增關卡時為 `storyBeatShots[mission.id]` 提供每幕一張不重複、存在且符合人物設定的圖；一般關五張、赤岩六張。執行劇情測試與全幕瀏覽器載入檢查，部署時同步 11 張新圖與 Worker；本輪無資料庫／權限調整。見 [驗收規格](STORY_CARD_VISUAL_DIVERSITY_V1.md)。
+
 > **v0.85.83：** 管理者可用 `npm run test:southern`、`npm run balance:audit` 及 `qa-battlefield-acceptance.cjs --faction egypt` 驗收埃及軍團；可選用 `qa-desktop-soak.cjs --faction egypt` 做隔離長測。不要把劇情伏筆標成正式章節。見 [軍團交付](EGYPT_FACTION_V08583.md)。
+
+> **潮門外流本機校正（未發布）：** 管理者可用 `scripts/qa-battlefield-acceptance.cjs` 複驗所有塔卡、合法塔位與地圖疊線；用 `scripts/qa-desktop-soak.cjs` 在隔離記憶體存檔做娜迦／矮人長測。工具不讀正式玩家存檔、不自動上傳證據；玩家實際卡頓仍需採集版本與效能面板數值。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
 
 > **v0.85.81：** 新增三個中立單位 ID：powderThrower、fireDemon、frostWyrm；bountyHunter 沿用原 ID。管理者可繞過 BOSS 難度門檻測試；不要替一般玩家變更解鎖進度。驗收頁僅允許獨立 4174 origin，使用記憶體帳號。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。
 
@@ -92,6 +100,8 @@
 > **v0.85.8：** 管理者以相同 240G／5 木比較霜原與王國開局，檢查卡片價格、實際傷害與凍結窗口；無新權限或存檔欄位。見 [霜原平衡交付](FROSTLAND_BALANCE_V0858.md)。
 
 # 管理者手冊
+
+> **v0.85.78 管理者測試支援：** 在「設定與玩家資料」切換為管理者後，劇情模式可直接選取每一章與每一關，按「觀看本關劇情」即可讀完整故事卡；此流程只預覽、不寫入通關。既有管理者存檔首次更新會一次性補足大廳鑽石與造型商城試用水晶至 99,999；一般玩家與新測試輪次維持各自原本的餘額與進度。
 
 > **v0.85.7（2026-09-23）：** 地精建築與特效納入資產載入失敗／重試管理；無新權限、資料庫或存檔遷移。 操作、架構、部署、回復及驗收見 [地精視覺交付](GOBLIN_POLISH_V0857.md)。
 
@@ -558,3 +568,5 @@ v0.85.0：冰原僅為 TESTABLE，管理者可玩，新測試輪次故事鎖定�
 > **v0.85.80：** 權限熱路徑改為純布林查詢，未放寬管理者或一般玩家權限。不要在戰鬥循環呼叫 `ProfileStore.current()` 只為取得身份。實驗頁只在獨立測試 port 執行，不能在玩家正式 origin 測試。見 [8D](PERFORMANCE_PROFILE_8D_V08580.md)。
 
 > **v0.85.82：** 三英雄進化及南方軍團進階沿用既有權限與存檔，不替玩家修改解鎖。既有分組驗收已記錄；使用者要求停止追加測試，最終整版尚未重跑，發布狀態請獨立確認 Actions／Pages。詳見 [維護交付](SOUTHERN_COMPLETION_V08582.md)。
+
+> **戰場驗收 v1.0.0：** 管理者在本機 `127.0.0.1:4173` 運行 `scripts/qa-battlefield-acceptance.cjs`，工具用記憶體管理員資料，不讀正式玩家存檔；輸出 `artifacts/` 不自動發布。人工審卡片、合法塔位和正常／半尺寸戰場，再在前景長局複驗。見 [完整規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。

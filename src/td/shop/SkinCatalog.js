@@ -14,6 +14,25 @@
   }
   const thunder = root.FrontierShop?.thunderKing || require('./ThunderKing.js');
   const catalog = schema.catalog([
+    skin('goblin-contractors', '工地防衛公司', '地精工程團 · 警戒施工區', 'faction', 'goblin', 'legendary', 1980, image('shop/goblin-contractors-concept-v1'), {
+      soldierAppearance: sprite('shop/goblin-contractors-units-v1'), towerAppearance: image('shop/goblin-contractors-buildings-a-v1'), banner: image('shop/goblin-contractors-concept-v1'), buildVfx: null, attackVfx: null
+    }),
+    skin('starshield-patrol', '星盾巡警', '銀葉公主 · 星港執勤', 'hero', 'arcanist', 'legendary', 1580, image('shop/starshield-patrol-portrait-v1'), {
+      portrait: image('shop/starshield-patrol-portrait-v1'), selectionArt: image('shop/starshield-patrol-portrait-v1'), battlefieldSprite: sprite('shop/starshield-patrol-actions-v1'), skillVfx: null,
+      summonAppearance: null, animation: sprite('shop/starshield-patrol-actions-v1', 'animation'), voice: null
+    }),
+    skin('tigerstripe-vanguard', '虎紋突擊手', '守誓者 · 先鋒遊獵', 'hero', 'hunter', 'legendary', 1580, image('shop/tigerstripe-vanguard-portrait-v1'), {
+      portrait: image('shop/tigerstripe-vanguard-portrait-v1'), selectionArt: image('shop/tigerstripe-vanguard-portrait-v1'), battlefieldSprite: sprite('shop/tigerstripe-vanguard-actions-v1'), skillVfx: null,
+      summonAppearance: null, animation: sprite('shop/tigerstripe-vanguard-actions-v1', 'animation'), voice: null
+    }),
+    skin('neon-webrunner', '霓虹網行者', '影行者 · 夜城潛行', 'hero', 'rogue', 'legendary', 1580, image('shop/neon-webrunner-portrait-v1'), {
+      portrait: image('shop/neon-webrunner-portrait-v1'), selectionArt: image('shop/neon-webrunner-portrait-v1'), battlefieldSprite: sprite('shop/neon-webrunner-actions-v1'), skillVfx: null,
+      summonAppearance: null, animation: sprite('shop/neon-webrunner-actions-v1', 'animation'), voice: null
+    }),
+    skin('night-owl-warden', '夜梟巡守', '大酋長 · 紫月守門人', 'hero', 'chief', 'legendary', 1680, image('shop/night-owl-warden-portrait-v1'), {
+      portrait: image('shop/night-owl-warden-portrait-v1'), selectionArt: image('shop/night-owl-warden-portrait-v1'), battlefieldSprite: sprite('shop/night-owl-warden-actions-v1'), skillVfx: null,
+      summonAppearance: null, animation: sprite('shop/night-owl-warden-actions-v1', 'animation'), voice: null
+    }),
     skin('north-rescue', '北境搜救犬', '霜牙・凜 · 極地救援', 'hero', 'frostland', 'legendary', 1480, image('shop/north-rescue-portrait-v1'), {
       portrait: image('shop/north-rescue-portrait-v1'), selectionArt: image('shop/north-rescue-portrait-v1'), battlefieldSprite: sprite('shop/north-rescue-actions-v1'), skillVfx: null,
       summonAppearance: null, animation: sprite('shop/north-rescue-actions-v1', 'animation'), voice: null

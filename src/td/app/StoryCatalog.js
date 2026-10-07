@@ -131,18 +131,62 @@
     'chapter4-reef-confluence':{cast:['naga'],cardImages:['assets/td/story/chapter4-reef-confluence-v2.png',null,'assets/td/story/chapter4-reef-confluence-v2.png',null,'assets/td/story/chapter4-reef-confluence-v2.png'],lines:['兩岸測得的潮流在暗礁交會處碰撞，賽洛要比對兩份獨立紀錄。','兩個潮位計顯示同一個節奏；這證明異常會重複，還不能證明原因。','橋頭被切斷前，兩份資料必須在同一處完成交叉比對。'],goal:'讓兩岸獨立取得的讀值在橋頭完成交叉比對。',outcome:'同步被確認。來源依然沒有名字，下一步只能延長觀測時間。'},
     'chapter4-tide-observatory':{cast:['naga'],cardImages:['assets/td/story/chapter4-tide-observatory-v2.png',null,'assets/td/story/chapter4-tide-observatory-v2.png',null,'assets/td/story/chapter4-tide-observatory-v2.png'],lines:['潮儀台在夜裡重現相同回折。賽洛要封存所有原始讀值。','他把時間、潮位與方位分開記錄，讓下一個人也能重新驗算。','敵軍已經接近觀測站；紀錄若在今晚遺失，整條線索就必須重查。'],goal:'守住潮儀台，封存所有原始讀值，讓下一位觀測者能重查。',outcome:'潮衛持續同行。可以證實的是回應仍在重複；不能證實的來源，仍不能被編成結論。'}
   };
+  // Every beat owns a distinct visual. The earlier cardImages fallback silently
+  // reused one key art for up to five cards; an incomplete new mission now fails
+  // loudly during development instead of shipping a repeated slideshow.
+  const storyBeatShots={
+    'chapter1-border':['assets/td/story/kingdom-border-at-dusk-v2.png','assets/td/story/rhen-oathkeeper-v2.png','assets/td/beginner-valley-v2.png','assets/td/story/kingdom-checkpoint-order-v2.png','assets/td/opening/hero-hunter-selection-v1.png'],
+    'chapter1-silverleaf':['assets/td/story/silverleaf-valley-arrival-v2.png','assets/td/story/silverleaf-record-study-v2.png','assets/td/silverleaf-valley-v4.png','assets/td/story/silverleaf-bridge-escort-v2.png','assets/td/opening/hero-arcanist-selection-v1.png'],
+    'chapter1-shadowfall':['assets/td/story/shadowfall-testimony-v2.png','assets/td/story/shadowfall-archive-reliquary-v2.png','assets/td/shadowfall-ruins-v3.png','assets/td/story/shadowfall-evacuation-v2.png','assets/td/opening/hero-rogue-selection-v1.png'],
+    'chapter1-frostborn':['assets/td/story/frostborn-chasm-route-v2.png','assets/td/story/frostborn-bridge-signal-v2.png','assets/td/frostborn-chasm-v3.png','assets/td/story/frostborn-last-bridge-v2.png','assets/td/opening/hero-hunter-selection-v1.png'],
+    'chapter2-western-signal':['assets/td/story/chapter2-western-signal-v1.png','assets/td/story/chapter2-western-parley-v1.png','assets/td/western-signal-v1.png','assets/td/story/chapter2-western-passage-v1.png','assets/td/opening/hero-chief-selection-v2.png'],
+    'chapter2-ember-road':['assets/td/ember-road-encounter-v1.png','assets/td/story/chapter2-ember-road-escort-v2.png','assets/td/story/chapter2-ember-road-rescue-v1.png','assets/td/opening/hero-chief-selection-v2.png','assets/td/opening/hero-hunter-selection-v1.png'],
+    'chapter2-stone-circle':['assets/td/stone-ring-basin-v1.png','assets/td/story/chapter2-stone-circle-parley-v2.png','assets/td/story/chapter2-stone-circle-escort-v1.png','assets/td/opening/hero-chief-selection-v2.png','assets/td/opening/hero-hunter-selection-v1.png'],
+    'chapter2-red-mesa':['assets/td/red-mesa-terminus-v1.png','assets/td/story/chapter2-red-mesa-escort-v2.png','assets/td/opening/hero-hunter-selection-v1.png','assets/td/opening/hero-chief-selection-v2.png','assets/td/story/chapter2-bull-parting-v1.png','assets/td/story/chapter2-red-mesa-convoy-v1.png'],
+    'chapter3-white-trace':['assets/td/chapter3-white-trace-pass-v1.png','assets/td/frostland/hero-selection-v2.png','assets/td/story/chapter3-white-trace-sample-v1.png','assets/td/goblin-chief-engineer-v1.png','assets/td/story/chapter3-white-trace-investigation-v2.png'],
+    'chapter3-echo-yard':['assets/td/chapter3-echo-engine-yard-v1.png','assets/td/goblin-chief-engineer-v1.png','assets/td/story/chapter3-echo-yard-receiver-v1.png','assets/td/story/chapter3-echo-yard-study-v2.png','assets/td/story/chapter3-white-trace-investigation-v2.png'],
+    'chapter3-crossmark':['assets/td/chapter3-crossmark-hollow-v1.png','assets/td/frostland/hero-selection-v2.png','assets/td/story/chapter3-crossmark-records-v1.png','assets/td/story/chapter3-crossmark-compare-v2.png','assets/td/story/chapter3-echo-yard-study-v2.png'],
+    'chapter3-nightwatch':['assets/td/chapter3-nightwatch-calibration-v1.png','assets/td/story/chapter3-white-trace-investigation-v2.png','assets/td/story/chapter3-nightwatch-defense-v1.png','assets/td/story/chapter3-crossmark-compare-v2.png','assets/td/story/chapter3-nightwatch-calibration-v2.png'],
+    'chapter4-tidegate-outfall':['assets/td/chapter4-tidegate-outfall-v1.png','assets/td/naga/tidebreaker-selection-v1.png','assets/td/story/chapter4-tidegate-readings-v1.png','assets/td/story/chapter4-tidegate-outfall-v2.png','assets/td/naga/faction-selection-v1.png'],
+    'chapter4-brineway':['assets/td/chapter4-brineway-v1.png','assets/td/naga/tidebreaker-selection-v1.png','assets/td/story/chapter4-brineway-measurements-v1.png','assets/td/story/chapter4-brineway-rescue-v2.png','assets/td/naga/faction-selection-v1.png'],
+    'chapter4-reef-confluence':['assets/td/chapter4-reef-confluence-v1.png','assets/td/naga/tidebreaker-selection-v1.png','assets/td/story/chapter4-reef-records-v1.png','assets/td/story/chapter4-reef-confluence-v2.png','assets/td/naga/faction-selection-v1.png'],
+    'chapter4-tide-observatory':['assets/td/chapter4-tide-observatory-v1.png','assets/td/naga/tidebreaker-selection-v1.png','assets/td/story/chapter4-observatory-archive-v1.png','assets/td/story/chapter4-tide-observatory-v2.png','assets/td/naga/faction-selection-v1.png'],
+    'chapter2-western-signal-preview':['assets/td/story/chapter2-western-signal-v1.png','assets/td/story/chapter2-western-parley-v1.png','assets/td/western-signal-v1.png','assets/td/story/chapter2-western-passage-v1.png','assets/td/opening/hero-chief-selection-v2.png']
+  };
+  // Score each beat by its dramatic purpose, not only by chapter or faction.
+  // Themes are short original motifs in StoryMusic; no remote/copyrighted tracks.
+  const storyBeatScores={
+    'chapter1-border':['unease','resolve','tension','heroic','hope'],
+    'chapter1-silverleaf':['wonder','mystery','tension','resolve','hope'],
+    'chapter1-shadowfall':['mystery','sorrow','tension','resolve','hope'],
+    'chapter1-frostborn':['unease','sorrow','tension','heroic','hope'],
+    'chapter2-western-signal':['wonder','resolve','tension','heroic','joy'],
+    'chapter2-ember-road':['unease','sorrow','tension','heroic','hope'],
+    'chapter2-stone-circle':['mystery','resolve','tension','heroic','hope'],
+    'chapter2-red-mesa':['wonder','resolve','tension','heroic','sorrow','hope'],
+    'chapter3-white-trace':['mystery','sorrow','tension','resolve','hope'],
+    'chapter3-echo-yard':['mystery','wonder','tension','resolve','joy'],
+    'chapter3-crossmark':['unease','mystery','tension','resolve','hope'],
+    'chapter3-nightwatch':['unease','sorrow','tension','heroic','hope'],
+    'chapter4-tidegate-outfall':['wonder','mystery','tension','resolve','hope'],
+    'chapter4-brineway':['unease','sorrow','tension','heroic','hope'],
+    'chapter4-reef-confluence':['mystery','wonder','tension','resolve','hope'],
+    'chapter4-tide-observatory':['mystery','sorrow','tension','heroic','hope'],
+    'chapter2-western-signal-preview':['wonder','resolve','tension','heroic','joy']
+  };
   const decorateStoryCards=mission=>{
     const plan=storyBeatPlans[mission.id];
     if(!plan)return;
-    // A location image can orient one beat, but a character-bound mission must
-    // never fall back to a retired generic portrait or a map-only card.
-    const artAt=(index,fallback)=>plan.cardImages?.[index]||plan.sceneImage||plan.cardImages?.find(Boolean)||fallback;
-    const original=mission.storyCards.map((card,index)=>({...card,line:plan.lines?.[index]||card.line,image:artAt(index,card.image),cast:[...plan.cast],visualPolicy:'cast-bound'}));
-    const concreteGoal={title:'本關目標',label:'現在要做什麼',line:plan.goal,image:artAt(2,mission.storyCards[0].image),focus:'center',cast:[...plan.cast],visualPolicy:'cast-bound',beat:'objective'};
-    const outcome={title:'守住之後',label:'這一戰改變了什麼',line:plan.outcome,image:artAt(4,mission.storyCards[0].image),focus:'center',cast:[...plan.cast],visualPolicy:'cast-bound',beat:'outcome'};
+    const shots=storyBeatShots[mission.id],expected=plan.epilogue?6:5;
+    if(!shots||shots.length!==expected||new Set(shots).size!==expected)throw Error('Story beat art incomplete: '+mission.id);
+    const scores=storyBeatScores[mission.id];
+    if(!scores||scores.length!==expected)throw Error('Story beat score incomplete: '+mission.id);
+    const original=mission.storyCards.map((card,index)=>{const beat=index===2?3:index;return {...card,line:plan.lines?.[index]||card.line,image:shots[beat],musicMood:scores[beat],cast:[...plan.cast],visualPolicy:'cast-bound'};});
+    const concreteGoal={title:'本關目標',label:'現在要做什麼',line:plan.goal,image:shots[2],musicMood:scores[2],focus:'center',cast:[...plan.cast],visualPolicy:'cast-bound',beat:'objective'};
+    const outcome={title:'守住之後',label:'這一戰改變了什麼',line:plan.outcome,image:shots[expected-1],musicMood:scores[expected-1],focus:'center',cast:[...plan.cast],visualPolicy:'cast-bound',beat:'outcome'};
     // Five beats make every battle understandable without revealing later truth:
     // arrival → people/position → concrete objective → immediate choice → result.
-    mission.storyCards=[original[0],original[1],concreteGoal,original[2],...(plan.epilogue?[plan.epilogue]:[]),outcome];
+    mission.storyCards=[original[0],original[1],concreteGoal,original[2],...(plan.epilogue?[{...plan.epilogue,image:shots[4],musicMood:scores[4]}]:[]),outcome];
   };
   storyBeatPlans[chapter2Preview.id]={cast:['hunter','chief'],goal:'護送信使與舊印穿過西境，換取戈爾繼續對話的條件。',outcome:'戈爾同意帶來見證者；這是對話的開始，不是結論。'};
   decorateStoryCards(chapter2Preview);

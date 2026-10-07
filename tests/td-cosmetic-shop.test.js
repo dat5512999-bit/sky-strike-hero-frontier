@@ -7,11 +7,13 @@ const previewStore=async()=>new SkinStore(catalog,new MemorySkinAdapter()).init(
 
 test('shop releases crossworld and legacy hero skins plus the kingdom colorway while holding unfinished effects',async()=>{
   const crossworld=['north-rescue','abyss-response','steel-foreman','special-maintenance'];
+  const secondLooks=['starshield-patrol','tigerstripe-vanguard','neon-webrunner','night-owl-warden'];
   assert.deepEqual(crossworld.map(id=>catalog.find(s=>s.id===id)?.targetId),['frostland','naga','bull','goblin']);
+  assert.deepEqual(secondLooks.map(id=>catalog.find(s=>s.id===id)?.targetId),['arcanist','hunter','rogue','chief']);
   assert.deepEqual(['astral-oath','solar-lion','crimson-fox','bone-emperor'].map(id=>catalog.find(s=>s.id===id)?.category),['hero','hero','hero','hero']);
   assert.equal(catalog.find(s=>s.id==='eclipse-court').targetId,'hunter');
   assert.equal(catalog.find(s=>s.id==='arcane-echo').availability.status,'locked');
-  const store=await previewStore();for(const skin of catalog)assert.equal(store.status(skin.id),[...crossworld,'astral-oath','solar-lion','crimson-fox','bone-emperor','thunder-king','eclipse-court'].includes(skin.id)?'available':'locked');
+  const store=await previewStore();for(const skin of catalog)assert.equal(store.status(skin.id),['goblin-contractors',...crossworld,...secondLooks,'astral-oath','solar-lion','crimson-fox','bone-emperor','thunder-king','eclipse-court'].includes(skin.id)?'available':'locked');
   assert.equal(catalog.find(s=>s.id==='bone-emperor').cover.src,'assets/td/shop/bone-chief-portrait-v1.png');
 });
 test('all referenced preview assets exist and cosmetic schema rejects gameplay fields',()=>{
@@ -42,13 +44,15 @@ test('purchases and equipment persist by player profile and reject stale commits
   const {ProfileSkinAdapter}=require('../src/td/app/ProfileSkinAdapter.js');
   const memory=new Map(),storage={getItem:key=>memory.get(key)??null,setItem:(key,value)=>memory.set(key,value)};
   const profiles=new globalThis.TowerFrontier.systems.ProfileStore(storage);
+  profiles.switchTo('admin');
   const first=await new SkinStore(catalog,new ProfileSkinAdapter(profiles)).init();
+  assert.equal(first.snapshot().balance,99999);
   await first.buy('bone-emperor');await first.equip('bone-emperor');
   const reopened=await new SkinStore(catalog,new ProfileSkinAdapter(new globalThis.TowerFrontier.systems.ProfileStore(storage))).init();
-  assert.equal(reopened.status('bone-emperor'),'equipped');assert.equal(reopened.snapshot().balance,8720);
+  assert.equal(reopened.status('bone-emperor'),'equipped');assert.equal(reopened.snapshot().balance,98719);
   await reopened.buy('solar-lion');
   await assert.rejects(first.buy('solar-lion'),/另一個分頁|資料已更新/);
-  assert.equal(first.snapshot().balance,8720);
+  assert.equal(first.snapshot().balance,98719);
   const latestProfiles=new globalThis.TowerFrontier.systems.ProfileStore(storage);latestProfiles.newRound();
   const fresh=await new SkinStore(catalog,new ProfileSkinAdapter(latestProfiles)).init();
   assert.equal(fresh.status('bone-emperor'),'available');assert.equal(fresh.snapshot().balance,10000);

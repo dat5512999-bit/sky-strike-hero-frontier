@@ -10,7 +10,7 @@ test('thunder purchases preserve old cosmetics and remain isolated to the active
   const store=await new shop.SkinStore(shop.catalog,new shop.ProfileSkinAdapter(profiles)).init();
   await store.buy('thunder-king');await store.equip('thunder-king');await assert.rejects(store.buy('thunder-king'),/已擁有/);
   const reloaded=new ns.systems.ProfileStore(storage),again=await new shop.SkinStore(shop.catalog,new shop.ProfileSkinAdapter(reloaded)).init();
-  assert.equal(again.snapshot().balance,720);assert.equal(again.status('thunder-king'),'equipped');
+  assert.equal(again.snapshot().balance,98719);assert.equal(again.status('thunder-king'),'equipped');
   assert.deepEqual(plain(again.snapshot().equippedSkins),{'hero:chief':'thunder-king','hero:arcanist':'astral-oath','faction:hunter':'eclipse-court'});
   assert.equal(again.status('bone-emperor'),'owned');
   const before=reloaded.export();reloaded.newRound();

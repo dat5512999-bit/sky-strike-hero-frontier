@@ -4,9 +4,13 @@
   // purchasing a skin never changes a hero's stats, skill timings, or equipment.
   const Art=ns.systems.ArtSystem,proto=Art.prototype,previous=proto.drawHero;
   const skins={
+    arcanist:{id:'starshield-patrol',path:'assets/td/shop/starshield-patrol-actions-v1.png',height:112,foot:.8,y:12},
+    hunter:{id:'tigerstripe-vanguard',path:'assets/td/shop/tigerstripe-vanguard-actions-v1.png',height:112,foot:.8,y:12},
+    rogue:{id:'neon-webrunner',path:'assets/td/shop/neon-webrunner-actions-v1.png',height:112,foot:.8,y:12},
     frostland:{id:'north-rescue',path:'assets/td/shop/north-rescue-actions-v1.png',height:108,foot:.8,y:12},
     naga:{id:'abyss-response',path:'assets/td/shop/abyss-response-actions-v1.png',height:108,foot:.8,y:12},
-    goblin:{id:'special-maintenance',path:'assets/td/shop/special-maintenance-actions-v1.png',height:96,foot:.84,y:10}
+    goblin:{id:'special-maintenance',path:'assets/td/shop/special-maintenance-actions-v1.png',height:96,foot:.84,y:10},
+    chief:{id:'night-owl-warden',path:'assets/td/shop/night-owl-warden-actions-v1.png',height:112,foot:.82,y:12}
   };
   function asset(art,path){
     art.crossworldSkinImages ||= {};
