@@ -1,3 +1,5 @@
+> 封存回復：舊手冊中已移出的 artifacts 路徑，可用 scripts/archive-project-artifacts.ps1 -Mode Restore -Target artifacts/項目名稱取回；清單與封存資料須一併備份。 見 [整理、發布與還原說明](PROJECT_STORAGE_CLEANUP_20261007.md)。
+
 > **v0.85.87：** 地圖選擇包含在玩家匯出資料的 adventure:world-v1；章節存檔新增可選 adventure 欄位，schema 1 舊檔仍可載入。見 [備份與回復](MAP_ADVENTURE_V08587.md#備份與回復)。
 
 > **v0.85.86 備份回復：** 更新前匯出玩家 JSON 並保留完整 v0.85.85 提交；回退時整版還原入口與 Worker，不刪玩家資料。新報表的 `leakTypes` 可選，舊版可忽略。見 [步驟](COMBAT_CLARITY_V08586.md)。

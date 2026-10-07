@@ -1,3 +1,5 @@
+> 安裝：遊戲無新依賴；封存工具需 PowerShell 7.3+，新 clone 啟動遊戲不需要舊驗收資料。 見 [整理、發布與還原說明](PROJECT_STORAGE_CLEANUP_20261007.md)。
+
 > **v0.85.87：** 沿用 Node.js 18+ 與本機 HTTP 啟動；無新套件或資料庫。新增地圖模組必須隨 td.html／sw.js 一起提供。見 [安裝與部署](MAP_ADVENTURE_V08587.md#安裝部署與更新)。
 
 > **v0.85.86 安裝：** 沿用 Node.js ≥18 與 `npm run serve:test`，開啟 `/td.html` 確認版號；無新套件、資料庫或 API key。見 [安裝及驗收](COMBAT_CLARITY_V08586.md)。

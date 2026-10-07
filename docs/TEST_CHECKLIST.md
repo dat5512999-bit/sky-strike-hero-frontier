@@ -1,3 +1,5 @@
+> 整理 QA：2,219 個封存檔案及 588 個保護檔案核對一致；單項還原成功。新增發布依賴、排除規則及拒絕覆寫 3 項測試。 見 [整理、發布與還原說明](PROJECT_STORAGE_CLEANUP_20261007.md)。
+
 > **v0.85.87：** 執行 npm run test:adventure、npm run check:adventure 和 npm test；人工驗收手機捲動、範圍定位、暫停還原與跨關支援。見 [完整驗收清單](MAP_ADVENTURE_V08587.md#qa-驗收)。
 
 > **v0.85.86 QA：** 跑 `tests/td-combat-clarity.test.js`、全套測試、語法與平衡 audit；桌面／手機檢查提醒遮擋、索敵覆蓋、技能錯誤、波後診斷及真機前景效能。見 [完整清單](COMBAT_CLARITY_V08586.md)。

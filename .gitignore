@@ -6,6 +6,7 @@ node_modules/
 .worktrees/
 artifacts/
 _site/
+.release-stage/
 
 # Local concept/reference archive; the playable game does not load these files.
 assets/td/reference/

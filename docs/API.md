@@ -1,3 +1,5 @@
+> 發布／封存維護：無新增 HTTP API；新增 Node plan／build 與 PowerShell Plan／Archive／Verify／Restore 介面。 見 [整理、發布與還原說明](PROJECT_STORAGE_CLEANUP_20261007.md)。
+
 > **v0.85.87：** 新增 AdventureCatalog.describe、AdventureSystem.act／snapshot／restore／writeVictory；沒有新增 HTTP API。見 [介面與存檔](MAP_ADVENTURE_V08587.md#介面與存檔)。
 
 > **v0.85.86 資料契約：** 新增 `CombatClaritySystem` 純展示介面，`recordLeak(damage, monster?)` 的怪物參數可選，單波報表可有 `leakTypes`；無 HTTP API、資料庫或玩家存檔 schema 變更。見 [架構](COMBAT_CLARITY_V08586.md)。
