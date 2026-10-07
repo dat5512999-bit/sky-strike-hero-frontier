@@ -120,7 +120,7 @@
     const path=HERO[hero.classType];if(!path)return originalHero.call(this,ctx,hero);
     const atlas=image(this,'hero:'+hero.classType,path);if(!atlas.ready)return false;
     const row={idle:0,walk:1,attack:2,cast:3}[hero.state]||0,frame=Math.max(0,Math.min(3,Math.floor(hero.frame||0))),profile=HERO_PROFILES[hero.classType],scale=profile.height/profile.bodyHeight,h=1254/4*scale,w=h;
-    ctx.save();try{ctx.translate(hero.x,hero.y);if(Math.cos(hero.facing||0)<0)ctx.scale(-1,1);ctx.fillStyle='rgba(0,0,0,.22)';ctx.beginPath();ctx.ellipse(0,10,22,5,0,0,Math.PI*2);ctx.fill();Art.drawFrame(ctx,atlas,frame,row,-w/2,12-profile.feet[row*4+frame]*scale,w,h);const weapon=ns.systems.EquipmentSystem.weapon(hero);if((hero.equipment.spear||0)>0){ctx.strokeStyle=weapon.color;ctx.shadowColor=weapon.color;ctx.shadowBlur=8;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(4,-34);ctx.lineTo(30,-46);ctx.stroke();}}finally{ctx.restore();}return true;
+    ctx.save();try{ctx.translate(hero.x,hero.y);if(Math.cos(hero.facing||0)<0)ctx.scale(-1,1);ctx.fillStyle='rgba(0,0,0,.22)';ctx.beginPath();ctx.ellipse(0,10,22,5,0,0,Math.PI*2);ctx.fill();Art.drawFrame(ctx,atlas,frame,row,-w/2,12-profile.feet[row*4+frame]*scale,w,h);}finally{ctx.restore();}return true;
   };
   Art.prototype.drawCombatUnitSprite=function(ctx,unit){
     const path=SOLDIERS[unit.type];if(!path)return originalUnit.call(this,ctx,unit);

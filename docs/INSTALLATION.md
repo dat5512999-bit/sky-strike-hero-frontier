@@ -1,3 +1,5 @@
+> **英雄品質安裝檢查：** Node.js ≥18、`npm run serve:test` 後開啟 `/td.html`，確認商店英雄武器圖與遊戲設定音效；無新依賴。見 [安裝及 QA](HERO_PRESENTATION_V08584.md)。
+
 > **v0.85.83：** 無新增正式執行依賴；沿用 Node.js ≥18，`npm run serve:test` 後開啟 `http://127.0.0.1:4173/td.html`，頁面應顯示 0.85.83。埃及選角、軍團與八張卡須可見；可選的本機視覺 QA 需 Edge／Playwright。見 [驗收及回復](EGYPT_FACTION_V08583.md)。
 
 > **潮門外流本機校正（未發布）：** 沿用既有 Node.js 18+ 安裝與 `npm run serve:test`；正式遊戲沒有新增依賴。可選的視覺／效能驗收需本機 Edge 與 Playwright，另開終端跑 `node scripts/qa-battlefield-acceptance.cjs --faction naga` 或 `node scripts/qa-desktop-soak.cjs --faction naga --seconds 60 --headed`。測試埠預設 4173，需改埠時兩個終端同設 `TD_TEST_PORT`。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。

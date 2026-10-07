@@ -63,10 +63,10 @@ for(const type of ['naga-tidegate','naga-maelstrom','naga-command','ultimate-nag
 
 test('Naga field fault restores transform/alpha scope and still draws the next field',()=>{
   const {ns,hero}=setup(),canvas=strictCanvas();hero.fields=[{type:'naga',x:180,y:220,time:6},{type:'naga',x:190,y:220,time:6}];
-  const healthy=hero.fields[1],arc=canvas.ctx.arc;let calls=0;
-  canvas.ctx.arc=(...args)=>{if(calls++===0)throw new Error('injected ground fault');return arc(...args);};
+  const healthy=hero.fields[1],ellipse=canvas.ctx.ellipse;let calls=0;
+  canvas.ctx.ellipse=(...args)=>{if(calls++===0)throw new Error('injected ground fault');return ellipse(...args);};
   canvas.ctx.globalAlpha=.61;ns.systems.HeroRoster.drawFields(canvas.ctx,hero);
-  assert.equal(canvas.depth,0);assert.equal(canvas.ctx.globalAlpha,.61);assert.equal(hero.fields.length,1);assert.equal(hero.fields[0],healthy);assert.equal(calls,2);assert.match(hero.nagaFieldFault,/injected ground fault/);
+  assert.equal(canvas.depth,0);assert.equal(canvas.ctx.globalAlpha,.61);assert.equal(hero.fields.length,1);assert.equal(hero.fields[0],healthy);assert.ok(calls>=2);assert.match(hero.nagaFieldFault,/injected ground fault/);
 });
 
 test('Rapid W taps, a dense swarm and background resume stay bounded',()=>{

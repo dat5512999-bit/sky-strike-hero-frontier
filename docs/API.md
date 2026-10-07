@@ -1,3 +1,5 @@
+> **英雄呈現介面 v0.85.84：** `EquipmentSystem.weapon/iconStyle` 提供圖格，`FrostlandAudio.playAttack` 於實際開火時呼叫；不新增 HTTP API、資料庫或存檔欄位。見 [資料流](HERO_PRESENTATION_V08584.md)。
+
 > **v0.85.83：** 新增 `FactionSystem.FACTIONS.egypt` 及 `config.units/buildings` 的四兵四塔 ID；`TowerEvolutionSystem`、`BattleSynergySystem`、`ArmorySystem` 與 `ImperialFactionArt` 沿用既有模組介面。沒有 HTTP API、資料庫或存檔 schema 變更。見 [資料流](EGYPT_FACTION_V08583.md)。
 
 > **潮門外流本機校正（未發布）：** `maps.definitions.tidegateoutfall` 的道路、城門、英雄出生點及五塊 `buildAreas` 與背景原畫對齊；`BuildSystem.canPlaceAt` 和道路／塔射程消費同一地圖幾何。QA 工具讀取 `PerformanceMonitor.record` 的既有影格樣本；不新增 HTTP API、資料庫或存檔欄位。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。

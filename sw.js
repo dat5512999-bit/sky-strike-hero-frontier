@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.83';
+const CACHE_NAME = 'sky-strike-v0.85.84';
 const ASSETS = [
  './src/td/systems/FrostlandMotionAtlas.js', './frostland-soldier-preview.html', './src/td/frostland-soldier-preview.js',
  './assets/td/frostland/frostWolf-motion-v2.png', './assets/td/frostland/frostBear-motion-v2.png', './assets/td/frostland/frostBird-motion-v2.png',
@@ -16,10 +16,10 @@ const ASSETS = [
  './src/td/systems/PaintedTowerVFX.js', './assets/td/tower-effects-painted-v2.png',
  './assets/td/tower-magic-effects-v2.png',
  './assets/td/goblin-steam-scavenger-actions-v1.png', './assets/td/goblin-bomb-sapper-actions-v1.png', './assets/td/orc-war-banner-actions-v1.png', './assets/td/orc-skullcrusher-actions-v1.png', './assets/td/frostland-rime-stalker-actions-v1.png', './assets/td/frostland-rime-priest-actions-v1.png',
- './assets/td/naga/siltwater-demonlord-actions-v1.png', './assets/td/naga/silt-imp-actions-v1.png', './assets/td/naga/brine-shellbreaker-actions-v1.png', './assets/td/naga/tidebreaker-hero-actions-v1.png', './assets/td/naga/tidebreaker-selection-v1.png', './assets/td/naga/faction-selection-v1.png', './assets/td/naga/tidebreaker-skill-icons-v1.png', './assets/td/naga/tideguard-actions-v1.png', './assets/td/naga/deep-tide-wargod-actions-v1.png', './assets/td/naga/manta-wing-raider-actions-v1.png', './assets/td/naga/venom-marsh-stalker-actions-v1.png', './assets/td/naga/naga-buildings-v1.png',
+ './assets/td/naga/siltwater-demonlord-actions-v1.png', './assets/td/naga/silt-imp-actions-v1.png', './assets/td/naga/brine-shellbreaker-actions-v1.png', './assets/td/naga/tidebreaker-hero-actions-v1.png', './assets/td/naga/tidebreaker-selection-v1.png', './assets/td/naga/faction-selection-v1.png', './assets/td/naga/tidebreaker-skill-icons-v1.png', './assets/td/naga/tidebreaker-weapons-v1.png', './assets/td/naga/tideguard-actions-v1.png', './assets/td/naga/deep-tide-wargod-actions-v1.png', './assets/td/naga/manta-wing-raider-actions-v1.png', './assets/td/naga/venom-marsh-stalker-actions-v1.png', './assets/td/naga/naga-buildings-v1.png',
  './src/td/systems/ImperialFactionArt.js', './src/td/systems/HeroSkillPresentation.js', './src/td/systems/Performance8DOptimizer.js', './assets/td/dwarf/hero-actions-v2.png', './assets/td/dwarf/hero-selection-v1.png', './assets/td/dwarf/skill-icons-v1.png', './assets/td/dwarf/faction-selection-v1.png', './assets/td/dwarf/soldiers-actions-v2.png', './assets/td/dwarf/weapons-v1.png', './assets/td/dragonkin/hero-actions-v2.png', './assets/td/dragonkin/hero-selection-v1.png', './assets/td/dragonkin/skill-icons-v1.png', './assets/td/dragonkin/faction-selection-v1.png', './assets/td/dragonkin/soldiers-actions-v2.png', './assets/td/dragonkin/weapons-v1.png', './assets/td/egypt/hero-actions-v3.png', './assets/td/egypt/hero-selection-v1.png', './assets/td/egypt/skill-icons-v1.png', './assets/td/egypt/weapons-v1.png',
  './assets/td/dwarf/buildings-atlas-v1.png', './assets/td/dragonkin/buildings-atlas-v2.png',
- './src/td/systems/BullWargodArt.js', './assets/td/neutral/bull-wargod-actions-5x5-v1.png', './assets/td/neutral/bull-wargod-selection-v1.png', './assets/td/neutral/bull-wargod-skill-icons-v2.png', './assets/td/shop/steel-foreman-actions-v1.png', './assets/td/shop/steel-foreman-portrait-v1.png',
+ './src/td/systems/BullWargodArt.js', './assets/td/neutral/bull-wargod-actions-5x5-v1.png', './assets/td/neutral/bull-wargod-selection-v1.png', './assets/td/neutral/bull-wargod-skill-icons-v2.png', './assets/td/neutral/bull-wargod-weapons-v1.png', './assets/td/shop/steel-foreman-actions-v1.png', './assets/td/shop/steel-foreman-portrait-v1.png',
  './src/td/systems/NeutralMercenaryArt.js', './assets/td/neutral/fire-demon-actions-v1.png', './assets/td/neutral/frost-wyrm-actions-v1.png', './assets/td/neutral/powder-thrower-actions-v2.png', './assets/td/neutral/bounty-hunter-actions-v4.png',
  './assets/td/enemy-grunt-directions-v1.png', './assets/td/enemy-brute-directions-v1.png',
  './update.html', './src/td/update-client.js',

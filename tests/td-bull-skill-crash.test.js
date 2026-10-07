@@ -33,7 +33,7 @@ for(const type of ['bull-hammerfall','bull-arena','bull-ascend','ultimate-bull']
 
 test('戰牛震域繪製故障只移除該領域並還原 Canvas 狀態',()=>{
   const {ns,hero}=setup(),canvas=strictCanvas();hero.fields=[{type:'bull',x:180,y:220,time:6},{type:'bull',x:190,y:220,time:6}];
-  const healthy=hero.fields[1],arc=canvas.ctx.arc;let calls=0;canvas.ctx.arc=(...args)=>{if(calls++===0)throw new Error('injected bull field fault');return arc(...args);};canvas.ctx.globalAlpha=.61;
+  const healthy=hero.fields[1],ellipse=canvas.ctx.ellipse;let calls=0;canvas.ctx.ellipse=(...args)=>{if(calls++===0)throw new Error('injected bull field fault');return ellipse(...args);};canvas.ctx.globalAlpha=.61;
   assert.doesNotThrow(()=>ns.systems.HeroRoster.drawFields(canvas.ctx,hero));assert.equal(canvas.depth,0);assert.equal(canvas.ctx.globalAlpha,.61);assert.equal(hero.fields.length,1);assert.equal(hero.fields[0],healthy);assert.match(hero.bullFieldFault,/injected bull field fault/);
 });
 

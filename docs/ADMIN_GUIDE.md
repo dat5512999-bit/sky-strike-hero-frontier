@@ -1,3 +1,5 @@
+> **英雄品質管理 v0.85.84：** 驗收 11 位英雄 × 三階武器圖、購買展示、攻擊音效及 Q／W／E／F；部署須同步兩張新武器圖與 Worker。見 [管理與驗收](HERO_PRESENTATION_V08584.md)。
+
 > **v0.85.83：** 管理者可用 `npm run test:southern`、`npm run balance:audit` 及 `qa-battlefield-acceptance.cjs --faction egypt` 驗收埃及軍團；可選用 `qa-desktop-soak.cjs --faction egypt` 做隔離長測。不要把劇情伏筆標成正式章節。見 [軍團交付](EGYPT_FACTION_V08583.md)。
 
 > **v0.85.81：** 新增三個中立單位 ID：powderThrower、fireDemon、frostWyrm；bountyHunter 沿用原 ID。管理者可繞過 BOSS 難度門檻測試；不要替一般玩家變更解鎖進度。驗收頁僅允許獨立 4174 origin，使用記憶體帳號。 詳見 [中立契約交付](NEUTRAL_CONTRACTS_V08581.md)。

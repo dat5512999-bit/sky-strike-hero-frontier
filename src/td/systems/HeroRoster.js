@@ -13,6 +13,8 @@
     egypt:{name:'曦陽守衛・納芙拉',faction:'埃及島曦陽衛團 · 劇情伏筆',color:'#e7be62',selectionArt:'assets/td/egypt/hero-selection-v1.png',selectionFocus:'50% 14%',skillArt:'assets/td/egypt/skill-icons-v1.png',range:138,damage:21,interval:.68,attackType:'magic',skills:['日輪斬','沙金領域','曦陽守望'],shortSkills:['日輪','沙金','曦陽'],icons:['☀','◇','𓂀'],hints:['以彎刀突進重擊，冷卻 9 秒','在腳下展開 6 秒日輪領域，冷卻 12 秒','自身攻擊與攻速提升 5 秒，冷卻 22 秒']},
     bull:{name:'戰神・奧魯姆',faction:'中立英雄 · 可與所有軍團遠征',color:'#e4a452',selectionArt:'assets/td/neutral/bull-wargod-selection-v1.png',selectionFocus:'50% 0%',skillArt:'assets/td/neutral/bull-wargod-skill-icons-v2.png',range:108,damage:22,interval:.72,attackType:'chaos',splash:22,skills:['破陣天墜','戰神震域','不滅戰意'],shortSkills:['天墜','震域','戰意'],icons:['⬟','✹','♛'],hints:['躍向前線，以巨槌震擊半徑 72 的敵軍並造成強緩速，冷卻 9 秒','在腳下展開 6 秒震域，穩定傷害並拖慢接近的敵軍，冷卻 12 秒','進入 6 秒戰意：自身傷害 +20%、攻速 +18%；不影響任何軍團單位，冷卻 22 秒']}
   };
+  CLASSES.frostland.skillArt='assets/td/frostland/skill-icons-v1.png';
+  CLASSES.goblin.skillArt='assets/td/goblin/skill-icons-v2.png';
   class HeroRoster{
     static get(type){return CLASSES[type]||CLASSES.arcanist;}
     // W is a ground aura, not twelve invisible projectiles.  Keeping its damage

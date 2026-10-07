@@ -1,3 +1,5 @@
+> **英雄品質 v0.85.84 發布：** 兩張新武器 PNG、相關 JS、入口版號及 Worker 快取鍵須同版；發布後抽驗商店武器卡、技能圖及音效切換。見 [發布清單](HERO_PRESENTATION_V08584.md)。
+
 > **v0.85.83 已發布：** 埃及與南方個別 4×4 PNG、各 JS、`td.html`、`update.html`、文件及 `sw.js` 已隨 GitHub `main` 提交 `79d0a1e` 部署；Worker 快取鍵為 `sky-strike-v0.85.83`。Pages 工作流程的線上檔案比對成功；玩家裝置仍應清除舊快取，核對選角女性肖像、八張卡與戰場圖，不只看版號。見 [完整部署檢查](EGYPT_FACTION_V08583.md)。
 
 > **潮門外流校正（發布前紀錄）：** 原先 GitHub `main` 仍為 0.85.82、舊道路／塔位；地圖幾何及本機 QA 後續已併入 v0.85.83，與正式版本入口、Service Worker 快取鍵同批部署。Pages 檔案比對已通過，但玩家裝置的背景／塔位及通關難度仍須實測。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。

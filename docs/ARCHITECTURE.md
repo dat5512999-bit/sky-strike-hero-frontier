@@ -1,3 +1,5 @@
+> **英雄視覺／音訊架構 v0.85.84：** 英雄類型與武器等級流向 `EquipmentSystem` 圖格、商店及購買展示；真正開火才流向有聲道上限的音效系統。無新後端或存檔 schema。見 [架構圖](HERO_PRESENTATION_V08584.md)。
+
 > **v0.85.83 架構：** `FactionSystem.egypt` → `config`／`BuildSystem` → `CombatUnit`／`Building`；`BattleSynergySystem` 限制祭壇同族加速，`ImperialFactionArt`／`PaintedTowerVFX` 管卡片、戰場與特效。未增加後端或資料表。見 [資料流與擴充點](EGYPT_FACTION_V08583.md)。
 
 > **潮門外流本機校正（未發布）：** `maps.js` 背景座標 → 路徑／城門與五塊草地 `buildAreas` → `BuildSystem.canPlaceAt`／怪物行進 → `ArtSystem` 與戰場相機。QA 疊線圖核對像素座標，`PerformanceMonitor` 樣本由桌面長測分桶讀取。無新後端、資料庫或持久化欄位。詳見 [驗收規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
