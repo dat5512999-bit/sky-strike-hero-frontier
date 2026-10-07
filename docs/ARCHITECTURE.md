@@ -1,3 +1,5 @@
+> **v0.85.86 架構：** `CombatClaritySystem` 只讀戰鬥狀態；`TDGame` 以既有 10 Hz UI 節奏顯示選取資訊，每 120 ms 掃描出口；小地圖與音效維持有界呈現。見 [資料流](COMBAT_CLARITY_V08586.md)。
+
 > **v0.85.85 架構：** 劇情資料、配樂、商城與外觀渲染器仍分模組；資料流及擴充界線見 [整合架構](FULL_RELEASE_V08585.md)。
 
 > **劇情配樂架構 v1.0.0：** `storyBeatScores` → `storyCards[].musicMood` → `FrontierApp` 劇情頁生命週期 → `StoryMusic` Web Audio 合成器。單一劇情排程、24 聲部上限、切幕交叉淡入淡出；戰鬥與背景分頁不持續排程。無後端、資料表或新執行依賴。見 [完整架構](STORY_MUSIC_V1.md)。
@@ -909,4 +911,3 @@ v0.85.0：FrostStatusSystem 掛在 BattleSynergySystem 與 Projectile，沿用 M
 > **v0.85.82：** 進化由 HeroEvolutionSystem → HeroEvolutionCombat → Projectile／Monster 結算，Presentation 只繪短暫效果；軍團由 config.ranks／TowerEvolutionSystem → CombatUnit／Building → 既有軍械及支援系統。無新更新迴圈或資料庫。詳見 [本版架構圖](SOUTHERN_COMPLETION_V08582.md)。
 
 > **戰場驗收 v1.0.0：** `FactionSystem → ArtSystem.preview／Building.draw → BattlefieldCamera` 檢查同一塔的卡片與實戰；`PerformanceMonitor → scripts/qa-battlefield-acceptance.cjs → artifacts/` 記錄本機對照。正式遊戲渲染管線、資料庫、API 與權限均未改。見 [流程圖與標準](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
-

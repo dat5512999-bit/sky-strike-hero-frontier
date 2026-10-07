@@ -1,3 +1,5 @@
+> **v0.85.86 QA：** 跑 `tests/td-combat-clarity.test.js`、全套測試、語法與平衡 audit；桌面／手機檢查提醒遮擋、索敵覆蓋、技能錯誤、波後診斷及真機前景效能。見 [完整清單](COMBAT_CLARITY_V08586.md)。
+
 > **v0.85.85 QA：** 完整測試、語法、平衡、劇情圖片／音樂、外觀商品與存檔、Pages 線上檔案比對；真機聆聽與 50 波仍列待驗。見 [整合驗收](FULL_RELEASE_V08585.md)。
 
 > **劇情配樂 QA：** 86 幕都有合法且依劇情變化的情緒；驗證九主題可播放、切幕淡出／淡入、音樂開關及裝置偏好、瀏覽器禁自播、離開劇情和進入戰鬥停止、背景分頁排程、手機橫向按鈕可觸及；執行 `tests/td-story-music.test.js`、全套測試與實機聆聽。見 [檢查紀錄](STORY_MUSIC_V1.md)。
@@ -1034,4 +1036,3 @@ v0.85.0 冰原：npm run test:frostland 檢查狀態、兵塔、36 種 Hero×Fac
 > **v0.85.82：** 已有分組 114／114、19／19、179／179 通過記錄（可能重疊，不相加算全套），三英雄進化專項最後為 45 項；150 敵人 × 三英雄 × 三倍速的 Node 長測有明確限制。使用者要求停止追加測試，最終提交快照全套及真機完整戰局未再驗收。詳見 [測試證據與待驗清單](SOUTHERN_COMPLETION_V08582.md)。
 
 > **戰場驗收 v1.0.0：** `node --test tests/qa-battlefield-acceptance.test.js`；本機伺服器上執行娜迦、龍族等 `node scripts/qa-battlefield-acceptance.cjs --faction ...`，逐張比對建造卡、正常／半尺寸戰場，檢查合法塔位、空白圖、頁面例外與 11／120 怪對照。娜迦、龍族、地精的工具結構檢查已通過；地圖接地感與玩家前景 10 分鐘實測未簽核。`npm run check` 與新增／效能專項 11 項通過；全套 `npm test` 仍有既有內容期望值失敗，不能宣稱完整綠燈。見 [完整清單](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
-

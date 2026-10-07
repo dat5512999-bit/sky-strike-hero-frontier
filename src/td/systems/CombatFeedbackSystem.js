@@ -90,7 +90,7 @@
         ctx.restore();offset+=15;
       }
     }
-    push(item){if(this.reducedFx&&['mote','dust','soul','aura'].includes(item.type))return;const cap=this.mobile?90:140;if(['damage','gold','mote','dust'].includes(item.type)&&this.items.filter(i=>i.type===item.type).length>=(this.mobile?18:30))return;this.items.push(item);if(this.items.length>cap)this.items.splice(0,this.items.length-cap);}
+    push(item){if(this.reducedFx&&['mote','dust','soul','aura'].includes(item.type))return;const cap=this.mobile?90:140;if(['damage','gold','mote','dust'].includes(item.type)&&this.items.filter(i=>i.type===item.type).length>=(this.mobile?18:30))return;this.items.push(item);if(this.items.length>cap){const low=this.items.findIndex(entry=>['damage','gold','mote','dust','aura'].includes(entry.type));this.items.splice(low>=0?low:0,1);}}
     visualPosition(monster){return typeof monster.visualPosition==='function'?monster.visualPosition():{x:monster.x,y:monster.y};}
     static impactKind(source){const style=source&&source.style;if(style==='ice')return'ice';if(style==='lightning')return'lightning';if(style==='nature')return'nature';if(style==='arrow'||style==='bullet'||(source&&source.attackType==='pierce'))return'pierce';if(style==='claw'||style==='moon'||(source&&source.attackType==='chaos'))return'slash';return'arcane';}
     static impactColor(source,kind){if(typeof source==='string')return source;if(source&&source.color)return source.color;return({ice:'#aeeeff',lightning:'#d8e8ff',nature:'#c4f49d',pierce:'#ffe2a1',slash:'#ff9b74',arcane:'#d9b7ff'})[kind]||'#fff1b2';}
@@ -101,6 +101,7 @@
       this.push({type:'dust',x:position.x-normal.x*radius*.18,y:position.y+4,time:critical?.28:.2,max:critical?.28:.2,directionX:normal.x,directionY:normal.y,color:kind==='ice'?'#c5edff':'#c4a678'});
       this.push({type:'damage',x:position.x+(Math.random()-.5)*12,y:position.y-monster.radius-12,time:.78,max:.78,value:Math.max(1,Math.round(damage)),critical:Boolean(critical)});
     }
+    immune(monster){const p=this.visualPosition(monster);this.push({type:'immune',x:p.x,y:p.y-(monster.radius||16)-14,time:.75,max:.75});}
     drawGround(ctx){this.items.forEach(function(item){if(item.type!=='dust')return;const ratio=Math.max(0,item.time/item.max),age=1-ratio;ctx.save();ctx.globalAlpha=ratio*.48;ctx.fillStyle=item.color;for(let i=0;i<3;i++){const spread=(i-1)*6+item.directionX*age*11,rise=Math.abs(i-1)*2-item.directionY*age*5;ctx.beginPath();ctx.ellipse(item.x+spread,item.y+rise,4+age*3,1.5+age,0,0,Math.PI*2);ctx.fill();}ctx.restore();});}
     gold(monster,value){const position=this.visualPosition(monster);this.push({type:'gold',x:position.x,y:position.y-8,time:1.05,max:1.05,value:Math.round(value)});}
     death(monster){
@@ -134,9 +135,12 @@
     }
     draw(ctx){
       const textCache=this.textCache;
-      this.items.forEach(function(item){const ratio=Math.max(0,item.time/item.max),age=1-ratio;ctx.save();ctx.globalAlpha=Math.min(1,ratio*2);
+      let normalShown=0;const normalLimit=this.mobile?12:20;
+      this.items.forEach(function(item){if(item.type==='damage'&&!item.critical&&++normalShown>normalLimit)return;const ratio=Math.max(0,item.time/item.max),age=1-ratio;ctx.save();ctx.globalAlpha=Math.min(1,ratio*2);
         if(item.type==='damage'||item.type==='gold'||item.type==='allyDamage'||item.type==='heal'){
           ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='rgba(3,5,5,.9)';ctx.fillStyle=item.type==='gold'?'#f5c85b':item.type==='heal'?'#7df09b':item.type==='allyDamage'?'#ff7b69':item.critical?'#ff823d':'#fff1d2';ctx.font=(item.critical?'900 19px ':'800 14px ')+'Segoe UI';const label=item.type==='gold'?('+'+item.value+' Gold'):item.type==='heal'?('治療 +'+item.value):(item.critical?'暴擊 '+item.value:'-'+item.value);const y=item.y-age*(item.type==='gold'?30:22);if(!textCache?.draw(ctx,label,item.x,y)){ctx.strokeText(label,item.x,y);ctx.fillText(label,item.x,y);}
+        }else if(item.type==='immune'){
+          ctx.textAlign='center';ctx.strokeStyle='#06171a';ctx.lineWidth=3;ctx.fillStyle='#9ee9ed';ctx.font='900 14px Segoe UI';ctx.strokeText('免疫',item.x,item.y-age*18);ctx.fillText('免疫',item.x,item.y-age*18);
         }else if(item.type==='impact'){
           const angle=Math.atan2(item.incomingY||0,item.incomingX||1),rays=item.heavy?7:5,reach=age*(item.heavy?27:17);ctx.translate(item.x,item.y);ctx.strokeStyle=item.color;ctx.fillStyle='#fff7d6';ctx.shadowColor=item.color;ctx.shadowBlur=8;ctx.lineCap='round';ctx.lineWidth=item.heavy?3:2;
           // This short streak keeps the visual contact point readable after a projectile retires.

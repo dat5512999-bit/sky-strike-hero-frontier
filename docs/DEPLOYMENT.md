@@ -1,3 +1,5 @@
+> **v0.85.86 部署：** `CombatClaritySystem.js`、HTML、CSS、報表、音效及 `sw.js` 必須同版；部署後核對 0.85.86 與線上檔案。見 [發布與回退](COMBAT_CLARITY_V08586.md)。
+
 > **v0.85.85 部署：** 程式、劇情圖、外觀圖、入口與 `sw.js` 必須同版發布；使用 `npm run verify:pages` 逐檔比對。見 [部署與回退清單](FULL_RELEASE_V08585.md)。
 
 > **劇情配樂發布：** 須同版部署 `StoryMusic.js`、`StoryCatalog.js`、`FrontierApp.js`、`td.html`、`td-lobby.css` 與 `sw.js`，提升應用／Worker 版本後核對 Pages 線上有聲，並以手機橫向測試首次播放。不可只更新程式入口而漏掉離線殼。見 [發布清單](STORY_MUSIC_V1.md)。
@@ -579,4 +581,3 @@ v0.85.0：同步部署 td.html、td-expedition.css、codex.css、src/td、Frostl
 > **v0.85.82：** 同步發布英雄進化、南方兵塔／美術接線、素材與七處版本入口，Worker 為 sky-strike-v0.85.82。依使用者要求本次不再跑追加驗收；推送成功不等於 Pages 已更新，須分別看實際遠端狀態。詳見 [發布範圍與未驗項](SOUTHERN_COMPLETION_V08582.md)。
 
 > **戰場驗收 v1.0.0：** 本次僅新增本機 QA 工具、測試與文件；沒有正式遊戲版本、Service Worker 快取或玩家資料變更，也未部署到 GitHub。後續發佈新美術前要人工簽核卡片／戰場截圖並做玩家前景長局測試；不要把 `artifacts/` 當成發佈資產。見 [標準](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
-

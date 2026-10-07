@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.85';
+const CACHE_NAME = 'sky-strike-v0.85.86';
 const ASSETS = [
  './src/td/systems/FrostlandMotionAtlas.js', './frostland-soldier-preview.html', './src/td/frostland-soldier-preview.js',
  './assets/td/frostland/frostWolf-motion-v2.png', './assets/td/frostland/frostBear-motion-v2.png', './assets/td/frostland/frostBird-motion-v2.png',
@@ -61,7 +61,7 @@ const ASSETS = [
   './src/td/systems/HeroJoystick.js',
   './src/td/systems/BattleSynergySystem.js', './src/td/systems/GoblinNetworkSystem.js', './src/td/systems/GoblinAnimation.js', './src/td/systems/GoblinArt.js', './src/td/systems/NagaArt.js', './assets/td/goblin-concept-card.svg', './assets/td/goblin-chief-engineer-v1.png', './assets/td/goblin-soldiers-atlas-v1.png', './assets/td/faction-builds-v1.png',
   './td-combat.css',
-  './src/td/systems/TargetSelector.js', './src/td/systems/ChapterCheckpointSystem.js',
+  './src/td/systems/TargetSelector.js', './src/td/systems/CombatClaritySystem.js', './src/td/systems/ChapterCheckpointSystem.js',
   './src/td/systems/TDDifficultySystem.js', './src/td/systems/EnemyTraitSystem.js', './src/td/systems/BattleReportSystem.js',
   './', './index.html', './styles.css', './td.html', './td.css', './td-accessibility.css', './manifest.webmanifest', './td.webmanifest', './assets/icons/game-icon.svg', './assets/icons/app-icon-192.png', './assets/icons/app-icon-512.png', './assets/icons/apple-touch-icon-180.png',
   './src/namespace.js', './src/config.js', './src/utils/math.js',

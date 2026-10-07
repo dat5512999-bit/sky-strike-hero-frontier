@@ -15,7 +15,7 @@
         const remaining=monster.remainingDistance(),front=aheadByPath.get(monster.path);let advance=Infinity;
         for(const leader of [front,sharedAhead])if(leader&&leader.active)advance=Math.min(advance,Game.prototype.convoyAdvanceLimit.call(this,leader,monster));
         monster.update(dt,this.hero,null,advance);
-        if(monster.leaked&&!monster.leakHandled){monster.leakHandled=true;this.report.recordLeak(monster.baseDamage);this.baseHealth=Math.max(0,this.baseHealth-monster.baseDamage);this.flash('城門受損 -'+monster.baseDamage,'#ff416d');}
+        if(monster.leaked&&!monster.leakHandled){monster.leakHandled=true;this.report.recordLeak(monster.baseDamage,monster);this.baseHealth=Math.max(0,this.baseHealth-monster.baseDamage);this.flash('城門受損 -'+monster.baseDamage,'#ff416d');}
         if(monster.active){aheadByPath.set(monster.path,monster);if(monster.remainingDistance()<=ns.config.sharedLength)sharedAhead=monster;}
       }
       return;
@@ -23,7 +23,7 @@
     active.sort((a,b)=>(b.routeDistance||0)-(a.routeDistance||0));let ahead=null;
     for(const monster of active){
       const maxAdvance=Game.prototype.convoyAdvanceLimit.call(this,ahead,monster);monster.update(dt,this.hero,null,maxAdvance);
-      if(monster.leaked&&!monster.leakHandled){monster.leakHandled=true;this.report.recordLeak(monster.baseDamage);this.baseHealth=Math.max(0,this.baseHealth-monster.baseDamage);this.flash('城門受損 -'+monster.baseDamage,'#ff416d');}
+      if(monster.leaked&&!monster.leakHandled){monster.leakHandled=true;this.report.recordLeak(monster.baseDamage,monster);this.baseHealth=Math.max(0,this.baseHealth-monster.baseDamage);this.flash('城門受損 -'+monster.baseDamage,'#ff416d');}
       if(monster.active)ahead=monster;
     }
   };

@@ -50,6 +50,7 @@
       ctx.restore();
       const dot=(x,y,color,r)=>{ctx.fillStyle=color;ctx.beginPath();ctx.arc(fit.x+x*fit.scale,fit.y+y*fit.scale,r,0,Math.PI*2);ctx.fill();};
       for(const enemy of game.monsters)if(enemy.active)dot(enemy.x,enemy.y,enemy.boss?'#ffca69':'#f35e5e',enemy.boss?4:2);
+      if(game.gateThreat?.active){const x=fit.x+game.gateThreat.x*fit.scale,y=fit.y+game.gateThreat.y*fit.scale;ctx.strokeStyle='#ffdc75';ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,7,0,Math.PI*2);ctx.stroke();}
       if(game.build&&game.build.towers)for(const ally of game.build.towers())dot(ally.x,ally.y,ally.kind==='building'?'#70cde6':'#8ee59e',2.2);
       if(game.hero.active)dot(game.hero.x,game.hero.y,'#fff0a4',3.4);
       const s=camera.scale(),left=Math.max(0,camera.x-camera.width/(2*s)),top=Math.max(0,camera.y-camera.height/(2*s));

@@ -1,3 +1,5 @@
+> **v0.85.86 資料契約：** 新增 `CombatClaritySystem` 純展示介面，`recordLeak(damage, monster?)` 的怪物參數可選，單波報表可有 `leakTypes`；無 HTTP API、資料庫或玩家存檔 schema 變更。見 [架構](COMBAT_CLARITY_V08586.md)。
+
 > **v0.85.85 資料契約：** 逐幕 `image/musicMood`、商城外觀 ID 與一次性管理者旗標沿用本機架構；無新 HTTP API。見 [整合資料流](FULL_RELEASE_V08585.md)。
 
 > **劇情音樂資料契約 v1.0.0：** `StoryCatalog.storyCards[].musicMood` 為九種本機主題 ID 之一，`StoryMusic.play/stop/setEnabled` 管頁面播放生命週期；裝置偏好 key 為 `heroFrontierStoryMusic`。無 HTTP API、資料庫或玩家存檔 schema 變更。見 [資料流](STORY_MUSIC_V1.md)。
@@ -707,4 +709,3 @@ v0.85.0 無新增網路 API。FrostStatusSystem 提供 apply／update／prepare�
 > **v0.85.82：** HeroEvolutionSystem 增加 dwarf／dragonkin／egypt 的兩階技能與試煉資料；cast 冷卻先行返回，場域／延遲攻擊有數量上限。兵種 ranks 與 TowerEvolutionSystem 分支沿用原 API，無 HTTP API、資料庫或 schema 變更。詳見 [架構與 API](SOUTHERN_COMPLETION_V08582.md)。
 
 > **戰場驗收規格 v1.0.0：** 本機 QA 程式讀取 `FactionSystem.FACTIONS[faction].buildings`、`ArtSystem` 建造卡 Canvas、`BuildSystem.canPlaceAt()`、`BattlefieldCamera.scale()` 與 `PerformanceMonitor.samples`；產出本機 JSON／PNG，沒有新增 HTTP API、資料庫或存檔 schema。詳見 [架構與限制](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
-

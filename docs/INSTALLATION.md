@@ -1,3 +1,5 @@
+> **v0.85.86 安裝：** 沿用 Node.js ≥18 與 `npm run serve:test`，開啟 `/td.html` 確認版號；無新套件、資料庫或 API key。見 [安裝及驗收](COMBAT_CLARITY_V08586.md)。
+
 > **v0.85.85 安裝：** Node.js ≥18，執行 `npm run serve:test` 開啟 `/td.html`；無新套件或後端，檢查項目見 [安裝與驗收](FULL_RELEASE_V08585.md)。
 
 > **劇情配樂本機安裝：** 沿用 Node.js ≥18、`npm run serve:test` 與 `/td.html`，無須下載音樂套件或外部歌曲。開劇情後點音樂開關即可驗聲；瀏覽器需支援 Web Audio，且可能要求使用者先點擊。見 [本機驗收](STORY_MUSIC_V1.md)。
@@ -564,4 +566,3 @@ v0.85.0：沿用 Node.js 18+，無新依賴。完整取得 assets/td/frostland �
 > **v0.85.82：** 無新依賴、帳號或環境變數；沿用 Node.js 18+、npm run serve:test 與 /td.html。更新後識別為 0.85.82；若仍顯示舊版，開啟 /update.html，保留玩家存檔。詳見 [安裝與更新](SOUTHERN_COMPLETION_V08582.md)。
 
 > **戰場驗收 v1.0.0：** 遊戲安裝方式不變。開發者若要跑視覺／效能 QA，需 Node ≥18、Edge 與 Playwright，先 `npm run serve:test`，再 `node scripts/qa-battlefield-acceptance.cjs --faction naga`；缺 Playwright 可用既有工作區套件設定 `NODE_PATH`。見 [規格](BATTLEFIELD_ACCEPTANCE_STANDARD.md)。
-
