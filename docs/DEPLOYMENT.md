@@ -1,3 +1,5 @@
+> **v0.85.87：** 同步發布五支 src/td/adventure 腳本、td-adventure.css 及五張 assets/td/adventure 透明圖集；核對 package、頁面、存檔版號與 SW 均為 0.85.87。見 [發布與回復](MAP_ADVENTURE_V08587.md#安裝部署與更新)。
+
 > **v0.85.86 部署：** `CombatClaritySystem.js`、HTML、CSS、報表、音效及 `sw.js` 必須同版；部署後核對 0.85.86 與線上檔案。見 [發布與回退](COMBAT_CLARITY_V08586.md)。
 
 > **v0.85.85 部署：** 程式、劇情圖、外觀圖、入口與 `sw.js` 必須同版發布；使用 `npm run verify:pages` 逐檔比對。見 [部署與回退清單](FULL_RELEASE_V08585.md)。

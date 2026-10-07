@@ -1,3 +1,5 @@
+> **v0.85.87：** Catalog → System → View，由 Integration 接既有戰鬥、部署、章節存檔與 ProfileStore 原子保存。見 [模組關係](MAP_ADVENTURE_V08587.md#管理與架構)。
+
 > **v0.85.86 架構：** `CombatClaritySystem` 只讀戰鬥狀態；`TDGame` 以既有 10 Hz UI 節奏顯示選取資訊，每 120 ms 掃描出口；小地圖與音效維持有界呈現。見 [資料流](COMBAT_CLARITY_V08586.md)。
 
 > **v0.85.85 架構：** 劇情資料、配樂、商城與外觀渲染器仍分模組；資料流及擴充界線見 [整合架構](FULL_RELEASE_V08585.md)。

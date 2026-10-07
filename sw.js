@@ -1,7 +1,9 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.86';
+const CACHE_NAME = 'sky-strike-v0.85.87';
 const ASSETS = [
+ './td-adventure.css', './src/td/adventure/AdventureCatalog.js', './src/td/adventure/AdventureSystem.js', './src/td/adventure/AdventureArt.js', './src/td/adventure/AdventureView.js', './src/td/adventure/AdventureIntegration.js',
+ './assets/td/adventure/mechanisms-v1.png', './assets/td/adventure/beacons-v1.png', './assets/td/adventure/support-v1.png', './assets/td/adventure/platforms-v1.png', './assets/td/adventure/water-action-v1.png',
  './src/td/systems/FrostlandMotionAtlas.js', './frostland-soldier-preview.html', './src/td/frostland-soldier-preview.js',
  './assets/td/frostland/frostWolf-motion-v2.png', './assets/td/frostland/frostBear-motion-v2.png', './assets/td/frostland/frostBird-motion-v2.png',
  './assets/td/frostland/frostHunter-motion-v2.png', './assets/td/frostland/frostShaman-motion-v2.png', './assets/td/frostland/frostMammoth-motion-v2.png',

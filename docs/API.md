@@ -1,3 +1,5 @@
+> **v0.85.87：** 新增 AdventureCatalog.describe、AdventureSystem.act／snapshot／restore／writeVictory；沒有新增 HTTP API。見 [介面與存檔](MAP_ADVENTURE_V08587.md#介面與存檔)。
+
 > **v0.85.86 資料契約：** 新增 `CombatClaritySystem` 純展示介面，`recordLeak(damage, monster?)` 的怪物參數可選，單波報表可有 `leakTypes`；無 HTTP API、資料庫或玩家存檔 schema 變更。見 [架構](COMBAT_CLARITY_V08586.md)。
 
 > **v0.85.85 資料契約：** 逐幕 `image/musicMood`、商城外觀 ID 與一次性管理者旗標沿用本機架構；無新 HTTP API。見 [整合資料流](FULL_RELEASE_V08585.md)。

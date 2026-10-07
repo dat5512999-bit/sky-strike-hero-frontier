@@ -1,6 +1,6 @@
 (function(ns){
   'use strict';
-  const KEY='heroFrontierProfilesV1', VERSION='0.85.86', ADMIN_DIAMONDS=99999, ADMIN_DIAMOND_GRANT='admin-diamonds-99999-v1';
+  const KEY='heroFrontierProfilesV1', VERSION='0.85.87', ADMIN_DIAMONDS=99999, ADMIN_DIAMOND_GRANT='admin-diamonds-99999-v1';
   const clone=value=>JSON.parse(JSON.stringify(value));
   function profile(id,kind,round){const admin=kind==='admin';return {id,kind,round,startedAt:new Date().toISOString(),startedVersion:VERSION,completed:[],encountered:[],discovered:[],cinematics:[],unlocks:{heroes:['hunter','naga','bull'],factions:['hunter','naga'],maps:['beginner','westernsignal','emberroad'],difficulties:['story','standard']},wallet:{gold:0,diamonds:admin?ADMIN_DIAMONDS:0},data:admin?{[ADMIN_DIAMOND_GRANT]:'true'}:{},lastRun:null};}
   class ProfileStore{

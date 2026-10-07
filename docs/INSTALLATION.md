@@ -1,3 +1,5 @@
+> **v0.85.87：** 沿用 Node.js 18+ 與本機 HTTP 啟動；無新套件或資料庫。新增地圖模組必須隨 td.html／sw.js 一起提供。見 [安裝與部署](MAP_ADVENTURE_V08587.md#安裝部署與更新)。
+
 > **v0.85.86 安裝：** 沿用 Node.js ≥18 與 `npm run serve:test`，開啟 `/td.html` 確認版號；無新套件、資料庫或 API key。見 [安裝及驗收](COMBAT_CLARITY_V08586.md)。
 
 > **v0.85.85 安裝：** Node.js ≥18，執行 `npm run serve:test` 開啟 `/td.html`；無新套件或後端，檢查項目見 [安裝與驗收](FULL_RELEASE_V08585.md)。

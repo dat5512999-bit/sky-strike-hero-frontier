@@ -1,3 +1,5 @@
+> **v0.85.87：** 執行 npm run test:adventure、npm run check:adventure 和 npm test；人工驗收手機捲動、範圍定位、暫停還原與跨關支援。見 [完整驗收清單](MAP_ADVENTURE_V08587.md#qa-驗收)。
+
 > **v0.85.86 QA：** 跑 `tests/td-combat-clarity.test.js`、全套測試、語法與平衡 audit；桌面／手機檢查提醒遮擋、索敵覆蓋、技能錯誤、波後診斷及真機前景效能。見 [完整清單](COMBAT_CLARITY_V08586.md)。
 
 > **v0.85.85 QA：** 完整測試、語法、平衡、劇情圖片／音樂、外觀商品與存檔、Pages 線上檔案比對；真機聆聽與 50 波仍列待驗。見 [整合驗收](FULL_RELEASE_V08585.md)。

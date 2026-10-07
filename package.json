@@ -1,10 +1,13 @@
 {
   "name": "sky-strike",
-  "version": "0.85.86",
+  "version": "0.85.87",
+  "mapAdventureVersion": "1.0.0",
   "private": true,
   "frostlandMotionVersion": "1.0.0",
   "description": "包含縱向射擊與英雄塔防模式的本機 HTML5 Canvas 遊戲",
   "scripts": {
+    "test:adventure": "node --test tests/td-map-adventure.test.js tests/td-map-adventure-art.test.js",
+    "check:adventure": "node --check src/td/adventure/AdventureCatalog.js && node --check src/td/adventure/AdventureSystem.js && node --check src/td/adventure/AdventureArt.js && node --check src/td/adventure/AdventureView.js && node --check src/td/adventure/AdventureIntegration.js",
     "test:neutral": "node --test tests/td-neutral-contracts.test.js",
     "test:frostland-motion": "node --test tests/td-frostland-motion.test.js tests/td-unit-vfx.test.js tests/td-faction-motion.test.js",
     "measure:frostland-motion": "node scripts/measure-frostland-motion.cjs --write",
