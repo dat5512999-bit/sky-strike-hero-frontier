@@ -26,6 +26,8 @@ jobs:
       - name: Verify game
         run: |
           npm run check
+          npm run check:release
+          npm run check:audio
           npm test
       - name: Configure Pages
         uses: actions/configure-pages@v5

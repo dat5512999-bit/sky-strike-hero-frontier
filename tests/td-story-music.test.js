@@ -48,7 +48,7 @@ test('story music ships in the offline shell and exposes a reachable toggle',()=
   const html=fs.readFileSync('td.html','utf8'),worker=fs.readFileSync('sw.js','utf8'),app=fs.readFileSync('src/td/app/FrontierApp.js','utf8');
   assert.ok(html.indexOf('src/td/app/StoryMusic.js')<html.indexOf('src/td/app/FrontierApp.js'));
   assert.match(worker,/\.\/src\/td\/app\/StoryMusic\.js/);
-  assert.match(app,/data-action="story-music-toggle"/);
+  assert.match(fs.readFileSync('src/td/app/StoryComicBook.js','utf8'),/data-action="story-music-toggle"/);
   assert.match(app,/aria-pressed/);
   assert.match(app,/this\.storyMusic\?\.stop\(\)/);
 });

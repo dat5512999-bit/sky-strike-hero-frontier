@@ -1,6 +1,16 @@
+> v0.85.88 整合發布（2026-10-08）：音效、英雄技能卡、劇情載入與漫畫閱讀器同版交付。下方保留各功能開發當時的紀錄；目前發布與回復流程見 [整合發布](FULL_RELEASE_V08588.md)。
+
+> 音效 v1.0.0：成功事件 → AudioIntegration → AudioCatalog → GameAudio → WebAudio；舊 FrostlandAudio 共用同一 context。見 [架構](GAME_AUDIO_V1.md)。
+
 > 發布架構：遊戲來源經 build-static-site.cjs 產生 _site；概念／參考稿留本機，舊驗收移入外部封存。 見 [整理、發布與還原說明](PROJECT_STORAGE_CLEANUP_20261007.md)。
 
+> v0.85.88 架構：StoryCatalog 資產 → StoryComicBook 逐頁敘事 → FrontierApp 導航 → td-story-book.css 分欄書頁；圖片等比包含且不自動放大。見 [架構圖](STORY_COMIC_READER_V08588.md)。
+
+> 英雄技能卡：HeroRoster → HeroSkillPresentation → td-expedition.css；只修遠征預覽，不影響戰鬥技能列。見 [模組關係](HERO_SKILL_LAYOUT_V1.md)。
+
 > **v0.85.87：** Catalog → System → View，由 Integration 接既有戰鬥、部署、章節存檔與 ProfileStore 原子保存。見 [模組關係](MAP_ADVENTURE_V08587.md#管理與架構)。
+
+> **劇情圖慢載架構：** `StoryCatalog.image` → `FrontierApp` 先呈現已載圖／關卡地圖 → 本幕 `<img>` 完成載入後轉 `ready`，再預載下一幕；錯誤轉 `error` 可重試。舊卡片回呼不更新新卡片。無後端或存檔變更。見 [架構與效能](STORY_ART_LOADING_FIX_V1.md)。
 
 > **v0.85.86 架構：** `CombatClaritySystem` 只讀戰鬥狀態；`TDGame` 以既有 10 Hz UI 節奏顯示選取資訊，每 120 ms 掃描出口；小地圖與音效維持有界呈現。見 [資料流](COMBAT_CLARITY_V08586.md)。
 

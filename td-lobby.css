@@ -17,8 +17,14 @@
 #frontier-app[data-page=story-cards] .lobby-top{height:56px;background:#08121b}
 #frontier-app[data-page=story-cards] .lobby-content{display:grid;place-items:center;padding:12px;background:#060b13}
 .story-card{width:min(1040px,100%);max-height:100%;border:1px solid #ac9568;background:#101b26;box-shadow:0 20px 55px #000a;overflow:auto}
-.story-card-stage{position:relative;height:min(61vh,600px);min-height:260px;overflow:hidden;background:#101b26}
-.story-card-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:story-card-drift 9s ease-out both}
+.story-card-stage{position:relative;height:min(61vh,600px);min-height:260px;overflow:hidden;background-color:#101b26;background-size:cover;background-position:center}
+.story-card-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:story-card-drift 9s ease-out both;opacity:0;transition:opacity .35s ease}
+.story-card-stage[data-art-state=ready]>img{opacity:1}
+.story-card-art-status{position:absolute;z-index:3;top:18px;left:18px;max-width:min(60%,340px);padding:7px 10px;color:#ffebbd;background:#07121bd9;border:1px solid #9e875ba6;font:12px/1.4 system-ui;text-shadow:0 1px 3px #000}
+.story-card-stage[data-art-state=ready] .story-card-art-status,.story-card-art-status .story-art-error,.story-card-art-status button{display:none}
+.story-card-stage[data-art-state=error] .story-card-art-status .story-art-loading{display:none}
+.story-card-stage[data-art-state=error] .story-card-art-status .story-art-error,.story-card-stage[data-art-state=error] .story-card-art-status button{display:block}
+.story-card-art-status button{margin-top:6px;min-height:34px!important;padding:4px 8px!important;font-size:12px!important}
 .story-card-stage-1>img{object-position:center 24%!important}
 .story-card-shade{position:absolute;inset:0;background:linear-gradient(90deg,#07121bd9 0%,#07121b52 58%,transparent 100%),linear-gradient(0deg,#07121be8,transparent 72%)}
 .story-card-stage-1 .story-card-shade{background:linear-gradient(90deg,#07121bd9 0%,#07121b57 55%,#07121b31 100%),linear-gradient(0deg,#07121be6,transparent 68%)}

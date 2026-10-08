@@ -1,6 +1,16 @@
+> v0.85.88 整合發布（2026-10-08）：音效、英雄技能卡、劇情載入與漫畫閱讀器同版交付。下方保留各功能開發當時的紀錄；目前發布與回復流程見 [整合發布](FULL_RELEASE_V08588.md)。
+
+> 音效 v1.0.0：AudioCatalog 提供 cue，GameAudio 負責 play／skill／projectile／event／sync／stop；無 HTTP API 或存檔 schema 變更。見 [介面](GAME_AUDIO_V1.md)。
+
 > 發布／封存維護：無新增 HTTP API；新增 Node plan／build 與 PowerShell Plan／Archive／Verify／Restore 介面。 見 [整理、發布與還原說明](PROJECT_STORAGE_CLEANUP_20261007.md)。
 
+> v0.85.88 契約：StoryComicBook.pages(mission, includeAftermath)、render(app)、chapterIntro(id) 管理漫畫閱讀；既有 storyCards 和遊戲存檔保持相容，無新 HTTP API。見 [資料流](STORY_COMIC_READER_V08588.md)。
+
+> 英雄技能卡：沒有新增 API 或資料欄位；仍由 HeroRoster → HeroSkillPresentation 的 i／em 元件提供圖示與名稱。見 [介面與架構](HERO_SKILL_LAYOUT_V1.md)。
+
 > **v0.85.87：** 新增 AdventureCatalog.describe、AdventureSystem.act／snapshot／restore／writeVictory；沒有新增 HTTP API。見 [介面與存檔](MAP_ADVENTURE_V08587.md#介面與存檔)。
+
+> **劇情圖片載入狀態：** 故事卡前端節點以 `data-art-state=loading|ready|error` 表示載入狀態；失敗重試只修改圖片 URL 的查詢參數，不改 `StoryCatalog.storyCards[].image`。無 HTTP API、資料庫或玩家存檔 schema 變更。見 [資料流](STORY_ART_LOADING_FIX_V1.md)。
 
 > **v0.85.86 資料契約：** 新增 `CombatClaritySystem` 純展示介面，`recordLeak(damage, monster?)` 的怪物參數可選，單波報表可有 `leakTypes`；無 HTTP API、資料庫或玩家存檔 schema 變更。見 [架構](COMBAT_CLARITY_V08586.md)。
 

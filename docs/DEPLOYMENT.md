@@ -1,6 +1,16 @@
+> v0.85.88 整合發布（2026-10-08）：音效、英雄技能卡、劇情載入與漫畫閱讀器同版交付。下方保留各功能開發當時的紀錄；目前發布與回復流程見 [整合發布](FULL_RELEASE_V08588.md)。
+
+> 音效 v1.0.0 納入 v0.85.88：新音效腳本、試聽頁已入離線與線上驗證清單；发布前須統一主版號、更新 SW 並跑 verify:pages。見 [部署](GAME_AUDIO_V1.md)。
+
 > 發布：使用 npm run check:site 與 npm run build:site；_site 必須尚未存在，GitHub Actions 使用同一打包工具，概念稿與參考圖不再上線。 見 [整理、發布與還原說明](PROJECT_STORAGE_CLEANUP_20261007.md)。
 
+> v0.85.88 部署：StoryComicBook.js、td-story-book.css、FrontierApp、HTML 與 Worker 同版發布；入口須顯示 0.85.88，線上核對第三章凜全身與翻頁。見 [發布流程](STORY_COMIC_READER_V08588.md)。
+
+> 英雄技能卡 v1.0.0 尚未發布；正式部署須更新主版號／SW 快取，再以 verify:pages 核對線上 CSS。見 [發布與回復](HERO_SKILL_LAYOUT_V1.md)。
+
 > **v0.85.87：** 同步發布五支 src/td/adventure 腳本、td-adventure.css 及五張 assets/td/adventure 透明圖集；核對 package、頁面、存檔版號與 SW 均為 0.85.87。見 [發布與回復](MAP_ADVENTURE_V08587.md#安裝部署與更新)。
+
+> **劇情配圖修補待發布：** 部署時同步 `FrontierApp.js`、`td-lobby.css`、擴充後的 `verify-pages-release.cjs`、測試與文件，提升應用／Worker 版號；執行線上逐檔比對並以慢網實際開第三幕。純粹 HTTP 200 不代表玩家不會見到空白。見 [發布清單](STORY_ART_LOADING_FIX_V1.md)。
 
 > **v0.85.86 部署：** `CombatClaritySystem.js`、HTML、CSS、報表、音效及 `sw.js` 必須同版；部署後核對 0.85.86 與線上檔案。見 [發布與回退](COMBAT_CLARITY_V08586.md)。
 

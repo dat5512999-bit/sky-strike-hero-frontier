@@ -1,6 +1,16 @@
+> v0.85.88 整合發布（2026-10-08）：音效、英雄技能卡、劇情載入與漫畫閱讀器同版交付。下方保留各功能開發當時的紀錄；目前發布與回復流程見 [整合發布](FULL_RELEASE_V08588.md)。
+
+> 音效 v1.0.0：不改玩家存檔；音量偏好另存 heroFrontierAudioMixV1。可停用三個新腳本入口回復舊音效，不覆蓋其他修改。見 [回復](GAME_AUDIO_V1.md)。
+
 > 封存回復：舊手冊中已移出的 artifacts 路徑，可用 scripts/archive-project-artifacts.ps1 -Mode Restore -Target artifacts/項目名稱取回；清單與封存資料須一併備份。 見 [整理、發布與還原說明](PROJECT_STORAGE_CLEANUP_20261007.md)。
 
+> v0.85.88 備份：閱讀器沒有新增玩家存檔欄位；發布前保留 0.85.87 Git 提交及玩家 JSON，回退應用與 Worker 整版，不刪存檔。見 [還原流程](STORY_COMIC_READER_V08588.md)。
+
+> 英雄技能卡：不改存檔格式；可單獨撤回限定 CSS 區段與 QA 檔案，不覆蓋其他修改、不清除玩家進度。見 [回復範圍](HERO_SKILL_LAYOUT_V1.md)。
+
 > **v0.85.87：** 地圖選擇包含在玩家匯出資料的 adventure:world-v1；章節存檔新增可選 adventure 欄位，schema 1 舊檔仍可載入。見 [備份與回復](MAP_ADVENTURE_V08587.md#備份與回復)。
+
+> **劇情慢載修補回復：** 本輪不改玩家資料；發布前保留完整前版 Git 提交與玩家 JSON 備份。回退需成套還原故事卡程式、樣式、應用版號與 Worker 快取鍵；切勿刪玩家進度。見 [回復界線](STORY_ART_LOADING_FIX_V1.md)。
 
 > **v0.85.86 備份回復：** 更新前匯出玩家 JSON 並保留完整 v0.85.85 提交；回退時整版還原入口與 Worker，不刪玩家資料。新報表的 `leakTypes` 可選，舊版可忽略。見 [步驟](COMBAT_CLARITY_V08586.md)。
 

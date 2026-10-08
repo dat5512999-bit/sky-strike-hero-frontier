@@ -3,7 +3,7 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..'),version=require('../package.json').version;
 const defaultUrl='https://dat5512999-bit.github.io/sky-strike-hero-frontier/';
-const entries=['td.html','td-mobile.html','mobile-simulator.html','update.html'];
+const entries=['td.html','td-mobile.html','mobile-simulator.html','update.html','audio-preview.html'];
 function releaseFiles(){
   const files=new Set([...entries,'sw.js','td.webmanifest','src/td/mobile-entry.js']);
   for(const entry of entries){
@@ -13,6 +13,11 @@ function releaseFiles(){
     }
   }
   for(const file of ['assets/td/tower-effects-painted-v2.png','assets/td/tower-magic-effects-v2.png','assets/td/soldier-effects-v1.png','assets/td/bosses/demonlord-actions-v2.png'])files.add(file);
+  // New story scenes must be verified as bytes, not inferred from a successful JS deploy.
+  for(const name of ['chapter2-ember-road-rescue','chapter2-stone-circle-escort','chapter2-red-mesa-convoy',
+    'chapter3-white-trace-sample','chapter3-echo-yard-receiver','chapter3-crossmark-records','chapter3-nightwatch-defense',
+    'chapter4-tidegate-readings','chapter4-brineway-measurements','chapter4-reef-records','chapter4-observatory-archive'])files.add('assets/td/story/'+name+'-v1.png');
+  files.add('assets/td/naga/tidebreaker-selection-v1.png');
   return [...files];
 }
 function digest(bytes,file){

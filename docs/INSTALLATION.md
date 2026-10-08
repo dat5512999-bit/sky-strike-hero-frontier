@@ -1,6 +1,16 @@
+> v0.85.88 整合發布（2026-10-08）：音效、英雄技能卡、劇情載入與漫畫閱讀器同版交付。下方保留各功能開發當時的紀錄；目前發布與回復流程見 [整合發布](FULL_RELEASE_V08588.md)。
+
+> 音效 v1.0.0：遊戲不需新依賴；serve:test 後可開 audio-preview.html。瀏覽器 QA 另需 Playwright＋Edge。見 [安裝指令](GAME_AUDIO_V1.md)。
+
 > 安裝：遊戲無新依賴；封存工具需 PowerShell 7.3+，新 clone 啟動遊戲不需要舊驗收資料。 見 [整理、發布與還原說明](PROJECT_STORAGE_CLEANUP_20261007.md)。
 
+> v0.85.88 安裝：沿用 Node.js ≥18 與 npm run serve:test，入口 /td.html，劇情模式即可閱讀漫畫；沒有新套件或帳號設定。見 [安裝驗收](STORY_COMIC_READER_V08588.md)。
+
+> 英雄技能卡：遊戲無新依賴；瀏覽器 QA 另需 Playwright＋Edge，啟動 4177 測試站後執行 npm run qa:hero-skills。見 [完整指令](HERO_SKILL_LAYOUT_V1.md)。
+
 > **v0.85.87：** 沿用 Node.js 18+ 與本機 HTTP 啟動；無新套件或資料庫。新增地圖模組必須隨 td.html／sw.js 一起提供。見 [安裝與部署](MAP_ADVENTURE_V08587.md#安裝部署與更新)。
+
+> **劇情慢載本機檢查：** 沿用 Node.js ≥18、`npm run serve:test` 後開啟 `/td.html`；進第四章「潮門外流」第三幕，慢網應先看到關卡地圖與載入提示，完成後換為觀測畫面。無新增套件。見 [驗收](STORY_ART_LOADING_FIX_V1.md)。
 
 > **v0.85.86 安裝：** 沿用 Node.js ≥18 與 `npm run serve:test`，開啟 `/td.html` 確認版號；無新套件、資料庫或 API key。見 [安裝及驗收](COMBAT_CLARITY_V08586.md)。
 

@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="td-wave.css">
   <link rel="stylesheet" href="td-tutorial.css">
   <link rel="stylesheet" href="td-lobby.css">
+  <link rel="stylesheet" href="td-story-book.css">
   <link rel="stylesheet" href="td-ranking.css">
   <link rel="stylesheet" href="td-cinematic.css">
   <link rel="stylesheet" href="shop.css">
@@ -73,7 +74,7 @@
 
       <div id="td-profession-screen" class="td-profession-screen" role="dialog" aria-modal="true" aria-labelledby="td-opening-title" hidden>
         <div class="profession-dialog">
-          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>英雄邊境 · v0.85.87 · 地圖行動</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
+          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>英雄邊境 · v0.85.88 · 故事漫畫</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
           <nav class="expedition-steps" aria-label="遠征配置步驟"><button type="button" data-opening-page="battlefield" aria-pressed="true"><b>01</b><span>選擇戰場</span></button><button type="button" data-opening-page="party"><b>02</b><span>組建隊伍</span></button></nav>
           <div class="opening-titlebar"><div class="opening-title-copy"><p>英雄邊境</p><h2 id="td-opening-title">選擇戰場</h2><span id="td-opening-subtitle">踏上新的戰場，書寫屬於你的傳奇。</span></div><select id="td-map-choice" class="opening-data-select" aria-label="選擇戰場"><option value="beginner">新手谷地</option><option value="twinpass">雙隘口要塞</option><option value="autumn">暮秋遺跡</option><option value="silverleaf">銀葉溪谷</option><option value="shadowfall">暮影舊城</option><option value="frostborn">冰原裂谷</option></select></div>
           <section class="expedition-page battlefield-page" data-expedition-page="battlefield">
@@ -450,6 +451,7 @@
   <script src="src/td/main.js"></script>
   <script src="src/td/app/ProfileStore.js"></script>
   <script src="src/td/app/StoryCatalog.js"></script>
+  <script src="src/td/app/StoryComicBook.js"></script>
   <script src="src/td/codex/CodexProgressAdapter.js"></script>
   <script src="src/td/codex/ChronicleProgressAdapter.js"></script>
   <script src="src/td/codex/CodexSaveBridge.js"></script>
@@ -485,5 +487,8 @@
   <script src="src/td/adventure/AdventureArt.js"></script>
   <script src="src/td/adventure/AdventureView.js"></script>
   <script src="src/td/adventure/AdventureIntegration.js"></script>
+  <script src="src/td/systems/AudioCatalog.js"></script>
+  <script src="src/td/systems/GameAudio.js"></script>
+  <script src="src/td/systems/AudioIntegration.js"></script>
 </body>
 </html>
