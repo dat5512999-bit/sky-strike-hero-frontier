@@ -1,0 +1,213 @@
+{
+  "version": "0.10.0",
+  "mode": "built-in image_gen",
+  "date": "2026-10-11",
+  "title": "戰後的責任與王國介入",
+  "runtimeIntegrated": false,
+  "published": false,
+  "userApproved": false,
+  "startPage": 45,
+  "endPage": 52,
+  "pages": [
+    {
+      "page": 45,
+      "title": "她帶回來的不是捷報",
+      "refs": [
+        "assets/td/opening/hero-arcanist-selection-v1.png",
+        "assets/td/concepts/story-comic-v1/cast-silverleaf-king-prince-v1.png",
+        "assets/td/concepts/story-comic-v2/main-35-v2.png",
+        "assets/td/concepts/story-comic-v2/main-43-v2.png"
+      ],
+      "text": [
+        "稍後・銀葉行館",
+        "銀葉王：他們是不是用了禁術？",
+        "希爾芙：現場有人這樣判斷。我能確認的是，我們先攻進我在的那條街。",
+        "希爾芙：我帶回來的是先後，不是替誰開脫。"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE premium full-color fantasy comic page, LANDSCAPE 1536x1024, exactly FOUR panels 2x2 read LEFT to RIGHT then TOP to BOTTOM. Thin black frames, narrow pale gutters, detailed hand-inked painterly color matching the comic references; varied camera distance, natural acting, expressive readable faces, not four static portraits. Contemporary era of this FANTASY world, no modern technology. Preserve each established face, skin tone, hair, costume and prop identity. Heroes remain their recognizable game designs. Large clean Traditional Chinese text EXACTLY as quoted, no extra invented writing, no English, no page number or watermark. White bubbles with clear tails to correct speakers; framed captions separate from speech. No omniscient revelation of prince's killers, no surprise new magical evidence. Do not copy the old dialogue from references. Render these NEW sequential events:\nInput1 Sylph exact game identity: long wavy brown hair, green eyes, pointed ears, leaf hairpins, tiny green forehead mark, cream/green leaf armor, green cloak, bronze leaf gauntlets. Input2 TOP ROW ONLY Silverleaf KING: gaunt long elderly face, green eyes, long white hair, no beard, gold leaf circlet, ivory green gold embroidered robes. Bottom prince does NOT appear. Input3 prior king's study architecture/costumes. Input4 Sylph's lived aftermath, not scene to copy.\nP1 upperleft wide Sylph enters SAME oak-paneled Silverleaf residence study with tall arched windows, climbing plants, darkgreen gold botanical wallcloth, candles, seated KING at desk. Daylight. Small caption \"稍後・銀葉行館\". Her cloak dusty, she holds small brown bound field notebook. NO royal army gathered.\nP2 upperright medium KING looking up, not villainous, fearful stern tired eyes. Bubble \"他們是不是用了禁術？\".\nP3 lowerleft Sylph places open notebook on desk with respectful but steady sad face, one bubble \"現場有人這樣判斷。我能確認的是，我們先攻進我在的那條街。\". Diary marks are faint scribbles, no invented diagrams/evidence.\nP4 lowerright wide side composition father and daughter divided by desk, nobody reconciles. Her hand rests on book, face visible. Sylph bubble \"我帶回來的是先後，不是替誰開脫。\". King silent. No other named characters, no human king, no prince ghost.",
+      "source": "main-45-v1.png",
+      "image": "review/main-45.webp",
+      "reviewStatus": "AI逐張複核通過；待作者人物辨認與閱讀驗收",
+      "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-9935d368-4bc4-40c6-8d38-cccff739b9c3.png"
+    },
+    {
+      "page": 46,
+      "title": "一條路還可以先打開",
+      "refs": [
+        "assets/td/opening/hero-arcanist-selection-v1.png",
+        "assets/td/concepts/story-comic-v1/cast-silverleaf-king-prince-v1.png",
+        "assets/td/concepts/story-comic-v2/main-35-v2.png"
+      ],
+      "text": [
+        "銀葉王：那你弟弟呢？",
+        "希爾芙：我也想知道誰害了他。",
+        "希爾芙：先讓傷者通過。查案不會因此停下。",
+        "銀葉王：銀葉把守的這處通道，先准傷者與救援車通行。其他命令不變。",
+        "一條路先打開了，父女之間卻沒有和解。"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE premium full-color fantasy comic page, LANDSCAPE 1536x1024, exactly FOUR panels 2x2 read LEFT to RIGHT then TOP to BOTTOM. Thin black frames, narrow pale gutters, detailed hand-inked painterly color matching the comic references; varied camera distance, natural acting, expressive readable faces, not four static portraits. Contemporary era of this FANTASY world, no modern technology. Preserve each established face, skin tone, hair, costume and prop identity. Heroes remain their recognizable game designs. Large clean Traditional Chinese text EXACTLY as quoted, no extra invented writing, no English, no page number or watermark. White bubbles with clear tails to correct speakers; framed captions separate from speech. No omniscient revelation of prince's killers, no surprise new magical evidence. Do not copy the old dialogue from references. Render these NEW sequential events:\nReferences: Image1 exact Sylph game identity brown waves green eyes leaf sprigs forehead mark green cloak creamgreen leaf armor; image2 TOP ROW king exact white longhair gaunt elderly clean-shaven greeneyes leaf circlet ivory green robes, NOT bottom prince; image3 same Silverleaf residence study architecture. Continue a private sober meeting, no warfare in room.\nP1 upperleft close king's tired face and hands holding small golden leaf-shaped clothing clasp over folded ivory cloth, remembering son WITHOUT any spirit/portrait. King asks \"那你弟弟呢？\".\nP2 upperright Sylph close halfbody, tearful but composed, no smiling. \"我也想知道誰害了他。\".\nP3 lowerleft overhead/oblique two of them at desk, Sylph unfolds SIMPLE handdrawn street route on parchment, NOT magic clue, father visible. Sylph says \"先讓傷者通過。查案不會因此停下。\".\nP4 lowerright king hands a freshly folded limited instruction sheet to ordinary young elf attendant, brown shorthair plain green robe no crown, Sylph in background not relieved. King speech \"銀葉把守的這處通道，先准傷者與救援車通行。其他命令不變。\". Bottom readable caption \"一條路先打開了，父女之間卻沒有和解。\". No total ceasefire, embrace, apology, or declaration anyone innocent.",
+      "source": "main-46-v1.png",
+      "image": "review/main-46.webp",
+      "reviewStatus": "AI逐張複核通過；待作者人物辨認與閱讀驗收",
+      "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-1e214992-8570-4546-8d08-e55a71e8b5ff.png"
+    },
+    {
+      "page": 47,
+      "title": "不是每件事都能靠她一個人",
+      "refs": [
+        "assets/td/opening/hero-rogue-selection-v1.png",
+        "assets/td/concepts/story-comic-v2/main-41-v2.png",
+        "assets/td/concepts/story-comic-v2/main-44-v2.png"
+      ],
+      "text": [
+        "暮影・臨時安置處",
+        "救援者：這邊領了兩次，後面那張床還沒有。",
+        "維菈：這兩份都是我交代的，卻沒指定誰統整。",
+        "維菈：由妳統整。缺了什麼，直接告訴我。",
+        "救援者：你拿乾淨的繃帶去後面那張床。"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE premium full-color fantasy comic page, LANDSCAPE 1536x1024, exactly FOUR panels 2x2 read LEFT to RIGHT then TOP to BOTTOM. Thin black frames, narrow pale gutters, detailed hand-inked painterly color matching the comic references; varied camera distance, natural acting, expressive readable faces, not four static portraits. Contemporary era of this FANTASY world, no modern technology. Preserve each established face, skin tone, hair, costume and prop identity. Heroes remain their recognizable game designs. Large clean Traditional Chinese text EXACTLY as quoted, no extra invented writing, no English, no page number or watermark. White bubbles with clear tails to correct speakers; framed captions separate from speech. No omniscient revelation of prince's killers, no surprise new magical evidence. Do not copy the old dialogue from references. Render these NEW sequential events:\nImage1 Vira exact game face pale IVORY skin purple eyes silverwhite wavy hair fine scars, blackpurple hood and bronze-trim assassin lightarmor black gloves. Image2 WHITE HEADSCARF short darkhair young female relief worker upperleft is recurring aide: slate blue sleeveless smock over white rolled-sleeve blouse, worried round face. NOT Sylph, no elf tiara. Image3 Vira current daylit aftermath/costume. Do not change her skin tone.\nP1 upperleft wide daylit roofed damaged-street relief shelter, wounded alive civilians rest on makeshift cots. Vira at supply table with CLOSED large brown occult study book beside her, no magic active. Caption \"暮影・臨時安置處\". Worker points from two bandage bundles to farther patient, says \"這邊領了兩次，後面那張床還沒有。\".\nP2 upperright close Vira compares two crumpled requisition slips with same ordinary marks, ashamed/exhausted not incompetent clown. Says \"這兩份都是我交代的，卻沒指定誰統整。\". No exact casualty counts.\nP3 lowerleft medium Vira hands a SMALL PLAIN LINEN SUPPLY LEDGER to the headscarved worker with sincere eye contact. CLOSED large occult book stays separate on table, NEVER handed over. \"由妳統整。缺了什麼，直接告訴我。\".\nP4 lowerright worker carrying supply ledger directs another young volunteer to bring clean dressings to neglected cot; Vira kneels helping hold bowl next to cot, cape/face clear. Quiet practical accountability. Large occult book remains closed at table edge in foreground. No cheering, magical healing, elders, ghosts or triumph.",
+      "source": "main-47-v1.png",
+      "image": "review/main-47.webp",
+      "reviewStatus": "AI逐張複核通過；待作者人物辨認與閱讀驗收",
+      "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-16948316-828d-4cf9-aba7-7a3c16a2fce1.png"
+    },
+    {
+      "page": 48,
+      "title": "首相提出的幫助",
+      "refs": [
+        "assets/td/concepts/story-comic-v1/cast-human-king-chancellor-v1.png",
+        "assets/td/concepts/story-comic-v2/main-44-v2.png"
+      ],
+      "text": [
+        "稍後・消息送抵王國王宮",
+        "人類王｜人類王國的統治者",
+        "人類王：他們現在總該需要我們了吧？",
+        "首相｜人類王國・政務重臣",
+        "首相：先送糧與護送人手。讓他們看見誰能讓街道重新通行。",
+        "首相：先從協助的名義開始。"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE premium full-color fantasy comic page, LANDSCAPE 1536x1024, exactly FOUR panels 2x2 read LEFT to RIGHT then TOP to BOTTOM. Thin black frames, narrow pale gutters, detailed hand-inked painterly color matching the comic references; varied camera distance, natural acting, expressive readable faces, not four static portraits. Contemporary era of this FANTASY world, no modern technology. Preserve each established face, skin tone, hair, costume and prop identity. Heroes remain their recognizable game designs. Large clean Traditional Chinese text EXACTLY as quoted, no extra invented writing, no English, no page number or watermark. White bubbles with clear tails to correct speakers; framed captions separate from speech. No omniscient revelation of prince's killers, no surprise new magical evidence. Do not copy the old dialogue from references. Render these NEW sequential events:\nImage1 CHARACTER REFERENCE TOP ROW human KING broad round mature face full cheeks short broad nose heavy lids, short reddishbrown BEARD curly brown hair gray temples, gold sapphire crown royal blue gold brocade ivory ermine mantle. BOTTOM ROW CHANCELLOR narrow long mature face cleanSHAVEN, gray-templed sidepart dark hair, thoughtful brown eyes faint wrinkles straight nose, dark teal formal longcoat gold vine collar and leaf clasp, white undercollar. They must be visibly different faces. Image2 STYLE ONLY; NONE OF ITS HEROES APPEAR.\nP1 upperleft WIDE separate HUMAN KINGDOM PALACE chamber, blue gold heraldry and tallstone royalwindow, messenger leaving handed-off ordinary road-disruption reports. King seated at counciltable, chancellor beside table. Caption \"稍後・消息送抵王國王宮\". Small distinct introduction box \"人類王｜人類王國的統治者\". King asks \"他們現在總該需要我們了吧？\".\nP2 upperright chancellor calm attentive closeup, humane polite expression, NOT sinister grin/shadow demon. Intro frame \"首相｜人類王國・政務重臣\". Bubble \"先送糧與護送人手。讓他們看見誰能讓街道重新通行。\".\nP3 lowerleft medium king gestures for an ordinary court scribe to draft proposal; chancellor opens blank parchment near practical grain and road sketch. Both faces visible, no dialogue. NO assassin weapons, incriminating letters or blackmagic markings.\nP4 lowerright chancellor gently aligns proposal at table, measured look toward king, mouth slight restrained confidence. \"先從協助的名義開始。\". Visual focus hands on mundane proposal not evil plot map. This is POLITICAL offer not direct confession. Not commoncity palace, no elf king.",
+      "source": "main-48-v1.png",
+      "image": "review/main-48.webp",
+      "reviewStatus": "AI逐張複核通過；待作者人物辨認與閱讀驗收",
+      "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-0fc67679-8045-4bae-978e-996f2c727828.png"
+    },
+    {
+      "page": 49,
+      "title": "援助不等於交出城市",
+      "refs": [
+        "assets/td/concepts/story-comic-v2/main-19-v1.png",
+        "assets/td/concepts/story-comic-v2/main-44-v2.png"
+      ],
+      "text": [
+        "其後・共同城市公共議事廳",
+        "王國使者：我們願提供糧食與護送人手。",
+        "石材商：糧可以收。守路的人聽誰指揮？",
+        "辦事女吏：糧車先送到公共檢點，護送者只隨車；守路權另議。"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE premium full-color fantasy comic page, LANDSCAPE 1536x1024, exactly FOUR panels 2x2 read LEFT to RIGHT then TOP to BOTTOM. Thin black frames, narrow pale gutters, detailed hand-inked painterly color matching the comic references; varied camera distance, natural acting, expressive readable faces, not four static portraits. Contemporary era of this FANTASY world, no modern technology. Preserve each established face, skin tone, hair, costume and prop identity. Heroes remain their recognizable game designs. Large clean Traditional Chinese text EXACTLY as quoted, no extra invented writing, no English, no page number or watermark. White bubbles with clear tails to correct speakers; framed captions separate from speech. No omniscient revelation of prince's killers, no surprise new magical evidence. Do not copy the old dialogue from references. Render these NEW sequential events:\nImage1 public civic architecture, and SAME female CLERK from top-right: blackhair small twisted bun with stray fringe, warm fair skin, narrow brown eyes, white rolledsleeve shirt grayblue sleeveless vest. NO prince appears. Image2 bottomRIGHT BALDING STOCKY MOUSTACHED MERCHANT: tan face, dark receding sidehair, thick black moustache, brownvest offwhite shirt. Other characters only style ref. The neutral commoncity is multi-racial civic town, NOT royalpalace; no factionflagwall/crowns/kingthrone.\nP1 upperleft wide ordinary commoncity public assembly hall with open street windows, merchants, human and long-ear adult representatives at shared wood table. Civilian kingdom ENVOY neatly tied darkhair narrowbeard plain blue formalcoat offers folded proposal not royal decree. Caption \"其後・共同城市公共議事廳\". Envoy \"我們願提供糧食與護送人手。\".\nP2 upperright stocky familiar merchant leans forward level respectful firm eyes, asks \"糧可以收。守路的人聽誰指揮？\". No weapon, no cartoon greed.\nP3 lowerleft same young female clerk writes TWO separate headings ONLY \"援助清單\" and \"指揮權\" on open ledger, threequarter face visible. Says \"糧車先送到公共檢點，護送者只隨車；守路權另議。\".\nP4 lowerright outside through openhall door, two ordinary blue-tabard kingdom guards accompany TWO grain carts while civic workers count sacks at public gate. Assembly seen still discussing inside, no concluded treaty, no takeover/occupation, NO army march or massive banners. Different races watch uncertainly.\nImportant P3: clerk reads out the LIMITED decision after representatives assent with nods/raised hands; she is recording a public deliberation, not unilaterally ordering soldiers. Two separate ledger headings can remain. Escorts never command checkpoints.",
+      "source": "main-49-v2.png",
+      "image": "review/main-49.webp",
+      "reviewStatus": "AI逐張複核通過；待作者人物辨認與閱讀驗收",
+      "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-56f9dbdc-6fb5-45fd-91cb-9150e33aa69f.png",
+      "repairHistory": [
+        {
+          "source": "main-49-v1.png",
+          "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-13a13b13-233f-43d9-aafa-1461327e7534.png",
+          "reason": "移除誤入的王子／證人，改成不同市民代表",
+          "prompt": "Use case: precise-object-edit. Edit this 1536x1024 FOUR-panel comic. This is a strict CAST-CONTINUITY correction, preserve everything else exactly: all panels, speech bubbles, EVERY Traditional Chinese word, clerk, merchant, envoy, grain carts, lighting and line style. CRITICAL forbidden characters accidentally appeared: the long brown-haired male elf at far LEFT in upper-left/upper-right/lower-left resembles the DEAD PRINCE, and the curly black-haired brown-skinned man with rust vest in upper-left and background lower-left resembles the PROTECTED WITNESS. Neither may be present anywhere. Replace EVERY occurrence of that long brown-haired young male elf with one SAME clearly different OLDER FEMALE elf civic representative: silvergray short bob haircut, lined oval face, small pointed ears, simple rust-red wool shawl and plain charcoal tunic, no leaf jewelry/armor/royalty. Replace EVERY occurrence of brown curly-haired rust-vest witness-like man with a clearly different middle-aged FEMALE human grain trader: deep warmbrown skin, long straight BLACK BRAID behind neck, round nose, ochre linen dress with darkgreen apron, no rust vest, no curls. All other attendees faces must also be distinct, no deadprince/hero/witness faces in crowd. In lower-left let an ordinary mature civic delegate in background give a clear assent gesture to the limited cart-only arrangement. Preserve the central balding black-moustached stocky stone merchant, young black-bun bluegrayvest clerk, and narrowbearded bluecoat envoy unchanged. Do not create new dialogue or page numbers. Exactly four panels."
+        }
+      ]
+    },
+    {
+      "page": 50,
+      "title": "沒有權力的人如何繼續查",
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png",
+        "assets/td/concepts/story-comic-v2/main-42-v2.png",
+        "assets/td/concepts/story-comic-v2/main-44-v2.png"
+      ],
+      "text": [
+        "城外・受保護的中繼處",
+        "部屬：現在還能調閱封存紀錄嗎？",
+        "雷恩：沒有調閱權。先請當班的人核對自己的所見。",
+        "文件：核對請求",
+        "雷恩：確認沒人跟蹤，再回來。"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE premium full-color fantasy comic page, LANDSCAPE 1536x1024, exactly FOUR panels 2x2 read LEFT to RIGHT then TOP to BOTTOM. Thin black frames, narrow pale gutters, detailed hand-inked painterly color matching the comic references; varied camera distance, natural acting, expressive readable faces, not four static portraits. Contemporary era of this FANTASY world, no modern technology. Preserve each established face, skin tone, hair, costume and prop identity. Heroes remain their recognizable game designs. Large clean Traditional Chinese text EXACTLY as quoted, no extra invented writing, no English, no page number or watermark. White bubbles with clear tails to correct speakers; framed captions separate from speech. No omniscient revelation of prince's killers, no surprise new magical evidence. Do not copy the old dialogue from references. Render these NEW sequential events:\nImage1 exact Rhen game identity brown tousled shorthair browneyes cleanSHAVEN squarejaw mature sternface, whitefur bluegold steelarmor, largebluegoldstarshield. Image2 and3 recurring WITNESS is same warm BROWN-skinned middle-aged HUMAN man short tight blackcurls graytemples roundbroad nose cleanSHAVEN, brownotch, rustbrownvest bluegray rolledup shirt. NOT baldingmerchant. Same protected timber relay interior from42/44 with records on table.\nP1 upperleft wide quiet daylight relayroom Rhen, witness resting seated in background, TWO blue-scarf armored guards nearby. Caption \"城外・受保護的中繼處\". One guard (helmet initially on) asks Rhen \"現在還能調閱封存紀錄嗎？\".\nP2 upperright close Rhen at table responds soberly \"沒有調閱權。先請當班的人核對自己的所見。\". Three original bundles on table not newly acquired accesslogs.\nP3 lowerleft oblique hands and face Rhen writes on SINGLE separate plain question parchment. Only large title \"核對請求\". Originals tied remain with witness, no exact suspectnames/seals fabricated. Show broad penstrokes not tiny legible extra text.\nP4 lowerright one young guard now ready as courier in ordinary charcoal cloak and brown travel tunic hiding bluearmor, helmet removed: recognizable cleanSHAVEN HUMAN narrowface olivefair skin short straight darkbrown hair, straight nose thick angledbrows. Seen inside doorway putting sealed REQUEST in satchel; second helmeted guard remains with witness and Rhen. Doorview trees only, NO readable map/address or safehouse exterior. No leaked witnesslocation, no sneaking into crime scene, no conclusion.\nP4 add Rhen clearly visible speaking to departing courier: \"確認沒人跟蹤，再回來。\". Request contains questions only; no witness identity, protected address or commissioner's name visible. Courier carries no original records.",
+      "source": "main-50-v2.png",
+      "image": "review/main-50.webp",
+      "reviewStatus": "AI逐張複核通過；待作者人物辨認與閱讀驗收",
+      "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-0bd1e307-56b2-45c4-a48d-a6b8d0239386.png",
+      "repairHistory": [
+        {
+          "source": "main-50-v1.png",
+          "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-5f30cb0f-dcf2-451b-a7e7-a6090da97cbd.png",
+          "reason": "區分使者與雷恩，移除中繼處多出的王旗",
+          "prompt": "Use case: precise-object-edit. Edit this 1536x1024 FOUR-panel comic for continuity. PRESERVE Rhen hero EXACTLY, his whitefur bluegoldarmor and brown tousled hair, BROWN-skinned curly-haired witness EXACTLY, helmeted guards, all FOUR-panel layouts and ALL Traditional Chinese text, props and actions. TWO targeted cast/location corrections only: (1) The plainclothes COURIER at bottom-right must NOT resemble Rhen. Give ONLY courier a distinct mature rectangular narrow face, very CLOSE-CROPPED straight black hair, prominent ears, noticeably long straight nose, olive mediumwarm skin, a neat THIN BLACK MOUSTACHE, no beard. Keep charcoal cloak, brown tunic, satchel and sealed REQUEST same. He is a different unnamed soldier, NOT a clone of the hero. Rhen's face and brownhair remain unchanged in all panels. (2) Remove ALL large hanging BLUE-GOLD ROYAL FLAGS from protected relay interior; replace with ordinary blank graybrown wool cloth or bare timber walls/maps with NO faction emblems. The safe interior should match the previous humble secure timber relay, not decorated royal headquarters. Keep witness inside with remaining guard and originals, no public address. No other changes."
+        }
+      ]
+    },
+    {
+      "page": 51,
+      "title": "一封有限的請求",
+      "refs": [
+        "assets/td/opening/hero-arcanist-selection-v1.png",
+        "assets/td/concepts/story-comic-v2/main-19-v1.png",
+        "assets/td/concepts/story-comic-v2/main-44-v2.png",
+        "assets/td/concepts/story-comic-v2/continuation/main-50-v2.png"
+      ],
+      "text": [
+        "稍後・公共救援登記處",
+        "使者：這是自願核對請求，只寫親眼所見。",
+        "辦事女吏：我只能先整理我親眼看見的部分。",
+        "銀葉哨口・救援車獲准通行",
+        "辦事女吏：公主，請另寫妳的戰地所見，好嗎？",
+        "希爾芙：我的記錄另寫，不先看別人的答案。"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE premium full-color fantasy comic page, LANDSCAPE 1536x1024, exactly FOUR panels 2x2 read LEFT to RIGHT then TOP to BOTTOM. Thin black frames, narrow pale gutters, detailed hand-inked painterly color matching the comic references; varied camera distance, natural acting, expressive readable faces, not four static portraits. Contemporary era of this FANTASY world, no modern technology. Preserve each established face, skin tone, hair, costume and prop identity. Heroes remain their recognizable game designs. Large clean Traditional Chinese text EXACTLY as quoted, no extra invented writing, no English, no page number or watermark. White bubbles with clear tails to correct speakers; framed captions separate from speech. No omniscient revelation of prince's killers, no surprise new magical evidence. Do not copy the old dialogue from references. Render these NEW sequential events:\nImage1 Sylph exact game brownwaves greeneyes leafsprigs foreheadmark greencloak creamgreenarmor. Image2 SAME female CLERK fromtopright blackhairtwistedbun brown eyes white rolledsleeve blouse grayblue vest, fairwarm skin. Image3 style/continuity ONLY noRhen/witness/Vira present. Courier same young HUMAN cleanSHAVEN narrowface olivefair skin short straightdarkbrown hair straightnose thickangledbrows, charcoal cloak brown travel tunic small satchel, NOT Rhen and NOT prince. Daylight neutral commoncity public relief registration porch, NOT protected relayhouse or crime scene.\nP1 upperleft medium courier hands sealed question packet to clerk across registration desk. Caption \"稍後・公共救援登記處\". Courier bubble \"這是自願核對請求，只寫親眼所見。\".\nP2 upperright clerk takes blank paper, cautious thoughtful face, packet rests beside her; \"我只能先整理我親眼看見的部分。\". No sealed casefiles given away.\nP3 lowerleft wide at a SILVERLEAF-HELD passage outside the public registration porch: an ordinary green-armored elf sentry checks the sealed LIMITED PASSAGE ORDER delivered by attendant, then lifts wooden crossbar for Sylph's aid wagon with seated bandaged patients. Sylph walks beside wagon, tired but recognizable. Caption ONLY \"銀葉哨口・救援車獲准通行\". This explicitly implements father's limited order, NOT a general ceasefire. No dialogue in this panel.\nP4 lowerright at registration porch AFTER checkpoint, female clerk asks Sylph \"公主，請另寫妳的戰地所見，好嗎？\". Sylph close at DIFFERENT side desk taking her own notebook without looking at clerk's statement, determined tired greeneyes. \"我的記錄另寫，不先看別人的答案。\". No instant alliance/handshake, noRhen, nobody says she witnessed prince's death.\nFINAL CAST OVERRIDE: COURIER must match ONLY the BOTTOM-RIGHT plainclothes messenger in the LAST reference image EXACTLY: mature narrow rectangular HUMAN face, OLIVE mediumwarm skin, very close-cropped short black hair, thin BLACK MOUSTACHE, long straight nose, prominent ears, charcoal cloak brown tunic leather satchel. He is NOT Rhen; discard prior shortbrown/clean-shaven courier description. NO Rhen, NO protected curlyhaired rustvest witness, NO long-brownhair prince anywhere in this public scene, even crowd. The prince is dead and witness remains secluded. Heroine skins/eyes/hair remain exactly as primary gameart.",
+      "source": "main-51-v1.png",
+      "image": "review/main-51.webp",
+      "reviewStatus": "AI逐張複核通過；待作者人物辨認與閱讀驗收",
+      "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-1a2eea72-893b-4ad9-97cd-33b3984edfd8.png"
+    },
+    {
+      "page": 52,
+      "title": "還不是同一支隊伍",
+      "refs": [
+        "assets/td/opening/hero-arcanist-selection-v1.png",
+        "assets/td/opening/hero-rogue-selection-v1.png",
+        "assets/td/concepts/story-comic-v2/continuation/main-49-v2.png",
+        "assets/td/concepts/story-comic-v2/continuation/main-47-v1.png",
+        "assets/td/concepts/story-comic-v2/continuation/main-50-v2.png"
+      ],
+      "text": [
+        "公共救援登記處",
+        "辦事女吏：這只是各自的所見，還不是結論。",
+        "封件：當晚所見／戰地所見",
+        "另一處・暮影安置處",
+        "有人試著把事情查清，也有人開始決定，城市該聽誰的。"
+      ],
+      "prompt": "Use case: illustration-story. Create ONE premium full-color fantasy comic page, LANDSCAPE 1536x1024, exactly FOUR panels 2x2 read LEFT to RIGHT then TOP to BOTTOM. Thin black frames, narrow pale gutters, detailed hand-inked painterly color matching the comic references; varied camera distance, natural acting, expressive readable faces, not four static portraits. Contemporary era of this FANTASY world, no modern technology. Preserve each established face, skin tone, hair, costume and prop identity. Heroes remain their recognizable game designs. Large clean Traditional Chinese text EXACTLY as quoted, no extra invented writing, no English, no page number or watermark. White bubbles with clear tails to correct speakers; framed captions separate from speech. No omniscient revelation of prince's killers, no surprise new magical evidence. Do not copy the old dialogue from references. Render these NEW sequential events:\nImage1 game Sylph longbrown waves greeneyes leafsprigs pointedears greencloak creamgreenleafarmor. Image2 game Vira IVORY pale skin purpleeyes silverwhitewaves finefacescars blackpurplehood bronze-trim assassinarmor. Image3 recurring femaleCLERK LOWER-LEFT panel blackhairbun brown eyes whiteblouse graybluevest; do NOT reproduce its publicassembly scene. Image4 current Vira reliefshelter and her headscarved aide. Image5 only bottom-right mustached close-cropped blackhair COURIER; NO other people from image5 appear in this new page. All scenes separate, heroes NEVER suddenly together.\nP1 upperleft publicrelief porch Sylph writing OWN notebook at separate desk in foreground while clerk at other desk folds TWO distinct statements separately behind her, contents not legible. Caption \"公共救援登記處\". No dialogue. These records concern different times (case night vs later street attack), do NOT merge timelines or makeSylphawitnessofthedeath.\nP2 upperright clerk places two CLOSED foldedpaper packets in small brown satchel held by courier (young narrowface cleanSHAVEN human olivefairskin shortstraightdarkbrown hair thickangledbrows charcoalcloak browntraveltunic). Clerk says \"這只是各自的所見，還不是結論。\". No safehouseaddress, no evidenceconnection magicallyfound.\nP3 lowerleft whollydifferent DUSK reliefshelter Vira helps whiteheadscarf shortdarkhair youngfemale aide in whiteblouse slateblueapron distribute linen and bowls to patients, ordinary supplyledger open. Caption \"同時・暮影安置處\". Vira is NOT receiving correspondence, not holding occultspell or smilingvictory; she has not joinedotherheroes.\nP4 lowerright wide developedneutralcommoncity street: grain carts with just two blue-tabard kingdomescorts, PUBLIC civic clerks counting sacks on wooden desk, normal multiracialfamilies watching, no kingdom conquestflags/palace/troopsflood. Bottom caption \"有人試著把事情查清，也有人開始決定，城市該聽誰的。\". Cliffhanger through mundane newpoliticalpresence, not culprit confession or westernjourney.\nFINAL CAST OVERRIDE: COURIER must match ONLY the BOTTOM-RIGHT plainclothes messenger in the LAST reference image EXACTLY: mature narrow rectangular HUMAN face, OLIVE mediumwarm skin, very close-cropped short black hair, thin BLACK MOUSTACHE, long straight nose, prominent ears, charcoal cloak brown tunic leather satchel. He is NOT Rhen; discard prior shortbrown/clean-shaven courier description. NO Rhen, NO protected curlyhaired rustvest witness, NO long-brownhair prince anywhere in this public scene, even crowd. The prince is dead and witness remains secluded. Heroine skins/eyes/hair remain exactly as primary gameart.",
+      "source": "main-52-v3.png",
+      "image": "review/main-52.webp",
+      "reviewStatus": "AI逐張複核通過；待作者人物辨認與閱讀驗收",
+      "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-6e5143ac-30d4-4ab8-b9cc-cbacdde015e0.png",
+      "repairHistory": [
+        {
+          "source": "main-52-v1.png",
+          "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-b14201bd-d38b-4826-9a84-e1735532445c.png",
+          "reason": "兩份獨立事件記錄不可混成一本",
+          "prompt": "Use case: precise-object-edit. Edit ONLY the paper objects and their immediate hand contact in the UPPER-RIGHT panel of this exact 1536x1024 four-panel full-color comic. The clerk currently hands one thick bound-looking book/bundle to courier: this is WRONG because they are two independent witness statements about different events. Replace it with TWO clearly SEPARATE THIN FOLDED PAPER ENVELOPES, each with its OWN red wax closure and its OWN thin string. They must be offset/fanned clearly apart so both are visible, NOT shared book spine or one cross-binding around both. On top envelope write readable exact Traditional Chinese small label \"當晚所見\" and on second envelope \"戰地所見\". No dates, names, addresses or insignia. Preserve clerk's hands naturally supporting envelopes as courier accepts over his satchel. Preserve EVERY OTHER detail exactly: all four panels, ALL existing Traditional Chinese dialogue/captions verbatim, all character faces/hair/skin/clothes (especially pale Vira, brownhaired Sylph, clerk, mustached courier), existing poses, colors, lighting, reliefsetting and grain carts. Do not add people, change layout, change speech, or redesign anything outside the documents. Two distinct statements, not merged evidence."
+        },
+        {
+          "source": "main-52-v2.png",
+          "generatedSource": "C:\\Users\\Owner\\.codex\\generated_images\\01a0db13-49c7-7392-af4a-6ebf20c06c20\\exec-75623caf-59fd-4697-b992-cc05eab56bdb.png",
+          "reason": "跨地點蒙太奇不宣稱精確同時",
+          "prompt": "Use case: text-localization. Make ONE tiny caption correction to this 1536x1024 four-panel fullcolor comic. ONLY replace the lower-left panel location caption \"同時・暮影安置處\" with exact Traditional Chinese \"另一處・暮影安置處\". It identifies another location without asserting exact simultaneous time. Keep its caption frame, size, style and placement. Preserve literally everything else unchanged, including TWO separate sealed paper envelopes in upper-right marked \"當晚所見\" and \"戰地所見\", all characters, all other dialogue/captions, all panels, lighting, faces, poses and costumes. Do NOT modify any imagery or other text. No resizing/cropping."
+        }
+      ]
+    }
+  ]
+}

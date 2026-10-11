@@ -1,3 +1,7 @@
+## 續篇審閱 0.10.0（2026-10-11，本機）
+
+新增 authoring 工具 scripts/prepare-story-continuation.cjs，匯出 validate(value) 與 async prepare()；驗證固定頁序、本機路徑及審閱狀態後轉 WebP。閱讀器只 fetch 同資料夾 production-v1.json，沒有新增後端 API、資料庫或存檔欄位。 詳見 [續篇操作、提示詞與驗收](STORY_CONTINUATION_45_52_V1.md)。
+
 ## v0.85.96 漫畫流程內部契約
 
 2026-10-11 已完整發布 GitHub Pages v0.85.96，提交 `361419b`、標籤 `v0.85.96`。Actions 成功；233 個關鍵檔案／239 次線上內容比對通過（含全部 44 張漫畫、五段戰牛語音）。線上四尺寸布局與更新保留本機資料驗收通過。完整 `npm test` 1,122／1,122 通過；正式網站 792 檔，排除 concepts。詳見 [發布紀錄](GITHUB_RELEASE_V08596.md) 與 [漫畫驗收](STORY_MANGA_V08596.md)。Safari 真機與作者視覺驗收仍待完成；下方舊版本「未發布」為歷史狀態。
