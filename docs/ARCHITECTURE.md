@@ -1,10 +1,10 @@
 ## v0.85.96 分段閱讀與章節布局
 
-已驗證：`npm test` 1,122／1,122 通過；`npm run check` 與三個漫畫 JS 語法檢查通過；`check:site` 檢查 792 個正式檔案，排除 concepts。正式 reader 與獨立 review 各通過三尺寸 44 頁 QA；最終修圖複驗證據見 [本次交付與验收](STORY_MANGA_V08596.md)。未發布 GitHub、未完成 Safari 真機與作者視覺驗收。
+2026-10-11 已完整發布 GitHub Pages v0.85.96，提交 `361419b`、標籤 `v0.85.96`。Actions 成功；233 個關鍵檔案／239 次線上內容比對通過（含全部 44 張漫畫、五段戰牛語音）。線上四尺寸布局與更新保留本機資料驗收通過。完整 `npm test` 1,122／1,122 通過；正式網站 792 檔，排除 concepts。詳見 [發布紀錄](GITHUB_RELEASE_V08596.md) 與 [漫畫驗收](STORY_MANGA_V08596.md)。Safari 真機與作者視覺驗收仍待完成；下方舊版本「未發布」為歷史狀態。
 
 新版入口：Flow.timeline → 8 個 section 閱讀節點＋1 個 battle 節點 → FrontierApp 新版故事清單；LegacyStory 保留原任務列表並由「既有挑戰」頁籤分流。兩條入口共用 ProfileStore 任務 ID，不建立第二套通關資料。章節預覽以 pages[0] 對應 Catalog.storyPage，最近選段與分段頁位置同存 bookmark-v2。
 
-2026-10-11。44 頁正式漫畫已接入本機；閱讀狀態與戰鬥進度保持分離，舊任務與獎勵模型不變。
+2026-10-11。44 頁正式漫畫已發布；閱讀狀態與戰鬥進度保持分離，舊任務與獎勵模型不變。
 
 ```text
 StoryMangaCatalog 畫面與文字 ─┐

@@ -4,7 +4,9 @@
 
 ## 發布狀態
 
-準備發布中，尚不能宣稱 GitHub Pages 已更新。完成後在此記錄提交、Actions 結果及線上檔案比對。
+已完成發布。正式提交 `361419b199b067bcf9a5922c99545f29dc5b5cdb`，回復標籤 `v0.85.96`；[Pages 工作流程 38127822736](https://github.com/dat5512999-bit/sky-strike-hero-frontier/actions/runs/38127822736) 已成功。正式入口為 [英雄邊境 v0.85.96](https://dat5512999-bit.github.io/sky-strike-hero-frontier/td.html?release=0.85.96)。
+
+本機另向正式站執行 `verify:pages`：233 檔、239 次內容雜湊比對通過；包含 44 張 WebP、五段語音、遊戲入口及一般／帶版本網址的 Worker。四尺寸線上布局驗收通過，主按鈕可見且外層不捲動。`qa-pages-update.cjs` 使用獨立 Edge 設定檔，更新後程式與 Worker 都為 0.85.96、舊測試快取已移除、localStorage 測試資料保留；測試起始站已為 0.85.96，故這不是實際舊 Worker 升級或 Safari 真機的證明。
 
 ## 發布與回復範圍
 

@@ -1,6 +1,6 @@
 ## v0.85.96 本機啟動與布局驗收
 
-已驗證：`npm test` 1,122／1,122 通過；`npm run check` 與三個漫畫 JS 語法檢查通過；`check:site` 檢查 792 個正式檔案，排除 concepts。正式 reader 與獨立 review 各通過三尺寸 44 頁 QA；最終修圖複驗證據見 [本次交付與验收](STORY_MANGA_V08596.md)。未發布 GitHub、未完成 Safari 真機與作者視覺驗收。
+2026-10-11 已完整發布 GitHub Pages v0.85.96，提交 `361419b`、標籤 `v0.85.96`。Actions 成功；233 個關鍵檔案／239 次線上內容比對通過（含全部 44 張漫畫、五段戰牛語音）。線上四尺寸布局與更新保留本機資料驗收通過。完整 `npm test` 1,122／1,122 通過；正式網站 792 檔，排除 concepts。詳見 [發布紀錄](GITHUB_RELEASE_V08596.md) 與 [漫畫驗收](STORY_MANGA_V08596.md)。Safari 真機與作者視覺驗收仍待完成；下方舊版本「未發布」為歷史狀態。
 
 啟動後的劇情模式應先見按年代排序的 9 節點及「新版故事／既有挑戰」頁籤；若仍直接看到舊 16 關，請核對整包版本與快取。node scripts/qa-story-layout.cjs 現在同時測試兩種入口，不需額外安裝或建立資料庫。
 
@@ -8,7 +8,7 @@
 
 版面自動驗收需可用的 Playwright 與 Microsoft Edge。可在 PowerShell 用 $env:TD_TEST_PORT='4191' 啟動伺服器，再執行 node scripts/qa-story-layout.cjs；不同埠可用 STORY_LAYOUT_QA_URL 指向你的本機網址。單元檢查：node --test tests/td-story-layout.test.js。圖片重建沿用既有 sharp 工具，與玩家安裝無關。
 
-啟動後核對畫面版本 0.85.96。44 頁正式漫畫已接入本機；四尺寸已驗九個封面與原 16 關操作，Node 回歸 1,122／1,122 通過；作者辨識與 Safari 真機仍待驗收。以下保留歷史安裝紀錄。
+啟動後核對畫面版本 0.85.96。44 頁正式漫畫已發布；四尺寸已驗九個封面與原 16 關操作，Node 回歸 1,122／1,122 通過；作者辨識與 Safari 真機仍待驗收。以下保留歷史安裝紀錄。
 
 > 主線審閱 0.8.0（2026-10-10）：沿用Node18+本機serve:test，無新增閱讀依賴；重建副本需sharp，QA需Playwright/Edge。 [操作、維護與驗收](STORY_MAIN_REVIEW_V080.md)。
 

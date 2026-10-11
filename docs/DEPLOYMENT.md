@@ -1,10 +1,10 @@
-## v0.85.96 待發布整合
+## v0.85.96 完整發布
 
-已驗證：`npm test` 1,122／1,122 通過；`npm run check` 與三個漫畫 JS 語法檢查通過；`check:site` 檢查 792 個正式檔案，排除 concepts。正式 reader 與獨立 review 各通過三尺寸 44 頁 QA；最終修圖複驗證據見 [本次交付與验收](STORY_MANGA_V08596.md)。未發布 GitHub、未完成 Safari 真機與作者視覺驗收。
+2026-10-11 已完整發布 GitHub Pages v0.85.96，提交 `361419b`、標籤 `v0.85.96`。Actions 成功；233 個關鍵檔案／239 次線上內容比對通過（含全部 44 張漫畫、五段戰牛語音）。線上四尺寸布局與更新保留本機資料驗收通過。完整 `npm test` 1,122／1,122 通過；正式網站 792 檔，排除 concepts。詳見 [發布紀錄](GITHUB_RELEASE_V08596.md) 與 [漫畫驗收](STORY_MANGA_V08596.md)。Safari 真機與作者視覺驗收仍待完成；下方舊版本「未發布」為歷史狀態。
 
 發布檢查新增：預設九節點按年代排序、每段漫畫首圖可載入、首頁續讀定位、閱讀節點沒有假戰鬥按鈕；「既有挑戰」保留 16 關且老存檔可續玩。TutorialIntegration 的顯示條件也必須隨版打包；不變更實際教學與戰鬥數值。
 
-2026-10-11。尚未 push 或部署 GitHub。runtime 0.85.96、漫畫模組 2.0.0、審閱內容 0.9.0；其他功能版號不變。44 頁正式 WebP 已接入本機；全套 Node 測試 1,122／1,122 通過，本機結果不可宣稱為線上發布。
+2026-10-11。已 push 與部署 GitHub Pages。runtime 0.85.96、漫畫模組 2.0.0、審閱內容 0.9.0；其他功能版號不變。44 頁正式 WebP 已接入本機；全套 Node 測試 1,122／1,122 通過，線上內容比對與獨立瀏覽器驗收亦已完成。
 
 發布必須將 td.html、FrontierApp、StoryMangaFlow、StoryManga、正式 Catalog、對應 runtime 素材、樣式、update.html 與 sw.js 一起打包。快取名稱為 sky-strike-v0.85.96；concepts／草稿與 QA artifacts 仍不混入正式發布。先執行 npm run check:site，再依下方既有流程發布與核對線上版本、頁碼／選段和實際資源。
 
