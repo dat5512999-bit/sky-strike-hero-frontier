@@ -3,7 +3,7 @@
 .hero-more { grid-column:1/-1; }
 .camera-controls { display:none; }
 .td-minimap,.td-quick-rail { display:none; }
-.selection-actions { position:absolute; z-index:19; display:flex; gap:4px; padding:4px; border:1px solid #b6934d; border-radius:5px; background:linear-gradient(145deg,#162421f4,#070e0ff7); box-shadow:0 8px 24px #000c,inset 0 0 0 1px #efd88a18; transform-origin:bottom left; animation:selection-actions-in .14s ease-out; }
+.selection-actions { position:absolute; z-index:19; display:flex; width:max-content; max-width:calc(100% - 12px); gap:4px; padding:4px; border:1px solid #b6934d; border-radius:5px; background:linear-gradient(145deg,#162421f4,#070e0ff7); box-shadow:0 8px 24px #000c,inset 0 0 0 1px #efd88a18; transform-origin:bottom left; animation:selection-actions-in .14s ease-out; }
 .selection-actions button { display:grid; grid-template-columns:17px auto; align-items:center; gap:3px; min-width:62px; min-height:34px; padding:3px 6px; border-color:#74633d; background:linear-gradient(#2b3529,#111917); }
 .selection-actions button b { color:#f0cf79; font-size:15px; line-height:1; }
 .selection-actions button span { color:#e8dfc5; font-size:10px; white-space:nowrap; }
@@ -751,3 +751,23 @@ body.edge-combat[data-combat-ui="edge"][data-layout]:is([data-game-screen="battl
 .td-clarity-toast[data-kind="gate"]{border-color:#ff7266;color:#ffe4c8}
 .td-selection-feedback,.td-upgrade-preview{margin:5px 0;padding:5px 7px;border-left:2px solid #8fc5bf;color:#d9ede8;font:600 12px/1.45 system-ui,sans-serif}
 .td-upgrade-preview{border-color:#e7c477;color:#f4e3b1}
+
+/* Mobile HUD v1.1: size against the safe battlefield, not the outer phone viewport. */
+body.edge-combat[data-combat-ui="edge"][data-layout="mobile"]:is([data-game-screen="battle"],[data-game-screen="result"]) .build-drawer{
+ left:var(--edge);right:var(--edge);width:auto;max-width:calc(100% - 2 * var(--edge));
+ grid-template-columns:minmax(0,1fr) 44px;gap:5px 8px;
+}
+body.edge-combat[data-combat-ui="edge"][data-layout="mobile"] .build-drawer-heading strong{display:none;}
+body.edge-combat[data-combat-ui="edge"][data-layout="mobile"] .build-drawer-filters{grid-column:1;overflow-x:auto;min-width:0;}
+body.edge-combat[data-combat-ui="edge"][data-layout="mobile"] .build-drawer-heading #td-build-drawer-close{
+ grid-column:2;grid-row:1;width:44px;height:44px;min-height:44px;justify-self:end;touch-action:manipulation;
+}
+body.edge-combat[data-combat-ui="edge"][data-layout="mobile"] .build-drawer-grid{min-width:0;max-width:100%;}
+body.edge-combat[data-combat-ui="edge"][data-layout="mobile"] .td-clarity-toast{
+ left:62px;width:max-content;max-width:min(280px,calc(100vw - var(--mobile-shell-system-inset,0px) - 250px));
+ white-space:normal;overflow-wrap:anywhere;
+}
+body.edge-combat[data-combat-ui="edge"][data-layout="mobile"][data-hero-expanded="true"] .td-clarity-toast{left:198px;}
+body.edge-combat[data-combat-ui="edge"][data-layout="mobile"] .selection-actions{animation:none;}
+body.edge-combat[data-combat-ui="edge"][data-layout="mobile"][data-combat-orientation="landscape"]:is([data-game-screen="battle"],[data-game-screen="result"]) .selection-actions button{min-height:44px;}
+body.edge-combat[data-combat-ui="edge"][data-layout="mobile"]:has(.build-drawer:not([hidden])) .selection-actions{visibility:hidden;}

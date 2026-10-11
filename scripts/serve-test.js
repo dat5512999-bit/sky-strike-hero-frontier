@@ -11,6 +11,7 @@ const mime = {
   '.webmanifest': 'application/manifest+json', '.png': 'image/png',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp',
   '.mp4': 'video/mp4', '.vtt': 'text/vtt; charset=utf-8',
+  '.wav': 'audio/wav', '.mp3': 'audio/mpeg', '.m4a': 'audio/mp4', '.ogg': 'audio/ogg',
   '.svg': 'image/svg+xml', '.ico': 'image/x-icon'
 };
 const port = Number(process.env.TD_TEST_PORT) || 4173;

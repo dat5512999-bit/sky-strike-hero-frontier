@@ -1,0 +1,590 @@
+{
+  "version": "story-manga-1.1.0",
+  "status": "superseded-before-integration",
+  "gameIntegrated": false,
+  "published": false,
+  "supersededBy": "docs/WORLD_STORY_REVISION_V2.md",
+  "notice": "Historical 20-page plan. Only 12 draft pages generated; none approved or added to runtime. Do not generate remaining pages from this plan after the user's narrative reset.",
+  "method": "built-in image_gen",
+  "scope": "Adapt the established four playable chapters and the missing contemporary transition; not a new ending or solution to the world mysteries.",
+  "style": "Use case: illustration-story. NEW finished full-color fantasy manga page, landscape 16:9, six cinematic panels, clear gutters, left-to-right then top-to-bottom. Rich colored ink and painterly shading matching intro-chancellor-v1.png. Alternate wide establishing shots, expressive face close-ups and concrete actions. Important faces fully visible and consistent with supplied references; no anonymous replacement for a named hero. Mature civilizations, formal faction equipment, not primitive workers. Integrated legible Traditional Chinese speech bubbles, exact supplied text only. No watermark, no gore, no modern technology, no fake UI. References are identity/style anchors, not layouts to duplicate. Each quoted sentence belongs in its corresponding panel. Never expose the assassination mastermind or invent the identity of the unknown signal. Show outcomes as narrative, not game victory UI.",
+  "pages": [
+    {
+      "id": "present-7",
+      "era": "當代篇",
+      "title": "王冠之外的路",
+      "source": "continuation-01-v1",
+      "mood": "wonder",
+      "cast": [
+        "silverleaf-princess"
+      ],
+      "refs": [
+        "assets/td/concepts/story-comic-v1/cast-princess-commander-v1.png"
+      ],
+      "summary": "銀葉王室長女選擇旅行與元素研究；元素是獨立的自然生命。",
+      "text": [
+        "銀葉公主｜王室長女・旅行與元素研究者",
+        "王位留給懂治理的人。我想走得更遠。",
+        "如果願意，就回應我吧。",
+        "謝謝你。",
+        "元素是自然的生命，不是逝者的亡魂。"
+      ],
+      "scene": "Only TOP ROW woman from reference, not bottom man. Princess with chestnut side braid, mature long face, green eyes, green gold traveling cloak. 1 large recognizable portrait at library stream with title and introduction. 2 puts political invitation aside and takes journal, sentence 2. 3 kneels and opens palm, sentence 3. 4 living luminous water elemental rises freely, not human ghost. 5 smiles sentence 4. 6 wide garden, sentence 5. Older sister of prince, not playable arcanist.",
+      "identityLocks": []
+    },
+    {
+      "id": "present-8",
+      "era": "當代篇",
+      "title": "兩種誓言",
+      "source": "continuation-02-v1",
+      "mood": "unease",
+      "cast": [
+        "guard-commander"
+      ],
+      "refs": [
+        "assets/td/concepts/story-comic-v1/cast-princess-commander-v1.png"
+      ],
+      "summary": "王國禁衛軍依法律與軍制行動；皇族親衛隊直接效忠國王，兩者並非同一隊伍。",
+      "text": [
+        "禁衛軍團長｜王國禁衛軍",
+        "封街的命令，請交出正式文書。",
+        "我們奉國王的命令。",
+        "我的職責，是守住法律與人民。",
+        "同一座王城，兩套命令。",
+        "裂縫，早已存在。"
+      ],
+      "scene": "Only BOTTOM ROW commander reference: broad trapezoid square jaw, short grey hair, grey stubble, blue black steel armor, NO white fur collar, NOT Rhen. 1 large commander introduction in grand city. 2 commander open palm requests documents at checkpoint. 3 anonymous adult royal bodyguard in burgundy gold royal livery replies; ordinary non-evil face. 4 commander calm determined closeup. 5 clear contrasting units blue law-bound guards and burgundy royal bodyguards separated by gate, pedestrians protected. 6 wide gate closes between two systems. Not combat or revelation of killers.",
+      "identityLocks": []
+    },
+    {
+      "id": "present-9",
+      "era": "當代篇",
+      "title": "未能赴約的人",
+      "source": "continuation-03-v1",
+      "mood": "sorrow",
+      "cast": [
+        "silverleaf-king",
+        "silverleaf-prince"
+      ],
+      "refs": [
+        "assets/td/concepts/story-comic-v1/cast-silverleaf-king-prince-v1.png"
+      ],
+      "summary": "銀葉王子遇害的消息抵達；讀者尚不知道兇手與執行方式。",
+      "text": [
+        "隔日，議事廳少了一個人。",
+        "王子殿下還沒到？",
+        "陛下……王子遇害了。",
+        "先封存現場。把知道的事，一件一件告訴我。",
+        "空著的座位，沒有給出答案。",
+        "鐘聲傳遍了共同城市。"
+      ],
+      "scene": "Do NOT show murderer, murder weapon or technique. TOP reference elderly king long white hair wrinkled narrow face leaf circlet; BOTTOM prince mature brown half-tied hair green white gold attire shown ONLY in small remembered image. 1 wide empty council chair daylight. 2 anxious clerk holds invitation by clock. 3 messenger kneels in king study brings death report. 4 king grief restrained, clearly recognizable frontal closeup gives rational order. 5 empty prince chair with folded green mantle and memory vignette of living prince NOT body, no ghost. 6 bells city skyline stormcloud mood. Readers learn death but not culprit.",
+      "identityLocks": []
+    },
+    {
+      "id": "present-10",
+      "era": "當代篇",
+      "title": "不要讓悲傷替我們判決",
+      "source": "continuation-04-v1",
+      "mood": "tension",
+      "cast": [
+        "silverleaf-king"
+      ],
+      "refs": [
+        "assets/td/concepts/story-comic-v1/cast-silverleaf-king-prince-v1.png"
+      ],
+      "summary": "疑似禁術痕跡與指控引發悲憤；銀葉王仍要求查證，調查面臨愈來愈大的壓力。",
+      "text": [
+        "現場有疑似禁術的痕跡。",
+        "他們說，是暮影做的。",
+        "誰親眼看見？",
+        "痕跡要查，傳言也要查。",
+        "城裡的悲憤，卻比調查走得更快。",
+        "邊境的烽火，已經亮起。"
+      ],
+      "scene": "Only elderly king TOP reference. 1 guards lay sealed evidence box and report with illegible nonsemantic marks, no invented specific murder tool. 2 concerned elven courtier repeats rumor visibly uncertain. 3 king intense grief but rational asks witness. 4 king points to separate report stacks, refuses instant war. 5 street crowds grieving, merchants closing shutters, ordinary duskfolk families anxious not villains. 6 far valley signal fire at dusk transitions chapter1. No king assault order yet, no claim magic traces prove culprit.",
+      "identityLocks": []
+    },
+    {
+      "id": "mission-1-1",
+      "era": "第一章・破碎的和平",
+      "missionId": "chapter1-border",
+      "title": "烽火初燃",
+      "source": "continuation-05-v1",
+      "mood": "heroic",
+      "cast": [
+        "hunter"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png"
+      ],
+      "summary": "雷恩守住谷地城門，讓殘缺命令成為調查起點。",
+      "text": [
+        "邊境烽火，比信使先到。",
+        "對面也是王國士兵。",
+        "盾列守門！先讓居民通過！",
+        "這份命令……少了最重要的一段。",
+        "先保住人，再查清誰下的令。",
+        "城門守住了。調查才剛開始。"
+      ],
+      "scene": "Rhen exact face from reference brown wavy hair square mature jaw thick eyebrows blue gold armor white fur collar large blue shield. 1 dusk fortified green valley beacon. 2 Rhen sees human armored halberdiers with same kingdom heraldry attacking. 3 shield line covering fleeing adult civilians, Rhen blocking a blow with shield no gore. 4 messenger hands torn order closeup, no legible invented seal. 5 face closeup speaks while pointing safe route. 6 dawn gate intact rescued messenger and evidence, concrete human success. No new rank or commander title.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander."
+      ]
+    },
+    {
+      "id": "mission-1-2",
+      "era": "第一章・破碎的和平",
+      "missionId": "chapter1-silverleaf",
+      "title": "溪谷餘音",
+      "source": "continuation-06-v1",
+      "mood": "hope",
+      "cast": [
+        "hunter",
+        "arcanist"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png",
+        "assets/td/opening/hero-arcanist-selection-v1.png"
+      ],
+      "summary": "雷恩與希爾芙護送舊盟約離開溪谷；合作的紀錄不能用來替任何人定罪。",
+      "text": [
+        "森語者・希爾芙｜銀葉英雄",
+        "這是我們一起簽下的舊盟約。",
+        "曾經合作，不代表現在的指控就是真的。",
+        "橋頭交給我。帶記錄先走！",
+        "別讓水浸進去！",
+        "盟約留下了；誰毀了和平，仍要查。"
+      ],
+      "scene": "Rhen reference1; arcanist reference2 exact game elf brown hair green leaf attire nature bow, not royal princess. 1 large distinctive Sylph face intro beside leafy stream archive. 2 she opens old alliance scroll with Rhen. 3 serious two-face conversation. 4 Rhen blue shield blocks attackers on wooden bridge while elf archers protect archive carriers. 5 Sylph catches slipping sealed scrollcase above stream. 6 both across bridge safe holding dry archive and looking back, not secret culprit revealed.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander.",
+        "森語者・希爾芙: long flowing brown hair with leaf hair ornaments, green eyes, sharp long elf ears, youthful oval soft face, white green leaf bodice, green cloak and natural wood bow. NOT braided princess."
+      ]
+    },
+    {
+      "id": "mission-1-3",
+      "era": "第一章・破碎的和平",
+      "missionId": "chapter1-shadowfall",
+      "title": "舊城疑雲",
+      "source": "continuation-07-v1",
+      "mood": "mystery",
+      "cast": [
+        "hunter",
+        "rogue"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png",
+        "assets/td/opening/hero-rogue-selection-v1.png"
+      ],
+      "summary": "暮影證人與遺物成為追查目標；有人阻止調查，仍不能直接判定真兇。",
+      "text": [
+        "影行者・維菈｜暮影英雄",
+        "你們要找證人，不是找一個認罪的人。",
+        "那就讓他自己說。",
+        "追兵到了。走內巷！",
+        "遺物帶好，人更不能丟。",
+        "有人不想讓這段證言離開舊城。"
+      ],
+      "scene": "Use exact Rhen and rogue reference identities, rogue mature elf-like woman distinctive hair and black/violet armor per reference, not generic hooded man. 1 large rogue portrait intro purple old city alley. 2 she stands protectively before frightened adult witness, speaks to Rhen. 3 Rhen lowers shield to listen. 4 human pursuers at archway, rogue guides witness through inner alley. 5 both protect witness carrying wrapped relic, no evil ritual by duskfolk. 6 dawn safe threshold witness opens mouth to testify, pursuit silhouette distant. No conclusion who ordered it.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander.",
+        "影行者・維菈: WHITE/SILVER wavy hair, VIOLET eyes, pale fine oval face, dark black hood with gold edging, black/violet leather armor, short silver blade. NOT red-haired or red-armored skin."
+      ]
+    },
+    {
+      "id": "mission-1-4",
+      "era": "第一章・破碎的和平",
+      "missionId": "chapter1-frostborn",
+      "title": "裂谷中的另一道命令",
+      "source": "continuation-08-v1",
+      "mood": "resolve",
+      "cast": [
+        "hunter"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png"
+      ],
+      "summary": "雙路護送保存調度紀錄，線索指向王城另一套命令系統與疆界之外。",
+      "text": [
+        "兩條路，都有人封鎖。",
+        "不要分開紀錄。沿橋往前！",
+        "這道調度，不在正常軍令裡。",
+        "王城裡，還有另一套命令？",
+        "現在只能確定，紀錄對不上。",
+        "要繼續查，就得走出王國的邊界。"
+      ],
+      "scene": "Rhen game reference no namechange. 1 icy rocky rift two branching trails enemy human troops block both. 2 hero shield covers courier party on bridge. 3 sheltered desk closeup comparing two rolls, no invented royal culprit seal. 4 Rhen face puzzled. 5 courier points inconsistent rows, neither knows fulltruth. 6 wide dawn westward road with caravan, damaged records preserved, not solved firstchapter.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander."
+      ]
+    },
+    {
+      "id": "mission-2-1",
+      "era": "第二章・荒野的回聲",
+      "missionId": "chapter2-western-signal",
+      "title": "西境的條件",
+      "source": "continuation-09-v1",
+      "mood": "unease",
+      "cast": [
+        "hunter",
+        "chief"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png",
+        "assets/td/opening/hero-chief-selection-v2.png"
+      ],
+      "summary": "雷恩與戈爾第一次交換條件：先護送信使，再繼續談舊印。",
+      "text": [
+        "大酋長・戈爾｜荒野部族領袖",
+        "你認得這枚舊印？",
+        "我認得。但不欠你答案。",
+        "先讓信使活著走完這條路。",
+        "可以。我的盾先護人。",
+        "戈爾同意帶來見證者，對話才開始。"
+      ],
+      "scene": "Exact Rhen and chief reference green orc rugged distinct tusked face red black armor with white fur collar large axe. 1 chief intro large portrait west dry frontier watchpost. 2 Rhen shows old engraved token to chief no invented readable rune. 3 chief skeptical eye closeup. 4 chief points threatened courier behind him. 5 Rhen shields courier at pass while chief holds flank. 6 safe camp two leaders at separate sides map, agreement limited no kneeling oath or kingdom banner acceptance.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander.",
+        "大酋長・戈爾: olive GREEN skin, broad nose, large lower white tusks, black braids and braided black goatee, red forehead paint, RED/black battered plate, HUGE white/grey fur collar and shoulder ivory horns. NOT skeletal full-body costume."
+      ]
+    },
+    {
+      "id": "mission-2-2",
+      "era": "第二章・荒野的回聲",
+      "missionId": "chapter2-ember-road",
+      "title": "先救人，再問歷史",
+      "source": "continuation-10-v1",
+      "mood": "tension",
+      "cast": [
+        "hunter",
+        "chief"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png",
+        "assets/td/opening/hero-chief-selection-v2.png"
+      ],
+      "summary": "護送隊從燃燒商道救出傷者；石環路名成為下一步線索。",
+      "text": [
+        "補給車著火了！裡面還有人！",
+        "先救人，再談南方。",
+        "我擋住箭。你把車輪抬起來！",
+        "抓住我的手！",
+        "這半張路單，只剩石環的名字。",
+        "傷者活了下來，才有下一段證言。"
+      ],
+      "scene": "Burning western trade road smoky orange light, distinct Rhen and chief refs. 1 supplywagon stuck and adult wounded trapped no gore. 2 chief directs rescue not exposition. 3 Rhen shield covering incoming arrows and chief physically lifting wagon axle. 4 adult survivor helped out handcloseup. 5 singed route sheet recovered no inventedlongtext. 6 rescued adults with bandages at safe roadside Rhen and chief exchange grave nod, do not reveal southern ancient species.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander.",
+        "大酋長・戈爾: olive GREEN skin, broad nose, large lower white tusks, black braids and braided black goatee, red forehead paint, RED/black battered plate, HUGE white/grey fur collar and shoulder ivory horns. NOT skeletal full-body costume."
+      ]
+    },
+    {
+      "id": "mission-2-3",
+      "era": "第二章・荒野的回聲",
+      "missionId": "chapter2-stone-circle",
+      "title": "讓見證者自己說",
+      "source": "continuation-11-v1",
+      "mood": "mystery",
+      "cast": [
+        "hunter",
+        "chief"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png",
+        "assets/td/opening/hero-chief-selection-v2.png"
+      ],
+      "summary": "石環見證者保留自己的聲音；遷徙紀錄需安全帶到赤岩峽橋查證。",
+      "text": [
+        "石環不屬於任何一面旗。",
+        "我們是被迫離開南方的。",
+        "細節，請讓他自己說。",
+        "外環有人！先護送大家離開！",
+        "下一個路名，是赤岩峽橋。",
+        "帶走的不只是紙，還有能說話的人。"
+      ],
+      "scene": "Ancient standingstone basin, no invented ancient species. 1 Rhen and chief remove threatening posture before elderly orc witness, plain nonheroelder distinct white brows. 2 elder weathered face testifies memory not flashbackconfirm. 3 chief letselderhold migrationrecord, Rhen listens. 4 hostile silhouettes outer ring, hero shield escort. 5 close hands point routemark direction, notnewproof. 6 caravan carries elderandscroll through ring, living testimony. Never portray chief speaking forelder.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander.",
+        "大酋長・戈爾: olive GREEN skin, broad nose, large lower white tusks, black braids and braided black goatee, red forehead paint, RED/black battered plate, HUGE white/grey fur collar and shoulder ivory horns. NOT skeletal full-body costume."
+      ]
+    },
+    {
+      "id": "mission-2-4",
+      "era": "第二章・荒野的回聲",
+      "missionId": "chapter2-red-mesa",
+      "title": "各自的路",
+      "source": "continuation-12-v1",
+      "mood": "heroic",
+      "cast": [
+        "hunter",
+        "chief",
+        "bull"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png",
+        "assets/td/opening/hero-chief-selection-v2.png",
+        "assets/td/neutral/bull-wargod-selection-v1.png"
+      ],
+      "summary": "奧魯姆為自己的道路破除封鎖；荒野部族保有自主，護送隊終於通過赤岩。",
+      "text": [
+        "傷者和紀錄都在車上。不能停！",
+        "戰神・奧魯姆｜中立戰士",
+        "我不替王國，也不替部落賣命。",
+        "你們擋住了我的路。",
+        "關口開了！車隊先過！",
+        "並肩走過一段路，不等於交出自己的旗。"
+      ],
+      "scene": "Redmesa canyonbridge dusk, identities Rhen chief and huge standing armored bullwarrior with massive hammer from reference3. 1 caravan trapped at bridge, blue shield Rhen. 2 large bullface hornsintroduction, no new allegiance. 3 bull talks dismissively facing both groups. 4 spectacular hammer smashing enemy barricade not people gore, dustshards. 5 chief escorts woundedwagon through breach Rhen coversrear. 6 bull takes separate fork whileorcandhumanconvoy passesbridge, no pledge, bull notclan savior.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander.",
+        "大酋長・戈爾: olive GREEN skin, broad nose, large lower white tusks, black braids and braided black goatee, red forehead paint, RED/black battered plate, HUGE white/grey fur collar and shoulder ivory horns. NOT skeletal full-body costume.",
+        "戰神・奧魯姆: brown bull face with wide muzzle, two huge upward curling HORNS with gold bands, reddish-brown mane, black gold rune plate, RED scarf and cloth, massive rectangular gold glowing HAMMER. Not grey minotaur with axe. Neutral."
+      ]
+    },
+    {
+      "id": "mission-3-1",
+      "era": "第三章・霜線與齒輪",
+      "missionId": "chapter3-white-trace",
+      "title": "逆風的白痕",
+      "source": "continuation-13-v1",
+      "mood": "mystery",
+      "cast": [
+        "hunter",
+        "frostland",
+        "goblin"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png",
+        "assets/td/frostland/hero-selection-v2.png",
+        "assets/td/goblin-chief-engineer-v1.png"
+      ],
+      "summary": "凜與奇克用兩種方法追蹤逆風霜痕，雷恩保護採樣撤離。",
+      "text": [
+        "霜牙・凜｜霜原追跡者",
+        "這道霜痕，是逆著風走的。",
+        "銅齒・奇克｜地精工程師",
+        "先別猜。讓我把方向記下來。",
+        "敵人接近了！樣本和讀值都帶走！",
+        "白霜沒有融化；兩份紀錄指向同一處。"
+      ],
+      "scene": "Snowpass maturegrey wolfhumanoid Rin exactreference, green goblinengineer goggles machinery exactreference, browncurlyhaired bluegold shield Rhen in groupref. 1 Rin kneels largefaceintro tracesfrost. 2 clothstreamer blowsoppositefrost direction. 3 goblin expressive closeupintro adjustbrassinstrument. 4 goblinwrites raw readings wolfcollectssample. 5 Rhen shieldprotects both as enemiesapproach stonepass. 6 sealedice sample androlledrecord sidebyside atcamp. No confirmed supernaturalorigin.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander.",
+        "霜牙・凜: actual grey-white WOLF HEAD with pointed ears, long muzzle, ice-blue eyes, grey-white fur, dark iron leather armor, animal skull on shoulder, turquoise pendant, long stoneheaded spear. Never human face.",
+        "銅齒・奇克: short GREEN goblin, huge pointy ears, hooked nose, orange eyes, toothy grin, brass cyan goggles on leather cap, brown mechanic leather, turquoise canister backpack, large wrench. NOT dwarf."
+      ]
+    },
+    {
+      "id": "mission-3-2",
+      "era": "第三章・霜線與齒輪",
+      "missionId": "chapter3-echo-yard",
+      "title": "早了十七秒",
+      "source": "continuation-14-v1",
+      "mood": "tension",
+      "cast": [
+        "hunter",
+        "frostland",
+        "goblin"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png",
+        "assets/td/frostland/hero-selection-v2.png",
+        "assets/td/goblin-chief-engineer-v1.png"
+      ],
+      "summary": "回聲早於發訊十七秒；工程團保留原始讀值並重測，不將異常解釋為已證實的時間魔法。",
+      "text": [
+        "我還沒發訊，它怎麼先回了？",
+        "早了十七秒。",
+        "也可能是你的機器錯了。",
+        "所以要重測，不是把它擦掉。",
+        "守住機座！原始讀值不能丟！",
+        "機器保住了，問題也留下了。"
+      ],
+      "scene": "Brassgear yard receiver, exact goblinQike wolfRin Rhenrefs. 1 goblin startled handabove unsentlever bellalreadyringing. 2 clockpair andgoblinholding17secondnote, ONLYquote textnotnewnumbers. 3 skeptical wolf face earsalert. 4 goblin irritated butreasoned opening instrumenthousing inspect. 5 Rhen shieldline holds machineplatform whileengineersfixgear, notmoderncomputer. 6 instruments stable goblinandwolfcompare savedtraces sunset, no time travel proof.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander.",
+        "霜牙・凜: actual grey-white WOLF HEAD with pointed ears, long muzzle, ice-blue eyes, grey-white fur, dark iron leather armor, animal skull on shoulder, turquoise pendant, long stoneheaded spear. Never human face.",
+        "銅齒・奇克: short GREEN goblin, huge pointy ears, hooked nose, orange eyes, toothy grin, brass cyan goggles on leather cap, brown mechanic leather, turquoise canister backpack, large wrench. NOT dwarf."
+      ]
+    },
+    {
+      "id": "mission-3-3",
+      "era": "第三章・霜線與齒輪",
+      "missionId": "chapter3-crossmark",
+      "title": "把矛盾一起帶走",
+      "source": "continuation-15-v1",
+      "mood": "resolve",
+      "cast": [
+        "hunter",
+        "frostland",
+        "goblin"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png",
+        "assets/td/frostland/hero-selection-v2.png",
+        "assets/td/goblin-chief-engineer-v1.png"
+      ],
+      "summary": "腳印與量測存在矛盾；兩人決定同時保留資料，穿越遭截斷的橋頭。",
+      "text": [
+        "溪泥留下了經過的痕跡。",
+        "可我的量架，沒有記到重量。",
+        "總不能只留你喜歡的那份！",
+        "那就兩份都留。也許我們都漏看了。",
+        "橋頭要斷了！把兩箱一起送過去！",
+        "矛盾沒有消失，卻讓下一次校準有了方向。"
+      ],
+      "scene": "Frostedcreekjunction wolfRin goblinQike Rhen exactgroupref. 1 wolfpoints mudtrail. 2 goblinchecks balancedbrassweighingframe. 3 face-to-face argument controlled notcomiccaricature. 4 both decide wraptwoseparate labeledbycolor records. 5 Rhen bracesblue shieldonbridge underattack carriesonecase wolfcarriesother goblincrosses. 6 two intactcases placedtogether map, collaboration notrewrittenevidence.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander.",
+        "霜牙・凜: actual grey-white WOLF HEAD with pointed ears, long muzzle, ice-blue eyes, grey-white fur, dark iron leather armor, animal skull on shoulder, turquoise pendant, long stoneheaded spear. Never human face.",
+        "銅齒・奇克: short GREEN goblin, huge pointy ears, hooked nose, orange eyes, toothy grin, brass cyan goggles on leather cap, brown mechanic leather, turquoise canister backpack, large wrench. NOT dwarf."
+      ]
+    },
+    {
+      "id": "mission-3-4",
+      "era": "第三章・霜線與齒輪",
+      "missionId": "chapter3-nightwatch",
+      "title": "願意承認可能錯了",
+      "source": "continuation-16-v1",
+      "mood": "hope",
+      "cast": [
+        "hunter",
+        "frostland",
+        "goblin"
+      ],
+      "refs": [
+        "assets/td/opening/hero-hunter-selection-v1.png",
+        "assets/td/frostland/hero-selection-v2.png",
+        "assets/td/goblin-chief-engineer-v1.png"
+      ],
+      "summary": "夜守站完成交叉觀測；凜與奇克成為調查夥伴，仍未確認回應來源。",
+      "text": [
+        "最後一次校準。你守霜痕，我守儀器。",
+        "如果錯的是我，也照樣記下來。",
+        "這句話，我也寫。",
+        "雷恩，還要一點時間！",
+        "訊標亮了！但來源……仍是一片空白。",
+        "我們繼續查。這次，一起。"
+      ],
+      "scene": "Starry frostwatch stonecalibration platform brassbeacon, grouprefidentities. 1 wolfandgoblinprepareseparatemethods. 2 goblin sincere expressiveface. 3 wolf mirrorshumility writingjournal. 4 heroRhen blue shieldblocks advancingtroops atstairs notidentifymaster. 5 three pale measurementlines oninstrumentconverge blank notportalcreature or southernmap. 6 wolf andgoblinseal bothrecords sidebyside underdawn hopefulquiet, notkingdomallegiance.",
+      "identityLocks": [
+        "守誓者・雷恩: brown wavy short hair, thick brown brows, square mature clean-shaven face, brown eyes, white fur collar, royal blue cloth and heavy gold-edged armor, large blue heraldic shield. NOT grey-haired commander.",
+        "霜牙・凜: actual grey-white WOLF HEAD with pointed ears, long muzzle, ice-blue eyes, grey-white fur, dark iron leather armor, animal skull on shoulder, turquoise pendant, long stoneheaded spear. Never human face.",
+        "銅齒・奇克: short GREEN goblin, huge pointy ears, hooked nose, orange eyes, toothy grin, brass cyan goggles on leather cap, brown mechanic leather, turquoise canister backpack, large wrench. NOT dwarf."
+      ]
+    },
+    {
+      "id": "mission-4-1",
+      "era": "第四章・潮門回聲",
+      "missionId": "chapter4-tidegate-outfall",
+      "title": "退潮時回頭的水",
+      "source": "continuation-17-v1",
+      "mood": "wonder",
+      "cast": [
+        "naga"
+      ],
+      "refs": [
+        "assets/td/naga/tidebreaker-selection-v1.png",
+        "assets/td/naga/faction-selection-v1.png"
+      ],
+      "summary": "賽洛觀測潮門外流；確認可重複的異常，不替潮汐捏造來源。",
+      "text": [
+        "破潮者・賽洛｜娜迦潮衛",
+        "退潮時，它卻回頭了。",
+        "先記時間，再記方向。",
+        "礁岸有敵人！量具和本子一起撤！",
+        "這不是普通潮汐。",
+        "但為什麼回折，我還不知道。"
+      ],
+      "scene": "NagaSailuo exacthero reference teal mane scaled serpentinetail goldtealarmor trident, no humanlegs; factionNaga soldiersreference. 1 largefacehero intro stormrocktidegate. 2 visible waterflowcurvesback amidretreatingfoam no evilgod. 3 heroorders nagaobservermeasure tidepole writejournal. 4 tridentsandbarriers protectretreat from hostilearmoredsilhouettes oncoastroad. 5 clearface hero studies oscillatingwater. 6 safeobservationbook andsealedinstrument atcliffcamp, oceanwide. Soldiers matchfaction nothumans.",
+      "identityLocks": [
+        "破潮者・賽洛: reptilian grey-green elongated face, gold eyes, turquoise FIN CREST (not human flowing hair), teal scales, massive coiled snake TAIL no legs, white shells and cream cloth with gold marine armor, huge teal/gold trident."
+      ]
+    },
+    {
+      "id": "mission-4-2",
+      "era": "第四章・潮門回聲",
+      "missionId": "chapter4-brineway",
+      "title": "風暴裡的第二次量測",
+      "source": "continuation-18-v1",
+      "mood": "tension",
+      "cast": [
+        "naga"
+      ],
+      "refs": [
+        "assets/td/naga/tidebreaker-selection-v1.png",
+        "assets/td/naga/faction-selection-v1.png"
+      ],
+      "summary": "風暴堤道上，潮向與壓力再次偏離；潮衛保護工程團完成重測。",
+      "text": [
+        "壓力計交給工程團，潮向由我記。",
+        "又偏了。時間和上次一樣！",
+        "浪要上堤了！抓緊量架！",
+        "別鬆手，我拉你上來！",
+        "兩種量測相符，也不代表我們知道另一端是誰。",
+        "把原始紀錄帶去礁環。"
+      ],
+      "scene": "Use exact naga heroidentity serpentinetail trident andnagaguardfaction. Sea stormcauseway atnight. 1 nagahero recordsdirection nagatechnicians operatebrasspressuregauge notmoderntech. 2 closehands clockandpaper matchingmarks. 3 massive wavehits observationrig, technician slips. 4 Sailuo coilanchoredtostone handrescues adult technician, cleananatomy. 5 understonearch compares twowetbutreadable ledgers no namedvillain. 6 groupcarriescrates towardreefbridge understormlight. Correct Traditional text firstsentence render '交給' notsimplified.",
+      "identityLocks": [
+        "破潮者・賽洛: reptilian grey-green elongated face, gold eyes, turquoise FIN CREST (not human flowing hair), teal scales, massive coiled snake TAIL no legs, white shells and cream cloth with gold marine armor, huge teal/gold trident."
+      ]
+    },
+    {
+      "id": "mission-4-3",
+      "era": "第四章・潮門回聲",
+      "missionId": "chapter4-reef-confluence",
+      "title": "讓兩岸的記錄相遇",
+      "source": "continuation-19-v1",
+      "mood": "resolve",
+      "cast": [
+        "naga"
+      ],
+      "refs": [
+        "assets/td/naga/tidebreaker-selection-v1.png",
+        "assets/td/naga/faction-selection-v1.png"
+      ],
+      "summary": "兩岸獨立讀值在橋頭交叉比對，確認異常同步，但尚未確認原因。",
+      "text": [
+        "左岸到了！右岸還在橋外！",
+        "別先交換答案。各自把原本的紀錄攤開。",
+        "敵人要切斷橋頭！",
+        "我守橋，你們繼續比對！",
+        "同一個節奏，沒有錯。",
+        "同步值得追查，卻還不是原因。"
+      ],
+      "scene": "Twinreefpaths converging longstonebridge tealwater, nagaexactrefs. 1 two separatedobserverteams carryseparateledgers arrivalone delayed. 2 hero emphasizesindependentrecords handsplacingdifferentbooks. 3 distant enemyhumanoids approach bridge neitheridentifiedasevilnaga. 4 dynamic Sailuo trident channelswatershield protectingnagaresearchers goodfacevisible. 5 pairedtidegauges showalignedwatermark two observerslookrelieved. 6 hero thoughtfulcloseup sunsetsea no confirmed source.",
+      "identityLocks": [
+        "破潮者・賽洛: reptilian grey-green elongated face, gold eyes, turquoise FIN CREST (not human flowing hair), teal scales, massive coiled snake TAIL no legs, white shells and cream cloth with gold marine armor, huge teal/gold trident."
+      ]
+    },
+    {
+      "id": "mission-4-4",
+      "era": "第四章・潮門回聲",
+      "missionId": "chapter4-tide-observatory",
+      "title": "把未知留給下一個人查證",
+      "source": "continuation-20-v1",
+      "mood": "hope",
+      "cast": [
+        "naga"
+      ],
+      "refs": [
+        "assets/td/naga/tidebreaker-selection-v1.png",
+        "assets/td/naga/faction-selection-v1.png"
+      ],
+      "summary": "長時觀測完成並封存原始讀值，潮衛繼續同行；現有四章在可追查的線索上收束，不宣告世界真相揭曉。",
+      "text": [
+        "今晚，一筆也不能漏。",
+        "時間、潮位、方位，分開封存。",
+        "觀測站還要守多久？",
+        "守到最後一份原始讀值送出去！",
+        "回折仍在重複。來源，仍待查證。",
+        "把紀錄交給下一位觀測者，讓調查繼續。"
+      ],
+      "scene": "Seaside observatory nighttolight, heroSailuo consistent serpenttail tealhairgoldarmor. 1 vigil hero watchesglowingtidemeasurementring notsuperweapon. 2 observer packs separatedtime tidebearing records intodrysealedcrates. 3 guardcalls atstairs enemyapproaches. 4 Sailuo thruststrident waterdefense atarch keepingmeasurementsafe no gore. 5 dawn sealsrecordbook, hero exhaustedbutresolved. 6 widesunrise sea convoy ofnaga leaveswatchstation carryingcrates to nextobserver. Hopefulearnedchapterending, NOT fullmysterysolution; no newboss, no ancientgodreveal.",
+      "identityLocks": [
+        "破潮者・賽洛: reptilian grey-green elongated face, gold eyes, turquoise FIN CREST (not human flowing hair), teal scales, massive coiled snake TAIL no legs, white shells and cream cloth with gold marine armor, huge teal/gold trident."
+      ]
+    }
+  ]
+}

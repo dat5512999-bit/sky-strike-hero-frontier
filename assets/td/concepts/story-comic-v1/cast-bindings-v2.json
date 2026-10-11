@@ -1,0 +1,13 @@
+{
+  "version": "comic-production-0.5.0",
+  "date": "2026-10-10",
+  "authority": "User-confirmed story identities; primary art paths verified against current HeroRoster.CLASSES. Production reference only, not a runtime roster change.",
+  "canon": "docs/WORLD_STORY_REVISION_V2.md",
+  "characters": [
+    {"gameHeroId":"hunter","name":"守誓者・雷恩","role":"王國禁衛軍團長","primaryReference":"assets/td/opening/hero-hunter-selection-v1.png","retiredCandidate":"cast-princess-commander-v1.png bottom row","features":["棕色蓬鬆短髮","濃眉棕眼、方下顎、無灰鬍","白毛領、藍金甲、藍色披布與大盾"]},
+    {"gameHeroId":"arcanist","name":"森語者・希爾芙","role":"銀葉公主、王室長女、王子的姊姊","primaryReference":"assets/td/opening/hero-arcanist-selection-v1.png","retiredCandidate":"cast-princess-commander-v1.png top row","features":["深棕色長波浪髮與葉飾","綠眼、尖耳、原版柔和臉型","綠披風、白綠葉紋甲與自然弓"]},
+    {"gameHeroId":"rogue","name":"影行者・維菈","role":"暮影現任領導者","primaryReference":"assets/td/opening/hero-rogue-selection-v1.png","features":["銀白髮、紫眼、蒼白膚色","黑紫兜帽與輕甲","敏捷輪廓與短刃"],"confirmedTraits":["暮影已沒有上一代／老人，原因不明，暫不解釋","缺少前代傳承，治理並非全能","喜歡鑽研歷史與技術，專長暗殺術","族人受攻擊後，為保護族人痛苦決定重啟黑魔法"],"retiredLabel":"二代公主"}
+  ],
+  "reviewGates":["canon-and-causality","storyboard","primary-art-identity","user-character-recognition","runtime-QA"],
+  "generatedCandidateApproval": false
+}

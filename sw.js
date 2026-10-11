@@ -1,10 +1,14 @@
 'use strict';
 
-const CACHE_NAME = 'sky-strike-v0.85.88';
+const CACHE_NAME = 'sky-strike-v0.85.96';
 const ASSETS = [
  './src/td/systems/AudioCatalog.js', './src/td/systems/GameAudio.js', './src/td/systems/AudioIntegration.js',
+ './src/td/systems/BullAudioMaterials.js', './src/td/systems/HeroVoice.js',
+ './src/td/systems/CharacterAudioMaterials.js',
+ './assets/audio/voices/bull/select-v1.wav', './assets/audio/voices/bull/q-v1.wav', './assets/audio/voices/bull/w-v1.wav', './assets/audio/voices/bull/e-v1.wav', './assets/audio/voices/bull/f-v1.wav',
  './audio-preview.html', './src/td/audio-preview.js',
  './td-story-book.css', './src/td/app/StoryComicBook.js',
+ './td-story-manga.css', './src/td/app/StoryMangaCatalog.js', './src/td/app/StoryMangaFlow.js', './src/td/app/StoryManga.js',
  './td-adventure.css', './src/td/adventure/AdventureCatalog.js', './src/td/adventure/AdventureSystem.js', './src/td/adventure/AdventureArt.js', './src/td/adventure/AdventureView.js', './src/td/adventure/AdventureIntegration.js',
  './assets/td/adventure/mechanisms-v1.png', './assets/td/adventure/beacons-v1.png', './assets/td/adventure/support-v1.png', './assets/td/adventure/platforms-v1.png', './assets/td/adventure/water-action-v1.png',
  './src/td/systems/FrostlandMotionAtlas.js', './frostland-soldier-preview.html', './src/td/frostland-soldier-preview.js',

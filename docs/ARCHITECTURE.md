@@ -1,3 +1,33 @@
+## v0.85.96 分段閱讀與章節布局
+
+已驗證：`npm test` 1,122／1,122 通過；`npm run check` 與三個漫畫 JS 語法檢查通過；`check:site` 檢查 792 個正式檔案，排除 concepts。正式 reader 與獨立 review 各通過三尺寸 44 頁 QA；最終修圖複驗證據見 [本次交付與验收](STORY_MANGA_V08596.md)。未發布 GitHub、未完成 Safari 真機與作者視覺驗收。
+
+新版入口：Flow.timeline → 8 個 section 閱讀節點＋1 個 battle 節點 → FrontierApp 新版故事清單；LegacyStory 保留原任務列表並由「既有挑戰」頁籤分流。兩條入口共用 ProfileStore 任務 ID，不建立第二套通關資料。章節預覽以 pages[0] 對應 Catalog.storyPage，最近選段與分段頁位置同存 bookmark-v2。
+
+2026-10-11。44 頁正式漫畫已接入本機；閱讀狀態與戰鬥進度保持分離，舊任務與獎勵模型不變。
+
+```text
+StoryMangaCatalog 畫面與文字 ─┐
+StoryMangaFlow 選段與權限 ───┼→ StoryManga 閱讀器 → 圖片解碼／本段下一頁預載／配樂
+ProfileStore 既有通關紀錄 ───┘            └→ 分段書籤 bookmark-v2
+FrontierApp 章節選單 → 固定標題 + 內捲詳情 + 固定 CTA
+戰前讀畢 → 任務摘要 → 明確開始戰鬥 → 既有戰鬥／通關機制
+```
+
+Flow 不以閱讀進度授予通關；管理者預覽不寫入書籤或解鎖。原 bookmark-v1 保留。桌機與手機橫向共用同一章節 DOM，CSS 限制於 story 頁，不影響戰場配置。正式圖像位於 assets/td/story/manga-v2/page-01.webp 至 page-44.webp；九節點封面載入已通過四尺寸瀏覽器驗收，完整 Node 回歸 1,122／1,122 通過；以下為歷史架構紀錄。
+
+> 主線審閱 0.8.0（2026-10-10）：前導/主線來源清單→轉圖→連續review-catalog→獨立審閱器；不匯入正式遊戲模組。架構圖見下列說明。 [操作、維護與驗收](STORY_MAIN_REVIEW_V080.md)。
+
+> 前導審閱 0.7.0（2026-10-10）：生成 PNG／提示詞 → WebP 審閱副本 → JSON 目錄 → 獨立 review.html → 作者驗收；概念稿不接正式遊戲。架構圖與界線見下列說明。 [操作、維護與驗收](STORY_PROLOGUE_REVIEW_V070.md)。
+
+> v0.85.95：設定 → 44 頁分鏡 → 審稿 → 樣頁 → 作者驗收 → 正式繪製 → 閱讀器整合；本輪停在樣頁驗收，不改資料庫與遊戲模組關係。 [交付、驗收與回復](STORY_REVISION_DELIVERY_V08595.md)。
+
+> v0.85.94／故事漫畫 1.0.0（2026-10-10）：StoryMangaCatalog → StoryManga → WebP／StoryMusic／ProfileStore；漫畫與戰鬥解鎖分離，架構圖與路由在專章。 [操作、架構與驗收](STORY_MANGA_V08594.md)。
+
+> v0.85.93／手機 HUD 1.1.0（2026-10-09）：安全區容器承載手機 HUD；TDGame 單一定位、CSS 分區、ArtSystem 圖集開戰閘門，架構圖見專章。 詳見[手機介面修正與驗收](MOBILE_HUD_V08593.md)。
+
+> v0.85.92／音效 1.4.0（2026-10-09，本機完成）：十一名英雄事件 → AudioCatalog.character → GameAudio 節流／8–12 聲道 → CharacterAudioMaterials（非戰牛）或 BullAudioMaterials → 音效匯流排。語音獨立；無資料庫、存檔結構或戰鬥規則變更，完整架構圖見下列紀錄。 詳見[角色音效紀錄](CHARACTER_AUDIO_V11.md)。
+
 > v0.85.88 整合發布（2026-10-08）：音效、英雄技能卡、劇情載入與漫畫閱讀器同版交付。下方保留各功能開發當時的紀錄；目前發布與回復流程見 [整合發布](FULL_RELEASE_V08588.md)。
 
 > 音效 v1.0.0：成功事件 → AudioIntegration → AudioCatalog → GameAudio → WebAudio；舊 FrostlandAudio 共用同一 context。見 [架構](GAME_AUDIO_V1.md)。

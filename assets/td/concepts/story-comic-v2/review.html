@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:,">
+  <title>世界觀漫畫 V2 本地審閱</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,"Microsoft JhengHei",sans-serif;background:#101419;color:#f1eee5}
+    *{box-sizing:border-box}body{margin:0}[hidden]{display:none!important}
+    button,select{font:inherit;color:inherit;background:#242d35;border:1px solid #7e8b96;border-radius:6px;min-height:44px;padding:8px 12px;cursor:pointer}
+    button:disabled{opacity:.4;cursor:default}button:hover:not(:disabled){background:#34434e}button:focus-visible,select:focus-visible,img:focus-visible{outline:3px solid #ffd677;outline-offset:2px}
+    h1{font-size:clamp(17px,2vw,23px);margin:0;line-height:1.25}p{margin:0;line-height:1.5}
+    .review-shell{height:100vh;height:100dvh;min-height:340px;max-width:2000px;margin:auto;padding:10px max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));display:flex;flex-direction:column;gap:8px;background:#101419}
+    .review-shell:fullscreen{max-width:none}header{flex:none;display:grid;gap:4px}.scope-note{color:#ffd677;font-size:13px}.catalog-meta{font-size:12px;color:#b9c8d4}
+    #reader-content{min-height:0;flex:1;display:grid;grid-template-rows:auto minmax(120px,1fr) auto auto;gap:8px}
+    .tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.page-picker{display:flex;align-items:center;gap:8px;flex:1;min-width:200px;white-space:nowrap}.page-picker select{width:100%;min-width:0}.tools button{flex:none}
+    .viewport{min-height:0;display:grid;grid-template-columns:minmax(0,1fr);gap:10px}.viewport[data-transcript="open"]{grid-template-columns:minmax(0,1fr) minmax(220px,32%)}
+    .stage{position:relative;min-height:0;overflow:auto;background:#050709;border:1px solid #46535d;border-radius:8px;display:grid;place-items:center;overscroll-behavior:contain;scrollbar-gutter:stable;touch-action:pan-x pan-y}
+    .stage img{display:block;width:100%;height:100%;min-height:0;object-fit:contain;cursor:zoom-in;user-select:none;-webkit-user-select:none}
+    .stage[data-state="loading"] img,.stage[data-state="error"] img{visibility:hidden}
+    .stage.zoom{display:block;cursor:grab}.stage.zoom img{width:max(1300px,180%);height:auto;max-width:none;cursor:grab}.stage.dragging,.stage.dragging img{cursor:grabbing}
+    .image-status{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;text-align:center;pointer-events:none;background:#101820}.image-status button{pointer-events:auto}
+    .stage[data-state="ready"] .image-status{display:none}.stage[data-state="loading"] #retry-image{display:none}
+    .transcript{overflow:auto;min-height:0;padding:14px;background:#1b252d;border:1px solid #46535d;border-radius:8px}.transcript h2{font-size:17px;margin:0 0 8px}.transcript ol{margin:8px 0;padding-left:1.6em}.transcript li{font-size:18px;line-height:1.7;margin-bottom:10px;overflow-wrap:anywhere}
+    footer{display:flex;align-items:center;justify-content:space-between;gap:8px}#page-status{text-align:center;font-size:14px;line-height:1.4;overflow-wrap:anywhere}#save-note,#interaction-note{font-size:12px;color:#c4d1dc;min-height:18px}#save-note:not(:empty){color:#ffd677}
+    .error-box{padding:22px;display:grid;gap:14px;border:1px solid #c99667;background:#2c211c;border-radius:8px}.help{font-size:12px;color:#b9c8d4}
+    @media(max-height:480px){.review-shell{padding-top:5px;gap:4px}header{gap:1px}h1{font-size:16px}.scope-note{font-size:12px}.catalog-meta{font-size:11px}#reader-content{gap:4px}.tools{gap:5px}button,select{padding:6px 10px}#save-note:empty{display:none}.help{font-size:11px}}
+    @media(max-width:620px){.tools{gap:5px}.page-picker{flex-basis:100%}.viewport[data-transcript="open"]{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(120px,1fr) minmax(100px,38%)}.transcript{padding:10px}.transcript li{font-size:16px}footer button{padding:6px 8px}.scope-note{font-size:12px}}
+  </style>
+</head>
+<body>
+<main class="review-shell" id="review-shell">
+  <header>
+    <h1 id="review-title">世界觀漫畫 V2 本地審閱</h1>
+    <p class="scope-note" id="scope-note">本地漫畫審閱合集；非正式更新。圖稿仍待審閱，不代表已核准。</p>
+    <p class="catalog-meta" id="catalog-meta">正在讀取本地漫畫目錄…</p>
+  </header>
+  <section id="catalog-error" class="error-box" role="alert" hidden>
+    <h2>暫時無法開啟審閱合集</h2>
+    <p id="catalog-error-message"></p>
+    <button id="retry-catalog" type="button">重新讀取目錄</button>
+    <p class="help">這是獨立審閱頁，不會變更正式劇情、角色、通關或遊戲存檔。</p>
+  </section>
+  <section id="reader-content" aria-label="漫畫審閱工具" hidden>
+    <nav class="tools" aria-label="閱讀工具">
+      <label class="page-picker">頁目錄 <select id="page-select" aria-label="選擇漫畫頁"></select></label>
+      <button id="zoom-button" type="button" aria-pressed="false">放大拖看</button>
+      <button id="text-button" type="button" aria-expanded="false" aria-controls="transcript">逐句文字</button>
+      <button id="fullscreen-button" type="button">全螢幕</button>
+    </nav>
+    <div id="viewport" class="viewport" data-transcript="closed">
+      <section id="stage" class="stage" data-state="loading" aria-label="漫畫圖片">
+        <div id="image-status" class="image-status" role="status" aria-live="polite">
+          <span id="image-status-text">漫畫載入中…</span>
+          <button id="retry-image" type="button">重新載入圖片</button>
+        </div>
+      </section>
+      <aside id="transcript" class="transcript" aria-label="本頁逐句文字" hidden>
+        <h2 id="transcript-title"></h2><p id="review-status"></p><ol id="transcript-lines"></ol>
+      </aside>
+    </div>
+    <footer>
+      <button id="previous-page" type="button">← 上一頁</button>
+      <p id="page-status" aria-live="polite"></p>
+      <button id="next-page" type="button">下一頁 →</button>
+    </footer>
+    <div><p id="save-note" role="status"></p><p id="interaction-note" role="status">由左至右、由上至下閱讀；點圖片可放大，方向鍵可翻頁。</p></div>
+  </section>
+  <noscript><p class="error-box">此審閱頁需要啟用 JavaScript。原圖與文字仍保留在本地資料夾，不影響正式遊戲。</p></noscript>
+</main>
+<script id="review-data">
+(function(root){
+  'use strict';
+  const BOOKMARK_KEY='hf-story-v2-review-bookmark';
+  function requiredText(value,label,max=300){
+    if(typeof value!=='string'||!value.trim()||value.length>max)throw new Error(label+'格式不完整');
+    return value;
+  }
+  function validateCatalog(value){
+    if(!value||typeof value!=='object'||Array.isArray(value))throw new Error('目錄格式不完整');
+    const catalog={version:requiredText(value.version,'版本',80),title:requiredText(value.title,'標題'),status:requiredText(value.status,'審閱狀態'),plannedPages:value.plannedPages};
+    if(catalog.plannedPages!==44)throw new Error('這份主線規劃必須標示44頁');
+    if(!Array.isArray(value.pages)||value.pages.length<1||value.pages.length>catalog.plannedPages)throw new Error('目錄頁數超出規劃範圍');
+    const ids=new Set(),images=new Set();
+    catalog.pages=value.pages.map((page,index)=>{
+      if(!page||typeof page!=='object'||Array.isArray(page))throw new Error('第'+(index+1)+'頁格式不完整');
+      const id=requiredText(page.id,'頁面識別',100),image=requiredText(page.image,'圖片位置',100);
+      const imageMatch=image.match(/^review\/(?:prologue-(0[1-9]|1[0-2])|main-(1[3-9]|[23][0-9]|4[0-4]))\.webp$/);
+      if(!imageMatch)throw new Error('圖片必須是本地review資料夾中的規劃頁面');
+      const imagePage=Number(imageMatch[1]||imageMatch[2]),storyPage=page.storyPage===undefined?imagePage:page.storyPage;
+      if(!Number.isInteger(storyPage)||storyPage!==index+1||storyPage!==imagePage)throw new Error('頁序必須從第1頁連續，不可缺頁、調序或與圖片不符');
+      if(ids.has(id)||images.has(image))throw new Error('目錄含重複頁面');
+      ids.add(id);images.add(image);
+      if(!Array.isArray(page.text)||page.text.length<1||page.text.length>40)throw new Error('第'+(index+1)+'頁缺少故事文字');
+      return {id,title:requiredText(page.title,'頁名'),era:requiredText(page.era,'年代',100),storyPage,image,text:page.text.map(line=>requiredText(line,'故事文字',2000)),reviewStatus:requiredText(page.reviewStatus,'頁面審閱狀態'),...(page.group===undefined?{}:{group:requiredText(page.group,'分組',100)})};
+    });
+    return catalog;
+  }
+  function clampIndex(value,length){return Number.isInteger(value)?Math.max(0,Math.min(Math.max(0,length-1),value)):0;}
+  function bookmarkIndex(value,pages){return Math.max(0,pages.findIndex(page=>page.id===value));}
+  function hashPageIndex(hash,pages){
+    if(typeof hash!=='string')return -1;
+    const match=hash.match(/^#page=([^&]*)$/);if(!match)return -1;
+    try{const id=decodeURIComponent(match[1]);return pages.findIndex(page=>page.id===id);}catch(_){return -1;}
+  }
+  function remainingPages(catalog){return Math.max(0,catalog.plannedPages-catalog.pages.length);}
+  function scopeNote(catalog){const remaining=remainingPages(catalog);return '已有 '+catalog.pages.length+' 頁審閱圖稿；'+(remaining?'尚有 '+remaining+' 頁未繪製；':'全部圖稿仍待作者驗收；')+'非正式更新。圖稿仍待審閱，不代表已核准。';}
+  root.StoryV2ReviewData={BOOKMARK_KEY,validateCatalog,clampIndex,bookmarkIndex,hashPageIndex,remainingPages,scopeNote};
+})(globalThis);
+</script>
+<script id="review-app">
+(function(){
+  'use strict';
+  const {BOOKMARK_KEY,validateCatalog,clampIndex,bookmarkIndex,hashPageIndex,remainingPages,scopeNote}=globalThis.StoryV2ReviewData;
+  const READING_HELP='由左至右、由上至下閱讀；點圖片可放大，方向鍵可翻頁。';
+  const byId=id=>document.getElementById(id);
+  const shell=byId('review-shell'),content=byId('reader-content'),stage=byId('stage'),overlay=byId('image-status'),select=byId('page-select');
+  const state={catalog:null,index:0,zoom:false,showText:false,imageToken:0,fetchToken:0,preloadPath:'',preload:null,drag:null,suppressClick:false};
+  let fetchController=null;
+  function saveBookmark(){
+    try{localStorage.setItem(BOOKMARK_KEY,state.catalog.pages[state.index].id);byId('save-note').textContent='';}
+    catch(_){byId('save-note').textContent='瀏覽器未允許保存審閱書籤；仍可正常閱讀，正式遊戲存檔不受影響。';}
+  }
+  function setZoom(value){
+    state.zoom=Boolean(value);state.drag=null;state.suppressClick=false;
+    stage.classList.toggle('zoom',state.zoom);stage.classList.remove('dragging');
+    stage.scrollLeft=0;stage.scrollTop=0;
+    byId('zoom-button').textContent=state.zoom?'完整畫面':'放大拖看';
+    byId('zoom-button').setAttribute('aria-pressed',String(state.zoom));
+    const img=stage.querySelector('img');if(img)img.setAttribute('aria-label',state.zoom?'漫畫已放大，拖曳捲動；點一下恢復完整畫面':'點一下放大漫畫');
+  }
+  function preloadNext(){
+    const next=state.catalog.pages[state.index+1];
+    if(!next||state.preloadPath===next.image)return;
+    state.preload?.removeAttribute('src');
+    state.preloadPath=next.image;state.preload=new Image();state.preload.decoding='async';state.preload.src=next.image;
+  }
+  function loadImage(retry=false){
+    const token=++state.imageToken,page=state.catalog.pages[state.index],img=document.createElement('img');
+    stage.dataset.state='loading';byId('image-status-text').textContent='漫畫載入中…';
+    img.alt='第'+page.storyPage+'頁，'+page.era+'，'+page.title;img.decoding='async';img.draggable=false;img.tabIndex=0;img.setAttribute('role','button');
+    const active=()=>token===state.imageToken&&img.isConnected;
+    const failed=()=>{if(!active())return;stage.dataset.state='error';byId('image-status-text').textContent='這頁圖片暫時無法載入。請重試，或開啟「逐句文字」；也可以繼續翻頁。';};
+    img.onload=async()=>{
+      try{if(typeof img.decode==='function')await img.decode();}catch(_){failed();return;}
+      if(!active())return;stage.dataset.state='ready';preloadNext();
+    };
+    img.onerror=failed;
+    img.onclick=()=>{if(state.suppressClick){state.suppressClick=false;return;}setZoom(!state.zoom);};
+    img.onkeydown=event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();setZoom(!state.zoom);}};
+    stage.replaceChildren(img,overlay);setZoom(false);
+    img.src=page.image+(retry?'?retry='+Date.now():'');
+  }
+  function renderPage(index){
+    state.index=clampIndex(index,state.catalog.pages.length);state.drag=null;state.suppressClick=false;
+    const page=state.catalog.pages[state.index],last=state.index===state.catalog.pages.length-1;
+    if(state.preload&&state.preloadPath!==page.image){state.preload.removeAttribute('src');state.preload=null;state.preloadPath='';}
+    select.value=String(state.index);
+    byId('previous-page').disabled=state.index===0;byId('next-page').disabled=last;
+    byId('next-page').textContent=last?'本批審閱末頁':'下一頁 →';
+    const remaining=remainingPages(state.catalog);
+    byId('page-status').textContent=page.storyPage+' / '+state.catalog.pages.length+' · '+page.title+(last?(remaining?'｜尚有'+remaining+'頁未繪製':'｜圖稿仍待作者驗收'):'');
+    byId('transcript-title').textContent=page.era+' · '+page.title;
+    byId('review-status').textContent='圖稿狀態：'+page.reviewStatus;
+    byId('transcript-lines').replaceChildren(...page.text.map(line=>{const item=document.createElement('li');item.textContent=line;return item;}));
+    loadImage();saveBookmark();
+  }
+  async function loadCatalog(){
+    const token=++state.fetchToken;++state.imageToken;fetchController?.abort();fetchController=new AbortController();
+    content.hidden=true;byId('catalog-error').hidden=true;byId('catalog-meta').textContent='正在讀取本地漫畫目錄…';
+    byId('scope-note').textContent='本地漫畫審閱合集；非正式更新。圖稿仍待審閱，不代表已核准。';
+    try{
+      const response=await fetch('review-catalog.json',{cache:'no-store',credentials:'same-origin',signal:fetchController.signal});
+      if(!response.ok)throw new Error('catalog');
+      const catalog=validateCatalog(await response.json());if(token!==state.fetchToken)return;
+      state.catalog=catalog;byId('review-title').textContent=catalog.title;
+      byId('catalog-meta').textContent='內容版 '+catalog.version+' · '+catalog.status+' · 獨立審閱書籤';
+      byId('scope-note').textContent=scopeNote(catalog);
+      select.replaceChildren();let currentGroup=null,groupNode=null;
+      catalog.pages.forEach((page,index)=>{
+        let parent=select;
+        if(page.group){if(currentGroup!==page.group){currentGroup=page.group;groupNode=document.createElement('optgroup');groupNode.label=page.group;select.append(groupNode);}parent=groupNode;}
+        else{currentGroup=null;groupNode=null;}
+        const option=document.createElement('option');option.value=String(index);option.textContent=String(page.storyPage).padStart(2,'0')+' · '+page.era+' · '+page.title;parent.append(option);
+      });
+      let index=0;try{index=bookmarkIndex(localStorage.getItem(BOOKMARK_KEY),catalog.pages);}catch(_){}
+      const linkedIndex=hashPageIndex(location.hash,catalog.pages);
+      if(linkedIndex>=0)index=linkedIndex;
+      byId('interaction-note').textContent=location.hash&&linkedIndex<0?'連結未對應到本批頁面，已開啟原審閱書籤。'+READING_HELP:READING_HELP;
+      content.hidden=false;renderPage(index);
+    }catch(error){
+      if(token!==state.fetchToken||error?.name==='AbortError')return;
+      byId('catalog-meta').textContent='目錄尚未載入；沒有更動正式遊戲。';byId('catalog-error').hidden=false;
+      byId('catalog-error-message').textContent=location.protocol==='file:'?'請透過專案的本機 HTTP 服務開啟 review.html，不要直接雙擊 HTML 檔。瀏覽器會限制直接讀取旁邊的 JSON。':'無法讀取審閱目錄。請確認同資料夾已有 review-catalog.json、標示44頁規劃，且現有頁面從第1頁連續排列，再重新讀取。若服務剛啟動，也可以稍後重試。';
+    }
+  }
+  byId('retry-catalog').onclick=()=>loadCatalog();byId('retry-image').onclick=()=>loadImage(true);
+  byId('previous-page').onclick=()=>renderPage(state.index-1);byId('next-page').onclick=()=>renderPage(state.index+1);
+  select.onchange=()=>renderPage(Number(select.value));byId('zoom-button').onclick=()=>setZoom(!state.zoom);
+  byId('text-button').onclick=()=>{
+    state.showText=!state.showText;byId('transcript').hidden=!state.showText;byId('viewport').dataset.transcript=state.showText?'open':'closed';
+    byId('text-button').setAttribute('aria-expanded',String(state.showText));byId('text-button').textContent=state.showText?'收起文字':'逐句文字';
+  };
+  byId('fullscreen-button').onclick=async()=>{
+    try{
+      if(document.fullscreenElement){await document.exitFullscreen();}
+      else if(typeof shell.requestFullscreen==='function'){await shell.requestFullscreen();}
+      else{throw new Error('unsupported');}
+      byId('interaction-note').textContent='可按 Esc 離開全螢幕；放大、文字與翻頁仍可使用。';
+    }catch(_){byId('interaction-note').textContent='此瀏覽器未允許全螢幕，已保留一般閱讀；可轉橫向並使用「放大拖看」。';}
+  };
+  document.addEventListener('fullscreenchange',()=>{byId('fullscreen-button').textContent=document.fullscreenElement?'離開全螢幕':'全螢幕';});
+  window.addEventListener('hashchange',()=>{
+    if(!state.catalog||content.hidden)return;
+    const index=hashPageIndex(location.hash,state.catalog.pages);
+    if(index>=0){byId('interaction-note').textContent=READING_HELP;renderPage(index);}
+    else{byId('interaction-note').textContent='連結未對應到本批頁面，保留目前閱讀位置。'+READING_HELP;}
+  });
+  stage.onpointerdown=event=>{
+    if(!state.zoom||event.pointerType==='touch'||event.button!==0||event.target.closest('button'))return;
+    state.suppressClick=false;state.drag={id:event.pointerId,x:event.clientX,y:event.clientY,left:stage.scrollLeft,top:stage.scrollTop,moved:false};
+    stage.setPointerCapture?.(event.pointerId);stage.classList.add('dragging');event.preventDefault();
+  };
+  stage.onpointermove=event=>{
+    const drag=state.drag;if(!drag||drag.id!==event.pointerId)return;
+    const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(Math.abs(dx)+Math.abs(dy)>4)drag.moved=true;
+    stage.scrollLeft=drag.left-dx;stage.scrollTop=drag.top-dy;
+  };
+  function endDrag(event){if(!state.drag||state.drag.id!==event.pointerId)return;state.suppressClick=state.drag.moved;state.drag=null;stage.classList.remove('dragging');if(stage.hasPointerCapture?.(event.pointerId))stage.releasePointerCapture(event.pointerId);}
+  stage.onpointerup=stage.onpointercancel=endDrag;
+  // Captured mouse clicks can target the stage rather than the original image.
+  stage.onclick=event=>{if(event.target!==stage||!state.zoom)return;if(state.suppressClick){state.suppressClick=false;return;}setZoom(false);};
+  document.addEventListener('keydown',event=>{
+    if(!state.catalog||content.hidden||event.altKey||event.ctrlKey||event.metaKey||event.target?.isContentEditable||/^(INPUT|SELECT|TEXTAREA)$/.test(event.target?.tagName||''))return;
+    const target={ArrowLeft:state.index-1,ArrowRight:state.index+1,Home:0,End:state.catalog.pages.length-1}[event.key];
+    if(target!==undefined){event.preventDefault();renderPage(target);}
+    else if(event.key==='Escape'&&state.zoom){event.preventDefault();setZoom(false);}
+  });
+  loadCatalog();
+})();
+</script>
+</body>
+</html>

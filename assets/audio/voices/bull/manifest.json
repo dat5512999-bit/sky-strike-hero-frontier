@@ -1,0 +1,56 @@
+{
+  "version": "1.0.0",
+  "provider": "Voice-Generator.com",
+  "providerPage": "https://voice-generator.com/text-to-speech/chinese",
+  "termsPage": "https://voice-generator.com/terms",
+  "licenseEvidence": "assets/audio/voices/bull/provider-rights.json",
+  "voice": "zm_yunjian",
+  "language": "z",
+  "speed": 0.9,
+  "kind": "AI speech with pitch, saturation and chest-resonance processing; not a human recording",
+  "approvedReference": "bull-select-rough-v2.wav",
+  "processingFilter": "[0:a]highpass=f=65,rubberband=pitch=0.840896:tempo=1:formant=shifted:transients=smooth,asplit=3[clean][grit][chest];[clean]equalizer=f=155:t=q:w=0.8:g=3,equalizer=f=2300:t=q:w=1:g=1.5[main];[grit]highpass=f=170,lowpass=f=2900,volume=10,asoftclip=type=tanh:threshold=0.55:oversample=4,volume=0.23[rasp];[chest]rubberband=pitch=0.793701:tempo=1:formant=shifted,highpass=f=50,lowpass=f=420,volume=0.5[body];[main][rasp][body]amix=inputs=3:weights=1 1 1:normalize=0:duration=first,acompressor=threshold=0.18:ratio=3:attack=8:release=90:makeup=1.2,lowpass=f=7600,loudnorm=I=-18:TP=-2:LRA=7,afade=t=in:d=0.012,areverse,afade=t=in:d=0.025,areverse[out]",
+  "lines": {
+    "select": {
+      "text": "這條防線，交給我。",
+      "input": "bull-select-yunjian-090.mp3",
+      "file": "assets/audio/voices/bull/select-v1.wav",
+      "duration": 3.288,
+      "bytes": 157902,
+      "sha256": "7617bf408ef6ef57ee158e51a96bd2a6bc420e2fd3dda6abdf8166836ef1d001"
+    },
+    "q": {
+      "text": "短促發力聲",
+      "synthesisText": "哈！",
+      "input": "bull-q-yunjian-090.mp3",
+      "file": "assets/audio/voices/bull/q-v1.wav",
+      "duration": 1.752,
+      "bytes": 84174,
+      "sha256": "ee5cd38b4501cef9a7eab15bf37b0cddd6a21df4cb04a992c7d241a1d289a2e4"
+    },
+    "w": {
+      "text": "休想越過！",
+      "input": "bull-w-yunjian-090.mp3",
+      "file": "assets/audio/voices/bull/w-v1.wav",
+      "duration": 2.52,
+      "bytes": 121038,
+      "sha256": "cc14a4a11d7c7e8e756eb103c4318c5ec58df0decdf1e0ad72d458fb67bd16df"
+    },
+    "e": {
+      "text": "還沒結束！",
+      "input": "bull-e-yunjian-090.mp3",
+      "file": "assets/audio/voices/bull/e-v1.wav",
+      "duration": 2.52,
+      "bytes": 121038,
+      "sha256": "3c089c313940f0c3760a81e3cddb93c3e243c6f22b3d781f504ce270923b1ac2"
+    },
+    "f": {
+      "text": "接下這一槌！",
+      "input": "bull-f-yunjian-090.mp3",
+      "file": "assets/audio/voices/bull/f-v1.wav",
+      "duration": 2.808,
+      "bytes": 134862,
+      "sha256": "d03590d1568ce5a65a763058ceaa9f9247ed4c758ce9030fc36ff888fd81e18d"
+    }
+  }
+}

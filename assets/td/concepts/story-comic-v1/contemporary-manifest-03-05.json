@@ -1,0 +1,47 @@
+{
+  "version": "comic-production-0.3.0",
+  "date": "2026-10-09",
+  "published": false,
+  "gameIntegrated": false,
+  "mode": "built-in image_gen",
+  "sourceBible": "docs/WORLD_STORY_BIBLE_V1.md",
+  "pages": [
+    {
+      "page": 3,
+      "title": "同一座城，不同的期待",
+      "file": "contemporary-03-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "contemporary-prompts-03-05.json",
+      "promptIndex": 0
+    },
+    {
+      "page": 4,
+      "title": "王子的分量",
+      "file": "contemporary-04-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "contemporary-prompts-03-05.json",
+      "promptIndex": 1
+    },
+    {
+      "page": 5,
+      "title": "王冠之外",
+      "file": "contemporary-05-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "contemporary-prompts-03-05.json",
+      "promptIndex": 2
+    }
+  ],
+  "review": {
+    "visual": "逐頁目視核對五格、台詞、陣營色系、成熟文明尺度；王室臉孔未定稿未出鏡。",
+    "canon": "對照原世界觀二、五、八至十一；配角對話是演出稿。未確定共同統治者、未完成退位、未揭露真凶。",
+    "pending": [
+      "使用者驗收",
+      "王室正式角色外觀設計",
+      "閱讀器與配樂整合",
+      "手機可讀性與逐格閱讀驗收"
+    ]
+  }
+}

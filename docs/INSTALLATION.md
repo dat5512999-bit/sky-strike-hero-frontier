@@ -1,3 +1,27 @@
+## v0.85.96 本機啟動與布局驗收
+
+已驗證：`npm test` 1,122／1,122 通過；`npm run check` 與三個漫畫 JS 語法檢查通過；`check:site` 檢查 792 個正式檔案，排除 concepts。正式 reader 與獨立 review 各通過三尺寸 44 頁 QA；最終修圖複驗證據見 [本次交付與验收](STORY_MANGA_V08596.md)。未發布 GitHub、未完成 Safari 真機與作者視覺驗收。
+
+啟動後的劇情模式應先見按年代排序的 9 節點及「新版故事／既有挑戰」頁籤；若仍直接看到舊 16 關，請核對整包版本與快取。node scripts/qa-story-layout.cjs 現在同時測試兩種入口，不需額外安裝或建立資料庫。
+
+2026-10-11，沿用 Node.js 18+ 與現有靜態伺服器；遊戲閱讀無新增外部服務、帳號或 runtime 套件。執行 npm run serve:test，從終端顯示的網址開啟 td.html；手機橫向入口為 td-mobile.html。勿直接以 file URL 驗收資源載入。
+
+版面自動驗收需可用的 Playwright 與 Microsoft Edge。可在 PowerShell 用 $env:TD_TEST_PORT='4191' 啟動伺服器，再執行 node scripts/qa-story-layout.cjs；不同埠可用 STORY_LAYOUT_QA_URL 指向你的本機網址。單元檢查：node --test tests/td-story-layout.test.js。圖片重建沿用既有 sharp 工具，與玩家安裝無關。
+
+啟動後核對畫面版本 0.85.96。44 頁正式漫畫已接入本機；四尺寸已驗九個封面與原 16 關操作，Node 回歸 1,122／1,122 通過；作者辨識與 Safari 真機仍待驗收。以下保留歷史安裝紀錄。
+
+> 主線審閱 0.8.0（2026-10-10）：沿用Node18+本機serve:test，無新增閱讀依賴；重建副本需sharp，QA需Playwright/Edge。 [操作、維護與驗收](STORY_MAIN_REVIEW_V080.md)。
+
+> 前導審閱 0.7.0（2026-10-10）：Node 18+ 啟動既有 serve:test，指定 TD_TEST_PORT=4189；閱讀無新依賴。重轉圖需 sharp，QA 需 Playwright/Edge。 [操作、維護與驗收](STORY_PROLOGUE_REVIEW_V070.md)。
+
+> v0.85.95：無新增依賴或安裝步驟，沿用下列流程；文字劇本在 docs、樣頁在 concepts，均不等於正式內容已更新。 [交付、驗收與回復](STORY_REVISION_DELIVERY_V08595.md)。
+
+> v0.85.94／故事漫畫 1.0.0（2026-10-10）：沿用 Node 18+ 與 npm run serve:test；WebP 已包含，遊戲執行沒有新套件。只有重建圖片與 QA 需 sharp／playwright。 [操作、架構與驗收](STORY_MANGA_V08594.md)。
+
+> v0.85.93／手機 HUD 1.1.0（2026-10-09）：沿用 Node.js 18+、npm run serve:test 與 td.html；手機版無新增設定或服務。 詳見[手機介面修正與驗收](MOBILE_HUD_V08593.md)。
+
+> v0.85.92／音效 1.4.0（2026-10-09，本機完成）：沿用 npm run serve:test，開啟 http://127.0.0.1:4173/audio-preview.html 或 td.html。角色音效不需額外程式、帳號、金鑰或素材下載；手機使用已部署網址，首次載入／更新仍需網路。 詳見[角色音效紀錄](CHARACTER_AUDIO_V11.md)。
+
 > v0.85.88 整合發布（2026-10-08）：音效、英雄技能卡、劇情載入與漫畫閱讀器同版交付。下方保留各功能開發當時的紀錄；目前發布與回復流程見 [整合發布](FULL_RELEASE_V08588.md)。
 
 > 音效 v1.0.0：遊戲不需新依賴；serve:test 後可開 audio-preview.html。瀏覽器 QA 另需 Playwright＋Edge。見 [安裝指令](GAME_AUDIO_V1.md)。

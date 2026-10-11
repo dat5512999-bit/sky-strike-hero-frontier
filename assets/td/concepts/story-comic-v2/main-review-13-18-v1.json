@@ -1,0 +1,70 @@
+{
+  "version": "0.8.0",
+  "scope": "main pages 13–18",
+  "reviewType": "AI visual identity, dialogue and causality review; not user approval or human expert certification",
+  "userApproved": false,
+  "runtimeIntegrated": false,
+  "published": false,
+  "verdict": "Ready for author review",
+  "pages": [
+    {
+      "page": 13,
+      "source": "main-13-v1.png",
+      "verdict": "AI review passed",
+      "notes": "Prince identity and action/dialogue continuity checked."
+    },
+    {
+      "page": 14,
+      "source": "main-14-v1.png",
+      "verdict": "AI review passed",
+      "notes": "Prince identity and action/dialogue continuity checked."
+    },
+    {
+      "page": 15,
+      "source": "main-15-v1.png",
+      "verdict": "AI review passed",
+      "notes": "Sylph checked against original game art, not retired princess candidate."
+    },
+    {
+      "page": 16,
+      "source": "main-16-v1.png",
+      "verdict": "AI review passed",
+      "notes": "King remains in office; no completed abdication or departure."
+    },
+    {
+      "page": 17,
+      "source": "main-17-v2.png",
+      "verdict": "AI review passed",
+      "notes": "Removed invented location-specific repair list; preserved Vira identity."
+    },
+    {
+      "page": 18,
+      "source": "main-18-v2.png",
+      "verdict": "AI review passed",
+      "notes": "Added privateguard identity label, removed malformed sign lettering; preserved Rhen identity."
+    }
+  ],
+  "tests": {
+    "fullSuite": {
+      "passed": 1101,
+      "failed": 0
+    },
+    "storyReviewAndEditorial": {
+      "passed": 13,
+      "failed": 0
+    },
+    "browserQA": "artifacts/story-v2-review/results.json",
+    "viewports": [
+      "1365x900",
+      "844x390",
+      "667x375"
+    ],
+    "all18Pages": true,
+    "realIphoneSafari": false
+  },
+  "pending": [
+    "Author recognition and pacing review",
+    "Draw pages 19–44",
+    "Future formal-game integration and release"
+  ]
+}

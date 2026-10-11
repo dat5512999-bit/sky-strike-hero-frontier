@@ -66,8 +66,11 @@ test('音效可由玩家關閉，且十一種英雄攻擊聲有有界播放途�
   const {ns}=load(),audio=ns.systems.FrostlandAudio,waves=[];
   assert.equal(audio.enabled,false);assert.equal(audio.playAttack('hunter'),false);
   audio.enabled=true;audio.context={state:'running',currentTime:0,destination:{},createOscillator(){const voice={frequency:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){},disconnect(){},start(){},stop(){this.onended?.()}};waves.push(voice);return voice;},createGain(){return{gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){},disconnect(){}};}};
+  let samples=0;audio.context.sampleRate=8000;
+  audio.context.createBuffer=(_channels,length)=>({getChannelData:()=>new Float32Array(length)});
+  audio.context.createBufferSource=()=>{samples++;return audio.context.createOscillator();};
   for(const type of heroes){audio.context.currentTime+=.2;assert.equal(audio.playAttack(type),true,type);}
-  assert.equal(waves.length,heroes.length);assert.equal(audio.voices,0);audio.enabled=false;assert.equal(audio.playAttack('hunter'),false);
+  assert.equal(waves.length,heroes.length*2);assert.equal(samples,heroes.length*2);assert.equal(audio.voices,0);audio.enabled=false;assert.equal(audio.playAttack('hunter'),false);
 });
 
 test('瀏覽器音效 API 異常時不中斷戰鬥，也不佔住聲道',()=>{

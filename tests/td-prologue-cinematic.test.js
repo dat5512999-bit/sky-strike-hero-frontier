@@ -96,23 +96,16 @@ test('Chronicle replay is locked until experienced, then remains completely read
   progress.complete(result(api)); const before = store.export(); await progress.replay(api.prologue.cinematicId, player);
   assert.equal(calls, 1); assert.equal(store.export(), before);
 });
-test('Story entry plays prologue once, then offers an eight-page comic before battle', async () => {
+test('Story entry opens chapter selection and only explicit battle action launches', async () => {
   const { ns, api, store } = setup(), app = Object.create(ns.systems.FrontierApp.prototype);
-  let plays = 0, launches = 0; Object.assign(app, { store, root:{querySelector(){return null;}}, cinematicPlayer: { play: async () => { plays++; return result(api, 'skipped'); } }, run: fn => fn(), show(page) { this.page = page; }, render() {}, launchStory() { launches++; } });
-  await app.startCinematic(); assert.equal(app.page, 'chapter-start'); assert.equal(launches, 0); assert.equal(plays, 1);
-  app.act('chapter-battle'); assert.equal(app.page, 'story-cards'); assert.equal(launches, 0);
-  assert.match(app.renderStoryCards(), /邊境烽火亮起/);
-  app.act('story-card-next'); assert.match(app.renderStoryCards(), /對面也是王國士兵/);
-  app.act('story-card-next'); assert.match(app.renderStoryCards(), /<h1[^>]*>命令上少了一段/);
-  for(let i=3;i<8;i++)app.act('story-card-next');
-  assert.equal(launches,0);assert.match(app.renderStoryCards(), /<h1[^>]*>這一戰要做什麼/);
-  app.act('story-card-next'); assert.equal(launches, 1);
-  await app.startCinematic(); assert.equal(plays, 1); assert.equal(app.page, 'story-cards'); assert.equal(launches, 1);
-  app.act('story-card-skip'); assert.equal(launches, 2);
-  const beforeCards = store.export(); app.act('story-card-replay'); assert.equal(app.page, 'story-cards');
-  app.act('story-card-skip'); assert.equal(app.page, 'story'); assert.equal(launches, 2); assert.equal(store.export(), beforeCards);
-  app.replayOnly = true; const before = store.export(); await app.startCinematic();
-  assert.equal(plays, 2); assert.equal(launches, 2); assert.equal(store.export(), before);
+  let plays=0,launches=0;
+  Object.assign(app,{store,game:{paused:false},root:{querySelector(){return null;}},cinematicPlayer:{play:async()=>{plays++;return result(api);}},show(page){this.page=page;},render(){},launchStory(){launches++;}});
+  await app.startCinematic();assert.equal(app.page,'story');assert.equal(plays,0);assert.equal(launches,0);
+  // Flow is verified separately; opening a briefing never grants a mission clear.
+  ns.systems.StoryManga.brief(app,ns.systems.StoryCatalog.mission);assert.equal(app.page,'mission-brief');assert.match(ns.systems.StoryManga.renderBrief(app),/抽象重現/);
+  app.act('manga-fight');assert.equal(launches,1);
+  app.act('story');assert.equal(app.page,'story');assert.equal(launches,1);
+  assert.equal(store.current().completed.length,0);assert.equal(store.current().cinematics.length,0);
 });
 test('first mission keeps its continuity-approved Chapter I key art within the five-beat story', () => {
   const catalog = setup().ns.systems.StoryCatalog.mission;
@@ -143,7 +136,8 @@ test('every playable Chapter I mission has five understandable, spoiler-safe sto
   }
   assert.match(missions[1].aftermath, /不足以判定王子之死/);
   assert.match(missions[2].aftermath, /沒有證明現代暮影/);
-  assert.match(missions[3].aftermath, /不受禁衛軍管轄/);
+  assert.match(missions[3].aftermath, /仍須核對命令來源與當日行動/);
+  assert.doesNotMatch(missions[3].aftermath, /還有一套|另有命令系統/);
 });
 test('every story beat has its own existing image instead of repeating one key art', () => {
   const catalog = setup().ns.systems.StoryCatalog;
@@ -173,25 +167,20 @@ test('new action shots are wide nonempty PNGs suitable for the horizontal story 
     assert.ok(worker.includes(`./${file}`), `${file} missing from worker asset inventory`);
   }
 });
-test('story cards launch and replay the selected mission rather than always returning to the first mission', () => {
-  const { ns, store } = setup(), app = Object.create(ns.systems.FrontierApp.prototype), selected = ns.systems.StoryCatalog.getMission('chapter1-shadowfall');
-  Object.assign(app, { store, root: { querySelector(){ return null; } }, show(page){ this.page = page; }, render(){}, launchStory(mission){ this.launched = mission; return true; } });
-  app.act('story-battle', selected.id); assert.equal(app.storyCardMission, selected); assert.match(app.renderStoryCards(), /尋找知情的人/);
-  for(let i=0;i<8;i++)app.act('story-card-next');assert.equal(app.launched, selected);
-  app.act('story-card-replay', selected.id); assert.equal(app.storyCardReplay, true); assert.match(app.renderStoryCards(), /舊城疑雲/);
-  app.act('story-card-skip'); assert.equal(app.page, 'story');
+test('mission summary preserves selected mission and cannot bypass its lock', () => {
+  const {ns,store}=setup(),app=Object.create(ns.systems.FrontierApp.prototype),selected=ns.systems.StoryCatalog.getMission('chapter1-shadowfall');
+  Object.assign(app,{store,root:{querySelector(){return null;}},show(page){this.page=page;},render(){},launchStory(mission){this.launched=mission;return true;}});
+  app.act('story-battle',selected.id);assert.equal(app.mangaMission,selected);assert.equal(app.page,'mission-brief');
+  assert.match(ns.systems.StoryManga.renderBrief(app),/先完成前一個任務/);app.act('manga-fight');assert.equal(app.launched,undefined);
+  store.complete(ns.systems.StoryCatalog.getMission(selected.requires));app.act('manga-fight');assert.equal(app.launched,selected);
+  app.act('story-card-replay',selected.id);assert.equal(app.page,'mission-brief');app.act('manga-missions');assert.equal(app.page,'story');
 });
-test('Chapter II preview has eight browsable pages and never launches a battle', () => {
-  const { ns, store } = setup(), preview = ns.systems.StoryCatalog.chapter2Preview, app = Object.create(ns.systems.FrontierApp.prototype);
-  Object.assign(app, { store, root: { querySelector(){ return null; } }, show(page){ this.page = page; }, render(){}, launchStory(){ throw Error('Chapter II preview must not launch a battle'); } });
-  assert.equal(preview.id, 'chapter2-western-signal-preview'); assert.equal(preview.chapter, 2); assert.equal(preview.previewOnly, true); assert.equal(preview.storyCards.length, 5);
-  for (const card of preview.storyCards) { assert.ok(fs.existsSync(card.image), card.image); assert.ok(fs.statSync(card.image).size > 100000, card.image); }
-  app.act('story-card-replay', preview.id); assert.equal(app.page, 'story-cards'); assert.equal(app.storyCardReplay, true);
-  assert.match(app.renderStoryCards(), /CHAPTER 2/); assert.match(app.renderStoryCards(), /線索通往西方/);
-  app.act('story-card-next'); assert.match(app.renderStoryCards(), /<h1[^>]*>在舊哨遇到戈爾/);
-  for(let i=2;i<8;i++)app.act('story-card-next');assert.equal(app.page,'story-cards');
-  app.act('story-card-next'); assert.equal(app.page, 'story');
-  app.act('story-battle', preview.id); assert.equal(app.storyCardReplay, true); app.act('story-card-skip'); assert.equal(app.page, 'story');
+test('Chapter II preview uses concise summary instead of old slideshow and never launches battle', () => {
+  const {ns,store}=setup(),preview=ns.systems.StoryCatalog.chapter2Preview,app=Object.create(ns.systems.FrontierApp.prototype);
+  Object.assign(app,{store,root:{querySelector(){return null;}},show(page){this.page=page;},render(){},launchStory(){throw Error('Preview must not launch');}});
+  app.act('story-card-replay',preview.id);assert.equal(app.page,'mission-brief');assert.equal(app.mangaMission,preview);
+  const html=ns.systems.StoryManga.renderBrief(app);assert.match(html,/既有戰術挑戰/);assert.doesNotMatch(html,/manga-fight|story-book-art/);
+  assert.equal(app.act('manga-fight'),false);app.act('manga-missions');assert.equal(app.page,'story');
 });
 test('all playable story cards resolve people through the same approved hero references', () => {
   const { ns } = setup(), blocked = new Set([

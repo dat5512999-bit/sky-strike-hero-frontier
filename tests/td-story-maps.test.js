@@ -123,7 +123,7 @@ test('chapter missions preserve unlock order, with Chapter III unlocking existin
   for(const mission of chapter4){assert.equal(mission.hero,'naga');assert.equal(mission.faction,'naga');assert.equal(mission.storyCards.length,5);store.complete(mission);for(const id of mission.rewards.maps)assert.equal(store.allows('maps',id),true);}
   assert.match(chapter4.at(-1).aftermath,/來源仍然未知/,'第四章必須保留來源未知');
   const result=ns.systems.ResultScreen.view({waves:3},{mode:'story',victory:true,saved:true,mission:chapter1.at(-1)});
-  assert.match(result.intro,/已儲存/);assert.match(result.intro,/線索推進/);assert.equal(result.showUnlock,false);
+  assert.match(result.intro,/已儲存/);assert.match(result.intro,/既有戰術挑戰/);assert.match(result.intro,/並非新版主線時序/);assert.doesNotMatch(result.intro,/線索推進/);assert.equal(result.showUnlock,false);
 });
 
 test('Chapter III roads, landmarks and the dual-route merge remain explicit gameplay geometry',()=>{

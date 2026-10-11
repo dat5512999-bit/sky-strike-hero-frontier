@@ -15,7 +15,7 @@
       if(!this.enabled)return;
       try{const Audio=globalThis.AudioContext||globalThis.webkitAudioContext;if(!Audio)return;this.context ||= new Audio();this.context.resume()?.catch(()=>{});}catch(_){}
     }
-    static setVolume(value){this.volume=clamp(value);if(!this.volume)this.stop();this.save();}
+    static setVolume(value){this.volume=clamp(value);if(!this.volume){for(const voice of [...this.active])voice.cancel();this.stopAmbient();}this.save();}
     static save(){try{localStorage.setItem('heroFrontierAudioMixV1',JSON.stringify({volume:this.volume,ambientVolume:this.ambientVolume,ambientEnabled:this.ambientEnabled}));}catch(_){} }
     static load(){try{const data=JSON.parse(localStorage.getItem('heroFrontierAudioMixV1')||'null');if(data){if(Number.isFinite(data.volume))this.volume=clamp(data.volume);if(Number.isFinite(data.ambientVolume))this.ambientVolume=clamp(data.ambientVolume);if(typeof data.ambientEnabled==='boolean')this.ambientEnabled=data.ambientEnabled;}}catch(_){} }
     static graph(){
@@ -24,8 +24,10 @@
       this.master=ctx.createGain();this.master.gain.value=.65;
       if(ctx.createDynamicsCompressor){const compressor=ctx.createDynamicsCompressor();compressor.threshold.value=-20;compressor.knee.value=18;compressor.ratio.value=5;this.master.connect(compressor);compressor.connect(ctx.destination);}
       else this.master.connect(ctx.destination);
+      this.effects=ctx.createGain();this.effects.gain.value=1;this.effects.connect(this.master);
       return this.master;
     }
+    static duckEffects(talking){if(this.effects)this.effects.gain.setTargetAtTime?.(talking ? .38 : 1,this.context.currentTime,.06);}
     static buffer(){
       if(this.noiseBuffer)return this.noiseBuffer;
       const ctx=this.context,b=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*.8),ctx.sampleRate),data=b.getChannelData(0);let seed=173;
@@ -36,7 +38,7 @@
       const ctx=this.context;
       if(!cue||!this.enabled||!this.volume||!ctx||ctx.state!=='running'||globalThis.document?.hidden)return false;
       try{
-        const destination=this.graph(),now=ctx.currentTime,priority=cue.priority||0;
+        this.graph();const destination=this.effects,now=ctx.currentTime,priority=cue.priority||0;
         if(now-(this.last.get(cue.key)??-10)<(cue.gap||.1)||priority===0&&now-this.lastLow<.045)return false;
         const layers=cue.layers.slice(0,4),limit=priority<2?8:12;
         if(this.active.size+layers.length>limit&&priority>=2){for(const voice of [...this.active]){if(voice.priority<priority)voice.cancel();if(this.active.size+layers.length<=limit)break;}}
@@ -54,14 +56,17 @@
       const release=()=>{if(done)return;done=true;for(const node of [source,gain,filter])try{node?.disconnect();}catch(_){}this.active.delete(entry);};
       try{
         gain=ctx.createGain();
-        if(layer.noise){source=ctx.createBufferSource();source.buffer=this.buffer();filter=ctx.createBiquadFilter();filter.type='bandpass';filter.frequency.value=layer.cut||1500;filter.Q.value=.7;source.connect(filter);filter.connect(gain);}
+        if(layer.material){source=ctx.createBufferSource();this.materialSequence=(this.materialSequence||0)+1;const bank=layer.materialBank==='character'?ns.systems.CharacterAudioMaterials:ns.systems.BullAudioMaterials;source.buffer=bank.buffer(ctx,layer.material,this.materialSequence%3);if(!source.buffer)throw Error('Unknown audio material');source.connect(gain);}
+        else if(layer.noise){source=ctx.createBufferSource();source.buffer=this.buffer();filter=ctx.createBiquadFilter();filter.type='bandpass';filter.frequency.value=layer.cut||1500;filter.Q.value=.7;source.connect(filter);filter.connect(gain);}
         else{source=ctx.createOscillator();source.type=layer.w||'sine';source.frequency.setValueAtTime(Math.max(25,layer.a||220),start);source.frequency.exponentialRampToValueAtTime(Math.max(25,layer.b||layer.a||220),start+duration);source.connect(gain);}
-        gain.gain.setValueAtTime(.0001,start);gain.gain.exponentialRampToValueAtTime(Math.max(.0001,(layer.level||.1)*this.volume*level),start+.008);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);gain.connect(destination);
+        const amplitude=Math.max(.0001,(layer.level||.1)*this.volume*level);
+        if(layer.material){gain.gain.setValueAtTime(amplitude,start);gain.gain.setValueAtTime(amplitude,start+duration-.02);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);}
+        else{gain.gain.setValueAtTime(.0001,start);gain.gain.exponentialRampToValueAtTime(amplitude,start+.008);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);}gain.connect(destination);
         this.active.add(entry);source.onended=release;source.start(start);started=true;source.stop(start+duration+.015);return true;
       }catch(_){entry.cancel();return false;}
     }
     static event(name){return this.play(C().event(name));}
-    static skill(hero,slot){return this.play(C().skill(hero.classType,slot));}
+    static skill(hero,slot){const played=this.play(C().skill(hero.classType,slot));ns.systems.HeroVoice?.play(hero.classType,slot).catch(()=>{});return played;}
     static projectile(shot){
       if(!this.enabled||!this.volume||!this.context||this.context.state!=='running')return false;
       try{
@@ -73,13 +78,15 @@
     }
     static legacy(type){
       const hero=type.startsWith('attack-')?type.slice(7):null;
+      if(hero){const cue=C().character(hero,'attack');if(cue)return this.play(cue);}
       if(hero){const id=C().identities[hero];return id?this.play({key:type,layers:[{a:id[0],b:id[0]*.35,d:.14,w:id[1],level:.11}],priority:0,gap:.1}):false;}
       const family={freeze:'ice',shatter:'ice',chain:'lightning',hunt:'support',winter:'ice',spear:'arrow','impact-pierce':'blade','impact-magic':'arcane','impact-heavy':'stone','impact-shield':'stone','impact-immune':'support'}[type];
       return family?this.play({key:type,layers:C().families[family],priority:0,gap:.2},{level:type.startsWith('impact-')?.3:.55}):false;
     }
     static stopAmbient(){if(!this.ambient)return;for(const n of this.ambient.nodes){try{n.stop?.();n.disconnect();}catch(_){}}this.ambient=null;}
-    static stop(){for(const voice of [...this.active])voice.cancel();this.stopAmbient();}
+    static stop(){for(const voice of [...this.active])voice.cancel();this.stopAmbient();ns.systems.HeroVoice?.stop();}
     static sync(game){
+      if(game?.paused&&!this.wasPaused)ns.systems.HeroVoice?.stop();this.wasPaused=Boolean(game?.paused);
       const running=this.enabled&&this.volume>0&&this.ambientEnabled&&this.ambientVolume>0&&this.context?.state==='running'&&!globalThis.document?.hidden&&game?.profession?.selected&&game.status==='playing'&&!game.paused&&(!game.app||game.app.root.hidden)&&game.ui?.professionScreen?.hidden;
       if(!running){this.stopAmbient();return;}
       const kind=C().ambience(ns.config.mapId);

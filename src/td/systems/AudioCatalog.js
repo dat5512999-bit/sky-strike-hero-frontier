@@ -30,11 +30,112 @@
     death:[noise(650,.12,0,.07),tone(90,45,.18,'triangle',0,.06)],leak:[tone(330,220,.18,'square',0,.07),tone(220,165,.2,'triangle',.15)]
   };
   const groupFamilies={slash:'blade',thrust:'blade',shield:'stone',slam:'stone',tideSlash:'tide',charge:'stone',breath:'fire',arrow:'arrow',bullet:'gun',cannon:'siege',inferno:'fire',emberBreath:'fire',frostBreath:'ice',lightning:'lightning',poison:'shadow',nature:'nature',moon:'blade',spirit:'shadow',ice:'ice',arcane:'arcane',tide:'tide'};
+  const material=(name,d,at=0,level=.35)=>({material:name,materialBank:'character',d,at,level});
+  const characterCues={
+    hunter:{
+      attack:[material('bow',.3,0,.3),material('leaves',.18,.03,.1)],
+      hit:[material('wood',.3,0,.21),material('blade',.16,0,.08)],
+      q:[material('bow',.3,0,.36),material('bow',.3,.065,.3),material('bow',.3,.13,.25),material('leaves',.6,0,.18)],
+      w:[material('wood',.42,0,.32),material('steel',.28,.06,.18)],
+      e:[material('horn',.8,0,.2),material('leaves',.65,.06,.3)],
+      f:[material('bow',.32,0,.4),material('blade',.34,.1,.28),material('leaves',.65,.2,.38),material('wood',.44,.4,.35)]
+    },
+    arcanist:{
+      attack:[material('arcane',.3,0,.2),material('crystal',.23,0,.12)],
+      hit:[material('crystal',.3,0,.17),material('leaves',.22,0,.06)],
+      q:[material('crystal',.8,0,.35),material('frost',.9,0,.28)],
+      w:[material('thunder',.85,0,.32),material('crystal',.4,.13,.18),material('thunder',.6,.24,.22)],
+      e:[material('arcane',1.15,0,.32),material('leaves',.65,.12,.2)],
+      f:[material('arcane',1.1,0,.3),material('crystal',.85,.12,.4),material('frost',1.2,.2,.36),material('thunder',1.25,.1,.32)]
+    },
+    rogue:{
+      attack:[material('blade',.22,0,.22),material('veil',.18,0,.1)],
+      hit:[material('blade',.16,0,.16),material('wood',.12,0,.1)],
+      q:[material('veil',.65,0,.28),material('blade',.3,.09,.4)],
+      w:[material('veil',.8,0,.4),material('sand',.85,0,.18)],
+      e:[material('veil',.75,0,.35),material('blade',.22,.12,.16)],
+      f:[material('veil',.8,0,.36),material('blade',.34,.12,.44),material('blade',.32,.28,.32),material('wood',.3,.32,.18)]
+    },
+    chief:{
+      attack:[material('wood',.35,0,.28),material('drum',.25,.02,.17)],
+      hit:[material('drum',.38,0,.28),material('wood',.2,0,.12)],
+      q:[material('horn',1.05,0,.35),material('drum',.55,0,.3)],
+      w:[material('flame',1.1,0,.36),material('drum',.5,0,.25)],
+      e:[material('drum',.7,0,.42),material('wood',.44,.08,.3),material('thunder',.9,.04,.18)],
+      f:[material('horn',1.05,0,.38),material('drum',.7,.04,.5),material('wood',.44,.16,.28),material('flame',1.15,.12,.3)]
+    },
+    frostland:{
+      attack:[material('blade',.24,0,.19),material('crystal',.32,.02,.14)],
+      hit:[material('crystal',.4,0,.24),material('frost',.2,0,.09)],
+      q:[material('frost',1.05,0,.33),material('horn',.7,0,.2)],
+      w:[material('blade',.34,0,.3),material('crystal',.85,.07,.45)],
+      e:[material('horn',1,0,.3),material('frost',.8,.08,.24)],
+      f:[material('frost',1.2,0,.45),material('horn',1.05,.04,.27),material('crystal',.85,.16,.36),material('thunder',.95,.08,.16)]
+    },
+    dwarf:{
+      attack:[material('steel',.33,0,.25),material('wood',.18,0,.12)],
+      hit:[material('steel',.5,0,.26),material('drum',.24,0,.13)],
+      q:[material('steel',.8,0,.43),material('drum',.6,0,.38)],
+      w:[material('flame',1.15,0,.36),material('steel',.65,.05,.28)],
+      e:[material('steel',.7,0,.27),material('steel',.7,.17,.2),material('horn',.9,0,.23)],
+      f:[material('steel',.8,0,.48),material('drum',.7,0,.42),material('arcane',1.1,.07,.22),material('thunder',1.2,.04,.23)]
+    },
+    dragonkin:{
+      attack:[material('thunder',.24,0,.22),material('blade',.25,0,.15)],
+      hit:[material('thunder',.4,0,.24),material('crystal',.2,0,.08)],
+      q:[material('blade',.34,0,.3),material('thunder',1,.03,.43)],
+      w:[material('flame',1.15,0,.4),material('thunder',1.3,.08,.32)],
+      e:[material('horn',1.05,0,.28),material('arcane',1.1,.08,.23)],
+      f:[material('blade',.34,0,.25),material('thunder',1.35,.04,.58),material('flame',1.15,.12,.3),material('horn',1.05,.08,.2)]
+    },
+    egypt:{
+      attack:[material('blade',.3,0,.22),material('sand',.25,0,.12)],
+      hit:[material('steel',.25,0,.16),material('sand',.38,0,.19)],
+      q:[material('blade',.34,0,.4),material('sand',.75,.04,.32)],
+      w:[material('sand',.95,0,.44),material('arcane',1.1,0,.2)],
+      e:[material('arcane',1.15,0,.28),material('steel',.7,.06,.18)],
+      f:[material('sand',.95,0,.42),material('steel',.8,.14,.34),material('arcane',1.15,.03,.32),material('flame',1,.1,.28)]
+    },
+    goblin:{
+      attack:[material('rivet',.26,0,.32),material('ratchet',.2,.04,.12)],
+      hit:[material('rivet',.16,0,.18),material('ratchet',.25,0,.1)],
+      q:[material('ratchet',.58,0,.38),material('motor',.85,.1,.25)],
+      w:[material('rivet',.18,0,.18),material('steam',.95,.03,.46)],
+      e:[material('ratchet',.5,0,.32),material('motor',1.1,.12,.35)],
+      f:[material('motor',1.2,0,.52),material('ratchet',.58,.15,.36),material('steam',.95,.4,.38),material('rivet',.28,.35,.33)]
+    },
+    naga:{
+      attack:[material('splash',.35,0,.27),material('conch',.2,.02,.065)],
+      hit:[material('splash',.42,0,.24),material('current',.22,0,.1)],
+      q:[material('splash',.48,0,.5),material('breaker',.85,.06,.32)],
+      w:[material('splash',.4,0,.22),material('current',1.25,0,.52),material('current',.9,.25,.2)],
+      e:[material('conch',.9,0,.34),material('current',.8,.08,.23)],
+      f:[material('current',1.15,0,.3),material('breaker',1.35,.08,.65),material('splash',.48,.22,.4),material('conch',.85,.09,.18)]
+    }
+  };
   class AudioCatalog{
     static identities=identities;
     static families=families;
     static events=events;
-    static skill(hero,slot){
+    static character(hero,action){
+      if(hero==='bull')return this.bull(action);
+      const layers=characterCues[hero]?.[action];
+      return layers?{key:hero+':'+action,layers,priority:action==='f'?3:['attack','hit'].includes(action)?0:2,gap:action==='hit'?.2:.12}:null;
+    }
+    static bull(action){
+      const m=(material,d,at=0,level=.45)=>({material,d,at,level});
+      const cues={
+        attack:[m('swing',.3,0,.28),m('iron',.35,.07,.16)],
+        hit:[m('impact',.38,0,.38),m('rubble',.45,.025,.16)],
+        q:[m('impact',.7,0,.65),m('iron',.6,0,.24),m('rubble',1.1,.05,.36)],
+        w:[m('impact',.65,0,.45),m('pressure',1.3,0,.38),m('rubble',1.1,.16,.22)],
+        e:[m('resolve',1,0,.42),m('iron',.6,.08,.22)],
+        f:[m('impact',.72,0,.85),m('iron',.62,0,.38),m('rubble',1.15,.04,.55),m('pressure',1.3,.05,.35)]
+      };
+      return cues[action]?{key:'bull:'+action,layers:cues[action],priority:action==='f'?3:['attack','hit'].includes(action)?0:2,gap:action==='hit'?.18:.12}:null;
+    }
+    static skill(hero,slot,legacy=false){
+      if(!legacy&&['q','w','e','f'].includes(slot)){const cue=this.character(hero,slot);if(cue)return {...cue,key:'skill:'+hero+':'+slot};}
       const p=identities[hero];if(!p||!['q','w','e','f'].includes(slot))return null;
       const [f,w,cut]=p;
       const patterns={q:[noise(cut,.16),tone(f*1.8,f*.6,.24,w)],w:[noise(cut*.6,.48),tone(f*.5,f,.42,w),tone(f*1.5,f*.75,.38,'sine',.12,.07)],e:[tone(f,f,.23,w),tone(f*1.25,f*1.5,.3,w,.13),tone(f*2,f*2,.32,'sine',.26,.07)],f:[noise(cut*.5,.65,0,.24),tone(f*.25,f*.125,.65,'triangle'),tone(f,f*1.5,.55,w,.08),tone(f*2,f*3,.55,'sine',.22,.08)]};

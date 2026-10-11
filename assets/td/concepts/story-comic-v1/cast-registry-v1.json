@@ -1,0 +1,213 @@
+{
+  "version": "comic-production-0.4.0",
+  "status": "historical-proposal-superseded",
+  "supersededBy": "cast-bindings-v2.json",
+  "notice": "Old princess/commander candidates are retired. Use actual arcanist/hunter HeroRoster selectionArt. Current rogue is the duskfolk leader; do not infer a separate princess.",
+  "date": "2026-10-09",
+  "purpose": "Production-only character identity and first-appearance proposal. Not a runtime HeroRoster or approved cast registry.",
+  "published": false,
+  "gameIntegrated": false,
+  "method": "built-in image_gen",
+  "characters": [
+    {
+      "key": "silverleaf-king",
+      "role": "銀葉王",
+      "appearanceStatus": "pending-user-review",
+      "sheet": "cast-silverleaf-king-prince-v1.png",
+      "row": 1,
+      "gameHeroId": null,
+      "features": [
+        "細長臉、高額頭、深眼窩",
+        "長直鼻、細弧眉、皺紋",
+        "銀白長髮、無鬍、綠眼"
+      ],
+      "publicIntro": [
+        "銀葉王",
+        "銀葉的統治者"
+      ],
+      "canon": [
+        "年長，原準備交棒給兒子",
+        "想在退位後研究西方與獄烈戰爭"
+      ]
+    },
+    {
+      "key": "silverleaf-prince",
+      "role": "銀葉王子",
+      "appearanceStatus": "pending-user-review",
+      "sheet": "cast-silverleaf-king-prince-v1.png",
+      "row": 2,
+      "gameHeroId": null,
+      "features": [
+        "稜角顴骨、較寬下頜、堅實下巴",
+        "長鼻、深直眉、成熟眼形",
+        "深栗色半束長髮、無鬍"
+      ],
+      "publicIntro": [
+        "銀葉王子",
+        "共同城市統治者的重要人選"
+      ],
+      "canon": [
+        "比部分人類統治者年長",
+        "有治理經驗、跨族理解",
+        "尚未確認當選共同統治者"
+      ]
+    },
+    {
+      "key": "silverleaf-princess",
+      "role": "銀葉公主",
+      "appearanceStatus": "pending-user-review",
+      "sheet": "cast-princess-commander-v1.png",
+      "row": 1,
+      "gameHeroId": null,
+      "doNotAssumeSameAs": [
+        "arcanist"
+      ],
+      "features": [
+        "長臉、較高且寬的顴骨",
+        "突出鼻樑、較寬眼距",
+        "栗色側辮、成熟眉眼、旅行服"
+      ],
+      "publicIntro": [
+        "銀葉公主",
+        "銀葉王室長女・旅行與元素研究者"
+      ],
+      "canon": [
+        "年長於王子",
+        "長期在外旅行，對統治權興趣不大",
+        "水元素不等於亡魂"
+      ]
+    },
+    {
+      "key": "human-king",
+      "role": "人類王",
+      "appearanceStatus": "pending-user-review",
+      "sheet": "cast-human-king-chancellor-v1.png",
+      "row": 1,
+      "gameHeroId": null,
+      "features": [
+        "寬圓臉、飽滿雙頰",
+        "短寬鼻、厚眼皮",
+        "紅棕短鬍、捲髮灰鬢"
+      ],
+      "publicIntro": [
+        "人類王",
+        "人類王國的統治者"
+      ],
+      "canon": [
+        "渴望共同城市統治權",
+        "許多重大決策依靠首相"
+      ]
+    },
+    {
+      "key": "chancellor",
+      "role": "首相",
+      "appearanceStatus": "pending-user-review",
+      "sheet": "cast-human-king-chancellor-v1.png",
+      "row": 2,
+      "gameHeroId": null,
+      "features": [
+        "長橢圓臉、較窄下巴",
+        "直鼻、略垂眉、細眼紋",
+        "側分深髮灰鬢、乾淨無鬍"
+      ],
+      "publicIntro": [
+        "首相",
+        "人類王國・政務重臣"
+      ],
+      "performanceRule": "以禮貌、說法轉換、觀察和停頓演出算計；介紹框不得揭露未來陰謀。"
+    },
+    {
+      "key": "guard-commander",
+      "role": "禁衛軍團長",
+      "appearanceStatus": "pending-user-review",
+      "sheet": "cast-princess-commander-v1.png",
+      "row": 2,
+      "gameHeroId": null,
+      "doNotAssumeSameAs": [
+        "hunter"
+      ],
+      "features": [
+        "寬梯形臉、方顎、厚眉",
+        "寬鼻樑、成熟額紋",
+        "短灰髮、灰黑鬍渣、無白毛領"
+      ],
+      "publicIntro": [
+        "禁衛軍團長",
+        "王國禁衛軍"
+      ],
+      "canon": [
+        "忠於王國、法律、人民",
+        "不等同效忠國王個人的皇族親衛隊"
+      ],
+      "identityNote": "此為獨立外觀候選，未證明一定與雷恩不同人，也不自動合併。正式採用前須確認身分。"
+    },
+    {
+      "key": "rhen",
+      "role": "守誓者・雷恩",
+      "appearanceStatus": "existing-game-reference",
+      "gameHeroId": "hunter",
+      "primaryReference": "assets/td/opening/hero-hunter-selection-v1.png",
+      "continuityReference": "assets/td/story/chapter1-hero-continuity-v1.png",
+      "features": [
+        "方正成熟臉、濃眉棕眼",
+        "棕色微捲髮、無鬍",
+        "白毛領、藍金甲、藍披巾與大盾"
+      ],
+      "publicIntro": [
+        "守誓者・雷恩",
+        "王國英雄"
+      ],
+      "identityNote": "不在漫畫中擅自加註禁衛軍團長。實際玩法武器與選角圖不完全一致，戰鬥漫畫另核對裝備，不改玩法資料。"
+    }
+  ],
+  "assets": [
+    {
+      "file": "cast-silverleaf-king-prince-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "cast-prompts-v1.json",
+      "promptKey": "sheets[0].prompt"
+    },
+    {
+      "file": "cast-human-king-chancellor-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "cast-prompts-v1.json",
+      "promptKey": "sheets[1].prompt"
+    },
+    {
+      "file": "cast-princess-commander-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "cast-prompts-v1.json",
+      "promptKey": "sheets[2].prompt"
+    },
+    {
+      "file": "intro-rhen-v1.png",
+      "width": 1536,
+      "height": 1024,
+      "promptSource": "cast-prompts-v1.json",
+      "promptKey": "heroIntro.prompt",
+      "status": "intro-layout-proposal-replacing-contemporary-02-not-new-event"
+    },
+    {
+      "file": "intro-chancellor-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "intro-chancellor-prompt-v1.json",
+      "promptKey": "prompt",
+      "status": "proposed-scene-pending-approval"
+    }
+  ],
+  "qa": {
+    "visual": "五張已目視核對角色輪廓、角度連貫、身分框及台詞；王室與首相等尚待使用者核准。",
+    "format": "雷恩示範為 3:2 橫圖，未符合提示詞的 16:9；構圖完整且臉部清晰，正式閱讀器需等比例完整展示，不能裁掉標示。",
+    "notTested": [
+      "手機閱讀器",
+      "逐格放大",
+      "獨立文字層",
+      "音樂銜接",
+      "使用者盲辨角色測試"
+    ]
+  }
+}

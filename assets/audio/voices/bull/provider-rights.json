@@ -1,0 +1,10 @@
+{
+  "checkedDate": "2026-10-11",
+  "providerPage": "https://voice-generator.com/text-to-speech/chinese",
+  "commercialUseStatement": "You can freely use generated speech not only for personal, but also commercial use.",
+  "termsPage": "https://voice-generator.com/terms",
+  "termsEffectiveDate": "2026-01-12",
+  "termsSummary": "Service terms identify Kokoro under Apache 2.0. This record describes the provider's statements, not an independent guarantee of all upstream rights. Recheck before distribution.",
+  "method": "Public website generation endpoint. No login, API key, installation or voice cloning used. Original game dialogue only.",
+  "userApproval": "User approved the rough-v2 audition voice and continuing its use. Other lines use the same voice and processing."
+}

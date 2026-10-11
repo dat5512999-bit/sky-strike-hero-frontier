@@ -1,0 +1,78 @@
+{
+  "version": "comic-production-0.1.0",
+  "date": "2026-10-08",
+  "status": "six-pages-produced-pending-user-review",
+  "published": false,
+  "gameIntegrated": false,
+  "method": "built-in image_gen",
+  "sourceBible": "docs/WORLD_STORY_BIBLE_V1.md",
+  "scope": "序篇開頭六頁；非完整序篇",
+  "continuityReference": "page-01-v1.png",
+  "referenceEditPrefix": "Edit supplied page into later sequential page; replace all panels and dialogue while preserving recurring civilians' identities, faces, hair, garments and full-color manga style.",
+  "pages": [
+    {
+      "page": 1,
+      "title": "曾經的和平／同一條路",
+      "file": "page-01-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "prompts.json",
+      "promptIndex": 0
+    },
+    {
+      "page": 2,
+      "title": "各有所長",
+      "file": "page-02-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "prompts.json",
+      "promptIndex": 1
+    },
+    {
+      "page": 3,
+      "title": "下一趟，也一起走",
+      "file": "page-03-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "prompts.json",
+      "promptIndex": 2
+    },
+    {
+      "page": 4,
+      "title": "不必每次都道別",
+      "file": "page-04-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "prompts-pages-04-06.json",
+      "promptIndex": 0
+    },
+    {
+      "page": 5,
+      "title": "一座共同的城",
+      "file": "page-05-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "prompts-pages-04-06.json",
+      "promptIndex": 1
+    },
+    {
+      "page": 6,
+      "title": "把想法，建成家",
+      "file": "page-06-v1.png",
+      "width": 1672,
+      "height": 941,
+      "promptSource": "prompts-pages-04-06.json",
+      "promptIndex": 2
+    }
+  ],
+  "review": {
+    "visual": "六張已逐頁目視檢查，保持藍衫工匠、棕髮綠披風銀葉、白髮紫袍暮影人物辨識點；民服不是新英雄造型。",
+    "canon": "跨族工作與建城依原設定；對話及普通群眾互動是演出稿，非新增核心歷史。",
+    "pending": [
+      "使用者內容與外觀驗收",
+      "正式閱讀器整合、放大／逐格閱讀、文字稿、續讀",
+      "王室新角色外觀與英雄身分對應確認",
+      "正式手機與音樂搭配驗收"
+    ]
+  }
+}

@@ -1,3 +1,33 @@
+## v0.85.96 漫畫流程內部契約
+
+已驗證：`npm test` 1,122／1,122 通過；`npm run check` 與三個漫畫 JS 語法檢查通過；`check:site` 檢查 792 個正式檔案，排除 concepts。正式 reader 與獨立 review 各通過三尺寸 44 頁 QA；最終修圖複驗證據見 [本次交付與验收](STORY_MANGA_V08596.md)。未發布 GitHub、未完成 Safari 真機與作者視覺驗收。
+
+StoryMangaFlow.timeline(profile, admin) 回傳按 firstPage 排序的 9 節點：id、kind（section／battle）、title、era、pages、locked、note、selectionKeys，以及 sectionId 或 missionId；battle 另有 afterLocked。FrontierApp 的 storyMode 為 timeline（預設）或 legacy，selectedStoryNode 僅是目前顯示節點，不變更玩法資料。StoryManga.lastSelection(store) 讀取 bookmark-v2 內 $lastSelection，與頁書籤同次寫入；管理者不保存。
+
+2026-10-11。無新增後端、HTTP API 或玩家存檔格式遷移。runtime 0.85.96、storyMangaVersion 2.0.0、storyReviewVersion 0.9.0。
+
+- StoryMangaFlow.configure(config)：設定 sections 與 missions，驗證識別碼、頁碼及任務依賴；不要自行改寫既有任務 ID。
+- StoryMangaFlow.missionInfo(id)、getSection(id)：讀取對應關係；missionInfo 無對應時回傳 null，介面必須降級為摘要。
+- StoryMangaFlow.missionPresentation(id)、chapterPresentation(number)：首頁與選關頁共用唯讀顯示資料；第一關標示「護證撤離・戰術重現」，其餘既有戰術挑戰不引用舊劇情目標作為新版正史，也不變更任務 ID／波次／獎勵。
+- StoryMangaFlow.resolve(request, profile, admin)：依 sectionId 或 missionId + phase（before／after）解析可讀段落；拒絕未解鎖或冒用管理者預覽的請求。
+- StoryMangaFlow.pagesFor(selection, catalog)：以 storyPage 對應完整選段；缺頁不得偷偷跳到其他段落。
+- StoryManga.openSelection(app, request)：開啟指定段落，turn 只在本段範圍內移動。戰前讀畢回摘要，由使用者明確開始戰鬥。
+- ProfileStore.adapter('manga') 的 bookmark-v2：JSON 物件，selection.key 對應 page.id；實際存於目前玩家 data 的 manga:bookmark-v2。保留 manga:bookmark-v1，不跨版本猜測頁序；管理者預覽不寫新書籤。
+
+FrontierApp.renderStory 是唯讀展示；mission-details 內捲、mission-actions 固定。正式 Catalog 已接入 44 頁本機 WebP，對應九節點與首關戰前 31–33／戰後 34。完整 Node 回歸 1,122／1,122 通過，不代表已發布 GitHub 或完成真機驗收。以下為舊版契約紀錄。
+
+> 主線審閱 0.8.0（2026-10-10）：審閱器改讀review-catalog.json，plannedPages=44、連續序號與本地路徑白名單；新增可选storyPage/group，不改正式API。 [操作、維護與驗收](STORY_MAIN_REVIEW_V080.md)。
+
+> 前導審閱 0.7.0（2026-10-10）：新增本機 prologue-catalog.json 契約，只有受限相對圖路徑與純文字；獨立 bookmark，不新增後端 API。 [操作、維護與驗收](STORY_PROLOGUE_REVIEW_V070.md)。
+
+> v0.85.95：不新增 API 或資料格式；StoryCatalog 僅修改文案，任務 ID、波次與獎勵不變。package.json 新增 storyEditorialVersion 0.6.0，與正式漫畫版本 1.0.0 分開。 [交付、驗收與回復](STORY_REVISION_DELIVERY_V08595.md)。
+
+> v0.85.94／故事漫畫 1.0.0（2026-10-10）：新增內部 StoryManga open/turn/render/attach/brief/install 與 StoryMangaCatalog；無新 HTTP API。書籤在 ProfileStore 的 manga:bookmark-v1。 [操作、架構與驗收](STORY_MANGA_V08594.md)。
+
+> v0.85.93／手機 HUD 1.1.0（2026-10-09）：positionSelectionActions 統一定位；coreStatus 的原回傳介面不變，三名原始英雄納入技能圖集检查。 詳見[手機介面修正與驗收](MOBILE_HUD_V08593.md)。
+
+> v0.85.92／音效 1.4.0（2026-10-09，本機完成）：AudioCatalog.character(hero,action) 現支援全部十一名英雄的 attack／hit／q／w／e／f；CharacterAudioMaterials 提供 22 種材質，三變體最多 66 個 buffer／context。舊版技能比較、未知項目 null 合約不變，無新增後端 API。 詳見[角色音效紀錄](CHARACTER_AUDIO_V11.md)。
+
 > v0.85.88 整合發布（2026-10-08）：音效、英雄技能卡、劇情載入與漫畫閱讀器同版交付。下方保留各功能開發當時的紀錄；目前發布與回復流程見 [整合發布](FULL_RELEASE_V08588.md)。
 
 > 音效 v1.0.0：AudioCatalog 提供 cue，GameAudio 負責 play／skill／projectile／event／sync／stop；無 HTTP API 或存檔 schema 變更。見 [介面](GAME_AUDIO_V1.md)。

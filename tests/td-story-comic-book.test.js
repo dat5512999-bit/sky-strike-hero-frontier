@@ -1,6 +1,16 @@
 'use strict';
-const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const {load}=require('./helpers/td-runtime.cjs');
+// The old illustrated reader is retained for rollback, but its entry points are
+// intentionally replaced in the live app. Test that dormant module in isolation;
+// td-story-manga.test.js verifies the installed V2 routing and permissions.
+function loadRetainedReader(){
+  const runtime=load(),source=fs.readFileSync('src/td/app/FrontierApp.js','utf8');
+  const install='ns.systems.StoryManga.install(FrontierApp);';
+  assert.equal(source.split(install).length,2);
+  vm.runInContext(source.replace(install,''),runtime.context,{filename:'FrontierApp-retained-reader-test.js'});
+  return runtime;
+}
 function appFor(ns,admin=false,completed=[]){
   const app=Object.create(ns.systems.FrontierApp.prototype);
   Object.assign(app,{store:{isAdmin:()=>admin,current:()=>({completed})},root:{querySelector:()=>null},render(){},show(page){this.page=page;},launchStory(){this.launched=true;}});return app;
@@ -15,7 +25,7 @@ test('all four chapters and preview offer eight illustrated pages with valid spe
   assert.equal(count,136);
 });
 test('back, jump and keyboard navigation cannot accidentally launch battle or move out of range',()=>{
-  const {ns}=load(),app=appFor(ns);app.startStoryCards(ns.systems.StoryCatalog.mission);
+  const {ns}=loadRetainedReader(),app=appFor(ns);app.startStoryCards(ns.systems.StoryCatalog.mission);
   app.act('story-card-prev');assert.equal(app.storyCardIndex,0);
   app.act('story-book-page','6');assert.equal(app.storyCardIndex,6);
   app.act('story-card-prev');assert.equal(app.storyCardIndex,5);
@@ -27,7 +37,7 @@ test('back, jump and keyboard navigation cannot accidentally launch battle or mo
   app.act('story-book-exit');assert.equal(app.page,'story');assert.ok(!app.launched);
 });
 test('aftermath and continuous reading obey completion state and never grant progress',()=>{
-  const {ns}=load(),mission=ns.systems.StoryCatalog.mission,completed=[],app=appFor(ns,false,completed);
+  const {ns}=loadRetainedReader(),mission=ns.systems.StoryCatalog.mission,completed=[],app=appFor(ns,false,completed);
   app.startStoryCards(mission,true);assert.equal(app.storyPages().length,8);assert.equal(app.nextStoryReading(),null);
   app.act('story-book-continue');assert.equal(app.storyCardMission,mission);
   completed.push(mission.id);assert.equal(app.storyPages().length,9);assert.equal(app.storyPages().at(-1).phase,'after');
@@ -35,7 +45,7 @@ test('aftermath and continuous reading obey completion state and never grant pro
   const admin=appFor(ns,true);admin.startStoryCards(mission,true);assert.equal(admin.storyPages().length,9);assert.ok(admin.nextStoryReading());
 });
 test('reader preserves the complete image, escapes copy and ships offline styles and data',()=>{
-  const {ns}=load(),app=appFor(ns,true),mission=ns.systems.StoryCatalog.getMission('chapter3-white-trace');
+  const {ns}=loadRetainedReader(),app=appFor(ns,true),mission=ns.systems.StoryCatalog.getMission('chapter3-white-trace');
   app.startStoryCards(mission,true);app.storyCardIndex=1;
   const html=app.renderStoryCards();assert.match(html,/風往那邊吹/);assert.match(html,/hero-selection-v2.png/);assert.match(html,/story-book-speech/);
   const old=ns.systems.StoryComicBook.stories[mission.id][1].title;ns.systems.StoryComicBook.stories[mission.id][1].title='<script>bad</script>';

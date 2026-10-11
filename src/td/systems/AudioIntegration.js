@@ -9,6 +9,8 @@
     Object.defineProperty(legacy,'context',{configurable:true,get:()=>A.context,set:value=>{A.stop();A.context=value;A.graphContext=null;}});
     Object.defineProperty(legacy,'voices',{configurable:true,get:()=>A.active.size});
     legacy.unlock=()=>A.unlock();legacy.play=type=>A.legacy(type);
+    const impact=legacy.playImpact;
+    legacy.playImpact=function(source,monster,damage){if(damage>0&&!(monster?.barrier>0)){const cue=ns.systems.AudioCatalog.character(source?.owner?.classType,'hit');if(cue)return A.play(cue);}return impact.call(this,source,monster,damage);};
     after(legacy,'setEnabled',function(){if(!this.enabled)A.stop();});
   }
   const hero=ns.entities.Hero.prototype;
@@ -36,14 +38,23 @@
   after(game,'updateUi',function(){const before=this.audioBaseHealth;if(Number.isFinite(before)&&this.baseHealth<before)A.event('leak');this.audioBaseHealth=this.baseHealth;A.sync(this);});
   after(ns.systems.FrontierApp?.prototype,'show',()=>A.stop());
   if(typeof document==='undefined')return;
-  A.load();
+  A.load();const V=ns.systems.HeroVoice;V.load();
   document.addEventListener('visibilitychange',()=>{if(document.hidden)A.stop();else A.sync(globalThis.towerFrontierGame);});
   globalThis.addEventListener('pagehide',()=>A.stop());
   document.addEventListener('click',event=>{const button=event.target.closest?.('button');if(button&&!button.disabled&&!button.closest('[inert]')&&!button.id.startsWith('td-audio-'))A.event('click');});
+  document.addEventListener('click',event=>{const button=event.target.closest?.('button[data-profession]');if(button&&!button.disabled&&!button.closest('[inert]')&&globalThis.towerFrontierGame?.selectedProfession===button.dataset.profession)V.play(button.dataset.profession,'select');});
   const panel=document.getElementById('td-menu-settings-panel');
   if(panel){
     const field=document.createElement('fieldset');field.className='td-access-controls';field.innerHTML='<legend>音效混音</legend><label>音效音量 <input id="td-audio-volume" type="range" min="0" max="100" step="5" aria-label="音效音量"></label><label><input id="td-audio-ambient" type="checkbox"> 戰場環境聲</label><label>環境音量 <input id="td-audio-ambient-volume" type="range" min="0" max="100" step="5" aria-label="環境音量"></label><button id="td-audio-test" type="button">試聽音效</button><small>靜音會立即停止音效；劇情配樂仍由劇情頁的音樂開關控制。</small>';
     panel.insertBefore(field,document.getElementById('td-performance-toggle'));
+    const voiceField=document.createElement('fieldset');voiceField.className='td-access-controls';
+    voiceField.innerHTML='<legend>人物語音</legend><label><input id="td-audio-voice-enabled" type="checkbox"> 播放人物語音</label><label>語音音量 <input id="td-audio-voice-volume" type="range" min="0" max="100" step="5" aria-label="人物語音音量"></label><small id="td-audio-voice-status"></small>';
+    field.after(voiceField);
+    const voiceEnabled=voiceField.querySelector('#td-audio-voice-enabled'),voiceVolume=voiceField.querySelector('#td-audio-voice-volume');
+    voiceEnabled.checked=V.enabled;voiceVolume.value=Math.round(V.volume*100);
+    voiceEnabled.onchange=()=>{V.enabled=voiceEnabled.checked;if(!V.enabled)V.stop();V.save();};
+    voiceVolume.oninput=()=>V.setVolume(voiceVolume.value/100);
+    voiceField.querySelector('#td-audio-voice-status').textContent=Object.keys(V.catalog.bull).some(slot=>V.available('bull',slot))?'人物語音不連續重播；大招優先。戰鬥音效總開關也會控制人物語音。':'戰牛配音尚未加入；目前可聽到專屬武器與技能音效。';
     const volume=field.querySelector('#td-audio-volume'),ambient=field.querySelector('#td-audio-ambient'),ambientVolume=field.querySelector('#td-audio-ambient-volume');
     volume.value=Math.round(A.volume*100);ambient.checked=A.ambientEnabled;ambientVolume.value=Math.round(A.ambientVolume*100);
     volume.oninput=()=>{A.setVolume(volume.value/100);A.sync(globalThis.towerFrontierGame);};
