@@ -1,3 +1,7 @@
+## 續篇審閱 0.12.0（2026-10-12，本機）
+
+共用 validate(value) 新增 0.12.0／45–68 的完整 24 頁契約，仍接受兩個歷史版本。prepare 與 reader 都讀 production-v3.json；資料新增原始提示詞、修稿履歷與本批複核結果，無新增 HTTP API、資料庫或玩家儲存欄位。 詳見 [第 61–68 頁製作與驗收](STORY_CONTINUATION_61_68_V1.md)。
+
 ## 續篇審閱 0.11.0（2026-10-12，本機）
 
 review-catalog.js 為共用 validate(value) 契約，支援 0.10.0／45–52 與 0.11.0／45–60，驗證連續頁序、本機來源、人物參考及未發布狀態。prepare 預設讀 v2；無新增後端 API 或玩家欄位。 詳見 [新八頁與驗收](STORY_CONTINUATION_53_60_V1.md)。

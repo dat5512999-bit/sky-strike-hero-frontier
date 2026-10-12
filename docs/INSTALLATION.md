@@ -1,3 +1,7 @@
+## 續篇審閱 0.12.0（2026-10-12，本機）
+
+一般閱讀仍只需既有 Node HTTP 伺服器；設定 TD_TEST_PORT=4189 後執行 npm run serve:test。prepare 會重建 24 張 WebP，依賴沿用 sharp；瀏覽器驗收沿用 playwright 與 Edge。遇 ERR_CONNECTION_REFUSED 先檢查本機伺服器，不需清存檔。 詳見 [第 61–68 頁製作與驗收](STORY_CONTINUATION_61_68_V1.md)。
+
 ## 續篇審閱 0.11.0（2026-10-12，本機）
 
 不新增安裝需求。Node 18+ 啟動既有 HTTP 伺服器，轉圖沿用 sharp，QA 沿用 playwright 與 Edge。prepare 現重建全部 16 張 WebP，QA 預設使用本機 4189。 詳見 [新八頁與驗收](STORY_CONTINUATION_53_60_V1.md)。

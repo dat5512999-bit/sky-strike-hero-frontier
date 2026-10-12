@@ -22,7 +22,7 @@
   async function load(){
     el('load-error').hidden=true;stage.hidden=false;
     try{
-      const r=await fetch('production-v2.json',{cache:'no-store'});if(!r.ok)throw Error('catalog');const data=ContinuationReviewCatalog.validate(await r.json());
+      const r=await fetch('production-v3.json',{cache:'no-store'});if(!r.ok)throw Error('catalog');const data=ContinuationReviewCatalog.validate(await r.json());
       pages=data.pages;el('pages').replaceChildren(...pages.map((p,i)=>{const option=document.createElement('option');option.value=i;option.textContent=p.page+' · '+p.title;return option;}));
       for(const id of ['pages','zoom','text'])el(id).disabled=false;
       const linked=Number(location.hash.match(/^#page=(\d+)$/)?.[1]);show(pages.findIndex(p=>p.page===linked));

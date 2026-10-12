@@ -1,6 +1,6 @@
 (function(root){
   'use strict';
-  const editions=Object.freeze({'0.10.0':52,'0.11.0':60});
+  const editions=Object.freeze({'0.10.0':52,'0.11.0':60,'0.12.0':68});
   function validate(value){
     const end=value&&Object.hasOwn(editions,value.version)&&editions[value.version];
     if(!end||value.runtimeIntegrated!==false||value.published!==false||value.userApproved!==false)throw Error('續篇必須標示為未發布、未核准的獨立審閱稿');

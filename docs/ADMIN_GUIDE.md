@@ -1,3 +1,7 @@
+## 續篇審閱 0.12.0（2026-10-12，本機）
+
+當前製作清單 production-v3.json 包含 45–68 頁。published、runtimeIntegrated、userApproved 仍為 false；AI 複核不等於作者批准。新配角艾岑是漫畫中的公共會所遞送員，不是新增可用英雄、軍團或掉落內容。 詳見 [第 61–68 頁製作與驗收](STORY_CONTINUATION_61_68_V1.md)。
+
 ## 續篇審閱 0.11.0（2026-10-12，本機）
 
 新清單 production-v2.json 為 0.11.0，舊 production-v1.json 保留；published／runtimeIntegrated／userApproved 均 false。新增八頁不構成作者驗收、故事解鎖或管理者通關。 詳見 [新八頁與驗收](STORY_CONTINUATION_53_60_V1.md)。

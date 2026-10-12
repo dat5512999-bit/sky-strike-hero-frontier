@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path');
 const {validate}=require('../assets/td/concepts/story-comic-v2/continuation/review-catalog.js');
 const root=path.resolve(__dirname,'..'),folder=path.join(root,'assets/td/concepts/story-comic-v2/continuation');
 async function prepare(){
-  const sharp=require('sharp'),value=validate(JSON.parse(fs.readFileSync(path.join(folder,'production-v2.json'),'utf8'))),report=[];
+  const sharp=require('sharp'),value=validate(JSON.parse(fs.readFileSync(path.join(folder,'production-v3.json'),'utf8'))),report=[];
   fs.mkdirSync(path.join(folder,'review'),{recursive:true});
   for(const p of value.pages){
     for(const reference of p.refs)if(!fs.existsSync(path.join(root,reference)))throw Error('Missing reference '+reference);

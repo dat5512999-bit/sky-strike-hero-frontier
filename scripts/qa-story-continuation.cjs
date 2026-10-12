@@ -2,7 +2,7 @@
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const base=process.env.STORY_CONTINUATION_QA_URL||'http://127.0.0.1:4189/assets/td/concepts/story-comic-v2/continuation/review.html';
 const out=path.resolve(__dirname,'../artifacts/story-continuation');
-const catalog=require('../assets/td/concepts/story-comic-v2/continuation/production-v2.json');
+const catalog=require('../assets/td/concepts/story-comic-v2/continuation/production-v3.json');
 const ready=page=>page.waitForSelector('#stage[data-state=ready]',{timeout:20000});
 async function layout(page){
   const state=await page.evaluate(()=>({outer:document.documentElement.scrollHeight-innerHeight,buttons:['prev','next','zoom','text','pages'].map(id=>{const e=document.getElementById(id),r=e.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {id,w:r.width,h:r.height,visible:r.top>=0&&r.bottom<=innerHeight+1&&r.left>=0&&r.right<=innerWidth+1,hit:hit===e||e.contains(hit)};})}));
@@ -28,7 +28,9 @@ async function layout(page){
     await page.goto(base+'#page=51');await ready(page);assert.equal(await page.locator('#pages').inputValue(),'6');
     await page.selectOption('#pages','7');await ready(page);await page.locator('#next').click();await ready(page);assert.equal(await page.locator('#pages').inputValue(),'8');assert.match(page.url(),/#page=53$/);
     await page.goto(base+'#page=60');await ready(page);assert.equal(await page.locator('#pages').inputValue(),'15');
-    await page.route('**/production-v2.json',route=>route.fulfill({contentType:'application/json',body:'{"pages":[]}'}));await page.reload();await page.waitForSelector('#load-error:not([hidden])');assert(await page.locator('#reload').isVisible());await page.unroute('**/production-v2.json');await page.locator('#reload').click();await ready(page);await layout(page);
+    await page.locator('#next').click();await ready(page);assert.equal(await page.locator('#pages').inputValue(),'16');assert.match(page.url(),/#page=61$/);
+    await page.goto(base+'#page=68');await ready(page);assert.equal(await page.locator('#pages').inputValue(),'23');assert(await page.locator('#next').isDisabled());
+    await page.route('**/production-v3.json',route=>route.fulfill({contentType:'application/json',body:'{"pages":[]}'}));await page.reload();await page.waitForSelector('#load-error:not([hidden])');assert(await page.locator('#reload').isVisible());await page.unroute('**/production-v3.json');await page.locator('#reload').click();await ready(page);await layout(page);
     reports.push({name,width,height,pages:visited.length,storage,errors});await context.close();console.log('PASS continuation '+name);
   }}finally{await browser.close();}
   fs.writeFileSync(path.join(out,'report.json'),JSON.stringify({base,reports},null,2));
