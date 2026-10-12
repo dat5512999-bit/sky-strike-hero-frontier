@@ -8,7 +8,7 @@
     index=Math.max(0,Math.min(pages.length-1,target));const p=pages[index],current=++token;
     el('pages').value=String(index);el('prev').disabled=index===0;el('next').disabled=index===pages.length-1;
     el('next').textContent=index===pages.length-1?'本批末頁':'下一頁 →';
-    el('position').textContent=p.page+' / 52 · '+p.title;el('title').textContent=p.title;
+    el('position').textContent=p.page+' / '+pages[pages.length-1].page+' · '+p.title;el('title').textContent=p.title;
     el('lines').replaceChildren(...p.text.map(line=>{const li=document.createElement('li');li.textContent=line;return li;}));
     setZoom(false);stage.dataset.state='loading';el('message').textContent='漫畫載入中…';el('retry').hidden=true;
     const img=new Image();img.alt='當代續篇第'+p.page+'頁：'+p.title;img.draggable=false;img.decoding='async';img.tabIndex=0;img.setAttribute('role','button');img.setAttribute('aria-label','點擊放大或恢復完整漫畫');
@@ -22,9 +22,7 @@
   async function load(){
     el('load-error').hidden=true;stage.hidden=false;
     try{
-      const r=await fetch('production-v1.json',{cache:'no-store'});if(!r.ok)throw Error('catalog');const data=await r.json();
-      if(data.runtimeIntegrated!==false||data.published!==false||data.startPage!==45||data.endPage!==52||!Array.isArray(data.pages)||data.pages.length!==8)throw Error('scope');
-      for(const [i,p] of data.pages.entries())if(p.page!==45+i||p.image!=='review/main-'+p.page+'.webp'||typeof p.title!=='string'||!Array.isArray(p.text)||!p.text.length||p.text.some(t=>typeof t!=='string'))throw Error('page');
+      const r=await fetch('production-v2.json',{cache:'no-store'});if(!r.ok)throw Error('catalog');const data=ContinuationReviewCatalog.validate(await r.json());
       pages=data.pages;el('pages').replaceChildren(...pages.map((p,i)=>{const option=document.createElement('option');option.value=i;option.textContent=p.page+' · '+p.title;return option;}));
       for(const id of ['pages','zoom','text'])el(id).disabled=false;
       const linked=Number(location.hash.match(/^#page=(\d+)$/)?.[1]);show(pages.findIndex(p=>p.page===linked));

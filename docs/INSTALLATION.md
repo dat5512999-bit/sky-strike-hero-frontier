@@ -1,3 +1,7 @@
+## 續篇審閱 0.11.0（2026-10-12，本機）
+
+不新增安裝需求。Node 18+ 啟動既有 HTTP 伺服器，轉圖沿用 sharp，QA 沿用 playwright 與 Edge。prepare 現重建全部 16 張 WebP，QA 預設使用本機 4189。 詳見 [新八頁與驗收](STORY_CONTINUATION_53_60_V1.md)。
+
 ## 續篇審閱 0.10.0（2026-10-11，本機）
 
 一般續篇閱讀沿用 Node 18+ 與 npm run serve:test，不需新依賴。重新轉檔需 sharp；自動驗收需 playwright 與 Edge，透過現有環境提供套件或 NODE_PATH，不提交機器專屬路徑。完整命令見下方專項文件。 詳見 [續篇操作、提示詞與驗收](STORY_CONTINUATION_45_52_V1.md)。

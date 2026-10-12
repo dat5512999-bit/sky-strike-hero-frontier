@@ -1,3 +1,7 @@
+## 續篇審閱 0.11.0（2026-10-12，本機）
+
+新清單 production-v2.json 為 0.11.0，舊 production-v1.json 保留；published／runtimeIntegrated／userApproved 均 false。新增八頁不構成作者驗收、故事解鎖或管理者通關。 詳見 [新八頁與驗收](STORY_CONTINUATION_53_60_V1.md)。
+
 ## 續篇審閱 0.10.0（2026-10-11，本機）
 
 第 45–52 頁獨立審閱稿不匯入遊戲、不使用管理者權限，也不寫玩家進度。製作清單的 runtimeIntegrated／published／userApproved 皆為 false；AI 複核通過不可改稱作者批准。 詳見 [續篇操作、提示詞與驗收](STORY_CONTINUATION_45_52_V1.md)。

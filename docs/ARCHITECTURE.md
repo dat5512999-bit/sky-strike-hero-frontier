@@ -1,3 +1,7 @@
+## 續篇審閱 0.11.0（2026-10-12，本機）
+
+production-v2.json → 共用 review-catalog.js 驗證 → 轉 WebP／獨立閱讀器。兩端共用完整頁數和來源檢查，v1 留作歷史；正式 StoryMangaCatalog 仍 44 頁。 詳見 [新八頁與驗收](STORY_CONTINUATION_53_60_V1.md)。
+
 ## 續篇審閱 0.10.0（2026-10-11，本機）
 
 續篇保持單向隔離：版本 PNG＋production-v1.json → prepare-story-continuation.cjs → 八張 review/main-N.webp → 獨立 review.html／review.js。正式 StoryMangaCatalog 與 build:site 不匯入 continuation；網址頁碼不寫玩家儲存。 詳見 [續篇操作、提示詞與驗收](STORY_CONTINUATION_45_52_V1.md)。

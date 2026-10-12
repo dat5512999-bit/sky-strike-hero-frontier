@@ -1,3 +1,7 @@
+## 續篇審閱 0.11.0（2026-10-12，本機）
+
+review-catalog.js 為共用 validate(value) 契約，支援 0.10.0／45–52 與 0.11.0／45–60，驗證連續頁序、本機來源、人物參考及未發布狀態。prepare 預設讀 v2；無新增後端 API 或玩家欄位。 詳見 [新八頁與驗收](STORY_CONTINUATION_53_60_V1.md)。
+
 ## 續篇審閱 0.10.0（2026-10-11，本機）
 
 新增 authoring 工具 scripts/prepare-story-continuation.cjs，匯出 validate(value) 與 async prepare()；驗證固定頁序、本機路徑及審閱狀態後轉 WebP。閱讀器只 fetch 同資料夾 production-v1.json，沒有新增後端 API、資料庫或存檔欄位。 詳見 [續篇操作、提示詞與驗收](STORY_CONTINUATION_45_52_V1.md)。
