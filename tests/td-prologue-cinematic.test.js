@@ -103,7 +103,8 @@ test('Story entry opens chapter selection and only explicit battle action launch
   await app.startCinematic();assert.equal(app.page,'story');assert.equal(plays,0);assert.equal(launches,0);
   // Flow is verified separately; opening a briefing never grants a mission clear.
   ns.systems.StoryManga.brief(app,ns.systems.StoryCatalog.mission);assert.equal(app.page,'mission-brief');assert.match(ns.systems.StoryManga.renderBrief(app),/抽象重現/);
-  app.act('manga-fight');assert.equal(launches,1);
+  app.act('manga-fight');assert.equal(launches,0);
+  app.act('story-battle',ns.systems.StoryCatalog.mission.id);ns.systems.StoryManga.turn(app,999);app.act('manga-next');assert.equal(launches,1);
   app.act('story');assert.equal(app.page,'story');assert.equal(launches,1);
   assert.equal(store.current().completed.length,0);assert.equal(store.current().cinematics.length,0);
 });

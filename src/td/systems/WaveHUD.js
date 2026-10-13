@@ -38,8 +38,8 @@
       else this.toast.hidden=now>=this.toastUntil;
       this.root.dataset.phase=m.preparing||game.evolutionCamp?'preparing':'active';
       game.ui.waveNumber.textContent='第 '+m.number+'／'+m.total+' 波';game.ui.waveStatus.textContent=m.status;
-      game.ui.wave.textContent=game.evolutionCamp?'完成遠征':game.hero?.evolution?.trialStage?'試煉進行中':m.preparing?'立即迎戰':game.waves.complete?'已守成':'戰鬥中';
-      game.ui.wave.disabled=!visible||(!m.preparing&&!game.evolutionCamp)||game.paused||Boolean(game.hero?.evolution?.trialStage);
+      game.ui.wave.textContent=game.hero?.evolution?.trialStage?'試煉進行中':game.hero?.evolution?.autoTrial?'等待進化試煉':game.evolutionCamp?'完成遠征':m.preparing?'立即迎戰':game.waves.complete?'已守成':'戰鬥中';
+      game.ui.wave.disabled=!visible||(!m.preparing&&!game.evolutionCamp)||game.paused||Boolean(game.hero?.evolution?.trialStage||game.hero?.evolution?.autoTrial);
       this.root.title='難度：'+game.difficulty.current().name;
       const key=JSON.stringify([m.number,m.preparing,m.groups]);
       if(key!==this.groupKey){

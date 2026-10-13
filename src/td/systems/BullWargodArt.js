@@ -11,7 +11,31 @@
     return art.bullWargodImages[path]||(art.bullWargodImages[path]=art.load(path));
   };
   const skillIcons=art=>art.bullWargodSkillIcons||(art.bullWargodSkillIcons=art.load('assets/td/neutral/bull-wargod-skill-icons-v2.png'));
+  const evolutionImage=(art,rank)=>{
+    const form=ns.systems.BullEvolutionAtlas?.[rank];if(!form)return null;
+    art.bullWargodImages ||= {};
+    return art.bullWargodImages[form.path]||(art.bullWargodImages[form.path]=art.load(form.path));
+  };
+  proto.preloadBullEvolution=function(rank){return evolutionImage(this,rank);};
+  proto.drawBullEvolution=function(ctx,hero){
+    // Purchased skins take priority; evolution never mutates cosmetic ownership.
+    if(this.cosmeticEquipped?.['hero:bull'])return false;
+    const rank=ns.systems.HeroEvolutionSystem?.rank(hero)||0,form=ns.systems.BullEvolutionAtlas?.[rank];if(!form)return false;
+    const atlas=evolutionImage(this,rank);if(!atlas?.ready)return false;
+    const rows={idle:0,walk:1,attack:2,cast:3,hit:4,death:4},row=rows[hero.state]??0;
+    let col=Number.isFinite(hero.frame)?Math.max(0,Math.min(3,Math.floor(hero.frame))):0;
+    if(hero.state==='idle')col=Math.floor(Math.max(0,hero.animationTime||0)*3)%4;
+    // This channel pose has its far hammer head occluded; use the three fully
+    // readable poses instead. All source poses remain in the reviewed atlas.
+    if(rank===2&&row===3)col=[0,2,3,0][col];
+    const [x,y,w,h,fx,fy]=form.frames[row*4+col],scale=form.worldHeight/form.visible;
+    ctx.save();try{
+      ctx.translate(hero.x,hero.y+16);if(Math.cos(hero.facing||0)<0)ctx.scale(-1,1);
+      ctx.drawImage(atlas,x,y,w,h,(x-fx)*scale,(y-fy)*scale,w*scale,h*scale);
+    }finally{ctx.restore();}return true;
+  };
   proto.drawBullWargod=function(ctx,hero){
+    if(this.drawBullEvolution(ctx,hero))return true;
     const atlas=image(this,hero);skillIcons(this);if(!atlas?.ready)return false;
     const rows={idle:0,walk:1,attack:2,cast:3,hit:4,death:4},row=rows[hero.state]??0,col=Math.max(0,Math.min(4,hero.frame||0)),sw=atlas.width/5,sh=atlas.height/5,height=112,width=height*sw/sh;
     ctx.save();ctx.translate(hero.x,hero.y+12);if(Math.cos(hero.facing)<0)ctx.scale(-1,1);
@@ -22,9 +46,12 @@
   proto.drawHero=function(ctx,hero){return hero.classType==='bull'?this.drawBullWargod(ctx,hero):prior.drawHero.call(this,ctx,hero);};
   proto.coreStatus=function(type){
     if(type!=='bull')return prior.coreStatus.call(this,type);
+    // Optional forms preload in the background; a failed evolution image must
+    // never prevent starting a game or hide the original hero.
+    evolutionImage(this,1);evolutionImage(this,2);
     const hero=image(this),icons=skillIcons(this),map=this.mapAssets[ns.config.mapId]||this.background,needed=[map,this.enemyActions.grunt,hero,icons],loaded=needed.filter(asset=>asset?.ready).length;
     return {loaded:loaded,total:needed.length,failed:needed.some(asset=>asset?.failed),ready:loaded===needed.length};
   };
-  proto.failedAssets=function(){const assets=[image(this),skillIcons(this)];return prior.failedAssets.call(this).concat(assets.filter(asset=>asset.failed));};
-  proto.retryFailed=function(){prior.retryFailed.call(this);for(const asset of [image(this),skillIcons(this)])if(asset.failed){asset.failed=false;asset.attempts=0;this.request(asset);}};
+  proto.failedAssets=function(){const assets=[image(this),skillIcons(this),...Object.values(this.bullWargodImages||{})];return [...new Set(prior.failedAssets.call(this).concat(assets.filter(asset=>asset.failed)))];};
+  proto.retryFailed=function(){prior.retryFailed.call(this);for(const asset of new Set([image(this),skillIcons(this),...Object.values(this.bullWargodImages||{})]))if(asset.failed){asset.failed=false;asset.attempts=0;this.request(asset);}};
 })(globalThis.TowerFrontier);

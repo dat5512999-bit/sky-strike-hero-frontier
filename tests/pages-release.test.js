@@ -10,6 +10,10 @@ test('online verification covers mobile, simulator, game styles/scripts, cache a
   for(let n=1;n<=44;n++)assert(files.includes('assets/td/story/manga-v2/page-'+String(n).padStart(2,'0')+'.webp'));
   for(const line of ['select','q','w','e','f'])assert(files.includes('assets/audio/voices/bull/'+line+'-v1.wav'));
   assert(!files.some(file=>file.includes('/concepts/')));
+  const evolved=files.filter(file=>file.startsWith('assets/td/evolution/'));
+  assert.equal(evolved.length,22);
+  assert(files.includes('assets/td/neutral/fire-demon-actions-v1.png'));
+  for(const hero of ['arcanist','hunter','rogue','chief','goblin','frostland','naga','dwarf','dragonkin','egypt','bull'])for(const rank of ['awakened','transcendent'])assert(evolved.includes('assets/td/evolution/'+hero+'-'+rank+'-actions-v1.png'));
   assert.equal(digest(Buffer.from('a\r\nb'),'td.html'),digest(Buffer.from('a\nb'),'td.html'));
   assert.notEqual(digest(Buffer.from('a\r\nb'),'image.png'),digest(Buffer.from('a\nb'),'image.png'));
   assert.equal(digest(Buffer.from('a\r\nb'),'manifest.json'),digest(Buffer.from('a\nb'),'manifest.json'));

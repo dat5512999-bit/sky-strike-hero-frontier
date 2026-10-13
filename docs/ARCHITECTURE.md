@@ -1,3 +1,13 @@
+> 全英雄進化外觀 v0.85.100（2026-10-13）：evolution.rank → 商城造型優先／戰牛專用圖集／其餘十英雄共用 SpriteAtlas → 原渲染回退；裝備與技能仍獨立，不新增進度欄位。詳見完整架構圖。 見[操作、架構與驗收](HERO_EVOLUTION_ALL_V085100.md)。以下版本紀錄為歷史狀態。
+
+> 王國／娜迦進化美術 v0.85.99（2026-10-13）：rank → 共用進化 SpriteArt → 逐格 Atlas／PNG；付費造型優先，未就緒回原渲染，保留裝備與技能特效。 見[操作、架構與驗收](HERO_EVOLUTION_HUNTER_NAGA_V08599.md)。
+
+> 戰牛進化美術 v0.85.98（2026-10-12）：沿用 rank 驅動 BullWargodArt → BullEvolutionAtlas → PNG；試煉標記驅動 EvolutionTrialArt，與傭兵裝備、一般 BOSS 外觀隔離。 見[操作、架構與驗收](HERO_EVOLUTION_ART_V08598.md)。
+
+> 劇情銜接 v1.0.0（本機）：StoryMangaFlow → StoryCampaign → StoryManga → launchStory → TDGame → 儲存勝利／ResultScreen → 戰後及下段，詳見內文流程圖。 見 [設計、操作與驗收](STORY_CAMPAIGN_FLOW_V1.md)。
+
+> 英雄進化修補 v0.85.97（2026-10-12）：商城 → 支付與安全快照 → 待清場排程 → BOSS → 勝利 Lv.0／失敗保留石頭；UI 與進度分離，披甲分前後層，完整架構見交付文件。 見[設計、操作與驗收](HERO_EVOLUTION_STONE_V08597.md)。
+
 ## 續篇審閱 0.12.0（2026-10-12，本機）
 
 版本 PNG＋production-v3.json → review-catalog.js 共用驗證 → prepare 產生 WebP／review.js 閱讀。v1、v2 留作快照；本機 reader 的腳本查詢碼升到 0.12.0。此支線仍不流入正式 StoryMangaCatalog、戰鬥或存檔。 詳見 [第 61–68 頁製作與驗收](STORY_CONTINUATION_61_68_V1.md)。

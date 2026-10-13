@@ -1,0 +1,9 @@
+#td-evolution-notice{position:absolute;left:50%;top:74px;transform:translateX(-50%);z-index:14;width:min(340px,calc(100% - 100px));box-sizing:border-box;padding:12px 14px;border:1px solid #c5a869;border-left:4px solid #edcc84;border-radius:7px;background:rgba(9,24,27,.94);color:#f9e7b5;box-shadow:0 4px 20px #0008;pointer-events:none}
+#td-evolution-notice[hidden]{display:none}
+#td-evolution-notice strong{display:block;font-size:15px;line-height:1.4}
+#td-evolution-notice p{margin:5px 0 0;font-size:12px;line-height:1.5;color:#d3e5dc}
+#td-evolution-notice button{pointer-events:auto;min-height:44px;margin-top:8px;padding:7px 14px;border:1px solid #d9bd79;border-radius:4px;background:#284944;color:#fff0c8;font:inherit;cursor:pointer}
+#td-evolution-notice button[hidden]{display:none}
+#td-evolution-notice button:disabled{opacity:.65;cursor:default}
+#td-evolution-notice button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media(max-height:500px){#td-evolution-notice{top:62px;width:280px;max-width:calc(100% - 125px);padding:7px 10px}#td-evolution-notice strong{font-size:13px}#td-evolution-notice p{font-size:11px}#td-evolution-notice button{margin-top:4px}}

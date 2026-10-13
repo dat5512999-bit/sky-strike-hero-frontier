@@ -1,0 +1,2551 @@
+{
+  "mode": "built-in image_gen; transparent PNG copied unchanged",
+  "version": "0.85.100",
+  "specs": [
+    {
+      "type": "arcanist",
+      "name": "森語者・希爾芙",
+      "ref": "assets/td/hero-actions-v1.png",
+      "body": "adult FEMALE elf mage, long dark brown ponytail, pointed ears, delicate face, TWO arms TWO legs, wielding a long crystal-tipped STAFF, no bow",
+      "one": "AWAKENED forest archmage, layered white and emerald leaf-pattern robes, ornate silver leaf shoulder guards, jade crystal staff, flowing split cloak; distinct from original plate armor",
+      "two": "TRANSCENDENT astral forest sovereign: flowing ivory and midnight-green robes, broad silver-gold leaf mantle, bright turquoise multi-prong crystal staff, silver leaf diadem worn on head, long dark brown hair, no floating crown",
+      "attack": "staff aimed forward casting a bolt (no projectile), recoil, recover",
+      "height": [
+        82,
+        86
+      ]
+    },
+    {
+      "type": "rogue",
+      "name": "影行者・維菈",
+      "ref": "assets/td/opening/hero-rogue-selection-v1.png",
+      "body": "adult FEMALE shadow rogue, pale skin, silver-white hair, purple eyes, black hood, TWO arms TWO legs, TWO short daggers one in each hand",
+      "one": "AWAKENED night stalker: fitted violet leather armor with silver articulated forearms, high dark hood, short layered split cape, silver crescent DAGGERS, elegant agile silhouette",
+      "two": "TRANSCENDENT eclipse assassin: hood lowered revealing silver-white hair, blackened segmented armor with rose-gold trim, burgundy feathered shoulder mantle, long split dark-violet cloak, two ornate obsidian crescent DAGGERS with purple crystal insets",
+      "attack": "dual dagger slash windup, forward slash, follow-through, recover",
+      "height": [
+        82,
+        86
+      ]
+    },
+    {
+      "type": "chief",
+      "name": "大酋長・戈爾",
+      "ref": "assets/td/opening/hero-chief-selection-v2.png",
+      "body": "hulking adult MALE green-skinned ORC chief, pronounced tusks, long black braids, muscular heavy body, TWO arms TWO legs, massive TWO-HANDED battle AXE",
+      "one": "AWAKENED tribal warlord: dark iron lamellar armor, ivory bone and fur shoulder mantle, burnt red cloth belt panels, huge steel double-bit axe with bone bindings",
+      "two": "TRANSCENDENT ancestral high chief: heavy blackened bronze armor with bold tusk-shaped shoulder plates, long crimson war cape, pale fur collar, embossed bronze chestplate, enormous ornate gold-edged double-bit AXE, no helmet hiding orc face",
+      "attack": "two-handed axe lift, downward cleave, follow-through, recover",
+      "height": [
+        100,
+        106
+      ]
+    },
+    {
+      "type": "goblin",
+      "name": "銅齒・奇克",
+      "ref": "assets/td/goblin-chief-engineer-v1.png",
+      "body": "small adult MALE green goblin engineer, long pointed ears, long hooked nose, grin, brass goggles on head, TWO arms TWO short legs, mechanical WRENCH held as primary tool",
+      "one": "AWAKENED master mechanic: copper-and-steel reinforced workshop coat, shoulder pressure gauges, compact twin-cylinder turquoise power backpack, steel articulated gloves, heavy calibrated WRENCH",
+      "two": "TRANSCENDENT chief artificer: compact bulky brass and dark-steel POWER EXOSUIT around original goblin body, visible green face and giant ears, reinforced mechanical boots, twin short back pistons, red-orange glowing chest boiler inset, huge mechanical WRENCH; NOT robot replacing goblin, no extra arms",
+      "attack": "aim wrench nozzle, recoil from firing rivet (no projectile), recover",
+      "height": [
+        78,
+        88
+      ]
+    },
+    {
+      "type": "frostland",
+      "name": "霜牙・凜",
+      "ref": "assets/td/frostland/hero-selection-v2.png",
+      "body": "adult MALE anthropomorphic GREY WHITE WOLF warrior, true wolf muzzle ears paws and tail, biped TWO legs TWO arms, SPEAR warrior not human",
+      "one": "AWAKENED frost pack champion: pale steel scale armor, thick white fur mantle, icy blue cloth tabs, turquoise frost crystal spearhead, wolf face fully visible",
+      "two": "TRANSCENDENT winter pack sovereign: dark navy and silver segmented armor, large angular ice-crystal shoulders, long white-fur trimmed cobalt cloak, ornate long frost crystal SPEAR, grey-white wolf head unchanged, no crown above head",
+      "attack": "spear draw back, spear thrust, follow-through, recover",
+      "height": [
+        100,
+        106
+      ]
+    },
+    {
+      "type": "dwarf",
+      "name": "符石監軍・巴隆",
+      "ref": "assets/td/dwarf/hero-selection-v1.png",
+      "body": "adult MALE DWARF, short stocky muscular build, enormous braided red beard, red hair, TWO arms TWO short legs, heavy square-headed RUNE WAR HAMMER",
+      "one": "AWAKENED rune marshal: silver-steel plate armor with turquoise inset runes, dark green belt apron, broad fur collar, geometric engraved square rune HAMMER",
+      "two": "TRANSCENDENT mountain king: layered black and antique GOLD fortress armor, garnet-red cloak and tabard, thick gold bracers, large twin-faced HAMMER with glowing orange forged rune insets, red beard and uncovered face, no floating crown",
+      "attack": "hammer lift, downward smash, follow-through, recover",
+      "height": [
+        84,
+        90
+      ]
+    },
+    {
+      "type": "dragonkin",
+      "name": "蒼穹使者・賽爾",
+      "ref": "assets/td/dragonkin/hero-selection-v1.png",
+      "body": "adult MALE BLUE DRAGON humanoid, reptilian blue snout, horns, TWO arms TWO legs and ONE tail, two compact FOLDED blue dragon wings attached to back, long crystal SPEAR",
+      "one": "AWAKENED storm lancer: silver and cobalt scale armor, pale-blue cloak panels, bright silver shoulder blades, compact folded wings and sapphire lightning spear",
+      "two": "TRANSCENDENT sky sovereign: midnight blue scales, antique gold and ivory ornate plate armor, wide but FOLDED dark blue wings with gold armored wing-fingers, royal deep-blue cloth, long elegant golden spear with blue crystal blade; all wings fit close to body",
+      "attack": "spear lift, forward thrust, follow-through, recover",
+      "height": [
+        102,
+        106
+      ]
+    },
+    {
+      "type": "egypt",
+      "name": "曦陽守衛・納芙拉",
+      "ref": "assets/td/egypt/hero-selection-v1.png",
+      "body": "adult FEMALE Egyptian fantasy sun guardian, warm brown skin, long black braided hair, TWO arms TWO legs, curved KHOPESH sword, elegant strong warrior not mummy",
+      "one": "AWAKENED dawn guardian: ivory linen cloak, turquoise-and-gold scale cuirass, broad lapis collar, fitted gold greaves, compact cobra diadem on head, gold-edged curved KHOPESH sword",
+      "two": "TRANSCENDENT sun empress: black and GOLD scale armor, broad layered golden falcon-feather shoulder mantle, long crimson and ivory split cloak, tall but compact integrated gold cobra headdress, large ornate khopesh with amber inset, face visible, NO floating sun disk or halo",
+      "attack": "curved sword windup, slash, follow-through, recover",
+      "height": [
+        84,
+        90
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "type": "arcanist",
+      "rank": 1,
+      "prompt": "Input image: identity/style reference only. Preserve adult FEMALE elf mage, long dark brown ponytail, pointed ears, delicate face, TWO arms TWO legs, wielding a long crystal-tipped STAFF, no bow. Design AWAKENED forest archmage, layered white and emerald leaf-pattern robes, ornate silver leaf shoulder guards, jade crystal staff, flowing split cloak; distinct from original plate armor. ATTACK row: staff aimed forward casting a bolt (no projectile), recoil, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/hero-actions-v1.png"
+    },
+    {
+      "type": "arcanist",
+      "rank": 2,
+      "prompt": "Input image: identity/style reference only. Preserve adult FEMALE elf mage, long dark brown ponytail, pointed ears, delicate face, TWO arms TWO legs, wielding a long crystal-tipped STAFF, no bow. Design TRANSCENDENT astral forest sovereign: flowing ivory and midnight-green robes, broad silver-gold leaf mantle, bright turquoise multi-prong crystal staff, silver leaf diadem worn on head, long dark brown hair, no floating crown. ATTACK row: staff aimed forward casting a bolt (no projectile), recoil, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/hero-actions-v1.png"
+    },
+    {
+      "type": "rogue",
+      "rank": 1,
+      "prompt": "Input image: identity/style reference only. Preserve adult FEMALE shadow rogue, pale skin, silver-white hair, purple eyes, black hood, TWO arms TWO legs, TWO short daggers one in each hand. Design AWAKENED night stalker: fitted violet leather armor with silver articulated forearms, high dark hood, short layered split cape, silver crescent DAGGERS, elegant agile silhouette. ATTACK row: dual dagger slash windup, forward slash, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/opening/hero-rogue-selection-v1.png"
+    },
+    {
+      "type": "rogue",
+      "rank": 2,
+      "prompt": "Input image: identity/style reference only. Preserve adult FEMALE shadow rogue, pale skin, silver-white hair, purple eyes, black hood, TWO arms TWO legs, TWO short daggers one in each hand. Design TRANSCENDENT eclipse assassin: hood lowered revealing silver-white hair, blackened segmented armor with rose-gold trim, burgundy feathered shoulder mantle, long split dark-violet cloak, two ornate obsidian crescent DAGGERS with purple crystal insets. ATTACK row: dual dagger slash windup, forward slash, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/opening/hero-rogue-selection-v1.png"
+    },
+    {
+      "type": "chief",
+      "rank": 1,
+      "prompt": "Input image: identity/style reference only. Preserve hulking adult MALE green-skinned ORC chief, pronounced tusks, long black braids, muscular heavy body, TWO arms TWO legs, massive TWO-HANDED battle AXE. Design AWAKENED tribal warlord: dark iron lamellar armor, ivory bone and fur shoulder mantle, burnt red cloth belt panels, huge steel double-bit axe with bone bindings. ATTACK row: two-handed axe lift, downward cleave, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/opening/hero-chief-selection-v2.png"
+    },
+    {
+      "type": "chief",
+      "rank": 2,
+      "prompt": "Input image: identity/style reference only. Preserve hulking adult MALE green-skinned ORC chief, pronounced tusks, long black braids, muscular heavy body, TWO arms TWO legs, massive TWO-HANDED battle AXE. Design TRANSCENDENT ancestral high chief: heavy blackened bronze armor with bold tusk-shaped shoulder plates, long crimson war cape, pale fur collar, embossed bronze chestplate, enormous ornate gold-edged double-bit AXE, no helmet hiding orc face. Make armor mostly black and GOLD, large closed chestplate and long crimson cape clearly different from red leather. ATTACK row: two-handed axe lift, downward cleave, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/opening/hero-chief-selection-v2.png"
+    },
+    {
+      "type": "goblin",
+      "rank": 1,
+      "prompt": "Input image: identity/style reference only. Preserve small adult MALE green goblin engineer, long pointed ears, long hooked nose, grin, brass goggles on head, TWO arms TWO short legs, mechanical WRENCH held as primary tool. Design AWAKENED master mechanic: copper-and-steel reinforced workshop coat, shoulder pressure gauges, compact twin-cylinder turquoise power backpack, steel articulated gloves, heavy calibrated WRENCH. ATTACK row: aim wrench nozzle, recoil from firing rivet (no projectile), recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/goblin-chief-engineer-v1.png"
+    },
+    {
+      "type": "goblin",
+      "rank": 2,
+      "prompt": "Input image: identity/style reference only. Preserve small adult MALE green goblin engineer, long pointed ears, long hooked nose, grin, brass goggles on head, TWO arms TWO short legs, mechanical WRENCH held as primary tool. Design TRANSCENDENT chief artificer: compact bulky brass and dark-steel POWER EXOSUIT around original goblin body, visible green face and giant ears, reinforced mechanical boots, twin short back pistons, red-orange glowing chest boiler inset, huge mechanical WRENCH; NOT robot replacing goblin, no extra arms. Dramatically different from brown coat: BIG metal armor shoulders, orange chest core, visible goblin face and ears. ATTACK row: aim wrench nozzle, recoil from firing rivet (no projectile), recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/goblin-chief-engineer-v1.png"
+    },
+    {
+      "type": "frostland",
+      "rank": 1,
+      "prompt": "Input image: identity/style reference only. Preserve adult MALE anthropomorphic GREY WHITE WOLF warrior, true wolf muzzle ears paws and tail, biped TWO legs TWO arms, SPEAR warrior not human. Design AWAKENED frost pack champion: pale steel scale armor, thick white fur mantle, icy blue cloth tabs, turquoise frost crystal spearhead, wolf face fully visible. ATTACK row: spear draw back, spear thrust, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/frostland/hero-selection-v2.png"
+    },
+    {
+      "type": "frostland",
+      "rank": 2,
+      "prompt": "Input image: identity/style reference only. Preserve adult MALE anthropomorphic GREY WHITE WOLF warrior, true wolf muzzle ears paws and tail, biped TWO legs TWO arms, SPEAR warrior not human. Design TRANSCENDENT winter pack sovereign: dark navy and silver segmented armor, large angular ice-crystal shoulders, long white-fur trimmed cobalt cloak, ornate long frost crystal SPEAR, grey-white wolf head unchanged, no crown above head. ATTACK row: spear draw back, spear thrust, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/frostland/hero-selection-v2.png"
+    },
+    {
+      "type": "dwarf",
+      "rank": 1,
+      "prompt": "Input image: identity/style reference only. Preserve adult MALE DWARF, short stocky muscular build, enormous braided red beard, red hair, TWO arms TWO short legs, heavy square-headed RUNE WAR HAMMER. Design AWAKENED rune marshal: silver-steel plate armor with turquoise inset runes, dark green belt apron, broad fur collar, geometric engraved square rune HAMMER. ATTACK row: hammer lift, downward smash, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/dwarf/hero-selection-v1.png"
+    },
+    {
+      "type": "dwarf",
+      "rank": 2,
+      "prompt": "Input image: identity/style reference only. Preserve adult MALE DWARF, short stocky muscular build, enormous braided red beard, red hair, TWO arms TWO short legs, heavy square-headed RUNE WAR HAMMER. Design TRANSCENDENT mountain king: layered black and antique GOLD fortress armor, garnet-red cloak and tabard, thick gold bracers, large twin-faced HAMMER with glowing orange forged rune insets, red beard and uncovered face, no floating crown. Gold armor and red cloth dominate, orange hammer runes, visibly different from silver turquoise armor. ATTACK row: hammer lift, downward smash, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/dwarf/hero-selection-v1.png"
+    },
+    {
+      "type": "dragonkin",
+      "rank": 1,
+      "prompt": "Input image: identity/style reference only. Preserve adult MALE BLUE DRAGON humanoid, reptilian blue snout, horns, TWO arms TWO legs and ONE tail, two compact FOLDED blue dragon wings attached to back, long crystal SPEAR. Design AWAKENED storm lancer: silver and cobalt scale armor, pale-blue cloak panels, bright silver shoulder blades, compact folded wings and sapphire lightning spear. ATTACK row: spear lift, forward thrust, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/dragonkin/hero-selection-v1.png"
+    },
+    {
+      "type": "dragonkin",
+      "rank": 2,
+      "prompt": "Input image: identity/style reference only. Preserve adult MALE BLUE DRAGON humanoid, reptilian blue snout, horns, TWO arms TWO legs and ONE tail, two compact FOLDED blue dragon wings attached to back, long crystal SPEAR. Design TRANSCENDENT sky sovereign: midnight blue scales, antique gold and ivory ornate plate armor, wide but FOLDED dark blue wings with gold armored wing-fingers, royal deep-blue cloth, long elegant golden spear with blue crystal blade; all wings fit close to body. Large ivory and GOLD shoulder armor and GOLD framed folded wings distinguish from original blue-silver armor. ATTACK row: spear lift, forward thrust, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/dragonkin/hero-selection-v1.png"
+    },
+    {
+      "type": "egypt",
+      "rank": 1,
+      "prompt": "Input image: identity/style reference only. Preserve adult FEMALE Egyptian fantasy sun guardian, warm brown skin, long black braided hair, TWO arms TWO legs, curved KHOPESH sword, elegant strong warrior not mummy. Design AWAKENED dawn guardian: ivory linen cloak, turquoise-and-gold scale cuirass, broad lapis collar, fitted gold greaves, compact cobra diadem on head, gold-edged curved KHOPESH sword. ATTACK row: curved sword windup, slash, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/egypt/hero-selection-v1.png"
+    },
+    {
+      "type": "egypt",
+      "rank": 2,
+      "prompt": "Input image: identity/style reference only. Preserve adult FEMALE Egyptian fantasy sun guardian, warm brown skin, long black braided hair, TWO arms TWO legs, curved KHOPESH sword, elegant strong warrior not mummy. Design TRANSCENDENT sun empress: black and GOLD scale armor, broad layered golden falcon-feather shoulder mantle, long crimson and ivory split cloak, tall but compact integrated gold cobra headdress, large ornate khopesh with amber inset, face visible, NO floating sun disk or halo. Main palette BLACK, GOLD and CRIMSON, gold falcon-feather shoulder mantle visibly widens shoulders, fitted armored breastplate not original white costume. ATTACK row: curved sword windup, slash, follow-through, recover. Use case: stylized-concept. Production fantasy strategy game sprite animation atlas. Painterly realistic 3D rendering, readable at small game scale, three-quarter elevated view facing RIGHT. Exactly SIXTEEN isolated FULL BODY poses, FOUR columns FOUR rows on square canvas. Row1: four subtle IDLE breathing poses, feet stationary. Row2: four sequential WALK steps, alternating feet. Row3: four ATTACK poses as specified. Row4: four UPRIGHT STANDING spell-command gestures with weapon retained: lift free hand, extend palm, point, recover; never kneel or lie down. Same character, body proportions and gear in every cell. Each COMPLETE sprite including weapons occupies only central 60% of its cell, make sprites SMALL with very wide empty transparent gutters. At least 40 pixels transparent space around ALL sides of each pose and outer canvas. Full weapon tip, arms, hands, feet, tail and cloak must fit in its own box without touching neighboring sprites. Genuine transparent background, opaque character pixels, NO ground, shadows, particles, projectile, floating badge, text, grid, borders or scenery. All 16 poses equally scaled. Do NOT crop, overlap or enlarge to fill cells.",
+      "reference": "assets/td/egypt/hero-selection-v1.png"
+    },
+    {
+      "type": "arcanist",
+      "rank": 2,
+      "revision": 1,
+      "prompt": "Edit this exact 16-pose sprite sheet. Preserve the SAME adult female elf, dark brown ponytail, face, pointed ears, staff class, all16 action poses, true transparency. REDESIGN ONLY her TRANSCENDENT costume so it is visibly different from green robes: long mostly IVORY WHITE robe with midnight BLUE lining, broad layered SILVER leaf-shaped mantle extending across shoulders, two long ivory split cloak panels, fitted silver vambraces, a small silver leaf diadem worn on her head. Replace the green crystal staff with an ornate SILVER staff ending in THREE pale blue crystal leaves. This must be a clearly white-silver astral archmage, NOT the original green-gold mage. No bow, no wings, no floating crown. Repack same16 poses 4 columns4rows with very large transparent gutters (all full sprites 65% previous relative size). Full staff, hands, robe and feet always entirely within each own cell. Rows idle,walk,staff attack,standing spell commands. No kneeling/death, text, shadow or particles.",
+      "reference": "assets/td/evolution/arcanist-transcendent-actions-v1.png"
+    },
+    {
+      "type": "frostland",
+      "rank": 1,
+      "revision": 1,
+      "prompt": "REPACK ONLY this exact 16-pose wolf warrior atlas. Preserve each character, all equipment, colors and poses. Make EVERY complete pose INCLUDING full spear much SMALLER at about 60% current size, place into a ROOMY four-column four-row grid on transparent square canvas. Every character's entire bounding rectangle including extended weapon must have a minimum50 pixels empty transparent space before next character. Critical: in third row, the forward spear tips of poses2 and3 overlap adjacent pose rectangles; separate all of them widely so each full sprite can be cropped with a plain rectangle with NO neighboring pixels. Keep all16 full poses with complete ears, tail, spear ends and feet. Same grey-white wolf, silver armor, white fur and blue cloth. No extra effects or shadows. Keep rows idle,walking,attack,standing gestures. Do not crop any spear. Real alpha transparency.",
+      "reference": "assets/td/evolution/frostland-awakened-actions-v1.png"
+    },
+    {
+      "type": "dragonkin",
+      "rank": 1,
+      "revision": 1,
+      "prompt": "REPACK ONLY the supplied EXACT 16 dragon-warrior poses. Same blue dragon humanoid, horns, wings, tail, silver blue armor and spear. Make EVERY whole sprite INCLUDING the complete horizontally extended spear only 60% current relative size, with much more empty space. Four columns four rows. At least50 pixels true-transparent gap around entire bounding rectangle of each sprite. Especially third row thrusts: spear tips must not enter neighboring pose rectangles. Full ears horns wing tips tail feet and spear ends intact. All16 poses unchanged, same proportions, same gear. No cropped bodies or weapons. Preserve rows idle/walk/attack/standing spell gestures. No additional objects, effects, shadows or labels. Genuine transparent background. Do NOT zoom the individual sprites up to fill the empty space.",
+      "reference": "assets/td/evolution/dragonkin-awakened-actions-v1.png"
+    },
+    {
+      "type": "dragonkin",
+      "rank": 2,
+      "prompt": "REPACK ONLY the supplied EXACT 16 dragon-warrior poses. Same blue dragon humanoid, horns, wings, tail, ornate gold ivory and blue armor and spear. Make EVERY whole sprite INCLUDING the complete horizontally extended spear only 60% current relative size, with much more empty space. Four columns four rows. At least 50 pixels true-transparent gap around entire bounding rectangle of each sprite. Especially third row thrusts: spear tips must not enter neighboring pose rectangles. Full ears horns wing tips tail feet and spear ends intact. All 16 poses unchanged, same proportions, same gear. No cropped bodies or weapons. Preserve rows idle/walk/attack/standing spell gestures. No additional objects, effects, shadows or labels. Genuine transparent background. Do NOT zoom the individual sprites up to fill the empty space.",
+      "reference": "C:/Users/Owner/Documents/ChatGPT/飛機小遊戲//assets/td/evolution/dragonkin-transcendent-actions-v1.png",
+      "revision": 1
+    },
+    {
+      "type": "egypt",
+      "rank": 2,
+      "prompt": "REPACK the supplied EXACT 16 Egyptian sun-empress warrior poses. Same adult brown skinned woman, black braids, black gold armor, falcon shoulders, integrated headdress, crimson cape and KHOPESH curved sword. Make EVERY whole sprite INCLUDING extended sword and cape only 65% current relative size, with much more empty space. Four columns four rows. At least 50 pixels true-transparent gap around entire bounding rectangle of each sprite. Especially third row attacks: sword tips and cloth must not enter neighboring pose rectangles. All 16 poses same proportions, same gear and character. Exactly two arms and two legs. No cropped bodies or weapons. Preserve rows idle/walk/attack/standing spell gestures. No additional objects, effects, shadows or labels. Genuine transparent background. Do NOT zoom the individual sprites up to fill empty space.",
+      "reference": "C:/Users/Owner/Documents/ChatGPT/飛機小遊戲//assets/td/evolution/egypt-transcendent-actions-v1.png",
+      "revision": 1
+    }
+  ],
+  "selected": [
+    {
+      "type": "arcanist",
+      "rank": 1,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-17b32f39-1e5a-410d-8931-104fc3fdbc6c.png",
+      "path": "assets/td/evolution/arcanist-awakened-actions-v1.png"
+    },
+    {
+      "type": "arcanist",
+      "rank": 2,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-1e22086c-42ec-43a5-9b57-ba4296ec23b0.png",
+      "path": "assets/td/evolution/arcanist-transcendent-actions-v1.png"
+    },
+    {
+      "type": "rogue",
+      "rank": 1,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-56c6fc15-2078-4614-8486-af30116cb6ec.png",
+      "path": "assets/td/evolution/rogue-awakened-actions-v1.png"
+    },
+    {
+      "type": "rogue",
+      "rank": 2,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-7d110864-8e72-4b2c-bb4c-31cfc587d7e3.png",
+      "path": "assets/td/evolution/rogue-transcendent-actions-v1.png"
+    },
+    {
+      "type": "chief",
+      "rank": 1,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-a480e704-f618-4681-8083-81d292364c2e.png",
+      "path": "assets/td/evolution/chief-awakened-actions-v1.png"
+    },
+    {
+      "type": "chief",
+      "rank": 2,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-ce2c11b1-6c8c-4039-bc8f-916ed732c9a0.png",
+      "path": "assets/td/evolution/chief-transcendent-actions-v1.png"
+    },
+    {
+      "type": "goblin",
+      "rank": 1,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-e878e8ea-f797-4221-923b-2075576747fe.png",
+      "path": "assets/td/evolution/goblin-awakened-actions-v1.png"
+    },
+    {
+      "type": "goblin",
+      "rank": 2,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-6ae1b0b5-b3b1-4be3-8732-bfab95a1851f.png",
+      "path": "assets/td/evolution/goblin-transcendent-actions-v1.png"
+    },
+    {
+      "type": "frostland",
+      "rank": 1,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-2d79572b-9a1c-463d-84e6-b7efec546bc2.png",
+      "path": "assets/td/evolution/frostland-awakened-actions-v1.png"
+    },
+    {
+      "type": "frostland",
+      "rank": 2,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-96ec6f4b-cd79-4019-a826-c0e1fb88a3bf.png",
+      "path": "assets/td/evolution/frostland-transcendent-actions-v1.png"
+    },
+    {
+      "type": "dwarf",
+      "rank": 1,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-76e1a614-c053-4d9c-ae2e-e2d7f687c447.png",
+      "path": "assets/td/evolution/dwarf-awakened-actions-v1.png"
+    },
+    {
+      "type": "dwarf",
+      "rank": 2,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-117da0dc-d993-4a1b-a938-3a0e2e0a35c5.png",
+      "path": "assets/td/evolution/dwarf-transcendent-actions-v1.png"
+    },
+    {
+      "type": "dragonkin",
+      "rank": 1,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-6b1f3425-e288-4946-9a53-b71b546bd9e0.png",
+      "path": "assets/td/evolution/dragonkin-awakened-actions-v1.png"
+    },
+    {
+      "type": "dragonkin",
+      "rank": 2,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-267efca6-2c51-4af7-9a7c-00e0bd112fe6.png",
+      "path": "assets/td/evolution/dragonkin-transcendent-actions-v1.png"
+    },
+    {
+      "type": "egypt",
+      "rank": 1,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-7c241102-4d9a-40bb-a42d-4d2d4a9150a6.png",
+      "path": "assets/td/evolution/egypt-awakened-actions-v1.png"
+    },
+    {
+      "type": "egypt",
+      "rank": 2,
+      "source": "C:/Users/Owner/.codex/generated_images/01a0e05a-fb14-7542-bbaa-c3875a820689/exec-d32b43b1-5a59-4143-a633-7b501a559e76.png",
+      "path": "assets/td/evolution/egypt-transcendent-actions-v1.png"
+    }
+  ],
+  "measured": {
+    "arcanist": {
+      "1": {
+        "path": "assets/td/evolution/arcanist-awakened-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 297,
+        "worldHeight": 82,
+        "frames": [
+          [
+            50,
+            14,
+            199,
+            302,
+            136,
+            312
+          ],
+          [
+            359,
+            13,
+            195,
+            303,
+            449,
+            312
+          ],
+          [
+            676,
+            12,
+            197,
+            303,
+            760,
+            311
+          ],
+          [
+            987,
+            14,
+            200,
+            302,
+            1075,
+            312
+          ],
+          [
+            31,
+            333,
+            252,
+            270,
+            141,
+            599
+          ],
+          [
+            353,
+            343,
+            248,
+            260,
+            464,
+            599
+          ],
+          [
+            662,
+            345,
+            256,
+            258,
+            778,
+            599
+          ],
+          [
+            988,
+            350,
+            242,
+            250,
+            1101,
+            596
+          ],
+          [
+            28,
+            628,
+            263,
+            271,
+            157,
+            895
+          ],
+          [
+            339,
+            671,
+            278,
+            230,
+            472,
+            897
+          ],
+          [
+            621,
+            679,
+            363,
+            220,
+            745,
+            895
+          ],
+          [
+            985,
+            664,
+            241,
+            239,
+            1100,
+            899
+          ],
+          [
+            37,
+            915,
+            207,
+            319,
+            133,
+            1230
+          ],
+          [
+            353,
+            922,
+            214,
+            312,
+            458,
+            1230
+          ],
+          [
+            642,
+            924,
+            230,
+            309,
+            759,
+            1229
+          ],
+          [
+            986,
+            925,
+            200,
+            308,
+            1083,
+            1229
+          ]
+        ]
+      },
+      "2": {
+        "path": "assets/td/evolution/arcanist-transcendent-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 285,
+        "worldHeight": 86,
+        "frames": [
+          [
+            56,
+            30,
+            191,
+            289,
+            138,
+            315
+          ],
+          [
+            377,
+            30,
+            182,
+            289,
+            455,
+            315
+          ],
+          [
+            682,
+            28,
+            191,
+            291,
+            765,
+            315
+          ],
+          [
+            1001,
+            28,
+            188,
+            291,
+            1082,
+            315
+          ],
+          [
+            43,
+            343,
+            219,
+            274,
+            153,
+            613
+          ],
+          [
+            357,
+            344,
+            236,
+            272,
+            475,
+            612
+          ],
+          [
+            671,
+            342,
+            227,
+            275,
+            782,
+            613
+          ],
+          [
+            992,
+            342,
+            221,
+            275,
+            1106,
+            613
+          ],
+          [
+            39,
+            648,
+            232,
+            265,
+            152,
+            909
+          ],
+          [
+            330,
+            696,
+            293,
+            216,
+            460,
+            908
+          ],
+          [
+            656,
+            692,
+            293,
+            221,
+            775,
+            909
+          ],
+          [
+            989,
+            673,
+            229,
+            241,
+            1106,
+            910
+          ],
+          [
+            42,
+            940,
+            203,
+            293,
+            131,
+            1229
+          ],
+          [
+            362,
+            935,
+            205,
+            298,
+            449,
+            1229
+          ],
+          [
+            669,
+            934,
+            228,
+            299,
+            763,
+            1229
+          ],
+          [
+            996,
+            935,
+            191,
+            298,
+            1078,
+            1229
+          ]
+        ]
+      }
+    },
+    "rogue": {
+      "1": {
+        "path": "assets/td/evolution/rogue-awakened-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 268,
+        "worldHeight": 82,
+        "frames": [
+          [
+            61,
+            31,
+            197,
+            274,
+            147,
+            301
+          ],
+          [
+            382,
+            31,
+            193,
+            274,
+            454,
+            301
+          ],
+          [
+            692,
+            32,
+            197,
+            273,
+            765,
+            301
+          ],
+          [
+            984,
+            32,
+            219,
+            274,
+            1078,
+            302
+          ],
+          [
+            40,
+            348,
+            235,
+            266,
+            172,
+            610
+          ],
+          [
+            365,
+            349,
+            243,
+            264,
+            488,
+            609
+          ],
+          [
+            666,
+            348,
+            236,
+            266,
+            809,
+            610
+          ],
+          [
+            983,
+            349,
+            229,
+            263,
+            1107,
+            608
+          ],
+          [
+            39,
+            657,
+            241,
+            271,
+            157,
+            924
+          ],
+          [
+            360,
+            662,
+            303,
+            259,
+            479,
+            917
+          ],
+          [
+            681,
+            680,
+            257,
+            235,
+            797,
+            911
+          ],
+          [
+            1010,
+            679,
+            207,
+            236,
+            1105,
+            911
+          ],
+          [
+            64,
+            955,
+            195,
+            271,
+            155,
+            1222
+          ],
+          [
+            391,
+            955,
+            188,
+            270,
+            469,
+            1221
+          ],
+          [
+            692,
+            956,
+            208,
+            270,
+            769,
+            1222
+          ],
+          [
+            999,
+            956,
+            200,
+            270,
+            1077,
+            1222
+          ]
+        ]
+      },
+      "2": {
+        "path": "assets/td/evolution/rogue-transcendent-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 271,
+        "worldHeight": 86,
+        "frames": [
+          [
+            71,
+            34,
+            175,
+            277,
+            151,
+            307
+          ],
+          [
+            385,
+            33,
+            170,
+            276,
+            465,
+            305
+          ],
+          [
+            697,
+            34,
+            174,
+            275,
+            779,
+            305
+          ],
+          [
+            1007,
+            34,
+            185,
+            276,
+            1090,
+            306
+          ],
+          [
+            56,
+            345,
+            211,
+            270,
+            148,
+            611
+          ],
+          [
+            368,
+            344,
+            209,
+            272,
+            468,
+            612
+          ],
+          [
+            681,
+            341,
+            206,
+            274,
+            793,
+            611
+          ],
+          [
+            990,
+            343,
+            210,
+            271,
+            1085,
+            610
+          ],
+          [
+            50,
+            646,
+            224,
+            264,
+            161,
+            906
+          ],
+          [
+            340,
+            677,
+            276,
+            234,
+            461,
+            907
+          ],
+          [
+            662,
+            667,
+            299,
+            237,
+            798,
+            900
+          ],
+          [
+            994,
+            671,
+            209,
+            227,
+            1096,
+            894
+          ],
+          [
+            69,
+            949,
+            185,
+            271,
+            162,
+            1216
+          ],
+          [
+            381,
+            952,
+            204,
+            267,
+            482,
+            1215
+          ],
+          [
+            692,
+            953,
+            209,
+            265,
+            790,
+            1214
+          ],
+          [
+            1009,
+            952,
+            172,
+            267,
+            1093,
+            1215
+          ]
+        ]
+      }
+    },
+    "chief": {
+      "1": {
+        "path": "assets/td/evolution/chief-awakened-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 279,
+        "worldHeight": 100,
+        "frames": [
+          [
+            71,
+            36,
+            244,
+            285,
+            166,
+            317
+          ],
+          [
+            370,
+            36,
+            242,
+            285,
+            466,
+            317
+          ],
+          [
+            687,
+            36,
+            248,
+            285,
+            783,
+            317
+          ],
+          [
+            996,
+            37,
+            241,
+            284,
+            1087,
+            317
+          ],
+          [
+            55,
+            343,
+            252,
+            262,
+            164,
+            601
+          ],
+          [
+            381,
+            350,
+            246,
+            259,
+            472,
+            605
+          ],
+          [
+            692,
+            348,
+            223,
+            255,
+            781,
+            599
+          ],
+          [
+            999,
+            349,
+            225,
+            259,
+            1094,
+            604
+          ],
+          [
+            58,
+            611,
+            226,
+            309,
+            189,
+            916
+          ],
+          [
+            367,
+            687,
+            270,
+            232,
+            501,
+            915
+          ],
+          [
+            664,
+            688,
+            308,
+            226,
+            806,
+            910
+          ],
+          [
+            997,
+            668,
+            249,
+            252,
+            1098,
+            916
+          ],
+          [
+            47,
+            930,
+            237,
+            282,
+            190,
+            1208
+          ],
+          [
+            351,
+            954,
+            257,
+            256,
+            472,
+            1206
+          ],
+          [
+            656,
+            955,
+            274,
+            255,
+            788,
+            1206
+          ],
+          [
+            991,
+            948,
+            249,
+            266,
+            1123,
+            1210
+          ]
+        ]
+      },
+      "2": {
+        "path": "assets/td/evolution/chief-transcendent-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 270,
+        "worldHeight": 106,
+        "frames": [
+          [
+            51,
+            31,
+            250,
+            276,
+            176,
+            303
+          ],
+          [
+            357,
+            32,
+            244,
+            275,
+            479,
+            303
+          ],
+          [
+            653,
+            33,
+            245,
+            274,
+            775,
+            303
+          ],
+          [
+            958,
+            34,
+            257,
+            272,
+            1086,
+            302
+          ],
+          [
+            29,
+            340,
+            302,
+            258,
+            138,
+            594
+          ],
+          [
+            346,
+            340,
+            279,
+            258,
+            463,
+            594
+          ],
+          [
+            637,
+            341,
+            300,
+            257,
+            749,
+            594
+          ],
+          [
+            951,
+            342,
+            285,
+            256,
+            1082,
+            594
+          ],
+          [
+            43,
+            608,
+            246,
+            323,
+            166,
+            927
+          ],
+          [
+            335,
+            685,
+            288,
+            238,
+            497,
+            919
+          ],
+          [
+            636,
+            693,
+            306,
+            233,
+            792,
+            922
+          ],
+          [
+            957,
+            686,
+            275,
+            245,
+            1087,
+            927
+          ],
+          [
+            51,
+            945,
+            220,
+            272,
+            153,
+            1213
+          ],
+          [
+            353,
+            956,
+            238,
+            262,
+            455,
+            1214
+          ],
+          [
+            655,
+            956,
+            247,
+            261,
+            766,
+            1213
+          ],
+          [
+            968,
+            957,
+            240,
+            261,
+            1089,
+            1214
+          ]
+        ]
+      }
+    },
+    "goblin": {
+      "1": {
+        "path": "assets/td/evolution/goblin-awakened-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 255,
+        "worldHeight": 78,
+        "frames": [
+          [
+            63,
+            40,
+            210,
+            258,
+            169,
+            294
+          ],
+          [
+            375,
+            39,
+            208,
+            260,
+            477,
+            295
+          ],
+          [
+            688,
+            39,
+            208,
+            261,
+            791,
+            296
+          ],
+          [
+            1004,
+            42,
+            204,
+            259,
+            1104,
+            297
+          ],
+          [
+            64,
+            352,
+            197,
+            263,
+            170,
+            611
+          ],
+          [
+            383,
+            353,
+            196,
+            260,
+            484,
+            609
+          ],
+          [
+            690,
+            353,
+            206,
+            258,
+            788,
+            607
+          ],
+          [
+            1009,
+            353,
+            192,
+            261,
+            1112,
+            610
+          ],
+          [
+            63,
+            671,
+            221,
+            241,
+            164,
+            908
+          ],
+          [
+            366,
+            676,
+            241,
+            241,
+            523,
+            913
+          ],
+          [
+            688,
+            672,
+            229,
+            242,
+            774,
+            910
+          ],
+          [
+            1002,
+            669,
+            204,
+            256,
+            1101,
+            921
+          ],
+          [
+            62,
+            971,
+            196,
+            267,
+            168,
+            1234
+          ],
+          [
+            373,
+            974,
+            223,
+            263,
+            479,
+            1233
+          ],
+          [
+            684,
+            972,
+            228,
+            266,
+            793,
+            1234
+          ],
+          [
+            1007,
+            972,
+            175,
+            263,
+            1112,
+            1231
+          ]
+        ]
+      },
+      "2": {
+        "path": "assets/td/evolution/goblin-transcendent-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 263,
+        "worldHeight": 88,
+        "frames": [
+          [
+            59,
+            34,
+            231,
+            269,
+            155,
+            299
+          ],
+          [
+            361,
+            42,
+            233,
+            261,
+            465,
+            299
+          ],
+          [
+            682,
+            41,
+            228,
+            263,
+            770,
+            300
+          ],
+          [
+            979,
+            47,
+            224,
+            257,
+            1079,
+            300
+          ],
+          [
+            59,
+            338,
+            250,
+            277,
+            149,
+            611
+          ],
+          [
+            354,
+            339,
+            253,
+            274,
+            467,
+            609
+          ],
+          [
+            679,
+            340,
+            249,
+            276,
+            763,
+            612
+          ],
+          [
+            1002,
+            340,
+            218,
+            275,
+            1083,
+            611
+          ],
+          [
+            36,
+            657,
+            270,
+            244,
+            137,
+            897
+          ],
+          [
+            350,
+            664,
+            279,
+            235,
+            448,
+            895
+          ],
+          [
+            661,
+            667,
+            261,
+            236,
+            777,
+            899
+          ],
+          [
+            970,
+            651,
+            246,
+            254,
+            1079,
+            901
+          ],
+          [
+            63,
+            949,
+            215,
+            267,
+            161,
+            1212
+          ],
+          [
+            372,
+            955,
+            231,
+            261,
+            467,
+            1212
+          ],
+          [
+            680,
+            953,
+            244,
+            263,
+            776,
+            1212
+          ],
+          [
+            1001,
+            946,
+            217,
+            270,
+            1088,
+            1212
+          ]
+        ]
+      }
+    },
+    "frostland": {
+      "1": {
+        "path": "assets/td/evolution/frostland-awakened-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 256,
+        "worldHeight": 100,
+        "frames": [
+          [
+            74,
+            54,
+            163,
+            261,
+            147,
+            311
+          ],
+          [
+            378,
+            53,
+            166,
+            262,
+            457,
+            311
+          ],
+          [
+            693,
+            54,
+            164,
+            260,
+            771,
+            310
+          ],
+          [
+            1006,
+            55,
+            169,
+            259,
+            1085,
+            310
+          ],
+          [
+            68,
+            355,
+            185,
+            266,
+            155,
+            617
+          ],
+          [
+            378,
+            355,
+            186,
+            266,
+            460,
+            617
+          ],
+          [
+            686,
+            355,
+            181,
+            265,
+            772,
+            616
+          ],
+          [
+            1008,
+            355,
+            183,
+            265,
+            1099,
+            616
+          ],
+          [
+            45,
+            667,
+            209,
+            228,
+            157,
+            891
+          ],
+          [
+            349,
+            720,
+            280,
+            170,
+            441,
+            886
+          ],
+          [
+            693,
+            722,
+            293,
+            169,
+            786,
+            887
+          ],
+          [
+            1019,
+            663,
+            180,
+            235,
+            1103,
+            894
+          ],
+          [
+            78,
+            934,
+            158,
+            260,
+            156,
+            1190
+          ],
+          [
+            386,
+            934,
+            189,
+            261,
+            466,
+            1191
+          ],
+          [
+            701,
+            934,
+            195,
+            260,
+            782,
+            1190
+          ],
+          [
+            1030,
+            933,
+            148,
+            261,
+            1107,
+            1190
+          ]
+        ]
+      },
+      "2": {
+        "path": "assets/td/evolution/frostland-transcendent-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 291,
+        "worldHeight": 106,
+        "frames": [
+          [
+            55,
+            22,
+            213,
+            288,
+            144,
+            306
+          ],
+          [
+            379,
+            14,
+            194,
+            297,
+            463,
+            307
+          ],
+          [
+            683,
+            14,
+            217,
+            297,
+            771,
+            307
+          ],
+          [
+            1001,
+            15,
+            195,
+            296,
+            1086,
+            307
+          ],
+          [
+            52,
+            323,
+            210,
+            292,
+            148,
+            611
+          ],
+          [
+            354,
+            321,
+            218,
+            292,
+            460,
+            609
+          ],
+          [
+            667,
+            327,
+            220,
+            286,
+            777,
+            609
+          ],
+          [
+            992,
+            322,
+            210,
+            288,
+            1097,
+            606
+          ],
+          [
+            26,
+            652,
+            288,
+            231,
+            161,
+            879
+          ],
+          [
+            330,
+            687,
+            296,
+            196,
+            454,
+            879
+          ],
+          [
+            646,
+            682,
+            331,
+            204,
+            777,
+            882
+          ],
+          [
+            984,
+            652,
+            245,
+            234,
+            1092,
+            882
+          ],
+          [
+            61,
+            923,
+            212,
+            278,
+            167,
+            1197
+          ],
+          [
+            368,
+            920,
+            220,
+            281,
+            474,
+            1197
+          ],
+          [
+            684,
+            922,
+            218,
+            279,
+            789,
+            1197
+          ],
+          [
+            996,
+            920,
+            207,
+            281,
+            1099,
+            1197
+          ]
+        ]
+      }
+    },
+    "dwarf": {
+      "1": {
+        "path": "assets/td/evolution/dwarf-awakened-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 270,
+        "worldHeight": 84,
+        "frames": [
+          [
+            61,
+            21,
+            185,
+            272,
+            152,
+            289
+          ],
+          [
+            360,
+            22,
+            200,
+            270,
+            460,
+            288
+          ],
+          [
+            687,
+            17,
+            185,
+            276,
+            777,
+            289
+          ],
+          [
+            998,
+            24,
+            186,
+            269,
+            1088,
+            289
+          ],
+          [
+            36,
+            341,
+            226,
+            254,
+            169,
+            591
+          ],
+          [
+            356,
+            343,
+            227,
+            251,
+            488,
+            590
+          ],
+          [
+            667,
+            347,
+            220,
+            247,
+            796,
+            590
+          ],
+          [
+            977,
+            347,
+            235,
+            248,
+            1114,
+            591
+          ],
+          [
+            39,
+            616,
+            232,
+            318,
+            157,
+            930
+          ],
+          [
+            338,
+            708,
+            269,
+            221,
+            476,
+            925
+          ],
+          [
+            650,
+            710,
+            286,
+            217,
+            764,
+            923
+          ],
+          [
+            967,
+            693,
+            251,
+            240,
+            1104,
+            929
+          ],
+          [
+            61,
+            951,
+            213,
+            278,
+            156,
+            1225
+          ],
+          [
+            349,
+            974,
+            254,
+            255,
+            459,
+            1225
+          ],
+          [
+            680,
+            973,
+            244,
+            254,
+            774,
+            1223
+          ],
+          [
+            1000,
+            971,
+            182,
+            258,
+            1088,
+            1225
+          ]
+        ]
+      },
+      "2": {
+        "path": "assets/td/evolution/dwarf-transcendent-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 251,
+        "worldHeight": 90,
+        "frames": [
+          [
+            50,
+            37,
+            196,
+            257,
+            147,
+            290
+          ],
+          [
+            368,
+            37,
+            192,
+            257,
+            464,
+            290
+          ],
+          [
+            677,
+            38,
+            196,
+            256,
+            774,
+            290
+          ],
+          [
+            995,
+            37,
+            192,
+            257,
+            1091,
+            290
+          ],
+          [
+            49,
+            347,
+            221,
+            252,
+            152,
+            595
+          ],
+          [
+            363,
+            350,
+            218,
+            248,
+            479,
+            594
+          ],
+          [
+            677,
+            348,
+            218,
+            251,
+            779,
+            595
+          ],
+          [
+            988,
+            349,
+            217,
+            246,
+            1105,
+            591
+          ],
+          [
+            45,
+            633,
+            221,
+            268,
+            164,
+            897
+          ],
+          [
+            351,
+            691,
+            255,
+            212,
+            484,
+            899
+          ],
+          [
+            649,
+            677,
+            307,
+            221,
+            789,
+            894
+          ],
+          [
+            979,
+            673,
+            262,
+            228,
+            1088,
+            897
+          ],
+          [
+            61,
+            955,
+            212,
+            258,
+            162,
+            1209
+          ],
+          [
+            368,
+            969,
+            233,
+            243,
+            473,
+            1208
+          ],
+          [
+            687,
+            968,
+            224,
+            244,
+            786,
+            1208
+          ],
+          [
+            1000,
+            966,
+            193,
+            246,
+            1095,
+            1208
+          ]
+        ]
+      }
+    },
+    "dragonkin": {
+      "1": {
+        "path": "assets/td/evolution/dragonkin-awakened-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 188,
+        "worldHeight": 102,
+        "frames": [
+          [
+            108,
+            99,
+            126,
+            192,
+            166,
+            287
+          ],
+          [
+            408,
+            99,
+            125,
+            192,
+            466,
+            287
+          ],
+          [
+            711,
+            99,
+            126,
+            192,
+            768,
+            287
+          ],
+          [
+            1012,
+            99,
+            123,
+            194,
+            1071,
+            289
+          ],
+          [
+            93,
+            396,
+            144,
+            194,
+            159,
+            586
+          ],
+          [
+            397,
+            397,
+            153,
+            193,
+            467,
+            586
+          ],
+          [
+            703,
+            397,
+            149,
+            195,
+            771,
+            588
+          ],
+          [
+            1004,
+            400,
+            146,
+            191,
+            1070,
+            587
+          ],
+          [
+            89,
+            684,
+            155,
+            199,
+            175,
+            879
+          ],
+          [
+            383,
+            737,
+            223,
+            141,
+            461,
+            874
+          ],
+          [
+            683,
+            733,
+            222,
+            147,
+            759,
+            876
+          ],
+          [
+            1009,
+            707,
+            171,
+            173,
+            1081,
+            876
+          ],
+          [
+            102,
+            980,
+            131,
+            185,
+            162,
+            1161
+          ],
+          [
+            414,
+            979,
+            137,
+            186,
+            474,
+            1161
+          ],
+          [
+            709,
+            979,
+            144,
+            186,
+            768,
+            1161
+          ],
+          [
+            1031,
+            979,
+            123,
+            187,
+            1090,
+            1162
+          ]
+        ]
+      },
+      "2": {
+        "path": "assets/td/evolution/dragonkin-transcendent-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 229,
+        "worldHeight": 106,
+        "frames": [
+          [
+            76,
+            58,
+            162,
+            235,
+            157,
+            289
+          ],
+          [
+            401,
+            68,
+            146,
+            225,
+            473,
+            289
+          ],
+          [
+            698,
+            62,
+            150,
+            232,
+            773,
+            290
+          ],
+          [
+            1005,
+            68,
+            147,
+            225,
+            1078,
+            289
+          ],
+          [
+            75,
+            366,
+            167,
+            225,
+            158,
+            587
+          ],
+          [
+            376,
+            375,
+            169,
+            216,
+            460,
+            587
+          ],
+          [
+            678,
+            365,
+            180,
+            229,
+            768,
+            590
+          ],
+          [
+            1001,
+            380,
+            172,
+            216,
+            1087,
+            592
+          ],
+          [
+            66,
+            663,
+            191,
+            223,
+            165,
+            882
+          ],
+          [
+            367,
+            730,
+            263,
+            151,
+            473,
+            877
+          ],
+          [
+            669,
+            729,
+            268,
+            155,
+            781,
+            880
+          ],
+          [
+            1016,
+            693,
+            177,
+            193,
+            1104,
+            882
+          ],
+          [
+            75,
+            962,
+            184,
+            226,
+            161,
+            1184
+          ],
+          [
+            383,
+            962,
+            175,
+            224,
+            470,
+            1182
+          ],
+          [
+            698,
+            955,
+            189,
+            233,
+            779,
+            1184
+          ],
+          [
+            1005,
+            960,
+            155,
+            228,
+            1082,
+            1184
+          ]
+        ]
+      }
+    },
+    "egypt": {
+      "1": {
+        "path": "assets/td/evolution/egypt-awakened-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 299,
+        "worldHeight": 84,
+        "frames": [
+          [
+            70,
+            16,
+            216,
+            303,
+            154,
+            315
+          ],
+          [
+            365,
+            15,
+            207,
+            305,
+            446,
+            316
+          ],
+          [
+            665,
+            19,
+            205,
+            302,
+            751,
+            317
+          ],
+          [
+            977,
+            18,
+            213,
+            303,
+            1062,
+            317
+          ],
+          [
+            45,
+            329,
+            264,
+            293,
+            173,
+            618
+          ],
+          [
+            354,
+            332,
+            249,
+            290,
+            463,
+            618
+          ],
+          [
+            649,
+            332,
+            252,
+            291,
+            769,
+            619
+          ],
+          [
+            963,
+            334,
+            240,
+            287,
+            1093,
+            617
+          ],
+          [
+            67,
+            629,
+            231,
+            302,
+            179,
+            927
+          ],
+          [
+            346,
+            652,
+            267,
+            262,
+            460,
+            910
+          ],
+          [
+            648,
+            672,
+            307,
+            250,
+            769,
+            918
+          ],
+          [
+            961,
+            671,
+            256,
+            253,
+            1094,
+            920
+          ],
+          [
+            76,
+            940,
+            186,
+            296,
+            155,
+            1232
+          ],
+          [
+            367,
+            951,
+            211,
+            280,
+            467,
+            1227
+          ],
+          [
+            682,
+            951,
+            212,
+            279,
+            770,
+            1226
+          ],
+          [
+            1002,
+            950,
+            160,
+            284,
+            1080,
+            1230
+          ]
+        ]
+      },
+      "2": {
+        "path": "assets/td/evolution/egypt-transcendent-actions-v1.png",
+        "width": 1254,
+        "height": 1254,
+        "visible": 244,
+        "worldHeight": 90,
+        "frames": [
+          [
+            83,
+            65,
+            200,
+            250,
+            183,
+            311
+          ],
+          [
+            390,
+            66,
+            196,
+            249,
+            488,
+            311
+          ],
+          [
+            691,
+            68,
+            203,
+            247,
+            792,
+            311
+          ],
+          [
+            1003,
+            69,
+            189,
+            246,
+            1097,
+            311
+          ],
+          [
+            71,
+            371,
+            214,
+            236,
+            182,
+            603
+          ],
+          [
+            377,
+            375,
+            226,
+            236,
+            496,
+            607
+          ],
+          [
+            687,
+            374,
+            223,
+            238,
+            805,
+            608
+          ],
+          [
+            996,
+            375,
+            205,
+            236,
+            1089,
+            607
+          ],
+          [
+            62,
+            664,
+            212,
+            241,
+            160,
+            901
+          ],
+          [
+            352,
+            681,
+            263,
+            224,
+            471,
+            901
+          ],
+          [
+            657,
+            701,
+            303,
+            208,
+            783,
+            905
+          ],
+          [
+            999,
+            685,
+            212,
+            223,
+            1105,
+            904
+          ],
+          [
+            85,
+            945,
+            171,
+            244,
+            164,
+            1185
+          ],
+          [
+            396,
+            957,
+            175,
+            232,
+            480,
+            1185
+          ],
+          [
+            702,
+            957,
+            183,
+            230,
+            785,
+            1183
+          ],
+          [
+            1014,
+            960,
+            172,
+            230,
+            1100,
+            1186
+          ]
+        ]
+      }
+    }
+  }
+}

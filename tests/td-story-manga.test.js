@@ -36,7 +36,8 @@ test('before and after require their own access checks; spoofed preview grants n
   assert.equal(reader.open(app,{missionId:'chapter1-border',phase:'after',preview:true}),false);
   assert.equal(app.act('manga-section','late'),false);
   app.act('manga-before','chapter1-border');assert.deepEqual(plain(reader.currentPages(app).map(p=>p.storyPage)),[31,32,33]);
-  reader.turn(app,2);app.act('manga-next');assert.equal(app.page,'mission-brief');assert.equal(app.launched,undefined);
+  reader.turn(app,2);app.act('manga-next');assert.equal(app.page,'story');assert.equal(app.launched,undefined);
+  app.act('story-battle','chapter1-border');reader.turn(app,2);
   assert.equal(store.current().completed.length,0);app.act('manga-fight');assert.equal(app.launched.id,'chapter1-border');assert.equal(store.current().completed.length,0);
   store.complete(ns.systems.StoryCatalog.mission);app.act('manga-after','chapter1-border');assert.deepEqual(plain(reader.currentPages(app).map(p=>p.storyPage)),[34]);
   app.act('manga-next');assert.equal(app.page,'story');app.act('manga-section','late');assert.equal(app.page,'story-manga');
@@ -57,7 +58,7 @@ test('bookmarks are per selection and per profile, included in backup, with old 
 test('malformed bookmarks and storage failure remain readable without corrupting progress',()=>{
   const f=synthetic(fixture()),{app,store,reader}=f;store.adapter('manga').setItem(reader.KEY,'[malformed');
   app.act('manga-section','intro');assert.equal(app.manga.index,0);
-  app.store={current:()=>({completed:[]}),isAdmin:()=>false,adapter:()=>({getItem(){throw Error('quota');},setItem(){throw Error('quota');}})};
+  const current=store.current();app.store={current:()=>current,isAdmin:()=>false,adapter:()=>({getItem(){throw Error('quota');},setItem(){throw Error('quota');}})};
   assert.doesNotThrow(()=>reader.save(app));assert.match(app.manga.error,/未能儲存/);assert.match(reader.render(app),/未能儲存/);
 });
 test('unsafe titles and transcripts are escaped; tools remain accessible',()=>{

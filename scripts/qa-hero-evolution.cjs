@@ -2,7 +2,7 @@
 // Production browser flow with accelerated wave fixtures; not a balance simulation.
 const {chromium}=require('playwright'),{pathToFileURL}=require('node:url'),fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),out=path.join(root,'artifacts/evolution-completion');
-(async()=>{console.log('Evolution QA PID '+process.pid);const browser=await chromium.launch({channel:'msedge',headless:true});try{
+(async()=>{fs.mkdirSync(out,{recursive:true});console.log('Evolution QA PID '+process.pid);const browser=await chromium.launch({channel:'msedge',headless:true});try{
   const page=await browser.newPage({viewport:{width:1280,height:800},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.text().startsWith('EVOLUTION_QA'))console.log(m.text());});
   await page.goto(pathToFileURL(path.join(root,'td.html')).href);await page.waitForFunction(()=>globalThis.towerFrontierGame?.art.coreStatus('naga').ready);
   const flows=await page.evaluate(()=>{
@@ -12,12 +12,12 @@ const root=path.resolve(__dirname,'..'),out=path.join(root,'artifacts/evolution-
     g.hero.level=15;g.hero.invulnerable=999;g.economy.emblems=8;clearWave(20);
     for(const rank of [1,2]){console.log('EVOLUTION_QA trial '+rank);
       if(rank===2){clearWave(50);check(g.evolutionCamp&&g.status==='playing','50 wave must retain playable camp');check(g.ui.wave.textContent==='完成遠征','finish action missing');}
-      check(g.shop.buy('evolution-stone',g.economy).ok,'stone purchase');check(g.checkpoints.read().hero.evolution.stones===1,'stone checkpoint');g.updateUi();g.ui.heroEvolve.click();
+      check(g.shop.buy('evolution-stone',g.economy).ok,'stone purchase');check(g.checkpoints.read().hero.evolution.stones===1,'stone checkpoint');g.updateUi();check(g.hero.evolution.trialStage===rank,'purchase must automatically summon boss');
       const boss=g.monsters.find(m=>m.evolutionTrial&&m.active);check(boss,'trial button did not start');const wave=g.waves.wave,countdown=g.waves.countdown;
       for(let i=0;i<30;i++)g.update(1/30,false);check(g.waves.wave===wave&&g.waves.countdown===countdown,'trial advanced wave');
       check(g.ui.wave.disabled,'manual wave during trial');
       new ns.entities.Projectile(g.hero,boss,{damage:100000,attackType:'chaos',canHitAir:true}).hit(g.monsters,(m,s)=>g.onKill(m,s),(m,d,c,s)=>g.onHit(m,d,c,s));
-      check(g.hero.evolution.rank===rank,'real death callback must complete trial');check(g.checkpoints.read().hero.evolution.rank===rank,'rank checkpoint');g.draw();
+      check(g.hero.evolution.rank===rank,'real death callback must complete trial');check(g.hero.level===0&&g.hero.xp===0,'evolution resets to Lv0');check(g.checkpoints.read().hero.evolution.rank===rank,'rank checkpoint');g.draw();
       results.push({rank,wave,checkpointRank:g.checkpoints.read().hero.evolution.rank});console.log('EVOLUTION_QA rank '+rank+' complete');
     }
     const snapshot=g.checkpoints.read();g.hero.evolution.rank=0;check(g.checkpoints.restore(g,snapshot),'checkpoint restore');g.updateUi();check(g.evolutionCamp&&g.status==='playing'&&g.hero.evolution.rank===2,'resume final camp');g.ui.heroEvolve.click();check(g.monsters.some(m=>m.evolutionTraining),'training button');g.draw();console.log('EVOLUTION_QA flow complete');return results;

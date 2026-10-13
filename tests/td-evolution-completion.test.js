@@ -40,7 +40,7 @@ for(const type of ['hunter','arcanist','rogue','chief','goblin','frostland','nag
     boss.health=10;new ns.systems.EnemyCombatSystem().phase(boss,g.monsters,{});assert.equal(g.monsters.length,1,'no normal boss adds');
     boss.update(10,g.hero,[]);assert.equal(boss.active,true,'stationary boss cannot leak');
     boss.takeDamage(99999,{owner:g.hero});assert.equal(E.completeTrial(g,boss),true);
-    assert.equal(g.hero.level,1);assert.equal(g.hero.evolution.rank,rank);assert.equal(g.hero.evolution.stones,0);assert.equal(g.hero.equipment.spear,3);
+    assert.equal(g.hero.level,0);assert.equal(g.hero.evolution.rank,rank);assert.equal(g.hero.evolution.stones,0);assert.equal(g.hero.equipment.spear,3);
     assert.ok(g.hero.skillPower()>=power);assert.ok(g.hero.combatConfig().interval<=interval);assert.ok(g.hero.maxHealth>=health);assert.equal(g.waves.preparationHeld,false);
     assert.equal(E.completeTrial(g,boss),false,'completion idempotent');
   });
@@ -78,8 +78,9 @@ test('evolved fields bound background catchup and isolate a broken pulse',()=>{
     g.hero.skillCooldowns.thunder=0;cast(ns,g,'w');ns.systems.HeroEvolutionCombat.pulse=()=>{throw Error('injected pulse');};assert.doesNotThrow(()=>ns.systems.HeroRoster.updateFields(g.hero,.5,g.monsters));assert.equal(g.hero.fields.length,0);assert.match(g.hero.evolutionFault,/injected/);
   }
 });
-test('naga dedicated trident crest and isolated Canvas fault keep state balanced',()=>{
-  const {ns,g}=setup('naga',2),c=strictCanvas();assert.equal(ns.systems.HeroEvolutionPresentation.draw(c.ctx,null,g.hero),true);assert.ok(c.calls.some(x=>x[0]==='lineTo'));assert.equal(c.calls.some(x=>x[0]==='drawImage'),false);
+test('naga painted form has no crest and isolated skill Canvas fault keeps state balanced',()=>{
+  const {ns,g}=setup('naga',2),c=strictCanvas();assert.equal(ns.systems.HeroEvolutionPresentation.draw(c.ctx,null,g.hero),true);assert.equal(c.calls.length,0);
+  g.hero.evolutionCast={slot:'q',rank:2,time:.5,max:1,targetX:150,targetY:100};
   c.ctx.arc=()=>{throw Error('injected Canvas');};assert.doesNotThrow(()=>ns.systems.HeroEvolutionPresentation.draw(c.ctx,null,g.hero));assert.equal(c.depth,0);assert.match(g.hero.evolutionFault,/injected/);
   g.hero.evolutionFault=null;assert.equal(ns.systems.HeroEvolutionPresentation.draw(c.ctx,null,g.hero),false);assert.equal(g.hero.evolutionFault,null,'a failed renderer must not throw and notify every frame');
 });

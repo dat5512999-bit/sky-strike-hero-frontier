@@ -49,7 +49,7 @@ test('full first-arc screenplay has 44 ordered pages and four panels per page',(
 
 test('runtime version and editorial version are distinct from unfinished comic content',()=>{
   const pkg=JSON.parse(read('package.json')),{ns}=load();
-  assert.equal(pkg.version,'0.85.96');
+  assert.equal(pkg.version,'0.85.100');
   assert.equal(pkg.storyEditorialVersion,'0.6.0');
   assert.equal(pkg.storyMangaVersion,'2.0.0');
   assert.equal(pkg.storyReviewVersion,'0.9.0');

@@ -66,7 +66,7 @@
   function timeline(profile,admin=false){
     const nodes=sections.map(section=>({
       id:section.id,kind:'section',sectionId:section.id,title:section.title,era:section.era,
-      pages:section.pages.slice(),firstPage:section.pages[0],note:section.requires?'完成護證撤離後開放；這是同期另一處的事件。':'獨立前情選段；讀完返回章節，不自動連播。',
+      pages:section.pages.slice(),firstPage:section.pages[0],note:section.requires?'完成護證撤離後開放；這是同期另一處的事件。':'主線會依序銜接；「只回顧本段」讀完返回目錄。',
       locked:!resolve({sectionId:section.id,preview:admin},profile,admin),selectionKeys:['section:'+section.id]
     }));
     for(const [id,info] of Object.entries(missions))nodes.push({

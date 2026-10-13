@@ -36,7 +36,7 @@ const ready=frame=>frame.waitForSelector('.manga-stage[data-state=ready]',{timeo
       TowerFrontier.systems.ResultScreen.render(app.game.ui,{waves:5,score:0,persisted:true},{victory:true,...result});
       return {saved:result.saved,label:app.game.ui.resultNext.textContent,completed:app.store.current().completed.includes(m.id)};
     });
-    assert(resultRoute.saved&&resultRoute.completed);assert.equal(resultRoute.label,'閱讀戰後劇情 →');
+    assert(resultRoute.saved&&resultRoute.completed);assert.equal(resultRoute.label,'繼續主線・戰後劇情 →');
     await frame.evaluate(()=>frontierApp.game.ui.resultNext.onclick());await ready(frame);
     assert.deepEqual(await frame.evaluate(()=>TowerFrontier.systems.StoryManga.currentPages(frontierApp).map(p=>p.storyPage)),[34]);
     await frame.locator('[data-action=manga-next]').click();assert.equal(await frame.evaluate(()=>frontierApp.storyMode),'timeline');

@@ -37,13 +37,13 @@ test('霜牙・凜以接地陰影、冰痕與動態位移呈現，但保留核�
   assert.equal(art.drawHero(ctx,hero),true);assert.ok(calls.filter(call=>call[0]==='ellipse').length>=3,'需包含陰影與兩道冰痕');assert.ok(calls.some(call=>call[0]==='drawImage'&&call[1].assetSrc==='assets/td/frostland/hero-actions-v1.png'));
 });
 
-test('all six evolved heroes receive a rank-specific production crest',()=>{
+test('every painted hero omits obsolete rank crests',()=>{
   const {ns}=load(),art={load:src=>({assetSrc:src,ready:true,width:1254,height:1254})},calls=[];
   const ctx=new Proxy({}, {get:(_,key)=>key==='drawImage'?(...args)=>calls.push(args):()=>{}});
-  for(const [rank,source] of [[1,'awakened'],[2,'transcendent']])for(const [index,classType] of ['hunter','arcanist','rogue','chief','goblin','frostland'].entries()){
+  for(const rank of [1,2])for(const classType of Object.keys(ns.systems.HeroRoster.CLASSES)){
     calls.length=0;const hero={classType,animationTime:0,x:100,y:100,evolution:{rank}};
     assert.equal(ns.systems.HeroEvolutionPresentation.draw(ctx,art,hero),true);
-    const call=calls.find(args=>args[0].assetSrc);assert.ok(call);assert.match(call[0].assetSrc,new RegExp(source));assert.equal(call[1],(index%3)*418);assert.equal(call[2],Math.floor(index/3)*627);
+    assert.equal(calls.length,0,classType+' must not overlay a crest on its painted form');
   }
 });
 

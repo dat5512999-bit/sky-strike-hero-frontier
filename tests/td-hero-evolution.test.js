@@ -22,15 +22,15 @@ test('evolution uses a separate boss-emblem currency, preserves health floor, an
   g.economy.addEmblems(3);
   assert.equal(g.shop.buy('evolution-stone',g.economy).ok,true);
   assert.equal(g.economy.emblems,0);
-  assert.equal(system.canStartTrial(g),true);
-  const trial=system.startTrial(g);assert.equal(trial.ok,true);
+  assert.equal(system.canStartTrial(g),false,'purchase already started the trial');
+  assert.equal(g.hero.evolution.trialStage,1);assert.equal(g.monsters.length,1);
   const boss=g.monsters[0],tower={};const before=boss.health;
   assert.equal(boss.takeDamage(999,{owner:tower}),false);assert.equal(boss.health,before);
   assert.equal(system.completeTrial(g,boss),false,'living trial boss cannot grant evolution');
   boss.takeDamage(100000,{owner:g.hero});
   assert.equal(system.completeTrial(g,boss),true);
-  assert.equal(g.hero.evolution.rank,1);assert.equal(g.hero.level,1);assert.ok(g.hero.maxHealth>=220);
-  assert.ok(g.hero.skillPower()>2,'Awakened Lv.1 remains stronger than its initial form');
+  assert.equal(g.hero.evolution.rank,1);assert.equal(g.hero.level,0);assert.ok(g.hero.maxHealth>=220);
+  assert.ok(g.hero.skillPower()>2,'Awakened Lv.0 remains stronger than its initial form');
 });
 
 test('each awakened hero can cast a replacement Q skill without requiring an army',()=>{

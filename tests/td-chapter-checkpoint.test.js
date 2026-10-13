@@ -11,8 +11,8 @@ test('20與50波保存購石和進化结果；禁止存活試煉覆蓋安全存�
   source.checkpoints=system;source.saveChapterCheckpoint=()=>system.capture(source);source.waves.wave=20;source.economy.emblems=8;
   source.shop=new ns.systems.ShopSystem(source.hero,source.armory);source.shop.context=source;
   assert.equal(source.shop.buy('evolution-stone',source.economy).ok,true);assert.equal(system.read().hero.evolution.stones,1);assert.equal(system.read().economy.emblems,5);
-  E.startTrial(source);assert.equal(system.capture(source),null);assert.equal(system.read().hero.evolution.trialStage,0);
-  const boss=source.monsters[0];boss.takeDamage(999999,{owner:source.hero});E.completeTrial(source,boss);assert.equal(system.read().hero.evolution.rank,1);assert.equal(system.read().hero.evolution.stones,0);
+  assert.equal(source.hero.evolution.trialStage,1);assert.equal(system.capture(source),null);assert.equal(system.read().hero.evolution.trialStage,0);assert.equal(system.read().hero.evolution.autoTrial,true);
+  const boss=source.monsters[0];boss.takeDamage(999999,{owner:source.hero});E.completeTrial(source,boss);assert.equal(system.read().hero.evolution.rank,1);assert.equal(system.read().hero.evolution.stones,0);assert.equal(system.read().hero.level,0);assert.equal(system.read().hero.xp,0);
   source.waves.wave=50;source.waves.complete=true;source.waves.phase='complete';source.evolutionCamp=true;
   source.shop.buy('evolution-stone',source.economy);E.startTrial(source);const final=source.monsters.at(-1);final.takeDamage(999999,{owner:source.hero});E.completeTrial(source,final);
   const target=game(ns);assert.equal(system.restore(target,system.read()),true);assert.equal(target.hero.evolution.rank,2);assert.equal(target.economy.emblems,0);assert.equal(target.evolutionCamp,true);assert.equal(target.waves.complete,true);assert.equal(target.waves.canStart(),false);assert.equal(target.hero.evolution.trialStage,0);

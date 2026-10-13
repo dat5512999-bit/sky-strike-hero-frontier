@@ -20,6 +20,7 @@
     }
     restore(game,data){
       if(!game||!this.valid(data))return false;
+      game.evolutionHolding=false;game.evolutionPreparationHeld=false;game.evolutionNotice=null;game.evolutionWaveOwned=false;
       Object.assign(game.economy,clone(data.economy));game.baseHealth=data.baseHealth;game.maxBaseHealth=data.maxBaseHealth;
       Object.assign(game.hero,clone(data.hero),{displayHealth:data.hero.health,selected:true,pendingTarget:null,fields:[]});
       game.build.items=data.buildings.map(saved=>{const item=saved.kind==='unit'?new ns.entities.CombatUnit(saved.type,saved.x,saved.y):new ns.entities.Building(saved.type,saved.x,saved.y);Object.assign(item,clone(saved));if(item.kind==='unit'){item.displayHealth=item.health;item.lockedTarget=null;}return item;});

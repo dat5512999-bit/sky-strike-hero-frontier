@@ -42,7 +42,7 @@ async function cover(view){
     }
     assert.equal(new Set(covers.map(c=>c.image.src)).size,9,name+' distinct covers for all nine nodes');
     await view.locator('[data-action=story-node][data-value="present-investigation"]').click();
-    const investigation=await view.evaluate(inspect);check(investigation,name+' investigation');assert(investigation.actions.every(a=>a.action==='manga-section'));
+    const investigation=await view.evaluate(inspect);check(investigation,name+' investigation');assert.deepEqual(investigation.actions.map(a=>a.action),['manga-campaign','manga-section']);
     await view.locator('[data-action=story-node][data-value="battle:chapter1-border"]').click();
     const battle=await view.evaluate(inspect);check(battle,name+' timeline battle');assert(battle.actions.some(a=>a.action==='story-battle'));
     await cover(view);

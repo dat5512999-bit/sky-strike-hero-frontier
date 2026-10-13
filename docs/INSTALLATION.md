@@ -1,3 +1,13 @@
+> 全英雄進化外觀 v0.85.100（2026-10-13）：無新遊戲依賴或設定；沿用 Node 18+、npm run serve:test、td.html。新增 16 張 PNG 隨專案交付，玩家無須登入或安裝素材工具。 見[操作、架構與驗收](HERO_EVOLUTION_ALL_V085100.md)。以下版本紀錄為歷史狀態。
+
+> 王國／娜迦進化美術 v0.85.99（2026-10-13）：無新安裝依賴與設定；沿用 npm run serve:test。兩個新 JS 與四張 PNG 已納入遊戲入口與離線清單。 見[操作、架構與驗收](HERO_EVOLUTION_HUNTER_NAGA_V08599.md)。
+
+> 戰牛進化美術 v0.85.98（2026-10-12）：無新安裝依賴，沿用 Node 18+ 與 npm run serve:test；兩張新 PNG 和兩個 JS 均已接入 td.html／離線快取。 見[操作、架構與驗收](HERO_EVOLUTION_ART_V08598.md)。
+
+> 劇情銜接 v1.0.0（本機）：無新增依賴；沿用 npm run serve:test，HTML 必須載入 StoryCampaign.js，主線和回顧入口分離。 見 [設計、操作與驗收](STORY_CAMPAIGN_FLOW_V1.md)。
+
+> 英雄進化修補 v0.85.97（2026-10-12）：無新增玩家安裝項目；沿用 npm run serve:test 與 td.html，新 JS/CSS 已隨入口載入。不需新帳號、金鑰或外部素材服務。 見[設計、操作與驗收](HERO_EVOLUTION_STONE_V08597.md)。
+
 ## 續篇審閱 0.12.0（2026-10-12，本機）
 
 一般閱讀仍只需既有 Node HTTP 伺服器；設定 TD_TEST_PORT=4189 後執行 npm run serve:test。prepare 會重建 24 張 WebP，依賴沿用 sharp；瀏覽器驗收沿用 playwright 與 Edge。遇 ERR_CONNECTION_REFUSED 先檢查本機伺服器，不需清存檔。 詳見 [第 61–68 頁製作與驗收](STORY_CONTINUATION_61_68_V1.md)。

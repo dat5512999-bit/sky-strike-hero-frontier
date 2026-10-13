@@ -37,6 +37,7 @@
   <link rel="stylesheet" href="td-polish.css">
   <link rel="stylesheet" href="td-accessibility.css">
   <link rel="stylesheet" href="td-adventure.css">
+  <link rel="stylesheet" href="td-evolution.css">
 </head>
 <body data-combat-ui="edge">
   <div id="td-boot-screen" role="status" aria-live="polite"><strong>英雄邊境</strong><span>正在開啟主大廳…</span></div>
@@ -62,6 +63,7 @@
     </section>
     <section class="td-stage">
       <canvas id="td-game" width="720" height="720" aria-label="英雄塔防戰場"></canvas>
+      <aside id="td-evolution-notice" aria-label="英雄進化挑戰" hidden><strong></strong><p></p><button type="button">免費挑戰 BOSS</button></aside>
       <output id="td-battle-announcement" class="td-screen-reader-only" role="status" aria-live="polite" aria-atomic="true"></output>
       <output id="td-performance-panel" class="td-performance-panel" aria-label="戰場效能資訊" aria-live="off" hidden></output>
       <div id="td-hero-joystick" class="hero-joystick" role="group" aria-label="英雄移動搖桿：輕推慢走，推到底全速，放開停止" hidden><span class="joystick-direction" aria-hidden="true"></span><span class="joystick-thumb" aria-hidden="true"></span><small aria-hidden="true">輕推慢走</small></div>
@@ -76,7 +78,7 @@
 
       <div id="td-profession-screen" class="td-profession-screen" role="dialog" aria-modal="true" aria-labelledby="td-opening-title" hidden>
         <div class="profession-dialog">
-          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>英雄邊境 · v0.85.96 · 分段故事漫畫</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
+          <div class="opening-topline"><button id="td-opening-reset" type="button">↺ 重設遠征選擇</button><span>英雄邊境 · v0.85.100 · 分段故事漫畫</span><button id="td-opening-menu-open" type="button" aria-label="開啟遊戲選單">⚙ 遊戲選單</button></div>
           <nav class="expedition-steps" aria-label="遠征配置步驟"><button type="button" data-opening-page="battlefield" aria-pressed="true"><b>01</b><span>選擇戰場</span></button><button type="button" data-opening-page="party"><b>02</b><span>組建隊伍</span></button></nav>
           <div class="opening-titlebar"><div class="opening-title-copy"><p>英雄邊境</p><h2 id="td-opening-title">選擇戰場</h2><span id="td-opening-subtitle">踏上新的戰場，書寫屬於你的傳奇。</span></div><select id="td-map-choice" class="opening-data-select" aria-label="選擇戰場"><option value="beginner">新手谷地</option><option value="twinpass">雙隘口要塞</option><option value="autumn">暮秋遺跡</option><option value="silverleaf">銀葉溪谷</option><option value="shadowfall">暮影舊城</option><option value="frostborn">冰原裂谷</option></select></div>
           <section class="expedition-page battlefield-page" data-expedition-page="battlefield">
@@ -367,9 +369,11 @@
   <script src="src/td/systems/ArtSystem.js"></script>
   <script src="src/td/systems/NeutralMercenaryArt.js"></script>
   <script src="src/td/systems/ImperialFactionArt.js"></script>
+  <script src="src/td/systems/BullEvolutionAtlas.js"></script>
   <script src="src/td/systems/BullWargodArt.js"></script>
   <script src="src/td/systems/BossSpriteBounds.js"></script>
   <script src="src/td/systems/BossVisualCatalog.js"></script>
+  <script src="src/td/systems/EvolutionTrialArt.js"></script>
   <script src="src/td/systems/EquipmentSystem.js"></script>
   <script src="src/td/systems/ArmorySystem.js"></script>
   <script src="src/td/systems/ProfessionSystem.js"></script>
@@ -411,6 +415,7 @@
   <script src="src/td/systems/HeroEvolutionCombat.js"></script>
   <script src="src/td/systems/HeroEvolutionSystem.js"></script>
   <script src="src/td/systems/HeroEvolutionPresentation.js"></script>
+  <script src="src/td/systems/HeroEvolutionFlow.js"></script>
   <script src="src/td/systems/ResultScreen.js"></script>
   <script src="src/td/systems/ChiefShockwave.js"></script>
   <script src="src/td/systems/HeroUltimateSystem.js"></script>
@@ -457,6 +462,7 @@
   <script src="src/td/app/StoryMangaCatalog.js"></script>
   <script src="src/td/app/StoryMangaFlow.js"></script>
   <script src="src/td/app/StoryManga.js"></script>
+  <script src="src/td/app/StoryCampaign.js"></script>
   <script src="src/td/codex/CodexProgressAdapter.js"></script>
   <script src="src/td/codex/ChronicleProgressAdapter.js"></script>
   <script src="src/td/codex/CodexSaveBridge.js"></script>
@@ -478,6 +484,8 @@
   <script src="src/td/systems/CrossworldSkinArt.js"></script>
   <script src="src/td/systems/GoblinPresentation.js"></script>
   <script src="src/td/systems/FactionSkinArt.js"></script>
+  <script src="src/td/systems/HeroEvolutionSpriteAtlas.js"></script>
+  <script src="src/td/systems/HeroEvolutionSpriteArt.js"></script>
   <script src="src/td/shop/ShopArt.js"></script>
   <script src="src/td/shop/ShopTemplates.js"></script>
   <script src="src/td/shop/ScrollRail.js"></script>

@@ -65,7 +65,7 @@ for(const type of TYPES)for(const rank of [1,2]){
       g.hero.update(.1,g.monsters,g.projectiles);for(const p of g.projectiles)p.update(.1,g.monsters,()=>{},()=>{});g.projectiles=g.projectiles.filter(p=>p.active);elapsed+=.1;
     }
     assert.equal(boss.active,false,'ordinary hero attacks complete a finite trial');assert.ok(elapsed<90);
-    assert.equal(E.completeTrial(g,boss),true);assert.equal(g.hero.evolution.rank,rank);assert.equal(g.hero.level,1);assert.equal(g.hero.evolution.stones,0);assert.equal(g.hero.equipment.spear,3);assert.ok(g.hero.skillPower()>=beforePower);assert.ok(g.hero.combatConfig().interval<=beforeInterval);assert.ok(g.hero.maxHealth>=320);assert.equal(E.completeTrial(g,boss),false);
+    assert.equal(E.completeTrial(g,boss),true);assert.equal(g.hero.evolution.rank,rank);assert.equal(g.hero.level,0);assert.equal(g.hero.evolution.stones,0);assert.equal(g.hero.equipment.spear,3);assert.ok(g.hero.skillPower()>beforePower);assert.ok(g.hero.combatConfig().interval<=beforeInterval);assert.ok(g.hero.maxHealth>=320);assert.equal(E.completeTrial(g,boss),false);
   });
 }
 
@@ -106,7 +106,7 @@ test('legacy and current southern checkpoint data restore rank, equipment and fl
   }
 });
 test('southern evolution Canvas faults isolate one renderer and malformed visual values stay finite',()=>{
-  for(const type of TYPES){const {ns,g}=setup(type,2),c=strictCanvas();g.hero.evolutionCast={slot:'f',time:Infinity,max:1,targetX:NaN,targetY:Infinity};g.hero.evolutionReveal={time:1,max:NaN};assert.equal(ns.systems.HeroEvolutionPresentation.draw(c.ctx,null,g.hero),true);assert.equal(g.hero.evolutionFault,undefined);assert.equal(c.depth,0);c.ctx.arc=()=>{throw Error('injected evolution crest');};assert.equal(ns.systems.HeroEvolutionPresentation.draw(c.ctx,null,g.hero),false);assert.equal(c.depth,0);assert.match(g.hero.evolutionFault,/injected/);g.hero.evolutionFault=null;assert.equal(ns.systems.HeroEvolutionPresentation.draw(c.ctx,null,g.hero),false);assert.equal(g.hero.evolutionFault,null);}
+  for(const type of TYPES){const {ns,g}=setup(type,2),c=strictCanvas();g.hero.evolutionCast={slot:'f',time:Infinity,max:1,targetX:NaN,targetY:Infinity};g.hero.evolutionReveal={time:1,max:NaN};assert.equal(ns.systems.HeroEvolutionPresentation.draw(c.ctx,null,g.hero),true);assert.equal(g.hero.evolutionFault,undefined);assert.equal(c.depth,0);g.hero.evolutionReveal={rank:2,time:.5,max:1};c.ctx.arc=()=>{throw Error('injected evolution reveal');};assert.equal(ns.systems.HeroEvolutionPresentation.draw(c.ctx,null,g.hero),false);assert.equal(c.depth,0);assert.match(g.hero.evolutionFault,/injected/);g.hero.evolutionFault=null;assert.equal(ns.systems.HeroEvolutionPresentation.draw(c.ctx,null,g.hero),false);assert.equal(g.hero.evolutionFault,null);}
 });
 
 test('cooldown key-repeat returns before scanning or sorting a 150-enemy battlefield',()=>{

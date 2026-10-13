@@ -1,3 +1,13 @@
+> 全英雄進化外觀 v0.85.100（2026-10-13）：HeroEvolutionSpriteAtlas 擴至十英雄 × rank 1/2；戰牛保留 BullEvolutionAtlas。preloadHeroEvolution／drawHeroEvolutionSprite 合約不變，無新 HTTP API 或 schema。 見[操作、架構與驗收](HERO_EVOLUTION_ALL_V085100.md)。以下版本紀錄為歷史狀態。
+
+> 王國／娜迦進化美術 v0.85.99（2026-10-13）：新增 HeroEvolutionSpriteAtlas、ArtSystem.preloadHeroEvolution／drawHeroEvolutionSprite；沿用存檔 schema 1，無新 HTTP API 或資料庫。 見[操作、架構與驗收](HERO_EVOLUTION_HUNTER_NAGA_V08599.md)。
+
+> 戰牛進化美術 v0.85.98（2026-10-12）：新增 BullEvolutionAtlas、ArtSystem.drawBullEvolution／preloadBullEvolution 與 EvolutionTrialArt.draw；未新增 HTTP API 或資料庫欄位。 見[操作、架構與驗收](HERO_EVOLUTION_ART_V08598.md)。
+
+> 劇情銜接 v1.0.0（本機）：新增 StoryCampaign.start/next/recordOutcome/afterBattle，與 StoryManga campaign request；本機 manga:campaign-v1 續玩記錄，無新增 HTTP API。 見 [設計、操作與驗收](STORY_CAMPAIGN_FLOW_V1.md)。
+
+> 英雄進化修補 v0.85.97（2026-10-12）：新增 HeroEvolutionSystem.purchase/processPending/healthAtLevel/growthLevel 及 HeroEvolutionFlow；無 HTTP API。沿用 evolution，autoTrial、lastResult 為可選欄位，存檔 schema 不變。 見[設計、操作與驗收](HERO_EVOLUTION_STONE_V08597.md)。
+
 ## 續篇審閱 0.12.0（2026-10-12，本機）
 
 共用 validate(value) 新增 0.12.0／45–68 的完整 24 頁契約，仍接受兩個歷史版本。prepare 與 reader 都讀 production-v3.json；資料新增原始提示詞、修稿履歷與本批複核結果，無新增 HTTP API、資料庫或玩家儲存欄位。 詳見 [第 61–68 頁製作與驗收](STORY_CONTINUATION_61_68_V1.md)。

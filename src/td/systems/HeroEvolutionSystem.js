@@ -34,8 +34,10 @@
     static hintSet(hero,fallback){return this.form(hero)?.hints||fallback;}
     static rankName(hero){return this.form(hero)?.name||'初始';}
     static powerMultiplier(hero){return Math.max([1,2.08,3.72][this.rank(hero)]||1,finite(this.state(hero).powerFloor));}
-    static levelPower(hero){return this.powerMultiplier(hero)*(1+(ns.utils.clamp(finite(hero.level,1),1,15)-1)*.08);}
-    static intervalScale(hero){return Math.min(Math.pow(.985,ns.utils.clamp(finite(hero.level,1),1,15)-1),ns.utils.clamp(finite(this.state(hero).intervalFloor,1),.1,1));}
+    static growthLevel(hero){return this.rank(hero)?ns.utils.clamp(finite(hero.level),0,15):ns.utils.clamp(finite(hero.level,1),1,15)-1;}
+    static levelPower(hero){return this.powerMultiplier(hero)*(1+this.growthLevel(hero)*.08);}
+    static intervalScale(hero){return Math.min([1,.92,.84][this.rank(hero)]*Math.pow(.985,this.growthLevel(hero)),ns.utils.clamp(finite(this.state(hero).intervalFloor,1),.1,1));}
+    static healthAtLevel(hero){const rank=this.rank(hero);return Math.max(Math.round(ns.config.hero.maxHealth*[1,1.6,2.3][rank]+this.growthLevel(hero)*[10,12,16][rank]),this.state(hero).healthFloor);}
     static nextGate(hero){return GATES[this.rank(hero)+1]||null;}
     static clearedWave(game){return Math.max(0,(game.waves?.wave||0)-(game.waves?.active?1:0));}
     static progress(hero,wave){const gate=this.nextGate(hero);if(!gate)return{complete:true};return{gate,unlocked:(wave||0)>=gate.wave,hasStone:(this.state(hero).stones||0)>0};}
@@ -45,30 +47,47 @@
       if(!p.unlocked)return{ok:false,message:'需在第 '+p.gate.wave+' 波守成後才可購買進化石'};
       if(p.hasStone)return{ok:false,message:'已持有進化石，先完成試煉'};
       if((economy.emblems||0)<p.gate.emblems)return{ok:false,message:'首領勳章不足，還需要 '+(p.gate.emblems-(economy.emblems||0))+' 枚'};
-      economy.emblems-=p.gate.emblems;this.state(hero).stones=1;return{ok:true,message:'已購買'+(this.rank(hero)===0?'覺醒':'超凡')+'進化石'};
+      economy.emblems-=p.gate.emblems;Object.assign(this.state(hero),{stones:1,autoTrial:true});return{ok:true,message:'已購買進化石 · 清場後自動召喚試煉 BOSS，打贏才進化為 Lv.0'};
+    }
+    static purchase(game,economy){
+      const result=this.buyStone(game.hero,economy,this.clearedWave(game));if(!result.ok)return result;
+      // Save paid currency and the retained stone BEFORE a live trial blocks safe snapshots.
+      if(game.checkpoints)game.saveChapterCheckpoint?.();this.processPending(game);
+      return Object.assign(result,{evolution:true,message:this.state(game.hero).trialStage?'試煉 BOSS 已出現！打贏才會進化；失敗保留進化石。':result.message});
+    }
+    static holdTrial(game){if(!game.evolutionHolding){game.evolutionPreparationHeld=Boolean(game.waves?.preparationHeld);game.evolutionHolding=true;}game.waves?.holdPreparation?.(true);}
+    static processPending(game){
+      const state=this.state(game.hero);if(!state.autoTrial||!state.stones||state.trialStage||(game.status&&game.status!=='playing')||game.waves?.active||game.monsters?.some(m=>m.active))return false;
+      this.holdTrial(game);if(!this.canStartTrial(game))return false;
+      return this.startTrial(game).ok;
     }
     static canStartTrial(game){const h=game.hero,s=this.state(h),p=this.progress(h,this.clearedWave(game));return Boolean(h.active&&Number.isFinite(h.x)&&Number.isFinite(h.y)&&(game.status===undefined||game.status==='playing')&&p.gate&&p.unlocked&&p.gate.trialHealth[h.classType]>0&&s.stones>0&&!s.trialStage&&!game.waves?.active&&!game.monsters?.some(m=>m.active));}
     static startTrial(game){
       if(!this.canStartTrial(game))return{ok:false,message:'請在波次間準備進化石，並等英雄復活後發起試煉'};
       const h=game.hero,stage=this.rank(h)+1,gate=GATES[stage],x=ns.utils.clamp(h.x+76,40,ns.config.width-40),y=ns.utils.clamp(h.y,60,ns.config.height-40),path=[{x,y},{x,y}];
-      const boss=new ns.entities.Monster('boss',gate.wave,path);Object.assign(boss,{evolutionTrial:true,trialOwner:h,trialStage:stage,speed:0,baseDamage:0,reward:0,health:gate.trialHealth[h.classType],maxHealth:gate.trialHealth[h.classType],displayHealth:gate.trialHealth[h.classType],barrier:0,maxBarrier:0,abilityCooldown:7});
-      this.state(h).trialStage=stage;game.evolutionPreparationHeld=Boolean(game.waves?.preparationHeld);game.waves?.holdPreparation?.(true);game.monsters.push(boss);
+      const boss=new ns.entities.Monster('boss',gate.wave,path);Object.assign(boss,{name:stage===1?'火焰惡魔・熔火魔將':'火焰惡魔・煉獄魔王',evolutionTrial:true,trialAppearance:'fire-demon',bossAspect:'flame',abilityLabel:'熔火爆發',trialOwner:h,trialStage:stage,facing:Math.atan2(h.y-y,h.x-x),speed:0,baseDamage:0,reward:0,health:gate.trialHealth[h.classType],maxHealth:gate.trialHealth[h.classType],displayHealth:gate.trialHealth[h.classType],barrier:0,maxBarrier:0,abilityCooldown:7,attackCooldown:3});
+      game.art?.actionImage?.('fireDemon');if(h.classType==='bull')game.art?.preloadBullEvolution?.(stage);
+      game.art?.preloadHeroEvolution?.(h.classType,stage);
+      Object.assign(this.state(h),{trialStage:stage,autoTrial:false});this.holdTrial(game);game.monsters.push(boss);game.evolutionNotice={kind:'trial'};
+      h.selected=true;game.build?.cancel?.();if(game.camera){game.camera.follow=false;game.camera.inspect=false;game.camera.focus((h.x+x)/2,(h.y+y)/2);game.camera.sync?.();}
+      game.flash?.(boss.name+'降臨 · 擊敗後進化為 Lv.0','#ffe08a');
       return{ok:true,message:(stage===1?'覺醒':'超凡')+'試煉開始 · 僅英雄與其召喚有效；倒下可保留進化石重試'};
     }
-    static releaseTrial(game){game.waves?.holdPreparation?.(Boolean(game.evolutionPreparationHeld));game.evolutionPreparationHeld=false;}
+    static releaseTrial(game){game.waves?.holdPreparation?.(Boolean(game.evolutionPreparationHeld));game.evolutionPreparationHeld=false;game.evolutionHolding=false;}
     static cancelTrial(game){
       if(!this.state(game.hero).trialStage)return false;
       for(const m of game.monsters)if(m.evolutionTrial){m.active=false;m.rewardHandled=true;}
-      this.state(game.hero).trialStage=0;game.hero.evolutionPending=[];game.hero.fields=[];for(const s of game.summons||[])if(s.owner===game.hero)s.active=false;this.releaseTrial(game);game.flash?.('試煉未完成，進化石保留；復活後可再挑戰','#ffb36b');return true;
+      this.state(game.hero).trialStage=0;this.state(game.hero).autoTrial=false;game.hero.evolutionPending=[];game.hero.fields=[];for(const s of game.summons||[])if(s.owner===game.hero)s.active=false;this.releaseTrial(game);game.evolutionNotice={kind:'retry'};game.flash?.('試煉未完成，進化石保留；復活後可免費重試','#ffb36b');return true;
     }
     static completeTrial(game,monster){
       const h=game.hero,s=this.state(h),stage=s.trialStage;
       if(!h.active||!stage||monster?.trialOwner!==h||monster.trialStage!==stage||!Number.isFinite(monster.health)||monster.health>0||monster.active)return false;
-      const powerFloor=this.levelPower(h),intervalFloor=this.intervalScale(h);
-      s.rank=stage;s.stones=Math.max(0,(s.stones||0)-1);s.trialStage=0;s.powerFloor=Math.max(powerFloor,this.powerMultiplier(h));s.intervalFloor=intervalFloor;s.healthFloor=Math.max(s.healthFloor||0,h.maxHealth);
-      h.level=1;h.xp=0;h.maxHealth=Math.max(h.maxHealth,ns.config.hero.maxHealth+(stage===1?8:28));s.healthFloor=h.maxHealth;h.health=h.displayHealth=h.maxHealth;h.novaCooldown=0;h.skillCooldowns={thunder:0,summon:0,ultimate:0};h.fields=[];h.huntTime=0;h.evolutionPending=[];h.evolutionAuraTime=0;h.evolutionAvatarTime=0;
+      const before={level:h.level,damage:h.combatConfig().damage,health:h.maxHealth,interval:h.combatConfig().interval},powerFloor=this.levelPower(h),intervalFloor=this.intervalScale(h);
+      s.rank=stage;s.stones=Math.max(0,(s.stones||0)-1);s.trialStage=0;s.powerFloor=Math.max(powerFloor*1.12,this.powerMultiplier(h));s.intervalFloor=intervalFloor;s.healthFloor=Math.max(s.healthFloor||0,h.maxHealth);
+      h.level=0;h.xp=0;h.maxHealth=this.healthAtLevel(h);s.healthFloor=h.maxHealth;h.health=h.displayHealth=h.maxHealth;h.novaCooldown=0;h.skillCooldowns={thunder:0,summon:0,ultimate:0};h.fields=[];h.huntTime=0;h.evolutionPending=[];h.evolutionAuraTime=0;h.evolutionAvatarTime=0;
       for(const summon of game.summons||[])if(summon.owner===h&&summon.evolutionKind)summon.active=false;
-      h.evolutionReveal={rank:stage,time:1.2,max:1.2};this.releaseTrial(game);game.flash?.(this.rankName(h)+'完成 · Lv.1 已繼承原有戰力','#ffe08a');if(game.checkpoints)game.saveChapterCheckpoint();return true;
+      s.autoTrial=false;s.lastResult={rank:stage,before,after:{level:0,damage:h.combatConfig().damage,health:h.maxHealth,interval:h.combatConfig().interval}};
+      game.evolutionNotice={kind:'success'};h.evolutionReveal={rank:stage,time:2.4,max:2.4};this.releaseTrial(game);game.flash?.(this.rankName(h)+'完成 · Lv.0 · 基礎能力與外觀已強化','#ffe08a');if(game.checkpoints)game.saveChapterCheckpoint();return true;
     }
     static training(game){
       if(!game.evolutionCamp||this.rank(game.hero)!==2||!game.hero.active||game.monsters.some(m=>m.active))return false;

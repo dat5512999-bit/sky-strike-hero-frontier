@@ -15,7 +15,7 @@ test('劇情首通才標示新戰場，重玩不重複宣告獎勵，儲存失�
   const nextMission=ns.systems.StoryCatalog.missions[1];
   const first=ns.systems.ResultScreen.view(result,{mode:'story',victory:true,mission,nextMission,saved:true,canContinue:true,newlyUnlocked:true});
   assert.equal(first.title,'護證撤離・戰術重現');assert.equal(first.showUnlock,true);assert.equal(first.rewardName,'雙隘口要塞');
-  assert.equal(first.nextLabel,'閱讀戰後劇情 →');assert.doesNotMatch(first.intro,/殘缺的命令名冊|叛軍|下一個劇情/);assert.match(first.intro,/抽象重現/);
+  assert.equal(first.nextLabel,'繼續主線・戰後劇情 →');assert.doesNotMatch(first.intro,/殘缺的命令名冊|叛軍|下一個劇情/);assert.match(first.intro,/抽象重現/);
   assert.equal(first.unlockLabel,'新戰場解鎖');assert.equal(first.score,'642');assert.equal(first.time,'70');
   const replay=ns.systems.ResultScreen.view(result,{mode:'story',victory:true,mission,nextMission,saved:true,canContinue:true,newlyUnlocked:false});
   assert.equal(replay.unlockLabel,'已解鎖戰場');assert.match(replay.intro,/再次守住/);
@@ -36,7 +36,7 @@ test('首關戰後CTA只依勝利與已儲存，不需要舊nextMission，未儲
   const {ns}=load(),mission=ns.systems.StoryCatalog.mission,result={waves:5,persisted:true};
   const ui={resultNext:{},overlay:{dataset:{}},resultUnlock:{},overlayMessage:{},overlayTitle:{}};
   const success=ns.systems.ResultScreen.render(ui,result,{mode:'story',victory:true,mission,saved:true});
-  assert(success.showUnlock);assert.equal(ui.resultNext.hidden,false);assert.equal(ui.resultNext.textContent,'閱讀戰後劇情 →');assert.equal(ui.overlay.dataset.resultPrimary,'next');
+  assert(success.showUnlock);assert.equal(ui.resultNext.hidden,false);assert.equal(ui.resultNext.textContent,'繼續主線・戰後劇情 →');assert.equal(ui.overlay.dataset.resultPrimary,'next');
   for(const options of [{victory:true,saved:false},{victory:false,saved:true}]){
     const view=ns.systems.ResultScreen.render(ui,result,{mode:'story',mission,...options});assert.equal(ui.resultNext.hidden,true);assert.equal(view.showUnlock,false);
   }

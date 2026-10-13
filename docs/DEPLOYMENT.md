@@ -1,3 +1,13 @@
+> 全英雄進化外觀 v0.85.100（2026-10-13）：整包發布 v0.85.100；sw.js 新增 16 張 PNG（27.0 MB），版本入口同步。先備份、check:site、驗證新造型及舊存檔；尚未推送 GitHub。 見[操作、架構與驗收](HERO_EVOLUTION_ALL_V085100.md)。以下版本紀錄為歷史狀態。
+
+> 王國／娜迦進化美術 v0.85.99（2026-10-13）：整包發布兩個新 JS、四張 PNG 及新版 HTML／sw.js，新增圖約 7.6 MB；本機完成但未上傳 GitHub。 見[操作、架構與驗收](HERO_EVOLUTION_HUNTER_NAGA_V08599.md)。
+
+> 戰牛進化美術 v0.85.98（2026-10-12）：先跑 npm test、check:evolution、check:site；發佈完整 v0.85.98 站點，不能只更新圖片。本機尚未推送 GitHub。 見[操作、架構與驗收](HERO_EVOLUTION_ART_V08598.md)。
+
+> 劇情銜接 v1.0.0（本機）：發布須整合 controller、reader、FrontierApp、重試原關卡、ResultScreen、HTML 與 Worker，通過 test:story-campaign 及全套驗收；本機修正不等於已上線。 見 [設計、操作與驗收](STORY_CAMPAIGN_FLOW_V1.md)。
+
+> 英雄進化修補 v0.85.97（2026-10-12）：進化修補主版號／快取同步 0.85.97，整包包含 HeroEvolutionFlow.js 與 td-evolution.css；尚未提交、推送或部署。 見[設計、操作與驗收](HERO_EVOLUTION_STONE_V08597.md)。
+
 ## 續篇審閱 0.12.0（2026-10-12，本機）
 
 新增續篇仍位於 concepts，build:site 不收錄。此次 check:site 通過；工作區另有其他遊戲變更，發布包大小不能當成續篇的增量。作者審閱及正式段落／配樂配置完成後，才另行接入與發布；本批沒有 push 或部署。 詳見 [第 61–68 頁製作與驗收](STORY_CONTINUATION_61_68_V1.md)。

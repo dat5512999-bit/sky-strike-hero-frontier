@@ -26,7 +26,7 @@
       if(mapped){
         intro=won
           ?options.saved
-            ?(options.newlyUnlocked?'成功守住 ':'再次守住 ')+waves+' 波攻勢，護證撤離挑戰已儲存。可閱讀本關戰後劇情，並選讀同期事件。'
+            ?(options.newlyUnlocked?'成功守住 ':'再次守住 ')+waves+' 波攻勢，護證撤離挑戰已儲存。按「繼續主線」接上戰後劇情與後續事件。'
             :'成功守住 '+waves+' 波攻勢，但進度尚未儲存。請保留此頁並匯出備份；戰後劇情尚未解鎖。'
           :'防線未能守住，抵達第 '+reached+' 波。調整部署後再試；本次未推進劇情。';
       }
@@ -36,7 +36,7 @@
       return{
         story,won,title,intro,highlight,showUnlock,rewardId,rewardName,nextMissionName:options.nextMission?.name,
         chapter:story?(mapped?'主線・戰術重現':'既有戰術挑戰')+' · '+(won?'任務完成':'挑戰失敗'):'自由遠征 · '+(won?'挑戰完成':'挑戰結束'),
-        nextLabel:mapped?'閱讀戰後劇情 →':'前往'+(ns.maps?.definitions?.[options.nextMission?.map]?.name||options.nextMission?.name||'下一個既有挑戰')+' →',
+        nextLabel:mapped?'繼續主線・戰後劇情 →':'前往'+(ns.maps?.definitions?.[options.nextMission?.map]?.name||options.nextMission?.name||'下一個既有挑戰')+' →',
         status:won?'守城成功':'城門失守',score:Math.max(0,Number(result?.score)||0).toLocaleString('zh-TW'),
         grade:result?.grade||'--',time:Math.max(0,Math.round(Number(result?.time)||0)).toLocaleString('zh-TW'),
         unlockLabel:options.newlyUnlocked?'新戰場解鎖':'已解鎖戰場',

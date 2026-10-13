@@ -18,6 +18,7 @@ function releaseFiles(){
     'chapter3-white-trace-sample','chapter3-echo-yard-receiver','chapter3-crossmark-records','chapter3-nightwatch-defense',
     'chapter4-tidegate-readings','chapter4-brineway-measurements','chapter4-reef-records','chapter4-observatory-archive'])files.add('assets/td/story/'+name+'-v1.png');
   files.add('assets/td/naga/tidebreaker-selection-v1.png');
+  files.add('assets/td/neutral/fire-demon-actions-v1.png');
   // Verify the actual deployed comic set, not just its JS catalog or a sample.
   const context={TowerFrontier:{systems:{}}};
   vm.runInNewContext(fs.readFileSync(path.join(root,'src/td/app/StoryMangaCatalog.js'),'utf8'),context);
@@ -26,6 +27,17 @@ function releaseFiles(){
   for(const page of pages){
     if(!/^assets\/td\/story\/manga-v2\/page-\d{2}\.webp$/.test(page.image))throw Error('Invalid runtime manga release path');
     files.add(page.image);
+  }
+  // Check every evolved body atlas as bytes, not merely the new version label.
+  for(const catalog of ['HeroEvolutionSpriteAtlas','BullEvolutionAtlas']){
+    vm.runInNewContext(fs.readFileSync(path.join(root,'src/td/systems/'+catalog+'.js'),'utf8'),context);
+  }
+  const systems=context.TowerFrontier.systems;
+  for(const ranks of [...Object.values(systems.HeroEvolutionSpriteAtlas),systems.BullEvolutionAtlas]){
+    for(const form of Object.values(ranks)){
+      if(!/^assets\/td\/evolution\/[a-z]+-(?:awakened|transcendent)-actions-v1\.png$/.test(form.path))throw Error('Invalid evolution release path');
+      files.add(form.path);
+    }
   }
   const voiceManifest='assets/audio/voices/bull/manifest.json';
   files.add(voiceManifest);files.add('assets/audio/voices/bull/provider-rights.json');
