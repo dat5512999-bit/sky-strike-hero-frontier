@@ -1,3 +1,5 @@
+> GitHub 正式發布 v0.85.100（2026-10-13）：提交 30e0e12、同名版本標籤已上傳，Pages 工作流程 38406107515 成功；全套 1,163 項測試、263 檔／269 次線上內容比對通過，包含全部 22 張進化 PNG。下方「本機／未上傳」為製作時的歷史紀錄。見[發布、更新與回復](GITHUB_RELEASE_V085100.md)。
+
 > 全英雄進化外觀 v0.85.100（2026-10-13）：HeroEvolutionSpriteAtlas 擴至十英雄 × rank 1/2；戰牛保留 BullEvolutionAtlas。preloadHeroEvolution／drawHeroEvolutionSprite 合約不變，無新 HTTP API 或 schema。 見[操作、架構與驗收](HERO_EVOLUTION_ALL_V085100.md)。以下版本紀錄為歷史狀態。
 
 > 王國／娜迦進化美術 v0.85.99（2026-10-13）：新增 HeroEvolutionSpriteAtlas、ArtSystem.preloadHeroEvolution／drawHeroEvolutionSprite；沿用存檔 schema 1，無新 HTTP API 或資料庫。 見[操作、架構與驗收](HERO_EVOLUTION_HUNTER_NAGA_V08599.md)。
