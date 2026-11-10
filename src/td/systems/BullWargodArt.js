@@ -18,8 +18,8 @@
   };
   proto.preloadBullEvolution=function(rank){return evolutionImage(this,rank);};
   proto.drawBullEvolution=function(ctx,hero){
-    // Purchased skins take priority; evolution never mutates cosmetic ownership.
-    if(this.cosmeticEquipped?.['hero:bull'])return false;
+    // Purchased skins remain the default; a display preference never changes ownership.
+    if(this.cosmeticEquipped?.['hero:bull']&&this.heroAppearance?.bull!=='evolution')return false;
     const rank=ns.systems.HeroEvolutionSystem?.rank(hero)||0,form=ns.systems.BullEvolutionAtlas?.[rank];if(!form)return false;
     const atlas=evolutionImage(this,rank);if(!atlas?.ready)return false;
     const rows={idle:0,walk:1,attack:2,cast:3,hit:4,death:4},row=rows[hero.state]??0;
@@ -46,9 +46,7 @@
   proto.drawHero=function(ctx,hero){return hero.classType==='bull'?this.drawBullWargod(ctx,hero):prior.drawHero.call(this,ctx,hero);};
   proto.coreStatus=function(type){
     if(type!=='bull')return prior.coreStatus.call(this,type);
-    // Optional forms preload in the background; a failed evolution image must
-    // never prevent starting a game or hide the original hero.
-    evolutionImage(this,1);evolutionImage(this,2);
+    // Optional forms load at trial start or first display, never block entry.
     const hero=image(this),icons=skillIcons(this),map=this.mapAssets[ns.config.mapId]||this.background,needed=[map,this.enemyActions.grunt,hero,icons],loaded=needed.filter(asset=>asset?.ready).length;
     return {loaded:loaded,total:needed.length,failed:needed.some(asset=>asset?.failed),ready:loaded===needed.length};
   };

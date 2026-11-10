@@ -4,8 +4,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
 const EXCLUDED = ['assets/td/concepts/', 'assets/td/reference/', 'codex-dev.html', 'src/td/codex/CodexDebug.js'];
+// Retain retired chief art locally for rollback; do not ship superseded bodies.
+EXCLUDED.push('assets/td/opening/hero-chief-selection-v1.png','assets/td/opening/hero-chief-selection-v2.png',
+  'assets/td/wild-chief-actions-v1.png','assets/td/shop/chief-original-portrait-v1.png','assets/td/shop/chief-original-actions-v1.png',
+  'assets/td/evolution/chief-awakened-actions-v1.png','assets/td/evolution/chief-transcendent-actions-v1.png');
 
 function excluded(relative) {
+  const currentChiefSkins=new Set(['thunder-chief-portrait-v2.png','thunder-chief-actions-v4.png','bone-chief-portrait-v2.png','bone-chief-actions-v2.png','night-owl-warden-portrait-v2.png','night-owl-warden-actions-v2.png']);
+  if(/^assets\/td\/shop\/(?:thunder-chief-|bone-chief-|night-owl-warden-)/.test(relative)&&!currentChiefSkins.has(path.basename(relative)))return true;
   return EXCLUDED.some(rule => rule.endsWith('/') ? relative.startsWith(rule) : relative === rule);
 }
 

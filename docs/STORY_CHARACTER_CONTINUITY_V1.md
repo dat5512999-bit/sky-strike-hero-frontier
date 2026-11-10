@@ -11,7 +11,7 @@
 | 王國守誓者 | `hero-hunter-selection-v1.png` | 棕色微捲髮、濃眉棕眼、方正成熟臉形、藍金甲、白毛領、藍色披巾與大盾。 |
 | 銀葉森語者 | `hero-arcanist-selection-v1.png` | 長棕髮、葉片髮飾、尖耳、柔和綠瞳、綠披風、白綠葉紋甲與自然弓。 |
 | 暮影影行者 | `hero-rogue-selection-v1.png` | 白髮、紫眼、蒼白膚色、黑紫兜帽與輕甲、纖細敏捷輪廓、短刃。 |
-| 荒野大酋長 | `hero-chief-selection-v2.png` | 綠膚、黑色辮髮與鬍鬚、獠牙、額頭紅紋、巨型結實身形、紅黑皮甲與毛皮。 |
+| 荒野大酋長 | `hero-chief-selection-v3.png` | 綠膚、灰黑野人長髮、舊傷與灰鬍渣、獠牙、寬肩窄腰的露肌身形、不對稱拼補破甲、深青披風；不沿用舊紅紋與旗徽。 |
 
 `assets/td/story/chapter1-hero-continuity-v1.png` 是上述四位英雄的統一劇情製作參考圖。所有第一章新劇情 Key Art 都必須用它與相對應原版基準圖做角色參考。
 

@@ -1,7 +1,7 @@
 (function(ns){
   'use strict';
   const proto=ns.systems.ArtSystem.prototype;
-  const prior={drawHero:proto.drawHero,coreStatus:proto.coreStatus,failedAssets:proto.failedAssets,retryFailed:proto.retryFailed};
+  const prior={drawHero:proto.drawHero,failedAssets:proto.failedAssets,retryFailed:proto.retryFailed};
   const rows={idle:0,walk:1,attack:2,cast:3,hit:0};
   proto.preloadHeroEvolution=function(type,rank){
     const form=ns.systems.HeroEvolutionSpriteAtlas[type]?.[rank];if(!form)return null;
@@ -10,7 +10,7 @@
   };
   proto.drawHeroEvolutionSprite=function(ctx,hero){
     const rank=ns.systems.HeroEvolutionSystem.rank(hero),form=ns.systems.HeroEvolutionSpriteAtlas[hero.classType]?.[rank];
-    if(!form||this.cosmeticEquipped?.['hero:'+hero.classType]||hero.evolutionVisualDisabledRank===rank)return false;
+    if(!form||(this.cosmeticEquipped?.['hero:'+hero.classType]&&this.heroAppearance?.[hero.classType]!=='evolution')||hero.evolutionVisualDisabledRank===rank)return false;
     const atlas=this.preloadHeroEvolution(hero.classType,rank);if(!atlas?.ready)return false;
     const row=rows[hero.state]??0;
     let col=Number.isFinite(hero.frame)?Math.max(0,Math.min(3,Math.floor(hero.frame))):0;
@@ -26,10 +26,7 @@
     return true;
   };
   proto.drawHero=function(ctx,hero){return proto.drawHeroEvolutionSprite.call(this,ctx,hero)||prior.drawHero.call(this,ctx,hero);};
-  proto.coreStatus=function(type){
-    if(ns.systems.HeroEvolutionSpriteAtlas[type]){this.preloadHeroEvolution(type,1);this.preloadHeroEvolution(type,2);}
-    return prior.coreStatus.call(this,type);
-  };
+  // Optional evolution atlases load at trial start or first display, not selection.
   proto.failedAssets=function(){return [...new Set(prior.failedAssets.call(this).concat(Object.values(this.heroEvolutionImages||{}).filter(image=>image.failed)))];};
   proto.retryFailed=function(){prior.retryFailed.call(this);for(const image of Object.values(this.heroEvolutionImages||{}))if(image.failed){image.failed=false;image.attempts=0;this.request(image);}};
 })(globalThis.TowerFrontier);

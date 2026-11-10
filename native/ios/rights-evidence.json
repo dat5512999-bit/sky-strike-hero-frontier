@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "reviewedOn": "2026-11-03",
+  "ownerDeclaration": {
+    "confirmedOn": "2026-11-03",
+    "source": "使用者於本聊天直接確認",
+    "scope": "本專案圖片與生成參考圖",
+    "statement": "沒有使用其他遊戲、網路下載或外包圖片；都是本專案生成或自行繪製。",
+    "externalImagesUsed": false,
+    "limits": "這是使用者的來源聲明，不等於逐檔生成工具證明、排他著作權或無相似性保證；不適用於配音供應商。"
+  },
+  "providerChecks": [
+    {
+      "provider": "Voice-Generator.com",
+      "status": "commercial-statement-confirmed-upstream-voice-unresolved",
+      "sources": [
+        "https://voice-generator.com/text-to-speech/chinese",
+        "https://voice-generator.com/terms"
+      ],
+      "finding": "中文工具頁允許生成音訊商用；條款稱音色由 Kokoro 提供並連結 Apache 2.0。專案記錄 zm_yunjian；網頁未提供該音色到具體上游權利的完整對應。",
+      "remaining": "保存生成紀錄，確認音色供應鏈；不將模型授權直接當成輸出或第三方權利保證。未代用戶聯絡供應商。"
+    },
+    {
+      "provider": "OpenAI",
+      "status": "output-ownership-clause-confirmed-input-rights-unresolved",
+      "sources": [
+        "https://openai.com/policies/terms-of-use/",
+        "https://openai.com/policies/services-agreement/"
+      ],
+      "finding": "條款在雙方之間、法律容許範圍內將輸出權利歸使用者，但使用者仍須有輸入素材權利；輸出可能相似且不含第三方權利保證。",
+      "remaining": "核對生成當時帳號與適用條款，補原始參考圖權利；不因提示詞記錄而自動核准。"
+    }
+  ],
+  "proceduralAudio": {
+    "sources": [
+      "src/td/app/StoryMusic.js",
+      "docs/STORY_MUSIC_V1.md",
+      "src/td/systems/GameAudio.js",
+      "src/td/systems/CharacterAudioMaterials.js",
+      "src/td/systems/BullAudioMaterials.js"
+    ],
+    "finding": "劇情配樂的九組和弦與旋律由 StoryMusic Web Audio 程式合成，文件記載未用外部歌曲。戰鬥音效有專案內合成程式，須與五個外部生成 WAV 分開記錄。",
+    "status": "source-code-located-owner-confirmation-pending"
+  },
+  "visualInspections": [
+    {
+      "path": "assets/td/shop/starshield-patrol-portrait-v1.png",
+      "sha256": "af8cfc39341a4eea547ba117eaee31aacee1bcafe734e60eddbafb53a096fe50",
+      "reviewedOn": "2026-11-03",
+      "observation": "本輪檢視封面，未辨識到可直接確認的第三方標誌；不是無侵權保證，動作圖與參考素材待核對。",
+      "releaseApproved": false
+    },
+    {
+      "path": "assets/td/shop/tigerstripe-vanguard-portrait-v1.png",
+      "sha256": "8534bcc15920dc2a8e38de369f8b783c357917a1892ee2c5b96b1a2052e97a3d",
+      "reviewedOn": "2026-11-03",
+      "observation": "本輪檢視封面，未辨識到可直接確認的第三方標誌；不是無侵權保證，動作圖與參考素材待核對。",
+      "releaseApproved": false
+    },
+    {
+      "path": "assets/td/shop/neon-webrunner-portrait-v1.png",
+      "sha256": "dc18c263943b45bb69af549b73c83150d877dea2a3737c5ad8a440180e3565c5",
+      "reviewedOn": "2026-11-03",
+      "observation": "本輪檢視封面，未辨識到可直接確認的第三方標誌；不是無侵權保證，動作圖與參考素材待核對。",
+      "releaseApproved": false
+    },
+    {
+      "path": "assets/td/shop/night-owl-warden-portrait-v1.png",
+      "sha256": "ff7ee972a724f0700166e5e9c2a5b470d1ed7aaa67b26e8766bdba0a22686a6a",
+      "reviewedOn": "2026-11-03",
+      "observation": "本輪檢視封面，未辨識到可直接確認的第三方標誌；不是無侵權保證，動作圖與參考素材待核對。",
+      "releaseApproved": false
+    },
+    {
+      "path": "assets/td/shop/north-rescue-portrait-v1.png",
+      "sha256": "6c371d7aef956085adc2f9b9ed3697766074d2583da0d1c8738cdef2190ca86d",
+      "reviewedOn": "2026-11-03",
+      "observation": "本輪檢視封面，未辨識到可直接確認的第三方標誌；不是無侵權保證，動作圖與參考素材待核對。",
+      "releaseApproved": false
+    },
+    {
+      "path": "assets/td/shop/abyss-response-portrait-v1.png",
+      "sha256": "f3df908a9e36d2f5457ee87bdadcfe02d56ea12ce344872ddbe9ff292b94d219",
+      "reviewedOn": "2026-11-03",
+      "observation": "本輪檢視封面，未辨識到可直接確認的第三方標誌；不是無侵權保證，動作圖與參考素材待核對。",
+      "releaseApproved": false
+    },
+    {
+      "path": "assets/td/shop/steel-foreman-portrait-v1.png",
+      "sha256": "b3ea911b9aff9016b772121afb0abd91fabd2ba98125308707bb271815e39175",
+      "reviewedOn": "2026-11-03",
+      "observation": "本輪檢視封面，未辨識到可直接確認的第三方標誌；不是無侵權保證，動作圖與參考素材待核對。",
+      "releaseApproved": false
+    },
+    {
+      "path": "assets/td/shop/special-maintenance-portrait-v1.png",
+      "sha256": "174648abfcebd9de323f1145c6487e30d4d70bc682db1f856e7803a8be9a199a",
+      "reviewedOn": "2026-11-03",
+      "observation": "本輪檢視封面，未辨識到可直接確認的第三方標誌；不是無侵權保證，動作圖與參考素材待核對。",
+      "releaseApproved": false
+    }
+  ]
+}

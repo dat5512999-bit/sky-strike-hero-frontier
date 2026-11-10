@@ -52,6 +52,7 @@
     }
     show(page){if(page!=='story-cards')this.storyMusic?.stop();this.page=page;this.game.ui.professionScreen.hidden=true;this.root.hidden=false;this.shell.inert=true;document.body.dataset.appPage=page;this.render();}
     applyCosmetics(){
+      ns.systems.HeroAppearanceSystem.bind(this.game,this.store.adapter('presentation'));
       const raw=this.store.current().data['shop:state'];let state;
       try{state=raw?JSON.parse(raw):null;}catch{state=null;}
       const owned=new Set(state?.ownedSkins||[]),equipped=state?.equippedSkins||{},valid={};
@@ -217,7 +218,7 @@
       else if(this.page==='settings'){const test=this.store.state.profiles.test;content='<div class="section-heading"><small>PLAYER PROFILES</small><h1>玩家進度與管理者檔案</h1><p>目前：'+label+'。不同檔案的進度、裝備、戰績與中途存檔皆獨立。</p></div><div class="settings-grid"><article class="journey-card"><h2>管理者遊玩</h2><p>保留原有紀錄，可使用所有英雄、軍團、地圖與難度。故事仍記錄實際通關進度。</p>'+b('admin','切換管理者')+'</article><article class="journey-card"><h2>一般玩家進度</h2><p>'+(test?'現有第 '+test.round+' 輪 · '+escape(test.startedVersion):'從王國與雷恩開始，體驗正常解鎖流程。')+'</p>'+ (test?b('test','繼續此輪遊玩'):'')+b('new-round','開始新一輪遊玩',null,'gold')+'</article><article class="journey-card"><h2>備份與還原</h2><p>備份包含管理者、一般玩家與封存輪次。匯入會先保存目前資料。</p>'+b('export','匯出完整備份')+'<label class="import-label">匯入備份<input type="file" id="profile-import" accept="application/json"></label></article><article class="journey-card"><h2>封存進度</h2><p>每次開新一輪都保留上一輪，可回復繼續遊玩。</p>'+ (this.store.state.archives.map(a=>b('restore','回復 ROUND '+a.round+' · '+escape(a.startedVersion),String(a.round))).join('')||'<p>尚無封存紀錄</p>')+'</article><article class="journey-card"><h2>遊戲程式更新</h2><p>畫面仍是舊版時，重新取得新版程式；保留進度、購買紀錄與裝備。</p><a class="import-label" href="update.html" target="_top">更新並重新開啟</a></article></div>';}
       else if(this.page==='confirm-round'){content='<article class="confirm-card"><small>NEW TEST ROUND</small><h1>從全新玩家重新開始</h1><p>目前玩家進度會封存。新一輪將重設故事、解鎖、戰績與中途存檔；管理者紀錄完整保留。</p>'+b('settings','取消')+b('confirm-round','封存並開始新一輪',null,'gold')+'</article>';}
       else if(this.page==='wallet'){content='<article class="confirm-card"><small>ACCOUNT WALLET</small><h1>造型帳戶</h1><p>帳戶金幣：'+p.wallet.gold.toLocaleString()+'　鑽石：'+p.wallet.diamonds.toLocaleString()+'</p><p>此餘額跨場保存，供造型等外觀內容使用，與戰鬥中的建造金幣分開。</p><p>正式貨幣取得與消費尚未開放；商城使用獨立試用水晶，購買紀錄保存於目前玩家檔案。</p>'+b('home','返回大廳',null,'gold')+'</article>';}
-      else if(this.page==='skin-preview'||this.page==='limited-preview'){const limited=this.page==='limited-preview';content='<article class="cosmetic-preview"><img src="assets/td/lobby/'+(limited?'../shop/bone-chief-portrait-v1.png':'skin-frost-v1.png')+'" alt="'+(limited?'冥骨帝王造型':'霜華之誓造型概念')+'"><section><small>'+(limited?'期間限定企劃':'新造型預告')+'</small><h1>'+(limited?'冥骨帝王':'森語者 · 霜華之誓')+'</h1><p>外觀現已在商城開放使用試用水晶購買及裝備。無真實付款。</p><p>造型不增加戰鬥能力。</p>'+b('home','返回大廳',null,'blue')+'</section></article>';}
+      else if(this.page==='skin-preview'||this.page==='limited-preview'){const limited=this.page==='limited-preview';content='<article class="cosmetic-preview"><img src="assets/td/lobby/'+(limited?'../shop/bone-chief-portrait-v2.png':'skin-frost-v1.png')+'" alt="'+(limited?'冥骨帝王造型':'霜華之誓造型概念')+'"><section><small>'+(limited?'期間限定企劃':'新造型預告')+'</small><h1>'+(limited?'冥骨帝王':'森語者 · 霜華之誓')+'</h1><p>外觀現已在商城開放使用試用水晶購買及裝備。無真實付款。</p><p>造型不增加戰鬥能力。</p>'+b('home','返回大廳',null,'blue')+'</section></article>';}
       else {const names={codex:'世界圖鑑',shop:'商城',ranking:'排行榜',friends:'好友'};content='<article class="confirm-card"><small>COMING NEXT</small><h1>'+names[this.page]+'</h1><p>此功能尚未開放。當前版本已提供故事示範任務與自由遠征。</p>'+b('home','返回大廳',null,'gold')+'</article>';}
       if(this.page==='settings'){const card='<article class="journey-card td-access-card"><h2>畫面與動態</h2><fieldset class="td-access-controls"><legend>辨識設定</legend><label><input type="checkbox" data-access-option="contrast" '+(document.body.dataset.accessContrast==='on'?'checked':'')+'> 提高文字與按鈕對比</label><label><input type="checkbox" data-access-option="text" '+(document.body.dataset.accessText==='on'?'checked':'')+'> 放大戰鬥資訊文字</label><label><input type="checkbox" data-access-option="effects" '+(document.body.dataset.accessEffects==='reduced'?'checked':'')+'> 減少裝飾特效與動態</label><small>設定在大廳與戰場共用，並保存在此裝置。</small></fieldset></article>';content=content.replace(/<\/div>$/,card+'</div>');}
       this.root.dataset.page=this.page;
@@ -279,7 +280,7 @@
   const renderWithRelease=FrontierApp.prototype.render;
   FrontierApp.prototype.render=function(){
     renderWithRelease.call(this);
-    const release=this.root.querySelector('.profile-badge small');if(release)release.textContent='HERO FRONTIER · v0.85.100';
+    const release=this.root.querySelector('.profile-badge small');if(release)release.textContent='HERO FRONTIER · v0.85.105';
     if(this.page==='story'&&this.storyMode!=='legacy'){
       const list=this.root.querySelector('.story-node-list'),selected=list?.querySelector('.story-node.selected');
       if(selected&&list){const item=selected.getBoundingClientRect(),box=list.getBoundingClientRect();if(item.bottom>box.bottom||item.top<box.top)list.scrollTop+=item.top-box.top;}

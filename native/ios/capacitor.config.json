@@ -1,0 +1,6 @@
+{
+  "appId": "com.example.herofrontier",
+  "appName": "英雄邊境",
+  "webDir": "www",
+  "ios": { "contentInset": "automatic" }
+}

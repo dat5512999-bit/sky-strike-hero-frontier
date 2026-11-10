@@ -53,8 +53,8 @@ test('four skill renderers use painted layers, cap work and preserve combat stat
  assert.equal(ns.systems.GoblinPresentation.draw(ctx,{type:'goblin-cool'},g.hero),false);
 });
 test('failed painted assets are tracked/retried and building reload invalidates preview cache',()=>{
- const {ns,context}=load();context.Image=class {addEventListener(k,cb){this[k+'Listener']=cb;}};
- const art=new ns.systems.ArtSystem(),requests=[];art.request=image=>requests.push(image);
+ const {ns,context}=load();context.Image=class {addEventListener(k,cb){this[k+'Listener']=cb;}};context.setTimeout=()=>1;context.clearTimeout=()=>{};
+ const art=new ns.systems.ArtSystem(),requests=[];art.request=image=>requests.push(image);art.assetStore.request=image=>requests.push(image);
  const image=art.goblinBuildingImage('a');art.previewCache=new Map([['building:goblinSiege',{}],['unit:hunter',{}]]);
  image.loadListener();assert.equal(art.previewCache.has('building:goblinSiege'),false);assert.equal(art.previewCache.has('unit:hunter'),true);
  ns.systems.GoblinPresentation.assets(art);image.failed=true;art.goblinSpellAtlas.failed=true;art.goblinSkillIcons.failed=true;

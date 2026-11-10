@@ -13,6 +13,7 @@ a { color:#e6ca91; text-underline-offset:4px; } button,select { font:inherit; } 
 .lab-heroes { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:0 0 20px; }
 .lab-hero { display:flex; gap:13px; align-items:center; text-align:left; padding:8px; min-width:0; background:linear-gradient(110deg,#15232c,#09111a); }
 .lab-hero img { width:56px; height:62px; object-fit:cover; object-position:50% 12%; border:1px solid #bda67977; }
+body[data-hero="chief"] .lab-before img { object-position:50% 0%; }
 .lab-hero span { min-width:0; } .lab-hero strong { display:block; font:18px/1.5 Georgia,'PMingLiU',serif; letter-spacing:1px; color:var(--look-accent); }
 .lab-hero small { display:block; color:#c0c4c8; font-size:10px; } .lab-hero[aria-pressed=true] { border-color:var(--look-accent); box-shadow:inset 0 0 22px #c7a26818; }
 #after-name { font-weight:400; } body[data-ready=loading] .lab-portraits,body[data-ready=loading] .lab-stages { opacity:.5; }

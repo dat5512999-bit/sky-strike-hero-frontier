@@ -29,9 +29,9 @@
       portrait: image('shop/neon-webrunner-portrait-v1'), selectionArt: image('shop/neon-webrunner-portrait-v1'), battlefieldSprite: sprite('shop/neon-webrunner-actions-v1'), skillVfx: null,
       summonAppearance: null, animation: sprite('shop/neon-webrunner-actions-v1', 'animation'), voice: null
     }),
-    skin('night-owl-warden', '夜梟巡守', '大酋長 · 紫月守門人', 'hero', 'chief', 'legendary', 1680, image('shop/night-owl-warden-portrait-v1'), {
-      portrait: image('shop/night-owl-warden-portrait-v1'), selectionArt: image('shop/night-owl-warden-portrait-v1'), battlefieldSprite: sprite('shop/night-owl-warden-actions-v1'), skillVfx: null,
-      summonAppearance: null, animation: sprite('shop/night-owl-warden-actions-v1', 'animation'), voice: null
+    skin('night-owl-warden', '夜梟巡守', '大酋長 · 紫月守門人', 'hero', 'chief', 'legendary', 1680, image('shop/night-owl-warden-portrait-v2'), {
+      portrait: image('shop/night-owl-warden-portrait-v2'), selectionArt: image('shop/night-owl-warden-portrait-v2'), battlefieldSprite: sprite('shop/night-owl-warden-actions-v2'), skillVfx: null,
+      summonAppearance: null, animation: sprite('shop/night-owl-warden-actions-v2', 'animation'), voice: null
     }),
     skin('north-rescue', '北境搜救犬', '霜牙・凜 · 極地救援', 'hero', 'frostland', 'legendary', 1480, image('shop/north-rescue-portrait-v1'), {
       portrait: image('shop/north-rescue-portrait-v1'), selectionArt: image('shop/north-rescue-portrait-v1'), battlefieldSprite: sprite('shop/north-rescue-actions-v1'), skillVfx: null,
@@ -62,9 +62,9 @@
       portrait: image('shop/moon-portrait-v1'), selectionArt: image('shop/moon-portrait-v1'), battlefieldSprite: sprite('shop/moon-actions-v1'), skillVfx: null,
       summonAppearance: null, animation: sprite('shop/moon-actions-v1','animation'), voice: null
     }),
-    skin('bone-emperor', '冥骨帝王', '大酋長 · 幽冥王座', 'hero', 'chief', 'legendary', 1280, image('shop/bone-chief-portrait-v1'), {
-      portrait: image('shop/bone-chief-portrait-v1'), selectionArt: image('shop/bone-chief-portrait-v1'), battlefieldSprite: { type: 'sprite', src: 'assets/td/shop/bone-chief-motion-v1.png', columns: 4, rows: 2, frames: 4 }, skillVfx: null,
-      summonAppearance: null, animation: { type: 'animation', src: 'assets/td/shop/bone-chief-attack-v1.png', columns: 2, rows: 2, frames: 2 }, voice: null
+    skin('bone-emperor', '冥骨帝王', '大酋長 · 幽冥王座', 'hero', 'chief', 'legendary', 1280, image('shop/bone-chief-portrait-v2'), {
+      portrait: image('shop/bone-chief-portrait-v2'), selectionArt: image('shop/bone-chief-portrait-v2'), battlefieldSprite: { type: 'sprite', src: 'assets/td/shop/bone-chief-actions-v2.png', columns: 4, rows: 4, frames: 4 }, skillVfx: null,
+      summonAppearance: null, animation: { type: 'animation', src: 'assets/td/shop/bone-chief-actions-v2.png', columns: 4, rows: 4, frames: 4 }, voice: null
     }),
     skin('eclipse-court', '日蝕王庭', '王國守望 · 黑金軍團', 'faction', 'hunter', 'legendary', 1680, image('shop/eclipse-court-concept-v1'), {
       soldierAppearance: image('combat-art/eclipse-units-a-v1'), towerAppearance: image('combat-art/eclipse-buildings-v1'), banner: image('shop/eclipse-court-concept-v1'), buildVfx: null, attackVfx: null

@@ -2,8 +2,8 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),{rgba}=require('./png-pixels.cjs');
 
 function art(){
-  const c=vm.createContext({Image:class{}});c.globalThis=c;
-  for(const f of ['namespace','config','systems/SpriteFrameBounds','systems/ArtSystem'])vm.runInContext(fs.readFileSync('src/td/'+f+'.js','utf8'),c);
+  const c=vm.createContext({Image:class{},setTimeout:()=>1,clearTimeout(){}});c.globalThis=c;
+  for(const f of ['namespace','config','systems/SpriteFrameBounds','systems/ArtAssetStore','systems/ArtSystem'])vm.runInContext(fs.readFileSync('src/td/'+f+'.js','utf8'),c);
   const A=c.TowerFrontier.systems.ArtSystem;return {A,a:new A()};
 }
 

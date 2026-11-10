@@ -3,7 +3,7 @@
   const KEY='heroFrontierScoreRecordsV1';
   const maps={beginner:['新手谷地','assets/td/beginner-valley-v2.png'],twinpass:['雙隘口要塞','assets/td/twin-pass-v1.png'],autumn:['暮秋遺跡','assets/td/autumn-ruins-v1.png']};
   Object.assign(maps,{silverleaf:['銀葉溪谷','assets/td/silverleaf-valley-v4.png'],shadowfall:['暮影舊城','assets/td/shadowfall-ruins-v3.png'],frostborn:['冰原裂谷','assets/td/frostborn-chasm-v3.png']});
-  const heroes={hunter:['守誓者・雷恩','assets/td/opening/hero-hunter-selection-v1.png'],arcanist:['森語者・希爾芙','assets/td/opening/hero-arcanist-selection-v1.png'],rogue:['影行者・維菈','assets/td/opening/hero-rogue-selection-v1.png'],chief:['大酋長・戈爾','assets/td/opening/hero-chief-selection-v2.png'],goblin:['銅齒・奇克','assets/td/goblin-chief-engineer-v1.png']};
+  const heroes={hunter:['守誓者・雷恩','assets/td/opening/hero-hunter-selection-v1.png'],arcanist:['森語者・希爾芙','assets/td/opening/hero-arcanist-selection-v1.png'],rogue:['影行者・維菈','assets/td/opening/hero-rogue-selection-v1.png'],chief:['大酋長・戈爾','assets/td/opening/hero-chief-selection-v3.png'],goblin:['銅齒・奇克','assets/td/goblin-chief-engineer-v1.png']};
   heroes.frostland=['霜牙・凜','assets/td/frostland/hero-selection-v1.png'];
   const factions={frostland:'霜原盟族',hunter:'王國遠征軍',arcanist:'月影守望者',rogue:'暗影軍團',wild:'荒野部族',goblin:'地精工程團'};
   const difficulties={story:'遠征見習',standard:'邊境守衛',veteran:'軍團老兵',calamity:'災厄遠征'};

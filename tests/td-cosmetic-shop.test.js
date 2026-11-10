@@ -14,7 +14,7 @@ test('shop releases crossworld and legacy hero skins plus the kingdom colorway w
   assert.equal(catalog.find(s=>s.id==='eclipse-court').targetId,'hunter');
   assert.equal(catalog.find(s=>s.id==='arcane-echo').availability.status,'locked');
   const store=await previewStore();for(const skin of catalog)assert.equal(store.status(skin.id),['goblin-contractors',...crossworld,...secondLooks,'astral-oath','solar-lion','crimson-fox','bone-emperor','thunder-king','eclipse-court'].includes(skin.id)?'available':'locked');
-  assert.equal(catalog.find(s=>s.id==='bone-emperor').cover.src,'assets/td/shop/bone-chief-portrait-v1.png');
+  assert.equal(catalog.find(s=>s.id==='bone-emperor').cover.src,'assets/td/shop/bone-chief-portrait-v2.png');
 });
 test('all referenced preview assets exist and cosmetic schema rejects gameplay fields',()=>{
   for(const skin of catalog){schema.validate(skin);for(const asset of [skin.cover,...Object.values(skin.slots)].filter(Boolean))assert.ok(fs.existsSync(path.join(__dirname,'..',asset.src)),asset.src);}

@@ -1,0 +1,77 @@
+{
+  "version": "0.85.102",
+  "mode": "built-in imagegen edit",
+  "transparent_background": true,
+  "recordKind": "Reproduction design specification, not a verbatim API transcript",
+  "commonPrompt": "Identity-preserving production transparent 4x4 game sprite sheet. Reference 1 is the original playable hero actions; reference 2 is its old evolved form. Preserve original cartoon face and large-head short-body proportions. Large readable surfaces, strong outlines, saturated colors; not realistic. Exactly 16 full-body poses: idle, walk, attack, standing cast, four frames each. Elevated three-quarter view facing right, consistent size, feet grounded, complete weapon inside each frame with clear gutters. True RGBA transparent background, no floor, shadows, text, grid, badges or separate projectiles.",
+  "heroes": {
+    "dwarf": {
+      "identity": "Short stout, oversized dark helmet, bright orange two-part braided beard, broad torso and short legs.",
+      "awakened": "Silver-steel armor, turquoise runes, short dark teal cloak, broad pauldrons and square hammer.",
+      "transcendent": "Black and antique-gold fortress armor, garnet short cape and tabard, orange rune square hammer."
+    },
+    "goblin": {
+      "identity": "Yellow-green skin, large pointed ears, oversized head, hooked nose, round cyan goggles over eyes, leather cap, short legs and round boots.",
+      "awakened": "Brown workshop coat, copper-steel shoulders, twin cyan tanks, chunky wrench.",
+      "transcendent": "Brass and dark-steel power armor, orange chest furnace, twin pistons, boots and wrench; clearly a goblin, not a robot."
+    }
+  },
+  "assets": [
+    {
+      "type": "goblin",
+      "stage": "awakened",
+      "references": [
+        "assets/td/goblin/hero-actions-v2.png",
+        "assets/td/evolution/goblin-awakened-actions-v1.png"
+      ],
+      "output": "assets/td/evolution/goblin-awakened-actions-v2.png",
+      "validation": {
+        "frames": 16,
+        "cropErrors": [],
+        "omittedSolidPixels": 0
+      }
+    },
+    {
+      "type": "goblin",
+      "stage": "transcendent",
+      "references": [
+        "assets/td/goblin/hero-actions-v2.png",
+        "assets/td/evolution/goblin-transcendent-actions-v1.png"
+      ],
+      "output": "assets/td/evolution/goblin-transcendent-actions-v2.png",
+      "validation": {
+        "frames": 16,
+        "cropErrors": [],
+        "omittedSolidPixels": 0
+      }
+    },
+    {
+      "type": "dwarf",
+      "stage": "awakened",
+      "references": [
+        "assets/td/dwarf/hero-actions-v2.png",
+        "assets/td/evolution/dwarf-awakened-actions-v1.png"
+      ],
+      "output": "assets/td/evolution/dwarf-awakened-actions-v2.png",
+      "validation": {
+        "frames": 16,
+        "cropErrors": [],
+        "omittedSolidPixels": 0
+      }
+    },
+    {
+      "type": "dwarf",
+      "stage": "transcendent",
+      "references": [
+        "assets/td/dwarf/hero-actions-v2.png",
+        "assets/td/evolution/dwarf-transcendent-actions-v1.png"
+      ],
+      "output": "assets/td/evolution/dwarf-transcendent-actions-v2.png",
+      "validation": {
+        "frames": 16,
+        "cropErrors": [],
+        "omittedSolidPixels": 0
+      }
+    }
+  ]
+}

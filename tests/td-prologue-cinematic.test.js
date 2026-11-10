@@ -120,7 +120,7 @@ test('first mission keeps its continuity-approved Chapter I key art within the f
     assert.ok(fs.statSync(file).size > 100000, file + ' must be a real key-art asset');
   }
   const continuity = fs.readFileSync('docs/STORY_CHARACTER_CONTINUITY_V1.md', 'utf8');
-  for (const source of ['hero-hunter-selection-v1.png', 'hero-arcanist-selection-v1.png', 'hero-rogue-selection-v1.png', 'hero-chief-selection-v2.png']) assert.ok(continuity.includes(source), source);
+  for (const source of ['hero-hunter-selection-v1.png', 'hero-arcanist-selection-v1.png', 'hero-rogue-selection-v1.png', 'hero-chief-selection-v3.png']) assert.ok(continuity.includes(source), source);
 });
 test('every playable Chapter I mission has five understandable, spoiler-safe story beats', () => {
   const missions = setup().ns.systems.StoryCatalog.missions.filter(mission => mission.chapter === 1);

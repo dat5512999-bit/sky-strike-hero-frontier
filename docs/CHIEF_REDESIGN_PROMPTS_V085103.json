@@ -1,0 +1,447 @@
+{
+  "version": "0.85.103",
+  "purpose": "User-approved chief wild-hair redesign and exact sprite generation prompts",
+  "approvedOn": "2026-11-05",
+  "mode": "built-in imagegen",
+  "portrait": {
+    "path": "assets/td/opening/hero-chief-selection-v3.png",
+    "source": "exec-f599ff2c-84ff-44ce-983d-b7967d86dcae.png",
+    "prompt": "Use case: precise-object-edit / identity-preserve. EDIT ONLY THE HAIR of the original orc chieftain in image1. User wants a WILD UNTAMED SAVAGE hairstyle, not a neat soldier haircut or groomed human hairstyle. Replace the short spiky undercut with coarse thick charcoal-black hair streaked with iron-gray, irregular rough shoulder-length locks falling over the back of neck and around the temples. Untamed wind-tossed mane with natural asymmetry, a few rough locks loosely caught behind the head with ONE worn plain leather cord, other locks falling free. Hairline uneven and rugged, no clean fade, no neatly shaved sides, no salon styling, no elegant ponytail, no ornate braids or beads, no dreadlocks, no horns, no feathers or skull ornaments. Keep hair away from most of the face so the amber eyes, scar and tusks remain clearly visible. It should feel like a battle-hardened wilderness chieftain who cuts his own hair with a blade and ties it for battle, fierce and feral rather than fashionable. ABSOLUTELY PRESERVE his exact face, age, expression, scars, tusks, ears, gray chin stubble, green skin, muscular exposed chest and arm, athletic narrow-waist body, posture, broken asymmetrical patchwork armor, repaired teal cloak, axe, background, framing, lighting and premium painterly quality. Do not alter his body or add more armor. Do not change any symbols or add insignia, text or logos. Only the head hair silhouette, length, rough texture and gray strands change, naturally integrating with existing light.",
+    "reconstructedPrompt": false
+  },
+  "sprites": [
+    {
+      "stage": "base",
+      "design": "BASE form: exact APPROVED costume and weapon as reference, retain exposed muscles and patched old armor, no additions.",
+      "prompt": "Use case: identity-preserve / style-transfer. Production transparent game SPRITE SHEET for the approved ORIGINAL orc chieftain Gor. Image1 is the approved identity and costume reference. Preserve the weathered angular bestial ORC face, green skin, amber eyes, TWO lower tusks, pointed ears, scars, charcoal-black and gray coarse wild shoulder-length untamed hair, gray chin stubble, muscular exposed right chest and arm, athletic broad shoulders and narrow waist, long powerful legs. Same asymmetrical broken repaired dark iron / bronze armor plates, worn leather cross strap, torn dark teal cloak, patched uneven war skirt, one metal shoulder guard and other bare shoulder. Same single-bladed crescent heavy battle axe with straight haft. All badges and emblems absent. No red black faction colors, skulls, horns, faction symbols or recognizable franchise designs. Translate premium portrait into readable 90px tall painted game character with slightly emphasized face, bold clean silhouette, large simple surfaces rather than microscopic texture. EXACTLY SIXTEEN full-body poses in a clean FOUR columns FOUR rows square sheet; equal-scale characters, front three-quarter elevated isometric camera, all face RIGHT. Row1 four standing idle frames; row2 four walking frames; row3 four axe-attack phases: raise above head, downward strike, follow-through, recover; row4 four standing cast/warcry frames: free hand rise, open palm, point forward, recovery, axe retained in weapon hand. All poses fully grounded and same body scale, do NOT kneel or lie down. Each entire body, hair, cloak and complete axe fully INSIDE its own cell, characters occupy central 65-70 percent of cells, ample at least 25px transparent gaps around every pose and outer sheet edges. No overlap or detached axe. TRUE RGBA TRANSPARENT background, no floor, ground, shadows, VFX, projectiles, text, frames, grids, logos or decorations outside the character. BASE form: exact APPROVED costume and weapon as reference, retain exposed muscles and patched old armor, no additions."
+    },
+    {
+      "stage": "awakened",
+      "design": "AWAKENED form: keep exact same face, HAIR and exposed muscular chest. Upgrade only armor to reinforced dark teal and antique SILVER edges, add a few prominent pale TURQUOISE inlay lines on surviving armor plates and axe blade, broader but asymmetrical silver-bronze shoulder plate, repaired teal cloak with narrow silver edging. Still visibly broken patchwork and muscular, no ceremonial full chest armor, no horns or symbols.",
+      "prompt": "Use case: identity-preserve / style-transfer. Production transparent game SPRITE SHEET for the approved ORIGINAL orc chieftain Gor. Image1 is the approved identity and costume reference. Preserve the weathered angular bestial ORC face, green skin, amber eyes, TWO lower tusks, pointed ears, scars, charcoal-black and gray coarse wild shoulder-length untamed hair, gray chin stubble, muscular exposed right chest and arm, athletic broad shoulders and narrow waist, long powerful legs. Same asymmetrical broken repaired dark iron / bronze armor plates, worn leather cross strap, torn dark teal cloak, patched uneven war skirt, one metal shoulder guard and other bare shoulder. Same single-bladed crescent heavy battle axe with straight haft. All badges and emblems absent. No red black faction colors, skulls, horns, faction symbols or recognizable franchise designs. Translate premium portrait into readable 90px tall painted game character with slightly emphasized face, bold clean silhouette, large simple surfaces rather than microscopic texture. EXACTLY SIXTEEN full-body poses in a clean FOUR columns FOUR rows square sheet; equal-scale characters, front three-quarter elevated isometric camera, all face RIGHT. Row1 four standing idle frames; row2 four walking frames; row3 four axe-attack phases: raise above head, downward strike, follow-through, recover; row4 four standing cast/warcry frames: free hand rise, open palm, point forward, recovery, axe retained in weapon hand. All poses fully grounded and same body scale, do NOT kneel or lie down. Each entire body, hair, cloak and complete axe fully INSIDE its own cell, characters occupy central 65-70 percent of cells, ample at least 25px transparent gaps around every pose and outer sheet edges. No overlap or detached axe. TRUE RGBA TRANSPARENT background, no floor, ground, shadows, VFX, projectiles, text, frames, grids, logos or decorations outside the character. AWAKENED form: keep exact same face, HAIR and exposed muscular chest. Upgrade only armor to reinforced dark teal and antique SILVER edges, add a few prominent pale TURQUOISE inlay lines on surviving armor plates and axe blade, broader but asymmetrical silver-bronze shoulder plate, repaired teal cloak with narrow silver edging. Still visibly broken patchwork and muscular, no ceremonial full chest armor, no horns or symbols."
+    },
+    {
+      "stage": "transcendent",
+      "design": "TRANSCENDENT form: keep same recognizable face, wild shoulder-length HAIR and exposed muscular chest. More impressive asymmetrical BLACKENED IRON and aged GOLD reinforced shoulder plate and bracers, torn DEEP TEAL cloak with heavy gold edging and bronze shoulder chain, larger refined crescent axe with narrow AMBER metal inlay. Keep incomplete patched breastplate and visible chest, imposing not fat, no glowing aura, no horns, no skulls, no symbol or crown.",
+      "prompt": "Use case: identity-preserve / style-transfer. Production transparent game SPRITE SHEET for the approved ORIGINAL orc chieftain Gor. Image1 is the approved identity and costume reference. Preserve the weathered angular bestial ORC face, green skin, amber eyes, TWO lower tusks, pointed ears, scars, charcoal-black and gray coarse wild shoulder-length untamed hair, gray chin stubble, muscular exposed right chest and arm, athletic broad shoulders and narrow waist, long powerful legs. Same asymmetrical broken repaired dark iron / bronze armor plates, worn leather cross strap, torn dark teal cloak, patched uneven war skirt, one metal shoulder guard and other bare shoulder. Same single-bladed crescent heavy battle axe with straight haft. All badges and emblems absent. No red black faction colors, skulls, horns, faction symbols or recognizable franchise designs. Translate premium portrait into readable 90px tall painted game character with slightly emphasized face, bold clean silhouette, large simple surfaces rather than microscopic texture. EXACTLY SIXTEEN full-body poses in a clean FOUR columns FOUR rows square sheet; equal-scale characters, front three-quarter elevated isometric camera, all face RIGHT. Row1 four standing idle frames; row2 four walking frames; row3 four axe-attack phases: raise above head, downward strike, follow-through, recover; row4 four standing cast/warcry frames: free hand rise, open palm, point forward, recovery, axe retained in weapon hand. All poses fully grounded and same body scale, do NOT kneel or lie down. Each entire body, hair, cloak and complete axe fully INSIDE its own cell, characters occupy central 65-70 percent of cells, ample at least 25px transparent gaps around every pose and outer sheet edges. No overlap or detached axe. TRUE RGBA TRANSPARENT background, no floor, ground, shadows, VFX, projectiles, text, frames, grids, logos or decorations outside the character. TRANSCENDENT form: keep same recognizable face, wild shoulder-length HAIR and exposed muscular chest. More impressive asymmetrical BLACKENED IRON and aged GOLD reinforced shoulder plate and bracers, torn DEEP TEAL cloak with heavy gold edging and bronze shoulder chain, larger refined crescent axe with narrow AMBER metal inlay. Keep incomplete patched breastplate and visible chest, imposing not fat, no glowing aura, no horns, no skulls, no symbol or crown."
+    }
+  ],
+  "forms": {
+    "base": {
+      "path": "assets/td/wild-chief-actions-v2.png",
+      "width": 1254,
+      "height": 1254,
+      "visible": 291,
+      "worldHeight": 92,
+      "frames": [
+        [
+          68,
+          12,
+          214,
+          291,
+          164,
+          299
+        ],
+        [
+          373,
+          6,
+          206,
+          297,
+          466,
+          299
+        ],
+        [
+          673,
+          13,
+          209,
+          287,
+          770,
+          296
+        ],
+        [
+          984,
+          13,
+          198,
+          289,
+          1076,
+          298
+        ],
+        [
+          32,
+          321,
+          254,
+          285,
+          152,
+          602
+        ],
+        [
+          347,
+          321,
+          248,
+          284,
+          449,
+          601
+        ],
+        [
+          644,
+          321,
+          239,
+          286,
+          767,
+          603
+        ],
+        [
+          982,
+          326,
+          195,
+          278,
+          1078,
+          600
+        ],
+        [
+          20,
+          660,
+          256,
+          266,
+          177,
+          922
+        ],
+        [
+          327,
+          616,
+          263,
+          308,
+          471,
+          920
+        ],
+        [
+          675,
+          679,
+          257,
+          244,
+          804,
+          919
+        ],
+        [
+          985,
+          680,
+          238,
+          240,
+          1109,
+          916
+        ],
+        [
+          45,
+          947,
+          236,
+          296,
+          156,
+          1239
+        ],
+        [
+          342,
+          940,
+          266,
+          303,
+          454,
+          1239
+        ],
+        [
+          645,
+          947,
+          278,
+          295,
+          755,
+          1238
+        ],
+        [
+          960,
+          952,
+          230,
+          291,
+          1064,
+          1239
+        ]
+      ]
+    },
+    "awakened": {
+      "path": "assets/td/evolution/chief-awakened-actions-v2.png",
+      "width": 1254,
+      "height": 1254,
+      "visible": 301,
+      "worldHeight": 100,
+      "frames": [
+        [
+          64,
+          6,
+          215,
+          304,
+          171,
+          306
+        ],
+        [
+          374,
+          6,
+          207,
+          304,
+          477,
+          306
+        ],
+        [
+          689,
+          3,
+          196,
+          307,
+          787,
+          306
+        ],
+        [
+          1001,
+          7,
+          192,
+          303,
+          1097,
+          306
+        ],
+        [
+          29,
+          318,
+          245,
+          291,
+          149,
+          605
+        ],
+        [
+          338,
+          320,
+          257,
+          289,
+          468,
+          605
+        ],
+        [
+          656,
+          320,
+          243,
+          289,
+          755,
+          605
+        ],
+        [
+          983,
+          317,
+          208,
+          296,
+          1080,
+          609
+        ],
+        [
+          29,
+          633,
+          248,
+          292,
+          168,
+          921
+        ],
+        [
+          331,
+          619,
+          255,
+          304,
+          463,
+          919
+        ],
+        [
+          645,
+          662,
+          278,
+          266,
+          793,
+          924
+        ],
+        [
+          957,
+          656,
+          279,
+          268,
+          1099,
+          920
+        ],
+        [
+          53,
+          945,
+          228,
+          301,
+          157,
+          1242
+        ],
+        [
+          341,
+          946,
+          264,
+          300,
+          454,
+          1242
+        ],
+        [
+          653,
+          948,
+          272,
+          298,
+          767,
+          1242
+        ],
+        [
+          979,
+          947,
+          222,
+          299,
+          1083,
+          1242
+        ]
+      ]
+    },
+    "transcendent": {
+      "path": "assets/td/evolution/chief-transcendent-actions-v2.png",
+      "width": 1254,
+      "height": 1254,
+      "visible": 296,
+      "worldHeight": 106,
+      "frames": [
+        [
+          32,
+          5,
+          263,
+          302,
+          157,
+          303
+        ],
+        [
+          350,
+          5,
+          250,
+          302,
+          467,
+          303
+        ],
+        [
+          667,
+          6,
+          241,
+          297,
+          776,
+          299
+        ],
+        [
+          970,
+          6,
+          242,
+          300,
+          1085,
+          302
+        ],
+        [
+          24,
+          320,
+          253,
+          294,
+          139,
+          610
+        ],
+        [
+          338,
+          321,
+          247,
+          291,
+          426,
+          608
+        ],
+        [
+          649,
+          321,
+          243,
+          296,
+          758,
+          613
+        ],
+        [
+          962,
+          319,
+          244,
+          295,
+          1089,
+          610
+        ],
+        [
+          26,
+          633,
+          252,
+          296,
+          173,
+          925
+        ],
+        [
+          334,
+          625,
+          279,
+          301,
+          472,
+          922
+        ],
+        [
+          649,
+          658,
+          281,
+          269,
+          798,
+          923
+        ],
+        [
+          956,
+          659,
+          247,
+          275,
+          1090,
+          930
+        ],
+        [
+          23,
+          948,
+          256,
+          300,
+          149,
+          1244
+        ],
+        [
+          322,
+          943,
+          282,
+          306,
+          443,
+          1245
+        ],
+        [
+          642,
+          948,
+          278,
+          300,
+          762,
+          1244
+        ],
+        [
+          958,
+          948,
+          257,
+          300,
+          1077,
+          1244
+        ]
+      ]
+    }
+  },
+  "remainingReview": [
+    "Story composite illustrations and comic pages are not redrawn in this release.",
+    "Purchased skins remain unchanged; no intellectual-property clearance is implied."
+  ],
+  "releaseApproved": false
+}

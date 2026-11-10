@@ -39,5 +39,5 @@ test('軍械推薦依攻速、多目標與空裝備產生排序和可解釋比�
 });
 
 test('荒野英雄與四名新士兵皆有透明四乘四戰鬥圖集',()=>{
-  for(const file of ['wild-chief-actions-v1.png','wild-centaur-actions-v1.png','wild-boar-rider-actions-v1.png','wild-minotaur-actions-v1.png','wild-shaman-actions-v1.png']){const data=fs.readFileSync('assets/td/'+file),w=data.readUInt32BE(16),h=data.readUInt32BE(20);assert.ok(w>1100&&h>1100,file);assert.equal(data[25],6,file);assert.ok(data.length>100000,file);}
+  for(const file of ['wild-chief-actions-v2.png','wild-centaur-actions-v1.png','wild-boar-rider-actions-v1.png','wild-minotaur-actions-v1.png','wild-shaman-actions-v1.png']){const data=fs.readFileSync('assets/td/'+file),w=data.readUInt32BE(16),h=data.readUInt32BE(20);assert.ok(w>1100&&h>1100,file);assert.equal(data[25],6,file);assert.ok(data.length>100000,file);}
 });

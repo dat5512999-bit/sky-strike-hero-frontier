@@ -1,6 +1,15 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
 const {load}=require('./helpers/td-runtime.cjs'),{strictCanvas}=require('./helpers/strict-canvas.cjs'),{rgba}=require('./png-pixels.cjs');
+
+test('release verification follows current dwarf and goblin v2 art while retaining v1 originals',()=>{
+  const files=require('../scripts/verify-pages-release.cjs').releaseFiles();
+  for(const type of ['goblin','dwarf'])for(const stage of ['awakened','transcendent']){
+    const stem='assets/td/evolution/'+type+'-'+stage+'-actions-';
+    assert(files.includes(stem+'v2.png'));assert(!files.includes(stem+'v1.png'));
+    assert(fs.existsSync(stem+'v1.png'),'old art is recoverable');
+  }
+});
 test('all ten shared-atlas heroes have 320 complete transparent poses and no cropped or omitted body pixels',()=>{
   const {ns}=load();
   for(const ranks of Object.values(ns.systems.HeroEvolutionSpriteAtlas))for(const form of Object.values(ranks)){

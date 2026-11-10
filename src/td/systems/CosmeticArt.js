@@ -34,13 +34,15 @@
     const id=this.cosmeticEquipped?.['hero:'+hero.classType],path=heroPaths[hero.classType];
     if(hero.classType==='chief'&&['bone-emperor','thunder-king'].includes(id)){
       const thunder=id==='thunder-king'?globalThis.FrontierShop.thunderKing:null;
-      const paths=thunder?[thunder.look.sprite,thunder.look.attack,thunder.look.cast]:['assets/td/shop/bone-chief-motion-v1.png','assets/td/shop/bone-chief-attack-v1.png','assets/td/shop/bone-chief-cast-v1.png'];
+      const paths=thunder?[thunder.look.sprite,thunder.look.attack,thunder.look.cast]:Array(3).fill(globalThis.FrontierChiefSkinAtlas['bone-emperor'].form.path);
       this.cosmeticImages ||= {};
       const images=paths.map(src=>this.cosmeticImages[src]||(this.cosmeticImages[src]=this.load(src)));
       if(images.every(image=>image.ready)){
         this.chiefCosmeticRenderers ||= {};
         this.chiefCosmeticRenderers[id] ||= globalThis.FrontierSkinLab.createChiefRenderer(...images,thunder?.layouts);
-        return this.chiefCosmeticRenderers[id].drawHero(ctx,hero);
+        const drawn=this.chiefCosmeticRenderers[id].drawHero(ctx,hero);
+        if(drawn&&this.drawGearPieces){ctx.save();try{ctx.translate(hero.x,hero.y);if(Math.cos(hero.facing||0)<0)ctx.scale(-1,1);this.drawGearPieces(ctx,hero,false);}finally{ctx.restore();}}
+        return drawn;
       }
       return oldHero.call(this,ctx,hero);
     }

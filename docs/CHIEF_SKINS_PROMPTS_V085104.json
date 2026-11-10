@@ -1,0 +1,461 @@
+{
+  "version": "0.85.104",
+  "date": "2026-11-07",
+  "tool": "Built-in imagegen",
+  "portraits": [
+    {
+      "id": "thunder-king",
+      "file": "thunder-chief-portrait-v2.png",
+      "design": "THUNDER WAR KING: battered SILVER STEEL armor with repaired dark blue cloth and narrow pale blue inlay, asymmetrical hammered shoulder plates, one shoulder exposed, torn navy cloak, one side of chest exposed, forearm wraps and dented greaves. Large SINGLE-BLADED dark silver crescent war axe, intense restrained blue electrical filaments along blade, no lightning rune or glyph. Stormy mountain battlement, blue-white lightning in distance. No wolf emblems, animal medallions, printed geometric banners, fur royal collar, shoulder horns, skull buckles, or recognisable branded motifs. Plain unmarked blue cloth in background.",
+      "prompt": "Use case: identity-preserve / original game cosmetic costume redesign. Image1 is the APPROVED ORIGINAL identity of orc chieftain Gor. Preserve his exact mature bestial ORC face with heavy brow, broad nose, TWO lower tusks, amber eyes, healed diagonal scar, gray chin stubble, charcoal-and-gray WILD shoulder-length loose hair, green skin, muscular broad chest and arms, narrow defined waist and tall long legs. Keep exposed muscular chest on ONE side and bare upper arms, powerful experienced hero not fat, not human-looking, not a generic grunt. All skins are the SAME hero wearing themed broken, patched asymmetrical premium armor, still prestigious. Vertical head-to-knees production fantasy game portrait, dramatic rich cinematic painterly quality, face clearly visible near upper quarter with headroom. No text, watermark, logos, faction emblems, red forehead markings, red angular glyphs, animal insignia or recognizable franchise symbols. No neat matching full plate, no black braids, no familiar existing character. THUNDER WAR KING: battered SILVER STEEL armor with repaired dark blue cloth and narrow pale blue inlay, asymmetrical hammered shoulder plates, one shoulder exposed, torn navy cloak, one side of chest exposed, forearm wraps and dented greaves. Large SINGLE-BLADED dark silver crescent war axe, intense restrained blue electrical filaments along blade, no lightning rune or glyph. Stormy mountain battlement, blue-white lightning in distance. No wolf emblems, animal medallions, printed geometric banners, fur royal collar, shoulder horns, skull buckles, or recognisable branded motifs. Plain unmarked blue cloth in background."
+    },
+    {
+      "id": "bone-emperor",
+      "file": "bone-chief-portrait-v2.png",
+      "design": "BONE EMPEROR: terrifying prestigious asymmetrical armor built from broad chipped IVORY BONE splints lashed to dark iron and old bronze with leather cords, large curved shoulder bone plates that are abstract NON-FACE shapes, one side chest exposed, bare muscular upper arm, torn DEEP PURPLE cloak and uneven repaired cloth panels. Keep hair wild and face clearly visible, NO headdress or crown ring. Large SINGLE-BLADED crescent axe with rib-like ivory reinforcing bars and subtle emerald spectral light inside blade. Dark abandoned limestone halls with mist and green embers, no skull buildings, no banners or emblems. Bone theme should be original crafted material and anatomy-like ribs, not a copy of any known armor. No paired dragon heads on shoulders.",
+      "prompt": "Use case: identity-preserve / original game cosmetic costume redesign. Image1 is the APPROVED ORIGINAL identity of orc chieftain Gor. Preserve his exact mature bestial ORC face with heavy brow, broad nose, TWO lower tusks, amber eyes, healed diagonal scar, gray chin stubble, charcoal-and-gray WILD shoulder-length loose hair, green skin, muscular broad chest and arms, narrow defined waist and tall long legs. Keep exposed muscular chest on ONE side and bare upper arms, powerful experienced hero not fat, not human-looking, not a generic grunt. All skins are the SAME hero wearing themed broken, patched asymmetrical premium armor, still prestigious. Vertical head-to-knees production fantasy game portrait, dramatic rich cinematic painterly quality, face clearly visible near upper quarter with headroom. No text, watermark, logos, faction emblems, red forehead markings, red angular glyphs, animal insignia or recognizable franchise symbols. No neat matching full plate, no black braids, no familiar existing character. BONE EMPEROR: terrifying prestigious asymmetrical armor built from broad chipped IVORY BONE splints lashed to dark iron and old bronze with leather cords, large curved shoulder bone plates that are abstract NON-FACE shapes, one side chest exposed, bare muscular upper arm, torn DEEP PURPLE cloak and uneven repaired cloth panels. Keep hair wild and face clearly visible, NO headdress or crown ring. Large SINGLE-BLADED crescent axe with rib-like ivory reinforcing bars and subtle emerald spectral light inside blade. Dark abandoned limestone halls with mist and green embers, no skull buildings, no banners or emblems. Bone theme should be original crafted material and anatomy-like ribs, not a copy of any known armor. No paired dragon heads on shoulders."
+    },
+    {
+      "id": "night-owl-warden",
+      "file": "night-owl-warden-portrait-v2.png",
+      "design": "NIGHT OWL WARDEN: dark plum-black battle leathers and chipped iron plates, layered purple-black OWL FEATHERS only on one shoulder and collar back, asymmetrical repaired owl-feather cloak, one bare muscular shoulder and exposed chest, curved bronze fastening and forearm guards. Small angular feather brow-piece fitted ABOVE brows, not over eyes or face; keep scar, tusks and wild long hair fully readable. NO full-face helmet. Large single crescent axe with muted violet edge light, carved weathered iron blade, no symbol. Moonlit ancient forest watchtower with violet mist, no owl statues, no branded bird emblem, no superhero pointed cowl or recognizable franchise costume.",
+      "prompt": "Use case: identity-preserve / original game cosmetic costume redesign. Image1 is the APPROVED ORIGINAL identity of orc chieftain Gor. Preserve his exact mature bestial ORC face with heavy brow, broad nose, TWO lower tusks, amber eyes, healed diagonal scar, gray chin stubble, charcoal-and-gray WILD shoulder-length loose hair, green skin, muscular broad chest and arms, narrow defined waist and tall long legs. Keep exposed muscular chest on ONE side and bare upper arms, powerful experienced hero not fat, not human-looking, not a generic grunt. All skins are the SAME hero wearing themed broken, patched asymmetrical premium armor, still prestigious. Vertical head-to-knees production fantasy game portrait, dramatic rich cinematic painterly quality, face clearly visible near upper quarter with headroom. No text, watermark, logos, faction emblems, red forehead markings, red angular glyphs, animal insignia or recognizable franchise symbols. No neat matching full plate, no black braids, no familiar existing character. NIGHT OWL WARDEN: dark plum-black battle leathers and chipped iron plates, layered purple-black OWL FEATHERS only on one shoulder and collar back, asymmetrical repaired owl-feather cloak, one bare muscular shoulder and exposed chest, curved bronze fastening and forearm guards. Small angular feather brow-piece fitted ABOVE brows, not over eyes or face; keep scar, tusks and wild long hair fully readable. NO full-face helmet. Large single crescent axe with muted violet edge light, carved weathered iron blade, no symbol. Moonlit ancient forest watchtower with violet mist, no owl statues, no branded bird emblem, no superhero pointed cowl or recognizable franchise costume."
+    }
+  ],
+  "sprites": [
+    {
+      "id": "thunder-king",
+      "portrait": "thunder-chief-portrait-v2.png",
+      "file": "thunder-chief-actions-v4.png",
+      "theme": "Damaged SILVER steel armor with dark BLUE patches, navy torn cloak, narrow pale BLUE inlay in the SINGLE crescent axe edge. No wolf symbols or animal medallions. Blue lightning effect stays ONLY as tiny embedded blade highlights, no detached arcs.",
+      "prompt": "Use case: identity-preserve / style-transfer. Production transparent GAME SPRITE SHEET. Image1 is APPROVED NEW cosmetic identity and costume. Retain exactly this mature bestial green ORC face, TWO lower tusks, amber eyes, eyebrow scar, gray stubble, WILD shoulder-length charcoal and gray loose hair, muscular EXPOSED chest on ONE side and bare upper arm, broad shoulders and narrow waist, tall powerful athletic not obese physique. Same asymmetrical BROKEN REPAIRED armor, exposed skin and short torn cloak as reference. Preserve expensive high-rank hero presence but readable at 92px game height, slightly enlarged face, strong painterly silhouette and large surfaces. EXACTLY SIXTEEN separate FULL BODY poses in FOUR columns by FOUR rows, on genuinely RGBA TRANSPARENT canvas. Row1: four standing idle frames. Row2: four walking frames. Row3: four axe attack phases: lift, overhead windup, downward strike followthrough, recover. Row4: four STANDING warcry/cast phases: free hand lift, open palm forward, forward point, recover, always retaining axe in other hand. All face RIGHT in elevated three-quarter isometric view, identical body scale and anatomy throughout, feet grounded, no kneeling or lying down. Entire body, all hair/cloak and COMPLETE axe contained inside its OWN cell, occupy central 65-70% of cell, at least 25px clear transparent margins and gaps on all outer edges and between sprites. Do not let weapon overlap another cell. No text, grid, panels, labels, logos, floor, shadows, ground, projectiles, detached effects, red forehead marks, animal badges, faction emblems, skull buckles, long braids or recognizable franchise symbols. No opaque background. Damaged SILVER steel armor with dark BLUE patches, navy torn cloak, narrow pale BLUE inlay in the SINGLE crescent axe edge. No wolf symbols or animal medallions. Blue lightning effect stays ONLY as tiny embedded blade highlights, no detached arcs."
+    },
+    {
+      "id": "bone-emperor",
+      "portrait": "bone-chief-portrait-v2.png",
+      "file": "bone-chief-actions-v2.png",
+      "theme": "Broad chipped IVORY bone splint armor over dark iron and bronze, bone panels tied with leather cords, DEEP PURPLE torn cloak, a SINGLE crescent axe reinforced with bone ribs and narrow emerald edge light. No dragon heads or crown ring. No detached soul flames.",
+      "prompt": "Use case: identity-preserve / style-transfer. Production transparent GAME SPRITE SHEET. Image1 is APPROVED NEW cosmetic identity and costume. Retain exactly this mature bestial green ORC face, TWO lower tusks, amber eyes, eyebrow scar, gray stubble, WILD shoulder-length charcoal and gray loose hair, muscular EXPOSED chest on ONE side and bare upper arm, broad shoulders and narrow waist, tall powerful athletic not obese physique. Same asymmetrical BROKEN REPAIRED armor, exposed skin and short torn cloak as reference. Preserve expensive high-rank hero presence but readable at 92px game height, slightly enlarged face, strong painterly silhouette and large surfaces. EXACTLY SIXTEEN separate FULL BODY poses in FOUR columns by FOUR rows, on genuinely RGBA TRANSPARENT canvas. Row1: four standing idle frames. Row2: four walking frames. Row3: four axe attack phases: lift, overhead windup, downward strike followthrough, recover. Row4: four STANDING warcry/cast phases: free hand lift, open palm forward, forward point, recover, always retaining axe in other hand. All face RIGHT in elevated three-quarter isometric view, identical body scale and anatomy throughout, feet grounded, no kneeling or lying down. Entire body, all hair/cloak and COMPLETE axe contained inside its OWN cell, occupy central 65-70% of cell, at least 25px clear transparent margins and gaps on all outer edges and between sprites. Do not let weapon overlap another cell. No text, grid, panels, labels, logos, floor, shadows, ground, projectiles, detached effects, red forehead marks, animal badges, faction emblems, skull buckles, long braids or recognizable franchise symbols. No opaque background. Broad chipped IVORY bone splint armor over dark iron and bronze, bone panels tied with leather cords, DEEP PURPLE torn cloak, a SINGLE crescent axe reinforced with bone ribs and narrow emerald edge light. No dragon heads or crown ring. No detached soul flames."
+    },
+    {
+      "id": "night-owl-warden",
+      "portrait": "night-owl-warden-portrait-v2.png",
+      "file": "night-owl-warden-actions-v2.png",
+      "theme": "Dark plum leather and patched iron armor, purple-black OWL feather layers on ONE shoulder, torn purple-black feather cloak, small feather brow ornament ABOVE eyes leaving face visible, single crescent axe with subtle violet edge. No full mask, no owl statues or emblem.",
+      "prompt": "Use case: identity-preserve / style-transfer. Production transparent GAME SPRITE SHEET. Image1 is APPROVED NEW cosmetic identity and costume. Retain exactly this mature bestial green ORC face, TWO lower tusks, amber eyes, eyebrow scar, gray stubble, WILD shoulder-length charcoal and gray loose hair, muscular EXPOSED chest on ONE side and bare upper arm, broad shoulders and narrow waist, tall powerful athletic not obese physique. Same asymmetrical BROKEN REPAIRED armor, exposed skin and short torn cloak as reference. Preserve expensive high-rank hero presence but readable at 92px game height, slightly enlarged face, strong painterly silhouette and large surfaces. EXACTLY SIXTEEN separate FULL BODY poses in FOUR columns by FOUR rows, on genuinely RGBA TRANSPARENT canvas. Row1: four standing idle frames. Row2: four walking frames. Row3: four axe attack phases: lift, overhead windup, downward strike followthrough, recover. Row4: four STANDING warcry/cast phases: free hand lift, open palm forward, forward point, recover, always retaining axe in other hand. All face RIGHT in elevated three-quarter isometric view, identical body scale and anatomy throughout, feet grounded, no kneeling or lying down. Entire body, all hair/cloak and COMPLETE axe contained inside its OWN cell, occupy central 65-70% of cell, at least 25px clear transparent margins and gaps on all outer edges and between sprites. Do not let weapon overlap another cell. No text, grid, panels, labels, logos, floor, shadows, ground, projectiles, detached effects, red forehead marks, animal badges, faction emblems, skull buckles, long braids or recognizable franchise symbols. No opaque background. Dark plum leather and patched iron armor, purple-black OWL feather layers on ONE shoulder, torn purple-black feather cloak, small feather brow ornament ABOVE eyes leaving face visible, single crescent axe with subtle violet edge. No full mask, no owl statues or emblem."
+    }
+  ],
+  "forms": {
+    "thunder-king": {
+      "path": "assets/td/shop/thunder-chief-actions-v4.png",
+      "width": 1199,
+      "height": 1312,
+      "visible": 301,
+      "worldHeight": 92,
+      "frames": [
+        [
+          49,
+          8,
+          219,
+          302,
+          146,
+          306
+        ],
+        [
+          341,
+          7,
+          227,
+          303,
+          440,
+          306
+        ],
+        [
+          637,
+          3,
+          217,
+          307,
+          738,
+          306
+        ],
+        [
+          928,
+          9,
+          219,
+          301,
+          1025,
+          306
+        ],
+        [
+          29,
+          337,
+          233,
+          285,
+          136,
+          618
+        ],
+        [
+          328,
+          337,
+          227,
+          283,
+          426,
+          616
+        ],
+        [
+          624,
+          339,
+          206,
+          282,
+          710,
+          617
+        ],
+        [
+          938,
+          338,
+          212,
+          282,
+          1041,
+          616
+        ],
+        [
+          49,
+          662,
+          246,
+          276,
+          151,
+          934
+        ],
+        [
+          347,
+          630,
+          194,
+          307,
+          453,
+          933
+        ],
+        [
+          639,
+          678,
+          257,
+          259,
+          780,
+          933
+        ],
+        [
+          942,
+          670,
+          205,
+          267,
+          1044,
+          933
+        ],
+        [
+          41,
+          969,
+          226,
+          309,
+          141,
+          1274
+        ],
+        [
+          335,
+          968,
+          230,
+          310,
+          442,
+          1274
+        ],
+        [
+          618,
+          967,
+          262,
+          310,
+          725,
+          1273
+        ],
+        [
+          923,
+          969,
+          220,
+          309,
+          1027,
+          1274
+        ]
+      ]
+    },
+    "bone-emperor": {
+      "path": "assets/td/shop/bone-chief-actions-v2.png",
+      "width": 1199,
+      "height": 1312,
+      "visible": 301,
+      "worldHeight": 92,
+      "frames": [
+        [
+          53,
+          11,
+          222,
+          306,
+          151,
+          313
+        ],
+        [
+          356,
+          10,
+          211,
+          307,
+          446,
+          313
+        ],
+        [
+          648,
+          11,
+          203,
+          305,
+          731,
+          312
+        ],
+        [
+          937,
+          12,
+          200,
+          304,
+          1016,
+          312
+        ],
+        [
+          27,
+          337,
+          237,
+          292,
+          133,
+          625
+        ],
+        [
+          323,
+          338,
+          241,
+          291,
+          417,
+          625
+        ],
+        [
+          623,
+          338,
+          242,
+          283,
+          714,
+          617
+        ],
+        [
+          913,
+          339,
+          206,
+          289,
+          1013,
+          624
+        ],
+        [
+          6,
+          682,
+          267,
+          285,
+          156,
+          963
+        ],
+        [
+          306,
+          644,
+          266,
+          320,
+          466,
+          960
+        ],
+        [
+          615,
+          688,
+          259,
+          277,
+          748,
+          961
+        ],
+        [
+          916,
+          679,
+          232,
+          284,
+          1026,
+          959
+        ],
+        [
+          44,
+          992,
+          225,
+          304,
+          142,
+          1292
+        ],
+        [
+          331,
+          992,
+          244,
+          304,
+          437,
+          1292
+        ],
+        [
+          613,
+          992,
+          271,
+          304,
+          718,
+          1292
+        ],
+        [
+          925,
+          994,
+          230,
+          302,
+          1031,
+          1292
+        ]
+      ]
+    },
+    "night-owl-warden": {
+      "path": "assets/td/shop/night-owl-warden-actions-v2.png",
+      "width": 1312,
+      "height": 1199,
+      "visible": 285,
+      "worldHeight": 92,
+      "frames": [
+        [
+          84,
+          9,
+          208,
+          288,
+          177,
+          293
+        ],
+        [
+          402,
+          6,
+          197,
+          291,
+          489,
+          293
+        ],
+        [
+          715,
+          13,
+          202,
+          284,
+          803,
+          293
+        ],
+        [
+          1037,
+          12,
+          191,
+          285,
+          1118,
+          293
+        ],
+        [
+          42,
+          305,
+          251,
+          268,
+          154,
+          569
+        ],
+        [
+          365,
+          306,
+          234,
+          266,
+          476,
+          568
+        ],
+        [
+          688,
+          306,
+          234,
+          268,
+          783,
+          570
+        ],
+        [
+          1022,
+          306,
+          193,
+          268,
+          1108,
+          570
+        ],
+        [
+          65,
+          608,
+          214,
+          274,
+          170,
+          878
+        ],
+        [
+          368,
+          577,
+          238,
+          307,
+          503,
+          880
+        ],
+        [
+          684,
+          630,
+          258,
+          251,
+          829,
+          877
+        ],
+        [
+          1023,
+          611,
+          224,
+          269,
+          1113,
+          876
+        ],
+        [
+          51,
+          904,
+          222,
+          278,
+          154,
+          1178
+        ],
+        [
+          361,
+          904,
+          250,
+          279,
+          473,
+          1179
+        ],
+        [
+          681,
+          907,
+          268,
+          275,
+          798,
+          1178
+        ],
+        [
+          1012,
+          906,
+          223,
+          277,
+          1117,
+          1179
+        ]
+      ]
+    }
+  }
+}

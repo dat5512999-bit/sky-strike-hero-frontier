@@ -34,11 +34,16 @@
       const metric=ArtSystem.SPRITE_METRICS[key||image.assetSrc];
       return {height:target/(metric?metric.visible:1),foot:metric?metric.foot:fallbackFoot};
     }
-    load(src){const image=new Image();image.assetSrc=src;image.ready=false;image.failed=false;image.queued=false;image.loading=true;image.attempts=1;image.onload=()=>{image.ready=true;image.loading=false;if(this.onProgress)this.onProgress();};image.onerror=()=>{image.failed=true;image.loading=false;if(this.onProgress)this.onProgress();};image.src=src;return image;}
-    request(image){if(image.ready||image.failed||image.queued||image.loading)return;this.assetQueue=this.assetQueue||[];this.assetQueue.push(image);image.queued=true;this.pump();}
-    pump(){this.assetQueue=this.assetQueue||[];this.activeLoads=this.activeLoads||0;while(this.activeLoads<4&&this.assetQueue.length){const image=this.assetQueue.shift();image.queued=false;image.loading=true;this.activeLoads++;const finish=ok=>{if(!image.loading)return;image.loading=false;this.activeLoads--;image.ready=ok;image.failed=!ok;if(this.onProgress)this.onProgress();this.pump();};const attempt=()=>{image.attempts++;const timer=setTimeout(()=>{if(image.loading){image.onload=null;image.onerror=null;if(image.attempts<3)attempt();else finish(false);}},20000);image.onload=()=>{clearTimeout(timer);finish(true);};image.onerror=()=>{clearTimeout(timer);if(image.attempts<3)attempt();else finish(false);};image.src=image.assetSrc+(image.attempts>1?(image.assetSrc.includes('?')?'&':'?')+'asset-retry='+image.attempts:'');};attempt();}}
+    load(src){
+      if(!this.assetStore){this.assetStore=new ns.systems.ArtAssetStore();this.assetStore.onChange=()=>this.onProgress?.();this.assetStore.onError=error=>this.game?.handleRuntimeFault?.('ui',error);}
+      return this.assetStore.image(src);
+    }
+    request(image){this.assetStore?.request(image);}
+    pump(){this.assetStore?.pump();}
+    maintainAssets(){this.assetStore?.trim();}
+    beginScene(){this.assetStore?.advanceScene();}
     coreStatus(type){const hero={hunter:this.heroHunter,arcanist:this.hero,rogue:this.heroRogue}[type]||this.hero,map=this.mapAssets[ns.config.mapId]||this.background;const needed=[map,this.enemyActions.grunt,hero];if(['hunter','arcanist','rogue'].includes(type))needed.push(this.skillIcons);const loaded=needed.filter(image=>image.ready).length;return{loaded:loaded,total:needed.length,failed:needed.some(image=>image.failed),ready:loaded===needed.length};}
-    retryFailed(){const all=[this.bearActions,this.buildAtlas,...Object.values(this.enemyActions),...Object.values(this.mapAssets),this.factionTowers,this.factionTowersV2,this.factionStructures,this.hero,this.heroHunter,this.heroRogue,this.heroHunterUnarmed,this.heroArcanistUnarmed,this.nagaHero,this.nagaBuildingAtlas,this.background,this.frontierGround,this.skillIcons,...Object.values(this.combatUnits),this.wolf,this.arcaneElemental,this.cryptWraith,this.graveyardRevenant,this.rogueUnarmed,this.weaponAtlas,this.equipmentAtlas,this.towers,this.units,this.keep];new Set(all).forEach(image=>{if(image&&image.failed){image.failed=false;image.attempts=0;this.request(image);}});}
+    retryFailed(){this.assetStore?.retryFailed();}
     preloadWave(definition){if(!definition)return;definition.groups.forEach(group=>{const image=this.enemyActions[group.type];if(image)this.request(image);});}
     preloadDeploy(kind,type){const action=kind==='unit'&&this.actionImage(type);if(action){this.request(action);return;}if(type==='beastmaster'){this.request(this.combatUnits.beastmaster);return;}if(kind==='building'&&ArtSystem.NAGA_BUILDING_FRAMES?.[type]){this.nagaBuildingAtlas||=this.load('assets/td/naga/naga-buildings-v1.png');this.request(this.nagaBuildingAtlas);return;}if(ArtSystem.BUILD_CELLS[type]){this.request(this.buildAtlas);return;}const image=kind==='unit'?this.combatUnits[type]:['arrow','iceward','frost','cannon'].includes(type)?this.towers:['barracks','grove','graveyard'].includes(type)?this.factionStructures:['ballista','moonwell','plague'].includes(type)?this.factionTowersV2:this.factionTowers;if(image)this.request(image);}
     preloadFaction(type,buildings){const support={hunter:this.wolf,arcanist:this.arcaneElemental,rogue:this.combatUnits.rogue}[type];if(support)this.request(support);(buildings||[]).forEach(building=>this.preloadDeploy('building',building));}
@@ -61,26 +66,35 @@
       return {left,top,width:Math.ceil(192+w/2)+1-left,height:283-top};
     }
     preview(button,kind,type){
+      if(button.hidden||button.closest?.('[hidden]')||button.getClientRects&&button.getClientRects().length===0){
+        const old=button.querySelector('canvas');if(old){old.width=0;old.height=0;old.remove?.();}delete button.dataset.previewReady;delete button.dataset.previewCustom;return;
+      }
       if(button.dataset.previewReady==='true')return;
-      let canvas=button.querySelector('canvas');if(!canvas){canvas=document.createElement('canvas');canvas.width=128;canvas.height=128;canvas.className=button.hasAttribute('data-mercenary')?'mercenary-preview':'build-preview';if(!button.hasAttribute('data-mercenary'))button.dataset.previewCustom='true';canvas.setAttribute('aria-hidden','true');button.prepend(canvas);}
+      const now=globalThis.performance?.now?.()??Date.now();if(now<(this.previewRetryAt||0))return;
       this.previewCache=this.previewCache||new Map();
       const key=kind+':'+type;
       let art=this.previewCache.get(key);
-      if(!art){
-        const source=document.createElement('canvas');source.width=384;source.height=384;
-        const sourceCtx=source.getContext('2d',{willReadFrequently:true});
-        const previewUnit={type,x:192,y:270,level:1,state:'idle',frame:0,facing:0,config:()=>ns.config.units[type]};
-        const ok=kind==='building'?this.drawBuilding(sourceCtx,type,192,270,1,null):(type.startsWith('goblin')||ns.config.units[type]?.frostland)?this.drawCombatUnit(sourceCtx,previewUnit):this.drawCombatUnitSprite(sourceCtx,previewUnit);
-        if(!ok)return;
-        const bounds=ArtSystem.previewBounds(kind,type);
-        art=Object.assign({source},bounds);this.previewCache.set(key,art);
-      }
-      const pad=kind==='unit'?5:0;
-      const crop={left:Math.max(0,art.left-pad),top:Math.max(0,art.top-pad),width:art.width+pad*2,height:art.height+pad*2};
-      crop.width=Math.min(crop.width,art.source.width-crop.left);crop.height=Math.min(crop.height,art.source.height-crop.top);
-      const ctx=canvas.getContext('2d'),scale=Math.min(112/crop.width,112/crop.height),w=crop.width*scale,h=crop.height*scale;
-      ctx.clearRect(0,0,128,128);ctx.drawImage(art.source,crop.left,crop.top,crop.width,crop.height,(128-w)/2,120-h,w,h);
-      button.dataset.previewReady='true';
+      let source=null,small=null;
+      try{
+        if(!art){
+          source=document.createElement('canvas');source.width=384;source.height=384;
+          const sourceCtx=source.getContext('2d',{willReadFrequently:true});if(!sourceCtx)throw Error('preview-context-unavailable');
+          const unit={type,x:192,y:270,level:1,state:'idle',frame:0,facing:0,config:()=>ns.config.units[type]};
+          const ok=kind==='building'?this.drawBuilding(sourceCtx,type,192,270,1,null):(type.startsWith('goblin')||ns.config.units[type]?.frostland)?this.drawCombatUnit(sourceCtx,unit):this.drawCombatUnitSprite(sourceCtx,unit);
+          if(!ok)return;
+          const bounds=ArtSystem.previewBounds(kind,type),pad=kind==='unit'?5:0,left=Math.max(0,bounds.left-pad),top=Math.max(0,bounds.top-pad),width=Math.min(bounds.width+pad*2,384-left),height=Math.min(bounds.height+pad*2,384-top),scale=Math.min(112/width,112/height),w=width*scale,h=height*scale;
+          small=document.createElement('canvas');small.width=128;small.height=128;const copy=small.getContext('2d');if(!copy)throw Error('preview-context-unavailable');
+          copy.drawImage(source,left,top,width,height,(128-w)/2,120-h,w,h);art={source:small};
+          while(this.previewCache.size>=32){const first=this.previewCache.keys().next().value,old=this.previewCache.get(first);old.source.width=0;old.source.height=0;this.previewCache.delete(first);}
+          this.previewCache.set(key,art);small=null;
+        }else{this.previewCache.delete(key);this.previewCache.set(key,art);}
+        let canvas=button.querySelector('canvas');if(!canvas){canvas=document.createElement('canvas');canvas.width=128;canvas.height=128;canvas.className=button.hasAttribute('data-mercenary')?'mercenary-preview':'build-preview';canvas.setAttribute('aria-hidden','true');button.prepend(canvas);}
+        const ctx=canvas.getContext('2d');if(!ctx)throw Error('preview-context-unavailable');
+        ctx.clearRect(0,0,128,128);ctx.drawImage(art.source,0,0);button.dataset.previewReady='true';if(!button.hasAttribute('data-mercenary'))button.dataset.previewCustom='true';
+      }catch(error){
+        this.previewRetryAt=now+5000;this.previewFault={type,message:String(error?.message||error)};
+        const canvas=button.querySelector('canvas');if(canvas){canvas.width=0;canvas.height=0;canvas.remove?.();}delete button.dataset.previewReady;delete button.dataset.previewCustom;
+      }finally{if(source){source.width=0;source.height=0;}if(small){small.width=0;small.height=0;}}
     }
     drawBackground(ctx){if(!this.background.ready)return false;ctx.drawImage(this.background,0,0,ns.config.width,ns.config.height);return true;}
     drawGearPieces(ctx,target,mounted,skipWeapon){if(target.kind==='unit')return;const atlas=this.equipmentAtlas;if(!atlas||!atlas.ready||!target.gear)return;const sw=atlas.width/3,sh=atlas.height/3,items=Object.values(target.gear).map(ns.systems.ArmorySystem.item).filter(Boolean);items.forEach(function(item,index){if(skipWeapon&&item.slot==='weapon')return;let x=18+index*5,y=-48-index*4,w=31,h=31;if(item.slot==='weapon'){x=20;y=-38;w=39;h=39;}if(item.slot==='armor'){x=-17;y=-43;w=34;h=38;}if(item.mount&&mounted){x=0;y=-23;w=45;h=36;}ctx.save();ctx.globalAlpha=.9;ctx.shadowColor=item.rarity==='傳說'?'#ffd76d':'#b98cff';ctx.shadowBlur=item.rarity==='傳說'?8:4;ctx.drawImage(atlas,item.column*sw,item.row*sh,sw,sh,x-w/2,y-h/2,w,h);ctx.restore();},this);}
@@ -117,6 +131,7 @@
     }
     drawActionUnit(ctx,unit,image){
       if(!image||!image.ready)return false;
+      if(unit.type==='chief'&&this.drawChiefBaseSprite)return this.drawChiefBaseSprite(ctx,unit,image);
       if(ns.systems.NeutralMercenaryArt?.has(unit.type))return ns.systems.NeutralMercenaryArt.draw(this,ctx,unit,image);
       const cfg=unit.config(),support=Boolean(cfg.supportOnly),cycle=(unit.frameClock||0)%8;
       const state=support&&cycle>5.5?'attack':unit.state,row={idle:0,walk:1,attack:2,hit:3,death:3}[state]||0;
@@ -216,7 +231,7 @@
     bomb:'assets/td/bomb-robot-actions-v2.png',heavyBomb:'assets/td/heavy-bomb-robot-actions-v2.png',
     dragon:'assets/td/ultimate-dragon-actions-v3.png',royalCommander:'assets/td/ultimate-commander-actions-v2.png',
     soulsteel:'assets/td/ultimate-soulsteel-actions-v2.png',
-    chief:'assets/td/wild-chief-actions-v1.png',centaur:'assets/td/wild-centaur-actions-v1.png',boarRider:'assets/td/wild-boar-rider-actions-v1.png',minotaur:'assets/td/wild-minotaur-actions-v1.png',shaman:'assets/td/wild-shaman-actions-v1.png',
+    chief:'assets/td/wild-chief-actions-v2.png',centaur:'assets/td/wild-centaur-actions-v1.png',boarRider:'assets/td/wild-boar-rider-actions-v1.png',minotaur:'assets/td/wild-minotaur-actions-v1.png',shaman:'assets/td/wild-shaman-actions-v1.png',
     nagaTideguard:'assets/td/naga/tideguard-actions-v1.png',nagaShellbreaker:'assets/td/naga/brine-shellbreaker-actions-v1.png',nagaDeepWargod:'assets/td/naga/deep-tide-wargod-actions-v1.png',nagaMantaRaider:'assets/td/naga/manta-wing-raider-actions-v1.png',nagaVenomStalker:'assets/td/naga/venom-marsh-stalker-actions-v1.png'
   });
   ArtSystem.BEASTMASTER_RECT={"x":369,"y":144,"width":503,"height":938};

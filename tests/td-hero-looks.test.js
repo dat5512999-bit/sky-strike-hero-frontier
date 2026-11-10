@@ -11,7 +11,7 @@ function engine() {
 test('all authored hero looks target existing heroes and use valid cosmetic assets', () => {
   const ns = engine(); assert.deepEqual([...new Set(looks.definitions.map(l=>l.heroId))].sort(), ['arcanist','chief','hunter','rogue']);
   assert.ok(looks.definitions.every(look=>ns.systems.HeroRoster.CLASSES[look.heroId]));
-  assert.equal(new Set(looks.definitions.map(l=>l.skinId)).size, 5);
+  assert.equal(new Set(looks.definitions.map(l=>l.skinId)).size, 6);
   for (const look of looks.definitions.filter(l=>!l.portraitOnly)) {
     const skin = looks.cosmetic(look,{schema}); assert.equal(skin.targetId,look.heroId); assert.ok(Object.isFrozen(skin.slots));
     for (const src of [look.portrait,look.baseSprite,look.sprite,look.cast || looks.actionLayouts[look.heroId]?.src || look.sprite]) assert.ok(fs.existsSync(path.join(__dirname,'..',src)),src);
@@ -61,7 +61,7 @@ test('chief fallback creates only a preview instance and never registers or modi
 });
 test('skin resolution cannot cross heroes and retained thunder assets remain available', () => {
   assert.equal(looks.getLook('hunter','bone-emperor'),null);assert.equal(looks.getLook('missing'),null);
-  assert.deepEqual(looks.looksFor('chief').map(l=>l.skinId),['bone-emperor','thunder-king']);
+  assert.deepEqual(looks.looksFor('chief').map(l=>l.skinId),['bone-emperor','night-owl-warden','thunder-king']);
   const saved=looks.getLook('chief','thunder-king');assert.notEqual(saved.portraitOnly,true);
   for(const src of [saved.portrait,saved.sprite]) assert.ok(fs.existsSync(path.join(__dirname,'..',src)));
 });

@@ -11,9 +11,13 @@
       originalDescription: '暗紫兜帽 ／ 暗影輕甲 ／ 月刃刺客', description: '緋紅戰袍 ／ 白髮狐面 ／ 月牙雙刃',
       portrait: 'assets/td/shop/moon-portrait-v1.png', baseSprite: 'assets/td/hero-rogue-actions-v2.png', sprite: 'assets/td/shop/moon-actions-v1.png' },
     { heroId: 'chief', skinId: 'bone-emperor', name: '冥骨帝王', theme: '幽冥王座', accent: '#9ce5b4',
-      originalDescription: '赤紅部族甲 ／ 白狼毛皮 ／ 戰斧酋長', description: '龍骨肩甲 ／ 紫黑王袍 ／ 幽綠魂火巨斧',
-      portrait: 'assets/td/shop/bone-chief-portrait-v1.png', baseSprite: 'assets/td/shop/chief-original-actions-v1.png', sprite: 'assets/td/shop/bone-chief-motion-v1.png', spriteRows: 2,
-      attack: 'assets/td/shop/bone-chief-attack-v1.png', cast: 'assets/td/shop/bone-chief-cast-v1.png' },
+      originalDescription: '灰黑野髮 ／ 拼補破甲 ／ 深青披風', description: '拼補骨甲 ／ 紫黑披風 ／ 幽綠魂火重斧',
+      portrait: 'assets/td/shop/bone-chief-portrait-v2.png', baseSprite: 'assets/td/wild-chief-actions-v2.png', sprite: 'assets/td/shop/bone-chief-actions-v2.png', spriteRows: 4,
+      attack: 'assets/td/shop/bone-chief-actions-v2.png', cast: 'assets/td/shop/bone-chief-actions-v2.png' },
+    { heroId:'chief', skinId:'night-owl-warden', name:'夜梟巡守', theme:'紫月守門人', accent:'#bb86ea',
+      originalDescription:'灰黑野髮 ／ 拼補破甲 ／ 深青披風', description:'紫黑梟羽 ／ 破損輕甲 ／ 月夜重斧',
+      portrait:'assets/td/shop/night-owl-warden-portrait-v2.png', baseSprite:'assets/td/wild-chief-actions-v2.png', sprite:'assets/td/shop/night-owl-warden-actions-v2.png',spriteRows:4,
+      attack:'assets/td/shop/night-owl-warden-actions-v2.png',cast:'assets/td/shop/night-owl-warden-actions-v2.png' },
     (root.FrontierShop?.thunderKing || require('../shop/ThunderKing.js')).look
   ];
   definitions.forEach(Object.freeze); Object.freeze(definitions);
@@ -37,7 +41,7 @@
     engine.systems.ArtSystem.SPRITE_METRICS[look.sprite] = { ...engine.systems.ArtSystem.SPRITE_METRICS[look.baseSprite] };
   }
   function createLookRenderer(engine, look, image, actionImage, castImage) {
-    if (look.heroId === 'chief') return root.FrontierSkinLab.createChiefRenderer(image, actionImage, castImage, look.skinId === 'thunder-king' ? root.FrontierShop.thunderKing.layouts : undefined);
+    if (look.heroId === 'chief') return root.FrontierSkinLab.createChiefRenderer(image, actionImage, castImage, root.FrontierChiefSkinAtlas[look.skinId].layouts);
     const renderer = root.FrontierSkinLab.createRenderer(engine, image, look.heroId === 'arcanist' ? actionImage : null);
     const layout = actionLayouts[look.heroId];
     if (!layout || !actionImage || image.assetSrc !== look.sprite) return renderer;
@@ -52,7 +56,7 @@
     return renderer;
   }
   function lookBounds(engine, look) {
-    if (look.heroId === 'chief') return root.FrontierSkinLab.chiefBounds(look.skinId === 'thunder-king' ? root.FrontierShop.thunderKing.layouts : undefined);
+    if (look.heroId === 'chief') return root.FrontierSkinLab.chiefBounds(root.FrontierChiefSkinAtlas[look.skinId].layouts);
     const result = { ...root.FrontierSkinLab.presentationBounds(engine, [look.baseSprite, look.sprite]) }, layout = actionLayouts[look.heroId];
     if (layout) layout.frames.forEach(([x, y, w, h, ax, ay]) => {
       const scale = 78 / layout.bodyHeight;

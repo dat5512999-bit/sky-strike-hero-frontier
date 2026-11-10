@@ -1,0 +1,19 @@
+{
+  "name": "hero-frontier-ios",
+  "version": "0.3.0",
+  "private": true,
+  "scripts": {
+    "prepare:web": "node ../../scripts/prepare-ios.cjs --build",
+    "check:web": "node ../../scripts/prepare-ios.cjs --check",
+    "add:ios": "cap add ios",
+    "sync:ios": "cap sync ios",
+    "open:ios": "cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/ios": "^8.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.0.0"
+  }
+}

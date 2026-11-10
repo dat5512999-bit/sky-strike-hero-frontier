@@ -27,14 +27,14 @@ test('thunder and bone render independently across all frames and missing assets
   }
   ArtSystem.SPRITE_METRICS={};class TDGame{updateOpeningPresentation(){}}
   const ctx=vm.createContext({TowerFrontier:{systems:{ArtSystem,SpriteFrameBounds:{},FactionSystem:{FACTIONS:{hunter:{units:[],buildings:[]}}}},TDGame}});
-  for(const f of ['src/td/shop/ThunderKing.js','src/td/skin-lab/ChiefPreview.js','src/td/systems/CosmeticArt.js'])vm.runInContext(fs.readFileSync(f,'utf8'),ctx);
+  for(const f of ['src/td/shop/ChiefSkinAtlas.js','src/td/shop/ThunderKing.js','src/td/skin-lab/ChiefPreview.js','src/td/systems/CosmeticArt.js'])vm.runInContext(fs.readFileSync(f,'utf8'),ctx);
   const art=new ArtSystem(),paint={save(){},restore(){},translate(){},scale(){},drawImage(image){seen.push(image.assetSrc);}};
   for(const skin of ['bone-emperor','thunder-king','bone-emperor','thunder-king']){
     art.cosmeticEquipped={'hero:chief':skin};
     for(const state of ['idle','walk','attack','cast'])for(let frame=0;frame<4;frame++){
       const hero=Object.freeze({classType:'chief',state,frame,facing:Math.PI,x:150,y:220,health:100,damage:24});
       assert.equal(art.drawHero(paint,hero),true);
-      assert.match(seen.at(-1),new RegExp((skin==='thunder-king'?'thunder':'bone')+'-chief-'+(['idle','walk'].includes(state)?'motion':state)));
+      assert.equal(seen.at(-1),ctx.FrontierChiefSkinAtlas[skin].form.path);
       assert.equal(hero.damage,24);assert.equal(hero.health,100);
     }
   }
@@ -49,6 +49,6 @@ test('td is the only shop page and preloads thunder before the catalog',()=>{
     const html=fs.readFileSync(file,'utf8');assert.ok(html.indexOf('shop/ThunderKing.js')<html.indexOf('shop/SkinCatalog.js'));
   }
   const sw=fs.readFileSync('sw.js','utf8');assert.ok(!sw.includes("'./shop.html'"));assert.ok(!sw.includes("'./src/td/shop/main.js'"));
-  for(const name of ['motion','attack','cast'])assert.ok(sw.includes('thunder-chief-'+name+'-v3.png'));
+  assert.ok(sw.includes('thunder-chief-actions-v4.png'));
   assert.match(fs.readFileSync('skin-lab.html','utf8'),/href="td.html\?panel=shop"/);
 });

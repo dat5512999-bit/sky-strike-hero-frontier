@@ -6,10 +6,11 @@
       const root=globalThis.document?.getElementById('td-evolution-notice');if(!root)return;
       game.canvas?.closest('.td-shell')?.append(root);
       game.evolutionUi={root,title:root.querySelector('strong'),detail:root.querySelector('p'),action:root.querySelector('button')};
+      ns.systems.HeroAppearanceSystem.attach(game);ns.systems.HeroEvolutionReview.attach(game);
       game.evolutionUi.action.onclick=()=>{
         const s=ns.systems.HeroEvolutionSystem.state(game.hero);
         if(s.stones&&!s.trialStage&&!s.autoTrial){game.attemptEvolution();return;}
-        game.evolutionNotice=null;root.hidden=true;game.canvas?.focus?.();
+        game.evolutionNotice=null;root.hidden=true;game.updateUi();game.canvas?.focus?.();
       };
       for(const button of game.ui.shopItems||[])if(button.dataset.shopItem==='evolution-stone'){
         const buy=button.onclick;
@@ -28,6 +29,11 @@
       else if(game.evolutionWaveOwned){game.evolutionWaveOwned=false;game.waveHUD?.update();}
       // Legacy saved stones are actionable even though they have no new autoTrial flag.
       const kind=boss?'trial':s.stones?(s.autoTrial?'pending':'retry'):notice?.kind==='success'?'success':null;
+      ns.systems.HeroAppearanceSystem.update(game);ns.systems.HeroEvolutionReview.update(game,kind);
+      // Portrait mobile HUD has its own stacking context. Put the success
+      // review at page level so its close button can never sit behind the dock.
+      const parent=kind==='success'?globalThis.document?.body:game.canvas?.closest('.td-shell');
+      if(parent&&ui.root.parentElement!==parent)parent.append(ui.root);
       ui.root.hidden=!kind||game.status!=='playing';if(ui.root.hidden)return;
       ui.root.dataset.kind=kind;ui.action.hidden=kind==='trial'||kind==='pending';ui.action.disabled=false;
       let title='',detail='';
@@ -37,7 +43,7 @@
       if(kind==='success'){
         title=E.rankName(game.hero)+'進化完成 · Lv.0';const result=s.lastResult;
         detail=result?'等級 '+result.before.level+' → 0；攻擊 '+Math.round(result.before.damage)+' → '+Math.round(result.after.damage)+'；生命 '+Math.round(result.before.health)+' → '+Math.round(result.after.health)+'。裝備保留，四技能與外觀已強化。':'基礎能力、四技能與外觀已強化；裝備保留。';
-        ui.action.textContent='知道了';
+        ui.action.textContent='繼續戰鬥';game.ui.wave.disabled=true;
       }
       if(ui.title.textContent!==title)ui.title.textContent=title;
       if(ui.detail.textContent!==detail)ui.detail.textContent=detail;

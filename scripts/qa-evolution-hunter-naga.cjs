@@ -15,7 +15,7 @@ const root=path.resolve(__dirname,'..'),out=path.join(root,'artifacts/evolution-
       const result=await page.evaluate(()=>{const g=towerFrontierGame,ns=TowerFrontier,m=g.monsters.find(m=>m.active&&m.evolutionTrial);new ns.entities.Projectile(g.hero,m,{damage:1e6,attackType:'chaos',canHitAir:true}).hit(g.monsters,(m,s)=>g.onKill(m,s),(m,d,c,s)=>g.onHit(m,d,c,s));g.hero.evolutionReveal=null;g.draw();return{rank:g.hero.evolution.rank,level:g.hero.level,xp:g.hero.xp,stone:g.hero.evolution.stones,saved:g.checkpoints.read()?.hero.level};});
       assert.equal(result.rank,rank+1);assert.equal(result.level,0);assert.equal(result.xp,0);assert.equal(result.stone,0);assert.equal(result.saved,0);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
       await page.screenshot({path:path.join(out,`${type}-rank${rank+1}-${viewport.width}.png`)});
-      await page.locator('#td-evolution-notice button').click();
+      await page.locator('#td-evolution-notice > button').click();
       await page.evaluate(()=>{const g=towerFrontierGame;g.paused=true;g.camera.follow=true;g.camera.overview=false;g.camera.focus(g.hero.x,g.hero.y);g.draw();});
       await page.screenshot({path:path.join(out,`${type}-rank${rank+1}-${viewport.width}-battle.png`)});
       const restored=await page.evaluate(()=>{const g=towerFrontierGame,saved=g.checkpoints.read();g.hero.evolution.rank=0;g.hero.level=9;const ok=g.checkpoints.restore(g,saved);return{ok,rank:g.hero.evolution.rank,level:g.hero.level};});assert.equal(restored.ok,true);assert.equal(restored.rank,rank+1);assert.equal(restored.level,0);results.push({type,viewport,before,result,restored});

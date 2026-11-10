@@ -32,8 +32,8 @@ test('PAGE 2 同屏比較四個選項並提供技能與代表軍隊',()=>{
   assert.match(html,/class="faction-roster-list"/);
   assert.match(game,/UNIT_CARD_ART/);
   assert.match(game,/factionRoster\.innerHTML/);
-  assert.match(fs.readFileSync('src/td/systems/HeroRoster.js','utf8'),/hero-chief-selection-v2\.png/);
-  assert.ok(fs.existsSync('assets/td/opening/hero-chief-selection-v2.png'));
+  assert.match(fs.readFileSync('src/td/systems/HeroRoster.js','utf8'),/hero-chief-selection-v3\.png/);
+  assert.ok(fs.existsSync('assets/td/opening/hero-chief-selection-v3.png'));
 });
 
 test('Mobile Landscape 共用內容並以英雄軍團頁籤切換',()=>{

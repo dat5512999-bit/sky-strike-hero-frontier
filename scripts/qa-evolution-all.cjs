@@ -3,20 +3,22 @@ const {chromium}=require('playwright'),{pathToFileURL}=require('node:url'),path=
 const root=path.resolve(__dirname,'..'),out=path.join(root,'artifacts/evolution-all'),types=['arcanist','rogue','chief','goblin','frostland','dwarf','dragonkin','egypt','hunter','naga','bull'];
 (async()=>{fs.mkdirSync(out,{recursive:true});const browser=await chromium.launch({channel:'msedge',headless:true});try{
   const page=await browser.newPage({viewport:{width:1280,height:800},serviceWorkers:'block'}),errors=[],results=[];page.on('pageerror',e=>errors.push(e.message));
-  await page.goto(process.env.EVOLUTION_QA_URL||pathToFileURL(path.join(root,'td.html')).href);
+  await page.goto(process.env.EVOLUTION_QA_URL||pathToFileURL(path.join(root,'td.html')).href,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(types=>globalThis.towerFrontierGame&&types.every(type=>towerFrontierGame.art.coreStatus(type).ready),types);
-  await page.evaluate(()=>towerFrontierGame.app.store.switchTo('admin')); // Isolated browser fixture, never the user's profile.
+  await page.evaluate(types=>{towerFrontierGame.app.store.switchTo('admin');for(const type of types)for(const rank of [1,2])type==='bull'?towerFrontierGame.art.preloadBullEvolution(rank):towerFrontierGame.art.preloadHeroEvolution(type,rank);},types); // Isolated browser fixture, never the user's profile.
   await page.waitForFunction(()=>Object.values(towerFrontierGame.art.heroEvolutionImages||{}).length===20&&Object.values(towerFrontierGame.art.heroEvolutionImages).every(image=>image.ready));
   for(const viewport of [{width:1280,height:800},{width:852,height:393}]){
     await page.setViewportSize(viewport);
     for(const type of types)for(const rank of [0,1]){
-      await page.evaluate(({type,rank})=>{const g=towerFrontierGame;g.app.openFree({profession:type,faction:'hunter',map:'beginner',difficulty:'standard'});if(g.hero.classType!==type||g.profession.selected!==type)throw Error('hero fixture did not launch '+type+'; got '+g.hero.classType);g.paused=false;g.waves.reset();g.waves.wave=rank?50:20;g.waves.beginPreparation();g.waves.holdPreparation(true);g.monsters=[];g.report.current=null;g.economy.emblems=20;g.hero.evolution.rank=rank;g.hero.level=15;g.hero.health=g.hero.maxHealth=g.hero.healthAtLevel();g.hero.invulnerable=999;g.hero.selected=true;g.updateUi();},{type,rank});
+      await page.evaluate(type=>towerFrontierGame.app.openFree({profession:type,faction:'hunter',map:'beginner',difficulty:'standard'}),type);
+      await page.waitForFunction(type=>towerFrontierGame.hero.classType===type&&towerFrontierGame.profession.selected===type&&!towerFrontierGame.pendingProfession,type);
+      await page.evaluate(({type,rank})=>{const g=towerFrontierGame;if(g.hero.classType!==type||g.profession.selected!==type)throw Error('hero fixture did not launch '+type+'; got '+g.hero.classType);g.paused=false;g.waves.reset();g.waves.wave=rank?50:20;g.waves.beginPreparation();g.waves.holdPreparation(true);g.monsters=[];g.report.current=null;g.economy.emblems=20;g.hero.evolution.rank=rank;g.hero.level=15;g.hero.health=g.hero.maxHealth=g.hero.healthAtLevel();g.hero.invulnerable=999;g.hero.selected=true;g.updateUi();},{type,rank});
       await page.locator('#td-shop-open').click();await page.locator('[data-shop-item="evolution-stone"]').click();
       const before=await page.evaluate(()=>{const g=towerFrontierGame,m=g.monsters.find(m=>m.active&&m.evolutionTrial);return{type:g.hero.classType,boss:m?.name,appearance:m?.trialAppearance,rank:g.hero.evolution.rank};});assert.equal(before.type,type);assert.equal(before.appearance,'fire-demon');assert.equal(before.rank,rank);
       const result=await page.evaluate(()=>{const g=towerFrontierGame,ns=TowerFrontier,m=g.monsters.find(m=>m.active&&m.evolutionTrial);new ns.entities.Projectile(g.hero,m,{damage:1e6,attackType:'chaos',canHitAir:true}).hit(g.monsters,(m,s)=>g.onKill(m,s),(m,d,c,s)=>g.onHit(m,d,c,s));g.hero.evolutionReveal=null;g.draw();return{type:g.hero.classType,rank:g.hero.evolution.rank,level:g.hero.level,xp:g.hero.xp,stone:g.hero.evolution.stones,saved:g.checkpoints.read()?.hero.level};});
       assert.equal(result.type,type);assert.equal(result.rank,rank+1);assert.equal(result.level,0);assert.equal(result.xp,0);assert.equal(result.stone,0);assert.equal(result.saved,0);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
       await page.screenshot({path:path.join(out,`${type}-rank${rank+1}-${viewport.width}.png`)});
-      await page.locator('#td-evolution-notice button').click();
+      await page.locator('#td-evolution-notice > button').click();
       await page.evaluate(()=>{const g=towerFrontierGame;g.paused=true;g.camera.follow=true;g.camera.overview=false;g.camera.focus(g.hero.x,g.hero.y);g.draw();});
       await page.screenshot({path:path.join(out,`${type}-rank${rank+1}-${viewport.width}-battle.png`)});
       const restored=await page.evaluate(()=>{const g=towerFrontierGame,saved=g.checkpoints.read();g.hero.evolution.rank=0;g.hero.level=9;const ok=g.checkpoints.restore(g,saved);return{ok,type:g.hero.classType,rank:g.hero.evolution.rank,level:g.hero.level};});assert.equal(restored.type,type);assert.equal(restored.ok,true);assert.equal(restored.rank,rank+1);assert.equal(restored.level,0);results.push({type,viewport,before,result,restored});
@@ -37,7 +39,7 @@ const root=path.resolve(__dirname,'..'),out=path.join(root,'artifacts/evolution-
     },type);
     await page.locator('#qa-evolution').screenshot({path:path.join(out,type+'-in-game.png')});
   }
-  for(const type of types)for(const rank of [1,2]){
+  for(const type of types)for(const rank of (type==='chief'?[0,1,2]:[1,2])){
     await page.evaluate(({type,rank})=>{
       document.getElementById('qa-evolution')?.remove();document.getElementById('qa-motion')?.remove();const ns=TowerFrontier,g=towerFrontierGame,canvas=document.createElement('canvas');canvas.width=1000;canvas.height=1600;const c=canvas.getContext('2d');c.fillStyle='#15272b';c.fillRect(0,0,1000,1600);
       for(let row=0;row<8;row++)for(let frame=0;frame<4;frame++){

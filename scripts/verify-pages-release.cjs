@@ -18,6 +18,9 @@ function releaseFiles(){
     'chapter3-white-trace-sample','chapter3-echo-yard-receiver','chapter3-crossmark-records','chapter3-nightwatch-defense',
     'chapter4-tidegate-readings','chapter4-brineway-measurements','chapter4-reef-records','chapter4-observatory-archive'])files.add('assets/td/story/'+name+'-v1.png');
   files.add('assets/td/naga/tidebreaker-selection-v1.png');
+  files.add('assets/td/opening/hero-chief-selection-v3.png');
+  files.add('assets/td/wild-chief-actions-v2.png');
+  for(const name of ['thunder-chief-portrait-v2','thunder-chief-actions-v4','bone-chief-portrait-v2','bone-chief-actions-v2','night-owl-warden-portrait-v2','night-owl-warden-actions-v2'])files.add('assets/td/shop/'+name+'.png');
   files.add('assets/td/neutral/fire-demon-actions-v1.png');
   // Verify the actual deployed comic set, not just its JS catalog or a sample.
   const context={TowerFrontier:{systems:{}}};
@@ -35,7 +38,7 @@ function releaseFiles(){
   const systems=context.TowerFrontier.systems;
   for(const ranks of [...Object.values(systems.HeroEvolutionSpriteAtlas),systems.BullEvolutionAtlas]){
     for(const form of Object.values(ranks)){
-      if(!/^assets\/td\/evolution\/[a-z]+-(?:awakened|transcendent)-actions-v1\.png$/.test(form.path))throw Error('Invalid evolution release path');
+      if(!/^assets\/td\/evolution\/[a-z]+-(?:awakened|transcendent)-actions-v[1-9]\d*\.png$/.test(form.path))throw Error('Invalid evolution release path');
       files.add(form.path);
     }
   }

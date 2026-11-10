@@ -15,6 +15,7 @@ test('equipped hero art uses its actual atlas and keeps the hero unchanged',()=>
   class TDGame{updateOpeningPresentation(){return true;}}
   const ns={systems:{ArtSystem,SpriteFrameBounds:{},FactionSystem:{FACTIONS:{hunter:{units:['hunter'],buildings:['arrow'],selectionArt:'base.png'}}},HeroRoster:{get:()=>({selectionArt:'base.png'})}},TDGame};
   const c=vm.createContext({TowerFrontier:ns,FrontierShop:{catalog:[]}});c.globalThis=c;
+  vm.runInContext(read('src/td/shop/ChiefSkinAtlas.js'),c);
   vm.runInContext(read('src/td/skin-lab/ChiefPreview.js'),c);
   vm.runInContext(read('src/td/systems/CosmeticArt.js'),c);
   const art=new ArtSystem(),ctx={save(){},restore(){},translate(){},scale(){},beginPath(){},ellipse(){},fill(){},drawImage(image){drawn.push(image.assetSrc);}};
@@ -22,7 +23,7 @@ test('equipped hero art uses its actual atlas and keeps the hero unchanged',()=>
   art.cosmeticEquipped={'hero:hunter':'solar-lion'};
   assert.equal(art.drawHero(ctx,hero),true);assert.equal(drawn.at(-1),'assets/td/shop/sun-actions-v1.png');assert.equal(JSON.stringify(hero),before);
   art.cosmeticEquipped={'hero:chief':'bone-emperor'};
-  assert.equal(art.drawHero(ctx,{...hero,classType:'chief'}),true);assert.equal(drawn.at(-1),'assets/td/shop/bone-chief-motion-v1.png');
+  assert.equal(art.drawHero(ctx,{...hero,classType:'chief'}),true);assert.equal(drawn.at(-1),'assets/td/shop/bone-chief-actions-v2.png');
   art.cosmeticEquipped={};assert.equal(art.drawHero(ctx,hero),'original');
   art.cosmeticFaction='eclipse-court';
   assert.equal(art.drawCombatUnitSprite(ctx,{type:'hunter'}),true);

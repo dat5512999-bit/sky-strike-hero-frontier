@@ -10,7 +10,7 @@
     frostland:{id:'north-rescue',path:'assets/td/shop/north-rescue-actions-v1.png',height:108,foot:.8,y:12},
     naga:{id:'abyss-response',path:'assets/td/shop/abyss-response-actions-v1.png',height:108,foot:.8,y:12},
     goblin:{id:'special-maintenance',path:'assets/td/shop/special-maintenance-actions-v1.png',height:96,foot:.84,y:10},
-    chief:{id:'night-owl-warden',path:'assets/td/shop/night-owl-warden-actions-v1.png',height:112,foot:.82,y:12}
+    chief:{id:'night-owl-warden',path:'assets/td/shop/night-owl-warden-actions-v2.png',height:112,foot:.82,y:12}
   };
   function asset(art,path){
     art.crossworldSkinImages ||= {};
@@ -22,6 +22,12 @@
     if(!skin||this.cosmeticEquipped?.['hero:'+hero.classType]!==skin.id)return previous.call(this,ctx,hero);
     const atlas=asset(this,skin.path);
     if(!atlas?.ready)return previous.call(this,ctx,hero);
+    if(hero.classType==='chief'){
+      this.chiefOwlRenderer ||= globalThis.FrontierSkinLab.createChiefRenderer(atlas,atlas,atlas,globalThis.FrontierChiefSkinAtlas['night-owl-warden'].layouts);
+      const drawn=this.chiefOwlRenderer.drawHero(ctx,hero);
+      if(drawn&&this.drawGearPieces){ctx.save();try{ctx.translate(hero.x,hero.y);if(Math.cos(hero.facing||0)<0)ctx.scale(-1,1);this.drawGearPieces(ctx,hero,false);}finally{ctx.restore();}}
+      return drawn;
+    }
     const cellW=atlas.width/4,cellH=atlas.height/4,height=skin.height,width=height*cellW/cellH;
     const frame=Math.max(0,Math.min(3,hero.frame||0));
     ctx.save();
