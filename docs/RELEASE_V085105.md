@@ -1,6 +1,10 @@
 # v0.85.105 整合發布紀錄
 
-2026-11-10（台灣）。依使用者「一起更新到 GitHub」的要求，整合先前未推送的 v0.85.101–105 工作。發布狀態：提交與 GitHub Pages 驗證進行中，驗證後更新本文件。
+2026-11-10（台灣）。依使用者「一起更新到 GitHub」的要求，整合先前未推送的 v0.85.101–105 工作。發布狀態：已推送 main，GitHub Pages 部署及正式站驗證成功。
+
+程式提交：[27a5bb73a0c4e3c8f2adce4b1ce3988271748c33](https://github.com/dat5512999-bit/sky-strike-hero-frontier/commit/27a5bb73a0c4e3c8f2adce4b1ce3988271748c33)。[GitHub Actions 執行紀錄](https://github.com/dat5512999-bit/sky-strike-hero-frontier/actions/runs/42806156408) 全步驟成功，包含自動測試、打包、部署及 Verify live release。正式站回報 version=0.85.105、276 檔／282 次請求的內容驗證通過。
+
+[開始遊戲](https://dat5512999-bit.github.io/sky-strike-hero-frontier/td.html)；[手機入口](https://dat5512999-bit.github.io/sky-strike-hero-frontier/td-mobile.html)。版本標記 v0.85.105 對應上述已通過 CI 的程式提交；後續僅補文件紀錄，不更動網站程式或素材。
 
 ## 本輪內容
 
