@@ -3,7 +3,7 @@
   "iosPreparationVersion": "1.2.0",
   "iosRightsReviewVersion": "1.0.0",
   "gameAudioVersion": "1.4.0",
-  "version": "0.85.105",
+  "version": "0.85.106",
   "storyMangaVersion": "2.0.0",
   "storyCampaignVersion": "1.0.0",
   "storyEditorialVersion": "0.6.0",
@@ -17,6 +17,7 @@
   "frostlandMotionVersion": "1.0.0",
   "description": "包含縱向射擊與英雄塔防模式的本機 HTML5 Canvas 遊戲",
   "scripts": {
+    "qa:diagnostics": "node scripts/qa-diagnostics.cjs",
     "qa:mobile-stability": "node scripts/qa-mobile-stability.cjs",
     "qa:chief-skins": "node scripts/qa-chief-skins.cjs",
     "ios:audit": "node scripts/audit-ios-content.cjs",

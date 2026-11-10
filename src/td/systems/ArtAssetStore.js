@@ -36,7 +36,7 @@
           record.loading=false;this.active--;record.ready=ok;
           if(ok){image.failed=false;record.bytes=(image.naturalWidth||image.width||0)*(image.naturalHeight||image.height||0)*4;this.bytes+=record.bytes;}
           else if(image.attempts<3){record.retry=this.setTimer(()=>{record.retry=null;this.request(image);},image.attempts*300);}
-          else image.failed=true;
+          else{image.failed=true;try{this.onFailure?.(record.path);}catch(_){}}
           this.changed();this.pump();
         };
         image.onload=()=>finish(true);image.onerror=()=>finish(false);
@@ -75,7 +75,7 @@
       this.queue=this.queue.filter(r=>r.image.queued);this.pump();
     }
     retryFailed(){for(const r of this.records.values())if(r.image.failed){r.image.failed=false;r.image.attempts=0;this.request(r.image);}}
-    stats(){return {handles:this.records.size,ready:[...this.records.values()].filter(r=>r.ready).length,active:this.active,queued:this.queue.filter(r=>r.image.queued).length,rgbaBytes:this.bytes,budget:this.budget};}
+    stats(){return {handles:this.records.size,ready:[...this.records.values()].filter(r=>r.ready).length,failed:[...this.records.values()].filter(r=>r.image.failed).length,active:this.active,queued:this.queue.filter(r=>r.image.queued).length,rgbaBytes:this.bytes,budget:this.budget};}
   }
   ns.systems.ArtAssetStore=ArtAssetStore;
 })(globalThis.TowerFrontier);

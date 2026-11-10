@@ -280,7 +280,7 @@
   const renderWithRelease=FrontierApp.prototype.render;
   FrontierApp.prototype.render=function(){
     renderWithRelease.call(this);
-    const release=this.root.querySelector('.profile-badge small');if(release)release.textContent='HERO FRONTIER · v0.85.105';
+    const release=this.root.querySelector('.profile-badge small');if(release)release.textContent='HERO FRONTIER · v0.85.106';
     if(this.page==='story'&&this.storyMode!=='legacy'){
       const list=this.root.querySelector('.story-node-list'),selected=list?.querySelector('.story-node.selected');
       if(selected&&list){const item=selected.getBoundingClientRect(),box=list.getBoundingClientRect();if(item.bottom>box.bottom||item.top<box.top)list.scrollTop+=item.top-box.top;}

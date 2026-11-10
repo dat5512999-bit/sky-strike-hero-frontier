@@ -2,7 +2,7 @@
 // Real mobile-shell entry and native Canvas in an isolated Edge profile.
 // Desktop emulation is not physical iPhone/WebKit certification.
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
-const out=path.resolve('artifacts/mobile-stability-v085105');
+const out=path.resolve('artifacts/mobile-stability-v'+require('../package.json').version.replaceAll('.',''));
 (async()=>{fs.mkdirSync(out,{recursive:true});const browser=await chromium.launch({channel:'msedge',headless:true});
 const report={version:require('../package.json').version,scope:'Mobile shell, native Canvas, isolated Edge, DPR3/touch; not iPhone/WebKit or OS memory measurement.',errors:[],samples:[],rosters:[]};
 try{

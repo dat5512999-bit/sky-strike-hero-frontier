@@ -35,7 +35,10 @@
       return {height:target/(metric?metric.visible:1),foot:metric?metric.foot:fallbackFoot};
     }
     load(src){
-      if(!this.assetStore){this.assetStore=new ns.systems.ArtAssetStore();this.assetStore.onChange=()=>this.onProgress?.();this.assetStore.onError=error=>this.game?.handleRuntimeFault?.('ui',error);}
+      if(!this.assetStore){
+        this.assetStore=new ns.systems.ArtAssetStore();this.assetStore.onChange=()=>this.onProgress?.();this.assetStore.onError=error=>this.game?.handleRuntimeFault?.('ui',error);
+        this.assetStore.onFailure=path=>{try{this.game?.diagnostics?.record('asset-failed',{item:path.split('/').pop()});this.game?.diagnostics?.flush(true);}catch(_){}};
+      }
       return this.assetStore.image(src);
     }
     request(image){this.assetStore?.request(image);}

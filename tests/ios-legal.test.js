@@ -12,3 +12,6 @@ test('publisher strings are escaped, invalid or executable public links are reje
 test('iOS legal screens compile and remain reachable from player settings',()=>{
   const s=require('../scripts/ios-player-mode.cjs').playerApp(fs.readFileSync('src/td/app/FrontierApp.js','utf8'));new vm.Script(s);assert(s.includes("b('ios-privacy','隱私與本機資料說明')"));assert(s.includes("b('ios-support','客服與常見問題')"));assert(s.includes("b('settings','返回設定')"));
 });
+test('offline disclosure distinguishes bounded local diagnostics from full player backups',()=>{
+ const p=pages(config);assert(p['ios-privacy.html'].includes('32768 字元'));assert(p['ios-privacy.html'].includes('不會自動上傳'));assert(p['ios-support.html'].includes('匯出診斷資訊'));assert(p['ios-privacy.html'].includes('診斷與玩家備份是不同檔案'));
+});
