@@ -2,7 +2,11 @@
 
 2026-11-10（台灣）。依使用者要求發布本機診斷與背景恢復更新，程式已提交至 main。
 
-2026-11-15 補驗：[首次執行](https://github.com/dat5512999-bit/sky-strike-hero-frontier/actions/runs/42810663427) 的測試與打包成功，但 Pages 部署等待逾時並取消；正式站逐檔檢查仍未取得 v106，新診斷模組為 404。GitHub 連接工具缺 Actions 重跑權限（403），改以本次狀態紀錄提交重新觸發相同版本的完整發布流程，未更動遊戲程式。最終結果待重試後核對。
+2026-11-15 補驗完成：[首次執行](https://github.com/dat5512999-bit/sky-strike-hero-frontier/actions/runs/42810663427) 的測試與打包成功，但 Pages 部署等待逾時並取消。GitHub 連接工具缺 Actions 重跑權限（403），改以狀態紀錄提交重新觸發相同版本的完整發布流程，未更動遊戲程式。
+
+[重新發布執行](https://github.com/dat5512999-bit/sky-strike-hero-frontier/actions/runs/43613786315) 全步驟成功，包含 1,229 項測試、打包、部署與 Verify live release；正式站確認為 v0.85.106，278 檔／284 次請求逐檔驗證通過。已驗證部署提交為 [e2b9753521d4b1603b3cf56752bb2b45a33a6e24](https://github.com/dat5512999-bit/sky-strike-hero-frontier/commit/e2b9753521d4b1603b3cf56752bb2b45a33a6e24)，程式實作提交為 90b8f823f676a36f7e21f1e713dc9e2dc47c1946；版本標記 v0.85.106 指向已驗證部署提交。
+
+[開始遊戲](https://dat5512999-bit.github.io/sky-strike-hero-frontier/td.html)；[手機入口](https://dat5512999-bit.github.io/sky-strike-hero-frontier/td-mobile.html)。本紀錄更新僅補文件，不更動已驗證的程式或素材。
 
 ## 更新內容
 
